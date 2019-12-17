@@ -1,0 +1,24 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <table class="contacts">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Company</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @contacts.each do |contact| %>
+            <tr>
+              <td><%= contact.vid %></td>
+              <td><%= contact.properties['firstname'] %></td>
+              <td><%= contact.properties['company'] %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
