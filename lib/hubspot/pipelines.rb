@@ -10,7 +10,7 @@ Swagger Codegen version: 2.4.8
 
 =end
 
-Dir["codegen/crm/pipelines/**/*.rb"].each { |f| require_relative "../../#{f}"}
+Dir["#{ROOT_PATH}/hubspot/codegen/crm/pipelines/**/*.rb"].each { |f| require f }
 
 module Hubspot
   module Pipelines
