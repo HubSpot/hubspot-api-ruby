@@ -10,5 +10,7 @@ Swagger Codegen version: 2.4.8
 
 =end
 
+require 'uri'
+
 ROOT_PATH = File.dirname(__FILE__)
 Dir["#{ROOT_PATH}/hubspot/*.rb"].each { |f| require f }
