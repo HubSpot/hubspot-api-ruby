@@ -1,7 +1,7 @@
 module Oauth
   class AuthorizationController < ApplicationController
     def authorize
-      url = ::Hubspot::OAuth.authorize_url(%w[contacts content])
+      url = Services::Authorization::GetAuthorizationUri.new(request: request).call
       redirect_to url
     end
 
