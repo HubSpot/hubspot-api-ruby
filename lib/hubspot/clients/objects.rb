@@ -8,7 +8,12 @@ module Hubspot
       API.each do |api_name|
         define_method(Util.underscore(api_name)) do
           api_class = Hubspot.const_get("Client::Crm::Objects::Api::#{api_name}")
-          api_class.new(@api_client)
+          method_name = Util.underscore(api_name)
+          if instance_variable_defined?("@#{method_name}")
+            instance_variable_get("@#{method_name}")
+          else
+            instance_variable_set("@#{method_name}", api_class.new(@api_client))
+          end
         end
       end
     end
