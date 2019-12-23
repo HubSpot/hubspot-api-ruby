@@ -6,12 +6,11 @@ module Hubspot
       API = %w[AssociationsApi BasicApi BatchApi CreateNativeObjectsApi SearchApi]
 
       API.each do |api_name|
-        define_method(api_name.underscore) do
-          api_class = Object.const_get("Hubspot::Client::Crm::Objects::Api::#{api_name}")
-          api_class.new(client_config)
+        define_method(Util.underscore(api_name)) do
+          api_class = Hubspot.const_get("Client::Crm::Objects::Api::#{api_name}")
+          api_class.new(@api_client)
         end
       end
-
     end
   end
 end
