@@ -3,7 +3,7 @@ Dir["#{ROOT_PATH}/hubspot/codegen/crm/pipelines/**/*.rb"].each { |f| require f }
 module Hubspot
   module Clients
     class Base
-      attr_accessor :config
+      attr_accessor :api_client
 
       def initialize(config)
         api_client_class = Hubspot.const_get("Client::Crm::#{self.class.name.split('::').last}::ApiClient")
