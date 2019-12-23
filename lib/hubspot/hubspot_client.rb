@@ -14,8 +14,8 @@ module Hubspot
       @config = config
     end
 
-    def configure(attrs)
-      @config.configure(attrs)
+    def configure
+      block_given? ? yield(@config) : @config
     end
 
     CLIENTS.each do |method_name|
