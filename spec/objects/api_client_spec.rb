@@ -17,34 +17,34 @@ describe Hubspot::Client::Crm::Objects::ApiClient do
     context 'URL stuff' do
       context 'host' do
         it 'removes http from host' do
-          Hubspot::Objects.configure { |c| c.host = 'http://example.com' }
+          Hubspot.configure { |c| c.host = 'http://example.com' }
           expect(Hubspot::Client::Crm::Objects::Configuration.default.host).to eq('example.com')
         end
 
         it 'removes https from host' do
-          Hubspot::Objects.configure { |c| c.host = 'https://wookiee.com' }
+          Hubspot.configure { |c| c.host = 'https://wookiee.com' }
           expect(Hubspot::Client::Crm::Objects::ApiClient.default.config.host).to eq('wookiee.com')
         end
 
         it 'removes trailing path from host' do
-          Hubspot::Objects.configure { |c| c.host = 'hobo.com/v4' }
+          Hubspot.configure { |c| c.host = 'hobo.com/v4' }
           expect(Hubspot::Client::Crm::Objects::Configuration.default.host).to eq('hobo.com')
         end
       end
 
       context 'base_path' do
         it "prepends a slash to base_path" do
-          Hubspot::Objects.configure { |c| c.base_path = 'v4/dog' }
+          Hubspot.configure { |c| c.base_path = 'v4/dog' }
           expect(Hubspot::Client::Crm::Objects::Configuration.default.base_path).to eq('/v4/dog')
         end
 
         it "doesn't prepend a slash if one is already there" do
-          Hubspot::Objects.configure { |c| c.base_path = '/v4/dog' }
+          Hubspot.configure { |c| c.base_path = '/v4/dog' }
           expect(Hubspot::Client::Crm::Objects::Configuration.default.base_path).to eq('/v4/dog')
         end
 
         it "ends up as a blank string if nil" do
-          Hubspot::Objects.configure { |c| c.base_path = nil }
+          Hubspot.configure { |c| c.base_path = nil }
           expect(Hubspot::Client::Crm::Objects::Configuration.default.base_path).to eq('')
         end
       end
