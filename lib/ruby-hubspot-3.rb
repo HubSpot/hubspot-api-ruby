@@ -11,6 +11,22 @@ Swagger Codegen version: 2.4.8
 =end
 
 require 'uri'
+require 'logger'
 
 ROOT_PATH = File.dirname(__FILE__)
-Dir["#{ROOT_PATH}/hubspot/*.rb"].each { |f| require f }
+Dir["#{ROOT_PATH}/hubspot/**/*.rb"].each { |f| require f }
+
+
+module Hubspot
+  class << self
+    def configure
+      return Configuration.default unless block_given?
+      yield(Configuration.default)
+      %w[Objects Owners Pipelines].each do |client_class_name|
+        config_class = Hubspot.const_get("Client::Crm::#{client_class_name}::Configuration")
+        yield(config_class.default)
+      end
+      Configuration.default
+    end
+  end
+end

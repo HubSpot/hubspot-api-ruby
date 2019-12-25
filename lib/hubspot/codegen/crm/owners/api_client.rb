@@ -213,7 +213,7 @@ module Hubspot
               end
             else
               # models, e.g. Pet
-              SwaggerClient.const_get(return_type).new.tap do |model|
+              Hubspot::Client::Crm::Owners::Models.const_get(return_type).new.tap do |model|
                 model.build_from_hash data
               end
             end

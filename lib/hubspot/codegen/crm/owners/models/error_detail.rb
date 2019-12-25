@@ -165,7 +165,7 @@ module Hubspot
                   end
                 end
               else # model
-                temp_model = SwaggerClient.const_get(type).new
+                temp_model = Hubspot::Client::Crm::Owners::Models.const_get(type).new
                 temp_model.build_from_hash(value)
               end
             end
