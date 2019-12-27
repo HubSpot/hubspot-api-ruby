@@ -19,7 +19,7 @@ require 'uri'
 
 module Hubspot
   module Client
-    module Oauth
+    module OAuth
       class ApiClient
         # The Configuration object holding settings to be used in the API client.
         attr_accessor :config

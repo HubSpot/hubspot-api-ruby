@@ -12,7 +12,7 @@ OpenAPI Generator version: 3.3.4
 
 module Hubspot
   module Client
-    module Oauth
+    module OAuth
       class ApiError < StandardError
         attr_reader :code, :response_headers, :response_body
 

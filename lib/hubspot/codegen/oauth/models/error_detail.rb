@@ -14,7 +14,7 @@ require 'date'
 
 module Hubspot
   module Client
-    module Oauth
+    module OAuth
       module Models
         class ErrorDetail
           # A human readable message describing the error along with remediation steps where appropriate

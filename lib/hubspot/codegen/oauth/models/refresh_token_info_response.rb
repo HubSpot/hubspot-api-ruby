@@ -14,7 +14,7 @@ require 'date'
 
 module Hubspot
   module Client
-    module Oauth
+    module OAuth
       module Models
         class RefreshTokenInfoResponse
           attr_accessor :token

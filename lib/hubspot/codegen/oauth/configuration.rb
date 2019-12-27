@@ -14,7 +14,7 @@ require 'uri'
 
 module Hubspot
   module Client
-    module Oauth
+    module OAuth
       class Configuration
         # Defines url scheme
         attr_accessor :scheme

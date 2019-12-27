@@ -14,7 +14,7 @@ require 'uri'
 
 module Hubspot
   module Client
-    module Oauth
+    module OAuth
       module Api
         class AccessTokensApi
           attr_accessor :api_client
