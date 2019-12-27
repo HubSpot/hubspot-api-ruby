@@ -65,7 +65,7 @@ Hubspot.configure do |config|
   config.access_token = 'YOUR ACCESS TOKEN'
 end
 
-api_instance = Hubspot::AssociationsApi.new
+api_instance = Hubspot::Client::Crm::Objects::Api::AssociationsApi.new
 
 object_type = 'object_type_example' # String | 
 
@@ -79,7 +79,7 @@ to_object_id = 'to_object_id_example' # String |
 begin
   #Remove an association between two objects
   api_instance.archive_association(object_type, object_id, associated_object_type, to_object_id)
-rescue Hubspot::ApiError => e
+rescue Hubspot::Client::Crm::Objects::ApiError => e
   puts "Exception when calling AssociationsApi->archive_association: #{e}"
 end
 
