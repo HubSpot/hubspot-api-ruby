@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
 
   def index
     # https://developers.hubspot.com/docs/methods/contacts/get_contacts
-    @contacts = Hubspot::Contact.all(count: 10)
+    @contacts = Services::Hubspot::Contacts::GetAll.new(limit: 15).call
   end
 
   private
