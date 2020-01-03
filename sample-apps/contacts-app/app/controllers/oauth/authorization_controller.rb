@@ -6,7 +6,10 @@ module Oauth
     end
 
     def callback
-      session[:tokens] = Services::Authorization::Tokens::Generate.new(code: params[:code]).call
+      session[:tokens] = Services::Authorization::Tokens::Generate.new(
+        code: params[:code],
+        request: request
+      ).call
       Services::Authorization::AuthorizeHubspot.new(tokens: session[:tokens]).call
       redirect_to '/contacts'
     end

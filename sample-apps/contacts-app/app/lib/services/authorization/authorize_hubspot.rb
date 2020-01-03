@@ -6,7 +6,9 @@ module Services
       end
 
       def call
-        ::Hubspot.configure(access_token: @tokens['access_token'])
+        ::Hubspot.configure do |config|
+          config.access_token = @tokens[:access_token]
+        end
       end
     end
   end
