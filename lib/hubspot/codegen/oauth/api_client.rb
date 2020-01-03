@@ -46,7 +46,7 @@ module Hubspot
 
         # Call an API with given options.
         #
-        # @return [Array<(Object, Fixnum, Hash)>] an array of 3 elements:
+        # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
         #   the data deserialized from response body (could be nil), response status code and response headers.
         def call_api(http_method, path, opts = {})
           request = build_request(http_method, path, opts)
@@ -67,7 +67,7 @@ module Hubspot
               fail ApiError.new(:code => response.code,
                                 :response_headers => response.headers,
                                 :response_body => response.body),
-                  response.status_message
+                   response.status_message
             end
           end
 
@@ -130,6 +130,34 @@ module Hubspot
           request
         end
 
+        # Builds the HTTP request body
+        #
+        # @param [Hash] header_params Header parameters
+        # @param [Hash] form_params Query parameters
+        # @param [Object] body HTTP body (JSON/XML)
+        # @return [String] HTTP body data in the form of string
+        def build_request_body(header_params, form_params, body)
+          # http form
+          if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
+              header_params['Content-Type'] == 'multipart/form-data'
+            data = {}
+            form_params.each do |key, value|
+              case value
+              when ::File, ::Array, nil
+                # let typhoeus handle File, Array and nil parameters
+                data[key] = value
+              else
+                data[key] = value.to_s
+              end
+            end
+          elsif body
+            data = body.is_a?(String) ? body : body.to_json
+          else
+            data = nil
+          end
+          data
+        end
+
         # Check if the given MIME is a JSON MIME.
         # JSON MIME examples:
         #   application/json
@@ -189,7 +217,7 @@ module Hubspot
             data.to_i
           when 'Float'
             data.to_f
-          when 'BOOLEAN'
+          when 'Boolean'
             data == true
           when 'DateTime'
             # parse date time (expecting ISO 8601 format)
@@ -266,35 +294,7 @@ module Hubspot
         def build_request_url(path)
           # Add leading and trailing slashes to path
           path = "/#{path}".gsub(/\/+/, '/')
-          URI.encode(@config.base_url + path)
-        end
-
-        # Builds the HTTP request body
-        #
-        # @param [Hash] header_params Header parameters
-        # @param [Hash] form_params Query parameters
-        # @param [Object] body HTTP body (JSON/XML)
-        # @return [String] HTTP body data in the form of string
-        def build_request_body(header_params, form_params, body)
-          # http form
-          if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
-              header_params['Content-Type'] == 'multipart/form-data'
-            data = {}
-            form_params.each do |key, value|
-              case value
-              when ::File, ::Array, nil
-                # let typhoeus handle File, Array and nil parameters
-                data[key] = value
-              else
-                data[key] = value.to_s
-              end
-            end
-          elsif body
-            data = body.is_a?(String) ? body : body.to_json
-          else
-            data = nil
-          end
-          data
+          @config.base_url + path
         end
 
         # Update hearder and query params based on authentication settings.

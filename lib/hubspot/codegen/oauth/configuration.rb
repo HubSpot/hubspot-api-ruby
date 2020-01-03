@@ -176,8 +176,7 @@ module Hubspot
         end
 
         def base_url
-          url = "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '')
-          URI.encode(url)
+          "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '')
         end
 
         # Gets API key (with prefix if set).
@@ -220,7 +219,7 @@ module Hubspot
           [
             {
               url: "https://api.hubapi.com/oauth",
-              description: "No descriptoin provided",
+              description: "No description provided",
             }
           ]
         end
@@ -233,8 +232,8 @@ module Hubspot
           servers = server_settings
 
           # check array index out of bound
-          if (index < 0 || index > servers.size)
-            fail ArgumentError "Invalid index #{index} when selecting the server. Must be less than #{servers.size}"
+          if (index < 0 || index >= servers.size)
+            fail ArgumentError, "Invalid index #{index} when selecting the server. Must be less than #{servers.size}"
           end
 
           server = servers[index]
