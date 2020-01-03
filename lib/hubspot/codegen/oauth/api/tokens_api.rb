@@ -31,8 +31,8 @@ module Hubspot
           # @option opts [String] :client_secret 
           # @option opts [String] :refresh_token 
           # @return [Error]
-          def postoauthv1token(opts = {})
-            data, _status_code, _headers = postoauthv1token_with_http_info(opts)
+          def post_oauth_v1_token(opts = {})
+            data, _status_code, _headers = post_oauth_v1_token_with_http_info(opts)
             data
           end
 
@@ -44,26 +44,26 @@ module Hubspot
           # @option opts [String] :client_id 
           # @option opts [String] :client_secret 
           # @option opts [String] :refresh_token 
-          # @return [Array<(Error, Fixnum, Hash)>] Error data, response status code and response headers
-          def postoauthv1token_with_http_info(opts = {})
+          # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
+          def post_oauth_v1_token_with_http_info(opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: TokensApi.postoauthv1token ...'
+              @api_client.config.logger.debug 'Calling API: TokensApi.post_oauth_v1_token ...'
             end
             # resource path
             local_var_path = '/v1/token'
 
             # query parameters
-            query_params = {}
+            query_params = opts[:query_params] || {}
 
             # header parameters
-            header_params = {}
+            header_params = opts[:header_params] || {}
             # HTTP header 'Accept' (if needed)
             header_params['Accept'] = @api_client.select_header_accept(['*/*'])
             # HTTP header 'Content-Type'
             header_params['Content-Type'] = @api_client.select_header_content_type(['application/x-www-form-urlencoded'])
 
             # form parameters
-            form_params = {}
+            form_params = opts[:form_params] || {}
             form_params['grant_type'] = opts[:'grant_type'] if !opts[:'grant_type'].nil?
             form_params['code'] = opts[:'code'] if !opts[:'code'].nil?
             form_params['redirect_uri'] = opts[:'redirect_uri'] if !opts[:'redirect_uri'].nil?
@@ -72,21 +72,29 @@ module Hubspot
             form_params['refresh_token'] = opts[:'refresh_token'] if !opts[:'refresh_token'].nil?
 
             # http body (model)
-            post_body = nil
-            auth_names = []
-            data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] || 'Error' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || []
+
+            new_options = opts.merge(
               :header_params => header_params,
               :query_params => query_params,
               :form_params => form_params,
               :body => post_body,
               :auth_names => auth_names,
-              :return_type => 'Error')
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: TokensApi#postoauthv1token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: TokensApi#post_oauth_v1_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
-
         end
       end
     end
