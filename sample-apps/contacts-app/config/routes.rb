@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/contacts', to: 'contacts#index'
+  resources :contacts, only: %i[index show new create]
   get '/oauth', to: 'oauth/authorization#authorize'
   get '/oauth/callback', to: 'oauth/authorization#callback'
   root to: 'contacts#index'

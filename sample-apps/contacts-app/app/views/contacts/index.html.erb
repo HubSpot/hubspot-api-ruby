@@ -2,6 +2,11 @@
   <% if @error.present? %>
     <h3><%= @error.message %></h3>
   <% else %>
+  <div class='contact-new-button'>
+    <a id="contact-new" href="/contacts/new">
+      <input class="button-primary"  type="button" value="New Contact">
+    </a>
+  </div>
     <table class="contacts">
       <thead>
       <tr>
