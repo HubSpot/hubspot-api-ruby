@@ -3,7 +3,13 @@ class ContactsController < ApplicationController
 
   def index
     # https://developers.hubspot.com/docs/methods/contacts/get_contacts
-    @contacts = Services::Hubspot::Contacts::GetAll.new(limit: 100).call.sort_by(&:created_at).reverse
+    @contacts = if params[:search].present?
+      @search_q = params[:search]
+      Services::Hubspot::Contacts::Search.new(email: @search_q).call
+    else
+      # https://developers.hubspot.com/docs/methods/contacts/get_contacts
+      Services::Hubspot::Contacts::GetAll.new(limit: 100).call.sort_by(&:created_at).reverse
+    end
   end
 
   def show
