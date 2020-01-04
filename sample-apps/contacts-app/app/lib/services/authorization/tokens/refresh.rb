@@ -2,8 +2,9 @@ module Services
   module Authorization
     module Tokens
       class Refresh < Tokens::Base
-        def initialize(tokens:)
+        def initialize(tokens:, request:)
           @tokens = tokens
+          @request = request
         end
 
         def call
@@ -16,15 +17,15 @@ module Services
         def refresh_tokens
           tokens_api = ::Hubspot::Client::OAuth::Api::TokensApi.new
           tokens = tokens_api.post_oauth_v1_token(
-            grant_type: :authorization_code,
-            code: @code,
+            grant_type: :refresh_token,
+            refresh_token: @tokens[:refresh_token],
             redirect_uri: server_uri + CALLBACK_PATH,
             client_id: ENV['HUBSPOT_CLIENT_ID'],
             client_secret: ENV['HUBSPOT_CLIENT_SECRET'],
             refresh_token: @tokens[:refresh_token],
             return_type: 'Object'
           )
-          tokens['expires_at'] = expires_at(tokens['expires_in'])
+          tokens[:expires_at] = expires_at(tokens[:expires_in])
           tokens
         end
       end

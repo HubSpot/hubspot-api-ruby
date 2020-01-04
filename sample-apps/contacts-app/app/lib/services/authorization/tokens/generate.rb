@@ -2,8 +2,6 @@ module Services
   module Authorization
     module Tokens
       class Generate < Tokens::Base
-        CALLBACK_PATH = '/oauth/callback'.freeze
-
         def initialize(code:, request:)
           @code = code
           @request = request
@@ -21,12 +19,6 @@ module Services
           )
           tokens[:expires_at] = expires_at(tokens[:expires_in])
           tokens
-        end
-
-        private
-
-        def server_uri
-          @request.protocol + @request.host_with_port
         end
       end
     end
