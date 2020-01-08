@@ -27,6 +27,18 @@ class ContactsController < ApplicationController
     redirect_to :contacts
   end
 
+  def export
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data(
+          Services::Hubspot::Contacts::Export.new.call,
+          filename: "contacts-#{Date.today}.csv"
+        )
+      end
+    end
+  end
+
   private
 
   def contact_params
