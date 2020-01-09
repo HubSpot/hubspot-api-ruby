@@ -1,4 +1,3 @@
-
 module Services
   module Hubspot
     module Contacts
@@ -17,9 +16,9 @@ module Services
 
         def contacts
           return @contacts if @contacts.present?
-          after = nil
 
-          @contacts = @max_pages.times.each_with_object([]) do |page_number, contacts|
+          after = nil
+          @contacts = @max_pages.times.each_with_object([]) do |_, contacts|
             params = { auth_names: 'oauth2', limit: 10, after: after }
             contacts_page = basic_api.get_page('contact', params)
             contacts.concat(contacts_page.results)

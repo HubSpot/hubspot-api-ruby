@@ -22,7 +22,6 @@ module Services
             redirect_uri: server_uri + CALLBACK_PATH,
             client_id: ENV['HUBSPOT_CLIENT_ID'],
             client_secret: ENV['HUBSPOT_CLIENT_SECRET'],
-            refresh_token: @tokens[:refresh_token],
             return_type: 'Object'
           )
           tokens[:expires_at] = expires_at(tokens[:expires_in])
