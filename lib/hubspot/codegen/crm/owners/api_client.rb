@@ -240,7 +240,7 @@ module Hubspot
               end
             else
               # models, e.g. Pet
-              Hubspot::Client::Crm::Owners::Models(return_type).build_from_hash(data)
+              Hubspot::Client::Crm::Owners::Models.const_get(return_type).build_from_hash(data)
             end
           end
 
