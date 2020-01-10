@@ -7,7 +7,7 @@
       <%= link_to('Export To CSV', export_contacts_path(format: :csv), class: 'button') %>
     </div>
 
-    <%= form_tag('/contacts', method: :get) do %>
+    <%= form_tag('/contacts', method: :get, class: 'contacts') do %>
       <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
     <% end %>
 

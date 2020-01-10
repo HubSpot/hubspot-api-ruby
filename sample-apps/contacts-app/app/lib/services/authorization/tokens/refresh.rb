@@ -19,7 +19,7 @@ module Services
           tokens = tokens_api.post_oauth_v1_token(
             grant_type: :refresh_token,
             refresh_token: @tokens[:refresh_token],
-            redirect_uri: server_uri + CALLBACK_PATH,
+            redirect_uri: redirect_uri,
             client_id: ENV['HUBSPOT_CLIENT_ID'],
             client_secret: ENV['HUBSPOT_CLIENT_SECRET'],
             return_type: 'Object'

@@ -10,8 +10,8 @@ module Services
 
         private
 
-        def server_uri
-          @request.protocol + @request.host_with_port
+        def redirect_uri
+          @request.protocol + @request.host_with_port + CALLBACK_PATH
         end
       end
     end

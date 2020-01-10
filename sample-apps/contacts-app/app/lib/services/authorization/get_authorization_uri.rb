@@ -12,15 +12,15 @@ module Services
 
         ::Hubspot::OAuth.authorize_url(
           client_id: ENV['HUBSPOT_CLIENT_ID'],
-          redirect_uri: server_uri + CALLBACK_PATH,
+          redirect_uri: redirect_uri,
           scope: %w[contacts content]
         )
       end
 
       private
 
-      def server_uri
-        @request.protocol + @request.host_with_port
+      def redirect_uri
+        @request.protocol + @request.host_with_port + CALLBACK_PATH
       end
 
       def check_presence_of_credentials
