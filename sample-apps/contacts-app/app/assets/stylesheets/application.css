@@ -82,3 +82,7 @@ input[type=datetime-local] {
 h3.alert-success {
   text-align: center;
 }
+
+.delete-button {
+  margin-bottom: 0;
+}

@@ -11,21 +11,33 @@
       <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
     <% end %>
 
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
     <table class="contacts">
       <thead>
       <tr>
         <th>ID</th>
         <th>Email</th>
         <th>Name</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
         <% @contacts.each do |contact| %>
-            <tr>
-              <td><a href="/contacts/<%= contact.id %>"><%= contact.id %></a></td>
-              <td><%= contact.properties['email'] %></td>
-              <td><%= [contact.properties['firstname'], contact.properties['lastname']].join(' ') %></td>
-            </tr>
+          <tr>
+            <td><a href="/contacts/<%= contact.id %>"><%= contact.id %></a></td>
+            <td><%= contact.properties['email'] %></td>
+            <td><%= [contact.properties['firstname'], contact.properties['lastname']].join(' ') %></td>
+            <td>
+              <%= button_to "delete",
+                { controller: :contacts, action: :destroy, id: contact.id },
+                method: :delete,
+                form_class: 'delete-button'
+              %>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :contacts, only: %i[index show new create update] do
+  resources :contacts do
     collection do
       get :export
     end

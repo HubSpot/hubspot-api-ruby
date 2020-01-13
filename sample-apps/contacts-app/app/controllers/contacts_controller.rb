@@ -40,6 +40,12 @@ class ContactsController < ApplicationController
     end
   end
 
+  def destroy
+    @contact = Services::Hubspot::Contacts::GetById.new(params[:id]).call
+    Services::Hubspot::Contacts::Destroy.new(params[:id]).call
+    redirect_back(fallback_location: root_path, notice: "Contact ##{@contact.id} was successfully destroyed.")
+  end
+
   private
 
   def contact_params
