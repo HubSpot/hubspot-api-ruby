@@ -26,11 +26,27 @@
       </thead>
       <tbody>
         <% @contacts.each do |contact| %>
-          <tr>
-            <td><a href="/contacts/<%= contact.id %>"><%= contact.id %></a></td>
-            <td><%= contact.properties['email'] %></td>
+          <tr class="contact">
             <td>
-              <%= contact.properties['fullname'].present? ? contact.properties['fullname'] : contact.properties['email'] %>
+              <a href="/contacts/<%= contact.id %>">
+                <div class="contact-info">
+                  <%= contact.id %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href="/contacts/<%= contact.id %>">
+                <div class="contact-info">
+                  <%= contact.properties['email'] %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href="/contacts/<%= contact.id %>">
+                <div class="contact-info">
+                  <%= contact.properties['fullname'].present? ? contact.properties['fullname'] : contact.properties['email'] %>
+                </div>
+              </a>
             </td>
             <td>
               <%= button_to "delete",

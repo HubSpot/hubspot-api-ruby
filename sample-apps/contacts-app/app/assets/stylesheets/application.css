@@ -92,3 +92,17 @@ h3.alert-success {
 .delete-button input {
   margin-bottom: 0;
 }
+
+.contact a {
+  color: #4e585f;
+  text-decoration: none;
+}
+
+.contact a:hover {
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.contact .contact-info {
+  display: block;
+}
