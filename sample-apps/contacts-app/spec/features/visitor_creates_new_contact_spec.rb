@@ -7,22 +7,17 @@ feature 'Visitor creates new contact' do
   scenario 'with correct data' do
     login
     using_wait_time 10 do
-      find("a[id$='new-contact']").click
-      find("input[id$='email']").fill_in with: email
-      find("input[type='submit']").click
+      create_contact(email)
 
       expect(page).to have_css('.contacts td', text: email)
-      id = find('.contacts .contact-email', text: email).find(:xpath, 'ancestor::tr[@class="contact"]').find('.contact-id').text
-      remove_test_contact(id)
+      remove_test_contact(email)
     end
   end
 
   scenario 'with incorrect data' do
     login
     using_wait_time 10 do
-      find("a[id$='new-contact']").click
-      find("input[id$='email']").fill_in with: incorrect_email
-      find("input[type='submit']").click
+      create_contact(incorrect_email)
 
       expect(page).to have_css('.error', text: 'Property values were not valid')
     end

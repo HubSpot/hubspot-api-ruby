@@ -16,7 +16,14 @@ module ApplicationHelper
     end
   end
 
-  def remove_test_contact(id)
+  def remove_test_contact(email)
+    id = find('.contacts .contact-email', text: email).find(:xpath, 'ancestor::tr[@class="contact"]').find('.contact-id').text
     Services::Hubspot::Contacts::Destroy.new(id).call
+  end
+
+  def create_contact(email)
+    find("a[id$='new-contact']").click
+    find("input[id$='email']").fill_in with: email
+    find("input[type='submit']").click
   end
 end
