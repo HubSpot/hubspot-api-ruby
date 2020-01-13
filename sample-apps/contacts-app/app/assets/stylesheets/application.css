@@ -85,4 +85,10 @@ h3.alert-success {
 
 .delete-button {
   margin-bottom: 0;
+  float: right;
+  margin-right: 20px;
+}
+
+.delete-button input {
+  margin-bottom: 0;
 }
