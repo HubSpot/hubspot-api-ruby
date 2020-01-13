@@ -3,8 +3,8 @@
     <h3><%= @error.message %></h3>
   <% else %>
     <div class='contact-new-button'>
-      <%= link_to('New Contact', new_contact_path, class: 'button') %>
-      <%= link_to('Export To CSV', export_contacts_path(format: :csv), class: 'button') %>
+      <%= link_to('New Contact', new_contact_path, class: 'button', id: 'new-contact') %>
+      <%= link_to('Export To CSV', export_contacts_path(format: :csv), class: 'button', id: 'export') %>
     </div>
 
     <%= form_tag('/contacts', method: :get, class: 'contacts') do %>
@@ -29,21 +29,21 @@
           <tr class="contact">
             <td>
               <a href="/contacts/<%= contact.id %>">
-                <div class="contact-info">
+                <div class="contact-info contact-id">
                   <%= contact.id %>
                 </div>
               </a>
             </td>
             <td>
               <a href="/contacts/<%= contact.id %>">
-                <div class="contact-info">
+                <div class="contact-info contact-email">
                   <%= contact.properties['email'] %>
                 </div>
               </a>
             </td>
             <td>
               <a href="/contacts/<%= contact.id %>">
-                <div class="contact-info">
+                <div class="contact-info contact-fullname">
                   <%= contact.properties['fullname'].present? ? contact.properties['fullname'] : contact.properties['email'] %>
                 </div>
               </a>
