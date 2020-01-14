@@ -24,5 +24,19 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.use_transactional_fixtures = false
 
-  config.include ApplicationHelper
+  config.include ApplicationHelper, DownloadHelper
+
+  Capybara.register_driver :selenium do |app|
+    profile = Selenium::WebDriver::Firefox::Profile.new
+    profile['browser.download.dir'] = DownloadHelper::PATH.to_s
+    profile['browser.download.folderList'] = 2
+
+    # Suppress "open with" dialog
+    profile['browser.helperApps.neverAsk.saveToDisk'] = 'text/csv'
+    Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
+  end
+
+  config.before( :each ) do
+      DownloadHelper::clear_downloads
+  end
 end
