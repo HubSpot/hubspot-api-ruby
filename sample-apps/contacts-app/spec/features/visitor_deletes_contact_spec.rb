@@ -8,8 +8,10 @@ feature 'Deleting contact' do
     using_wait_time 10 do
       create_contact(email)
       expect(page).to have_css('.contacts td', text: email)
-      remove_test_contact(email)
-      page.driver.browser.navigate.refresh
+      find('.contacts .contact-email', text: email)
+        .find(:xpath, 'ancestor::tr[@class="contact"]')
+        .find('.delete-button').click
+
       expect(page).not_to have_css('.contacts td', text: email)
     end
   end

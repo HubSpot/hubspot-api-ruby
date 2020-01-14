@@ -4,8 +4,11 @@ feature 'Visitor creates new contact' do
   let(:email) { 'test_email@q.com' }
   let(:incorrect_email) { 'wrong_email.com' }
 
-  scenario 'with correct data' do
+  before do
     login
+  end
+
+  scenario 'with correct data' do
     using_wait_time 10 do
       create_contact(email)
 
@@ -15,7 +18,6 @@ feature 'Visitor creates new contact' do
   end
 
   scenario 'with incorrect data' do
-    login
     using_wait_time 10 do
       create_contact(incorrect_email)
 
