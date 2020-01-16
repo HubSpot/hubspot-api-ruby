@@ -19,7 +19,7 @@ describe Hubspot::Client::Crm::Pipelines::Configuration do
     # uncomment below to setup host and base_path
     # require 'URI'
     # uri = URI.parse("https://api.hubapi.com/crm/v3/pipelines")
-    # OpenapiClient.configure do |c|
+    # Hubspot.configure do |c|
     #   c.host = uri.host
     #   c.base_path = uri.path
     # end
