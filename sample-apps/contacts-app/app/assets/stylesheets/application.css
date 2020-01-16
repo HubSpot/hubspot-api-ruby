@@ -93,16 +93,16 @@ h3.alert-success {
   margin-bottom: 0;
 }
 
-.contact a {
+.contact a, .property a {
   color: #4e585f;
   text-decoration: none;
 }
 
-.contact a:hover {
+.contact a:hover, .property a:hover {
    text-decoration: none;
    cursor: pointer;
 }
 
-.contact .contact-info {
+.contact .contact-info, .property .property-info {
   display: block;
 }

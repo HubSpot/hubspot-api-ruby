@@ -1,0 +1,67 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <table class="properties-list">
+      <thead>
+      <tr>
+            <th>Name</th>
+            <th>Label</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @properties.each do |property| %>
+        <tr class="property">
+          <td>
+            <a href="/properties/<%= property.name %>">
+              <div class="property-info property-name">
+                <%= property.name %>
+              </div>
+            </a>
+          </td>
+          <td>
+            <a href="/properties/<%= property.name %>">
+              <div class="property-info property-label">
+                <%= property.label %>
+              </div>
+            </a>
+          </td>
+          <td>
+            <a href="/properties/<%= property.name %>">
+              <div class="property-info property-description">
+                <%= property.description %>
+              </div>
+            </a>
+          </td>
+          <td>
+            <a href="/properties/<%= property.name %>">
+              <div class="property-info property-type">
+                <%= property.type %>
+              </div>
+            </a>
+          </td>
+          <td>
+            <%
+              if property.modification_metadata.archivable &&
+                 !property.modification_metadata.read_only_definition
+            %>
+              <a class='remove-button'>
+                <%= button_to 'Delete' %>
+              </a>
+            <% end%>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div>
+      <a id="new-property" href="/properties/new">
+        <input class="button-primary" type="button" value="New Property">
+      </a>
+    </div>
+  <% end %>
+</div>
