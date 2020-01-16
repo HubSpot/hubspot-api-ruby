@@ -84,28 +84,6 @@ module Hubspot
             # Whether or not the property can be used in a HubSpot form.
             attr_accessor :form_field
 
-            class EnumAttributeValidator
-              attr_reader :datatype
-              attr_reader :allowable_values
-
-              def initialize(datatype, allowable_values)
-                @allowable_values = allowable_values.map do |value|
-                  case datatype.to_s
-                  when /Integer/i
-                    value.to_i
-                  when /Float/i
-                    value.to_f
-                  else
-                    value
-                  end
-                end
-              end
-
-              def valid?(value)
-                !value || allowable_values.include?(value)
-              end
-            end
-
             # Attribute mapping from ruby-style variable name to JSON key.
             def self.attribute_map
               {
@@ -322,22 +300,10 @@ module Hubspot
               return false if @label.nil?
               return false if @type.nil?
               return false if @field_type.nil?
-              field_type_validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox"])
-              return false unless field_type_validator.valid?(@field_type)
               return false if @description.nil?
               return false if @group_name.nil?
               return false if @options.nil?
               true
-            end
-
-            # Custom attribute writer method checking allowed values (enum).
-            # @param [Object] field_type Object to be assigned
-            def field_type=(field_type)
-              validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox"])
-              unless validator.valid?(field_type)
-                fail ArgumentError, "invalid value for \"field_type\", must be one of #{validator.allowable_values}."
-              end
-              @field_type = field_type
             end
 
             # Checks equality by comparing each attribute.
