@@ -5,6 +5,10 @@ class PropertiesController < ApplicationController
     @properties = Services::Hubspot::Properties::GetAll.new.call
   end
 
+  def show
+    @property = Services::Hubspot::Properties::GetByName.new(params[:id]).call
+  end
+
   private
 
   def authorize

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :properties, only: %i[index]
+  resources :properties, only: %i[index show]
 
   get '/oauth', to: 'oauth/authorization#authorize'
   get '/oauth/callback', to: 'oauth/authorization#callback'
