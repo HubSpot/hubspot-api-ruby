@@ -17,40 +17,20 @@ module Hubspot
     module Crm
       module Objects
         module Models
-          class PublicObjectSearchRequest
-            attr_accessor :filter_groups
-
-            attr_accessor :sorts
-
-            attr_accessor :query
-
-            attr_accessor :properties
-
-            attr_accessor :limit
-
-            attr_accessor :after
+          class FilterGroup
+            attr_accessor :filters
 
             # Attribute mapping from ruby-style variable name to JSON key.
             def self.attribute_map
               {
-                :'filter_groups' => :'filterGroups',
-                :'sorts' => :'sorts',
-                :'query' => :'query',
-                :'properties' => :'properties',
-                :'limit' => :'limit',
-                :'after' => :'after'
+                :'filters' => :'filters'
               }
             end
 
             # Attribute type mapping.
             def self.openapi_types
               {
-                :'filter_groups' => :'Array<FilterGroup>',
-                :'sorts' => :'Array<String>',
-                :'query' => :'String',
-                :'properties' => :'Array<String>',
-                :'limit' => :'Integer',
-                :'after' => :'Integer'
+                :'filters' => :'Array<Filter>'
               }
             end
 
@@ -64,45 +44,21 @@ module Hubspot
             # @param [Hash] attributes Model attributes in the form of hash
             def initialize(attributes = {})
               if (!attributes.is_a?(Hash))
-                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Objects::Models::PublicObjectSearchRequest` initialize method"
+                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Objects::Models::Paging` initialize method"
               end
 
               # check to see if the attribute exists and convert string to symbol for hash key
               attributes = attributes.each_with_object({}) { |(k, v), h|
                 if (!self.class.attribute_map.key?(k.to_sym))
-                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Objects::Models::PublicObjectSearchRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Objects::Models::Paging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
                 end
                 h[k.to_sym] = v
               }
 
-              if attributes.key?(:'filter_groups')
-                if (value = attributes[:'filter_groups']).is_a?(Array)
-                  self.filter_groups = value
+              if attributes.key?(:'filters')
+                if (value = attributes[:'filters']).is_a?(Array)
+                  self.filters = value
                 end
-              end
-
-              if attributes.key?(:'sorts')
-                if (value = attributes[:'sorts']).is_a?(Array)
-                  self.sorts = value
-                end
-              end
-
-              if attributes.key?(:'query')
-                self.query = attributes[:'query']
-              end
-
-              if attributes.key?(:'properties')
-                if (value = attributes[:'properties']).is_a?(Array)
-                  self.properties = value
-                end
-              end
-
-              if attributes.key?(:'limit')
-                self.limit = attributes[:'limit']
-              end
-
-              if attributes.key?(:'after')
-                self.after = attributes[:'after']
               end
             end
 
@@ -110,24 +66,8 @@ module Hubspot
             # @return Array for valid properties with the reasons
             def list_invalid_properties
               invalid_properties = Array.new
-              if @filter_groups.nil?
-                invalid_properties.push('invalid value for "filter_groups", filter_groups cannot be nil.')
-              end
-
-              if @sorts.nil?
-                invalid_properties.push('invalid value for "sorts", sorts cannot be nil.')
-              end
-
-              if @properties.nil?
-                invalid_properties.push('invalid value for "properties", properties cannot be nil.')
-              end
-
-              if @limit.nil?
-                invalid_properties.push('invalid value for "limit", limit cannot be nil.')
-              end
-
-              if @after.nil?
-                invalid_properties.push('invalid value for "after", after cannot be nil.')
+              if @filters.nil?
+                invalid_properties.push('invalid value for "filters", filters cannot be nil.')
               end
 
               invalid_properties
@@ -136,11 +76,7 @@ module Hubspot
             # Check to see if the all the properties in the model are valid
             # @return true if the model is valid
             def valid?
-              return false if @filter_groups.nil?
-              return false if @sorts.nil?
-              return false if @properties.nil?
-              return false if @limit.nil?
-              return false if @after.nil?
+              return false if @filters.nil?
               true
             end
 
@@ -149,12 +85,7 @@ module Hubspot
             def ==(o)
               return true if self.equal?(o)
               self.class == o.class &&
-                  filter_groups == o.filter_groups &&
-                  sorts == o.sorts &&
-                  query == o.query &&
-                  properties == o.properties &&
-                  limit == o.limit &&
-                  after == o.after
+                  filters == o.filters
             end
 
             # @see the `==` method
@@ -166,7 +97,7 @@ module Hubspot
             # Calculates hash code according to all attributes.
             # @return [Integer] Hash code
             def hash
-              [filter_groups, sorts, query, properties, limit, after].hash
+              [filters].hash
             end
 
             # Builds the object from hash

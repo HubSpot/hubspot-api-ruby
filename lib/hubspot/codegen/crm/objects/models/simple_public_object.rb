@@ -52,7 +52,7 @@ module Hubspot
                 :'properties' => :'Hash<String, String>',
                 :'created_at' => :'String',
                 :'updated_at' => :'String',
-                :'associations' => :'Hash<String, CollectionResponse>',
+                :'associations' => :'Hash<String, CollectionResponseSimplePublicObjectId>',
                 :'archived' => :'Boolean',
                 :'archived_at' => :'String'
               }

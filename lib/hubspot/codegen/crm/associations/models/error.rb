@@ -1,7 +1,7 @@
 =begin
-#CRM Objects
+#Associations
 
-#CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are native objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
+#Associations define the relationships between objects in HubSpot. These endpoints allow you to create, read, and remove associations.
 
 The version of the OpenAPI document: v3
 
@@ -15,42 +15,48 @@ require 'date'
 module Hubspot
   module Client
     module Crm
-      module Objects
+      module Associations
         module Models
-          class PublicObjectSearchRequest
-            attr_accessor :filter_groups
+          class Error
+            # A human readable message describing the error along with remediation steps where appropriate
+            attr_accessor :message
 
-            attr_accessor :sorts
+            # A unique identifier for the request. Include this value with any error reports or support tickets
+            attr_accessor :correlation_id
 
-            attr_accessor :query
+            # The error category
+            attr_accessor :category
 
-            attr_accessor :properties
+            # further information about the error
+            attr_accessor :errors
 
-            attr_accessor :limit
+            # Context about the error condition
+            attr_accessor :context
 
-            attr_accessor :after
+            # A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+            attr_accessor :links
 
             # Attribute mapping from ruby-style variable name to JSON key.
             def self.attribute_map
               {
-                :'filter_groups' => :'filterGroups',
-                :'sorts' => :'sorts',
-                :'query' => :'query',
-                :'properties' => :'properties',
-                :'limit' => :'limit',
-                :'after' => :'after'
+                :'message' => :'message',
+                :'correlation_id' => :'correlationId',
+                :'category' => :'category',
+                :'errors' => :'errors',
+                :'context' => :'context',
+                :'links' => :'links'
               }
             end
 
             # Attribute type mapping.
             def self.openapi_types
               {
-                :'filter_groups' => :'Array<FilterGroup>',
-                :'sorts' => :'Array<String>',
-                :'query' => :'String',
-                :'properties' => :'Array<String>',
-                :'limit' => :'Integer',
-                :'after' => :'Integer'
+                :'message' => :'String',
+                :'correlation_id' => :'String',
+                :'category' => :'String',
+                :'errors' => :'Array<ErrorDetail>',
+                :'context' => :'Hash<String, Array<String>>',
+                :'links' => :'Hash<String, String>'
               }
             end
 
@@ -64,45 +70,45 @@ module Hubspot
             # @param [Hash] attributes Model attributes in the form of hash
             def initialize(attributes = {})
               if (!attributes.is_a?(Hash))
-                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Objects::Models::PublicObjectSearchRequest` initialize method"
+                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Associations::Models::Error` initialize method"
               end
 
               # check to see if the attribute exists and convert string to symbol for hash key
               attributes = attributes.each_with_object({}) { |(k, v), h|
                 if (!self.class.attribute_map.key?(k.to_sym))
-                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Objects::Models::PublicObjectSearchRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Associations::Models::Error`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
                 end
                 h[k.to_sym] = v
               }
 
-              if attributes.key?(:'filter_groups')
-                if (value = attributes[:'filter_groups']).is_a?(Array)
-                  self.filter_groups = value
+              if attributes.key?(:'message')
+                self.message = attributes[:'message']
+              end
+
+              if attributes.key?(:'correlation_id')
+                self.correlation_id = attributes[:'correlation_id']
+              end
+
+              if attributes.key?(:'category')
+                self.category = attributes[:'category']
+              end
+
+              if attributes.key?(:'errors')
+                if (value = attributes[:'errors']).is_a?(Array)
+                  self.errors = value
                 end
               end
 
-              if attributes.key?(:'sorts')
-                if (value = attributes[:'sorts']).is_a?(Array)
-                  self.sorts = value
+              if attributes.key?(:'context')
+                if (value = attributes[:'context']).is_a?(Hash)
+                  self.context = value
                 end
               end
 
-              if attributes.key?(:'query')
-                self.query = attributes[:'query']
-              end
-
-              if attributes.key?(:'properties')
-                if (value = attributes[:'properties']).is_a?(Array)
-                  self.properties = value
+              if attributes.key?(:'links')
+                if (value = attributes[:'links']).is_a?(Hash)
+                  self.links = value
                 end
-              end
-
-              if attributes.key?(:'limit')
-                self.limit = attributes[:'limit']
-              end
-
-              if attributes.key?(:'after')
-                self.after = attributes[:'after']
               end
             end
 
@@ -110,24 +116,21 @@ module Hubspot
             # @return Array for valid properties with the reasons
             def list_invalid_properties
               invalid_properties = Array.new
-              if @filter_groups.nil?
-                invalid_properties.push('invalid value for "filter_groups", filter_groups cannot be nil.')
+              if @message.nil?
+                invalid_properties.push('invalid value for "message", message cannot be nil.')
               end
 
-              if @sorts.nil?
-                invalid_properties.push('invalid value for "sorts", sorts cannot be nil.')
+              if @correlation_id.nil?
+                invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
               end
 
-              if @properties.nil?
-                invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+              pattern = Regexp.new(/[a-zA-Z0-9]{32}/)
+              if @correlation_id !~ pattern
+                invalid_properties.push("invalid value for \"correlation_id\", must conform to the pattern #{pattern}.")
               end
 
-              if @limit.nil?
-                invalid_properties.push('invalid value for "limit", limit cannot be nil.')
-              end
-
-              if @after.nil?
-                invalid_properties.push('invalid value for "after", after cannot be nil.')
+              if @category.nil?
+                invalid_properties.push('invalid value for "category", category cannot be nil.')
               end
 
               invalid_properties
@@ -136,12 +139,26 @@ module Hubspot
             # Check to see if the all the properties in the model are valid
             # @return true if the model is valid
             def valid?
-              return false if @filter_groups.nil?
-              return false if @sorts.nil?
-              return false if @properties.nil?
-              return false if @limit.nil?
-              return false if @after.nil?
+              return false if @message.nil?
+              return false if @correlation_id.nil?
+              return false if @correlation_id !~ Regexp.new(/[a-zA-Z0-9]{32}/)
+              return false if @category.nil?
               true
+            end
+
+            # Custom attribute writer method with validation
+            # @param [Object] correlation_id Value to be assigned
+            def correlation_id=(correlation_id)
+              if correlation_id.nil?
+                fail ArgumentError, 'correlation_id cannot be nil'
+              end
+
+              pattern = Regexp.new(/[a-zA-Z0-9]{32}/)
+              if correlation_id !~ pattern
+                fail ArgumentError, "invalid value for \"correlation_id\", must conform to the pattern #{pattern}."
+              end
+
+              @correlation_id = correlation_id
             end
 
             # Checks equality by comparing each attribute.
@@ -149,12 +166,12 @@ module Hubspot
             def ==(o)
               return true if self.equal?(o)
               self.class == o.class &&
-                  filter_groups == o.filter_groups &&
-                  sorts == o.sorts &&
-                  query == o.query &&
-                  properties == o.properties &&
-                  limit == o.limit &&
-                  after == o.after
+                  message == o.message &&
+                  correlation_id == o.correlation_id &&
+                  category == o.category &&
+                  errors == o.errors &&
+                  context == o.context &&
+                  links == o.links
             end
 
             # @see the `==` method
@@ -166,7 +183,7 @@ module Hubspot
             # Calculates hash code according to all attributes.
             # @return [Integer] Hash code
             def hash
-              [filter_groups, sorts, query, properties, limit, after].hash
+              [message, correlation_id, category, errors, context, links].hash
             end
 
             # Builds the object from hash
@@ -233,7 +250,7 @@ module Hubspot
                   end
                 end
               else # model
-                Hubspot::Client::Crm::Objects::Models.const_get(type).build_from_hash(value)
+                Hubspot::Client::Crm::Associations::Models(type).build_from_hash(value)
               end
             end
 
