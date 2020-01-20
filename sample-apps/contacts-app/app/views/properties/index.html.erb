@@ -2,6 +2,9 @@
   <% if @error.present? %>
     <h3><%= @error.message %></h3>
   <% else %>
+    <div class='contact-new-button'>
+      <%= link_to('New Property', new_property_path, class: 'button', id: 'new-property') %>
+    </div>
     <table class="properties-list">
       <thead>
       <tr>

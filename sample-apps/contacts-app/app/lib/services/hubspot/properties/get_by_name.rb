@@ -8,7 +8,7 @@ module Services
 
         def call
           core_api = ::Hubspot::Client::Crm::Properties::Api::CoreApi.new
-          core_api.get_crm_v3_properties_object_type_property_name(
+          core_api.get_by_name(
             'contacts',
             @name,
             auth_names: 'oauth2'
