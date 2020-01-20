@@ -17,46 +17,20 @@ module Hubspot
     module Crm
       module Objects
         module Models
-          class SortField
-            attr_accessor :property_name
-
-            attr_accessor :direction
-
-            class EnumAttributeValidator
-              attr_reader :datatype
-              attr_reader :allowable_values
-
-              def initialize(datatype, allowable_values)
-                @allowable_values = allowable_values.map do |value|
-                  case datatype.to_s
-                  when /Integer/i
-                    value.to_i
-                  when /Float/i
-                    value.to_f
-                  else
-                    value
-                  end
-                end
-              end
-
-              def valid?(value)
-                !value || allowable_values.include?(value)
-              end
-            end
+          class FilterGroup
+            attr_accessor :filters
 
             # Attribute mapping from ruby-style variable name to JSON key.
             def self.attribute_map
               {
-                :'property_name' => :'propertyName',
-                :'direction' => :'direction'
+                :'filters' => :'filters'
               }
             end
 
             # Attribute type mapping.
             def self.openapi_types
               {
-                :'property_name' => :'String',
-                :'direction' => :'String'
+                :'filters' => :'Array<Filter>'
               }
             end
 
@@ -70,23 +44,21 @@ module Hubspot
             # @param [Hash] attributes Model attributes in the form of hash
             def initialize(attributes = {})
               if (!attributes.is_a?(Hash))
-                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Objects::Models::SortField` initialize method"
+                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Objects::Models::Paging` initialize method"
               end
 
               # check to see if the attribute exists and convert string to symbol for hash key
               attributes = attributes.each_with_object({}) { |(k, v), h|
                 if (!self.class.attribute_map.key?(k.to_sym))
-                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Objects::Models::SortField`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Objects::Models::Paging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
                 end
                 h[k.to_sym] = v
               }
 
-              if attributes.key?(:'property_name')
-                self.property_name = attributes[:'property_name']
-              end
-
-              if attributes.key?(:'direction')
-                self.direction = attributes[:'direction']
+              if attributes.key?(:'filters')
+                if (value = attributes[:'filters']).is_a?(Array)
+                  self.filters = value
+                end
               end
             end
 
@@ -94,12 +66,8 @@ module Hubspot
             # @return Array for valid properties with the reasons
             def list_invalid_properties
               invalid_properties = Array.new
-              if @property_name.nil?
-                invalid_properties.push('invalid value for "property_name", property_name cannot be nil.')
-              end
-
-              if @direction.nil?
-                invalid_properties.push('invalid value for "direction", direction cannot be nil.')
+              if @filters.nil?
+                invalid_properties.push('invalid value for "filters", filters cannot be nil.')
               end
 
               invalid_properties
@@ -108,21 +76,8 @@ module Hubspot
             # Check to see if the all the properties in the model are valid
             # @return true if the model is valid
             def valid?
-              return false if @property_name.nil?
-              return false if @direction.nil?
-              direction_validator = EnumAttributeValidator.new('String', ["ASCENDING", "DESCENDING"])
-              return false unless direction_validator.valid?(@direction)
+              return false if @filters.nil?
               true
-            end
-
-            # Custom attribute writer method checking allowed values (enum).
-            # @param [Object] direction Object to be assigned
-            def direction=(direction)
-              validator = EnumAttributeValidator.new('String', ["ASCENDING", "DESCENDING"])
-              unless validator.valid?(direction)
-                fail ArgumentError, "invalid value for \"direction\", must be one of #{validator.allowable_values}."
-              end
-              @direction = direction
             end
 
             # Checks equality by comparing each attribute.
@@ -130,8 +85,7 @@ module Hubspot
             def ==(o)
               return true if self.equal?(o)
               self.class == o.class &&
-                  property_name == o.property_name &&
-                  direction == o.direction
+                  filters == o.filters
             end
 
             # @see the `==` method
@@ -143,7 +97,7 @@ module Hubspot
             # Calculates hash code according to all attributes.
             # @return [Integer] Hash code
             def hash
-              [property_name, direction].hash
+              [filters].hash
             end
 
             # Builds the object from hash
