@@ -29,8 +29,8 @@ module Hubspot
             # @param [Hash] opts the optional parameters
             # @option opts [BatchInputPropertyName] :batch_input_property_name 
             # @return [nil]
-            def post_crm_v3_properties_object_type_batch_archive(object_type, opts = {})
-              post_crm_v3_properties_object_type_batch_archive_with_http_info(object_type, opts)
+            def archive_batch(object_type, opts = {})
+              archive_batch_with_http_info(object_type, opts)
               nil
             end
 
@@ -40,13 +40,13 @@ module Hubspot
             # @param [Hash] opts the optional parameters
             # @option opts [BatchInputPropertyName] :batch_input_property_name 
             # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-            def post_crm_v3_properties_object_type_batch_archive_with_http_info(object_type, opts = {})
+            def archive_batch_with_http_info(object_type, opts = {})
               if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_properties_object_type_batch_archive ...'
+                @api_client.config.logger.debug 'Calling API: BatchApi.archive_batch ...'
               end
               # verify the required parameter 'object_type' is set
               if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.post_crm_v3_properties_object_type_batch_archive"
+                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.archive_batch"
               end
               # resource path
               local_var_path = '/{objectType}/batch/archive'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -84,7 +84,7 @@ module Hubspot
 
               data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
               if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_properties_object_type_batch_archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+                @api_client.config.logger.debug "API called: BatchApi#archive_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
               end
               return data, status_code, headers
             end
@@ -95,8 +95,8 @@ module Hubspot
             # @param [Hash] opts the optional parameters
             # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
             # @return [BatchResponseProperty]
-            def post_crm_v3_properties_object_type_batch_create(object_type, opts = {})
-              data, _status_code, _headers = post_crm_v3_properties_object_type_batch_create_with_http_info(object_type, opts)
+            def create_batch(object_type, opts = {})
+              data, _status_code, _headers = create_batch_with_http_info(object_type, opts)
               data
             end
 
@@ -106,13 +106,13 @@ module Hubspot
             # @param [Hash] opts the optional parameters
             # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
             # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
-            def post_crm_v3_properties_object_type_batch_create_with_http_info(object_type, opts = {})
+            def create_batch_with_http_info(object_type, opts = {})
               if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_properties_object_type_batch_create ...'
+                @api_client.config.logger.debug 'Calling API: BatchApi.create_batch ...'
               end
               # verify the required parameter 'object_type' is set
               if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.post_crm_v3_properties_object_type_batch_create"
+                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.create_batch"
               end
               # resource path
               local_var_path = '/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -150,7 +150,7 @@ module Hubspot
 
               data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
               if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_properties_object_type_batch_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+                @api_client.config.logger.debug "API called: BatchApi#create_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
               end
               return data, status_code, headers
             end
@@ -161,8 +161,8 @@ module Hubspot
             # @param [Hash] opts the optional parameters
             # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
             # @return [BatchResponseProperty]
-            def post_crm_v3_properties_object_type_batch_read(object_type, opts = {})
-              data, _status_code, _headers = post_crm_v3_properties_object_type_batch_read_with_http_info(object_type, opts)
+            def read_batch(object_type, opts = {})
+              data, _status_code, _headers = read_batch_with_http_info(object_type, opts)
               data
             end
 
@@ -172,13 +172,13 @@ module Hubspot
             # @param [Hash] opts the optional parameters
             # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
             # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
-            def post_crm_v3_properties_object_type_batch_read_with_http_info(object_type, opts = {})
+            def read_batch_with_http_info(object_type, opts = {})
               if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_properties_object_type_batch_read ...'
+                @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
               end
               # verify the required parameter 'object_type' is set
               if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.post_crm_v3_properties_object_type_batch_read"
+                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.read_batch"
               end
               # resource path
               local_var_path = '/{objectType}/batch/read'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -216,7 +216,7 @@ module Hubspot
 
               data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
               if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_properties_object_type_batch_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+                @api_client.config.logger.debug "API called: BatchApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
               end
               return data, status_code, headers
             end
