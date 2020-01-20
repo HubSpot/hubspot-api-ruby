@@ -1,15 +1,8 @@
-# HubSpot-ruby sample OAuth 2.0 app
+# HubSpot-ruby sample Contacts 2.0 app
 
-This is a sample app for the [hubspot-ruby SDK](https://github.com/adimichele/hubspot-ruby). Currently, this app focuses on demonstrating the functionality of [Companies API](https://developers.hubspot.com/docs/methods/companies/companies-overview) endpoints and their related actions.
+This is a sample app for the [hubspot-ruby SDK](https://github.com/adimichele/hubspot-ruby). Currently, this app focuses on demonstrating the functionality of [Contacts API](https://developers.hubspot.com/docs/methods/contacts/contacts-overview) endpoints and their related actions.
 
 Please see the documentation on [How do I create an app in HubSpot?](https://developers.hubspot.com/docs/faq/how-do-i-create-an-app-in-hubspot)
-
-### HubSpot Public API links used in this application
-
-  - [Initiate an Integration with OAuth 2.0](https://developers.hubspot.com/docs/methods/oauth2/initiate-oauth-integration)
-  - [Get OAuth 2.0 Access Token and Refresh Tokens](https://developers.hubspot.com/docs/methods/oauth2/get-access-and-refresh-tokens)
-  - [Refresh OAuth 2.0 Access Token](https://developers.hubspot.com/docs/methods/oauth2/refresh-access-token)
-  - [Get all contacts](https://developers.hubspot.com/docs/methods/contacts/get_contacts)
 
 ### Setup App
 
