@@ -1,5 +1,5 @@
 PATH
-  remote: ../..
+  remote: ../ruby-hubspot-3
   specs:
     ruby-hubspot-3 (1.0.0)
       json (~> 2.1, >= 2.1.0)

@@ -1,14 +1,18 @@
 FROM ruby:2.6.3
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+RUN mkdir /contacts-app
+COPY ./sample-apps/contacts-app/Gemfile /contacts-app/Gemfile
+COPY ./sample-apps/contacts-app/Gemfile.lock /contacts-app/Gemfile.lock
+COPY ./sample-apps/contacts-app /contacts-app
+RUN mkdir /ruby-hubspot-3
+COPY . /ruby-hubspot-3
+
+
+WORKDIR /contacts-app
 RUN bundle install
-COPY . /myapp
 
 # Add a script to be executed every time the container starts.
-COPY docker-entrypoint.sh /usr/bin/
+COPY ./sample-apps/contacts-app/docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 3000
