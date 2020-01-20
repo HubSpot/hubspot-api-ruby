@@ -52,7 +52,11 @@
                  !property.modification_metadata.read_only_definition
             %>
               <a class='remove-button'>
-                <%= button_to 'Delete' %>
+                <%= button_to "delete",
+                  { controller: :properties, action: :destroy, id: property.name },
+                  method: :delete,
+                  form_class: 'delete-button'
+                %>
               </a>
             <% end%>
           </td>
@@ -60,11 +64,5 @@
       <% end %>
       </tbody>
     </table>
-
-    <div>
-      <a id="new-property" href="/properties/new">
-        <input class="button-primary" type="button" value="New Property">
-      </a>
-    </div>
   <% end %>
 </div>

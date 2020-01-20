@@ -1,12 +1,9 @@
 class PropertiesController < ApplicationController
   before_action :authorize
+  before_action :property, only: %i[show destroy]
 
   def index
     @properties = Services::Hubspot::Properties::GetAll.new.call
-  end
-
-  def show
-    @property = Services::Hubspot::Properties::GetByName.new(params[:id]).call
   end
 
   def new
@@ -24,12 +21,20 @@ class PropertiesController < ApplicationController
   end
 
   def update
-    @property = Services::Hubspot::Properties::GetByName.new(params[:id]).call
     Services::Hubspot::Properties::Update.new(params[:id], property_params).call
     redirect_to :properties
   end
 
+  def destroy
+    Services::Hubspot::Properties::Destroy.new(params[:id]).call
+    redirect_back(fallback_location: properties_path, notice: "Property ##{@property.name} was successfully destroyed.")
+  end
+
   private
+
+  def property
+    @property ||= Services::Hubspot::Properties::GetByName.new(params[:id]).call
+  end
 
   def property_params
     params.require(:property).permit(%i[name label description group_name type field_type]).to_hash
