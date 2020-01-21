@@ -1,14 +1,9 @@
 FROM ruby:2.6.3
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /contacts-app
-COPY ./sample-apps/contacts-app/Gemfile /contacts-app/Gemfile
-COPY ./sample-apps/contacts-app/Gemfile.lock /contacts-app/Gemfile.lock
-COPY ./sample-apps/contacts-app /contacts-app
 RUN mkdir /ruby-hubspot-3
 COPY . /ruby-hubspot-3
 
-
-WORKDIR /contacts-app
+WORKDIR /ruby-hubspot-3/sample-apps/contacts-app
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
