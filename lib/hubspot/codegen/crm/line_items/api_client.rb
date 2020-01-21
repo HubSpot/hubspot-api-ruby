@@ -240,7 +240,7 @@ module Hubspot
               end
             else
               # models, e.g. Pet
-              OpenapiClient.const_get(return_type).build_from_hash(data)
+              Hubspot::Client::Crm::LineItems::Models.const_get(return_type).build_from_hash(data)
             end
           end
 
