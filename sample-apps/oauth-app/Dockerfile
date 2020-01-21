@@ -1,9 +1,5 @@
 FROM ruby:2.6.3
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-# RUN mkdir /oauth-app
-# COPY ./sample-apps/oauth-app/Gemfile /oauth-app/Gemfile
-# COPY ./sample-apps/oauth-app/Gemfile.lock /oauth-app/Gemfile.lock
-# COPY ./sample-apps/oauth-app /oauth-app
 RUN mkdir /ruby-hubspot-3
 COPY . /ruby-hubspot-3
 
