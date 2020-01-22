@@ -31,7 +31,8 @@ module Hubspot
       'Crm::Pipelines',
       'Crm::Products',
       'Crm::Properties',
-      'Crm::Quotes'
+      'Crm::Quotes',
+      'Crm::Tickets'
     ].freeze
 
     def configure
