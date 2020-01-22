@@ -4,7 +4,7 @@
         <h3>Properties</h3>
         <%= form_for :contact, url: "/contacts/#{params[:id]}", method: 'put' do |form| %>
           <% @contact.properties.each do |property_key, property_value| %>
-            <%= label(:contact, property_key, property_key) %>
+            <%= label(:contact, property_key, @properties.find { |p| p.name == property_key }.label) %>
             <% if property_key == 'hubspot_owner_id' %>
               <%= select(
                 :contact,

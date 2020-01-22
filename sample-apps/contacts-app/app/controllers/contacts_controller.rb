@@ -14,6 +14,7 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Services::Hubspot::Contacts::GetById.new(params[:id]).call
+    @properties = Services::Hubspot::Properties::GetAll.new.call
     @owners = Services::Hubspot::Owners::GetAll.new.call
   end
 

@@ -11,8 +11,16 @@ module Services
           basic_api.get_by_id(
             'contact', @id,
             auth_names: 'oauth2',
-            properties: %w[email firstname lastname hubspot_owner_id]
+            properties: properties_to_display
           )
+        end
+
+        private
+
+        def properties_to_display
+          properties = Services::Hubspot::Properties::GetAll.new.call
+          properties.filter! { |p| p.type == 'string' && !p.modification_metadata.read_only_definition }
+          properties.map(&:name) + %w[hubspot_owner_id]
         end
       end
     end
