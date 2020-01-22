@@ -30,7 +30,8 @@ module Hubspot
       'Crm::Owners',
       'Crm::Pipelines',
       'Crm::Products',
-      'Crm::Properties'
+      'Crm::Properties',
+      'Crm::Quotes'
     ].freeze
 
     def configure
