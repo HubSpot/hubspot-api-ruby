@@ -13,7 +13,7 @@ module Services
         ::Hubspot::OAuth.authorize_url(
           client_id: ENV['HUBSPOT_CLIENT_ID'],
           redirect_uri: redirect_uri,
-          scope: %w[contacts content]
+          scope: %w[contacts]
         )
       end
 
