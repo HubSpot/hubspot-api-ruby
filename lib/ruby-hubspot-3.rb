@@ -19,10 +19,26 @@ Dir["#{ROOT_PATH}/hubspot/**/*.rb"].each { |f| require f }
 
 module Hubspot
   class << self
+    CLIENTS = [
+      'OAuth',
+      'Crm::Associations',
+      'Crm::Companies',
+      'Crm::Deals',
+      'Crm::Extensions::Cards',
+      'Crm::LineItems',
+      'Crm::Objects',
+      'Crm::Owners',
+      'Crm::Pipelines',
+      'Crm::Products',
+      'Crm::Properties',
+      'Crm::Quotes',
+      'Crm::Tickets'
+    ].freeze
+
     def configure
       return Configuration.default unless block_given?
       yield(Configuration.default)
-      %w[OAuth Crm::Objects Crm::Owners Crm::Pipelines Crm::Properties].each do |client_class_name|
+      CLIENTS.each do |client_class_name|
         config_class = Hubspot.const_get("Client::#{client_class_name}::Configuration")
         yield(config_class.default)
       end

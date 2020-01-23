@@ -18,7 +18,7 @@ module Hubspot
       module Objects
         module Models
           class PublicObjectSearchRequest
-            attr_accessor :filters
+            attr_accessor :filter_groups
 
             attr_accessor :sorts
 
@@ -33,7 +33,7 @@ module Hubspot
             # Attribute mapping from ruby-style variable name to JSON key.
             def self.attribute_map
               {
-                :'filters' => :'filters',
+                :'filter_groups' => :'filterGroups',
                 :'sorts' => :'sorts',
                 :'query' => :'query',
                 :'properties' => :'properties',
@@ -45,8 +45,8 @@ module Hubspot
             # Attribute type mapping.
             def self.openapi_types
               {
-                :'filters' => :'Array<Filter>',
-                :'sorts' => :'Array<SortField>',
+                :'filter_groups' => :'Array<FilterGroup>',
+                :'sorts' => :'Array<String>',
                 :'query' => :'String',
                 :'properties' => :'Array<String>',
                 :'limit' => :'Integer',
@@ -75,9 +75,9 @@ module Hubspot
                 h[k.to_sym] = v
               }
 
-              if attributes.key?(:'filters')
-                if (value = attributes[:'filters']).is_a?(Array)
-                  self.filters = value
+              if attributes.key?(:'filter_groups')
+                if (value = attributes[:'filter_groups']).is_a?(Array)
+                  self.filter_groups = value
                 end
               end
 
@@ -110,8 +110,8 @@ module Hubspot
             # @return Array for valid properties with the reasons
             def list_invalid_properties
               invalid_properties = Array.new
-              if @filters.nil?
-                invalid_properties.push('invalid value for "filters", filters cannot be nil.')
+              if @filter_groups.nil?
+                invalid_properties.push('invalid value for "filter_groups", filter_groups cannot be nil.')
               end
 
               if @sorts.nil?
@@ -136,7 +136,7 @@ module Hubspot
             # Check to see if the all the properties in the model are valid
             # @return true if the model is valid
             def valid?
-              return false if @filters.nil?
+              return false if @filter_groups.nil?
               return false if @sorts.nil?
               return false if @properties.nil?
               return false if @limit.nil?
@@ -149,7 +149,7 @@ module Hubspot
             def ==(o)
               return true if self.equal?(o)
               self.class == o.class &&
-                  filters == o.filters &&
+                  filter_groups == o.filter_groups &&
                   sorts == o.sorts &&
                   query == o.query &&
                   properties == o.properties &&
@@ -166,7 +166,7 @@ module Hubspot
             # Calculates hash code according to all attributes.
             # @return [Integer] Hash code
             def hash
-              [filters, sorts, query, properties, limit, after].hash
+              [filter_groups, sorts, query, properties, limit, after].hash
             end
 
             # Builds the object from hash

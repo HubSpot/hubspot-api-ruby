@@ -1,7 +1,7 @@
 =begin
-#CRM Objects
+#Associations
 
-#CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are native objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
+#Associations define the relationships between objects in HubSpot. These endpoints allow you to create, read, and remove associations.
 
 The version of the OpenAPI document: v3
 
@@ -15,48 +15,27 @@ require 'date'
 module Hubspot
   module Client
     module Crm
-      module Objects
+      module Associations
         module Models
-          class SortField
-            attr_accessor :property_name
+          class PublicAssociationMulti
+            attr_accessor :from
 
-            attr_accessor :direction
-
-            class EnumAttributeValidator
-              attr_reader :datatype
-              attr_reader :allowable_values
-
-              def initialize(datatype, allowable_values)
-                @allowable_values = allowable_values.map do |value|
-                  case datatype.to_s
-                  when /Integer/i
-                    value.to_i
-                  when /Float/i
-                    value.to_f
-                  else
-                    value
-                  end
-                end
-              end
-
-              def valid?(value)
-                !value || allowable_values.include?(value)
-              end
-            end
+            # The IDs of objects that are associated with the object identified by the ID in 'from'.
+            attr_accessor :to
 
             # Attribute mapping from ruby-style variable name to JSON key.
             def self.attribute_map
               {
-                :'property_name' => :'propertyName',
-                :'direction' => :'direction'
+                :'from' => :'from',
+                :'to' => :'to'
               }
             end
 
             # Attribute type mapping.
             def self.openapi_types
               {
-                :'property_name' => :'String',
-                :'direction' => :'String'
+                :'from' => :'PublicObjectId',
+                :'to' => :'Array<PublicObjectId>'
               }
             end
 
@@ -70,23 +49,25 @@ module Hubspot
             # @param [Hash] attributes Model attributes in the form of hash
             def initialize(attributes = {})
               if (!attributes.is_a?(Hash))
-                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Objects::Models::SortField` initialize method"
+                fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Client::Crm::Associations::Models::PublicAssociationMulti` initialize method"
               end
 
               # check to see if the attribute exists and convert string to symbol for hash key
               attributes = attributes.each_with_object({}) { |(k, v), h|
                 if (!self.class.attribute_map.key?(k.to_sym))
-                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Objects::Models::SortField`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                  fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Client::Crm::Associations::Models::PublicAssociationMulti`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
                 end
                 h[k.to_sym] = v
               }
 
-              if attributes.key?(:'property_name')
-                self.property_name = attributes[:'property_name']
+              if attributes.key?(:'from')
+                self.from = attributes[:'from']
               end
 
-              if attributes.key?(:'direction')
-                self.direction = attributes[:'direction']
+              if attributes.key?(:'to')
+                if (value = attributes[:'to']).is_a?(Array)
+                  self.to = value
+                end
               end
             end
 
@@ -94,12 +75,12 @@ module Hubspot
             # @return Array for valid properties with the reasons
             def list_invalid_properties
               invalid_properties = Array.new
-              if @property_name.nil?
-                invalid_properties.push('invalid value for "property_name", property_name cannot be nil.')
+              if @from.nil?
+                invalid_properties.push('invalid value for "from", from cannot be nil.')
               end
 
-              if @direction.nil?
-                invalid_properties.push('invalid value for "direction", direction cannot be nil.')
+              if @to.nil?
+                invalid_properties.push('invalid value for "to", to cannot be nil.')
               end
 
               invalid_properties
@@ -108,21 +89,9 @@ module Hubspot
             # Check to see if the all the properties in the model are valid
             # @return true if the model is valid
             def valid?
-              return false if @property_name.nil?
-              return false if @direction.nil?
-              direction_validator = EnumAttributeValidator.new('String', ["ASCENDING", "DESCENDING"])
-              return false unless direction_validator.valid?(@direction)
+              return false if @from.nil?
+              return false if @to.nil?
               true
-            end
-
-            # Custom attribute writer method checking allowed values (enum).
-            # @param [Object] direction Object to be assigned
-            def direction=(direction)
-              validator = EnumAttributeValidator.new('String', ["ASCENDING", "DESCENDING"])
-              unless validator.valid?(direction)
-                fail ArgumentError, "invalid value for \"direction\", must be one of #{validator.allowable_values}."
-              end
-              @direction = direction
             end
 
             # Checks equality by comparing each attribute.
@@ -130,8 +99,8 @@ module Hubspot
             def ==(o)
               return true if self.equal?(o)
               self.class == o.class &&
-                  property_name == o.property_name &&
-                  direction == o.direction
+                  from == o.from &&
+                  to == o.to
             end
 
             # @see the `==` method
@@ -143,7 +112,7 @@ module Hubspot
             # Calculates hash code according to all attributes.
             # @return [Integer] Hash code
             def hash
-              [property_name, direction].hash
+              [from, to].hash
             end
 
             # Builds the object from hash
@@ -210,7 +179,7 @@ module Hubspot
                   end
                 end
               else # model
-                Hubspot::Client::Crm::Objects::Models.const_get(type).build_from_hash(value)
+                Hubspot::Client::Crm::Associations::Models(type).build_from_hash(value)
               end
             end
 
