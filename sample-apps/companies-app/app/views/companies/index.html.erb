@@ -1,0 +1,63 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <div class='company-new-button'>
+      <%= link_to('New Company', new_company_path, class: 'button', id: 'new-company') %>
+      <%= link_to('Export To CSV', export_companies_path(format: :csv), class: 'button', id: 'export') %>
+    </div>
+
+    <%= form_tag('/companies', method: :get, class: 'companies') do %>
+      <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
+    <% end %>
+
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <table class="companies">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Domain</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @companies.each do |company| %>
+          <tr class="company">
+            <td>
+              <a href="/companies/<%= company.id %>">
+                <div class="company-info company-id">
+                  <%= company.id %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href="/companies/<%= company.id %>">
+                <div class="company-info company-name">
+                  <%= company.properties['name'] %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href="/companies/<%= company.id %>">
+                <div class="company-info company-domain">
+                  <%= company.properties['domain'] %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <%= button_to "delete",
+                { controller: :companies, action: :destroy, id: company.id },
+                method: :delete,
+                form_class: 'delete-button'
+              %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
