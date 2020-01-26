@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="column">
+        <h3>Properties</h3>
+        <%= form_for :company, url: "/companies/#{params[:id]}", method: 'put' do |form| %>
+          <%= label(:name, "Name") %>
+          <%= form.text_field(:name, value: @company.properties['name']) %>
+          <%= label(:domain, "Domain") %>
+          <%= form.text_field(:domain, value: @company.properties['domain']) %>
+          <%= submit_tag("Save", class: 'button-primary') %>
+        <% end %>
+    </div>
+    <div class="column">
+      </div>
+  </div>
+</div>

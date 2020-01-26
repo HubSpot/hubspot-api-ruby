@@ -1,0 +1,20 @@
+<div class="container">
+  <% if flash[:error] %>
+    <div class="error"><%= flash[:error] %></div>
+  <% end %>
+
+  <div class="row company-create">
+      <div class="column column-20"></div>
+      <div class="column column-60">
+        <h3>Properties</h3>
+        <%= form_for :company, url: "/companies", method: 'post' do |form| %>
+          <%= label(:name, "Name") %>
+          <%= form.text_field(:name) %>
+          <%= label(:domain, "Domain") %>
+          <%= form.text_field(:domain) %>
+          <%= form.submit("Save", class: 'button-primary') %>
+        <% end %>
+      </div>
+      <div class="column column-20"></div>
+  </div>
+</div>
