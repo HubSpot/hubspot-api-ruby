@@ -1,16 +1,16 @@
 # HubSpot-ruby sample Companies app
 
-This is a sample app for the [hubspot-ruby SDK](https://github.com/hubspot/hubspot-ruby). Currently, this app focuses on demonstrating the functionality of [Companies API](https://developers.hubspot.com/docs/methods/companies/companies-overview) endpoints and their related actions.
+This is a sample app for the [hubspot-ruby SDK](../../../../).
+Currently, this app focuses on demonstrating the functionality of [Companies API](https://developers.hubspot.com/docs-beta/crm/companies) endpoints and their related actions.
 
-Please see the documentation on [How do I create an app in HubSpot?](https://developers.hubspot.com/docs/faq/how-do-i-create-an-app-in-hubspot)
-
+Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs-beta/creating-an-app)
 ### HubSpot Public API links used in this application
 
-  - [Get all companies](https://developers.hubspot.com/docs/methods/companies/get-all-companies)
-  - [Create a Company](https://developers.hubspot.com/docs/methods/companies/create_company)
-  - [Update a Company](https://developers.hubspot.com/docs/methods/companies/update_company)
-  - [Search for companies by domain](https://developers.hubspot.com/docs/methods/companies/search_companies_by_domain)
-  - [Get a Company](https://developers.hubspot.com/docs/methods/companies/get_company)
+  - [Get companies](https://developers.hubspot.com/docs-beta/crm/companies)
+  - [Create a company object](https://developers.hubspot.com/docs-beta/crm/companies)
+  - [Update a company](https://developers.hubspot.com/docs-beta/crm/companies)
+  - [Search for contacts](https://developers.hubspot.com/docs-beta/crm/contacts)
+  - [Get a company](https://developers.hubspot.com/docs-beta/crm/companies)
 
 ### Setup App
 

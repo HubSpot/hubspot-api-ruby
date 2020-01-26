@@ -1,6 +1,6 @@
 # HubSpot-ruby sample OAuth 2.0 app
 
-This is a sample app for the [hubspot-ruby SDK](https://github.com/hubspot/hubspot-ruby).
+This is a sample app for the [hubspot-ruby SDK](../../../../../)
 
 Please see the documentation on [How do I create an app in HubSpot?](https://developers.hubspot.com/docs/faq/how-do-i-create-an-app-in-hubspot)
 
