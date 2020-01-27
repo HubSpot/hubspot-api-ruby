@@ -74,9 +74,9 @@ module Hubspot
                 :'num_errors' => :'Integer',
                 :'errors' => :'Array<Error>',
                 :'status' => :'String',
-                :'requested_at' => :'String',
-                :'started_at' => :'String',
-                :'completed_at' => :'String'
+                :'requested_at' => :'DateTime',
+                :'started_at' => :'DateTime',
+                :'completed_at' => :'DateTime'
               }
             end
 
