@@ -19,7 +19,7 @@ module Services
 
         def properties_to_display
           properties = Services::Hubspot::Properties::GetAll.new.call
-          properties.filter! { |p| p.type == 'string' && !p.modification_metadata.read_only_definition }
+          properties.filter! { |p| p.type == 'string' && !p.modification_metadata.read_only_value }
           properties.map(&:name) + %w[hubspot_owner_id]
         end
       end

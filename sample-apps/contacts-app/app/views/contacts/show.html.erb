@@ -1,25 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="column">
-        <h3>Properties</h3>
-        <%= form_for :contact, url: "/contacts/#{params[:id]}", method: 'put' do |form| %>
-          <% @contact.properties.each do |property_key, property_value| %>
-            <%= label(:contact, property_key, @properties.find { |p| p.name == property_key }.label) %>
-            <% if property_key == 'hubspot_owner_id' %>
-              <%= select(
-                :contact,
-                property_key,
-                @owners.collect { |owner| [[owner.first_name, owner.last_name].join(' '), owner.id] },
-                include_blank: 'Not assigned',
-                selected: property_value
-              ) %>
-            <% else %>
-              <%= text_field(:contact, property_key, value: property_value) %>
-            <% end %>
+      <pre>
+        <p>Show</p>
+        <p># app/lib/services/hubspot/contacts/show.rb</p>
+      </pre>
+      <h3>Properties</h3>
+      <%= form_for :contact, url: "/contacts/#{params[:id]}", method: 'put' do |form| %>
+        <% @contact.properties.each do |property_key, property_value| %>
+          <%= label(:contact, property_key, @properties.find { |p| p.name == property_key }.label) %>
+          <% if property_key == 'hubspot_owner_id' %>
+            <%= select(
+              :contact,
+              property_key,
+              @owners.collect { |owner| [[owner.first_name, owner.last_name].join(' '), owner.id] },
+              include_blank: 'Not assigned',
+              selected: property_value
+            ) %>
+          <% else %>
+            <%= text_field(:contact, property_key, value: property_value) %>
           <% end %>
-
-          <%= submit_tag("Save", class: 'button-primary') %>
         <% end %>
+
+        <pre>
+          <p>Update</p>
+          <p># app/lib/services/hubspot/contacts/update.rb</p>
+        </pre>
+        <%= submit_tag("Save", class: 'button-primary') %>
+      <% end %>
     </div>
     <div class="column">
       </div>

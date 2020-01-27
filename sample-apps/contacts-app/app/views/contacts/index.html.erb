@@ -3,6 +3,13 @@
     <h3><%= @error.message %></h3>
   <% else %>
     <div class='contact-new-button'>
+      <pre>
+        <p>Create contact</p>
+        <p># app/lib/services/hubspot/contacts/create.rb</p>
+
+        <p>Export to CSV</p>
+        <p># app/lib/services/hubspot/contacts/export.rb</p>
+      </pre>
       <%= link_to('New Contact', new_contact_path, class: 'button', id: 'new-contact') %>
       <%= link_to('Export To CSV', export_contacts_path(format: :csv), class: 'button', id: 'export') %>
     </div>
@@ -10,6 +17,10 @@
     <%= form_tag('/contacts', method: :get, class: 'contacts') do %>
       <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
     <% end %>
+    <pre>
+    <p>Search</p>
+    <p># app/lib/services/hubspot/contacts/search.rb</p>
+    </pre>
 
     <% if flash[:notice] %>
       <div class="notice"><%= flash[:notice] %></div>
@@ -60,4 +71,8 @@
       </tbody>
     </table>
   <% end %>
+  <pre>
+    <p>Delete</p>
+    <p># app/lib/services/hubspot/contacts/destroy.rb</p>
+  </pre>
 </div>
