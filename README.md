@@ -1,4 +1,4 @@
-# ruby-hubspot-3
+# hubspot-api-ruby
 Ruby API vNext Client files and sample apps
 
 - API version: v3
@@ -12,27 +12,27 @@ Ruby API vNext Client files and sample apps
 To build the Ruby code into a gem:
 
 ```shell
-gem build ruby-hubspot-3.gemspec
+gem build hubspot-api-ruby.gemspec
 ```
 
 Then either install the gem locally:
 
 ```shell
-gem install ./ruby-hubspot-3-1.0.0.gem
+gem install ./hubspot-api-ruby-1.0.0.gem
 ```
-(for development, run `gem install --dev ./ruby-hubspot-3-1.0.0.gem` to install the development dependencies)
+(for development, run `gem install --dev ./hubspot-api-ruby-1.0.0.gem` to install the development dependencies)
 
 or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
 
 Finally add this to the Gemfile:
 
-    gem 'ruby-hubspot-3', '~> 1.0.0'
+    gem 'hubspot-api-ruby', '~> 1.0.0'
 
 ### Install from Git
 
 If the Ruby gem is hosted at a git repository: https://github.com/GIT_USER_ID/GIT_REPO_ID, then add the following in the Gemfile:
 
-    gem 'ruby-hubspot-3', :git => 'https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
+    gem 'hubspot-api-ruby', :git => 'https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
 
 ### Include the Ruby code directly
 
@@ -47,7 +47,7 @@ ruby -Ilib script.rb
 Please follow the [installation](#installation) procedure and then run the following code:
 ```ruby
 # Load the gem
-require 'ruby-hubspot-3'
+require 'hubspot-api-ruby'
 
 # Setup authorization
 Hubspot.configure do |config|
