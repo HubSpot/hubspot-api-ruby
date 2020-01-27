@@ -41,7 +41,7 @@ describe 'Filter' do
   describe 'test attribute "operator"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "ROLLING_DATE_RANGE", "TIME_UNIT_TO_DATE"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "ROLLING_DATE_RANGE", "TIME_UNIT_TO_DATE", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.operator = value }.not_to raise_error
       # end

@@ -7,15 +7,14 @@ module Services
         end
 
         def call
-          create_api = ::Hubspot::Client::Crm::Objects::Api::CreateNativeObjectsApi.new
-          params = { auth_names: 'oauth2', body: contact_input }
-          create_api.post_crm_v3_objects_contacts(params)
+          create_api = ::Hubspot::Client::Crm::Contacts::Api::BasicApi.new
+          create_api.create(body: contact_input, auth_names: 'oauth2')
         end
 
         private
 
         def contact_input
-          @contact_input ||= ::Hubspot::Client::Crm::Objects::Models::ContactInput.new(properties: @properties)
+          @contact_input ||= ::Hubspot::Client::Crm::Objects::Models::SimplePublicObjectInput.new(properties: @properties)
         end
       end
     end

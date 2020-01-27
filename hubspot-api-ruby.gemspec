@@ -16,7 +16,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "hubspot/version"
 
 Gem::Specification.new do |s|
-  s.name        = "ruby-hubspot-3"
+  s.name        = "hubspot-api-ruby"
   s.version     = Hubspot::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Swagger-Codegen"]

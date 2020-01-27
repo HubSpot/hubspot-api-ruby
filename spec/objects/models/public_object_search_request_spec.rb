@@ -32,7 +32,7 @@ describe 'PublicObjectSearchRequest' do
       expect(@instance).to be_instance_of(Hubspot::Client::Crm::Objects::Models::PublicObjectSearchRequest)
     end
   end
-  describe 'test attribute "filters"' do
+  describe 'test attribute "filter_groups"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

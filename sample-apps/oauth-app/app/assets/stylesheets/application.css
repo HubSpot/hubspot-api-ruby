@@ -106,3 +106,12 @@ h3.alert-success {
 .contact .contact-info, .property .property-info {
   display: block;
 }
+
+pre {
+  line-height: 0.7;
+}
+
+pre p {
+  margin: 0;
+  margin-left: 5px;
+}

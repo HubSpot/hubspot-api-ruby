@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Visitor searches contacts' do
   let(:email) { 'test_email@q.com' }
-  let(:wrong_email) { 'wrong_email.com' }
+  let(:wrong_email) { 'wrong_email@q.com' }
 
   before do
     login
