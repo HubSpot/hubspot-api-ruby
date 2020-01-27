@@ -23,6 +23,7 @@ module Hubspot
       'OAuth',
       'Crm::Associations',
       'Crm::Companies',
+      'Crm::Contacts',
       'Crm::Deals',
       'Crm::Extensions::Cards',
       'Crm::LineItems',
