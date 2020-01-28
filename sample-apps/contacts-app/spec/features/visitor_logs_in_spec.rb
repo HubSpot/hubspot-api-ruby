@@ -12,7 +12,7 @@ feature 'Visitor logs in' do
 
   scenario 'without creds in session' do
     visit root_path
-    expect(page).to have_content('Please authorize via OAuth2')
+    expect(page).to have_content('In order to continue please authorize via OAuth')
   end
 
   scenario 'clicking on OAuth2 link' do

@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    ruby-hubspot-3 (1.0.0)
+    hubspot-api-ruby (1.0.0)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -249,6 +249,7 @@ DEPENDENCIES
   csv
   dotenv-rails
   geckodriver-helper
+  hubspot-api-ruby!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pry
@@ -256,7 +257,6 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.3)
   rspec-rails (~> 3.5)
-  ruby-hubspot-3!
   sass-rails (~> 5.0)
   selenium-webdriver (= 3.4.3)
   sqlite3
