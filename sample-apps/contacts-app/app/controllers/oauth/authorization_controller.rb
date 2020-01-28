@@ -13,5 +13,7 @@ module Oauth
       Services::Authorization::AuthorizeHubspot.new(tokens: session[:tokens]).call
       redirect_to '/contacts'
     end
+
+    def login;end
   end
 end

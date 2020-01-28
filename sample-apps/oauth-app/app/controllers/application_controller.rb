@@ -2,19 +2,6 @@ class ApplicationController < ActionController::Base
   include ExceptionHandler
 
   before_action :check_env_variables
-  before_action :require_login, unless: :authorized?
-
-  helper_method :authorized?
-
-  private
-
-  def require_login
-    redirect_to login_path if session['form'].blank?
-  end
-
-  def authorized?
-    session['tokens'].present?
-  end
 
   private
 

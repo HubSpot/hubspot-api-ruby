@@ -19,15 +19,18 @@ class CompaniesController < ApplicationController
   def create
     Services::Hubspot::Companies::Create.new(company_params).call
     redirect_to :companies
-  rescue Hubspot::Client::Crm::Objects::ApiError => e
+  rescue Hubspot::Client::Crm::Companies::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
-    redirect_back(fallback_location: root_path, flash: { error: error_message })
+    redirect_to new_company_path, flash: { error: error_message }
   end
 
   def update
     @company = Services::Hubspot::Companies::GetById.new(params[:id]).call
     Services::Hubspot::Companies::Update.new(params[:id], company_params).call
     redirect_to :companies
+  rescue Hubspot::Client::Crm::Companies::ApiError => e
+    error_message = JSON.parse(e.response_body)['message']
+    redirect_to company_path(params[:id]), flash: { error: error_message }
   end
 
   def export
@@ -55,7 +58,7 @@ class CompaniesController < ApplicationController
   end
 
   def authorize
-    raise(ExceptionHandler::HubspotError.new, 'Please authorize via OAuth2') if session['tokens'].blank?
+    redirect_to login_path and return if session['tokens'].blank?
 
     session['tokens'] = Services::Authorization::Tokens::Refresh.new(tokens: session['tokens'], request: request).call
     Services::Authorization::AuthorizeHubspot.new(tokens: session['tokens']).call

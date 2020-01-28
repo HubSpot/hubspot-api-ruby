@@ -15,14 +15,17 @@ class PropertiesController < ApplicationController
   def create
     Services::Hubspot::Properties::Create.new(property_params).call
     redirect_to :properties
-  rescue Hubspot::Client::Crm::Objects::ApiError => e
+  rescue Hubspot::Client::Crm::Properties::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
-    redirect_back(fallback_location: root_path, flash: { error: error_message })
+    redirect_to new_property_path, flash: { error: error_message }
   end
 
   def update
     Services::Hubspot::Properties::Update.new(params[:id], property_params).call
     redirect_to :properties
+  rescue Hubspot::Client::Crm::Properties::ApiError => e
+    error_message = JSON.parse(e.response_body)['message']
+    redirect_to property_path(params[:id]), flash: { error: error_message }
   end
 
   def destroy
@@ -41,7 +44,7 @@ class PropertiesController < ApplicationController
   end
 
   def authorize
-    raise(ExceptionHandler::HubspotError.new, 'Please authorize via OAuth2') if session['tokens'].blank?
+    redirect_to login_path if session['tokens'].blank?
 
     session['tokens'] = Services::Authorization::Tokens::Refresh.new(tokens: session['tokens'], request: request).call
     Services::Authorization::AuthorizeHubspot.new(tokens: session['tokens']).call

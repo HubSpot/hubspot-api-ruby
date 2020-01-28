@@ -1,7 +1,5 @@
 module Oauth
   class AuthorizationController < ApplicationController
-    skip_before_action :require_login
-
     def authorize
       url = Services::Authorization::GetAuthorizationUri.new(request: request).call
       redirect_to url

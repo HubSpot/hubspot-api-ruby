@@ -106,3 +106,12 @@ company a {
 .company .company-info {
   display: block;
 }
+
+pre {
+  line-height: 0.7;
+}
+
+pre p {
+  margin: 0;
+  margin-left: 5px;
+}
