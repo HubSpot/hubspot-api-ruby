@@ -1,5 +1,5 @@
 # hubspot-api-ruby
-Ruby API vNext Client files and sample apps
+Ruby API v3 Client files and sample apps
 
 - API version: v3
 - Package version: 1.0.0
