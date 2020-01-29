@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     collection do
       get :export
     end
+    resources :contacts, only: %i[index] do
+      collection do
+        post :manage
+      end
+    end
   end
 
   get '/oauth', to: 'oauth/authorization#authorize'

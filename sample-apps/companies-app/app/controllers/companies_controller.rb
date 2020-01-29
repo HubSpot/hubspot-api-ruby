@@ -14,6 +14,7 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Services::Hubspot::Companies::GetById.new(params[:id]).call
+    @contacts = Services::Hubspot::Associations::GetById.new(params[:id]).call
   end
 
   def create

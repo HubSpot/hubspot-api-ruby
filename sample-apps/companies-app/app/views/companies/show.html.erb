@@ -4,6 +4,13 @@
   <% end %>
   <div class="row">
     <div class="column">
+      <pre>
+        <p>Get by ID</p>
+        <p># app/lib/services/hubspot/companies/get_by_id.rb</p>
+
+        <p>Update</p>
+        <p># app/lib/services/hubspot/companies/update.rb</p>
+      </pre>
         <h3>Properties</h3>
         <%= form_for :company, url: "/companies/#{params[:id]}", method: 'put' do |form| %>
           <%= label(:name, "Name") %>
@@ -14,6 +21,30 @@
         <% end %>
     </div>
     <div class="column">
-      </div>
+      <pre>
+        <p>Get contacts associated with company</p>
+        <p># app/lib/services/hubspot/associations/get_by_id.rb</p>
+      </pre>
+      <h3>Contacts</h3>
+      <%= link_to('Manage contacts', company_contacts_path(@company.id), class: 'button', id: 'new-contact') %>
+      <% if @contacts.present? %>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+              <% @contacts.each do |contact| %>
+                <tr>
+                  <td><%= contact.id %></td>
+                  <td><%= [contact.properties['firstname'], contact.properties['lastname']].join(' ') %></td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
+      <% end%>
+    </div>
   </div>
 </div>
