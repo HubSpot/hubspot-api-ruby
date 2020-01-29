@@ -3,6 +3,13 @@
     <h3><%= @error.message %></h3>
   <% else %>
     <div class='company-new-button'>
+      <pre>
+        <p>Create company</p>
+        <p># app/lib/services/hubspot/companies/create.rb</p>
+
+        <p>Export to CSV</p>
+        <p># app/lib/services/hubspot/companies/export.rb</p>
+      </pre>
       <%= link_to('New Company', new_company_path, class: 'button', id: 'new-company') %>
       <%= link_to('Export To CSV', export_companies_path(format: :csv), class: 'button', id: 'export') %>
     </div>
@@ -60,4 +67,8 @@
       </tbody>
     </table>
   <% end %>
+  <pre>
+    <p>Delete</p>
+    <p># app/lib/services/hubspot/companies/destroy.rb</p>
+  </pre>
 </div>

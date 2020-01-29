@@ -208,7 +208,7 @@ module Hubspot
                   end
                 end
               else # model
-                Hubspot::Client::Crm::Associations::Models(type).build_from_hash(value)
+                Hubspot::Client::Crm::Associations::Models.const_get(type).build_from_hash(value)
               end
             end
 

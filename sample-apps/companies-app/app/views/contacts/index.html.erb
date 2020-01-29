@@ -1,0 +1,49 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <%= form_tag('/contacts', method: :get, class: 'contacts') do %>
+      <%= text_field_tag(:search, @search_q, placeholder: 'Search..', id: 'search') %>
+    <% end %>
+
+    <pre>
+      <p>Get contacts associated with company</p>
+      <p># app/lib/services/hubspot/associations/get_by_id.rb</p>
+    </pre>
+
+    <% if @contact_list.present? %>
+        <%= form_for :contacts_ids, url: "/companies/#{params[:company_id]}/contacts/manage", method: 'post' do |form| %>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Selected</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @contact_list.each do |contact| %>
+              <tr>
+                <td><%= contact.id %></td>
+                <td><%= [contact.properties['firstname'], contact.properties['lastname']].join(' ') %></td>
+                <td><%= @associated_contacts.map(&:id).include?(contact.id) ? 'Associated' : '-'%></td>
+                <td><%= check_box(:contacts_ids, contact.id)%>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <%= form.submit('Add', class: 'button-primary') %>
+          <%= form.submit('Delete', class: 'button-primary') %>
+        <% end %>
+        <pre>
+          <p>Add batch of contacts to company</p>
+          <p># app/lib/services/hubspot/associations/create.rb</p>
+        </pre>
+        <pre>
+          <p>Delete batch of contacts from company</p>
+          <p># app/lib/services/hubspot/associations/delete.rb</p>
+        </pre>
+    <% end %>
+  <% end %>
+</div>
