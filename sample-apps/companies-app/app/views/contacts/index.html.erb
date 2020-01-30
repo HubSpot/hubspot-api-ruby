@@ -2,7 +2,7 @@
   <% if @error.present? %>
     <h3><%= @error.message %></h3>
   <% else %>
-    <%= form_tag('/contacts', method: :get, class: 'contacts') do %>
+    <%= form_tag("/companies/#{params[:company_id]}/contacts", method: :get, class: 'contacts') do %>
       <%= text_field_tag(:search, @search_q, placeholder: 'Search..', id: 'search') %>
     <% end %>
 

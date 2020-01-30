@@ -2,7 +2,12 @@ class ContactsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[manage]
 
   def index
-    @contact_list = Services::Hubspot::Contacts::GetAll.new(limit: 100).call.sort_by(&:created_at).reverse
+    @contact_list = if params[:search].present?
+      @search_q = params[:search]
+      Services::Hubspot::Contacts::Search.new(email: @search_q).call
+    else
+      Services::Hubspot::Contacts::GetAll.new(limit: 100).call.sort_by(&:created_at).reverse
+    end
     @associated_contacts = Services::Hubspot::Associations::GetById.new(params[:company_id]).call || []
   end
 
