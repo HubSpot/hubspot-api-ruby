@@ -28,6 +28,7 @@ module Services
         private
 
         def names(contact_objects)
+          contact_objects ||= []
           contact_objects.each_with_object({}) do |contact, hash|
             hash[contact.id.to_i] = [contact.properties['firstname'], contact.properties['lastname']].join(' ')
           end
