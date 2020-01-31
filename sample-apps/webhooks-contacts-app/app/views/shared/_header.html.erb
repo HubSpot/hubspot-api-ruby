@@ -4,18 +4,12 @@
         <h3 class="title">HubSpot Ruby Sample Webhook Contacts App</h3>
       </a>
       <ul class="navigation-list float-right">
-        <% if authorized? %>
-          <li class="navigation-item">
-            <a id="events" class="navigation-link" href="/events">Events</a>
-          </li>
-          <li class="navigation-item">
-            <a id="contacts-list" class="navigation-link" href="/">Contacts</a>
-          </li>
-        <% else %>
-          <li class="navigation-item">
-            <a class="navigation-link" href="/oauth">OAuth2</a>
-          </li>
-        <% end %>
+        <li class="navigation-item">
+          <a id="events" class="navigation-link" href="/events">Events</a>
+        </li>
+        <li class="navigation-item">
+          <a class="navigation-link" href="/oauth">OAuth2</a>
+        </li>
       </ul>
     </div>
   </nav>

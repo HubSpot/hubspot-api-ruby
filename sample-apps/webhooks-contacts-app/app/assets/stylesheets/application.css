@@ -134,3 +134,7 @@ pre p {
 .event.propertyChange span:first-child {
   background-color: #08080885;
 }
+
+.hidden {
+  display: none;
+}

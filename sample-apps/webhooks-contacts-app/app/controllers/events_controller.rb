@@ -5,6 +5,10 @@ class EventsController < ApplicationController
     @contacts = Services::Hubspot::Contacts::GetBatch.new(Event.all.map(&:object_id).uniq).call
   end
 
+  def not_shown_count
+    render json: { count: Event.where('created_at > ?', params[:time_mark].to_datetime).count }
+  end
+
   private
 
   def authorize
