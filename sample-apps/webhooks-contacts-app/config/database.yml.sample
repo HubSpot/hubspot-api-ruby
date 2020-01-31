@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: YOUR_NAME
+  password: YOUR_PASSWORD
+  pool: 5
+
+development:
+  <<: *default
+  database: webhooks_contacts_app_development
+
+
+test:
+  <<: *default
+  database: webhooks_contacts_app_test
