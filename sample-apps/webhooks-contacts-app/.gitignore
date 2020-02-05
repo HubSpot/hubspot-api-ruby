@@ -33,4 +33,3 @@
 .rubocop.yml
 .env
 .env.test
-/config/database.yml

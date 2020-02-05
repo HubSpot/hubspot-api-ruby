@@ -1,5 +1,5 @@
 FROM ruby:2.6.3
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y mariadb-client nodejs
 RUN mkdir /hubspot-api-ruby
 
 COPY ./lib /hubspot-api-ruby/lib

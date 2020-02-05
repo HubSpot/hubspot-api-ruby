@@ -1,15 +1,14 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: db
-  username: postgres
-  password:
+  adapter: mysql2
+  encoding: utf8
   pool: 5
+  username: root
+  password: root
+  host: db
 
 development:
   <<: *default
   database: webhooks_contacts_app_development
-
 
 test:
   <<: *default
