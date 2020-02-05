@@ -1,0 +1,38 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ../../
+      dockerfile: ./sample-apps/webhooks-contacts-app/Dockerfile
+    ports:
+      - 3000:3000
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/webhooks-contacts-app
+    links:
+      - db:sql_srv
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    logging:
+      driver: none
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: events
+      MYSQL_USER: events
+      MYSQL_PASSWORD: events
+  ngrok:
+    image: gtriggiano/ngrok-tunnel
+    ports:
+      - 4040:4040
+    environment:
+      TARGET_HOST: web
+      TARGET_PORT: 3000
+    depends_on:
+      - web
