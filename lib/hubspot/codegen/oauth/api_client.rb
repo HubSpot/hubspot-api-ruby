@@ -14,8 +14,7 @@ require 'date'
 require 'json'
 require 'logger'
 require 'tempfile'
-require 'typhoeus'
-require 'uri'
+require 'faraday'
 
 module Hubspot
   module Client
@@ -49,26 +48,46 @@ module Hubspot
         # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
         #   the data deserialized from response body (could be nil), response status code and response headers.
         def call_api(http_method, path, opts = {})
-          request = build_request(http_method, path, opts)
-          response = request.run
+          ssl_options = {
+            :ca_file => @config.ssl_ca_file,
+            :verify => @config.ssl_verify,
+            :verify_mode => @config.ssl_verify_mode,
+            :client_cert => @config.ssl_client_cert,
+            :client_key => @config.ssl_client_key
+          }
 
-          if @config.debugging
-            @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
+          connection = Faraday.new(:url => config.base_url, :ssl => ssl_options) do |conn|
+            conn.basic_auth(config.username, config.password)
+            if opts[:header_params]["Content-Type"] == "multipart/form-data"
+              conn.request :multipart
+              conn.request :url_encoded
+            end
+            conn.adapter(Faraday.default_adapter)
           end
 
-          unless response.success?
-            if response.timed_out?
-              fail ApiError.new('Connection timed out')
-            elsif response.code == 0
-              # Errors from libcurl will be made visible here
-              fail ApiError.new(:code => 0,
-                                :message => response.return_message)
-            else
-              fail ApiError.new(:code => response.code,
-                                :response_headers => response.headers,
-                                :response_body => response.body),
-                  response.status_message
+          begin
+            response = connection.public_send(http_method.to_sym.downcase) do |req|
+              build_request(http_method, path, req, opts)
             end
+
+            if @config.debugging
+              @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
+            end
+
+            unless response.success?
+              if response.status == 0
+                # Errors from libcurl will be made visible here
+                fail ApiError.new(:code => 0,
+                                  :message => response.return_message)
+              else
+                fail ApiError.new(:code => response.status,
+                                  :response_headers => response.headers,
+                                  :response_body => response.body),
+                    response.reason_phrase
+              end
+            end
+          rescue Faraday::TimeoutError
+            fail ApiError.new('Connection timed out')
           end
 
           if opts[:return_type]
@@ -76,7 +95,7 @@ module Hubspot
           else
             data = nil
           end
-          return data, response.code, response.headers
+          return data, response.status, response.headers
         end
 
         # Builds the HTTP request
@@ -88,7 +107,7 @@ module Hubspot
         # @option opts [Hash] :form_params Query parameters
         # @option opts [Object] :body HTTP body (JSON/XML)
         # @return [Typhoeus::Request] A Typhoeus Request
-        def build_request(http_method, path, opts = {})
+        def build_request(http_method, path, request, opts = {})
           url = build_request_url(path)
           http_method = http_method.to_sym.downcase
 
@@ -98,24 +117,14 @@ module Hubspot
 
           update_params_for_auth! header_params, query_params, opts[:auth_names]
 
-          # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
-          _verify_ssl_host = @config.verify_ssl_host ? 2 : 0
-
           req_opts = {
             :method => http_method,
             :headers => header_params,
             :params => query_params,
             :params_encoding => @config.params_encoding,
             :timeout => @config.timeout,
-            :ssl_verifypeer => @config.verify_ssl,
-            :ssl_verifyhost => _verify_ssl_host,
-            :sslcert => @config.cert_file,
-            :sslkey => @config.key_file,
             :verbose => @config.debugging
           }
-
-          # set custom cert, if provided
-          req_opts[:cainfo] = @config.ssl_ca_cert if @config.ssl_ca_cert
 
           if [:post, :patch, :put, :delete].include?(http_method)
             req_body = build_request_body(header_params, form_params, opts[:body])
@@ -124,8 +133,10 @@ module Hubspot
               @config.logger.debug "HTTP request body param ~BEGIN~\n#{req_body}\n~END~\n"
             end
           end
-
-          request = Typhoeus::Request.new(url, req_opts)
+          request.headers = header_params
+          request.body = req_body
+          request.url url
+          request.params = query_params
           download_file(request) if opts[:return_type] == 'File'
           request
         end
@@ -138,13 +149,17 @@ module Hubspot
         # @return [String] HTTP body data in the form of string
         def build_request_body(header_params, form_params, body)
           # http form
-          if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
-              header_params['Content-Type'] == 'multipart/form-data'
+          if header_params['Content-Type'] == 'application/x-www-form-urlencoded'
+            data = URI.encode_www_form(form_params)
+          elsif header_params['Content-Type'] == 'multipart/form-data'
             data = {}
             form_params.each do |key, value|
               case value
-              when ::File, ::Array, nil
-                # let typhoeus handle File, Array and nil parameters
+              when ::File, ::Tempfile
+                # TODO hardcode to application/octet-stream, need better way to detect content type
+                data[key] = Faraday::UploadIO.new(value.path, 'application/octet-stream', value.path)
+              when ::Array, nil
+                # let Faraday handle Array and nil parameters
                 data[key] = value
               else
                 data[key] = value.to_s

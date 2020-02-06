@@ -44,7 +44,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'token' when calling AccessTokensApi.get_oauth_v1_access_tokens_token"
             end
             # resource path
-            local_var_path = '/v1/access-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
+            local_var_path = '/v1/access-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s).gsub('%2F', '/'))
 
             # query parameters
             query_params = opts[:query_params] || {}
