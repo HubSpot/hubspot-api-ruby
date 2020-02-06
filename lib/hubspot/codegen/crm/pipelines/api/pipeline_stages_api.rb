@@ -59,7 +59,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.archive"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s)).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -129,7 +129,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.create"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -207,7 +207,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.get_by_id"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s)).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -278,7 +278,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_page"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -355,7 +355,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.replace"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s)).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -435,7 +435,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.update"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s)).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
