@@ -49,7 +49,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling SearchApi.do_search"
               end
               # resource path
-              local_var_path = '/{objectType}/search'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}/search'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}

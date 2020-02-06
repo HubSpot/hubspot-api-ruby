@@ -53,7 +53,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_id' when calling BasicApi.archive"
               end
               # resource path
-              local_var_path = '/{objectType}/{objectId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
+              local_var_path = '/{objectType}/{objectId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -117,7 +117,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling BasicApi.create"
               end
               # resource path
-              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -193,7 +193,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_id' when calling BasicApi.get_by_id"
               end
               # resource path
-              local_var_path = '/{objectType}/{objectId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
+              local_var_path = '/{objectType}/{objectId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -268,7 +268,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling BasicApi.get_page"
               end
               # resource path
-              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -343,7 +343,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_id' when calling BasicApi.update"
               end
               # resource path
-              local_var_path = '/{objectType}/{objectId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
+              local_var_path = '/{objectType}/{objectId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
