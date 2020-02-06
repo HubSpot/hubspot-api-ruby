@@ -50,11 +50,11 @@ module Hubspot
               {
                 :'id' => :'String',
                 :'properties' => :'Hash<String, String>',
-                :'created_at' => :'String',
-                :'updated_at' => :'String',
+                :'created_at' => :'DateTime',
+                :'updated_at' => :'DateTime',
                 :'associations' => :'Hash<String, CollectionResponseSimplePublicObjectId>',
                 :'archived' => :'Boolean',
-                :'archived_at' => :'String'
+                :'archived_at' => :'DateTime'
               }
             end
 
