@@ -59,8 +59,8 @@ module Hubspot
                 :'first_name' => :'String',
                 :'last_name' => :'String',
                 :'user_id' => :'Integer',
-                :'created_at' => :'String',
-                :'updated_at' => :'String',
+                :'created_at' => :'DateTime',
+                :'updated_at' => :'DateTime',
                 :'archived' => :'Boolean',
                 :'teams' => :'Array<PublicTeam>'
               }
