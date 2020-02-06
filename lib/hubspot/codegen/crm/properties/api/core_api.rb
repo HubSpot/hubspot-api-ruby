@@ -53,7 +53,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'property_name' when calling CoreApi.archive"
               end
               # resource path
-              local_var_path = '/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s))
+              local_var_path = '/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -117,7 +117,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling CoreApi.create"
               end
               # resource path
-              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -183,7 +183,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling CoreApi.get_all"
               end
               # resource path
-              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -254,7 +254,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'property_name' when calling CoreApi.get_by_name"
               end
               # resource path
-              local_var_path = '/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s))
+              local_var_path = '/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -325,7 +325,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'property_name' when calling CoreApi.update"
               end
               # resource path
-              local_var_path = '/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s))
+              local_var_path = '/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}

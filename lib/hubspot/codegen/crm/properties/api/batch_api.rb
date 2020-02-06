@@ -49,7 +49,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.archive_batch"
               end
               # resource path
-              local_var_path = '/{objectType}/batch/archive'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}/batch/archive'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -115,7 +115,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.create_batch"
               end
               # resource path
-              local_var_path = '/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -181,7 +181,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.read_batch"
               end
               # resource path
-              local_var_path = '/{objectType}/batch/read'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}/batch/read'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
