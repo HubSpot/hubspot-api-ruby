@@ -63,6 +63,18 @@ module Hubspot
               conn.request :url_encoded
             end
             conn.adapter(Faraday.default_adapter)
+
+            # Errors handler settings
+            if !config.error_handler.empty?
+              config.error_handler.each do |status, options|
+                retry_options = {
+                  max: options[:max_retries],
+                  interval: options[:seconds_delay],
+                  retry_statuses: [status]
+                }
+                conn.request :retry, retry_options
+              end
+            end
           end
 
           begin

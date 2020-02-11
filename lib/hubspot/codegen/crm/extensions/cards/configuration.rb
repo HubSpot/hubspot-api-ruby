@@ -124,6 +124,8 @@ module Hubspot
 
             attr_accessor :force_ending_format
 
+            attr_accessor :error_handler
+
             def initialize
               @scheme = 'https'
               @host = 'api.hubapi.com'
@@ -141,6 +143,8 @@ module Hubspot
               @inject_format = false
               @force_ending_format = false
               @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
+              # error_handler params: { 'status_code': { max_retries: ..., seconds_delay: ... }, ... }
+              @error_handler = {}
 
               yield(self) if block_given?
             end

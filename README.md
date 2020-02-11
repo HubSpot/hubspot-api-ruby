@@ -79,3 +79,25 @@ rescue Hubspot::Client::Crm::Objects::ApiError => e
 end
 
 ```
+
+### Error handling
+
+#### You can set number of retry attempts and delay in seconds before retry on specific status code of response:
+
+```ruby
+config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Set handlers of statuses you want to handle
+  config.error_handler = {
+    429 => { max_retries: 5, seconds_delay: 1 },
+    500 => { max_retries: 2, seconds_delay: 2 },
+    400 => { max_retries: 3, seconds_delay: 3 },
+  }
+end
+
+api_client = ::Hubspot::Client::Crm::Companies::ApiClient.new(config)
+basic_api = ::Hubspot::Client::Crm::Companies::Api::BasicApi.new(api_client)
+end
+
+```
