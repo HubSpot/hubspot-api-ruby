@@ -90,8 +90,8 @@ config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
 
   # Set handlers of statuses you want to handle
   config.error_handler = {
-    429 => { max_retries: 5, seconds_delay: 1 },
-    500 => { max_retries: 2, seconds_delay: 2 },
+    [429, 430, 442] => { max_retries: 5, seconds_delay: 1 },
+    (500..530).to_a => { max_retries: 2, seconds_delay: 2 },
     400 => { max_retries: 3, seconds_delay: 3 },
   }
 end

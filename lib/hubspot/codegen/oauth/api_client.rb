@@ -66,11 +66,14 @@ module Hubspot
 
             # Errors handler settings
             if !config.error_handler.empty?
-              config.error_handler.each do |status, options|
+              config.error_handler.each do |statuses, opts|
+                statuses = statuses.is_a?(Integer) ? [statuses] : statuses
                 retry_options = {
-                  max: options[:max_retries],
-                  interval: options[:seconds_delay],
-                  retry_statuses: [status]
+                  max: opts[:max_retries],
+                  interval: opts[:seconds_delay],
+                  retry_statuses: statuses,
+                  methods: %i[post delete get head options put],
+                  retry_block: -> (env, options, retries, exc) { opts[:retry_block].call }
                 }
                 conn.request :retry, retry_options
               end
