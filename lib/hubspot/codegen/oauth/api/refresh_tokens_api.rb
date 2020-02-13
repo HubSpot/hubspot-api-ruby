@@ -10,7 +10,7 @@ OpenAPI Generator version: 4.2.2
 
 =end
 
-require 'uri'
+require 'cgi'
 
 module Hubspot
   module Client
@@ -44,7 +44,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.delete_oauth_v1_refresh_tokens_token"
             end
             # resource path
-            local_var_path = '/v1/refresh-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
+            local_var_path = '/v1/refresh-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s).gsub('%2F', '/'))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -110,7 +110,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'client_id' when calling RefreshTokensApi.get_oauth_v1_refresh_tokens_hubs_hub_id_clients_client_id"
             end
             # resource path
-            local_var_path = '/v1/refresh-tokens/hubs/{hubId}/clients/{clientId}'.sub('{' + 'hubId' + '}', CGI.escape(hub_id.to_s)).sub('{' + 'clientId' + '}', CGI.escape(client_id.to_s))
+            local_var_path = '/v1/refresh-tokens/hubs/{hubId}/clients/{clientId}'.sub('{' + 'hubId' + '}', CGI.escape(hub_id.to_s).gsub('%2F', '/')).sub('{' + 'clientId' + '}', CGI.escape(client_id.to_s).gsub('%2F', '/'))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -176,7 +176,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'client_id' when calling RefreshTokensApi.get_oauth_v1_refresh_tokens_hubs_hub_id_clients_client_id_audits"
             end
             # resource path
-            local_var_path = '/v1/refresh-tokens/hubs/{hubId}/clients/{clientId}/audits'.sub('{' + 'hubId' + '}', CGI.escape(hub_id.to_s)).sub('{' + 'clientId' + '}', CGI.escape(client_id.to_s))
+            local_var_path = '/v1/refresh-tokens/hubs/{hubId}/clients/{clientId}/audits'.sub('{' + 'hubId' + '}', CGI.escape(hub_id.to_s).gsub('%2F', '/')).sub('{' + 'clientId' + '}', CGI.escape(client_id.to_s).gsub('%2F', '/'))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -236,7 +236,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.get_oauth_v1_refresh_tokens_token"
             end
             # resource path
-            local_var_path = '/v1/refresh-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
+            local_var_path = '/v1/refresh-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s).gsub('%2F', '/'))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -296,7 +296,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.get_oauth_v1_refresh_tokens_token_audits"
             end
             # resource path
-            local_var_path = '/v1/refresh-tokens/{token}/audits'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
+            local_var_path = '/v1/refresh-tokens/{token}/audits'.sub('{' + 'token' + '}', CGI.escape(token.to_s).gsub('%2F', '/'))
 
             # query parameters
             query_params = opts[:query_params] || {}

@@ -116,9 +116,9 @@ module Hubspot
             # Attribute type mapping.
             def self.openapi_types
               {
-                :'updated_at' => :'String',
-                :'created_at' => :'String',
-                :'archived_at' => :'String',
+                :'updated_at' => :'DateTime',
+                :'created_at' => :'DateTime',
+                :'archived_at' => :'DateTime',
                 :'name' => :'String',
                 :'label' => :'String',
                 :'type' => :'String',

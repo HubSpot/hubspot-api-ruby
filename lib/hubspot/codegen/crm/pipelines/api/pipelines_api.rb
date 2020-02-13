@@ -53,7 +53,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelinesApi.archive"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -117,7 +117,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelinesApi.create"
               end
               # resource path
-              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -189,7 +189,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelinesApi.get_by_id"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -254,7 +254,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelinesApi.get_page"
               end
               # resource path
-              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -325,7 +325,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelinesApi.replace"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -399,7 +399,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelinesApi.update"
               end
               # resource path
-              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
+              local_var_path = '/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}

@@ -51,7 +51,7 @@ module Hubspot
                 fail ArgumentError, "invalid value for \"id_property\", must be one of #{allowable_values}"
               end
               # resource path
-              local_var_path = '/{ownerId}'.sub('{' + 'ownerId' + '}', CGI.escape(owner_id.to_s))
+              local_var_path = '/{ownerId}'.sub('{' + 'ownerId' + '}', CGI.escape(owner_id.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}

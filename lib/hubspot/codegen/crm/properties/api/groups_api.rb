@@ -53,7 +53,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'group_name' when calling GroupsApi.archive"
               end
               # resource path
-              local_var_path = '/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s))
+              local_var_path = '/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -117,7 +117,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling GroupsApi.create"
               end
               # resource path
-              local_var_path = '/{objectType}/groups'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}/groups'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -181,7 +181,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'object_type' when calling GroupsApi.get_all"
               end
               # resource path
-              local_var_path = '/{objectType}/groups'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+              local_var_path = '/{objectType}/groups'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -249,7 +249,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'group_name' when calling GroupsApi.get_by_name"
               end
               # resource path
-              local_var_path = '/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s))
+              local_var_path = '/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
@@ -319,7 +319,7 @@ module Hubspot
                 fail ArgumentError, "Missing the required parameter 'group_name' when calling GroupsApi.update"
               end
               # resource path
-              local_var_path = '/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s))
+              local_var_path = '/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s).gsub('%2F', '/'))
 
               # query parameters
               query_params = opts[:query_params] || {}
