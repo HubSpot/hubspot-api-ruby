@@ -82,7 +82,13 @@ end
 
 ### Error handling
 
-#### You can set number of retry attempts and delay in seconds before retry on specific status code of response:
+#### You can set number of retry attempts and delay in seconds before retry on specific status code of response.
+
+Available params:
+  - max_retries (maximum number of retries)
+  - seconds_delay (pause in seconds between retries)
+  - retry_block (block that is executed after every retry)
+
 
 ```ruby
 config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
