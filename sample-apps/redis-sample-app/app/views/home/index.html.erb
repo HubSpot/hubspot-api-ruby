@@ -1,0 +1,9 @@
+<div class='container'>
+  <h3>In order to continue run rake task in console</h3>
+
+  <div id="rake-task">
+    <%= "rake redis:test access_token=#{session[:tokens][:access_token]}" %>
+  </div>
+
+  <button class="clipboard-btn" type="button" data-clipboard-target="#rake-task">Copy to clipboard</button>
+</div>
