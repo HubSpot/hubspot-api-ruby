@@ -1,0 +1,5 @@
+{
+  "name": "leaky-bucket-sample-app",
+  "private": true,
+  "dependencies": {}
+}

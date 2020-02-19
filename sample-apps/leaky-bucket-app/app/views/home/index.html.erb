@@ -1,0 +1,13 @@
+<div class='container'>
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <h3>In order to continue run rake task in console</h3>
+
+    <div id="rake-task">
+      <%= "docker-compose run web rake leaky_bucket:test access_token=#{session[:tokens][:access_token]}" %>
+    </div>
+
+    <button class="clipboard-btn" type="button" data-clipboard-target="#rake-task">Copy to clipboard</button>
+    <% end %>
+</div>
