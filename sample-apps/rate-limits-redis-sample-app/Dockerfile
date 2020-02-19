@@ -9,11 +9,11 @@ COPY ./Gemfile /hubspot-api-ruby/Gemfile
 COPY ./Gemfile.lock /hubspot-api-ruby/Gemfile.lock
 COPY ./hubspot-api-ruby.gemspec /hubspot-api-ruby/hubspot-api-ruby.gemspec
 
-WORKDIR /hubspot-api-ruby/sample-apps/redis-sample-app
+WORKDIR /hubspot-api-ruby/sample-apps/rate-limits-redis-sample-app
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
-COPY ./sample-apps/redis-sample-app/docker-entrypoint.sh /usr/bin/
+COPY ./sample-apps/rate-limits-redis-sample-app/docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 3000

@@ -31,5 +31,4 @@
 /config/master.key
 
 .rubocop.yml
-.env
-.env.test
+*.local

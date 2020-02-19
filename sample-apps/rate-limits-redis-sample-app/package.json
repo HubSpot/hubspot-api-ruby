@@ -1,5 +1,5 @@
 {
-  "name": "redis-sample-app",
+  "name": "rate-limits-redis-sample-app",
   "private": true,
   "dependencies": {}
 }
