@@ -24,7 +24,7 @@ class RedisRateLimitsWorker
   end
 
   def redis
-    @redis ||= Redis.new
+    @redis ||= Redis.new(host: ENV['REDIS_HOST'])
   end
 
   def push_timestamp
