@@ -52,31 +52,12 @@ require 'hubspot-api-ruby'
 # Setup authorization
 Hubspot.configure do |config|
   # Configure API key authorization: hapikey
-  config.api_key['hapikey'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['hapikey'] = 'Bearer'
-
-  # Configure OAuth2 access token for authorization: oauth2
-  config.access_token = 'YOUR ACCESS TOKEN'
+  config.api_key['hapikey'] = 'demo'
 end
 
-api_instance = Hubspot::Client::Crm::Objects::Api::AssociationsApi.new
-
-object_type = 'object_type_example' # String | 
-
-object_id = 'object_id_example' # String | 
-
-associated_object_type = 'associated_object_type_example' # String | 
-
-to_object_id = 'to_object_id_example' # String | 
-
-
-begin
-  #Remove an association between two objects
-  api_instance.archive_association(object_type, object_id, associated_object_type, to_object_id)
-rescue Hubspot::Client::Crm::Objects::ApiError => e
-  puts "Exception when calling AssociationsApi->archive_association: #{e}"
-end
+# Get contacts
+basic_api = Hubspot::Client::Crm::Contacts::Api::BasicApi.new
+basic_api.get_page(auth_names: 'hapikey')
 
 ```
 
