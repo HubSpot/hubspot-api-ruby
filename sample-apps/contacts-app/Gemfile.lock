@@ -1,9 +1,9 @@
 PATH
   remote: ../..
   specs:
-    hubspot-api-ruby (1.0.0)
+    hubspot-api-client (1.0.0)
+      faraday (>= 0.14.0)
       json (~> 2.1, >= 2.1.0)
-      typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -83,9 +83,9 @@ GEM
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
     erubi (1.9.0)
-    ethon (0.12.0)
-      ffi (>= 1.3.0)
     execjs (2.7.0)
+    faraday (1.0.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.11.1)
     geckodriver-helper (0.24.0)
       archive-zip (~> 0.7)
@@ -127,6 +127,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.13.0)
+    multipart-post (2.1.1)
     net-http-digest_auth (1.4.1)
     net-http-persistent (3.1.0)
       connection_pool (~> 2.2)
@@ -218,8 +219,6 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    typhoeus (1.3.1)
-      ethon (>= 0.9.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -249,7 +248,7 @@ DEPENDENCIES
   csv
   dotenv-rails
   geckodriver-helper
-  hubspot-api-ruby!
+  hubspot-api-client!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pry

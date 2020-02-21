@@ -11,7 +11,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
 gem 'csv'
 
-gem 'hubspot-api-ruby', path: '../../'
+gem 'hubspot-api-client', path: '../../'
 
 group :development, :test do
   gem 'dotenv-rails', require: 'dotenv/rails-now'
