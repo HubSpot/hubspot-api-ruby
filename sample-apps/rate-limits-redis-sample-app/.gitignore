@@ -32,4 +32,3 @@
 
 .rubocop.yml
 .env
-.env.test
