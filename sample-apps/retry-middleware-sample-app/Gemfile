@@ -15,7 +15,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'clipboard-rails'
 
-gem 'hubspot-api-ruby', path: '../../'
+gem 'hubspot-api-client', path: '../../'
 
 group :development, :test do
   gem 'dotenv-rails', require: 'dotenv/rails-now'

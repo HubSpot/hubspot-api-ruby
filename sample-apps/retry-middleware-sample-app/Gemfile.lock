@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    hubspot-api-ruby (1.0.0)
+    hubspot-api-client (1.0.0)
       faraday (>= 0.14.0)
       json (~> 2.1, >= 2.1.0)
 
@@ -257,7 +257,7 @@ DEPENDENCIES
   csv
   dotenv-rails
   geckodriver-helper
-  hubspot-api-ruby!
+  hubspot-api-client!
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails
