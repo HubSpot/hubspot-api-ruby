@@ -29,5 +29,7 @@ docker-compose up --build
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000).
 Firstly you will need to authorize via OAuth there.
 Then you can to go to the terminal window and execute the comand that displayed on root page.
+The app logs the results of the execution in the original terminal window where you started docker-compose
 
 Please note this app starts a few workers in order to test rate limit.
+
