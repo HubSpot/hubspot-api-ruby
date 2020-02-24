@@ -17,7 +17,7 @@ gem 'clipboard-rails'
 gem 'sidekiq'
 gem 'redis'
 
-gem 'hubspot-api-ruby', path: '../../'
+gem 'hubspot-api-client', path: '../../'
 
 group :development, :test do
   gem 'dotenv-rails', require: 'dotenv/rails-now'
