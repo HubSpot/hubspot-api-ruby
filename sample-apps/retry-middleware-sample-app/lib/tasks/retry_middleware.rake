@@ -7,7 +7,7 @@ namespace :retry_middleware do
         429 => {
           max_retries: 2,
           seconds_delay: 10,
-          retry_block: -> () { puts 'API reeturned 429 Status Code. Sleeping...' }
+          retry_block: -> () { puts 'API returned 429 Status Code. Sleeping...' }
         },
       }
     end
