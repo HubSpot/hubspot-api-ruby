@@ -3,10 +3,10 @@ class RedisRateLimitsWorker
 
   def perform(emails, access_token)
     # Create contacts
-    sleep(10) unless able_to_perform?
+    sleep(10) unless able_to_perform?(:create)
     response = create_contacts(emails, access_token)
     # Remove contacts
-    sleep(10) unless able_to_perform?
+    sleep(10) unless able_to_perform?(:remove)
     remove_contacts(response.results.map(&:id), access_token)
   end
 
@@ -36,10 +36,10 @@ class RedisRateLimitsWorker
     redis.rpop(:worker_timestamps)
   end
 
-  def able_to_perform?
+  def able_to_perform?(action)
     timestamps = redis.lrange(:worker_timestamps, 0, 90)
     ability = (timestamps.count < 90 || timestamps.last < 10.seconds.ago) ? true : false
-    logger.info("Able to perform: #{ability}")
+    logger.info("Able to #{action} contacts: #{ability}")
     ability
   end
 
