@@ -1,15 +1,15 @@
 FROM ruby:2.6.3
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir /hubspot-api-ruby
+RUN mkdir /hubspot-api-client
 
-COPY ./lib /hubspot-api-ruby/lib
-COPY ./sample-apps /hubspot-api-ruby/sample-apps
-COPY ./spec /hubspot-api-ruby/spec
-COPY ./Gemfile /hubspot-api-ruby/Gemfile
-COPY ./Gemfile.lock /hubspot-api-ruby/Gemfile.lock
-COPY ./hubspot-api-ruby.gemspec /hubspot-api-ruby/hubspot-api-ruby.gemspec
+COPY ./lib /hubspot-api-client/lib
+COPY ./sample-apps /hubspot-api-client/sample-apps
+COPY ./spec /hubspot-api-client/spec
+COPY ./Gemfile /hubspot-api-client/Gemfile
+COPY ./Gemfile.lock /hubspot-api-client/Gemfile.lock
+COPY ./hubspot-api-client.gemspec /hubspot-api-client/hubspot-api-client.gemspec
 
-WORKDIR /hubspot-api-ruby/sample-apps/oauth-app
+WORKDIR /hubspot-api-client/sample-apps/oauth-app
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
