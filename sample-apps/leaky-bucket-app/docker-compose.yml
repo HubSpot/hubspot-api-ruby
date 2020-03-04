@@ -15,14 +15,11 @@ services:
   redis:
     image: 'redis:4.0-alpine'
     command: redis-server
-  sidekiq:
+  resque:
     build:
       context: ../../
       dockerfile: ./sample-apps/leaky-bucket-app/Dockerfile
-    depends_on:
-      - web
-      - redis
-    env_file: .env
+    command: bundle exec rake environment resque:work QUEUE=*
     volumes:
-      - .:/leaky-bucket-app
-    entrypoint: ./sidekiq-entrypoint.sh
+      - .:/fitmo
+      - ../fitmo-core:/fitmo-core

@@ -1,6 +1,7 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  mount Resque::Server.new, at: '/resque'
 
   get '/oauth', to: 'oauth/authorization#authorize'
   get '/oauth/callback', to: 'oauth/authorization#callback'
