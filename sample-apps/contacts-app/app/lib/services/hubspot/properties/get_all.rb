@@ -3,7 +3,7 @@ module Services
     module Properties
       class GetAll
         def call
-          core_api = ::Hubspot::Client::Crm::Properties::Api::CoreApi.new
+          core_api = ::Hubspot::Crm::Properties::CoreApi.new
           core_api.get_all('contacts', auth_names: 'oauth2').results
         end
       end

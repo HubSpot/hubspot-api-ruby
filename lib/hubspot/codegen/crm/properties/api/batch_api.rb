@@ -13,214 +13,210 @@ OpenAPI Generator version: 4.2.2
 require 'cgi'
 
 module Hubspot
-  module Client
-    module Crm
-      module Properties
-        module Api
-          class BatchApi
-            attr_accessor :api_client
+  module Crm
+    module Properties
+      class BatchApi
+        attr_accessor :api_client
 
-            def initialize(api_client = ApiClient.default)
-              @api_client = api_client
-            end
-            # Archive a batch of properties
-            # Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
-            # @param object_type [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [BatchInputPropertyName] :batch_input_property_name 
-            # @return [nil]
-            def archive_batch(object_type, opts = {})
-              archive_batch_with_http_info(object_type, opts)
-              nil
-            end
+        def initialize(api_client = ApiClient.default)
+          @api_client = api_client
+        end
+        # Archive a batch of properties
+        # Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
+        # @param object_type [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [BatchInputPropertyName] :batch_input_property_name 
+        # @return [nil]
+        def archive_batch(object_type, opts = {})
+          archive_batch_with_http_info(object_type, opts)
+          nil
+        end
 
-            # Archive a batch of properties
-            # Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
-            # @param object_type [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [BatchInputPropertyName] :batch_input_property_name 
-            # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-            def archive_batch_with_http_info(object_type, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: BatchApi.archive_batch ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.archive_batch"
-              end
-              # resource path
-              local_var_path = '/{objectType}/batch/archive'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-              # HTTP header 'Content-Type'
-              header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_property_name']) 
-
-              # return_type
-              return_type = opts[:return_type] 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: BatchApi#archive_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Create a batch of properties
-            # Create a batch of properties using the same rules as when creating an individual property.
-            # @param object_type [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
-            # @return [BatchResponseProperty]
-            def create_batch(object_type, opts = {})
-              data, _status_code, _headers = create_batch_with_http_info(object_type, opts)
-              data
-            end
-
-            # Create a batch of properties
-            # Create a batch of properties using the same rules as when creating an individual property.
-            # @param object_type [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
-            # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
-            def create_batch_with_http_info(object_type, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: BatchApi.create_batch ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.create_batch"
-              end
-              # resource path
-              local_var_path = '/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-              # HTTP header 'Content-Type'
-              header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_property_create']) 
-
-              # return_type
-              return_type = opts[:return_type] || 'BatchResponseProperty' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: BatchApi#create_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Read a batch of properties
-            # Read a provided list of properties.
-            # @param object_type [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
-            # @return [BatchResponseProperty]
-            def read_batch(object_type, opts = {})
-              data, _status_code, _headers = read_batch_with_http_info(object_type, opts)
-              data
-            end
-
-            # Read a batch of properties
-            # Read a provided list of properties.
-            # @param object_type [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
-            # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
-            def read_batch_with_http_info(object_type, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.read_batch"
-              end
-              # resource path
-              local_var_path = '/{objectType}/batch/read'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-              # HTTP header 'Content-Type'
-              header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_read_input_property_name']) 
-
-              # return_type
-              return_type = opts[:return_type] || 'BatchResponseProperty' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: BatchApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
+        # Archive a batch of properties
+        # Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
+        # @param object_type [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [BatchInputPropertyName] :batch_input_property_name 
+        # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+        def archive_batch_with_http_info(object_type, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BatchApi.archive_batch ...'
           end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.archive_batch"
+          end
+          # resource path
+          local_var_path = '/{objectType}/batch/archive'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_property_name']) 
+
+          # return_type
+          return_type = opts[:return_type] 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BatchApi#archive_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Create a batch of properties
+        # Create a batch of properties using the same rules as when creating an individual property.
+        # @param object_type [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
+        # @return [BatchResponseProperty]
+        def create_batch(object_type, opts = {})
+          data, _status_code, _headers = create_batch_with_http_info(object_type, opts)
+          data
+        end
+
+        # Create a batch of properties
+        # Create a batch of properties using the same rules as when creating an individual property.
+        # @param object_type [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
+        # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
+        def create_batch_with_http_info(object_type, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BatchApi.create_batch ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.create_batch"
+          end
+          # resource path
+          local_var_path = '/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_property_create']) 
+
+          # return_type
+          return_type = opts[:return_type] || 'BatchResponseProperty' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BatchApi#create_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Read a batch of properties
+        # Read a provided list of properties.
+        # @param object_type [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
+        # @return [BatchResponseProperty]
+        def read_batch(object_type, opts = {})
+          data, _status_code, _headers = read_batch_with_http_info(object_type, opts)
+          data
+        end
+
+        # Read a batch of properties
+        # Read a provided list of properties.
+        # @param object_type [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
+        # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
+        def read_batch_with_http_info(object_type, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.read_batch"
+          end
+          # resource path
+          local_var_path = '/{objectType}/batch/read'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_read_input_property_name']) 
+
+          # return_type
+          return_type = opts[:return_type] || 'BatchResponseProperty' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BatchApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
         end
       end
     end

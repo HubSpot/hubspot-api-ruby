@@ -12,51 +12,51 @@ OpenAPI Generator version: 4.2.2
 
 require 'spec_helper'
 
-describe Hubspot::Client::Crm::Pipelines::ApiClient do
+describe Hubspot::Crm::Pipelines::ApiClient do
   context 'initialization' do
     context 'URL stuff' do
       context 'host' do
         it 'removes http from host' do
           Hubspot.configure { |c| c.host = 'http://example.com' }
-          expect(Hubspot::Client::Crm::Pipelines::Configuration.default.host).to eq('example.com')
+          expect(Hubspot::Crm::Pipelines::Configuration.default.host).to eq('example.com')
         end
 
         it 'removes https from host' do
           Hubspot.configure { |c| c.host = 'https://wookiee.com' }
-          expect(Hubspot::Client::Crm::Pipelines::ApiClient.default.config.host).to eq('wookiee.com')
+          expect(Hubspot::Crm::Pipelines::ApiClient.default.config.host).to eq('wookiee.com')
         end
 
         it 'removes trailing path from host' do
           Hubspot.configure { |c| c.host = 'hobo.com/v4' }
-          expect(Hubspot::Client::Crm::Pipelines::Configuration.default.host).to eq('hobo.com')
+          expect(Hubspot::Crm::Pipelines::Configuration.default.host).to eq('hobo.com')
         end
       end
 
       context 'base_path' do
         it "prepends a slash to base_path" do
           Hubspot.configure { |c| c.base_path = 'v4/dog' }
-          expect(Hubspot::Client::Crm::Pipelines::Configuration.default.base_path).to eq('/v4/dog')
+          expect(Hubspot::Crm::Pipelines::Configuration.default.base_path).to eq('/v4/dog')
         end
 
         it "doesn't prepend a slash if one is already there" do
           Hubspot.configure { |c| c.base_path = '/v4/dog' }
-          expect(Hubspot::Client::Crm::Pipelines::Configuration.default.base_path).to eq('/v4/dog')
+          expect(Hubspot::Crm::Pipelines::Configuration.default.base_path).to eq('/v4/dog')
         end
 
         it "ends up as a blank string if nil" do
           Hubspot.configure { |c| c.base_path = nil }
-          expect(Hubspot::Client::Crm::Pipelines::Configuration.default.base_path).to eq('')
+          expect(Hubspot::Crm::Pipelines::Configuration.default.base_path).to eq('')
         end
       end
     end
   end
 
   describe 'params_encoding in #build_request' do
-    let(:config) { Hubspot::Client::Crm::Pipelines::Configuration.new }
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new(config) }
+    let(:config) { Hubspot::Crm::Pipelines::Configuration.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new(config) }
 
     it 'defaults to nil' do
-      expect(Hubspot::Client::Crm::Pipelines::Configuration.default.params_encoding).to eq(nil)
+      expect(Hubspot::Crm::Pipelines::Configuration.default.params_encoding).to eq(nil)
       expect(config.params_encoding).to eq(nil)
 
       request = api_client.build_request(:get, '/test')
@@ -71,11 +71,11 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
   end
 
   describe 'timeout in #build_request' do
-    let(:config) { Hubspot::Client::Crm::Pipelines::Configuration.new }
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new(config) }
+    let(:config) { Hubspot::Crm::Pipelines::Configuration.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new(config) }
 
     it 'defaults to 0' do
-      expect(Hubspot::Client::Crm::Pipelines::Configuration.default.timeout).to eq(0)
+      expect(Hubspot::Crm::Pipelines::Configuration.default.timeout).to eq(0)
       expect(config.timeout).to eq(0)
 
       request = api_client.build_request(:get, '/test')
@@ -91,7 +91,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
 
   describe '#deserialize' do
     it "handles Array<Integer>" do
-      api_client = Hubspot::Client::Crm::Pipelines::ApiClient.new
+      api_client = Hubspot::Crm::Pipelines::ApiClient.new
       headers = { 'Content-Type' => 'application/json' }
       response = double('response', headers: headers, body: '[12, 34]')
       data = api_client.deserialize(response, 'Array<Integer>')
@@ -100,7 +100,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
     end
 
     it 'handles Array<Array<Integer>>' do
-      api_client = Hubspot::Client::Crm::Pipelines::ApiClient.new
+      api_client = Hubspot::Crm::Pipelines::ApiClient.new
       headers = { 'Content-Type' => 'application/json' }
       response = double('response', headers: headers, body: '[[12, 34], [56]]')
       data = api_client.deserialize(response, 'Array<Array<Integer>>')
@@ -109,7 +109,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
     end
 
     it 'handles Hash<String, String>' do
-      api_client = Hubspot::Client::Crm::Pipelines::ApiClient.new
+      api_client = Hubspot::Crm::Pipelines::ApiClient.new
       headers = { 'Content-Type' => 'application/json' }
       response = double('response', headers: headers, body: '{"message": "Hello"}')
       data = api_client.deserialize(response, 'Hash<String, String>')
@@ -121,8 +121,8 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
   describe "#object_to_hash" do
     it 'ignores nils and includes empty arrays' do
       # uncomment below to test object_to_hash for model
-      # api_client = Hubspot::Client::Crm::Pipelines::ApiClient.new
-      # _model = Hubspot::Client::Crm::Pipelines::ModelName.new
+      # api_client = Hubspot::Crm::Pipelines::ApiClient.new
+      # _model = Hubspot::Crm::Pipelines::ModelName.new
       # update the model attribute below
       # _model.id = 1
       # update the expected value (hash) below
@@ -133,7 +133,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
 
   describe '#build_collection_param' do
     let(:param) { ['aa', 'bb', 'cc'] }
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new }
 
     it 'works for csv' do
       expect(api_client.build_collection_param(param, :csv)).to eq('aa,bb,cc')
@@ -161,7 +161,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
   end
 
   describe '#json_mime?' do
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new }
 
     it 'works' do
       expect(api_client.json_mime?(nil)).to eq false
@@ -178,7 +178,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
   end
 
   describe '#select_header_accept' do
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new }
 
     it 'works' do
       expect(api_client.select_header_accept(nil)).to be_nil
@@ -194,7 +194,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
   end
 
   describe '#select_header_content_type' do
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new }
 
     it 'works' do
       expect(api_client.select_header_content_type(nil)).to eq('application/json')
@@ -209,7 +209,7 @@ describe Hubspot::Client::Crm::Pipelines::ApiClient do
   end
 
   describe '#sanitize_filename' do
-    let(:api_client) { Hubspot::Client::Crm::Pipelines::ApiClient.new }
+    let(:api_client) { Hubspot::Crm::Pipelines::ApiClient.new }
 
     it 'works' do
       expect(api_client.sanitize_filename('sun')).to eq('sun')

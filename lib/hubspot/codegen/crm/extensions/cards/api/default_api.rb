@@ -13,303 +13,299 @@ OpenAPI Generator version: 4.2.2
 require 'cgi'
 
 module Hubspot
-  module Client
-    module Crm
-      module Extensions
-        module Cards
-          module Api
-            class DefaultApi
-              attr_accessor :api_client
+  module Crm
+    module Extensions
+      module Cards
+        class DefaultApi
+          attr_accessor :api_client
 
-              def initialize(api_client = ApiClient.default)
-                @api_client = api_client
-              end
-              # @param card_id [String] 
-              # @param [Hash] opts the optional parameters
-              # @return [nil]
-              def archive(card_id, opts = {})
-                archive_with_http_info(card_id, opts)
-                nil
-              end
+          def initialize(api_client = ApiClient.default)
+            @api_client = api_client
+          end
+          # @param card_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [nil]
+          def archive(card_id, opts = {})
+            archive_with_http_info(card_id, opts)
+            nil
+          end
 
-              # @param card_id [String] 
-              # @param [Hash] opts the optional parameters
-              # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-              def archive_with_http_info(card_id, opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: DefaultApi.archive ...'
-                end
-                # verify the required parameter 'card_id' is set
-                if @api_client.config.client_side_validation && card_id.nil?
-                  fail ArgumentError, "Missing the required parameter 'card_id' when calling DefaultApi.archive"
-                end
-                # resource path
-                local_var_path = '/{appId}/cards/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] 
-
-                # return_type
-                return_type = opts[:return_type] 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: DefaultApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardCreateRequest] :card_create_request 
-              # @return [CardResponse]
-              def create(opts = {})
-                data, _status_code, _headers = create_with_http_info(opts)
-                data
-              end
-
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardCreateRequest] :card_create_request 
-              # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-              def create_with_http_info(opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: DefaultApi.create ...'
-                end
-                # resource path
-                local_var_path = '/{appId}/cards'
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-                # HTTP header 'Content-Type'
-                header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_create_request']) 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: DefaultApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # @param [Hash] opts the optional parameters
-              # @return [CardListResponse]
-              def get_all(opts = {})
-                data, _status_code, _headers = get_all_with_http_info(opts)
-                data
-              end
-
-              # @param [Hash] opts the optional parameters
-              # @return [Array<(CardListResponse, Integer, Hash)>] CardListResponse data, response status code and response headers
-              def get_all_with_http_info(opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: DefaultApi.get_all ...'
-                end
-                # resource path
-                local_var_path = '/{appId}/cards'
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardListResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: DefaultApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # @param card_id [String] 
-              # @param [Hash] opts the optional parameters
-              # @return [CardResponse]
-              def get_by_id(card_id, opts = {})
-                data, _status_code, _headers = get_by_id_with_http_info(card_id, opts)
-                data
-              end
-
-              # @param card_id [String] 
-              # @param [Hash] opts the optional parameters
-              # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-              def get_by_id_with_http_info(card_id, opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: DefaultApi.get_by_id ...'
-                end
-                # verify the required parameter 'card_id' is set
-                if @api_client.config.client_side_validation && card_id.nil?
-                  fail ArgumentError, "Missing the required parameter 'card_id' when calling DefaultApi.get_by_id"
-                end
-                # resource path
-                local_var_path = '/{appId}/cards/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: DefaultApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # @param card_id [String] 
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardPatchRequest] :card_patch_request 
-              # @return [CardResponse]
-              def update(card_id, opts = {})
-                data, _status_code, _headers = update_with_http_info(card_id, opts)
-                data
-              end
-
-              # @param card_id [String] 
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardPatchRequest] :card_patch_request 
-              # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-              def update_with_http_info(card_id, opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: DefaultApi.update ...'
-                end
-                # verify the required parameter 'card_id' is set
-                if @api_client.config.client_side_validation && card_id.nil?
-                  fail ArgumentError, "Missing the required parameter 'card_id' when calling DefaultApi.update"
-                end
-                # resource path
-                local_var_path = '/{appId}/cards/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-                # HTTP header 'Content-Type'
-                header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_patch_request']) 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: DefaultApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
+          # @param card_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+          def archive_with_http_info(card_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.archive ...'
             end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling DefaultApi.archive"
+            end
+            # resource path
+            local_var_path = '/{appId}/cards/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardCreateRequest] :card_create_request 
+          # @return [CardResponse]
+          def create(opts = {})
+            data, _status_code, _headers = create_with_http_info(opts)
+            data
+          end
+
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardCreateRequest] :card_create_request 
+          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          def create_with_http_info(opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.create ...'
+            end
+            # resource path
+            local_var_path = '/{appId}/cards'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_create_request']) 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # @param [Hash] opts the optional parameters
+          # @return [CardListResponse]
+          def get_all(opts = {})
+            data, _status_code, _headers = get_all_with_http_info(opts)
+            data
+          end
+
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(CardListResponse, Integer, Hash)>] CardListResponse data, response status code and response headers
+          def get_all_with_http_info(opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.get_all ...'
+            end
+            # resource path
+            local_var_path = '/{appId}/cards'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardListResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # @param card_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [CardResponse]
+          def get_by_id(card_id, opts = {})
+            data, _status_code, _headers = get_by_id_with_http_info(card_id, opts)
+            data
+          end
+
+          # @param card_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          def get_by_id_with_http_info(card_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.get_by_id ...'
+            end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling DefaultApi.get_by_id"
+            end
+            # resource path
+            local_var_path = '/{appId}/cards/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # @param card_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardPatchRequest] :card_patch_request 
+          # @return [CardResponse]
+          def update(card_id, opts = {})
+            data, _status_code, _headers = update_with_http_info(card_id, opts)
+            data
+          end
+
+          # @param card_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardPatchRequest] :card_patch_request 
+          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          def update_with_http_info(card_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.update ...'
+            end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling DefaultApi.update"
+            end
+            # resource path
+            local_var_path = '/{appId}/cards/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_patch_request']) 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
           end
         end
       end

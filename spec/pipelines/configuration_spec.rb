@@ -12,8 +12,8 @@ OpenAPI Generator version: 4.2.2
 
 require 'spec_helper'
 
-describe Hubspot::Client::Crm::Pipelines::Configuration do
-  let(:config) { Hubspot::Client::Crm::Pipelines::Configuration.default }
+describe Hubspot::Crm::Pipelines::Configuration do
+  let(:config) { Hubspot::Crm::Pipelines::Configuration.default }
 
   before(:each) do
     # uncomment below to setup host and base_path

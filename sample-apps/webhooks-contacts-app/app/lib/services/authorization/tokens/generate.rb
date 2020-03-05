@@ -8,7 +8,7 @@ module Services
         end
 
         def call
-          tokens_api = ::Hubspot::Client::OAuth::Api::TokensApi.new
+          tokens_api = ::Hubspot::OAuth::TokensApi.new
           tokens = tokens_api.post_oauth_v1_token(
             grant_type: :authorization_code,
             code: @code,

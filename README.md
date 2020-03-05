@@ -56,7 +56,7 @@ Hubspot.configure do |config|
 end
 
 # Get contacts
-basic_api = Hubspot::Client::Crm::Contacts::Api::BasicApi.new
+basic_api = Hubspot::Crm::Contacts::BasicApi.new
 basic_api.get_page(auth_names: 'hapikey')
 
 ```
@@ -72,7 +72,7 @@ Available params:
 
 
 ```ruby
-config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
+config = ::Hubspot::Crm::Companies::Configuration.new do |config|
   config.access_token = 'YOUR ACCESS TOKEN'
 
   # Set handlers of statuses you want to handle
@@ -83,8 +83,8 @@ config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
   }
 end
 
-api_client = ::Hubspot::Client::Crm::Companies::ApiClient.new(config)
-basic_api = ::Hubspot::Client::Crm::Companies::Api::BasicApi.new(api_client)
+api_client = ::Hubspot::Crm::Companies::ApiClient.new(config)
+basic_api = ::Hubspot::Crm::Companies::BasicApi.new(api_client)
 end
 
 ```

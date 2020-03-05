@@ -8,7 +8,7 @@ module Services
         end
 
         def call
-          ::Hubspot::Client::Crm::Associations::Api::BatchApi.new.archive_batch(
+          ::Hubspot::Crm::Associations::BatchApi.new.archive_batch(
             'companies',
             'contacts',
             body: association,
@@ -19,16 +19,16 @@ module Services
         private
 
         def association
-          ::Hubspot::Client::Crm::Associations::Models::BatchInputPublicAssociation.new(
+          ::Hubspot::Crm::Associations::BatchInputPublicAssociation.new(
             inputs: contacts_to_assotiate
           )
         end
 
         def contacts_to_assotiate
           @contacts_ids.map do |id|
-            ::Hubspot::Client::Crm::Associations::Models::PublicAssociation.new(
-              from: ::Hubspot::Client::Crm::Associations::Models::PublicObjectId.new(id: @company_id),
-              to: ::Hubspot::Client::Crm::Associations::Models::PublicObjectId.new(id: id)
+            ::Hubspot::Crm::Associations::PublicAssociation.new(
+              from: ::Hubspot::Crm::Associations::PublicObjectId.new(id: @company_id),
+              to: ::Hubspot::Crm::Associations::PublicObjectId.new(id: id)
             )
           end
         end

@@ -13,469 +13,465 @@ OpenAPI Generator version: 4.2.2
 require 'cgi'
 
 module Hubspot
-  module Client
-    module Crm
-      module Pipelines
-        module Api
-          class PipelineStagesApi
-            attr_accessor :api_client
+  module Crm
+    module Pipelines
+      class PipelineStagesApi
+        attr_accessor :api_client
 
-            def initialize(api_client = ApiClient.default)
-              @api_client = api_client
-            end
-            # Archive a pipeline stage
-            # Archive the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @return [nil]
-            def archive(object_type, pipeline_id, stage_id, opts = {})
-              archive_with_http_info(object_type, pipeline_id, stage_id, opts)
-              nil
-            end
+        def initialize(api_client = ApiClient.default)
+          @api_client = api_client
+        end
+        # Archive a pipeline stage
+        # Archive the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @return [nil]
+        def archive(object_type, pipeline_id, stage_id, opts = {})
+          archive_with_http_info(object_type, pipeline_id, stage_id, opts)
+          nil
+        end
 
-            # Archive a pipeline stage
-            # Archive the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-            def archive_with_http_info(object_type, pipeline_id, stage_id, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: PipelineStagesApi.archive ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.archive"
-              end
-              # verify the required parameter 'pipeline_id' is set
-              if @api_client.config.client_side_validation && pipeline_id.nil?
-                fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.archive"
-              end
-              # verify the required parameter 'stage_id' is set
-              if @api_client.config.client_side_validation && stage_id.nil?
-                fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.archive"
-              end
-              # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] 
-
-              # return_type
-              return_type = opts[:return_type] 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: PipelineStagesApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Create a pipeline stage
-            # Create a new stage associated with the pipeline identified by `{pipelineId}`. The entire stage object, including its unique ID, will be returned in the response.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [PipelineStageInput] :body 
-            # @return [PipelineStage]
-            def create(object_type, pipeline_id, opts = {})
-              data, _status_code, _headers = create_with_http_info(object_type, pipeline_id, opts)
-              data
-            end
-
-            # Create a pipeline stage
-            # Create a new stage associated with the pipeline identified by &#x60;{pipelineId}&#x60;. The entire stage object, including its unique ID, will be returned in the response.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [PipelineStageInput] :body 
-            # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-            def create_with_http_info(object_type, pipeline_id, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: PipelineStagesApi.create ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.create"
-              end
-              # verify the required parameter 'pipeline_id' is set
-              if @api_client.config.client_side_validation && pipeline_id.nil?
-                fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.create"
-              end
-              # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-              # HTTP header 'Content-Type'
-              header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
-
-              # return_type
-              return_type = opts[:return_type] || 'PipelineStage' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: PipelineStagesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Return a pipeline stage by ID
-            # Return the stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-            # @return [PipelineStage]
-            def get_by_id(object_type, pipeline_id, stage_id, opts = {})
-              data, _status_code, _headers = get_by_id_with_http_info(object_type, pipeline_id, stage_id, opts)
-              data
-            end
-
-            # Return a pipeline stage by ID
-            # Return the stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [Boolean] :archived Whether to return only results that have been archived.
-            # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-            def get_by_id_with_http_info(object_type, pipeline_id, stage_id, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_by_id ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.get_by_id"
-              end
-              # verify the required parameter 'pipeline_id' is set
-              if @api_client.config.client_side_validation && pipeline_id.nil?
-                fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_by_id"
-              end
-              # verify the required parameter 'stage_id' is set
-              if @api_client.config.client_side_validation && stage_id.nil?
-                fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.get_by_id"
-              end
-              # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-              query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] 
-
-              # return_type
-              return_type = opts[:return_type] || 'PipelineStage' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: PipelineStagesApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Return all stages of a pipeline
-            # Return all the stages associated with the pipeline identified by `{pipelineId}`.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-            # @return [CollectionResponsePipelineStage]
-            def get_page(object_type, pipeline_id, opts = {})
-              data, _status_code, _headers = get_page_with_http_info(object_type, pipeline_id, opts)
-              data
-            end
-
-            # Return all stages of a pipeline
-            # Return all the stages associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [Boolean] :archived Whether to return only results that have been archived.
-            # @return [Array<(CollectionResponsePipelineStage, Integer, Hash)>] CollectionResponsePipelineStage data, response status code and response headers
-            def get_page_with_http_info(object_type, pipeline_id, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_page ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.get_page"
-              end
-              # verify the required parameter 'pipeline_id' is set
-              if @api_client.config.client_side_validation && pipeline_id.nil?
-                fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_page"
-              end
-              # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-              query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] 
-
-              # return_type
-              return_type = opts[:return_type] || 'CollectionResponsePipelineStage' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: PipelineStagesApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Replace a pipeline stage
-            # Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [PipelineStageInput] :body 
-            # @return [PipelineStage]
-            def replace(object_type, pipeline_id, stage_id, opts = {})
-              data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, stage_id, opts)
-              data
-            end
-
-            # Replace a pipeline stage
-            # Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [PipelineStageInput] :body 
-            # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-            def replace_with_http_info(object_type, pipeline_id, stage_id, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: PipelineStagesApi.replace ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.replace"
-              end
-              # verify the required parameter 'pipeline_id' is set
-              if @api_client.config.client_side_validation && pipeline_id.nil?
-                fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.replace"
-              end
-              # verify the required parameter 'stage_id' is set
-              if @api_client.config.client_side_validation && stage_id.nil?
-                fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.replace"
-              end
-              # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-              # HTTP header 'Content-Type'
-              header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
-
-              # return_type
-              return_type = opts[:return_type] || 'PipelineStage' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: PipelineStagesApi#replace\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
-
-            # Update a pipeline stage
-            # Perform a partial update of the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-            # @option opts [PipelineStagePatchInput] :body 
-            # @return [PipelineStage]
-            def update(object_type, pipeline_id, stage_id, opts = {})
-              data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, stage_id, opts)
-              data
-            end
-
-            # Update a pipeline stage
-            # Perform a partial update of the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
-            # @param object_type [String] 
-            # @param pipeline_id [String] 
-            # @param stage_id [String] 
-            # @param [Hash] opts the optional parameters
-            # @option opts [Boolean] :archived Whether to return only results that have been archived.
-            # @option opts [PipelineStagePatchInput] :body 
-            # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-            def update_with_http_info(object_type, pipeline_id, stage_id, opts = {})
-              if @api_client.config.debugging
-                @api_client.config.logger.debug 'Calling API: PipelineStagesApi.update ...'
-              end
-              # verify the required parameter 'object_type' is set
-              if @api_client.config.client_side_validation && object_type.nil?
-                fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.update"
-              end
-              # verify the required parameter 'pipeline_id' is set
-              if @api_client.config.client_side_validation && pipeline_id.nil?
-                fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.update"
-              end
-              # verify the required parameter 'stage_id' is set
-              if @api_client.config.client_side_validation && stage_id.nil?
-                fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.update"
-              end
-              # resource path
-              local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
-
-              # query parameters
-              query_params = opts[:query_params] || {}
-              query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
-
-              # header parameters
-              header_params = opts[:header_params] || {}
-              # HTTP header 'Accept' (if needed)
-              header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-              # HTTP header 'Content-Type'
-              header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-              # form parameters
-              form_params = opts[:form_params] || {}
-
-              # http body (model)
-              post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
-
-              # return_type
-              return_type = opts[:return_type] || 'PipelineStage' 
-
-              # auth_names
-              auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-              new_options = opts.merge(
-                :header_params => header_params,
-                :query_params => query_params,
-                :form_params => form_params,
-                :body => post_body,
-                :auth_names => auth_names,
-                :return_type => return_type
-              )
-
-              data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
-              if @api_client.config.debugging
-                @api_client.config.logger.debug "API called: PipelineStagesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-              end
-              return data, status_code, headers
-            end
+        # Archive a pipeline stage
+        # Archive the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+        def archive_with_http_info(object_type, pipeline_id, stage_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.archive ...'
           end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.archive"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.archive"
+          end
+          # verify the required parameter 'stage_id' is set
+          if @api_client.config.client_side_validation && stage_id.nil?
+            fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.archive"
+          end
+          # resource path
+          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Create a pipeline stage
+        # Create a new stage associated with the pipeline identified by `{pipelineId}`. The entire stage object, including its unique ID, will be returned in the response.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [PipelineStageInput] :body 
+        # @return [PipelineStage]
+        def create(object_type, pipeline_id, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, pipeline_id, opts)
+          data
+        end
+
+        # Create a pipeline stage
+        # Create a new stage associated with the pipeline identified by &#x60;{pipelineId}&#x60;. The entire stage object, including its unique ID, will be returned in the response.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [PipelineStageInput] :body 
+        # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
+        def create_with_http_info(object_type, pipeline_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.create ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.create"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.create"
+          end
+          # resource path
+          local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
+
+          # return_type
+          return_type = opts[:return_type] || 'PipelineStage' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Return a pipeline stage by ID
+        # Return the stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @return [PipelineStage]
+        def get_by_id(object_type, pipeline_id, stage_id, opts = {})
+          data, _status_code, _headers = get_by_id_with_http_info(object_type, pipeline_id, stage_id, opts)
+          data
+        end
+
+        # Return a pipeline stage by ID
+        # Return the stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
+        def get_by_id_with_http_info(object_type, pipeline_id, stage_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_by_id ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.get_by_id"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_by_id"
+          end
+          # verify the required parameter 'stage_id' is set
+          if @api_client.config.client_side_validation && stage_id.nil?
+            fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.get_by_id"
+          end
+          # resource path
+          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'PipelineStage' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Return all stages of a pipeline
+        # Return all the stages associated with the pipeline identified by `{pipelineId}`.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @return [CollectionResponsePipelineStage]
+        def get_page(object_type, pipeline_id, opts = {})
+          data, _status_code, _headers = get_page_with_http_info(object_type, pipeline_id, opts)
+          data
+        end
+
+        # Return all stages of a pipeline
+        # Return all the stages associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @return [Array<(CollectionResponsePipelineStage, Integer, Hash)>] CollectionResponsePipelineStage data, response status code and response headers
+        def get_page_with_http_info(object_type, pipeline_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_page ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.get_page"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_page"
+          end
+          # resource path
+          local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponsePipelineStage' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Replace a pipeline stage
+        # Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [PipelineStageInput] :body 
+        # @return [PipelineStage]
+        def replace(object_type, pipeline_id, stage_id, opts = {})
+          data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, stage_id, opts)
+          data
+        end
+
+        # Replace a pipeline stage
+        # Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [PipelineStageInput] :body 
+        # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
+        def replace_with_http_info(object_type, pipeline_id, stage_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.replace ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.replace"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.replace"
+          end
+          # verify the required parameter 'stage_id' is set
+          if @api_client.config.client_side_validation && stage_id.nil?
+            fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.replace"
+          end
+          # resource path
+          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
+
+          # return_type
+          return_type = opts[:return_type] || 'PipelineStage' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#replace\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Update a pipeline stage
+        # Perform a partial update of the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @option opts [PipelineStagePatchInput] :body 
+        # @return [PipelineStage]
+        def update(object_type, pipeline_id, stage_id, opts = {})
+          data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, stage_id, opts)
+          data
+        end
+
+        # Update a pipeline stage
+        # Perform a partial update of the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param stage_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @option opts [PipelineStagePatchInput] :body 
+        # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
+        def update_with_http_info(object_type, pipeline_id, stage_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.update ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.update"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.update"
+          end
+          # verify the required parameter 'stage_id' is set
+          if @api_client.config.client_side_validation && stage_id.nil?
+            fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.update"
+          end
+          # resource path
+          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
+
+          # return_type
+          return_type = opts[:return_type] || 'PipelineStage' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
         end
       end
     end

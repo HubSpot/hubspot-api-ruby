@@ -7,7 +7,7 @@ module Services
         end
 
         def call
-          core_api = ::Hubspot::Client::Crm::Properties::Api::CoreApi.new
+          core_api = ::Hubspot::Crm::Properties::CoreApi.new
           params = { auth_names: 'oauth2', body: property_create }
           core_api.create('contact',params)
         end
@@ -15,7 +15,7 @@ module Services
         private
 
         def property_create
-          @property_create ||= ::Hubspot::Client::Crm::Properties::Models::PropertyCreate.new(@params)
+          @property_create ||= ::Hubspot::Crm::Properties::PropertyCreate.new(@params)
         end
       end
     end

@@ -3,7 +3,7 @@ module Services
     module Owners
       class GetAll
         def call
-          default_api = ::Hubspot::Client::Crm::Owners::Api::DefaultApi.new
+          default_api = ::Hubspot::Crm::Owners::DefaultApi.new
           default_api.get_page(auth_names: 'oauth2').results
         end
       end
