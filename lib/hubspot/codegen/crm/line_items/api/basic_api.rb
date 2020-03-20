@@ -18,6 +18,8 @@ module Hubspot
       module LineItems
         module Api
           class BasicApi
+            include Hubspot::Helpers::GetAllHelper
+
             attr_accessor :api_client
 
             def initialize(api_client = ApiClient.default)

@@ -18,6 +18,8 @@ module Hubspot
       module Owners
         module Api
           class DefaultApi
+            include Hubspot::Helpers::GetAllHelper
+
             attr_accessor :api_client
 
             def initialize(api_client = ApiClient.default)
