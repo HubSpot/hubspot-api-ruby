@@ -61,6 +61,18 @@ basic_api.get_page(auth_names: 'hapikey')
 
 ```
 
+### Usage
+
+### Get all:
+get_all method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
+
+```ruby
+basic_api = Hubspot::Crm::Contacts::BasicApi.new
+all_contacts = basic_api.get_all(auth_names: 'oauth2')
+```
+Please note that pagination is used under the hood to get all results.
+
+
 ### Error handling
 
 #### You can set number of retry attempts and delay in seconds before retry on specific status code of response.
