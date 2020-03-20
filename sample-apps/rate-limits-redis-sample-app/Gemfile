@@ -14,7 +14,7 @@ gem 'parallel'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'clipboard-rails'
-gem 'sidekiq'
+gem 'resque'
 gem 'redis'
 
 gem 'hubspot-api-client', path: '../../'
