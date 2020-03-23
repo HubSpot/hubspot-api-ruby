@@ -51,7 +51,7 @@ module Hubspot
             fail ArgumentError, "invalid value for \"id_property\", must be one of #{allowable_values}"
           end
           # resource path
-          local_var_path = '/{ownerId}'.sub('{' + 'ownerId' + '}', CGI.escape(owner_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/owners/{ownerId}'.sub('{' + 'ownerId' + '}', CGI.escape(owner_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -60,7 +60,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -112,7 +112,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: DefaultApi.get_page ...'
           end
           # resource path
-          local_var_path = '/'
+          local_var_path = '/crm/v3/owners/'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -123,7 +123,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
 
           # form parameters
           form_params = opts[:form_params] || {}
