@@ -59,9 +59,9 @@ module Hubspot
         def self.openapi_types
           {
             :'stages' => :'Array<PipelineStage>',
-            :'created_at' => :'String',
-            :'archived_at' => :'String',
-            :'updated_at' => :'String',
+            :'created_at' => :'DateTime',
+            :'archived_at' => :'DateTime',
+            :'updated_at' => :'DateTime',
             :'archived' => :'Boolean',
             :'label' => :'String',
             :'display_order' => :'Integer',

@@ -57,7 +57,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.archive"
           end
           # resource path
-          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -65,7 +65,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -100,7 +100,7 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :body 
+        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [PipelineStage]
         def create(object_type, pipeline_id, opts = {})
           data, _status_code, _headers = create_with_http_info(object_type, pipeline_id, opts)
@@ -112,7 +112,7 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :body 
+        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
         def create_with_http_info(object_type, pipeline_id, opts = {})
           if @api_client.config.debugging
@@ -127,7 +127,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.create"
           end
           # resource path
-          local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -135,7 +135,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
           # HTTP header 'Content-Type'
           header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
@@ -143,7 +143,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_stage_input']) 
 
           # return_type
           return_type = opts[:return_type] || 'PipelineStage' 
@@ -163,6 +163,77 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: PipelineStagesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Return all stages of a pipeline
+        # Return all the stages associated with the pipeline identified by `{pipelineId}`.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @return [CollectionResponsePipelineStage]
+        def get_all(object_type, pipeline_id, opts = {})
+          data, _status_code, _headers = get_all_with_http_info(object_type, pipeline_id, opts)
+          data
+        end
+
+        # Return all stages of a pipeline
+        # Return all the stages associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
+        # @param object_type [String] 
+        # @param pipeline_id [String] 
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @return [Array<(CollectionResponsePipelineStage, Integer, Hash)>] CollectionResponsePipelineStage data, response status code and response headers
+        def get_all_with_http_info(object_type, pipeline_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_all ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.get_all"
+          end
+          # verify the required parameter 'pipeline_id' is set
+          if @api_client.config.client_side_validation && pipeline_id.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_all"
+          end
+          # resource path
+          local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponsePipelineStage' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: PipelineStagesApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -205,7 +276,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.get_by_id"
           end
           # resource path
-          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -214,7 +285,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -244,84 +315,13 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Return all stages of a pipeline
-        # Return all the stages associated with the pipeline identified by `{pipelineId}`.
-        # @param object_type [String] 
-        # @param pipeline_id [String] 
-        # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @return [CollectionResponsePipelineStage]
-        def get_page(object_type, pipeline_id, opts = {})
-          data, _status_code, _headers = get_page_with_http_info(object_type, pipeline_id, opts)
-          data
-        end
-
-        # Return all stages of a pipeline
-        # Return all the stages associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
-        # @param object_type [String] 
-        # @param pipeline_id [String] 
-        # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @return [Array<(CollectionResponsePipelineStage, Integer, Hash)>] CollectionResponsePipelineStage data, response status code and response headers
-        def get_page_with_http_info(object_type, pipeline_id, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_page ...'
-          end
-          # verify the required parameter 'object_type' is set
-          if @api_client.config.client_side_validation && object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelineStagesApi.get_page"
-          end
-          # verify the required parameter 'pipeline_id' is set
-          if @api_client.config.client_side_validation && pipeline_id.nil?
-            fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.get_page"
-          end
-          # resource path
-          local_var_path = '/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/'))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] 
-
-          # return_type
-          return_type = opts[:return_type] || 'CollectionResponsePipelineStage' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: PipelineStagesApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
         # Replace a pipeline stage
         # Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :body 
+        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [PipelineStage]
         def replace(object_type, pipeline_id, stage_id, opts = {})
           data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, stage_id, opts)
@@ -334,7 +334,7 @@ module Hubspot
         # @param pipeline_id [String] 
         # @param stage_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :body 
+        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
         def replace_with_http_info(object_type, pipeline_id, stage_id, opts = {})
           if @api_client.config.debugging
@@ -353,7 +353,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.replace"
           end
           # resource path
-          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -361,7 +361,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
           # HTTP header 'Content-Type'
           header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
@@ -369,7 +369,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_stage_input']) 
 
           # return_type
           return_type = opts[:return_type] || 'PipelineStage' 
@@ -400,7 +400,7 @@ module Hubspot
         # @param stage_id [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @option opts [PipelineStagePatchInput] :body 
+        # @option opts [PipelineStagePatchInput] :pipeline_stage_patch_input 
         # @return [PipelineStage]
         def update(object_type, pipeline_id, stage_id, opts = {})
           data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, stage_id, opts)
@@ -414,7 +414,7 @@ module Hubspot
         # @param stage_id [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @option opts [PipelineStagePatchInput] :body 
+        # @option opts [PipelineStagePatchInput] :pipeline_stage_patch_input 
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
         def update_with_http_info(object_type, pipeline_id, stage_id, opts = {})
           if @api_client.config.debugging
@@ -433,7 +433,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.update"
           end
           # resource path
-          local_var_path = '/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s).gsub('%2F', '/')).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s).gsub('%2F', '/')).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -442,7 +442,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
           # HTTP header 'Content-Type'
           header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
@@ -450,7 +450,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'body']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_stage_patch_input']) 
 
           # return_type
           return_type = opts[:return_type] || 'PipelineStage' 
