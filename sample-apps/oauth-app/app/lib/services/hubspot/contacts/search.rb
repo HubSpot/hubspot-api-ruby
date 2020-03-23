@@ -7,7 +7,7 @@ module Services
         end
 
         def call
-          search_api = ::Hubspot::Client::Crm::Contacts::Api::SearchApi.new
+          search_api = ::Hubspot::Crm::Contacts::SearchApi.new
           results = search_api.do_search(body: search_request, auth_names: 'oauth2').results
           results = add_fullnames(results)
           results
@@ -16,13 +16,13 @@ module Services
         private
 
         def search_request
-          filter = ::Hubspot::Client::Crm::Contacts::Models::Filter.new(
+          filter = ::Hubspot::Crm::Contacts::Filter.new(
             property_name: 'email',
             operator: 'EQ',
             value: @email
           )
-          filter_group = ::Hubspot::Client::Crm::Contacts::Models::FilterGroup.new(filters: [filter])
-          ::Hubspot::Client::Crm::Contacts::Models::PublicObjectSearchRequest.new(filter_groups: [filter_group])
+          filter_group = ::Hubspot::Crm::Contacts::FilterGroup.new(filters: [filter])
+          ::Hubspot::Crm::Contacts::PublicObjectSearchRequest.new(filter_groups: [filter_group])
         end
 
         def add_fullnames(contacts)

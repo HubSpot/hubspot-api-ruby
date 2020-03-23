@@ -10,7 +10,7 @@ module Services
       def call
         check_presence_of_credentials
 
-        ::Hubspot::OAuth.authorize_url(
+        ::Hubspot::OAuthHelper.authorize_url(
           client_id: ENV['HUBSPOT_CLIENT_ID'],
           redirect_uri: redirect_uri,
           scope: %w[contacts]

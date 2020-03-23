@@ -8,7 +8,7 @@ module Services
         end
 
         def call
-          basic_api = ::Hubspot::Client::Crm::Companies::Api::BasicApi.new
+          basic_api = ::Hubspot::Crm::Companies::BasicApi.new
           params = { auth_names: 'oauth2', body: company }
           basic_api.update(@id, params)
         end
@@ -16,7 +16,7 @@ module Services
         private
 
         def company
-          ::Hubspot::Client::Crm::Companies::Models::SimplePublicObjectInput.new(
+          ::Hubspot::Crm::Companies::SimplePublicObjectInput.new(
             properties: @properties
           )
         end

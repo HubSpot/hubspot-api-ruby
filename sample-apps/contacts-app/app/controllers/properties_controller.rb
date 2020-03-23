@@ -7,7 +7,7 @@ class PropertiesController < ApplicationController
   end
 
   def new
-    @property = Hubspot::Client::Crm::Properties::Models::Property.new(
+    @property = Hubspot::Crm::Properties::Property.new(
       type: 'string', group_name: 'contactinformation', field_type: 'text'
     )
   end
@@ -15,7 +15,7 @@ class PropertiesController < ApplicationController
   def create
     Services::Hubspot::Properties::Create.new(property_params).call
     redirect_to :properties
-  rescue Hubspot::Client::Crm::Properties::ApiError => e
+  rescue Hubspot::Crm::Properties::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
     redirect_to new_property_path, flash: { error: error_message }
   end
@@ -23,7 +23,7 @@ class PropertiesController < ApplicationController
   def update
     Services::Hubspot::Properties::Update.new(params[:id], property_params).call
     redirect_to :properties
-  rescue Hubspot::Client::Crm::Properties::ApiError => e
+  rescue Hubspot::Crm::Properties::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
     redirect_to property_path(params[:id]), flash: { error: error_message }
   end

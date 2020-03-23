@@ -15,7 +15,7 @@ module Services
         private
 
         def refresh_tokens
-          tokens_api = ::Hubspot::Client::OAuth::Api::TokensApi.new
+          tokens_api = ::Hubspot::OAuth::TokensApi.new
           tokens = tokens_api.post_oauth_v1_token(
             grant_type: :refresh_token,
             refresh_token: @tokens[:refresh_token],

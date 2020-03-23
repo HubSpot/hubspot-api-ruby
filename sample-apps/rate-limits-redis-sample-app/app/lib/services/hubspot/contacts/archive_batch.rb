@@ -8,7 +8,7 @@ module Services
         end
 
         def call
-          ids_object = ::Hubspot::Client::Crm::Contacts::Models::BatchInputSimplePublicObjectId.new(
+          ids_object = ::Hubspot::Crm::Contacts::BatchInputSimplePublicObjectId.new(
             inputs: @ids
           )
           batch_api.archive_batch(body: ids_object , auth_names: 'oauth2')
@@ -17,11 +17,11 @@ module Services
         private
 
         def batch_api
-          config = ::Hubspot::Client::Crm::Contacts::Configuration.new do |config|
+          config = ::Hubspot::Crm::Contacts::Configuration.new do |config|
             config.access_token = @access_token
           end
-          api_client = ::Hubspot::Client::Crm::Contacts::ApiClient.new(config)
-          ::Hubspot::Client::Crm::Contacts::Api::BatchApi.new(api_client)
+          api_client = ::Hubspot::Crm::Contacts::ApiClient.new(config)
+          ::Hubspot::Crm::Contacts::BatchApi.new(api_client)
         end
       end
     end

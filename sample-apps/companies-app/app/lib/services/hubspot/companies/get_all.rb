@@ -7,7 +7,7 @@ module Services
         end
 
         def call
-          basic_api = ::Hubspot::Client::Crm::Companies::Api::BasicApi.new
+          basic_api = ::Hubspot::Crm::Companies::BasicApi.new
           results = basic_api.get_page(auth_names: 'oauth2', limit: @limit).results
         end
       end

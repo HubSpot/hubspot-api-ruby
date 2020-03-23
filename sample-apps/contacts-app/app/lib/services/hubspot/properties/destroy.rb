@@ -7,7 +7,7 @@ module Services
         end
 
         def call
-          core_api = ::Hubspot::Client::Crm::Properties::Api::CoreApi.new
+          core_api = ::Hubspot::Crm::Properties::CoreApi.new
           core_api.archive('contact', @name, auth_names: 'oauth2')
         end
       end

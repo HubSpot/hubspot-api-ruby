@@ -8,7 +8,7 @@ module Services
         end
 
         def call
-          basic_api = ::Hubspot::Client::Crm::Contacts::Api::BasicApi.new
+          basic_api = ::Hubspot::Crm::Contacts::BasicApi.new
           params = { auth_names: 'oauth2', body: contact_input }
           basic_api.update(@id, params)
         end
@@ -16,7 +16,7 @@ module Services
         private
 
         def contact_input
-          @contact_input ||= ::Hubspot::Client::Crm::Objects::Models::SimplePublicObjectInput.new(properties: @properties)
+          @contact_input ||= ::Hubspot::Crm::Objects::SimplePublicObjectInput.new(properties: @properties)
         end
       end
     end

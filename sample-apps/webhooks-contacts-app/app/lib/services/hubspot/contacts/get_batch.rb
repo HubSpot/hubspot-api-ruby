@@ -7,10 +7,10 @@ module Services
         end
 
         def call
-          contact_id_objects = ::Hubspot::Client::Crm::Contacts::Models::BatchReadInputSimplePublicObjectId.new(
-            inputs: @ids.map { |id| ::Hubspot::Client::Crm::Contacts::Models::SimplePublicObjectId.new(id: id) }
+          contact_id_objects = ::Hubspot::Crm::Contacts::BatchReadInputSimplePublicObjectId.new(
+            inputs: @ids.map { |id| ::Hubspot::Crm::Contacts::SimplePublicObjectId.new(id: id) }
           )
-          batch = ::Hubspot::Client::Crm::Contacts::Api::BatchApi.new.read_batch(
+          batch = ::Hubspot::Crm::Contacts::BatchApi.new.read_batch(
             body: contact_id_objects,
             auth_names: 'oauth2'
           ).results

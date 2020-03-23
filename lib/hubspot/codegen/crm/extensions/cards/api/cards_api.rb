@@ -13,323 +13,319 @@ OpenAPI Generator version: 4.2.3
 require 'cgi'
 
 module Hubspot
-  module Client
-    module Crm
-      module Extensions
-        module Cards
-          module Api
-            class CardsApi
-              attr_accessor :api_client
+  module Crm
+    module Extensions
+      module Cards
+        class CardsApi
+          attr_accessor :api_client
 
-              def initialize(api_client = ApiClient.default)
-                @api_client = api_client
-              end
-              # Delete a card
-              # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
-              # @param card_id [String] ID of the card to delete.
-              # @param [Hash] opts the optional parameters
-              # @return [nil]
-              def delete_crm_v3_extensions_cards_app_id_card_id(card_id, opts = {})
-                delete_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts)
-                nil
-              end
+          def initialize(api_client = ApiClient.default)
+            @api_client = api_client
+          end
+          # Delete a card
+          # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
+          # @param card_id [String] ID of the card to delete.
+          # @param [Hash] opts the optional parameters
+          # @return [nil]
+          def delete_crm_v3_extensions_cards_app_id_card_id(card_id, opts = {})
+            delete_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts)
+            nil
+          end
 
-              # Delete a card
-              # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can&#39;t be undone.
-              # @param card_id [String] ID of the card to delete.
-              # @param [Hash] opts the optional parameters
-              # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-              def delete_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: CardsApi.delete_crm_v3_extensions_cards_app_id_card_id ...'
-                end
-                # verify the required parameter 'card_id' is set
-                if @api_client.config.client_side_validation && card_id.nil?
-                  fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.delete_crm_v3_extensions_cards_app_id_card_id"
-                end
-                # resource path
-                local_var_path = '/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/'))
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] 
-
-                # return_type
-                return_type = opts[:return_type] 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: CardsApi#delete_crm_v3_extensions_cards_app_id_card_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # Get all cards
-              # Returns all existing card definitions for this app.
-              # @param [Hash] opts the optional parameters
-              # @return [CardListResponse]
-              def get_crm_v3_extensions_cards_app_id(opts = {})
-                data, _status_code, _headers = get_crm_v3_extensions_cards_app_id_with_http_info(opts)
-                data
-              end
-
-              # Get all cards
-              # Returns all existing card definitions for this app.
-              # @param [Hash] opts the optional parameters
-              # @return [Array<(CardListResponse, Integer, Hash)>] CardListResponse data, response status code and response headers
-              def get_crm_v3_extensions_cards_app_id_with_http_info(opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: CardsApi.get_crm_v3_extensions_cards_app_id ...'
-                end
-                # resource path
-                local_var_path = '/{appId}'
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardListResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: CardsApi#get_crm_v3_extensions_cards_app_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # Get a card.
-              # Returns the definition for a card with the given ID.
-              # @param card_id [String] ID of the target card.
-              # @param [Hash] opts the optional parameters
-              # @return [CardResponse]
-              def get_crm_v3_extensions_cards_app_id_card_id(card_id, opts = {})
-                data, _status_code, _headers = get_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts)
-                data
-              end
-
-              # Get a card.
-              # Returns the definition for a card with the given ID.
-              # @param card_id [String] ID of the target card.
-              # @param [Hash] opts the optional parameters
-              # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-              def get_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: CardsApi.get_crm_v3_extensions_cards_app_id_card_id ...'
-                end
-                # verify the required parameter 'card_id' is set
-                if @api_client.config.client_side_validation && card_id.nil?
-                  fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.get_crm_v3_extensions_cards_app_id_card_id"
-                end
-                # resource path
-                local_var_path = '/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/'))
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: CardsApi#get_crm_v3_extensions_cards_app_id_card_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # Update a card
-              # Update a card definition with new details.
-              # @param card_id [String] ID of the card to update.
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated
-              # @return [CardResponse]
-              def patch_crm_v3_extensions_cards_app_id_card_id(card_id, opts = {})
-                data, _status_code, _headers = patch_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts)
-                data
-              end
-
-              # Update a card
-              # Update a card definition with new details.
-              # @param card_id [String] ID of the card to update.
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated
-              # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-              def patch_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: CardsApi.patch_crm_v3_extensions_cards_app_id_card_id ...'
-                end
-                # verify the required parameter 'card_id' is set
-                if @api_client.config.client_side_validation && card_id.nil?
-                  fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.patch_crm_v3_extensions_cards_app_id_card_id"
-                end
-                # resource path
-                local_var_path = '/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/'))
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-                # HTTP header 'Content-Type'
-                header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_patch_request']) 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: CardsApi#patch_crm_v3_extensions_cards_app_id_card_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
-
-              # Create a new card
-              # Defines a new card that will become active on an account when this app is installed.
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardCreateRequest] :card_create_request The new card definition.
-              # @return [CardResponse]
-              def post_crm_v3_extensions_cards_app_id(opts = {})
-                data, _status_code, _headers = post_crm_v3_extensions_cards_app_id_with_http_info(opts)
-                data
-              end
-
-              # Create a new card
-              # Defines a new card that will become active on an account when this app is installed.
-              # @param [Hash] opts the optional parameters
-              # @option opts [CardCreateRequest] :card_create_request The new card definition.
-              # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-              def post_crm_v3_extensions_cards_app_id_with_http_info(opts = {})
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug 'Calling API: CardsApi.post_crm_v3_extensions_cards_app_id ...'
-                end
-                # resource path
-                local_var_path = '/{appId}'
-
-                # query parameters
-                query_params = opts[:query_params] || {}
-
-                # header parameters
-                header_params = opts[:header_params] || {}
-                # HTTP header 'Accept' (if needed)
-                header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-                # HTTP header 'Content-Type'
-                header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-                # form parameters
-                form_params = opts[:form_params] || {}
-
-                # http body (model)
-                post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_create_request']) 
-
-                # return_type
-                return_type = opts[:return_type] || 'CardResponse' 
-
-                # auth_names
-                auth_names = opts[:auth_names] || ['hapikey']
-
-                new_options = opts.merge(
-                  :header_params => header_params,
-                  :query_params => query_params,
-                  :form_params => form_params,
-                  :body => post_body,
-                  :auth_names => auth_names,
-                  :return_type => return_type
-                )
-
-                data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-                if @api_client.config.debugging
-                  @api_client.config.logger.debug "API called: CardsApi#post_crm_v3_extensions_cards_app_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-                end
-                return data, status_code, headers
-              end
+          # Delete a card
+          # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can&#39;t be undone.
+          # @param card_id [String] ID of the card to delete.
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+          def delete_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: CardsApi.delete_crm_v3_extensions_cards_app_id_card_id ...'
             end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.delete_crm_v3_extensions_cards_app_id_card_id"
+            end
+            # resource path
+            local_var_path = '/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/'))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: CardsApi#delete_crm_v3_extensions_cards_app_id_card_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Get all cards
+          # Returns all existing card definitions for this app.
+          # @param [Hash] opts the optional parameters
+          # @return [CardListResponse]
+          def get_crm_v3_extensions_cards_app_id(opts = {})
+            data, _status_code, _headers = get_crm_v3_extensions_cards_app_id_with_http_info(opts)
+            data
+          end
+
+          # Get all cards
+          # Returns all existing card definitions for this app.
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(CardListResponse, Integer, Hash)>] CardListResponse data, response status code and response headers
+          def get_crm_v3_extensions_cards_app_id_with_http_info(opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: CardsApi.get_crm_v3_extensions_cards_app_id ...'
+            end
+            # resource path
+            local_var_path = '/{appId}'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardListResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: CardsApi#get_crm_v3_extensions_cards_app_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Get a card.
+          # Returns the definition for a card with the given ID.
+          # @param card_id [String] ID of the target card.
+          # @param [Hash] opts the optional parameters
+          # @return [CardResponse]
+          def get_crm_v3_extensions_cards_app_id_card_id(card_id, opts = {})
+            data, _status_code, _headers = get_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts)
+            data
+          end
+
+          # Get a card.
+          # Returns the definition for a card with the given ID.
+          # @param card_id [String] ID of the target card.
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          def get_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: CardsApi.get_crm_v3_extensions_cards_app_id_card_id ...'
+            end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.get_crm_v3_extensions_cards_app_id_card_id"
+            end
+            # resource path
+            local_var_path = '/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/'))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: CardsApi#get_crm_v3_extensions_cards_app_id_card_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Update a card
+          # Update a card definition with new details.
+          # @param card_id [String] ID of the card to update.
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated
+          # @return [CardResponse]
+          def patch_crm_v3_extensions_cards_app_id_card_id(card_id, opts = {})
+            data, _status_code, _headers = patch_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts)
+            data
+          end
+
+          # Update a card
+          # Update a card definition with new details.
+          # @param card_id [String] ID of the card to update.
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated
+          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          def patch_crm_v3_extensions_cards_app_id_card_id_with_http_info(card_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: CardsApi.patch_crm_v3_extensions_cards_app_id_card_id ...'
+            end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.patch_crm_v3_extensions_cards_app_id_card_id"
+            end
+            # resource path
+            local_var_path = '/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/'))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_patch_request']) 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: CardsApi#patch_crm_v3_extensions_cards_app_id_card_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Create a new card
+          # Defines a new card that will become active on an account when this app is installed.
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardCreateRequest] :card_create_request The new card definition.
+          # @return [CardResponse]
+          def post_crm_v3_extensions_cards_app_id(opts = {})
+            data, _status_code, _headers = post_crm_v3_extensions_cards_app_id_with_http_info(opts)
+            data
+          end
+
+          # Create a new card
+          # Defines a new card that will become active on an account when this app is installed.
+          # @param [Hash] opts the optional parameters
+          # @option opts [CardCreateRequest] :card_create_request The new card definition.
+          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          def post_crm_v3_extensions_cards_app_id_with_http_info(opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: CardsApi.post_crm_v3_extensions_cards_app_id ...'
+            end
+            # resource path
+            local_var_path = '/{appId}'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_create_request']) 
+
+            # return_type
+            return_type = opts[:return_type] || 'CardResponse' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: CardsApi#post_crm_v3_extensions_cards_app_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
           end
         end
       end

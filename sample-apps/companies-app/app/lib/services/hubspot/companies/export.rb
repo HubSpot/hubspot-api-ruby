@@ -29,7 +29,7 @@ module Services
         end
 
         def basic_api
-          @basic_api ||= ::Hubspot::Client::Crm::Companies::Api::BasicApi.new
+          @basic_api ||= ::Hubspot::Crm::Companies::BasicApi.new
         end
 
         def convert_to_csv(companies, properties: PROPERTIES_TO_EXPORT)

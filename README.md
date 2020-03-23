@@ -56,7 +56,7 @@ Hubspot.configure do |config|
 end
 
 # Get contacts
-basic_api = Hubspot::Client::Crm::Contacts::Api::BasicApi.new
+basic_api = Hubspot::Crm::Contacts::BasicApi.new
 basic_api.get_page(auth_names: 'hapikey')
 
 ```
@@ -67,7 +67,7 @@ basic_api.get_page(auth_names: 'hapikey')
 get_all method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
 
 ```ruby
-basic_api = Hubspot::Client::Crm::Contacts::Api::BasicApi.new
+basic_api = Hubspot::Crm::Contacts::BasicApi.new
 all_contacts = basic_api.get_all(auth_names: 'oauth2')
 ```
 Please note that pagination is used under the hood to get all results.
@@ -84,7 +84,7 @@ Available params:
 
 
 ```ruby
-config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
+config = ::Hubspot::Crm::Companies::Configuration.new do |config|
   config.access_token = 'YOUR ACCESS TOKEN'
 
   # Set handlers of statuses you want to handle
@@ -95,8 +95,8 @@ config = ::Hubspot::Client::Crm::Companies::Configuration.new do |config|
   }
 end
 
-api_client = ::Hubspot::Client::Crm::Companies::ApiClient.new(config)
-basic_api = ::Hubspot::Client::Crm::Companies::Api::BasicApi.new(api_client)
+api_client = ::Hubspot::Crm::Companies::ApiClient.new(config)
+basic_api = ::Hubspot::Crm::Companies::BasicApi.new(api_client)
 end
 
 ```

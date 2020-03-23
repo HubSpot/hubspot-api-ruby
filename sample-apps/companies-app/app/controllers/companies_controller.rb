@@ -20,7 +20,7 @@ class CompaniesController < ApplicationController
   def create
     Services::Hubspot::Companies::Create.new(company_params).call
     redirect_to :companies
-  rescue Hubspot::Client::Crm::Companies::ApiError => e
+  rescue Hubspot::Crm::Companies::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
     redirect_to new_company_path, flash: { error: error_message }
   end
@@ -29,7 +29,7 @@ class CompaniesController < ApplicationController
     @company = Services::Hubspot::Companies::GetById.new(params[:id]).call
     Services::Hubspot::Companies::Update.new(params[:id], company_params).call
     redirect_to :companies
-  rescue Hubspot::Client::Crm::Companies::ApiError => e
+  rescue Hubspot::Crm::Companies::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
     redirect_to company_path(params[:id]), flash: { error: error_message }
   end

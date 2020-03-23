@@ -12,8 +12,8 @@ OpenAPI Generator version: 3.3.4
 
 require 'spec_helper'
 
-describe Hubspot::Client::OAuth::Configuration do
-  let(:config) { Hubspot::Client::OAuth::Configuration.default }
+describe Hubspot::OAuth::Configuration do
+  let(:config) { Hubspot::OAuth::Configuration.default }
 
   before(:each) do
     # uncomment below to setup host and base_path

@@ -21,7 +21,7 @@ class ContactsController < ApplicationController
   def create
     Services::Hubspot::Contacts::Create.new(email: params[:email]).call
     redirect_to :contacts
-  rescue Hubspot::Client::Crm::Contacts::ApiError => e
+  rescue Hubspot::Crm::Contacts::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
     redirect_to new_contact_path, flash: { error: error_message }
   end
@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
     @contact = Services::Hubspot::Contacts::GetById.new(params[:id]).call
     Services::Hubspot::Contacts::Update.new(params[:id], contact_params).call
     redirect_to :contacts
-  rescue Hubspot::Client::Crm::Contacts::ApiError => e
+  rescue Hubspot::Crm::Contacts::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
     redirect_to contact_path(params[:id]), flash: { error: error_message }
   end

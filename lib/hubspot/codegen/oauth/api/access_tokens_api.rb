@@ -13,75 +13,71 @@ OpenAPI Generator version: 4.2.2
 require 'cgi'
 
 module Hubspot
-  module Client
-    module OAuth
-      module Api
-        class AccessTokensApi
-          attr_accessor :api_client
+  module OAuth
+    class AccessTokensApi
+      attr_accessor :api_client
 
-          def initialize(api_client = ApiClient.default)
-            @api_client = api_client
-          end
-          # Auth Level: none ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=AccessTokensResource%20OR%20Object&defs=requestAccessTokenInfo)&nbsp;|&nbsp;[API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Foauth%2Fv1%2Faccess-tokens%2F%28%28%7Btoken%7D%29%29?showRequestDetails=true)&nbsp;|&nbsp;<a href='#operations-Access_Tokens-get-%2Foauth%2Fv1%2Faccess-tokens%2F%7Btoken%7D'>Permalink</a>
-          # @param token [String] 
-          # @param [Hash] opts the optional parameters
-          # @return [AccessTokenInfoResponse]
-          def get_oauth_v1_access_tokens_token(token, opts = {})
-            data, _status_code, _headers = get_oauth_v1_access_tokens_token_with_http_info(token, opts)
-            data
-          end
+      def initialize(api_client = ApiClient.default)
+        @api_client = api_client
+      end
+      # Auth Level: none ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=AccessTokensResource%20OR%20Object&defs=requestAccessTokenInfo)&nbsp;|&nbsp;[API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Foauth%2Fv1%2Faccess-tokens%2F%28%28%7Btoken%7D%29%29?showRequestDetails=true)&nbsp;|&nbsp;<a href='#operations-Access_Tokens-get-%2Foauth%2Fv1%2Faccess-tokens%2F%7Btoken%7D'>Permalink</a>
+      # @param token [String] 
+      # @param [Hash] opts the optional parameters
+      # @return [AccessTokenInfoResponse]
+      def get_oauth_v1_access_tokens_token(token, opts = {})
+        data, _status_code, _headers = get_oauth_v1_access_tokens_token_with_http_info(token, opts)
+        data
+      end
 
-          # Auth Level: none ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) [Source Code](https://private.hubteam.com/opengrok/search?project&#x3D;all&amp;path&#x3D;AccessTokensResource%20OR%20Object&amp;defs&#x3D;requestAccessTokenInfo)&amp;nbsp;|&amp;nbsp;[API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Foauth%2Fv1%2Faccess-tokens%2F%28%28%7Btoken%7D%29%29?showRequestDetails&#x3D;true)&amp;nbsp;|&amp;nbsp;&lt;a href&#x3D;&#39;#operations-Access_Tokens-get-%2Foauth%2Fv1%2Faccess-tokens%2F%7Btoken%7D&#39;&gt;Permalink&lt;/a&gt;
-          # @param token [String] 
-          # @param [Hash] opts the optional parameters
-          # @return [Array<(AccessTokenInfoResponse, Integer, Hash)>] AccessTokenInfoResponse data, response status code and response headers
-          def get_oauth_v1_access_tokens_token_with_http_info(token, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: AccessTokensApi.get_oauth_v1_access_tokens_token ...'
-            end
-            # verify the required parameter 'token' is set
-            if @api_client.config.client_side_validation && token.nil?
-              fail ArgumentError, "Missing the required parameter 'token' when calling AccessTokensApi.get_oauth_v1_access_tokens_token"
-            end
-            # resource path
-            local_var_path = '/v1/access-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s).gsub('%2F', '/'))
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] 
-
-            # return_type
-            return_type = opts[:return_type] || 'AccessTokenInfoResponse' 
-
-            # auth_names
-            auth_names = opts[:auth_names] || []
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: AccessTokensApi#get_oauth_v1_access_tokens_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
+      # Auth Level: none ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) [Source Code](https://private.hubteam.com/opengrok/search?project&#x3D;all&amp;path&#x3D;AccessTokensResource%20OR%20Object&amp;defs&#x3D;requestAccessTokenInfo)&amp;nbsp;|&amp;nbsp;[API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Foauth%2Fv1%2Faccess-tokens%2F%28%28%7Btoken%7D%29%29?showRequestDetails&#x3D;true)&amp;nbsp;|&amp;nbsp;&lt;a href&#x3D;&#39;#operations-Access_Tokens-get-%2Foauth%2Fv1%2Faccess-tokens%2F%7Btoken%7D&#39;&gt;Permalink&lt;/a&gt;
+      # @param token [String] 
+      # @param [Hash] opts the optional parameters
+      # @return [Array<(AccessTokenInfoResponse, Integer, Hash)>] AccessTokenInfoResponse data, response status code and response headers
+      def get_oauth_v1_access_tokens_token_with_http_info(token, opts = {})
+        if @api_client.config.debugging
+          @api_client.config.logger.debug 'Calling API: AccessTokensApi.get_oauth_v1_access_tokens_token ...'
         end
+        # verify the required parameter 'token' is set
+        if @api_client.config.client_side_validation && token.nil?
+          fail ArgumentError, "Missing the required parameter 'token' when calling AccessTokensApi.get_oauth_v1_access_tokens_token"
+        end
+        # resource path
+        local_var_path = '/v1/access-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s).gsub('%2F', '/'))
+
+        # query parameters
+        query_params = opts[:query_params] || {}
+
+        # header parameters
+        header_params = opts[:header_params] || {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+        # form parameters
+        form_params = opts[:form_params] || {}
+
+        # http body (model)
+        post_body = opts[:body] 
+
+        # return_type
+        return_type = opts[:return_type] || 'AccessTokenInfoResponse' 
+
+        # auth_names
+        auth_names = opts[:auth_names] || []
+
+        new_options = opts.merge(
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        )
+
+        data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+        if @api_client.config.debugging
+          @api_client.config.logger.debug "API called: AccessTokensApi#get_oauth_v1_access_tokens_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        end
+        return data, status_code, headers
       end
     end
   end

@@ -1,5 +1,5 @@
 module Hubspot
-  class OAuth
+  class OAuthHelper
     AUTHORIZE_URL = 'https://app.hubspot.com/oauth/authorize'.freeze
     class << self
       def authorize_url(client_id:, redirect_uri:, scope:, optional_scope: [])
