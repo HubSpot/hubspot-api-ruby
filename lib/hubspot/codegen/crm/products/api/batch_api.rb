@@ -41,7 +41,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: BatchApi.archive_batch ...'
           end
           # resource path
-          local_var_path = '/products/batch/archive'
+          local_var_path = '/crm/v3/objects/products/batch/archive'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -101,7 +101,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: BatchApi.create_batch ...'
           end
           # resource path
-          local_var_path = '/products/batch/create'
+          local_var_path = '/crm/v3/objects/products/batch/create'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -163,7 +163,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
           end
           # resource path
-          local_var_path = '/products/batch/read'
+          local_var_path = '/crm/v3/objects/products/batch/read'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -224,7 +224,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: BatchApi.update_batch ...'
           end
           # resource path
-          local_var_path = '/products/batch/update'
+          local_var_path = '/crm/v3/objects/products/batch/update'
 
           # query parameters
           query_params = opts[:query_params] || {}
