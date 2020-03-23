@@ -153,7 +153,7 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Read a batch of objects by ID
+        # Read a batch of objects by internal ID, or unique property values
         # Read a list of objects given a collection of IDs. Use the `properties` request body property to control which properties are returned.
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
@@ -165,7 +165,7 @@ module Hubspot
           data
         end
 
-        # Read a batch of objects by ID
+        # Read a batch of objects by internal ID, or unique property values
         # Read a list of objects given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
