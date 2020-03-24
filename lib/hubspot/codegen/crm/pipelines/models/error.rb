@@ -122,11 +122,6 @@ module Hubspot
             invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
           end
 
-          pattern = Regexp.new(/[a-zA-Z0-9]{32}/)
-          if @correlation_id !~ pattern
-            invalid_properties.push("invalid value for \"correlation_id\", must conform to the pattern #{pattern}.")
-          end
-
           if @category.nil?
             invalid_properties.push('invalid value for "category", category cannot be nil.')
           end
@@ -139,24 +134,8 @@ module Hubspot
         def valid?
           return false if @message.nil?
           return false if @correlation_id.nil?
-          return false if @correlation_id !~ Regexp.new(/[a-zA-Z0-9]{32}/)
           return false if @category.nil?
           true
-        end
-
-        # Custom attribute writer method with validation
-        # @param [Object] correlation_id Value to be assigned
-        def correlation_id=(correlation_id)
-          if correlation_id.nil?
-            fail ArgumentError, 'correlation_id cannot be nil'
-          end
-
-          pattern = Regexp.new(/[a-zA-Z0-9]{32}/)
-          if correlation_id !~ pattern
-            fail ArgumentError, "invalid value for \"correlation_id\", must conform to the pattern #{pattern}."
-          end
-
-          @correlation_id = correlation_id
         end
 
         # Checks equality by comparing each attribute.

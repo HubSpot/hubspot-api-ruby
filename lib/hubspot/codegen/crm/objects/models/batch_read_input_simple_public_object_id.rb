@@ -18,12 +18,15 @@ module Hubspot
       class BatchReadInputSimplePublicObjectId
         attr_accessor :properties
 
+        attr_accessor :id_property
+
         attr_accessor :inputs
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'properties' => :'properties',
+            :'id_property' => :'idProperty',
             :'inputs' => :'inputs'
           }
         end
@@ -32,6 +35,7 @@ module Hubspot
         def self.openapi_types
           {
             :'properties' => :'Array<String>',
+            :'id_property' => :'String',
             :'inputs' => :'Array<SimplePublicObjectId>'
           }
         end
@@ -61,6 +65,10 @@ module Hubspot
             if (value = attributes[:'properties']).is_a?(Array)
               self.properties = value
             end
+          end
+
+          if attributes.key?(:'id_property')
+            self.id_property = attributes[:'id_property']
           end
 
           if attributes.key?(:'inputs')
@@ -99,6 +107,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               properties == o.properties &&
+              id_property == o.id_property &&
               inputs == o.inputs
         end
 
@@ -111,7 +120,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [properties, inputs].hash
+          [properties, id_property, inputs].hash
         end
 
         # Builds the object from hash

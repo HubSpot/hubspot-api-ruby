@@ -43,7 +43,7 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'sub_category' => :'String',
+            :'sub_category' => :'Object',
             :'message' => :'String',
             :'code' => :'String',
             :'_in' => :'String',

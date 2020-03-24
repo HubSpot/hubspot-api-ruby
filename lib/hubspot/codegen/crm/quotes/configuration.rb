@@ -215,7 +215,7 @@ module Hubspot
         def server_settings
           [
             {
-              url: "https://api.hubapi.com/crm/v3/objects",
+              url: "https://api.hubapi.com/",
               description: "No description provided",
             }
           ]

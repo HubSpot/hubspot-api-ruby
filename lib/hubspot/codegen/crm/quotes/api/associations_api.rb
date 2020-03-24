@@ -55,7 +55,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.archive_association"
           end
           # resource path
-          local_var_path = '/quotes/{quoteId}/associations/{associatedObjectType}/{toObjectId}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s).gsub('%2F', '/')).sub('{' + 'associatedObjectType' + '}', CGI.escape(associated_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/quotes/{quoteId}/associations/{associatedObjectType}/{toObjectId}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s).gsub('%2F', '/')).sub('{' + 'associatedObjectType' + '}', CGI.escape(associated_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -127,7 +127,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.create_association"
           end
           # resource path
-          local_var_path = '/quotes/{quoteId}/associations/{associatedObjectType}/{toObjectId}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s).gsub('%2F', '/')).sub('{' + 'associatedObjectType' + '}', CGI.escape(associated_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/quotes/{quoteId}/associations/{associatedObjectType}/{toObjectId}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s).gsub('%2F', '/')).sub('{' + 'associatedObjectType' + '}', CGI.escape(associated_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -193,7 +193,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'associated_object_type' when calling AssociationsApi.get_associations"
           end
           # resource path
-          local_var_path = '/quotes/{quoteId}/associations/{associatedObjectType}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s).gsub('%2F', '/')).sub('{' + 'associatedObjectType' + '}', CGI.escape(associated_object_type.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/quotes/{quoteId}/associations/{associatedObjectType}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s).gsub('%2F', '/')).sub('{' + 'associatedObjectType' + '}', CGI.escape(associated_object_type.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}

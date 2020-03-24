@@ -41,7 +41,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: SearchApi.do_search ...'
           end
           # resource path
-          local_var_path = '/line_items/search'
+          local_var_path = '/crm/v3/objects/line_items/search'
 
           # query parameters
           query_params = opts[:query_params] || {}

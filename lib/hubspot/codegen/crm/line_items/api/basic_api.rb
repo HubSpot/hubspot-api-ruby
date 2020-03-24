@@ -47,7 +47,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'line_item_id' when calling BasicApi.archive"
           end
           # resource path
-          local_var_path = '/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -105,7 +105,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: BasicApi.create ...'
           end
           # resource path
-          local_var_path = '/line_items'
+          local_var_path = '/crm/v3/objects/line_items'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -175,7 +175,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'line_item_id' when calling BasicApi.get_by_id"
           end
           # resource path
-          local_var_path = '/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -244,7 +244,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: BasicApi.get_page ...'
           end
           # resource path
-          local_var_path = '/line_items'
+          local_var_path = '/crm/v3/objects/line_items'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -313,7 +313,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'line_item_id' when calling BasicApi.update"
           end
           # resource path
-          local_var_path = '/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
 
           # query parameters
           query_params = opts[:query_params] || {}
