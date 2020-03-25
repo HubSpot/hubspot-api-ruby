@@ -7,8 +7,8 @@ module Services
         end
 
         def call
-          basic_api = ::Hubspot::Crm::Objects::BasicApi.new
-          basic_api.archive('contact', @id, auth_names: 'oauth2')
+          basic_api = ::Hubspot::Crm::Contacts::BasicApi.new
+          basic_api.archive(@id, auth_names: 'oauth2')
         end
       end
     end

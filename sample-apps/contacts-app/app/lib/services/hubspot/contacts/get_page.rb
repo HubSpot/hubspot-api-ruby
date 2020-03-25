@@ -1,14 +1,14 @@
 module Services
   module Hubspot
     module Contacts
-      class GetAll
+      class GetPage
         def initialize(limit: 10)
           @limit = limit
         end
 
         def call
-          basic_api = ::Hubspot::Crm::Objects::BasicApi.new
-          results = basic_api.get_page('contact', auth_names: 'oauth2', limit: @limit).results
+          basic_api = ::Hubspot::Crm::Contacts::BasicApi.new
+          results = basic_api.get_page(auth_names: 'oauth2', limit: @limit).results
           results = add_fullnames(results)
         end
 

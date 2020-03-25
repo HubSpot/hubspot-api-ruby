@@ -15,21 +15,8 @@ module Services
         private
 
         def contacts
-          return @contacts if @contacts.present?
-
-          after = nil
-          @contacts = @max_pages.times.each_with_object([]) do |_, contacts|
-            params = { auth_names: 'oauth2', limit: 10, after: after }
-            contacts_page = basic_api.get_page('contact', params)
-            contacts.concat(contacts_page.results)
-            break contacts unless contacts_page.paging.present?
-
-            after = contacts_page.paging._next.after
-          end
-        end
-
-        def basic_api
-          @basic_api ||= ::Hubspot::Crm::Objects::BasicApi.new
+          basic_api = ::Hubspot::Crm::Contacts::BasicApi.new
+          basic_api.get_all(auth_names: 'oauth2')
         end
 
         def convert_to_csv(contacts, properties: PROPERTIES_TO_EXPORT)
