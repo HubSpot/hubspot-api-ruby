@@ -127,7 +127,7 @@ module Hubspot
         def initialize
           @scheme = 'https'
           @host = 'api.hubapi.com'
-          @base_path = '/crm/v3/properties'
+          @base_path = ''
           @api_key = {}
           @api_key_prefix = {}
           @timeout = 0
