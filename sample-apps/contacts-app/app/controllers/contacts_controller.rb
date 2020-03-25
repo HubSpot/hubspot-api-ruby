@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
       Services::Hubspot::Contacts::Search.new(email: @search_q).call
     else
       # https://developers.hubspot.com/docs/methods/contacts/get_contacts
-      Services::Hubspot::Contacts::GetAll.new(limit: 100).call.sort_by(&:created_at).reverse
+      Services::Hubspot::Contacts::GetPage.new(limit: 100).call.sort_by(&:created_at).reverse
     end
   end
 
