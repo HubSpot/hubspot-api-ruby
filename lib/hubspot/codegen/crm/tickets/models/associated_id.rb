@@ -15,31 +15,16 @@ require 'date'
 module Hubspot
   module Crm
     module Tickets
-      class SimplePublicObject
+      class AssociatedId
         attr_accessor :id
 
-        attr_accessor :properties
-
-        attr_accessor :created_at
-
-        attr_accessor :updated_at
-
-        attr_accessor :associations
-
-        attr_accessor :archived
-
-        attr_accessor :archived_at
+        attr_accessor :type
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'id' => :'id',
-            :'properties' => :'properties',
-            :'created_at' => :'createdAt',
-            :'updated_at' => :'updatedAt',
-            :'associations' => :'associations',
-            :'archived' => :'archived',
-            :'archived_at' => :'archivedAt'
+            :'type' => :'type'
           }
         end
 
@@ -47,12 +32,7 @@ module Hubspot
         def self.openapi_types
           {
             :'id' => :'String',
-            :'properties' => :'Hash<String, String>',
-            :'created_at' => :'DateTime',
-            :'updated_at' => :'DateTime',
-            :'associations' => :'Hash<String, CollectionResponseAssociatedId>',
-            :'archived' => :'Boolean',
-            :'archived_at' => :'DateTime'
+            :'type' => :'String'
           }
         end
 
@@ -66,13 +46,13 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Tickets::SimplePublicObject` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Tickets::AssociatedId` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Tickets::SimplePublicObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Tickets::AssociatedId`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
@@ -81,32 +61,8 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
-          if attributes.key?(:'properties')
-            if (value = attributes[:'properties']).is_a?(Hash)
-              self.properties = value
-            end
-          end
-
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
-          end
-
-          if attributes.key?(:'updated_at')
-            self.updated_at = attributes[:'updated_at']
-          end
-
-          if attributes.key?(:'associations')
-            if (value = attributes[:'associations']).is_a?(Hash)
-              self.associations = value
-            end
-          end
-
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
-          end
-
-          if attributes.key?(:'archived_at')
-            self.archived_at = attributes[:'archived_at']
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
           end
         end
 
@@ -118,16 +74,8 @@ module Hubspot
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
-          end
-
-          if @created_at.nil?
-            invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-          end
-
-          if @updated_at.nil?
-            invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
           invalid_properties
@@ -137,9 +85,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @id.nil?
-          return false if @properties.nil?
-          return false if @created_at.nil?
-          return false if @updated_at.nil?
+          return false if @type.nil?
           true
         end
 
@@ -149,12 +95,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               id == o.id &&
-              properties == o.properties &&
-              created_at == o.created_at &&
-              updated_at == o.updated_at &&
-              associations == o.associations &&
-              archived == o.archived &&
-              archived_at == o.archived_at
+              type == o.type
         end
 
         # @see the `==` method
@@ -166,7 +107,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, properties, created_at, updated_at, associations, archived, archived_at].hash
+          [id, type].hash
         end
 
         # Builds the object from hash
