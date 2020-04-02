@@ -141,7 +141,7 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Read a batch of companies by ID
+        # Read a batch of companies by internal ID, or unique property values
         # Read a list of companies given a collection of IDs. Use the `properties` request body property to control which properties are returned.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -152,7 +152,7 @@ module Hubspot
           data
         end
 
-        # Read a batch of companies by ID
+        # Read a batch of companies by internal ID, or unique property values
         # Read a list of companies given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
