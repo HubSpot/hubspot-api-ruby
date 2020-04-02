@@ -47,7 +47,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'line_item_id' when calling BasicApi.archive"
           end
           # resource path
-          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -146,12 +146,13 @@ module Hubspot
         end
 
         # Read
-        # Read an Object identified by `{lineItemId}`. Control what is returned via the `properties` query param.
+        # Read an Object identified by `{lineItemId}`. `{lineItemId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
         # @param line_item_id [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [SimplePublicObject]
         def get_by_id(line_item_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(line_item_id, opts)
@@ -159,12 +160,13 @@ module Hubspot
         end
 
         # Read
-        # Read an Object identified by &#x60;{lineItemId}&#x60;. Control what is returned via the &#x60;properties&#x60; query param.
+        # Read an Object identified by &#x60;{lineItemId}&#x60;. &#x60;{lineItemId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param.  Control what is returned via the &#x60;properties&#x60; query param.
         # @param line_item_id [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
         def get_by_id_with_http_info(line_item_id, opts = {})
           if @api_client.config.debugging
@@ -175,13 +177,14 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'line_item_id' when calling BasicApi.get_by_id"
           end
           # resource path
-          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
           query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+          query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -313,7 +316,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'line_item_id' when calling BasicApi.update"
           end
           # resource path
-          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/objects/line_items/{lineItemId}'.sub('{' + 'lineItemId' + '}', CGI.escape(line_item_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
