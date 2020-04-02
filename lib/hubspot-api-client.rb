@@ -21,19 +21,20 @@ module Hubspot
   class << self
     CLIENTS = [
       'OAuth',
+      'Webhooks',
       'Crm::Associations',
       'Crm::Companies',
       'Crm::Contacts',
       'Crm::Deals',
       'Crm::Extensions::Cards',
       'Crm::LineItems',
-      'Crm::Objects',
       'Crm::Owners',
       'Crm::Pipelines',
       'Crm::Products',
       'Crm::Properties',
       'Crm::Quotes',
-      'Crm::Tickets'
+      'Crm::Tickets',
+      'Crm::Timeline'
     ].freeze
 
     def configure
