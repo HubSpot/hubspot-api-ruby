@@ -15,50 +15,24 @@ require 'date'
 module Hubspot
   module Crm
     module Deals
-      class Filter
-        attr_accessor :property_name
+      class CollectionResponseAssociatedId
+        attr_accessor :results
 
-        attr_accessor :operator
-
-        attr_accessor :value
-
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
+        attr_accessor :paging
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'property_name' => :'propertyName',
-            :'operator' => :'operator',
-            :'value' => :'value'
+            :'results' => :'results',
+            :'paging' => :'paging'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'property_name' => :'String',
-            :'operator' => :'String',
-            :'value' => :'String'
+            :'results' => :'Array<AssociatedId>',
+            :'paging' => :'Paging'
           }
         end
 
@@ -72,27 +46,25 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Deals::Filter` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Deals::CollectionResponseAssociatedId` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Deals::Filter`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Deals::CollectionResponseAssociatedId`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'property_name')
-            self.property_name = attributes[:'property_name']
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
+            end
           end
 
-          if attributes.key?(:'operator')
-            self.operator = attributes[:'operator']
-          end
-
-          if attributes.key?(:'value')
-            self.value = attributes[:'value']
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
           end
         end
 
@@ -100,12 +72,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @property_name.nil?
-            invalid_properties.push('invalid value for "property_name", property_name cannot be nil.')
-          end
-
-          if @operator.nil?
-            invalid_properties.push('invalid value for "operator", operator cannot be nil.')
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
           invalid_properties
@@ -114,21 +82,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @property_name.nil?
-          return false if @operator.nil?
-          operator_validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
-          return false unless operator_validator.valid?(@operator)
+          return false if @results.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] operator Object to be assigned
-        def operator=(operator)
-          validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
-          unless validator.valid?(operator)
-            fail ArgumentError, "invalid value for \"operator\", must be one of #{validator.allowable_values}."
-          end
-          @operator = operator
         end
 
         # Checks equality by comparing each attribute.
@@ -136,9 +91,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              property_name == o.property_name &&
-              operator == o.operator &&
-              value == o.value
+              results == o.results &&
+              paging == o.paging
         end
 
         # @see the `==` method
@@ -150,7 +104,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [property_name, operator, value].hash
+          [results, paging].hash
         end
 
         # Builds the object from hash
