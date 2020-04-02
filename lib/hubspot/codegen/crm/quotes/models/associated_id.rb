@@ -15,41 +15,24 @@ require 'date'
 module Hubspot
   module Crm
     module Quotes
-      class ErrorDetail
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
+      class AssociatedId
+        attr_accessor :id
 
-        # The name of the field or parameter in which the error was found.
-        attr_accessor :_in
-
-        # The status code associated with the error detail
-        attr_accessor :code
-
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
-
-        # Context about the error condition
-        attr_accessor :context
+        attr_accessor :type
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'message' => :'message',
-            :'_in' => :'in',
-            :'code' => :'code',
-            :'sub_category' => :'subCategory',
-            :'context' => :'context'
+            :'id' => :'id',
+            :'type' => :'type'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'message' => :'String',
-            :'_in' => :'String',
-            :'code' => :'String',
-            :'sub_category' => :'String',
-            :'context' => :'Hash<String, Array<String>>'
+            :'id' => :'String',
+            :'type' => :'String'
           }
         end
 
@@ -63,37 +46,23 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Quotes::ErrorDetail` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Quotes::AssociatedId` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Quotes::ErrorDetail`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Quotes::AssociatedId`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
 
-          if attributes.key?(:'_in')
-            self._in = attributes[:'_in']
-          end
-
-          if attributes.key?(:'code')
-            self.code = attributes[:'code']
-          end
-
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
-          end
-
-          if attributes.key?(:'context')
-            if (value = attributes[:'context']).is_a?(Hash)
-              self.context = value
-            end
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
           end
         end
 
@@ -101,8 +70,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          end
+
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
           invalid_properties
@@ -111,7 +84,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @message.nil?
+          return false if @id.nil?
+          return false if @type.nil?
           true
         end
 
@@ -120,11 +94,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              message == o.message &&
-              _in == o._in &&
-              code == o.code &&
-              sub_category == o.sub_category &&
-              context == o.context
+              id == o.id &&
+              type == o.type
         end
 
         # @see the `==` method
@@ -136,7 +107,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [message, _in, code, sub_category, context].hash
+          [id, type].hash
         end
 
         # Builds the object from hash
