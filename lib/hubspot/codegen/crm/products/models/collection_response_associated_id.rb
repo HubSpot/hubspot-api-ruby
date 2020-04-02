@@ -15,20 +15,24 @@ require 'date'
 module Hubspot
   module Crm
     module Products
-      class SimplePublicObjectInput
-        attr_accessor :properties
+      class CollectionResponseAssociatedId
+        attr_accessor :results
+
+        attr_accessor :paging
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'properties' => :'properties'
+            :'results' => :'results',
+            :'paging' => :'paging'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'properties' => :'Hash<String, String>'
+            :'results' => :'Array<AssociatedId>',
+            :'paging' => :'Paging'
           }
         end
 
@@ -42,21 +46,25 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Products::SimplePublicObjectInput` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Products::CollectionResponseAssociatedId` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Products::SimplePublicObjectInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Products::CollectionResponseAssociatedId`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'properties')
-            if (value = attributes[:'properties']).is_a?(Hash)
-              self.properties = value
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
             end
+          end
+
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
           end
         end
 
@@ -64,8 +72,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
           invalid_properties
@@ -74,7 +82,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @properties.nil?
+          return false if @results.nil?
           true
         end
 
@@ -83,7 +91,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              properties == o.properties
+              results == o.results &&
+              paging == o.paging
         end
 
         # @see the `==` method
@@ -95,7 +104,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [properties].hash
+          [results, paging].hash
         end
 
         # Builds the object from hash
