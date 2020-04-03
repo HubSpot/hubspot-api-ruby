@@ -16,7 +16,7 @@ module Services
         private
 
         def contact_input
-          @contact_input ||= ::Hubspot::Crm::Objects::SimplePublicObjectInput.new(properties: @properties)
+          @contact_input ||= ::Hubspot::Crm::Contacts::SimplePublicObjectInput.new(properties: @properties)
         end
       end
     end
