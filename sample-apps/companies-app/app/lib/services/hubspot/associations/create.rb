@@ -11,7 +11,7 @@ module Services
           ::Hubspot::Crm::Associations::BatchApi.new.create_batch(
             'companies',
             'contacts',
-            body: association,
+            batch_input_public_association: association,
             auth_names: 'oauth2'
           )
         end
@@ -28,7 +28,8 @@ module Services
           @contacts_ids.map do |id|
             ::Hubspot::Crm::Associations::PublicAssociation.new(
               from: ::Hubspot::Crm::Associations::PublicObjectId.new(id: @company_id),
-              to: ::Hubspot::Crm::Associations::PublicObjectId.new(id: id)
+              to: ::Hubspot::Crm::Associations::PublicObjectId.new(id: id),
+              type: 'company_to_contact'
             )
           end
         end
