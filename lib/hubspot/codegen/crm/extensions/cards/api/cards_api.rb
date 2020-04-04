@@ -24,35 +24,35 @@ module Hubspot
           end
           # Delete a card
           # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to delete.
-          # @param app_id [Object] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [nil]
-          def archive(card_id, app_id, opts = {})
-            archive_with_http_info(card_id, app_id, opts)
+          def archive(app_id, card_id, opts = {})
+            archive_with_http_info(app_id, card_id, opts)
             nil
           end
 
           # Delete a card
           # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can&#39;t be undone.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to delete.
-          # @param app_id [Object] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def archive_with_http_info(card_id, app_id, opts = {})
+          def archive_with_http_info(app_id, card_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.archive ...'
-            end
-            # verify the required parameter 'card_id' is set
-            if @api_client.config.client_side_validation && card_id.nil?
-              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.archive"
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.archive"
             end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.archive"
+            end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/')).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s).gsub('%2F', '/'))
+            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -92,7 +92,7 @@ module Hubspot
 
           # Create a new card
           # Defines a new card that will become active on an account when this app is installed.
-          # @param app_id [Object] The ID of the target app.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @option opts [CardCreateRequest] :card_create_request The new card definition.
           # @return [CardResponse]
@@ -103,7 +103,7 @@ module Hubspot
 
           # Create a new card
           # Defines a new card that will become active on an account when this app is installed.
-          # @param app_id [Object] The ID of the target app.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @option opts [CardCreateRequest] :card_create_request The new card definition.
           # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
@@ -116,7 +116,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.create"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s).gsub('%2F', '/'))
+            local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -158,7 +158,7 @@ module Hubspot
 
           # Get all cards
           # Returns a list of cards for a given app.
-          # @param app_id [Object] The ID of the target app.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [CardListResponse]
           def get_all(app_id, opts = {})
@@ -168,7 +168,7 @@ module Hubspot
 
           # Get all cards
           # Returns a list of cards for a given app.
-          # @param app_id [Object] The ID of the target app.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(CardListResponse, Integer, Hash)>] CardListResponse data, response status code and response headers
           def get_all_with_http_info(app_id, opts = {})
@@ -180,7 +180,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.get_all"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s).gsub('%2F', '/'))
+            local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -220,35 +220,35 @@ module Hubspot
 
           # Get a card.
           # Returns the definition for a card with the given ID.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the target card.
-          # @param app_id [Object] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [CardResponse]
-          def get_by_id(card_id, app_id, opts = {})
-            data, _status_code, _headers = get_by_id_with_http_info(card_id, app_id, opts)
+          def get_by_id(app_id, card_id, opts = {})
+            data, _status_code, _headers = get_by_id_with_http_info(app_id, card_id, opts)
             data
           end
 
           # Get a card.
           # Returns the definition for a card with the given ID.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the target card.
-          # @param app_id [Object] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-          def get_by_id_with_http_info(card_id, app_id, opts = {})
+          def get_by_id_with_http_info(app_id, card_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.get_by_id ...'
-            end
-            # verify the required parameter 'card_id' is set
-            if @api_client.config.client_side_validation && card_id.nil?
-              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.get_by_id"
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.get_by_id"
             end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.get_by_id"
+            end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/')).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s).gsub('%2F', '/'))
+            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -288,37 +288,37 @@ module Hubspot
 
           # Update a card
           # Update a card definition with new details.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to update.
-          # @param app_id [Object] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated.
           # @return [CardResponse]
-          def update(card_id, app_id, opts = {})
-            data, _status_code, _headers = update_with_http_info(card_id, app_id, opts)
+          def update(app_id, card_id, opts = {})
+            data, _status_code, _headers = update_with_http_info(app_id, card_id, opts)
             data
           end
 
           # Update a card
           # Update a card definition with new details.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to update.
-          # @param app_id [Object] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated.
           # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-          def update_with_http_info(card_id, app_id, opts = {})
+          def update_with_http_info(app_id, card_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.update ...'
-            end
-            # verify the required parameter 'card_id' is set
-            if @api_client.config.client_side_validation && card_id.nil?
-              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.update"
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.update"
             end
+            # verify the required parameter 'card_id' is set
+            if @api_client.config.client_side_validation && card_id.nil?
+              fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.update"
+            end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s).gsub('%2F', '/')).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s).gsub('%2F', '/'))
+            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}

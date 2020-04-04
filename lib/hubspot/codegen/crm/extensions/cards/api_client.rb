@@ -64,6 +64,7 @@ module Hubspot
                 conn.request :url_encoded
               end
               conn.adapter(Faraday.default_adapter)
+              conn.options[:params_encoder] = Faraday::FlatParamsEncoder
 
               # Errors handler settings
               if !config.error_handler.empty?

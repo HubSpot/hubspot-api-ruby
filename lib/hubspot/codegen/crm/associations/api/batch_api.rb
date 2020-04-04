@@ -53,7 +53,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.archive_batch"
           end
           # resource path
-          local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/archive'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/archive'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -125,7 +125,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.create_batch"
           end
           # resource path
-          local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -197,7 +197,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.read_batch"
           end
           # resource path
-          local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s).gsub('%2F', '/')).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s).gsub('%2F', '/'))
+          local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}

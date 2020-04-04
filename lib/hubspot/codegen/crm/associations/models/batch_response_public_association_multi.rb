@@ -140,10 +140,6 @@ module Hubspot
             invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
-          if @errors.nil?
-            invalid_properties.push('invalid value for "errors", errors cannot be nil.')
-          end
-
           if @status.nil?
             invalid_properties.push('invalid value for "status", status cannot be nil.')
           end
@@ -163,7 +159,6 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @results.nil?
-          return false if @errors.nil?
           return false if @status.nil?
           status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
           return false unless status_validator.valid?(@status)
