@@ -90,6 +90,8 @@ require 'hubspot/codegen/crm/companies/models/next_page'
 require 'hubspot/codegen/crm/companies/models/simple_public_object_input'
 require 'hubspot/codegen/crm/companies/models/batch_read_input_simple_public_object_id'
 require 'hubspot/codegen/crm/companies/models/error_detail'
+require 'hubspot/codegen/crm/companies/models/paging'
+require 'hubspot/codegen/crm/companies/models/simple_public_object'
 
 require 'hubspot/codegen/crm/contacts/api_client'
 require 'hubspot/codegen/crm/contacts/api_error'
