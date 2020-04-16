@@ -16,7 +16,7 @@ module Hubspot
           page_opts = opts.merge(limit: MAX_PAGE_SIZE, after: after)
           page = get_page(page_opts)
           objects.concat(page.results)
-          break objects unless page.paging.present?
+          break objects if page.paging.nil?
 
           after = page.paging._next.after
         end
