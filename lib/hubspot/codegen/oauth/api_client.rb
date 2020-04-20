@@ -31,7 +31,7 @@ module Hubspot
       # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
       def initialize(config = Configuration.default)
         @config = config
-        @user_agent = "OpenAPI-Generator/#{VERSION}/ruby"
+        @user_agent = "hubspot-api-client-ruby; #{VERSION}"
         @default_headers = {
           'Content-Type' => 'application/json',
           'User-Agent' => @user_agent
@@ -98,7 +98,7 @@ module Hubspot
               fail ApiError.new(:code => response.status,
                                 :response_headers => response.headers,
                                 :response_body => response.body),
-                  response.reason_phrase
+                   response.reason_phrase
             end
           end
         rescue Faraday::TimeoutError

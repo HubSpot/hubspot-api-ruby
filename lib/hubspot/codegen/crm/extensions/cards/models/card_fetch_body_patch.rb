@@ -16,7 +16,6 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
-        # Variant of CardFetchBody with fields as optional for patches
         class CardFetchBodyPatch
           # URL to a service endpoint that will respond with details for this card. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
           attr_accessor :target_url

@@ -26,8 +26,8 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [nil]
-      def delete_subscription(subscription_id, app_id, opts = {})
-        delete_subscription_with_http_info(subscription_id, app_id, opts)
+      def archive(subscription_id, app_id, opts = {})
+        archive_with_http_info(subscription_id, app_id, opts)
         nil
       end
 
@@ -37,17 +37,17 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-      def delete_subscription_with_http_info(subscription_id, app_id, opts = {})
+      def archive_with_http_info(subscription_id, app_id, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.delete_subscription ...'
+          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.archive ...'
         end
         # verify the required parameter 'subscription_id' is set
         if @api_client.config.client_side_validation && subscription_id.nil?
-          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.delete_subscription"
+          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.archive"
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.delete_subscription"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.archive"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -83,42 +83,42 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SubscriptionsApi#delete_subscription\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SubscriptionsApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
 
-      # Get subscription
-      # Returns details about a subscription.
+      # Subscribe to an event
+      # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
       # @param app_id [Integer] The ID of the target app.
-      # @param subscription_id [Integer] The ID of the target subscription.
+      # @param subscription_create_request [SubscriptionCreateRequest] Details about the new subscription.
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
-      def get_subscription(app_id, subscription_id, opts = {})
-        data, _status_code, _headers = get_subscription_with_http_info(app_id, subscription_id, opts)
+      def create(app_id, subscription_create_request, opts = {})
+        data, _status_code, _headers = create_with_http_info(app_id, subscription_create_request, opts)
         data
       end
 
-      # Get subscription
-      # Returns details about a subscription.
+      # Subscribe to an event
+      # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
       # @param app_id [Integer] The ID of the target app.
-      # @param subscription_id [Integer] The ID of the target subscription.
+      # @param subscription_create_request [SubscriptionCreateRequest] Details about the new subscription.
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
-      def get_subscription_with_http_info(app_id, subscription_id, opts = {})
+      def create_with_http_info(app_id, subscription_create_request, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.get_subscription ...'
+          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.create ...'
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.get_subscription"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.create"
         end
-        # verify the required parameter 'subscription_id' is set
-        if @api_client.config.client_side_validation && subscription_id.nil?
-          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.get_subscription"
+        # verify the required parameter 'subscription_create_request' is set
+        if @api_client.config.client_side_validation && subscription_create_request.nil?
+          fail ArgumentError, "Missing the required parameter 'subscription_create_request' when calling SubscriptionsApi.create"
         end
         # resource path
-        local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s))
+        local_var_path = '/webhooks/v3/{appId}/subscriptions'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
         # query parameters
         query_params = opts[:query_params] || {}
@@ -127,12 +127,14 @@ module Hubspot
         header_params = opts[:header_params] || {}
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+        # HTTP header 'Content-Type'
+        header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
         # form parameters
         form_params = opts[:form_params] || {}
 
         # http body (model)
-        post_body = opts[:body] 
+        post_body = opts[:body] || @api_client.object_to_http_body(subscription_create_request) 
 
         # return_type
         return_type = opts[:return_type] || 'SubscriptionResponse' 
@@ -149,9 +151,9 @@ module Hubspot
           :return_type => return_type
         )
 
-        data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+        data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SubscriptionsApi#get_subscription\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SubscriptionsApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
@@ -161,8 +163,8 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionListResponse]
-      def get_subscriptions(app_id, opts = {})
-        data, _status_code, _headers = get_subscriptions_with_http_info(app_id, opts)
+      def get_all(app_id, opts = {})
+        data, _status_code, _headers = get_all_with_http_info(app_id, opts)
         data
       end
 
@@ -171,13 +173,13 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionListResponse, Integer, Hash)>] SubscriptionListResponse data, response status code and response headers
-      def get_subscriptions_with_http_info(app_id, opts = {})
+      def get_all_with_http_info(app_id, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.get_subscriptions ...'
+          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.get_all ...'
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.get_subscriptions"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.get_all"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/subscriptions'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -213,38 +215,42 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SubscriptionsApi#get_subscriptions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SubscriptionsApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
 
-      # Subscribe to an event
-      # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
+      # Get subscription
+      # Returns details about a subscription.
       # @param app_id [Integer] The ID of the target app.
+      # @param subscription_id [Integer] The ID of the target subscription.
       # @param [Hash] opts the optional parameters
-      # @option opts [SubscriptionCreateRequest] :subscription_create_request Details about the new subscription.
       # @return [SubscriptionResponse]
-      def subscribe(app_id, opts = {})
-        data, _status_code, _headers = subscribe_with_http_info(app_id, opts)
+      def get_by_id(app_id, subscription_id, opts = {})
+        data, _status_code, _headers = get_by_id_with_http_info(app_id, subscription_id, opts)
         data
       end
 
-      # Subscribe to an event
-      # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
+      # Get subscription
+      # Returns details about a subscription.
       # @param app_id [Integer] The ID of the target app.
+      # @param subscription_id [Integer] The ID of the target subscription.
       # @param [Hash] opts the optional parameters
-      # @option opts [SubscriptionCreateRequest] :subscription_create_request Details about the new subscription.
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
-      def subscribe_with_http_info(app_id, opts = {})
+      def get_by_id_with_http_info(app_id, subscription_id, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.subscribe ...'
+          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.get_by_id ...'
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.subscribe"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.get_by_id"
+        end
+        # verify the required parameter 'subscription_id' is set
+        if @api_client.config.client_side_validation && subscription_id.nil?
+          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.get_by_id"
         end
         # resource path
-        local_var_path = '/webhooks/v3/{appId}/subscriptions'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+        local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s))
 
         # query parameters
         query_params = opts[:query_params] || {}
@@ -253,14 +259,12 @@ module Hubspot
         header_params = opts[:header_params] || {}
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-        # HTTP header 'Content-Type'
-        header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
         # form parameters
         form_params = opts[:form_params] || {}
 
         # http body (model)
-        post_body = opts[:body] || @api_client.object_to_http_body(opts[:'subscription_create_request']) 
+        post_body = opts[:body] 
 
         # return_type
         return_type = opts[:return_type] || 'SubscriptionResponse' 
@@ -277,9 +281,9 @@ module Hubspot
           :return_type => return_type
         )
 
-        data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+        data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SubscriptionsApi#subscribe\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SubscriptionsApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
@@ -291,8 +295,8 @@ module Hubspot
       # @param [Hash] opts the optional parameters
       # @option opts [SubscriptionPatchRequest] :subscription_patch_request Updated details for the subscription.
       # @return [SubscriptionResponse]
-      def update_subscription(subscription_id, app_id, opts = {})
-        data, _status_code, _headers = update_subscription_with_http_info(subscription_id, app_id, opts)
+      def update(subscription_id, app_id, opts = {})
+        data, _status_code, _headers = update_with_http_info(subscription_id, app_id, opts)
         data
       end
 
@@ -303,17 +307,17 @@ module Hubspot
       # @param [Hash] opts the optional parameters
       # @option opts [SubscriptionPatchRequest] :subscription_patch_request Updated details for the subscription.
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
-      def update_subscription_with_http_info(subscription_id, app_id, opts = {})
+      def update_with_http_info(subscription_id, app_id, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.update_subscription ...'
+          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.update ...'
         end
         # verify the required parameter 'subscription_id' is set
         if @api_client.config.client_side_validation && subscription_id.nil?
-          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.update_subscription"
+          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.update"
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.update_subscription"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.update"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -351,7 +355,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SubscriptionsApi#update_subscription\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SubscriptionsApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end

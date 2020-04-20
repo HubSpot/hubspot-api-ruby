@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # State of the token definition for update requests.
       class TimelineEventTemplateTokenUpdateRequest
         # Used for list segmentation and reporting.
         attr_accessor :label

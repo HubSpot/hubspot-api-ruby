@@ -16,7 +16,6 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
-        # Configuration for displayed info on a card
         class CardDisplayBody
           # Card display properties. These will will be rendered as \"label : value\" pairs in the card UI. See the [example card](#) in the overview docs for more details.
           attr_accessor :properties

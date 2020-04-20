@@ -26,8 +26,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputSimplePublicObjectId] :batch_input_simple_public_object_id 
         # @return [nil]
-        def archive_batch(opts = {})
-          archive_batch_with_http_info(opts)
+        def archive(opts = {})
+          archive_with_http_info(opts)
           nil
         end
 
@@ -36,9 +36,9 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputSimplePublicObjectId] :batch_input_simple_public_object_id 
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_batch_with_http_info(opts = {})
+        def archive_with_http_info(opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.archive_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.archive ...'
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/archive'
@@ -76,7 +76,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#archive_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -86,8 +86,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputSimplePublicObjectInput] :batch_input_simple_public_object_input 
         # @return [BatchResponseSimplePublicObject]
-        def create_batch(opts = {})
-          data, _status_code, _headers = create_batch_with_http_info(opts)
+        def create(opts = {})
+          data, _status_code, _headers = create_with_http_info(opts)
           data
         end
 
@@ -96,9 +96,9 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputSimplePublicObjectInput] :batch_input_simple_public_object_input 
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def create_batch_with_http_info(opts = {})
+        def create_with_http_info(opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.create_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/create'
@@ -136,7 +136,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#create_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -147,8 +147,8 @@ module Hubspot
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @option opts [BatchReadInputSimplePublicObjectId] :batch_read_input_simple_public_object_id 
         # @return [BatchResponseSimplePublicObject]
-        def read_batch(opts = {})
-          data, _status_code, _headers = read_batch_with_http_info(opts)
+        def read(opts = {})
+          data, _status_code, _headers = read_with_http_info(opts)
           data
         end
 
@@ -158,9 +158,9 @@ module Hubspot
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
         # @option opts [BatchReadInputSimplePublicObjectId] :batch_read_input_simple_public_object_id 
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def read_batch_with_http_info(opts = {})
+        def read_with_http_info(opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.read ...'
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/read'
@@ -199,7 +199,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -209,8 +209,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputSimplePublicObjectBatchInput] :batch_input_simple_public_object_batch_input 
         # @return [BatchResponseSimplePublicObject]
-        def update_batch(opts = {})
-          data, _status_code, _headers = update_batch_with_http_info(opts)
+        def update(opts = {})
+          data, _status_code, _headers = update_with_http_info(opts)
           data
         end
 
@@ -219,9 +219,9 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputSimplePublicObjectBatchInput] :batch_input_simple_public_object_batch_input 
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def update_batch_with_http_info(opts = {})
+        def update_with_http_info(opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.update_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.update ...'
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/update'
@@ -259,7 +259,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#update_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

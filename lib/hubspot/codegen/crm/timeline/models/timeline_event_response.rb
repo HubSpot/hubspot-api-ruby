@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # The current state of the timeline event.
       class TimelineEventResponse
         # The ObjectType associated with the EventTemplate.
         attr_accessor :object_type

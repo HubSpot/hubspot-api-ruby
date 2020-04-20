@@ -28,8 +28,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputPublicAssociation] :batch_input_public_association 
         # @return [nil]
-        def archive_batch(from_object_type, to_object_type, opts = {})
-          archive_batch_with_http_info(from_object_type, to_object_type, opts)
+        def archive(from_object_type, to_object_type, opts = {})
+          archive_with_http_info(from_object_type, to_object_type, opts)
           nil
         end
 
@@ -40,17 +40,17 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputPublicAssociation] :batch_input_public_association 
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_batch_with_http_info(from_object_type, to_object_type, opts = {})
+        def archive_with_http_info(from_object_type, to_object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.archive_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.archive ...'
           end
           # verify the required parameter 'from_object_type' is set
           if @api_client.config.client_side_validation && from_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling BatchApi.archive_batch"
+            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling BatchApi.archive"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.archive_batch"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/archive'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
@@ -88,7 +88,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#archive_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -100,8 +100,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputPublicAssociation] :batch_input_public_association 
         # @return [BatchResponsePublicAssociation]
-        def create_batch(from_object_type, to_object_type, opts = {})
-          data, _status_code, _headers = create_batch_with_http_info(from_object_type, to_object_type, opts)
+        def create(from_object_type, to_object_type, opts = {})
+          data, _status_code, _headers = create_with_http_info(from_object_type, to_object_type, opts)
           data
         end
 
@@ -112,17 +112,17 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputPublicAssociation] :batch_input_public_association 
         # @return [Array<(BatchResponsePublicAssociation, Integer, Hash)>] BatchResponsePublicAssociation data, response status code and response headers
-        def create_batch_with_http_info(from_object_type, to_object_type, opts = {})
+        def create_with_http_info(from_object_type, to_object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.create_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
           # verify the required parameter 'from_object_type' is set
           if @api_client.config.client_side_validation && from_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling BatchApi.create_batch"
+            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling BatchApi.create"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.create_batch"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
@@ -160,7 +160,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#create_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -172,8 +172,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputPublicObjectId] :batch_input_public_object_id 
         # @return [BatchResponsePublicAssociationMulti]
-        def read_batch(from_object_type, to_object_type, opts = {})
-          data, _status_code, _headers = read_batch_with_http_info(from_object_type, to_object_type, opts)
+        def read(from_object_type, to_object_type, opts = {})
+          data, _status_code, _headers = read_with_http_info(from_object_type, to_object_type, opts)
           data
         end
 
@@ -184,17 +184,17 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [BatchInputPublicObjectId] :batch_input_public_object_id 
         # @return [Array<(BatchResponsePublicAssociationMulti, Integer, Hash)>] BatchResponsePublicAssociationMulti data, response status code and response headers
-        def read_batch_with_http_info(from_object_type, to_object_type, opts = {})
+        def read_with_http_info(from_object_type, to_object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.read ...'
           end
           # verify the required parameter 'from_object_type' is set
           if @api_client.config.client_side_validation && from_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling BatchApi.read_batch"
+            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling BatchApi.read"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.read_batch"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling BatchApi.read"
           end
           # resource path
           local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
@@ -232,7 +232,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

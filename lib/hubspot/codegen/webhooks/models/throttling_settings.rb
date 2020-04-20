@@ -14,7 +14,6 @@ require 'date'
 
 module Hubspot
   module Webhooks
-    # Configuration details for webhook throttling.
     class ThrottlingSettings
       # The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
       attr_accessor :max_concurrent_requests

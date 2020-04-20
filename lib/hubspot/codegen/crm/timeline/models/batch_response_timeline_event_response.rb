@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # The state of the batch event request.
       class BatchResponseTimelineEventResponse
         # Successfully created events.
         attr_accessor :results

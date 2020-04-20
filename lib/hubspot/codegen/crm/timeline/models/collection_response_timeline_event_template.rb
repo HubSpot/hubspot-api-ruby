@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # Container for all templates being returned.
       class CollectionResponseTimelineEventTemplate
         # A collection of templates.
         attr_accessor :results

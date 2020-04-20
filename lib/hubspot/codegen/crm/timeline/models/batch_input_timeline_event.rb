@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # Used to create timeline events in batches.
       class BatchInputTimelineEvent
         # A collection of timeline events we want to create.
         attr_accessor :inputs

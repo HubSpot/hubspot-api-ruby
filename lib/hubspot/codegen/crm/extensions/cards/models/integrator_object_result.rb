@@ -45,7 +45,7 @@ module Hubspot
               :'title' => :'String',
               :'link_url' => :'String',
               :'tokens' => :'Array<ObjectToken>',
-              :'actions' => :'Array<AnyOfActionHookActionBodyIFrameActionBody>'
+              :'actions' => :'Array<OneOfActionHookActionBodyIFrameActionBody>'
             }
           end
 

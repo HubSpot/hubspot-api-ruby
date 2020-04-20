@@ -98,7 +98,7 @@ module Hubspot
               fail ApiError.new(:code => response.status,
                                 :response_headers => response.headers,
                                 :response_body => response.body),
-                  response.reason_phrase
+                   response.reason_phrase
             end
           end
         rescue Faraday::TimeoutError

@@ -28,8 +28,8 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def archive_event_template_token(event_template_id, token_name, app_id, opts = {})
-          archive_event_template_token_with_http_info(event_template_id, token_name, app_id, opts)
+        def archive(event_template_id, token_name, app_id, opts = {})
+          archive_with_http_info(event_template_id, token_name, app_id, opts)
           nil
         end
 
@@ -40,21 +40,21 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_event_template_token_with_http_info(event_template_id, token_name, app_id, opts = {})
+        def archive_with_http_info(event_template_id, token_name, app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TokensApi.archive_event_template_token ...'
+            @api_client.config.logger.debug 'Calling API: TokensApi.archive ...'
           end
           # verify the required parameter 'event_template_id' is set
           if @api_client.config.client_side_validation && event_template_id.nil?
-            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TokensApi.archive_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TokensApi.archive"
           end
           # verify the required parameter 'token_name' is set
           if @api_client.config.client_side_validation && token_name.nil?
-            fail ArgumentError, "Missing the required parameter 'token_name' when calling TokensApi.archive_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'token_name' when calling TokensApi.archive"
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.archive_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'tokenName' + '}', CGI.escape(token_name.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -90,7 +90,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TokensApi#archive_event_template_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TokensApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -102,8 +102,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateToken] :timeline_event_template_token The new token definition.
         # @return [TimelineEventTemplateToken]
-        def create_event_template_token(event_template_id, app_id, opts = {})
-          data, _status_code, _headers = create_event_template_token_with_http_info(event_template_id, app_id, opts)
+        def create(event_template_id, app_id, opts = {})
+          data, _status_code, _headers = create_with_http_info(event_template_id, app_id, opts)
           data
         end
 
@@ -114,17 +114,17 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateToken] :timeline_event_template_token The new token definition.
         # @return [Array<(TimelineEventTemplateToken, Integer, Hash)>] TimelineEventTemplateToken data, response status code and response headers
-        def create_event_template_token_with_http_info(event_template_id, app_id, opts = {})
+        def create_with_http_info(event_template_id, app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TokensApi.create_event_template_token ...'
+            @api_client.config.logger.debug 'Calling API: TokensApi.create ...'
           end
           # verify the required parameter 'event_template_id' is set
           if @api_client.config.client_side_validation && event_template_id.nil?
-            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TokensApi.create_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TokensApi.create"
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.create_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -162,7 +162,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TokensApi#create_event_template_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TokensApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -175,8 +175,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateTokenUpdateRequest] :timeline_event_template_token_update_request The updated token definition.
         # @return [TimelineEventTemplateToken]
-        def update_event_template_token(event_template_id, token_name, app_id, opts = {})
-          data, _status_code, _headers = update_event_template_token_with_http_info(event_template_id, token_name, app_id, opts)
+        def update(event_template_id, token_name, app_id, opts = {})
+          data, _status_code, _headers = update_with_http_info(event_template_id, token_name, app_id, opts)
           data
         end
 
@@ -188,21 +188,21 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateTokenUpdateRequest] :timeline_event_template_token_update_request The updated token definition.
         # @return [Array<(TimelineEventTemplateToken, Integer, Hash)>] TimelineEventTemplateToken data, response status code and response headers
-        def update_event_template_token_with_http_info(event_template_id, token_name, app_id, opts = {})
+        def update_with_http_info(event_template_id, token_name, app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TokensApi.update_event_template_token ...'
+            @api_client.config.logger.debug 'Calling API: TokensApi.update ...'
           end
           # verify the required parameter 'event_template_id' is set
           if @api_client.config.client_side_validation && event_template_id.nil?
-            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TokensApi.update_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TokensApi.update"
           end
           # verify the required parameter 'token_name' is set
           if @api_client.config.client_side_validation && token_name.nil?
-            fail ArgumentError, "Missing the required parameter 'token_name' when calling TokensApi.update_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'token_name' when calling TokensApi.update"
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.update_event_template_token"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'tokenName' + '}', CGI.escape(token_name.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -240,7 +240,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TokensApi#update_event_template_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TokensApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
