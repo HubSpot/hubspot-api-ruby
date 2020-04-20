@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # State of the template definition being updated.
       class TimelineEventTemplateUpdateRequest
         # The template ID.
         attr_accessor :id

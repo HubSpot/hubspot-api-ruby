@@ -25,8 +25,8 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [nil]
-      def clear_settings(app_id, opts = {})
-        clear_settings_with_http_info(app_id, opts)
+      def clear(app_id, opts = {})
+        clear_with_http_info(app_id, opts)
         nil
       end
 
@@ -35,13 +35,13 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-      def clear_settings_with_http_info(app_id, opts = {})
+      def clear_with_http_info(app_id, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SettingsApi.clear_settings ...'
+          @api_client.config.logger.debug 'Calling API: SettingsApi.clear ...'
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.clear_settings"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.clear"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -77,7 +77,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SettingsApi#clear_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SettingsApi#clear\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
@@ -85,27 +85,31 @@ module Hubspot
       # Configure webhook settings
       # Used to set the webhook target URL and max concurrency limit for the given app.
       # @param app_id [Integer] The ID of the target app.
+      # @param settings_change_request [SettingsChangeRequest] Settings state to create new with or replace existing settings with.
       # @param [Hash] opts the optional parameters
-      # @option opts [SettingsChangeRequest] :settings_change_request Settings state to create new with or replace existing settings with.
       # @return [SettingsResponse]
-      def configure_settings(app_id, opts = {})
-        data, _status_code, _headers = configure_settings_with_http_info(app_id, opts)
+      def configure(app_id, settings_change_request, opts = {})
+        data, _status_code, _headers = configure_with_http_info(app_id, settings_change_request, opts)
         data
       end
 
       # Configure webhook settings
       # Used to set the webhook target URL and max concurrency limit for the given app.
       # @param app_id [Integer] The ID of the target app.
+      # @param settings_change_request [SettingsChangeRequest] Settings state to create new with or replace existing settings with.
       # @param [Hash] opts the optional parameters
-      # @option opts [SettingsChangeRequest] :settings_change_request Settings state to create new with or replace existing settings with.
       # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
-      def configure_settings_with_http_info(app_id, opts = {})
+      def configure_with_http_info(app_id, settings_change_request, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SettingsApi.configure_settings ...'
+          @api_client.config.logger.debug 'Calling API: SettingsApi.configure ...'
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.configure_settings"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.configure"
+        end
+        # verify the required parameter 'settings_change_request' is set
+        if @api_client.config.client_side_validation && settings_change_request.nil?
+          fail ArgumentError, "Missing the required parameter 'settings_change_request' when calling SettingsApi.configure"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -124,7 +128,7 @@ module Hubspot
         form_params = opts[:form_params] || {}
 
         # http body (model)
-        post_body = opts[:body] || @api_client.object_to_http_body(opts[:'settings_change_request']) 
+        post_body = opts[:body] || @api_client.object_to_http_body(settings_change_request) 
 
         # return_type
         return_type = opts[:return_type] || 'SettingsResponse' 
@@ -143,7 +147,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SettingsApi#configure_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SettingsApi#configure\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
@@ -153,8 +157,8 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [SettingsResponse]
-      def get_settings(app_id, opts = {})
-        data, _status_code, _headers = get_settings_with_http_info(app_id, opts)
+      def get_all(app_id, opts = {})
+        data, _status_code, _headers = get_all_with_http_info(app_id, opts)
         data
       end
 
@@ -163,13 +167,13 @@ module Hubspot
       # @param app_id [Integer] The ID of the target app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
-      def get_settings_with_http_info(app_id, opts = {})
+      def get_all_with_http_info(app_id, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: SettingsApi.get_settings ...'
+          @api_client.config.logger.debug 'Calling API: SettingsApi.get_all ...'
         end
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.get_settings"
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.get_all"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -205,7 +209,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: SettingsApi#get_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: SettingsApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end

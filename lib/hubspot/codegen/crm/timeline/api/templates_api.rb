@@ -27,8 +27,8 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def archive_event_template(event_template_id, app_id, opts = {})
-          archive_event_template_with_http_info(event_template_id, app_id, opts)
+        def archive(event_template_id, app_id, opts = {})
+          archive_with_http_info(event_template_id, app_id, opts)
           nil
         end
 
@@ -38,17 +38,17 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_event_template_with_http_info(event_template_id, app_id, opts = {})
+        def archive_with_http_info(event_template_id, app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TemplatesApi.archive_event_template ...'
+            @api_client.config.logger.debug 'Calling API: TemplatesApi.archive ...'
           end
           # verify the required parameter 'event_template_id' is set
           if @api_client.config.client_side_validation && event_template_id.nil?
-            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TemplatesApi.archive_event_template"
+            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TemplatesApi.archive"
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.archive_event_template"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -84,7 +84,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TemplatesApi#archive_event_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TemplatesApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -95,8 +95,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateCreateRequest] :timeline_event_template_create_request The new event template definition.
         # @return [TimelineEventTemplate]
-        def create_event_template(app_id, opts = {})
-          data, _status_code, _headers = create_event_template_with_http_info(app_id, opts)
+        def create(app_id, opts = {})
+          data, _status_code, _headers = create_with_http_info(app_id, opts)
           data
         end
 
@@ -106,13 +106,13 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateCreateRequest] :timeline_event_template_create_request The new event template definition.
         # @return [Array<(TimelineEventTemplate, Integer, Hash)>] TimelineEventTemplate data, response status code and response headers
-        def create_event_template_with_http_info(app_id, opts = {})
+        def create_with_http_info(app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TemplatesApi.create_event_template ...'
+            @api_client.config.logger.debug 'Calling API: TemplatesApi.create ...'
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.create_event_template"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -150,7 +150,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TemplatesApi#create_event_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TemplatesApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -160,8 +160,8 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponseTimelineEventTemplate]
-        def get_all_event_templates(app_id, opts = {})
-          data, _status_code, _headers = get_all_event_templates_with_http_info(app_id, opts)
+        def get_all(app_id, opts = {})
+          data, _status_code, _headers = get_all_with_http_info(app_id, opts)
           data
         end
 
@@ -170,13 +170,13 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponseTimelineEventTemplate, Integer, Hash)>] CollectionResponseTimelineEventTemplate data, response status code and response headers
-        def get_all_event_templates_with_http_info(app_id, opts = {})
+        def get_all_with_http_info(app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TemplatesApi.get_all_event_templates ...'
+            @api_client.config.logger.debug 'Calling API: TemplatesApi.get_all ...'
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.get_all_event_templates"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.get_all"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -212,7 +212,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TemplatesApi#get_all_event_templates\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TemplatesApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -223,8 +223,8 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [TimelineEventTemplate]
-        def get_event_template_by_id(event_template_id, app_id, opts = {})
-          data, _status_code, _headers = get_event_template_by_id_with_http_info(event_template_id, app_id, opts)
+        def get_by_id(event_template_id, app_id, opts = {})
+          data, _status_code, _headers = get_by_id_with_http_info(event_template_id, app_id, opts)
           data
         end
 
@@ -234,17 +234,17 @@ module Hubspot
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(TimelineEventTemplate, Integer, Hash)>] TimelineEventTemplate data, response status code and response headers
-        def get_event_template_by_id_with_http_info(event_template_id, app_id, opts = {})
+        def get_by_id_with_http_info(event_template_id, app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TemplatesApi.get_event_template_by_id ...'
+            @api_client.config.logger.debug 'Calling API: TemplatesApi.get_by_id ...'
           end
           # verify the required parameter 'event_template_id' is set
           if @api_client.config.client_side_validation && event_template_id.nil?
-            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TemplatesApi.get_event_template_by_id"
+            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TemplatesApi.get_by_id"
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.get_event_template_by_id"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.get_by_id"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -280,7 +280,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TemplatesApi#get_event_template_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TemplatesApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -292,8 +292,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateUpdateRequest] :timeline_event_template_update_request The updated event template definition.
         # @return [TimelineEventTemplate]
-        def update_event_template(event_template_id, app_id, opts = {})
-          data, _status_code, _headers = update_event_template_with_http_info(event_template_id, app_id, opts)
+        def update(event_template_id, app_id, opts = {})
+          data, _status_code, _headers = update_with_http_info(event_template_id, app_id, opts)
           data
         end
 
@@ -304,17 +304,17 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [TimelineEventTemplateUpdateRequest] :timeline_event_template_update_request The updated event template definition.
         # @return [Array<(TimelineEventTemplate, Integer, Hash)>] TimelineEventTemplate data, response status code and response headers
-        def update_event_template_with_http_info(event_template_id, app_id, opts = {})
+        def update_with_http_info(event_template_id, app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TemplatesApi.update_event_template ...'
+            @api_client.config.logger.debug 'Calling API: TemplatesApi.update ...'
           end
           # verify the required parameter 'event_template_id' is set
           if @api_client.config.client_side_validation && event_template_id.nil?
-            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TemplatesApi.update_event_template"
+            fail ArgumentError, "Missing the required parameter 'event_template_id' when calling TemplatesApi.update"
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.update_event_template"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling TemplatesApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -352,7 +352,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TemplatesApi#update_event_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TemplatesApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

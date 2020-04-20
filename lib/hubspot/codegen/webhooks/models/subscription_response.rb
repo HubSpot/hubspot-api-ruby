@@ -14,7 +14,6 @@ require 'date'
 
 module Hubspot
   module Webhooks
-    # Complete details for an event subscription.
     class SubscriptionResponse
       # The unique ID of the subscription.
       attr_accessor :id

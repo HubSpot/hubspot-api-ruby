@@ -27,8 +27,8 @@ module Hubspot
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponsePublicAssociationDefiniton]
-        def get_types(from_object_type, to_object_type, opts = {})
-          data, _status_code, _headers = get_types_with_http_info(from_object_type, to_object_type, opts)
+        def get_all(from_object_type, to_object_type, opts = {})
+          data, _status_code, _headers = get_all_with_http_info(from_object_type, to_object_type, opts)
           data
         end
 
@@ -38,17 +38,17 @@ module Hubspot
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponsePublicAssociationDefiniton, Integer, Hash)>] CollectionResponsePublicAssociationDefiniton data, response status code and response headers
-        def get_types_with_http_info(from_object_type, to_object_type, opts = {})
+        def get_all_with_http_info(from_object_type, to_object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TypesApi.get_types ...'
+            @api_client.config.logger.debug 'Calling API: TypesApi.get_all ...'
           end
           # verify the required parameter 'from_object_type' is set
           if @api_client.config.client_side_validation && from_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling TypesApi.get_types"
+            fail ArgumentError, "Missing the required parameter 'from_object_type' when calling TypesApi.get_all"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling TypesApi.get_types"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling TypesApi.get_all"
           end
           # resource path
           local_var_path = '/crm/v3/associations/{fromObjectType}/{toObjectType}/types'.sub('{' + 'fromObjectType' + '}', CGI.escape(from_object_type.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
@@ -84,7 +84,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TypesApi#get_types\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TypesApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

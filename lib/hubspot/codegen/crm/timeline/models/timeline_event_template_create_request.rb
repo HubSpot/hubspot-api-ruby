@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # State of the template definition being created.
       class TimelineEventTemplateCreateRequest
         # The type of CRM object you want this template applicable for. Currently we support [contacts, companies, deals].
         attr_accessor :object_type

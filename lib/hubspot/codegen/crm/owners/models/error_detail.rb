@@ -203,7 +203,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::Owners(type).build_from_hash(value)
+            Hubspot::Crm::Owners.const_get(type).build_from_hash(value)
           end
         end
 

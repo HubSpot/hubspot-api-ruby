@@ -15,7 +15,6 @@ require 'date'
 module Hubspot
   module Crm
     module Timeline
-      # The details Markdown rendered as HTML.
       class EventDetail
         # The details Markdown rendered as HTML.
         attr_accessor :details

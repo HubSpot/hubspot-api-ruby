@@ -37,7 +37,7 @@ module Hubspot
             {
               :'settings' => :'IFrameActionBody',
               :'primary' => :'OneOfActionHookActionBodyIFrameActionBody',
-              :'secondary' => :'Array<AnyOfActionHookActionBodyIFrameActionBody>'
+              :'secondary' => :'Array<OneOfActionHookActionBodyIFrameActionBody>'
             }
           end
 

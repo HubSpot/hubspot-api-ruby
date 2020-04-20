@@ -14,7 +14,6 @@ require 'date'
 
 module Hubspot
   module Webhooks
-    # New webhook settings for an app.
     class SubscriptionCreateRequest
       attr_accessor :active
 

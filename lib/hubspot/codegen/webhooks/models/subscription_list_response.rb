@@ -14,7 +14,6 @@ require 'date'
 
 module Hubspot
   module Webhooks
-    # List of event subscriptions for your app
     class SubscriptionListResponse
       # List of event subscriptions for your app
       attr_accessor :results

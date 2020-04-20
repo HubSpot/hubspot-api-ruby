@@ -28,8 +28,8 @@ module Hubspot
         # @param association_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def archive_association(deal_id, to_object_type, to_object_id, association_type, opts = {})
-          archive_association_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts)
+        def archive(deal_id, to_object_type, to_object_id, association_type, opts = {})
+          archive_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts)
           nil
         end
 
@@ -40,25 +40,25 @@ module Hubspot
         # @param association_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_association_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts = {})
+        def archive_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: AssociationsApi.archive_association ...'
+            @api_client.config.logger.debug 'Calling API: AssociationsApi.archive ...'
           end
           # verify the required parameter 'deal_id' is set
           if @api_client.config.client_side_validation && deal_id.nil?
-            fail ArgumentError, "Missing the required parameter 'deal_id' when calling AssociationsApi.archive_association"
+            fail ArgumentError, "Missing the required parameter 'deal_id' when calling AssociationsApi.archive"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.archive_association"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.archive"
           end
           # verify the required parameter 'to_object_id' is set
           if @api_client.config.client_side_validation && to_object_id.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.archive_association"
+            fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.archive"
           end
           # verify the required parameter 'association_type' is set
           if @api_client.config.client_side_validation && association_type.nil?
-            fail ArgumentError, "Missing the required parameter 'association_type' when calling AssociationsApi.archive_association"
+            fail ArgumentError, "Missing the required parameter 'association_type' when calling AssociationsApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/{dealId}/associations/{toObjectType}/{toObjectId}/{associationType}'.sub('{' + 'dealId' + '}', CGI.escape(deal_id.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s)).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s)).sub('{' + 'associationType' + '}', CGI.escape(association_type.to_s))
@@ -94,7 +94,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: AssociationsApi#archive_association\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: AssociationsApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -106,8 +106,8 @@ module Hubspot
         # @param association_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [SimplePublicObject]
-        def create_association(deal_id, to_object_type, to_object_id, association_type, opts = {})
-          data, _status_code, _headers = create_association_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts)
+        def create(deal_id, to_object_type, to_object_id, association_type, opts = {})
+          data, _status_code, _headers = create_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts)
           data
         end
 
@@ -118,25 +118,25 @@ module Hubspot
         # @param association_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-        def create_association_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts = {})
+        def create_with_http_info(deal_id, to_object_type, to_object_id, association_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: AssociationsApi.create_association ...'
+            @api_client.config.logger.debug 'Calling API: AssociationsApi.create ...'
           end
           # verify the required parameter 'deal_id' is set
           if @api_client.config.client_side_validation && deal_id.nil?
-            fail ArgumentError, "Missing the required parameter 'deal_id' when calling AssociationsApi.create_association"
+            fail ArgumentError, "Missing the required parameter 'deal_id' when calling AssociationsApi.create"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.create_association"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.create"
           end
           # verify the required parameter 'to_object_id' is set
           if @api_client.config.client_side_validation && to_object_id.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.create_association"
+            fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.create"
           end
           # verify the required parameter 'association_type' is set
           if @api_client.config.client_side_validation && association_type.nil?
-            fail ArgumentError, "Missing the required parameter 'association_type' when calling AssociationsApi.create_association"
+            fail ArgumentError, "Missing the required parameter 'association_type' when calling AssociationsApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/{dealId}/associations/{toObjectType}/{toObjectId}/{associationType}'.sub('{' + 'dealId' + '}', CGI.escape(deal_id.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s)).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s)).sub('{' + 'associationType' + '}', CGI.escape(association_type.to_s))
@@ -172,7 +172,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: AssociationsApi#create_association\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: AssociationsApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -182,8 +182,8 @@ module Hubspot
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponseAssociatedId]
-        def get_associations(deal_id, to_object_type, opts = {})
-          data, _status_code, _headers = get_associations_with_http_info(deal_id, to_object_type, opts)
+        def get_all(deal_id, to_object_type, opts = {})
+          data, _status_code, _headers = get_all_with_http_info(deal_id, to_object_type, opts)
           data
         end
 
@@ -192,17 +192,17 @@ module Hubspot
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponseAssociatedId, Integer, Hash)>] CollectionResponseAssociatedId data, response status code and response headers
-        def get_associations_with_http_info(deal_id, to_object_type, opts = {})
+        def get_all_with_http_info(deal_id, to_object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: AssociationsApi.get_associations ...'
+            @api_client.config.logger.debug 'Calling API: AssociationsApi.get_all ...'
           end
           # verify the required parameter 'deal_id' is set
           if @api_client.config.client_side_validation && deal_id.nil?
-            fail ArgumentError, "Missing the required parameter 'deal_id' when calling AssociationsApi.get_associations"
+            fail ArgumentError, "Missing the required parameter 'deal_id' when calling AssociationsApi.get_all"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.get_associations"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.get_all"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/{dealId}/associations/{toObjectType}'.sub('{' + 'dealId' + '}', CGI.escape(deal_id.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
@@ -238,7 +238,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: AssociationsApi#get_associations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: AssociationsApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
