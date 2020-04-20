@@ -7,39 +7,10 @@ Ruby API v3 Client files and sample apps
 
 ## Installation
 
-### Build a gem
+```ruby
 
-To build the Ruby code into a gem:
+gem 'hubspot-api-client'
 
-```shell
-gem build hubspot-api-client.gemspec
-```
-
-Then either install the gem locally:
-
-```shell
-gem install ./hubspot-api-client-1.0.0.gem
-```
-(for development, run `gem install --dev ./hubspot-api-client-1.0.0.gem` to install the development dependencies)
-
-or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
-
-Finally add this to the Gemfile:
-
-    gem 'hubspot-api-client', '~> 1.0.0'
-
-### Install from Git
-
-If the Ruby gem is hosted at a git repository: https://github.com/GIT_USER_ID/GIT_REPO_ID, then add the following in the Gemfile:
-
-    gem 'hubspot-api-client', :git => 'https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
-
-### Include the Ruby code directly
-
-Include the Ruby code directly using `-I` as follows:
-
-```shell
-ruby -Ilib script.rb
 ```
 
 ## Getting Started

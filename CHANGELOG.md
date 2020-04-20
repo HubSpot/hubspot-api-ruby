@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file.
 - Regenerate clients
 - Update sample apps according to regenerated clients
+- Update Gemfile
