@@ -1,3 +1,3 @@
  module Hubspot
-  VERSION = '3.0.0-beta'
+  VERSION = '3.1.0-beta'
  end
