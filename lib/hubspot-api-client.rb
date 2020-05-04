@@ -394,6 +394,7 @@ module Hubspot
       'Crm::Contacts',
       'Crm::Deals',
       'Crm::Extensions::Cards',
+      'Crm::Imports',
       'Crm::LineItems',
       'Crm::Owners',
       'Crm::Pipelines',
