@@ -372,16 +372,18 @@ require 'hubspot/codegen/webhooks/api_error'
 require 'hubspot/codegen/webhooks/configuration'
 require 'hubspot/codegen/webhooks/api/settings_api'
 require 'hubspot/codegen/webhooks/api/subscriptions_api'
+require 'hubspot/codegen/webhooks/models/batch_input_subscription_batch_update_request'
+require 'hubspot/codegen/webhooks/models/batch_response_subscription_response'
 require 'hubspot/codegen/webhooks/models/error'
 require 'hubspot/codegen/webhooks/models/error_detail'
 require 'hubspot/codegen/webhooks/models/settings_change_request'
 require 'hubspot/codegen/webhooks/models/settings_response'
+require 'hubspot/codegen/webhooks/models/subscription_batch_update_request'
 require 'hubspot/codegen/webhooks/models/subscription_create_request'
 require 'hubspot/codegen/webhooks/models/subscription_list_response'
 require 'hubspot/codegen/webhooks/models/subscription_patch_request'
 require 'hubspot/codegen/webhooks/models/subscription_response'
 require 'hubspot/codegen/webhooks/models/throttling_settings'
-
 
 
 module Hubspot
