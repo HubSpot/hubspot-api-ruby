@@ -359,6 +359,76 @@ module Hubspot
         end
         return data, status_code, headers
       end
+
+      # Batch update subscriptions
+      # Activates or deactivates specified subscriptions for the given app.
+      # @param app_id [Integer] The ID of the target app.
+      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Collection of updated details for the specified subscription.
+      # @param [Hash] opts the optional parameters
+      # @return [BatchResponseSubscriptionResponse]
+      def update_batch(app_id, batch_input_subscription_batch_update_request, opts = {})
+        data, _status_code, _headers = update_batch_with_http_info(app_id, batch_input_subscription_batch_update_request, opts)
+        data
+      end
+
+      # Batch update subscriptions
+      # Activates or deactivates specified subscriptions for the given app.
+      # @param app_id [Integer] The ID of the target app.
+      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Collection of updated details for the specified subscription.
+      # @param [Hash] opts the optional parameters
+      # @return [Array<(BatchResponseSubscriptionResponse, Integer, Hash)>] BatchResponseSubscriptionResponse data, response status code and response headers
+      def update_batch_with_http_info(app_id, batch_input_subscription_batch_update_request, opts = {})
+        if @api_client.config.debugging
+          @api_client.config.logger.debug 'Calling API: SubscriptionsApi.update_batch ...'
+        end
+        # verify the required parameter 'app_id' is set
+        if @api_client.config.client_side_validation && app_id.nil?
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.update_batch"
+        end
+        # verify the required parameter 'batch_input_subscription_batch_update_request' is set
+        if @api_client.config.client_side_validation && batch_input_subscription_batch_update_request.nil?
+          fail ArgumentError, "Missing the required parameter 'batch_input_subscription_batch_update_request' when calling SubscriptionsApi.update_batch"
+        end
+        # resource path
+        local_var_path = '/webhooks/v3/{appId}/subscriptions/batch/update'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+
+        # query parameters
+        query_params = opts[:query_params] || {}
+
+        # header parameters
+        header_params = opts[:header_params] || {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+        # HTTP header 'Content-Type'
+        header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+        # form parameters
+        form_params = opts[:form_params] || {}
+
+        # http body (model)
+        post_body = opts[:body] || @api_client.object_to_http_body(batch_input_subscription_batch_update_request) 
+
+        # return_type
+        return_type = opts[:return_type] || 'BatchResponseSubscriptionResponse' 
+
+        # auth_names
+        auth_names = opts[:auth_names] || ['hapikey']
+
+        new_options = opts.merge(
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        )
+
+        data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+        if @api_client.config.debugging
+          @api_client.config.logger.debug "API called: SubscriptionsApi#update_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        end
+        return data, status_code, headers
+      end
     end
   end
 end
