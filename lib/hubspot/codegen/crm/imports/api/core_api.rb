@@ -147,71 +147,6 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get active imports
-        # Returns a paged list of active imports for this account.
-        # @param [Hash] opts the optional parameters
-        # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [String] :before 
-        # @option opts [Integer] :limit The maximum number of results to display per page.
-        # @return [CollectionResponsePublicImportResponse]
-        def get_all(opts = {})
-          data, _status_code, _headers = get_all_with_http_info(opts)
-          data
-        end
-
-        # Get active imports
-        # Returns a paged list of active imports for this account.
-        # @param [Hash] opts the optional parameters
-        # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [String] :before 
-        # @option opts [Integer] :limit The maximum number of results to display per page.
-        # @return [Array<(CollectionResponsePublicImportResponse, Integer, Hash)>] CollectionResponsePublicImportResponse data, response status code and response headers
-        def get_all_with_http_info(opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: CoreApi.get_all ...'
-          end
-          # resource path
-          local_var_path = '/crm/v3/imports/'
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
-          query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
-          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] 
-
-          # return_type
-          return_type = opts[:return_type] || 'CollectionResponsePublicImportResponse' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: CoreApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
         # Get the information on any import
         # A complete summary of an import record, including any updates.
         # @param import_id [Integer] 
@@ -270,6 +205,71 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: CoreApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Get active imports
+        # Returns a paged list of active imports for this account.
+        # @param [Hash] opts the optional parameters
+        # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [String] :before 
+        # @option opts [Integer] :limit The maximum number of results to display per page.
+        # @return [CollectionResponsePublicImportResponse]
+        def get_page(opts = {})
+          data, _status_code, _headers = get_page_with_http_info(opts)
+          data
+        end
+
+        # Get active imports
+        # Returns a paged list of active imports for this account.
+        # @param [Hash] opts the optional parameters
+        # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [String] :before 
+        # @option opts [Integer] :limit The maximum number of results to display per page.
+        # @return [Array<(CollectionResponsePublicImportResponse, Integer, Hash)>] CollectionResponsePublicImportResponse data, response status code and response headers
+        def get_page_with_http_info(opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: CoreApi.get_page ...'
+          end
+          # resource path
+          local_var_path = '/crm/v3/imports/'
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+          query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
+          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponsePublicImportResponse' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: CoreApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
