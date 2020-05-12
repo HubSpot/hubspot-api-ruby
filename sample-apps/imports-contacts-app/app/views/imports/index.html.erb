@@ -1,0 +1,49 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <div class='import-new-button'>
+      <pre>
+        <p>Create import</p>
+        <p># app/lib/services/hubspot/imports/create.rb</p>
+
+      </pre>
+      <%= link_to('New Import', new_import_path, class: 'button', id: 'new-import') %>
+    </div>
+
+    <%= form_tag('/imports', method: :get, class: 'imports') do %>
+      <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
+    <% end %>
+    <pre>
+    <p>Search</p>
+    <p># app/lib/services/hubspot/imports/search.rb</p>
+    </pre>
+
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <table class="imports">
+      <thead>
+      <tr>
+        <th>ID</th>
+
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @imports.each do |import| %>
+          <tr class="import">
+            <td>
+              <a href="/imports/<%= import.id %>">
+                <div class="import-info import-id">
+                  <%= import.id %>
+                </div>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
