@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :imports
+  resources :imports, only: %i(index create)
+  get '/download', to: 'imports#download_example'
 
   resources :properties
 

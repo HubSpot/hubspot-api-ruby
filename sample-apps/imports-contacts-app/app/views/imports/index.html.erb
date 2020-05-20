@@ -2,48 +2,69 @@
   <% if @error.present? %>
     <h3><%= @error.message %></h3>
   <% else %>
-    <div class='import-new-button'>
-      <pre>
-        <p>Create import</p>
-        <p># app/lib/services/hubspot/imports/create.rb</p>
-
-      </pre>
-      <%= link_to('New Import', new_import_path, class: 'button', id: 'new-import') %>
-    </div>
-
-    <%= form_tag('/imports', method: :get, class: 'imports') do %>
-      <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
-    <% end %>
-    <pre>
-    <p>Search</p>
-    <p># app/lib/services/hubspot/imports/search.rb</p>
-    </pre>
-
+    <h3 class="text-center">Select File</h3>
+    <p>You can take an example of file <%= link_to "here", download_path, target: "_blank"%>.</p>
     <% if flash[:notice] %>
       <div class="notice"><%= flash[:notice] %></div>
     <% end %>
+    <%= form_tag('/imports', method: 'post', multipart: true) do %>
+      <%= file_field_tag(:file) %>
+      <%= submit_tag("Upload") %>
+    <% end %>
 
-    <table class="imports">
-      <thead>
-      <tr>
-        <th>ID</th>
+    <pre>
+module Services
+  module Hubspot
+    module Imports
+      class Create
+        def initialize(uploaded_file:)
+          @file = copy_file_to_uploads(uploaded_file)
+          @filename = uploaded_file.original_filename
+        end
 
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-        <% @imports.each do |import| %>
-          <tr class="import">
-            <td>
-              <a href="/imports/<%= import.id %>">
-                <div class="import-info import-id">
-                  <%= import.id %>
-                </div>
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        def call
+          core_api = ::Hubspot::Crm::Imports::CoreApi.new
+          core_api.create(import_request: import_request(@filename), files: @file, auth_names: 'oauth2')
+        end
+
+        private
+
+        def import_request(filename)
+          {
+            "name": "test_import",
+            "files": [
+              {
+                "fileName": filename,
+                "fileImportPage": {
+                  "hasHeader": true,
+                  "columnMappings": [
+                    {
+                      "columnName": "First Name",
+                      "propertyName": "firstname",
+                      "columnObjectType": "CONTACT",
+                    },
+                    {
+                      "columnName": "Email",
+                      "propertyName": "email",
+                      "columnObjectType": "CONTACT",
+                    },
+                  ]
+                }
+              }
+            ]
+          }.to_json
+        end
+
+        def copy_file_to_uploads(uploaded_file)
+          tmp = uploaded_file.tempfile
+          destiny_file = File.join('public', 'uploads', uploaded_file.original_filename)
+          FileUtils.cp tmp.path, destiny_file
+          File.open(destiny_file)
+        end
+      end
+    end
+  end
+end
+    </pre>
   <% end %>
 </div>

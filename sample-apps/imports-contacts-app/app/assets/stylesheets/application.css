@@ -63,9 +63,12 @@
   color: #606c76
 }
 
-.contact-new-button {
-  margin: 2rem;
-  margin-left: 0;
+.row.authorize-button {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .error-wrapper .result {
@@ -81,37 +84,4 @@ input[type=datetime-local] {
 
 h3.alert-success {
   text-align: center;
-}
-
-.delete-button {
-  margin-bottom: 0;
-  float: right;
-  margin-right: 20px;
-}
-
-.delete-button input {
-  margin-bottom: 0;
-}
-
-.contact a, .property a {
-  color: #4e585f;
-  text-decoration: none;
-}
-
-.contact a:hover, .property a:hover {
-   text-decoration: none;
-   cursor: pointer;
-}
-
-.contact .contact-info, .property .property-info {
-  display: block;
-}
-
-pre {
-  line-height: 0.7;
-}
-
-pre p {
-  margin: 0;
-  margin-left: 5px;
 }

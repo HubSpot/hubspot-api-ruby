@@ -33,3 +33,5 @@
 .rubocop.yml
 .env
 .env.test
+
+/public/uploads
