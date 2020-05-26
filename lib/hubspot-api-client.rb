@@ -404,7 +404,8 @@ module Hubspot
       'Crm::Properties',
       'Crm::Quotes',
       'Crm::Tickets',
-      'Crm::Timeline'
+      'Crm::Timeline',
+      'Crm::Webhooks'
     ].freeze
 
     def configure
