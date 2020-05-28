@@ -19,6 +19,7 @@ require 'hubspot/oauth_helper'
 require 'hubspot/version'
 
 require 'hubspot/helpers/get_all_helper'
+require 'hubspot/helpers/webhooks_helper'
 
 require 'hubspot/codegen/crm/associations/api_client'
 require 'hubspot/codegen/crm/associations/api_error'
