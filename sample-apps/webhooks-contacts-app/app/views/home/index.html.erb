@@ -1,0 +1,47 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <div class="row">
+      <div class="column column-80 column-offset-10">
+        <h3>Webhooks initialization:</h3>
+
+        <h5>1. All active subscriptions will be paused</h5>
+        <h5>2. Target url will be updated to <%= @target_url %></h5>
+        <h5>3. Following subscriptions will be created and activated:</h5>
+        <ul>
+          <li>Contact's Creation (contact.creation)</li>
+          <li>Changing of Contact's Fist Name (contact.propertyChange)</li>
+          <li>Contact's Deletion (contact.deletion)</li>
+        </ul>
+
+        <pre>
+  ::Hubspot.configure do |config|
+    config.api_key = { 'hapikey' => ENV['HUBSPOT_DEVELOPER_API_KEY'] }
+  end
+
+  app_id = ENV['HUBSPOT_APPLICATION_ID']
+  Services::Hubspot::Webhooks::PauseActiveSubscriptions.new(app_id: app_id).call
+
+  target_url = url_for(controller: :webhooks, action: :callback, only_path: false, protocol: 'https')
+  Services::Hubspot::Webhooks::ConfigureTargetUrl.new(app_id: app_id, target_url: target_url).call
+
+  subscriptions = [
+    {"event_type": "contact.propertyChange", "property_name": "firstname"},
+    {"event_type": "contact.creation"},
+    {"event_type": "contact.deletion"},
+  ]
+
+  subscriptions.each do |subscription|
+    Services::Hubspot::Webhooks::CreateOrActivateSubscription.new(app_id: app_id, **subscription).call
+  end
+
+  redirect_to controller: :events, action: :index
+        </pre>
+        <%= form_with(url: "/start", method: "post", local: true) do %>
+          <%= submit_tag("Start") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

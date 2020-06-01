@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
 
   def callback
     webhooks = JSON.parse(request.raw_post)
-    webhooks.each { |webhook| Services::Hubspot::Webhooks::Handle.new(webhook).call }
+    webhooks.each { |webhook| Services::Hubspot::Webhooks::Handle.new(webhook: webhook, request: request).call }
     render json: {}
   end
 end
