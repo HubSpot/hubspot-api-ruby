@@ -1,14 +1,15 @@
 default: &default
   adapter: mysql2
   pool: 5
-  username: root
-  password: '!12591996Ja'
-  host: localhost
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
 
 development:
-  <<: *default
-  database: webhooks_contacts_app_development
+ <<: *default
+ database: <%= ENV['DB_NAME'] %>_development
 
-test:
-  <<: *default
-  database: webhooks_contacts_app_test
+production:
+ <<: *default
+ database: <%= ENV['DB_NAME'] %>
