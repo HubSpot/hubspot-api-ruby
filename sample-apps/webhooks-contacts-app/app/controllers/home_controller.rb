@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   before_action :authorize
 
-  # def index;end
+  def index
+    @target_url = url_for(controller: :webhooks, action: :callback, only_path: false, protocol: 'https')
+  end
 
   def start
     ::Hubspot.configure do |config|
