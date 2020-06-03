@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/oauth/callback', to: 'oauth/authorization#callback'
   post '/webhooks/callback', to: 'webhooks#callback'
   get '/login', to: 'oauth/authorization#login'
+  get '/', to: 'home#index'
+  post '/start', to: 'home#start'
 
   root to: 'events#index'
 end

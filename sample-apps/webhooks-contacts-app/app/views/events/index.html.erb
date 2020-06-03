@@ -9,26 +9,24 @@
           <tr>
             <th>Contact ID</th>
             <th>Contact Name</th>
-            <th>Event type</th>
+            <th>Event</th>
+            <th>Occurred At</th>
           </tr>
         </thead>
         <tbody>
-          <% @contacts.each do |contact| %>
+          <% @events.each do |event| %>
             <tr>
-              <td><%= contact[:id] %></td>
-              <td><%= contact[:name] %></td>
+              <td><%= event.object_id %></td>
               <td>
-              <% contact[:events].map do |event| %>
-                <span class="event <%= event.event_type %>">
-                  <%= event.event_type %>
-                  <% if event.property_name.present? %>
-                    <span><%= event.property_name %></span>
-                  <% end %>
-                  <% if event.property_value.present? %>
-                    <span><%= event.property_value %></span>
-                  <% end %>
-                </span>
-              <% end %>
+                <% if @contacts.keys.include? event.object_id %>
+                  <%= @contacts[event.object_id][:name] %>
+                <% end %>
+              </td>
+              <td>
+                <span class="event <%= event.event_type.split('.')[0] %>"><%= event.event_type %></span>
+              </td>
+              <td>
+                <%= event.occured_at %>
               </td>
             </tr>
           <% end %>

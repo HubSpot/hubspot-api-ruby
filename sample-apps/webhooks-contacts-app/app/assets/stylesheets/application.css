@@ -63,57 +63,8 @@
   color: #606c76
 }
 
-.company-new-button {
-  margin: 2rem;
-  margin-left: 0;
-}
-
-.error-wrapper .result {
-  color: white;
-  background-color: red;
-}
-
-input[type=datetime-local] {
-  width: 100%;
-  height: 3.8rem;
-  padding: .6rem 1.0rem;
-}
-
-h3.alert-success {
-  text-align: center;
-}
-
-.delete-button {
-  margin-bottom: 0;
-  float: right;
-  margin-right: 20px;
-}
-
-.delete-button input {
-  margin-bottom: 0;
-}
-
-company a {
-  color: #4e585f;
-  text-decoration: none;
-}
-
-.company a:hover {
-   text-decoration: none;
-   cursor: pointer;
-}
-
-.company .company-info {
-  display: block;
-}
-
-pre {
-  line-height: 0.7;
-}
-
-pre p {
-  margin: 0;
-  margin-left: 5px;
+.hidden {
+  display: none;
 }
 
 .event.deletion {
@@ -131,10 +82,11 @@ pre p {
   color: #ffffff;
 }
 
-.event.propertyChange span:first-child {
-  background-color: #08080885;
+.authorize-button {
+  justify-content: center;
 }
 
-.hidden {
-  display: none;
+.text-center {
+  text-align: center;
 }
+

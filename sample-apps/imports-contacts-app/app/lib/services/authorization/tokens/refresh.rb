@@ -3,7 +3,7 @@ module Services
     module Tokens
       class Refresh < Tokens::Base
         def initialize(tokens:, request:)
-          @tokens = tokens.with_indifferent_access
+          @tokens = tokens
           @request = request
         end
 
@@ -25,7 +25,6 @@ module Services
             return_type: 'Object'
           )
           tokens[:expires_at] = expires_at(tokens[:expires_in])
-          Token.instance.update!(tokens)
           tokens
         end
       end
