@@ -11,5 +11,15 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require activestorage
+//= require clipboard
 //= require_tree .
+
+$(document).ready(function(){
+  var clipboard = new Clipboard('.clipboard-btn');
+  clipboard.on('success', function(e) {
+    $(e.trigger).text('Copied!');
+    $(e.trigger).addClass('is-copy');
+  });
+});
