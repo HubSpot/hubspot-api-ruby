@@ -21,6 +21,62 @@ require 'hubspot/version'
 require 'hubspot/helpers/get_all_helper'
 require 'hubspot/helpers/webhooks_helper'
 
+require 'hubspot/codegen/cms/audit-logs/api_client'
+require 'hubspot/codegen/cms/audit-logs/api_error'
+require 'hubspot/codegen/cms/audit-logs/configuration'
+require 'hubspot/codegen/cms/audit-logs/api/default_api'
+require 'hubspot/codegen/cms/audit-logs/models/collection_response_public_audit_log'
+require 'hubspot/codegen/cms/audit-logs/models/error'
+require 'hubspot/codegen/cms/audit-logs/models/error_detail'
+require 'hubspot/codegen/cms/audit-logs/models/next_page'
+require 'hubspot/codegen/cms/audit-logs/models/paging'
+require 'hubspot/codegen/cms/audit-logs/models/public_audit_log'
+
+require 'hubspot/codegen/cms/domains/api_client'
+require 'hubspot/codegen/cms/domains/api_error'
+require 'hubspot/codegen/cms/domains/configuration'
+require 'hubspot/codegen/cms/domains/api/domains_api'
+require 'hubspot/codegen/cms/domains/models/collection_response_with_total_domain'
+require 'hubspot/codegen/cms/domains/models/domain'
+require 'hubspot/codegen/cms/domains/models/domain_cdn_config'
+require 'hubspot/codegen/cms/domains/models/domain_setup_info'
+require 'hubspot/codegen/cms/domains/models/error'
+require 'hubspot/codegen/cms/domains/models/error_detail'
+require 'hubspot/codegen/cms/domains/models/next_page'
+require 'hubspot/codegen/cms/domains/models/paging'
+
+require 'hubspot/codegen/cms/performance/api_client'
+require 'hubspot/codegen/cms/performance/api_error'
+require 'hubspot/codegen/cms/performance/configuration'
+require 'hubspot/codegen/cms/performance/api/default_api'
+require 'hubspot/codegen/cms/performance/models/error'
+require 'hubspot/codegen/cms/performance/models/error_detail'
+require 'hubspot/codegen/cms/performance/models/performance_view'
+require 'hubspot/codegen/cms/performance/models/public_performance_response'
+
+require 'hubspot/codegen/cms/site-search/api_client'
+require 'hubspot/codegen/cms/site-search/api_error'
+require 'hubspot/codegen/cms/site-search/configuration'
+require 'hubspot/codegen/cms/site-search/api/default_api'
+require 'hubspot/codegen/cms/site-search/models/content_search_result'
+require 'hubspot/codegen/cms/site-search/models/error'
+require 'hubspot/codegen/cms/site-search/models/error_detail'
+require 'hubspot/codegen/cms/site-search/models/indexed_data'
+require 'hubspot/codegen/cms/site-search/models/public_search_results'
+require 'hubspot/codegen/cms/site-search/models/search_hit_field'
+
+require 'hubspot/codegen/cms/url-redirects/api_client'
+require 'hubspot/codegen/cms/url-redirects/api_error'
+require 'hubspot/codegen/cms/url-redirects/configuration'
+require 'hubspot/codegen/cms/url-redirects/api/redirects_api'
+require 'hubspot/codegen/cms/url-redirects/models/collection_response_with_total_url_mapping'
+require 'hubspot/codegen/cms/url-redirects/models/error'
+require 'hubspot/codegen/cms/url-redirects/models/error_detail'
+require 'hubspot/codegen/cms/url-redirects/models/next_page'
+require 'hubspot/codegen/cms/url-redirects/models/paging'
+require 'hubspot/codegen/cms/url-redirects/models/url_mapping'
+require 'hubspot/codegen/cms/url-redirects/models/url_mapping_create_request_body'
+
 require 'hubspot/codegen/crm/associations/api_client'
 require 'hubspot/codegen/crm/associations/api_error'
 require 'hubspot/codegen/crm/associations/configuration'
@@ -392,6 +448,11 @@ module Hubspot
     CLIENTS = [
       'OAuth',
       'Webhooks',
+      'Cms::AuditLogs',
+      'Cms::Domains',
+      'Cms::Performance',
+      'Cms::SiteSearch',
+      'Cms::UrlRedirects',
       'Crm::Associations',
       'Crm::Companies',
       'Crm::Contacts',
