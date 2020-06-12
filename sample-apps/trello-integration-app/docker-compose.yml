@@ -3,9 +3,9 @@ services:
   web:
     build:
       context: ../../
-      dockerfile: ./sample-apps/contacts-app/Dockerfile
+      dockerfile: ./sample-apps/trello-integration-app/Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/contacts-app
+      - .:/trello-integration-app
     ports:
       - "3000:3000"

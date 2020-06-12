@@ -6,7 +6,7 @@ module ExceptionHandler
   included do
     rescue_from HubspotError do |error|
       @error = error
-      render template: 'contacts/index'
+      render template: 'home/index'
     end
   end
 end

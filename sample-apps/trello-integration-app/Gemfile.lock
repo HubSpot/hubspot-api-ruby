@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    hubspot-api-client (2.0.0)
+    hubspot-api-client (4.0.0)
       faraday (>= 0.14.0)
       json (~> 2.1, >= 2.1.0)
 
