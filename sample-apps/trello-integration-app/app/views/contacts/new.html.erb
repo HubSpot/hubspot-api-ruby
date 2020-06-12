@@ -1,0 +1,18 @@
+<div class="container">
+  <% if flash[:error] %>
+    <div class="error"><%= flash[:error] %></div>
+  <% end %>
+
+  <div class="row contact-create">
+      <div class="column column-20"></div>
+      <div class="column column-60">
+        <h3>Properties</h3>
+        <%= form_tag('/contacts', method: 'post') do %>
+          <%= label_tag(:email, "Email") %>
+          <%= text_field_tag(:email, @email) %>
+          <%= submit_tag("Save") %>
+        <% end %>
+      </div>
+      <div class="column column-20"></div>
+  </div>
+</div>
