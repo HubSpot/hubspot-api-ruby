@@ -2,7 +2,7 @@ module Services
   module Hubspot
     module Authorization
       class GetAuthorizationUri
-        CALLBACK_PATH = '/oauth/callback'.freeze
+        CALLBACK_PATH = '/oauth/hubspot_callback'.freeze
 
         def initialize(request:)
           @request = request

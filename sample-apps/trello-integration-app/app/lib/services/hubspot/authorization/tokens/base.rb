@@ -3,7 +3,7 @@ module Services
     module Authorization
       module Tokens
         class Base
-          CALLBACK_PATH = '/oauth/callback'.freeze
+          CALLBACK_PATH = '/oauth/hubspot_callback'.freeze
 
           def expires_at(expires_in)
             Time.current + (expires_in * 0.95).round
