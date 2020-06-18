@@ -15,5 +15,6 @@ class ApplicationController < ActionController::Base
 
     session['hubspot_tokens'] = Services::Hubspot::Authorization::Tokens::Refresh.new(tokens: session['hubspot_tokens'], request: request).call
     Services::Hubspot::Authorization::Authorize.new(tokens: session['hubspot_tokens']).call
+    Services::Trello::Authorization::Authorize.new(tokens: session['trello_tokens']).call
   end
 end
