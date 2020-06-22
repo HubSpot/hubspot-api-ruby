@@ -38,7 +38,7 @@ module Hubspot
         def self.openapi_types
           {
             :'metadata_field' => :'Boolean',
-            :'values' => :'Array',
+            :'values' => :'Array<Object>',
             :'name' => :'String',
             :'value' => :'Object'
           }
@@ -70,7 +70,9 @@ module Hubspot
           end
 
           if attributes.key?(:'values')
-            self.values = attributes[:'values']
+            if (value = attributes[:'values']).is_a?(Array)
+              self.values = value
+            end
           end
 
           if attributes.key?(:'name')
