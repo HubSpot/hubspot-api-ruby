@@ -1,0 +1,78 @@
+<div class="container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <div class='contact-new-button'>
+      <pre>
+        <p>Create contact</p>
+        <p># app/lib/services/hubspot/contacts/create.rb</p>
+
+        <p>Export to CSV</p>
+        <p># app/lib/services/hubspot/contacts/export.rb</p>
+      </pre>
+      <%= link_to('New Contact', new_contact_path, class: 'button', id: 'new-contact') %>
+      <%= link_to('Export To CSV', export_contacts_path(format: :csv), class: 'button', id: 'export') %>
+    </div>
+
+    <%= form_tag('/contacts', method: :get, class: 'contacts') do %>
+      <%= text_field_tag(:search, @search_q, placeholder: 'Search by email..', id: 'search') %>
+    <% end %>
+    <pre>
+    <p>Search</p>
+    <p># app/lib/services/hubspot/contacts/search.rb</p>
+    </pre>
+
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <table class="contacts">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @contacts.each do |contact| %>
+          <tr class="contact">
+            <td>
+              <a href="/contacts/<%= contact.id %>">
+                <div class="contact-info contact-id">
+                  <%= contact.id %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href="/contacts/<%= contact.id %>">
+                <div class="contact-info contact-email">
+                  <%= contact.properties['email'] %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href="/contacts/<%= contact.id %>">
+                <div class="contact-info contact-fullname">
+                  <%= contact.properties['fullname'].present? ? contact.properties['fullname'] : contact.properties['email'] %>
+                </div>
+              </a>
+            </td>
+            <td>
+              <%= button_to "delete",
+                { controller: :contacts, action: :destroy, id: contact.id },
+                method: :delete,
+                form_class: 'delete-button'
+              %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <pre>
+    <p>Delete</p>
+    <p># app/lib/services/hubspot/contacts/destroy.rb</p>
+  </pre>
+</div>

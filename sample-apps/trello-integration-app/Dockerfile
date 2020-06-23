@@ -9,11 +9,11 @@ COPY ./Gemfile /hubspot-api-client/Gemfile
 COPY ./Gemfile.lock /hubspot-api-client/Gemfile.lock
 COPY ./hubspot-api-client.gemspec /hubspot-api-client/hubspot-api-client.gemspec
 
-WORKDIR /hubspot-api-client/sample-apps/trello-integration-app
+WORKDIR /hubspot-api-client/sample-apps/contacts-app
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
-COPY ./sample-apps/trello-integration-app/docker-entrypoint.sh /usr/bin/
+COPY ./sample-apps/contacts-app/docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 3000
