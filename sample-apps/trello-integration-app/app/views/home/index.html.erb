@@ -2,6 +2,13 @@
   <% if @error.present? %>
     <h3><%= @error.message %></h3>
   <% else %>
-    Trello integration sample app
+    <h3>Create crm card extension in your developer's account and proceed with following settings:</h3>
+    <ol>
+      <li>Update "Data fetch URL" with <a href="<%= @data_fetch_url %>"><%= @data_fetch_url %></a></li>
+      <li>Activate "deals" in "Target record types" section with "hs_object_id" property sent form HubSpot</li>
+      <li>Add <a href="<%= @base_url %>"><%= @base_url %></a> to "Custom actions"->"Base URL" section</li>
+    </ol>
+
+    <h3>Now you can test crm card extension on a deal page</h3>
   <% end %>
 </div>
