@@ -1,16 +1,3 @@
-.trello-container, .hubspot-container {
-  display: inline-block;
-}
-
-.auth-buttons-container {
-  width: 80%;
-}
-
-.hubspot-container {
-  float: right;
-  margin-right: 20%;
-}
-
 .authorize-button .button {
   width: 200px;
 }
@@ -23,6 +10,7 @@
 
 .authorization-info {
   margin-top: 20px;
+  text-align: center;
 }
 
 .authorized {
@@ -34,4 +22,9 @@
   border: none;
   text-align: center;
   display: block;
+}
+
+.button-inline {
+  margin-left: 10px;
+  display: inline;
 }
