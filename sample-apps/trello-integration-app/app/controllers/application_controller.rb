@@ -3,7 +3,13 @@ class ApplicationController < ActionController::Base
 
   before_action :check_env_variables
 
+  helper_method :authorized?
+
   private
+
+  def authorized?
+    session['hubspot_tokens'].present? && session['trello_tokens'].present?
+  end
 
   def check_env_variables
     missing_vars = %w[HUBSPOT_CLIENT_ID HUBSPOT_CLIENT_SECRET].select { |var| ENV[var].blank? }
@@ -11,7 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    redirect_to login_path and return if (session['hubspot_tokens'].blank? || session['trello_tokens'].blank?)
+    unless authorized?
+      redirect_to login_path and return unless (HubspotToken.any? && TrelloToken.any?)
+
+      session['hubspot_tokens'] = HubspotToken.instance.attributes
+      session['trello_tokens'] = TrelloToken.instance.attributes
+    end
 
     session['hubspot_tokens'] = Services::Hubspot::Authorization::Tokens::Refresh.new(tokens: session['hubspot_tokens'], request: request).call
     Services::Hubspot::Authorization::Authorize.new(tokens: session['hubspot_tokens']).call

@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'ruby-trello'
 gem 'omniauth-trello'
+gem 'mysql2', '~> 0.5.2'
 
 gem 'hubspot-api-client', path: '../../'
 

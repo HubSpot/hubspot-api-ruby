@@ -4,7 +4,7 @@ module Services
       module Tokens
         class Refresh < Tokens::Base
           def initialize(tokens:, request:)
-            @tokens = tokens
+            @tokens = tokens.with_indifferent_access
             @request = request
           end
 

@@ -15,12 +15,16 @@ module Oauth
         code: params[:code],
         request: request
       ).call
+      HubspotToken.instance.update_attributes(session[:hubspot_tokens])
       Services::Hubspot::Authorization::Authorize.new(tokens: session[:hubspot_tokens]).call
       redirect_to '/'
     end
 
     def trello_callback
-      session[:trello_tokens] = request.env["omniauth.auth"]['credentials']
+      trello_tokens = request.env["omniauth.auth"]['credentials']
+      session[:trello_tokens] = trello_tokens
+      TrelloToken.instance.update_attributes(trello_tokens.to_hash)
+
       redirect_to '/'
     end
   end
