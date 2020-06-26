@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_06_24_132337) do
 
   create_table "deal_associtaions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "association_id"
+    t.string "deal_id"
   end
 
   create_table "hubspot_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

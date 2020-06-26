@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def authorized?
-    session['hubspot_tokens'].present? && session['trello_tokens'].present?
+    HubspotToken.instance.filled? && TrelloToken.instance.filled?
   end
 
   def check_env_variables
@@ -17,15 +17,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    unless authorized?
-      redirect_to login_path and return unless (HubspotToken.any? && TrelloToken.any?)
+    redirect_to login_path and return unless authorized?
 
-      session['hubspot_tokens'] = HubspotToken.instance.attributes
-      session['trello_tokens'] = TrelloToken.instance.attributes
-    end
-
-    session['hubspot_tokens'] = Services::Hubspot::Authorization::Tokens::Refresh.new(tokens: session['hubspot_tokens'], request: request).call
-    Services::Hubspot::Authorization::Authorize.new(tokens: session['hubspot_tokens']).call
-    Services::Trello::Authorization::Authorize.new(tokens: session['trello_tokens']).call
+    new_hubspot_tokens = Services::Hubspot::Authorization::Tokens::Refresh.new(
+      tokens: HubspotToken.instance.attributes,
+      request: request
+    ).call
+    HubspotToken.instance.update_attributes(new_hubspot_tokens)
+    Services::Hubspot::Authorization::Authorize.new(tokens: HubspotToken.instance.attributes).call
+    Services::Trello::Authorization::Authorize.new(tokens: TrelloToken.instance.attributes).call
   end
 end

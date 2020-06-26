@@ -7,6 +7,10 @@ class TrelloToken < ApplicationRecord
     first_or_create!
   end
 
+  def filled?
+    token.present? && secret.present?
+  end
+
   private
 
   def confirm_singularity

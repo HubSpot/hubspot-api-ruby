@@ -1,11 +1,11 @@
 module Oauth
   module AuthorizationHelper
     def trello_authorized?
-      session[:trello_tokens].present?
+      TrelloToken.instance.filled?
     end
 
     def hubspot_authorized?
-      session[:hubspot_tokens].present?
+      HubspotToken.instance.filled?
     end
   end
 end

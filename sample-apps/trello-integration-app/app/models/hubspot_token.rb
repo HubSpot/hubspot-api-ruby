@@ -7,6 +7,10 @@ class HubspotToken < ApplicationRecord
     first_or_create!
   end
 
+  def filled?
+    refresh_token.present? && access_token.present?
+  end
+
   private
 
   def confirm_singularity
