@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   namespace :trello do
     resources :cards, only: %i(index) do
-      member do
-        post 'create_association'
+      collection do
+        get 'search'
+        get 'search_frame'
+        get 'search_frame_success'
         delete 'delete_association'
       end
     end
+    post 'cards/search_frame', to: 'cards#create_association'
+    get 'cards', to: 'cards#index'
   end
 
   get '/oauth/hubspot', to: 'oauth/authorization#authorize_hubspot'
@@ -13,6 +17,5 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'oauth/authorization#trello_callback'
   get '/oauth/trello_callback', to: 'oauth/authorization#trello_callback'
   get '/login', to: 'oauth/authorization#login'
-  get 'trello/cards', to: 'trello/cards#index'
   root to: 'home#index'
 end

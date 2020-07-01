@@ -1,0 +1,2 @@
+class DealAssociation < ApplicationRecord
+end
