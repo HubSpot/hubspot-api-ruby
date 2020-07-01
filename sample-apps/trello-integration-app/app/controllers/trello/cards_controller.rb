@@ -2,6 +2,7 @@ module Trello
   class CardsController < ApplicationController
     layout false
 
+    before_action :authorize
     skip_before_action :verify_authenticity_token
     before_action :allow_iframe, only: %i(search_frame search_frame_success)
 
@@ -13,24 +14,10 @@ module Trello
         card = ::Trello::Card.find(card_id)
       end
 
-      urls = {
-        search_frame: url_for(
-          controller: 'trello/cards',
-          action: :search_frame,
-          only_path: false,
-          protocol: 'https'
-        ),
-        delete_association: url_for(
-          controller: 'trello/cards',
-          action: :delete_association,
-          only_path: false,
-          protocol: 'https'
-        )
-      }
       response = Services::Trello::Cards::Format.new(
         deal_associated: deal_associated,
         card: card || nil,
-        urls: urls
+        request: request
       ).call
 
       render json: response.to_json

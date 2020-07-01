@@ -4,24 +4,22 @@ module Services
       class Format
         include Rails.application.routes.url_helpers
 
-        def initialize(deal_associated:, card:, urls:)
+        def initialize(deal_associated:, card:, request:)
           @deal_associated = deal_associated
           @card = card
-          @urls = urls
+          @request = request
         end
 
         def call
+          response = { results: [] }
+
           if @card.present?
-            result = {
-              'objectId' => @card.short_id,
-              'title' => @card.name,
-              'link' => @card.short_url
+            response[:results] << {
+              objectId: @card.short_id,
+              title: @card.name,
+              link: @card.short_url
             }
           end
-
-          response = {
-            'results' => result.present? ? [result] : []
-          }
 
           if @deal_associated
             response['primaryAction'] = {
@@ -30,7 +28,13 @@ module Services
               'associatedObjectProperties': [
                   'hs_object_id',
               ],
-              'uri': @urls[:delete_association],
+              'uri': url_for(
+                controller: 'trello/cards',
+                action: :delete_association,
+                only_path: false,
+                protocol: 'https',
+                host: @request.host
+              ),
               'label': 'Remove the association'
             }
           else
@@ -38,7 +42,13 @@ module Services
               'type': 'IFRAME',
               'width': 650,
               'height': 350,
-              'uri': @urls[:search_frame],
+              'uri': url_for(
+                controller: 'trello/cards',
+                action: :search_frame,
+                only_path: false,
+                protocol: 'https',
+                host: @request.host
+              ),
               'label': 'Associate Trello card',
               'associatedObjectProperties': [
                   'hs_object_id', 'dealname',
