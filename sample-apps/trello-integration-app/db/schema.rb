@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_132337) do
+ActiveRecord::Schema.define(version: 2020_07_02_130530) do
 
   create_table "deal_associations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "deal_id"
+    t.string "card_id"
+  end
+
+  create_table "extension_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "card_id_key"
     t.string "card_id"
   end
 

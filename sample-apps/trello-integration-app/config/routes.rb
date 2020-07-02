@@ -17,5 +17,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'oauth/authorization#trello_callback'
   get '/oauth/trello_callback', to: 'oauth/authorization#trello_callback'
   get '/login', to: 'oauth/authorization#login'
+
+  post '/create_card', to: 'home#create_card'
+  get '/success', to: 'home#success'
   root to: 'home#index'
 end

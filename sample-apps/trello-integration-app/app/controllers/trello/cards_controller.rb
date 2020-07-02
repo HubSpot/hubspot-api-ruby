@@ -9,14 +9,9 @@ module Trello
     def index
       deal_id = params[:hs_object_id]
       deal_associated = DealAssociation.exists?(deal_id: deal_id)
-      if deal_associated
-        card_id = DealAssociation.find_by(deal_id: deal_id).card_id
-        card = ::Trello::Card.find(card_id)
-      end
-
       response = Services::Trello::Cards::Format.new(
         deal_associated: deal_associated,
-        card: card || nil,
+        card: card(deal_id),
         request: request
       ).call
 
@@ -54,6 +49,14 @@ module Trello
 
     def allow_iframe
       response.headers.except! 'X-Frame-Options'
+    end
+
+    def card(deal_id)
+      return nil unless DealAssociation.exists?(deal_id: deal_id)
+      return @card if @card.present?
+
+      card_id = DealAssociation.find_by(deal_id: deal_id).card_id
+      @card = ::Trello::Card.find(card_id)
     end
   end
 end
