@@ -11,14 +11,9 @@ module Services
         end
 
         def call
-          response = { results: [] }
-
+          response = {}
           if @card.present?
-            response[:results] << {
-              objectId: @card.short_id,
-              title: @card.name,
-              link: @card.short_url
-            }
+            response[:results] = [card_info]
           end
 
           if @deal_associated
@@ -57,6 +52,25 @@ module Services
           end
 
           response
+        end
+
+        private
+
+        def card_info
+          result = {
+            objectId: @card.short_id,
+            title: @card.name,
+            link: @card.short_url
+          }
+          members = @card.members
+          result[:properties] = [
+            {
+              label: 'Members',
+              dataType: 'STRING',
+              value: members.map { |m| m.username }.join(', ')
+            }
+          ] if members.present?
+          result
         end
       end
     end
