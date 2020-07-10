@@ -22,6 +22,7 @@ module Trello
       deal_id = params[:hs_object_id]
       card_id = params[:card_id]
       DealAssociation.create!(deal_id: deal_id, card_id: card_id)
+      create_webhook(card_id)
 
       redirect_to search_frame_success_trello_cards_path
     end
@@ -57,6 +58,18 @@ module Trello
 
       card_id = DealAssociation.find_by(deal_id: deal_id).card_id
       @card = ::Trello::Card.find(card_id)
+    end
+
+    def create_webhook(card_id)
+      Services::Trello::Webhooks::Create.new(
+        id_model: card_id,
+        callback_url: url_for(
+          controller: 'trello/webhooks',
+          action: :complete,
+          only_path: false,
+          protocol: 'https'
+        )
+      ).call
     end
   end
 end

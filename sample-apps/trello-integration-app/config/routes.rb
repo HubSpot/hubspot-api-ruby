@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     end
     post 'cards/search_frame', to: 'cards#create_association'
     get 'cards', to: 'cards#index'
+
+    post '/webhooks/receive', to: 'webhooks#receive'
+    get '/webhooks/complete', to: 'webhooks#complete'
   end
 
   get '/oauth/hubspot', to: 'oauth/authorization#authorize_hubspot'
