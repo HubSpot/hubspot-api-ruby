@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     get '/webhooks/complete', to: 'webhooks#complete'
   end
 
-  resources :associations, only: %i[index]
+  scope :mappings do
+    get '/', to: 'mappings#boards_index'
+    get '/boards/:board_id', to: 'mappings#pipelines_index'
+    get '/boards/:board_id/pipelines/:pipeline_id', to: 'mappings#index'
+  end
 
   get '/oauth/hubspot', to: 'oauth/authorization#authorize_hubspot'
   get '/oauth/hubspot_callback', to: 'oauth/authorization#hubspot_callback'

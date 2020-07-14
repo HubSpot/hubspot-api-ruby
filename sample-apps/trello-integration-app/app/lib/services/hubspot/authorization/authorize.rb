@@ -3,7 +3,7 @@ module Services
     module Authorization
       class Authorize
         def initialize(tokens:)
-          @tokens = tokens
+          @tokens = tokens.with_indifferent_access
         end
 
         def call
