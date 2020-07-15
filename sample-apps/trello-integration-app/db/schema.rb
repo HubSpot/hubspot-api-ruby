@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_130530) do
+ActiveRecord::Schema.define(version: 2020_07_15_143913) do
 
   create_table "deal_associations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "deal_id"
@@ -29,9 +29,23 @@ ActiveRecord::Schema.define(version: 2020_07_02_130530) do
     t.datetime "expires_at"
   end
 
+  create_table "mappings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "board_id"
+    t.string "bard_list_id"
+    t.string "pipeline_id"
+    t.string "pipeline_stage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "trello_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "token"
     t.string "secret"
+  end
+
+  create_table "trello_webhooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "callback_url"
+    t.string "id_model"
   end
 
 end
