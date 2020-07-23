@@ -7,7 +7,11 @@ module Services
         end
 
         def call
-          ::Trello::Board.find(@id)
+          begin
+            ::Trello::Board.find(@id)
+          rescue
+            nil
+          end
         end
       end
     end

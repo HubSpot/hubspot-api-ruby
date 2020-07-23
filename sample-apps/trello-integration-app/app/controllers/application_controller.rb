@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include ExceptionHandler
 
   before_action :check_env_variables
+  protect_from_forgery prepend: true
 
   helper_method :authorized?
 

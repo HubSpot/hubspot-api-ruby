@@ -15,6 +15,8 @@
 //= require jquery
 //= require rails-ujs
 //= require typeahead.bundle.min
+//= require jquery-spinner.min
+//= require lodash
 //= require_tree .
 
 

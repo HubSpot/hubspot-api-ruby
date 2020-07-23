@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_143913) do
 
   create_table "mappings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "board_id"
-    t.string "bard_list_id"
+    t.string "board_list_id"
     t.string "pipeline_id"
     t.string "pipeline_stage_id"
     t.datetime "created_at", null: false

@@ -6,7 +6,7 @@
       </div>
       <ol>
         <li>Go to <a href="https://trello.com/app-key" target="_blank">https://trello.com/app-key</a> page</li>
-        <li>Add <a href="<%= root_url(protocol: :https) %>"><%= root_url(protocol: :https) %></a> to "Allowed Resources" section</li>
+        <li>Add <%= root_url(protocol: :https) %> to "Allowed Resources" section</li>
         <li>Continue with
         <% if trello_authorized? %>
           <div class="row authorize-button button authorized button-inline">
