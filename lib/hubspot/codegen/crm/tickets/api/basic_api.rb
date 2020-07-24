@@ -87,22 +87,26 @@ module Hubspot
 
         # Create
         # Create a ticket with the given properties and return a copy of the object, including the ID. Documentation and examples for creating native tickets is provided.
+        # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
         # @return [SimplePublicObject]
-        def create(opts = {})
-          data, _status_code, _headers = create_with_http_info(opts)
+        def create(simple_public_object_input, opts = {})
+          data, _status_code, _headers = create_with_http_info(simple_public_object_input, opts)
           data
         end
 
         # Create
         # Create a ticket with the given properties and return a copy of the object, including the ID. Documentation and examples for creating native tickets is provided.
+        # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-        def create_with_http_info(opts = {})
+        def create_with_http_info(simple_public_object_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BasicApi.create ...'
+          end
+          # verify the required parameter 'simple_public_object_input' is set
+          if @api_client.config.client_side_validation && simple_public_object_input.nil?
+            fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/tickets'
@@ -121,7 +125,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'simple_public_object_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(simple_public_object_input) 
 
           # return_type
           return_type = opts[:return_type] || 'SimplePublicObject' 
@@ -293,27 +297,31 @@ module Hubspot
         # Update
         # Perform a partial update of an Object identified by `{ticketId}`. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
         # @param ticket_id [String] 
+        # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
         # @return [SimplePublicObject]
-        def update(ticket_id, opts = {})
-          data, _status_code, _headers = update_with_http_info(ticket_id, opts)
+        def update(ticket_id, simple_public_object_input, opts = {})
+          data, _status_code, _headers = update_with_http_info(ticket_id, simple_public_object_input, opts)
           data
         end
 
         # Update
         # Perform a partial update of an Object identified by &#x60;{ticketId}&#x60;. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
         # @param ticket_id [String] 
+        # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-        def update_with_http_info(ticket_id, opts = {})
+        def update_with_http_info(ticket_id, simple_public_object_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BasicApi.update ...'
           end
           # verify the required parameter 'ticket_id' is set
           if @api_client.config.client_side_validation && ticket_id.nil?
             fail ArgumentError, "Missing the required parameter 'ticket_id' when calling BasicApi.update"
+          end
+          # verify the required parameter 'simple_public_object_input' is set
+          if @api_client.config.client_side_validation && simple_public_object_input.nil?
+            fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/objects/tickets/{ticketId}'.sub('{' + 'ticketId' + '}', CGI.escape(ticket_id.to_s))
@@ -332,7 +340,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'simple_public_object_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(simple_public_object_input) 
 
           # return_type
           return_type = opts[:return_type] || 'SimplePublicObject' 

@@ -16,23 +16,23 @@ module Hubspot
   module Crm
     module Tickets
       class SimplePublicObjectBatchInput
-        attr_accessor :id
-
         attr_accessor :properties
+
+        attr_accessor :id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'properties' => :'properties'
+            :'properties' => :'properties',
+            :'id' => :'id'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'properties' => :'Hash<String, String>'
+            :'properties' => :'Hash<String, String>',
+            :'id' => :'String'
           }
         end
 
@@ -57,14 +57,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
           if attributes.key?(:'properties')
             if (value = attributes[:'properties']).is_a?(Hash)
               self.properties = value
             end
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
         end
 
@@ -72,12 +72,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           if @properties.nil?
             invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           invalid_properties
@@ -86,8 +86,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
           return false if @properties.nil?
+          return false if @id.nil?
           true
         end
 
@@ -96,8 +96,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              properties == o.properties
+              properties == o.properties &&
+              id == o.id
         end
 
         # @see the `==` method
@@ -109,7 +109,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, properties].hash
+          [properties, id].hash
         end
 
         # Builds the object from hash

@@ -92,27 +92,31 @@ module Hubspot
         # Create a property group
         # Create and return a copy of a new property group.
         # @param object_type [String] 
+        # @param property_group_create [PropertyGroupCreate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyGroupCreate] :property_group_create 
         # @return [PropertyGroup]
-        def create(object_type, opts = {})
-          data, _status_code, _headers = create_with_http_info(object_type, opts)
+        def create(object_type, property_group_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, property_group_create, opts)
           data
         end
 
         # Create a property group
         # Create and return a copy of a new property group.
         # @param object_type [String] 
+        # @param property_group_create [PropertyGroupCreate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyGroupCreate] :property_group_create 
         # @return [Array<(PropertyGroup, Integer, Hash)>] PropertyGroup data, response status code and response headers
-        def create_with_http_info(object_type, opts = {})
+        def create_with_http_info(object_type, property_group_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: GroupsApi.create ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling GroupsApi.create"
+          end
+          # verify the required parameter 'property_group_create' is set
+          if @api_client.config.client_side_validation && property_group_create.nil?
+            fail ArgumentError, "Missing the required parameter 'property_group_create' when calling GroupsApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}/groups'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -131,7 +135,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'property_group_create']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(property_group_create) 
 
           # return_type
           return_type = opts[:return_type] || 'PropertyGroup' 
@@ -289,11 +293,11 @@ module Hubspot
         # Perform a partial update of a property group identified by {groupName}. Provided fields will be overwritten.
         # @param object_type [String] 
         # @param group_name [String] 
+        # @param property_group_update [PropertyGroupUpdate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyGroupUpdate] :property_group_update 
         # @return [PropertyGroup]
-        def update(object_type, group_name, opts = {})
-          data, _status_code, _headers = update_with_http_info(object_type, group_name, opts)
+        def update(object_type, group_name, property_group_update, opts = {})
+          data, _status_code, _headers = update_with_http_info(object_type, group_name, property_group_update, opts)
           data
         end
 
@@ -301,10 +305,10 @@ module Hubspot
         # Perform a partial update of a property group identified by {groupName}. Provided fields will be overwritten.
         # @param object_type [String] 
         # @param group_name [String] 
+        # @param property_group_update [PropertyGroupUpdate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyGroupUpdate] :property_group_update 
         # @return [Array<(PropertyGroup, Integer, Hash)>] PropertyGroup data, response status code and response headers
-        def update_with_http_info(object_type, group_name, opts = {})
+        def update_with_http_info(object_type, group_name, property_group_update, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: GroupsApi.update ...'
           end
@@ -315,6 +319,10 @@ module Hubspot
           # verify the required parameter 'group_name' is set
           if @api_client.config.client_side_validation && group_name.nil?
             fail ArgumentError, "Missing the required parameter 'group_name' when calling GroupsApi.update"
+          end
+          # verify the required parameter 'property_group_update' is set
+          if @api_client.config.client_side_validation && property_group_update.nil?
+            fail ArgumentError, "Missing the required parameter 'property_group_update' when calling GroupsApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}/groups/{groupName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'groupName' + '}', CGI.escape(group_name.to_s))
@@ -333,7 +341,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'property_group_update']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(property_group_update) 
 
           # return_type
           return_type = opts[:return_type] || 'PropertyGroup' 

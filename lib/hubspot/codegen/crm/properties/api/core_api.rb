@@ -92,27 +92,31 @@ module Hubspot
         # Create a property
         # Create and return a copy of a new property for the specified object type.
         # @param object_type [String] 
+        # @param property_create [PropertyCreate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyCreate] :property_create 
         # @return [Property]
-        def create(object_type, opts = {})
-          data, _status_code, _headers = create_with_http_info(object_type, opts)
+        def create(object_type, property_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, property_create, opts)
           data
         end
 
         # Create a property
         # Create and return a copy of a new property for the specified object type.
         # @param object_type [String] 
+        # @param property_create [PropertyCreate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyCreate] :property_create 
         # @return [Array<(Property, Integer, Hash)>] Property data, response status code and response headers
-        def create_with_http_info(object_type, opts = {})
+        def create_with_http_info(object_type, property_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: CoreApi.create ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling CoreApi.create"
+          end
+          # verify the required parameter 'property_create' is set
+          if @api_client.config.client_side_validation && property_create.nil?
+            fail ArgumentError, "Missing the required parameter 'property_create' when calling CoreApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -131,7 +135,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'property_create']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(property_create) 
 
           # return_type
           return_type = opts[:return_type] || 'Property' 
@@ -295,11 +299,11 @@ module Hubspot
         # Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
         # @param object_type [String] 
         # @param property_name [String] 
+        # @param property_update [PropertyUpdate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyUpdate] :property_update 
         # @return [Property]
-        def update(object_type, property_name, opts = {})
-          data, _status_code, _headers = update_with_http_info(object_type, property_name, opts)
+        def update(object_type, property_name, property_update, opts = {})
+          data, _status_code, _headers = update_with_http_info(object_type, property_name, property_update, opts)
           data
         end
 
@@ -307,10 +311,10 @@ module Hubspot
         # Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
         # @param object_type [String] 
         # @param property_name [String] 
+        # @param property_update [PropertyUpdate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PropertyUpdate] :property_update 
         # @return [Array<(Property, Integer, Hash)>] Property data, response status code and response headers
-        def update_with_http_info(object_type, property_name, opts = {})
+        def update_with_http_info(object_type, property_name, property_update, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: CoreApi.update ...'
           end
@@ -321,6 +325,10 @@ module Hubspot
           # verify the required parameter 'property_name' is set
           if @api_client.config.client_side_validation && property_name.nil?
             fail ArgumentError, "Missing the required parameter 'property_name' when calling CoreApi.update"
+          end
+          # verify the required parameter 'property_update' is set
+          if @api_client.config.client_side_validation && property_update.nil?
+            fail ArgumentError, "Missing the required parameter 'property_update' when calling CoreApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}/{propertyName}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'propertyName' + '}', CGI.escape(property_name.to_s))
@@ -339,7 +347,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'property_update']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(property_update) 
 
           # return_type
           return_type = opts[:return_type] || 'Property' 

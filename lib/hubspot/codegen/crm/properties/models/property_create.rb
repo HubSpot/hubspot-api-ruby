@@ -46,6 +46,9 @@ module Hubspot
         # If true, the property won't be visible and can't be used in HubSpot.
         attr_accessor :hidden
 
+        # Whether or not the property can be used in a HubSpot form.
+        attr_accessor :form_field
+
         class EnumAttributeValidator
           attr_reader :datatype
           attr_reader :allowable_values
@@ -80,7 +83,8 @@ module Hubspot
             :'options' => :'options',
             :'display_order' => :'displayOrder',
             :'has_unique_value' => :'hasUniqueValue',
-            :'hidden' => :'hidden'
+            :'hidden' => :'hidden',
+            :'form_field' => :'formField'
           }
         end
 
@@ -96,7 +100,8 @@ module Hubspot
             :'options' => :'Array<OptionInput>',
             :'display_order' => :'Integer',
             :'has_unique_value' => :'Boolean',
-            :'hidden' => :'Boolean'
+            :'hidden' => :'Boolean',
+            :'form_field' => :'Boolean'
           }
         end
 
@@ -161,6 +166,10 @@ module Hubspot
 
           if attributes.key?(:'hidden')
             self.hidden = attributes[:'hidden']
+          end
+
+          if attributes.key?(:'form_field')
+            self.form_field = attributes[:'form_field']
           end
         end
 
@@ -240,7 +249,8 @@ module Hubspot
               options == o.options &&
               display_order == o.display_order &&
               has_unique_value == o.has_unique_value &&
-              hidden == o.hidden
+              hidden == o.hidden &&
+              form_field == o.form_field
         end
 
         # @see the `==` method
@@ -252,7 +262,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, type, field_type, group_name, description, options, display_order, has_unique_value, hidden].hash
+          [name, label, type, field_type, group_name, description, options, display_order, has_unique_value, hidden, form_field].hash
         end
 
         # Builds the object from hash
