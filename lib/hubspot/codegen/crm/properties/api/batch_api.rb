@@ -24,27 +24,31 @@ module Hubspot
         # Archive a batch of properties
         # Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
         # @param object_type [String] 
+        # @param batch_input_property_name [BatchInputPropertyName] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputPropertyName] :batch_input_property_name 
         # @return [nil]
-        def archive(object_type, opts = {})
-          archive_with_http_info(object_type, opts)
+        def archive(object_type, batch_input_property_name, opts = {})
+          archive_with_http_info(object_type, batch_input_property_name, opts)
           nil
         end
 
         # Archive a batch of properties
         # Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
         # @param object_type [String] 
+        # @param batch_input_property_name [BatchInputPropertyName] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputPropertyName] :batch_input_property_name 
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_with_http_info(object_type, opts = {})
+        def archive_with_http_info(object_type, batch_input_property_name, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.archive ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.archive"
+          end
+          # verify the required parameter 'batch_input_property_name' is set
+          if @api_client.config.client_side_validation && batch_input_property_name.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_property_name' when calling BatchApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}/batch/archive'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -63,7 +67,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_property_name']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_input_property_name) 
 
           # return_type
           return_type = opts[:return_type] 
@@ -90,27 +94,31 @@ module Hubspot
         # Create a batch of properties
         # Create a batch of properties using the same rules as when creating an individual property.
         # @param object_type [String] 
+        # @param batch_input_property_create [BatchInputPropertyCreate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
         # @return [BatchResponseProperty]
-        def create(object_type, opts = {})
-          data, _status_code, _headers = create_with_http_info(object_type, opts)
+        def create(object_type, batch_input_property_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, batch_input_property_create, opts)
           data
         end
 
         # Create a batch of properties
         # Create a batch of properties using the same rules as when creating an individual property.
         # @param object_type [String] 
+        # @param batch_input_property_create [BatchInputPropertyCreate] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputPropertyCreate] :batch_input_property_create 
         # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
-        def create_with_http_info(object_type, opts = {})
+        def create_with_http_info(object_type, batch_input_property_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.create"
+          end
+          # verify the required parameter 'batch_input_property_create' is set
+          if @api_client.config.client_side_validation && batch_input_property_create.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_property_create' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -129,7 +137,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_property_create']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_input_property_create) 
 
           # return_type
           return_type = opts[:return_type] || 'BatchResponseProperty' 
@@ -156,27 +164,31 @@ module Hubspot
         # Read a batch of properties
         # Read a provided list of properties.
         # @param object_type [String] 
+        # @param batch_read_input_property_name [BatchReadInputPropertyName] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
         # @return [BatchResponseProperty]
-        def read(object_type, opts = {})
-          data, _status_code, _headers = read_with_http_info(object_type, opts)
+        def read(object_type, batch_read_input_property_name, opts = {})
+          data, _status_code, _headers = read_with_http_info(object_type, batch_read_input_property_name, opts)
           data
         end
 
         # Read a batch of properties
         # Read a provided list of properties.
         # @param object_type [String] 
+        # @param batch_read_input_property_name [BatchReadInputPropertyName] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchReadInputPropertyName] :batch_read_input_property_name 
         # @return [Array<(BatchResponseProperty, Integer, Hash)>] BatchResponseProperty data, response status code and response headers
-        def read_with_http_info(object_type, opts = {})
+        def read_with_http_info(object_type, batch_read_input_property_name, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.read ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.read"
+          end
+          # verify the required parameter 'batch_read_input_property_name' is set
+          if @api_client.config.client_side_validation && batch_read_input_property_name.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_read_input_property_name' when calling BatchApi.read"
           end
           # resource path
           local_var_path = '/crm/v3/properties/{objectType}/batch/read'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -195,7 +207,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_read_input_property_name']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_read_input_property_name) 
 
           # return_type
           return_type = opts[:return_type] || 'BatchResponseProperty' 

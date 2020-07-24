@@ -99,7 +99,7 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Associate two deals
+        # Associate a deal with another object
         # @param deal_id [String] 
         # @param to_object_type [String] 
         # @param to_object_id [String] 
@@ -111,7 +111,7 @@ module Hubspot
           data
         end
 
-        # Associate two deals
+        # Associate a deal with another object
         # @param deal_id [String] 
         # @param to_object_type [String] 
         # @param to_object_id [String] 

@@ -195,6 +195,13 @@ module Hubspot
           # Returns Auth Settings hash for api client.
           def auth_settings
             {
+              'developer-hapikey' =>
+                {
+                  type: 'api_key',
+                  in: 'query',
+                  key: 'hapikey',
+                  value: api_key_with_prefix('hapikey')
+                },
               'hapikey' =>
                 {
                   type: 'api_key',

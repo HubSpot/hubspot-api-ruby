@@ -23,22 +23,26 @@ module Hubspot
         end
         # Filter, Sort, and Search CRM Objects
         # Filter, Sort, and Search CRM Objects
+        # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PublicObjectSearchRequest] :public_object_search_request 
         # @return [CollectionResponseWithTotalSimplePublicObject]
-        def do_search(opts = {})
-          data, _status_code, _headers = do_search_with_http_info(opts)
+        def do_search(public_object_search_request, opts = {})
+          data, _status_code, _headers = do_search_with_http_info(public_object_search_request, opts)
           data
         end
 
         # Filter, Sort, and Search CRM Objects
         # Filter, Sort, and Search CRM Objects
+        # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PublicObjectSearchRequest] :public_object_search_request 
         # @return [Array<(CollectionResponseWithTotalSimplePublicObject, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObject data, response status code and response headers
-        def do_search_with_http_info(opts = {})
+        def do_search_with_http_info(public_object_search_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: SearchApi.do_search ...'
+          end
+          # verify the required parameter 'public_object_search_request' is set
+          if @api_client.config.client_side_validation && public_object_search_request.nil?
+            fail ArgumentError, "Missing the required parameter 'public_object_search_request' when calling SearchApi.do_search"
           end
           # resource path
           local_var_path = '/crm/v3/objects/companies/search'
@@ -57,7 +61,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'public_object_search_request']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(public_object_search_request) 
 
           # return_type
           return_type = opts[:return_type] || 'CollectionResponseWithTotalSimplePublicObject' 
