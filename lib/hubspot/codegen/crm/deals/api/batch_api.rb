@@ -23,22 +23,26 @@ module Hubspot
         end
         # Archive a batch of deals by ID
         # Archive a list of deals given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
+        # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputSimplePublicObjectId] :batch_input_simple_public_object_id 
         # @return [nil]
-        def archive(opts = {})
-          archive_with_http_info(opts)
+        def archive(batch_input_simple_public_object_id, opts = {})
+          archive_with_http_info(batch_input_simple_public_object_id, opts)
           nil
         end
 
         # Archive a batch of deals by ID
         # Archive a list of deals given a collection of IDs. This method will return a &#x60;204 No Content&#x60; response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
+        # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputSimplePublicObjectId] :batch_input_simple_public_object_id 
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_with_http_info(opts = {})
+        def archive_with_http_info(batch_input_simple_public_object_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.archive ...'
+          end
+          # verify the required parameter 'batch_input_simple_public_object_id' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_id.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_id' when calling BatchApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/batch/archive'
@@ -57,7 +61,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_simple_public_object_id']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_id) 
 
           # return_type
           return_type = opts[:return_type] 
@@ -83,22 +87,26 @@ module Hubspot
 
         # Create a batch of deals
         # Create a batch of deals. This follows the same rules as creating an individual object.
+        # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputSimplePublicObjectInput] :batch_input_simple_public_object_input 
         # @return [BatchResponseSimplePublicObject]
-        def create(opts = {})
-          data, _status_code, _headers = create_with_http_info(opts)
+        def create(batch_input_simple_public_object_input, opts = {})
+          data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input, opts)
           data
         end
 
         # Create a batch of deals
         # Create a batch of deals. This follows the same rules as creating an individual object.
+        # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputSimplePublicObjectInput] :batch_input_simple_public_object_input 
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def create_with_http_info(opts = {})
+        def create_with_http_info(batch_input_simple_public_object_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
+          end
+          # verify the required parameter 'batch_input_simple_public_object_input' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_input.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/batch/create'
@@ -117,7 +125,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_simple_public_object_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_input) 
 
           # return_type
           return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
@@ -143,24 +151,28 @@ module Hubspot
 
         # Read a batch of deals by internal ID, or unique property values
         # Read a list of deals given a collection of IDs. Use the `properties` request body property to control which properties are returned.
+        # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @option opts [BatchReadInputSimplePublicObjectId] :batch_read_input_simple_public_object_id 
         # @return [BatchResponseSimplePublicObject]
-        def read(opts = {})
-          data, _status_code, _headers = read_with_http_info(opts)
+        def read(batch_read_input_simple_public_object_id, opts = {})
+          data, _status_code, _headers = read_with_http_info(batch_read_input_simple_public_object_id, opts)
           data
         end
 
         # Read a batch of deals by internal ID, or unique property values
         # Read a list of deals given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
+        # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @option opts [BatchReadInputSimplePublicObjectId] :batch_read_input_simple_public_object_id 
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def read_with_http_info(opts = {})
+        def read_with_http_info(batch_read_input_simple_public_object_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.read ...'
+          end
+          # verify the required parameter 'batch_read_input_simple_public_object_id' is set
+          if @api_client.config.client_side_validation && batch_read_input_simple_public_object_id.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_read_input_simple_public_object_id' when calling BatchApi.read"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/batch/read'
@@ -180,7 +192,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_read_input_simple_public_object_id']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_read_input_simple_public_object_id) 
 
           # return_type
           return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
@@ -206,22 +218,26 @@ module Hubspot
 
         # Update a batch of deals
         # Perform a partial upate on a batch of deals. This follows the same rules as performing partial updates on an individual object.
+        # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputSimplePublicObjectBatchInput] :batch_input_simple_public_object_batch_input 
         # @return [BatchResponseSimplePublicObject]
-        def update(opts = {})
-          data, _status_code, _headers = update_with_http_info(opts)
+        def update(batch_input_simple_public_object_batch_input, opts = {})
+          data, _status_code, _headers = update_with_http_info(batch_input_simple_public_object_batch_input, opts)
           data
         end
 
         # Update a batch of deals
         # Perform a partial upate on a batch of deals. This follows the same rules as performing partial updates on an individual object.
+        # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [BatchInputSimplePublicObjectBatchInput] :batch_input_simple_public_object_batch_input 
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def update_with_http_info(opts = {})
+        def update_with_http_info(batch_input_simple_public_object_batch_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.update ...'
+          end
+          # verify the required parameter 'batch_input_simple_public_object_batch_input' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input' when calling BatchApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/objects/deals/batch/update'
@@ -240,7 +256,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'batch_input_simple_public_object_batch_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_batch_input) 
 
           # return_type
           return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 

@@ -16,23 +16,23 @@ module Hubspot
   module Crm
     module Properties
       class BatchReadInputPropertyName
-        attr_accessor :archived
-
         attr_accessor :inputs
+
+        attr_accessor :archived
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'archived' => :'archived',
-            :'inputs' => :'inputs'
+            :'inputs' => :'inputs',
+            :'archived' => :'archived'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'archived' => :'Boolean',
-            :'inputs' => :'Array<PropertyName>'
+            :'inputs' => :'Array<PropertyName>',
+            :'archived' => :'Boolean'
           }
         end
 
@@ -57,14 +57,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
-          end
-
           if attributes.key?(:'inputs')
             if (value = attributes[:'inputs']).is_a?(Array)
               self.inputs = value
             end
+          end
+
+          if attributes.key?(:'archived')
+            self.archived = attributes[:'archived']
           end
         end
 
@@ -72,12 +72,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @archived.nil?
-            invalid_properties.push('invalid value for "archived", archived cannot be nil.')
-          end
-
           if @inputs.nil?
             invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
+          end
+
+          if @archived.nil?
+            invalid_properties.push('invalid value for "archived", archived cannot be nil.')
           end
 
           invalid_properties
@@ -86,8 +86,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @archived.nil?
           return false if @inputs.nil?
+          return false if @archived.nil?
           true
         end
 
@@ -96,8 +96,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              archived == o.archived &&
-              inputs == o.inputs
+              inputs == o.inputs &&
+              archived == o.archived
         end
 
         # @see the `==` method
@@ -109,7 +109,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [archived, inputs].hash
+          [inputs, archived].hash
         end
 
         # Builds the object from hash

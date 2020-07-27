@@ -16,19 +16,17 @@ module Hubspot
   module Crm
     module LineItems
       class BatchResponseSimplePublicObject
-        attr_accessor :results
-
-        attr_accessor :num_errors
-
-        attr_accessor :errors
-
         attr_accessor :status
+
+        attr_accessor :results
 
         attr_accessor :requested_at
 
         attr_accessor :started_at
 
         attr_accessor :completed_at
+
+        attr_accessor :links
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -55,26 +53,24 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'results' => :'results',
-            :'num_errors' => :'numErrors',
-            :'errors' => :'errors',
             :'status' => :'status',
+            :'results' => :'results',
             :'requested_at' => :'requestedAt',
             :'started_at' => :'startedAt',
-            :'completed_at' => :'completedAt'
+            :'completed_at' => :'completedAt',
+            :'links' => :'links'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'results' => :'Array<SimplePublicObject>',
-            :'num_errors' => :'Integer',
-            :'errors' => :'Array<Error>',
             :'status' => :'String',
+            :'results' => :'Array<SimplePublicObject>',
             :'requested_at' => :'DateTime',
             :'started_at' => :'DateTime',
-            :'completed_at' => :'DateTime'
+            :'completed_at' => :'DateTime',
+            :'links' => :'Hash<String, String>'
           }
         end
 
@@ -99,24 +95,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'status')
+            self.status = attributes[:'status']
+          end
+
           if attributes.key?(:'results')
             if (value = attributes[:'results']).is_a?(Array)
               self.results = value
             end
-          end
-
-          if attributes.key?(:'num_errors')
-            self.num_errors = attributes[:'num_errors']
-          end
-
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
-          end
-
-          if attributes.key?(:'status')
-            self.status = attributes[:'status']
           end
 
           if attributes.key?(:'requested_at')
@@ -130,18 +116,24 @@ module Hubspot
           if attributes.key?(:'completed_at')
             self.completed_at = attributes[:'completed_at']
           end
+
+          if attributes.key?(:'links')
+            if (value = attributes[:'links']).is_a?(Hash)
+              self.links = value
+            end
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @results.nil?
-            invalid_properties.push('invalid value for "results", results cannot be nil.')
-          end
-
           if @status.nil?
             invalid_properties.push('invalid value for "status", status cannot be nil.')
+          end
+
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
           if @started_at.nil?
@@ -158,10 +150,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @results.nil?
           return false if @status.nil?
           status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
           return false unless status_validator.valid?(@status)
+          return false if @results.nil?
           return false if @started_at.nil?
           return false if @completed_at.nil?
           true
@@ -182,13 +174,12 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              results == o.results &&
-              num_errors == o.num_errors &&
-              errors == o.errors &&
               status == o.status &&
+              results == o.results &&
               requested_at == o.requested_at &&
               started_at == o.started_at &&
-              completed_at == o.completed_at
+              completed_at == o.completed_at &&
+              links == o.links
         end
 
         # @see the `==` method
@@ -200,7 +191,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [results, num_errors, errors, status, requested_at, started_at, completed_at].hash
+          [status, results, requested_at, started_at, completed_at, links].hash
         end
 
         # Builds the object from hash

@@ -99,7 +99,7 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Associate two contacts
+        # Associate a contact with another object
         # @param contact_id [String] 
         # @param to_object_type [String] 
         # @param to_object_id [String] 
@@ -111,7 +111,7 @@ module Hubspot
           data
         end
 
-        # Associate two contacts
+        # Associate a contact with another object
         # @param contact_id [String] 
         # @param to_object_type [String] 
         # @param to_object_id [String] 

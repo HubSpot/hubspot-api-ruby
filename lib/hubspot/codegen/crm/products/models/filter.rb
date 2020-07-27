@@ -16,11 +16,11 @@ module Hubspot
   module Crm
     module Products
       class Filter
+        attr_accessor :value
+
         attr_accessor :property_name
 
         attr_accessor :operator
-
-        attr_accessor :value
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -47,18 +47,18 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'value' => :'value',
             :'property_name' => :'propertyName',
-            :'operator' => :'operator',
-            :'value' => :'value'
+            :'operator' => :'operator'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'value' => :'String',
             :'property_name' => :'String',
-            :'operator' => :'String',
-            :'value' => :'String'
+            :'operator' => :'String'
           }
         end
 
@@ -83,16 +83,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
+          end
+
           if attributes.key?(:'property_name')
             self.property_name = attributes[:'property_name']
           end
 
           if attributes.key?(:'operator')
             self.operator = attributes[:'operator']
-          end
-
-          if attributes.key?(:'value')
-            self.value = attributes[:'value']
           end
         end
 
@@ -116,7 +116,7 @@ module Hubspot
         def valid?
           return false if @property_name.nil?
           return false if @operator.nil?
-          operator_validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
+          operator_validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
           return false unless operator_validator.valid?(@operator)
           true
         end
@@ -124,7 +124,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] operator Object to be assigned
         def operator=(operator)
-          validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
+          validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
           unless validator.valid?(operator)
             fail ArgumentError, "invalid value for \"operator\", must be one of #{validator.allowable_values}."
           end
@@ -136,9 +136,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              value == o.value &&
               property_name == o.property_name &&
-              operator == o.operator &&
-              value == o.value
+              operator == o.operator
         end
 
         # @see the `==` method
@@ -150,7 +150,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [property_name, operator, value].hash
+          [value, property_name, operator].hash
         end
 
         # Builds the object from hash

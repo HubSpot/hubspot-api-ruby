@@ -23,128 +23,6 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive
-        # Move an Object identified by `{quoteId}` to the recycling bin.
-        # @param quote_id [String] 
-        # @param [Hash] opts the optional parameters
-        # @return [nil]
-        def archive(quote_id, opts = {})
-          archive_with_http_info(quote_id, opts)
-          nil
-        end
-
-        # Archive
-        # Move an Object identified by &#x60;{quoteId}&#x60; to the recycling bin.
-        # @param quote_id [String] 
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_with_http_info(quote_id, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.archive ...'
-          end
-          # verify the required parameter 'quote_id' is set
-          if @api_client.config.client_side_validation && quote_id.nil?
-            fail ArgumentError, "Missing the required parameter 'quote_id' when calling BasicApi.archive"
-          end
-          # resource path
-          local_var_path = '/crm/v3/objects/quotes/{quoteId}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] 
-
-          # return_type
-          return_type = opts[:return_type] 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Create
-        # Create a quote with the given properties and return a copy of the object, including the ID. Documentation and examples for creating native quotes is provided.
-        # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
-        # @return [SimplePublicObject]
-        def create(opts = {})
-          data, _status_code, _headers = create_with_http_info(opts)
-          data
-        end
-
-        # Create
-        # Create a quote with the given properties and return a copy of the object, including the ID. Documentation and examples for creating native quotes is provided.
-        # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
-        # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-        def create_with_http_info(opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.create ...'
-          end
-          # resource path
-          local_var_path = '/crm/v3/objects/quotes'
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-          # HTTP header 'Content-Type'
-          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'simple_public_object_input']) 
-
-          # return_type
-          return_type = opts[:return_type] || 'SimplePublicObject' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
         # Read
         # Read an Object identified by `{quoteId}`. `{quoteId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
         # @param quote_id [String] 
@@ -201,7 +79,7 @@ module Hubspot
           return_type = opts[:return_type] || 'SimplePublicObject' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -272,7 +150,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseSimplePublicObject' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -286,72 +164,6 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: BasicApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Update
-        # Perform a partial update of an Object identified by `{quoteId}`. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
-        # @param quote_id [String] 
-        # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
-        # @return [SimplePublicObject]
-        def update(quote_id, opts = {})
-          data, _status_code, _headers = update_with_http_info(quote_id, opts)
-          data
-        end
-
-        # Update
-        # Perform a partial update of an Object identified by &#x60;{quoteId}&#x60;. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
-        # @param quote_id [String] 
-        # @param [Hash] opts the optional parameters
-        # @option opts [SimplePublicObjectInput] :simple_public_object_input 
-        # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-        def update_with_http_info(quote_id, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.update ...'
-          end
-          # verify the required parameter 'quote_id' is set
-          if @api_client.config.client_side_validation && quote_id.nil?
-            fail ArgumentError, "Missing the required parameter 'quote_id' when calling BasicApi.update"
-          end
-          # resource path
-          local_var_path = '/crm/v3/objects/quotes/{quoteId}'.sub('{' + 'quoteId' + '}', CGI.escape(quote_id.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-          # HTTP header 'Content-Type'
-          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'simple_public_object_input']) 
-
-          # return_type
-          return_type = opts[:return_type] || 'SimplePublicObject' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
