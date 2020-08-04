@@ -15,34 +15,34 @@ require 'date'
 module Hubspot
   module Webhooks
     class SettingsResponse
+      # A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+      attr_accessor :target_url
+
+      attr_accessor :throttling
+
       # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
       attr_accessor :created_at
 
       # When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
       attr_accessor :updated_at
 
-      # A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
-      attr_accessor :target_url
-
-      attr_accessor :throttling
-
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'created_at' => :'createdAt',
-          :'updated_at' => :'updatedAt',
           :'target_url' => :'targetUrl',
-          :'throttling' => :'throttling'
+          :'throttling' => :'throttling',
+          :'created_at' => :'createdAt',
+          :'updated_at' => :'updatedAt'
         }
       end
 
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'created_at' => :'DateTime',
-          :'updated_at' => :'DateTime',
           :'target_url' => :'String',
-          :'throttling' => :'ThrottlingSettings'
+          :'throttling' => :'ThrottlingSettings',
+          :'created_at' => :'DateTime',
+          :'updated_at' => :'DateTime'
         }
       end
 
@@ -67,14 +67,6 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'created_at')
-          self.created_at = attributes[:'created_at']
-        end
-
-        if attributes.key?(:'updated_at')
-          self.updated_at = attributes[:'updated_at']
-        end
-
         if attributes.key?(:'target_url')
           self.target_url = attributes[:'target_url']
         end
@@ -82,16 +74,20 @@ module Hubspot
         if attributes.key?(:'throttling')
           self.throttling = attributes[:'throttling']
         end
+
+        if attributes.key?(:'created_at')
+          self.created_at = attributes[:'created_at']
+        end
+
+        if attributes.key?(:'updated_at')
+          self.updated_at = attributes[:'updated_at']
+        end
       end
 
       # Show invalid properties with the reasons. Usually used together with valid?
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @created_at.nil?
-          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-        end
-
         if @target_url.nil?
           invalid_properties.push('invalid value for "target_url", target_url cannot be nil.')
         end
@@ -100,15 +96,19 @@ module Hubspot
           invalid_properties.push('invalid value for "throttling", throttling cannot be nil.')
         end
 
+        if @created_at.nil?
+          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+        end
+
         invalid_properties
       end
 
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @created_at.nil?
         return false if @target_url.nil?
         return false if @throttling.nil?
+        return false if @created_at.nil?
         true
       end
 
@@ -117,10 +117,10 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            created_at == o.created_at &&
-            updated_at == o.updated_at &&
             target_url == o.target_url &&
-            throttling == o.throttling
+            throttling == o.throttling &&
+            created_at == o.created_at &&
+            updated_at == o.updated_at
       end
 
       # @see the `==` method
@@ -132,7 +132,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [created_at, updated_at, target_url, throttling].hash
+        [target_url, throttling, created_at, updated_at].hash
       end
 
       # Builds the object from hash

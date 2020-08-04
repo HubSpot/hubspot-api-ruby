@@ -16,19 +16,19 @@ module Hubspot
   module Webhooks
     class SubscriptionPatchRequest
       # Determines if the subscription is active or paused.
-      attr_accessor :enabled
+      attr_accessor :active
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'enabled' => :'enabled'
+          :'active' => :'active'
         }
       end
 
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'enabled' => :'Boolean'
+          :'active' => :'Boolean'
         }
       end
 
@@ -53,8 +53,8 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'enabled')
-          self.enabled = attributes[:'enabled']
+        if attributes.key?(:'active')
+          self.active = attributes[:'active']
         end
       end
 
@@ -76,7 +76,7 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            enabled == o.enabled
+            active == o.active
       end
 
       # @see the `==` method
@@ -88,7 +88,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [enabled].hash
+        [active].hash
       end
 
       # Builds the object from hash
