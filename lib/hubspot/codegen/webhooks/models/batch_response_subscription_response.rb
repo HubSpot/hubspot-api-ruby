@@ -19,10 +19,6 @@ module Hubspot
 
       attr_accessor :results
 
-      attr_accessor :num_errors
-
-      attr_accessor :errors
-
       attr_accessor :requested_at
 
       attr_accessor :started_at
@@ -58,8 +54,6 @@ module Hubspot
         {
           :'status' => :'status',
           :'results' => :'results',
-          :'num_errors' => :'numErrors',
-          :'errors' => :'errors',
           :'requested_at' => :'requestedAt',
           :'started_at' => :'startedAt',
           :'completed_at' => :'completedAt',
@@ -72,8 +66,6 @@ module Hubspot
         {
           :'status' => :'String',
           :'results' => :'Array<SubscriptionResponse>',
-          :'num_errors' => :'Integer',
-          :'errors' => :'Array<Error>',
           :'requested_at' => :'DateTime',
           :'started_at' => :'DateTime',
           :'completed_at' => :'DateTime',
@@ -109,16 +101,6 @@ module Hubspot
         if attributes.key?(:'results')
           if (value = attributes[:'results']).is_a?(Array)
             self.results = value
-          end
-        end
-
-        if attributes.key?(:'num_errors')
-          self.num_errors = attributes[:'num_errors']
-        end
-
-        if attributes.key?(:'errors')
-          if (value = attributes[:'errors']).is_a?(Array)
-            self.errors = value
           end
         end
 
@@ -193,8 +175,6 @@ module Hubspot
         self.class == o.class &&
             status == o.status &&
             results == o.results &&
-            num_errors == o.num_errors &&
-            errors == o.errors &&
             requested_at == o.requested_at &&
             started_at == o.started_at &&
             completed_at == o.completed_at &&
@@ -210,7 +190,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [status, results, num_errors, errors, requested_at, started_at, completed_at, links].hash
+        [status, results, requested_at, started_at, completed_at, links].hash
       end
 
       # Builds the object from hash
