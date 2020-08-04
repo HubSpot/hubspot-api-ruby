@@ -292,11 +292,11 @@ module Hubspot
       # Updates the details for an existing subscription.
       # @param subscription_id [Integer] The ID of the subscription to update.
       # @param app_id [Integer] The ID of the target app.
+      # @param subscription_patch_request [SubscriptionPatchRequest] Updated details for the subscription.
       # @param [Hash] opts the optional parameters
-      # @option opts [SubscriptionPatchRequest] :subscription_patch_request Updated details for the subscription.
       # @return [SubscriptionResponse]
-      def update(subscription_id, app_id, opts = {})
-        data, _status_code, _headers = update_with_http_info(subscription_id, app_id, opts)
+      def update(subscription_id, app_id, subscription_patch_request, opts = {})
+        data, _status_code, _headers = update_with_http_info(subscription_id, app_id, subscription_patch_request, opts)
         data
       end
 
@@ -304,10 +304,10 @@ module Hubspot
       # Updates the details for an existing subscription.
       # @param subscription_id [Integer] The ID of the subscription to update.
       # @param app_id [Integer] The ID of the target app.
+      # @param subscription_patch_request [SubscriptionPatchRequest] Updated details for the subscription.
       # @param [Hash] opts the optional parameters
-      # @option opts [SubscriptionPatchRequest] :subscription_patch_request Updated details for the subscription.
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
-      def update_with_http_info(subscription_id, app_id, opts = {})
+      def update_with_http_info(subscription_id, app_id, subscription_patch_request, opts = {})
         if @api_client.config.debugging
           @api_client.config.logger.debug 'Calling API: SubscriptionsApi.update ...'
         end
@@ -318,6 +318,10 @@ module Hubspot
         # verify the required parameter 'app_id' is set
         if @api_client.config.client_side_validation && app_id.nil?
           fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.update"
+        end
+        # verify the required parameter 'subscription_patch_request' is set
+        if @api_client.config.client_side_validation && subscription_patch_request.nil?
+          fail ArgumentError, "Missing the required parameter 'subscription_patch_request' when calling SubscriptionsApi.update"
         end
         # resource path
         local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -336,7 +340,7 @@ module Hubspot
         form_params = opts[:form_params] || {}
 
         # http body (model)
-        post_body = opts[:body] || @api_client.object_to_http_body(opts[:'subscription_patch_request']) 
+        post_body = opts[:body] || @api_client.object_to_http_body(subscription_patch_request) 
 
         # return_type
         return_type = opts[:return_type] || 'SubscriptionResponse' 
@@ -361,9 +365,9 @@ module Hubspot
       end
 
       # Batch update subscriptions
-      # Activates or deactivates specified subscriptions for the given app.
-      # @param app_id [Integer] The ID of the target app.
-      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Collection of updated details for the specified subscription.
+      # Activates or deactivates target app subscriptions.
+      # @param app_id [Integer] The app ID of the target app.
+      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Updated details for the specified subscriptions.
       # @param [Hash] opts the optional parameters
       # @return [BatchResponseSubscriptionResponse]
       def update_batch(app_id, batch_input_subscription_batch_update_request, opts = {})
@@ -372,9 +376,9 @@ module Hubspot
       end
 
       # Batch update subscriptions
-      # Activates or deactivates specified subscriptions for the given app.
-      # @param app_id [Integer] The ID of the target app.
-      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Collection of updated details for the specified subscription.
+      # Activates or deactivates target app subscriptions.
+      # @param app_id [Integer] The app ID of the target app.
+      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Updated details for the specified subscriptions.
       # @param [Hash] opts the optional parameters
       # @return [Array<(BatchResponseSubscriptionResponse, Integer, Hash)>] BatchResponseSubscriptionResponse data, response status code and response headers
       def update_batch_with_http_info(app_id, batch_input_subscription_batch_update_request, opts = {})

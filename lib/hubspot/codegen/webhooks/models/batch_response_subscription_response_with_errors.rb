@@ -14,24 +14,22 @@ require 'date'
 
 module Hubspot
   module Webhooks
-    class SubscriptionResponse
-      # Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-      attr_accessor :event_type
+    class BatchResponseSubscriptionResponseWithErrors
+      attr_accessor :status
 
-      # The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
-      attr_accessor :property_name
+      attr_accessor :results
 
-      # Determines if the subscription is active or paused.
-      attr_accessor :active
+      attr_accessor :num_errors
 
-      # The unique ID of the subscription.
-      attr_accessor :id
+      attr_accessor :errors
 
-      # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
-      attr_accessor :created_at
+      attr_accessor :requested_at
 
-      # When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
-      attr_accessor :updated_at
+      attr_accessor :started_at
+
+      attr_accessor :completed_at
+
+      attr_accessor :links
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -58,24 +56,28 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'event_type' => :'eventType',
-          :'property_name' => :'propertyName',
-          :'active' => :'active',
-          :'id' => :'id',
-          :'created_at' => :'createdAt',
-          :'updated_at' => :'updatedAt'
+          :'status' => :'status',
+          :'results' => :'results',
+          :'num_errors' => :'numErrors',
+          :'errors' => :'errors',
+          :'requested_at' => :'requestedAt',
+          :'started_at' => :'startedAt',
+          :'completed_at' => :'completedAt',
+          :'links' => :'links'
         }
       end
 
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'event_type' => :'String',
-          :'property_name' => :'String',
-          :'active' => :'Boolean',
-          :'id' => :'String',
-          :'created_at' => :'DateTime',
-          :'updated_at' => :'DateTime'
+          :'status' => :'String',
+          :'results' => :'Array<SubscriptionResponse>',
+          :'num_errors' => :'Integer',
+          :'errors' => :'Array<Error>',
+          :'requested_at' => :'DateTime',
+          :'started_at' => :'DateTime',
+          :'completed_at' => :'DateTime',
+          :'links' => :'Hash<String, String>'
         }
       end
 
@@ -89,39 +91,53 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Webhooks::SubscriptionResponse` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Webhooks::BatchResponseSubscriptionResponseWithErrors` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Webhooks::SubscriptionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Webhooks::BatchResponseSubscriptionResponseWithErrors`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'event_type')
-          self.event_type = attributes[:'event_type']
+        if attributes.key?(:'status')
+          self.status = attributes[:'status']
         end
 
-        if attributes.key?(:'property_name')
-          self.property_name = attributes[:'property_name']
+        if attributes.key?(:'results')
+          if (value = attributes[:'results']).is_a?(Array)
+            self.results = value
+          end
         end
 
-        if attributes.key?(:'active')
-          self.active = attributes[:'active']
+        if attributes.key?(:'num_errors')
+          self.num_errors = attributes[:'num_errors']
         end
 
-        if attributes.key?(:'id')
-          self.id = attributes[:'id']
+        if attributes.key?(:'errors')
+          if (value = attributes[:'errors']).is_a?(Array)
+            self.errors = value
+          end
         end
 
-        if attributes.key?(:'created_at')
-          self.created_at = attributes[:'created_at']
+        if attributes.key?(:'requested_at')
+          self.requested_at = attributes[:'requested_at']
         end
 
-        if attributes.key?(:'updated_at')
-          self.updated_at = attributes[:'updated_at']
+        if attributes.key?(:'started_at')
+          self.started_at = attributes[:'started_at']
+        end
+
+        if attributes.key?(:'completed_at')
+          self.completed_at = attributes[:'completed_at']
+        end
+
+        if attributes.key?(:'links')
+          if (value = attributes[:'links']).is_a?(Hash)
+            self.links = value
+          end
         end
       end
 
@@ -129,20 +145,20 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @event_type.nil?
-          invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
+        if @status.nil?
+          invalid_properties.push('invalid value for "status", status cannot be nil.')
         end
 
-        if @active.nil?
-          invalid_properties.push('invalid value for "active", active cannot be nil.')
+        if @results.nil?
+          invalid_properties.push('invalid value for "results", results cannot be nil.')
         end
 
-        if @id.nil?
-          invalid_properties.push('invalid value for "id", id cannot be nil.')
+        if @started_at.nil?
+          invalid_properties.push('invalid value for "started_at", started_at cannot be nil.')
         end
 
-        if @created_at.nil?
-          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+        if @completed_at.nil?
+          invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
         end
 
         invalid_properties
@@ -151,23 +167,23 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @event_type.nil?
-        event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion"])
-        return false unless event_type_validator.valid?(@event_type)
-        return false if @active.nil?
-        return false if @id.nil?
-        return false if @created_at.nil?
+        return false if @status.nil?
+        status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+        return false unless status_validator.valid?(@status)
+        return false if @results.nil?
+        return false if @started_at.nil?
+        return false if @completed_at.nil?
         true
       end
 
       # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] event_type Object to be assigned
-      def event_type=(event_type)
-        validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion"])
-        unless validator.valid?(event_type)
-          fail ArgumentError, "invalid value for \"event_type\", must be one of #{validator.allowable_values}."
+      # @param [Object] status Object to be assigned
+      def status=(status)
+        validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+        unless validator.valid?(status)
+          fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
         end
-        @event_type = event_type
+        @status = status
       end
 
       # Checks equality by comparing each attribute.
@@ -175,12 +191,14 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            event_type == o.event_type &&
-            property_name == o.property_name &&
-            active == o.active &&
-            id == o.id &&
-            created_at == o.created_at &&
-            updated_at == o.updated_at
+            status == o.status &&
+            results == o.results &&
+            num_errors == o.num_errors &&
+            errors == o.errors &&
+            requested_at == o.requested_at &&
+            started_at == o.started_at &&
+            completed_at == o.completed_at &&
+            links == o.links
       end
 
       # @see the `==` method
@@ -192,7 +210,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [event_type, property_name, active, id, created_at, updated_at].hash
+        [status, results, num_errors, errors, requested_at, started_at, completed_at, links].hash
       end
 
       # Builds the object from hash
