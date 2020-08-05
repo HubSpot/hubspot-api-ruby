@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('select#boards, select#pipelines').on('change', fetchMappings);
-  $('form.mapping-select').on('submit', createMapping);
+  $('form.mapping-select').on('ajax:success', createMapping);
 
 });
 
@@ -16,18 +16,10 @@ function removeMapping(e) {
   });
 }
 
-function createMapping(e) {
-  e.preventDefault();
-  var form = $(this);
-  $.ajax({
-    type: 'POST',
-    url: '/mappings',
-    dataType: 'json',
-    data: form.serialize(),
-    success: function(result) {
-      addMappingtoDOM(result.data.mapping);
-    }
-  });
+function createMapping(event) {
+  [response, _, _] = event.detail;
+  addMappingtoDOM(response.data.mapping);
+
 }
 
 function addMappingtoDOM(mappingData) {

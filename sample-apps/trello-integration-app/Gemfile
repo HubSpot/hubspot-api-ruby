@@ -14,7 +14,7 @@ gem 'ruby-trello'
 gem 'omniauth-trello'
 gem 'mysql2', '~> 0.5.2'
 gem 'jquery-rails'
-gem 'httparty'
+gem 'httparty', '0.17.3'
 
 gem 'hubspot-api-client', path: '../../'
 

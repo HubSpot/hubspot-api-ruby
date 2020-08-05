@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_143913) do
+ActiveRecord::Schema.define(version: 2020_07_27_083656) do
 
   create_table "deal_associations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "deal_id"
@@ -43,9 +43,10 @@ ActiveRecord::Schema.define(version: 2020_07_15_143913) do
     t.string "secret"
   end
 
-  create_table "trello_webhooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "callback_url"
-    t.string "id_model"
+  create_table "webhooks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "webhook_id"
+    t.string "card_id"
+    t.string "url"
   end
 
 end

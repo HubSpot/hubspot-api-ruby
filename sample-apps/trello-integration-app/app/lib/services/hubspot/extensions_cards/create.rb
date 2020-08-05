@@ -58,6 +58,23 @@ module Services
 
             ExtensionCard.create!(card_id_key: ExtensionCard::CARD_ID_KEY, card_id: response.id)
           end
+
+          outdated_webhooks = Webhook.where.not(url: callback_url)
+          outdated_webhooks.each do |webhook|
+            Services::Trello::Webhooks::Update.new(webhook_id: webhook.webhook_id, callback_url: callback_url).call
+            webhook.update!(url: callback_url)
+          end
+        end
+
+        private
+
+        def callback_url
+          url_for(controller: 'trello/webhooks',
+            action: :receive,
+            only_path: false,
+            protocol: 'https',
+            host: @request.host
+          )
         end
       end
     end

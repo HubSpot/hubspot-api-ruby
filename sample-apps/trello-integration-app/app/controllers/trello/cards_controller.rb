@@ -22,14 +22,15 @@ module Trello
       deal_id = params[:hs_object_id]
       card_id = params[:card_id]
       DealAssociation.create!(deal_id: deal_id, card_id: card_id)
-      create_webhook(card_id)
-
+      create_or_update_webhook(card_id)
       redirect_to search_frame_success_trello_cards_path
     end
 
     def delete_association
       deal_id = params[:hs_object_id]
-      DealAssociation.find_by(deal_id: deal_id).destroy!
+      association = DealAssociation.find_by(deal_id: deal_id)
+      delete_webhook(association.card_id)
+      association.destroy!
     end
 
     def search
@@ -60,16 +61,34 @@ module Trello
       @card = ::Trello::Card.find(card_id)
     end
 
-    def create_webhook(card_id)
-      Services::Trello::Webhooks::Create.new(
-        id_model: card_id,
-        callback_url: url_for(
-          controller: 'trello/webhooks',
-          action: :complete,
-          only_path: false,
-          protocol: 'https'
-        )
-      ).call
+    def create_or_update_webhook(card_id)
+      webhooks = ::Webhook.where(card_id: card_id)
+
+      if webhooks.present?
+        webhooks.each do |webhook|
+          Services::Trello::Webhooks::Update.new(
+            webhook_id: webhook.webhook_id,
+            callback_url: trello_webhooks_url
+          ).call
+          webhook.update!(url: callback_url)
+        end
+      else
+        puts 'creating webhook'
+        webhook = Services::Trello::Webhooks::Create.new(
+          id_model: card_id,
+          callback_url: trello_webhooks_url
+        ).call
+
+        ::Webhook.create!(webhook_id: webhook['id'], card_id: card_id, url: trello_webhooks_url) if webhook.present?
+      end
+    end
+
+    def delete_webhook(card_id)
+      webhooks = ::Webhook.where(card_id: card_id)
+      webhooks.each do |webhook|
+        Services::Trello::Webhooks::Delete.new(webhook_id: webhook.webhook_id).call
+      end
+      webhooks.destroy_all
     end
   end
 end
