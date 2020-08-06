@@ -13,7 +13,14 @@ class ApplicationController < ActionController::Base
   end
 
   def check_env_variables
-    missing_vars = %w[HUBSPOT_CLIENT_ID HUBSPOT_CLIENT_SECRET].select { |var| ENV[var].blank? }
+    missing_vars = %w[
+      HUBSPOT_CLIENT_ID
+      HUBSPOT_CLIENT_SECRET
+      HUBSPOT_DEVELOPER_API_KEY
+      HUBSPOT_APPLICATION_ID
+      TRELLO_KEY
+      TRELLO_SECRET
+    ].select { |var| ENV[var].blank? }
     raise(ExceptionHandler::HubspotError.new, "Please specify #{missing_vars.join(', ')} in .env") if missing_vars.present?
   end
 
