@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="auth-buttons-container row">
+    <div class="column trello-container">
+      <div class="trello-label">
+        <h3>Trello</h3>
+      </div>
+      <ol>
+        <li>Go to <a href="https://trello.com/app-key" target="_blank">https://trello.com/app-key</a> page</li>
+        <li>Add <%= root_url(protocol: :https) %> to "Allowed Resources" section</li>
+        <li>Continue with
+        <% if trello_authorized? %>
+          <div class="row authorize-button button authorized button-inline">
+            Authorized
+          </div>
+        <% else %>
+          <div class="row authorize-button trello-authorize button-inline authorize-link">
+              <a class="button" href="/auth/trello">Authorize</a>
+          </div>
+        <% end %>
+        </li>
+      </ol>
+    </div>
+
+    <div class="column hubspot-container">
+      <div class="hubspot-label">
+        <h3>Hubspot</h3>
+      </div>
+        <% if hubspot_authorized? %>
+          <div class="row authorize-button button authorized">
+            Authorized
+          </div>
+        <% else %>
+          <div class="row authorize-button hubspot-authorize">
+              <a class="button" href="/oauth/hubspot">Authorize</a>
+          </div>
+        <% end %>
+    </div>
+  </div>
+  <div class="authorization-info">
+    <h3>Authorize both accounts to create your sync!</h3>
+  </div>
+</div>

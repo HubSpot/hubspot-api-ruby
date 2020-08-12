@@ -1,0 +1,44 @@
+<div class="container" id="mappings-container">
+  <% if @error.present? %>
+    <h3><%= @error.message %></h3>
+  <% else %>
+    <div class="row">
+      <div class="column boards">
+        <h3>Boards</h3>
+        <%= select_tag(
+          :boards,
+          options_for_select(@boards.map { |board| [board.name, board.id] }),
+          include_blank: '-- select pipeline --'
+        ) %>
+      </div>
+
+      <div class="column pipelines">
+        <h3>Pipelines</h3>
+        <%= select_tag(
+          :pipelines,
+          options_for_select(@pipelines.map { |pipeline| [pipeline.label, pipeline.id] }),
+          include_blank: '-- select board --'
+        ) %>
+      </div>
+    </div>
+
+    <%= form_with(url: '/mappings', method: :post, class: 'row mapping-select') do %>
+      <%= select_tag('mapping[board_list_id]', nil, include_blank: '-- select trello list --', class: 'column') %>
+      <%= select_tag('mapping[pipeline_stage_id]', nil, include_blank: '-- select pipeline stage --', class: 'column') %>
+      <%= hidden_field(:mapping, :board_id, value: nil)%>
+      <%= hidden_field(:mapping, :pipeline_id, value: nil)%>
+      <%= submit_tag('Add row', class: 'column') %>
+    <% end %>
+
+    <div class="mappings">
+      <div class="row mapping-headers">
+        <div class="column">Board list</div>
+        <div class="column"></div>
+        <div class="column">Pipeline stage</div>
+        <div class="column remove-button"></div>
+      </div>
+      <%= render 'mapping', object: @mapping, object: {}, classes: 'template' %>
+    </div>
+  <% end %>
+</div>
+

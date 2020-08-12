@@ -1,0 +1,13 @@
+<div class="mapping-row row <%= local_assigns[:classes] %>">
+  <div class="column board-list-id">
+    <%= object[:board_list_name] %>
+  </div>
+  <div class="column arrow">
+    <%= image_tag('right-arrow.png') %>
+  </div>
+  <div class="column pipeline-stage-id">
+    <%= object[:pipeline_stage_label] %>
+  </div>
+  <div class="mapping-id"><%= object[:id] %></div>
+  <button type="button" class="column remove-button">Remove</button>
+</div>

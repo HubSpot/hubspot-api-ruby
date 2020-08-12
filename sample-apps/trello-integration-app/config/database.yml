@@ -1,0 +1,16 @@
+default: &default
+  adapter: mysql2
+  pool: 25
+  timeout: 5000
+  username: <%= ENV['DB_USERNAME'] %>
+  password: "<%= ENV['DB_PASSWORD'] %>"
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
+
+development:
+ <<: *default
+ database: <%= ENV['DB_NAME'] %>_development
+
+production:
+ <<: *default
+ database: <%= ENV['DB_NAME'] %>

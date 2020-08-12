@@ -1,0 +1,34 @@
+.authorize-button .button {
+  width: 200px;
+}
+
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.authorization-info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.authorized {
+  width: 200px;
+  cursor: default;
+  pointer-events: none;
+  text-decoration: none;
+  background-color: grey;
+  border: none;
+  text-align: center;
+  display: block;
+}
+
+.button-inline {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.authorize-link {
+  display: inline;
+}
