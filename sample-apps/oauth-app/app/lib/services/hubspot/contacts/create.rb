@@ -8,7 +8,7 @@ module Services
 
         def call
           create_api = ::Hubspot::Crm::Contacts::BasicApi.new
-          create_api.create(body: contact_input, auth_names: 'oauth2')
+          create_api.create(contact_input, auth_names: 'oauth2')
         end
 
         private

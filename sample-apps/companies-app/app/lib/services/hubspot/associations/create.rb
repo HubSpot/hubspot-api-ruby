@@ -8,7 +8,7 @@ module Services
         end
 
         def call
-          ::Hubspot::Crm::Associations::BatchApi.new.create_batch(
+          ::Hubspot::Crm::Associations::BatchApi.new.create(
             'companies',
             'contacts',
             batch_input_public_association: association,

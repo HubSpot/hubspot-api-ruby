@@ -11,7 +11,7 @@ module Services
           contacts_object = ::Hubspot::Crm::Contacts::BatchInputSimplePublicObjectInput.new(
             inputs: contacts
           )
-          batch_api.create(body: contacts_object, auth_names: 'oauth2')
+          batch_api.create(contacts_object, auth_names: 'oauth2')
         end
 
         private

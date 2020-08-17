@@ -11,7 +11,7 @@ module Services
           ids_object = ::Hubspot::Crm::Contacts::BatchInputSimplePublicObjectId.new(
             inputs: @ids
           )
-          batch_api.archive(body: ids_object , auth_names: 'oauth2')
+          batch_api.archive(ids_object, auth_names: 'oauth2')
         end
 
         private

@@ -8,7 +8,7 @@ module Services
 
         def call
           search_api = ::Hubspot::Crm::Contacts::SearchApi.new
-          search_api.do_search(body: search_request, auth_names: 'oauth2').results
+          search_api.do_search(search_request, auth_names: 'oauth2').results
         end
 
         private

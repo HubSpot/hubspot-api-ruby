@@ -8,7 +8,7 @@ module Services
 
         def call
           basic_api = ::Hubspot::Crm::Companies::BasicApi.new
-          basic_api.create(auth_names: 'oauth2', body: company)
+          basic_api.create(company, auth_names: 'oauth2')
         end
 
         private

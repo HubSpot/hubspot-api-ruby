@@ -9,7 +9,7 @@ module Services
         def call
           return unless associated_contacts_id_object.present?
 
-          contacts_list = ::Hubspot::Crm::Contacts::BatchApi.new.read_batch(
+          contacts_list = ::Hubspot::Crm::Contacts::BatchApi.new.read(
             body: associated_contacts_id_object,
             auth_names: 'oauth2'
           ).results
@@ -18,7 +18,7 @@ module Services
         private
 
         def associated_contacts_id_object
-          id_objects = ::Hubspot::Crm::Associations::BatchApi.new.read_batch(
+          id_objects = ::Hubspot::Crm::Associations::BatchApi.new.read(
             'companies',
             'contacts',
             body: company_id_object,
