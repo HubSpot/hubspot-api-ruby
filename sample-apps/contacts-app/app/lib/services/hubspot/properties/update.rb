@@ -9,8 +9,7 @@ module Services
 
         def call
           core_api = ::Hubspot::Crm::Properties::CoreApi.new
-          params = { auth_names: 'oauth2', body: property_update }
-          core_api.update('contact', @name, params)
+          core_api.update('contact', @name, property_update, auth_names: 'oauth2')
         end
 
         private
