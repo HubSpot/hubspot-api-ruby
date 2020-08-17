@@ -10,10 +10,7 @@ module Services
           contact_id_objects = ::Hubspot::Crm::Contacts::BatchReadInputSimplePublicObjectId.new(
             inputs: @ids.map { |id| ::Hubspot::Crm::Contacts::SimplePublicObjectId.new(id: id) }
           )
-          batch = ::Hubspot::Crm::Contacts::BatchApi.new.read(
-            body: contact_id_objects,
-            auth_names: 'oauth2'
-          ).results
+          batch = ::Hubspot::Crm::Contacts::BatchApi.new.read(contact_id_objects, auth_names: 'oauth2').results
 
           contact_names = names(batch)
           @ids.map do |id|
