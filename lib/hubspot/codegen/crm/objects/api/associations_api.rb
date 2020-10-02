@@ -201,8 +201,8 @@ module Hubspot
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page. (default to 500)
         # @return [CollectionResponseAssociatedId]
-        def get_page(object_type, object_id, to_object_type, opts = {})
-          data, _status_code, _headers = get_page_with_http_info(object_type, object_id, to_object_type, opts)
+        def get_all(object_type, object_id, to_object_type, opts = {})
+          data, _status_code, _headers = get_all_with_http_info(object_type, object_id, to_object_type, opts)
           data
         end
 
@@ -215,21 +215,21 @@ module Hubspot
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page.
         # @return [Array<(CollectionResponseAssociatedId, Integer, Hash)>] CollectionResponseAssociatedId data, response status code and response headers
-        def get_page_with_http_info(object_type, object_id, to_object_type, opts = {})
+        def get_all_with_http_info(object_type, object_id, to_object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: AssociationsApi.get_page ...'
+            @api_client.config.logger.debug 'Calling API: AssociationsApi.get_all ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'object_type' when calling AssociationsApi.get_page"
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling AssociationsApi.get_all"
           end
           # verify the required parameter 'object_id' is set
           if @api_client.config.client_side_validation && object_id.nil?
-            fail ArgumentError, "Missing the required parameter 'object_id' when calling AssociationsApi.get_page"
+            fail ArgumentError, "Missing the required parameter 'object_id' when calling AssociationsApi.get_all"
           end
           # verify the required parameter 'to_object_type' is set
           if @api_client.config.client_side_validation && to_object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.get_page"
+            fail ArgumentError, "Missing the required parameter 'to_object_type' when calling AssociationsApi.get_all"
           end
           # resource path
           local_var_path = '/crm/v3/objects/{objectType}/{objectId}/associations/{toObjectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s))
@@ -268,7 +268,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: AssociationsApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: AssociationsApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

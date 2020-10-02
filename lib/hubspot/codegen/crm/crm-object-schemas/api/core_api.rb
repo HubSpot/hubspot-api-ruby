@@ -285,6 +285,62 @@ module Hubspot
           return data, status_code, headers
         end
 
+        # Get all schemas
+        # Returns all object schemas that have been defined for the target account.
+        # @param [Hash] opts the optional parameters
+        # @return [CollectionResponseObjectSchema]
+        def get_all(opts = {})
+          data, _status_code, _headers = get_all_with_http_info(opts)
+          data
+        end
+
+        # Get all schemas
+        # Returns all object schemas that have been defined for the target account.
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(CollectionResponseObjectSchema, Integer, Hash)>] CollectionResponseObjectSchema data, response status code and response headers
+        def get_all_with_http_info(opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: CoreApi.get_all ...'
+          end
+          # resource path
+          local_var_path = '/CrmObjectSchemas/v3/schemas'
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponseObjectSchema' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: CoreApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
         # Get an existing schema
         # Returns an existing object schema.
         # @param object_type [String] Fully qualified name or object type ID of the target schema.
@@ -343,62 +399,6 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: CoreApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Get all schemas
-        # Returns all object schemas that have been defined for the target account.
-        # @param [Hash] opts the optional parameters
-        # @return [CollectionResponseObjectSchema]
-        def get_page(opts = {})
-          data, _status_code, _headers = get_page_with_http_info(opts)
-          data
-        end
-
-        # Get all schemas
-        # Returns all object schemas that have been defined for the target account.
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponseObjectSchema, Integer, Hash)>] CollectionResponseObjectSchema data, response status code and response headers
-        def get_page_with_http_info(opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: CoreApi.get_page ...'
-          end
-          # resource path
-          local_var_path = '/CrmObjectSchemas/v3/schemas'
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] 
-
-          # return_type
-          return_type = opts[:return_type] || 'CollectionResponseObjectSchema' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: CoreApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

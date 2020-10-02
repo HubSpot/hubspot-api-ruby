@@ -24,21 +24,21 @@ module Hubspot
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def archive(object_type, opts = {})
-          archive_with_http_info(object_type, opts)
+        def purge(object_type, opts = {})
+          purge_with_http_info(object_type, opts)
           nil
         end
 
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def archive_with_http_info(object_type, opts = {})
+        def purge_with_http_info(object_type, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: DefaultApi.archive ...'
+            @api_client.config.logger.debug 'Calling API: DefaultApi.purge ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'object_type' when calling DefaultApi.archive"
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling DefaultApi.purge"
           end
           # resource path
           local_var_path = '/CrmObjectSchemas/v3/schemas/{objectType}/purge'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -74,7 +74,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: DefaultApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: DefaultApi#purge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
