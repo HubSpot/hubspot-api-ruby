@@ -44,6 +44,47 @@ all_contacts = basic_api.get_all(auth_names: 'oauth2')
 Please note that pagination is used under the hood to get all results.
 
 
+### Crm Object Schemas client usage:
+
+#### Creation
+
+```ruby
+config = ::Hubspot::Crm::Schemas::Configuration.new do |config|
+    config.api_key = { 'hapikey' => 'your_hapikey' }
+  end
+  api_client = ::Hubspot::Crm::Schemas::ApiClient.new(config)
+  api = ::Hubspot::Crm::Schemas::CoreApi.new(api_client)
+  labels = ::Hubspot::Crm::Schemas::ObjectTypeDefinitionLabels.new(singular: 'My object', plural: 'My objects')
+  option = ::Hubspot::Crm::Schemas::OptionInput.new(
+    label: 'Option A',
+    value: 'A',
+    description: 'Choice number one',
+    display_order: 1,
+    hidden: false
+  )
+  property = ::Hubspot::Crm::Schemas::ObjectTypePropertyCreate.new(
+      name: 'property001',
+      label: 'My object property',
+      group_name: 'my_object_information',
+      options: [option],
+      display_order: 2,
+      type: 'enumeration',
+      field_type: 'select'
+  )
+  object_schema_egg = ::Hubspot::Crm::Schemas::ObjectSchemaEgg.new(
+      labels: labels,
+      required_properties: ['property001'],
+      searchable_properties: [],
+      primary_display_property: 'property001',
+      secondary_display_properties: [],
+      properties: [property],
+      associated_objects: ['CONTACT'],
+      name: 'my_object'
+  )
+  api_response = api.create(object_schema_egg)
+```
+
+
 ### Error handling
 
 #### You can set number of retry attempts and delay in seconds before retry on specific status code of response.
