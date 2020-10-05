@@ -14,33 +14,88 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class PropertyModificationMetadata
-        attr_accessor :archivable
+    module Schemas
+      class ObjectTypePropertyCreate
+        # The internal property name, which must be used when referencing the property from the API.
+        attr_accessor :name
 
-        attr_accessor :read_only_definition
+        # A human-readable property label that will be shown in HubSpot.
+        attr_accessor :label
 
-        attr_accessor :read_only_options
+        # The name of the group this property belongs to.
+        attr_accessor :group_name
 
-        attr_accessor :read_only_value
+        # A description of the property that will be shown as help text in HubSpot.
+        attr_accessor :description
+
+        # A list of available options for the property. This field is only required for enumerated properties.
+        attr_accessor :options
+
+        # The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
+        attr_accessor :display_order
+
+        # Whether or not the property's value must be unique. Once set, this can't be changed.
+        attr_accessor :has_unique_value
+
+        attr_accessor :hidden
+
+        # The data type of the property.
+        attr_accessor :type
+
+        # Controls how the property appears in HubSpot.
+        attr_accessor :field_type
+
+        class EnumAttributeValidator
+          attr_reader :datatype
+          attr_reader :allowable_values
+
+          def initialize(datatype, allowable_values)
+            @allowable_values = allowable_values.map do |value|
+              case datatype.to_s
+              when /Integer/i
+                value.to_i
+              when /Float/i
+                value.to_f
+              else
+                value
+              end
+            end
+          end
+
+          def valid?(value)
+            !value || allowable_values.include?(value)
+          end
+        end
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'archivable' => :'archivable',
-            :'read_only_definition' => :'readOnlyDefinition',
-            :'read_only_options' => :'readOnlyOptions',
-            :'read_only_value' => :'readOnlyValue'
+            :'name' => :'name',
+            :'label' => :'label',
+            :'group_name' => :'groupName',
+            :'description' => :'description',
+            :'options' => :'options',
+            :'display_order' => :'displayOrder',
+            :'has_unique_value' => :'hasUniqueValue',
+            :'hidden' => :'hidden',
+            :'type' => :'type',
+            :'field_type' => :'fieldType'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'archivable' => :'Boolean',
-            :'read_only_definition' => :'Boolean',
-            :'read_only_options' => :'Boolean',
-            :'read_only_value' => :'Boolean'
+            :'name' => :'String',
+            :'label' => :'String',
+            :'group_name' => :'String',
+            :'description' => :'String',
+            :'options' => :'Array<OptionInput>',
+            :'display_order' => :'Integer',
+            :'has_unique_value' => :'Boolean',
+            :'hidden' => :'Boolean',
+            :'type' => :'String',
+            :'field_type' => :'String'
           }
         end
 
@@ -54,31 +109,57 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::PropertyModificationMetadata` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::ObjectTypePropertyCreate` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::PropertyModificationMetadata`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::ObjectTypePropertyCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'archivable')
-            self.archivable = attributes[:'archivable']
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'read_only_definition')
-            self.read_only_definition = attributes[:'read_only_definition']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
 
-          if attributes.key?(:'read_only_options')
-            self.read_only_options = attributes[:'read_only_options']
+          if attributes.key?(:'group_name')
+            self.group_name = attributes[:'group_name']
           end
 
-          if attributes.key?(:'read_only_value')
-            self.read_only_value = attributes[:'read_only_value']
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
+          if attributes.key?(:'options')
+            if (value = attributes[:'options']).is_a?(Array)
+              self.options = value
+            end
+          end
+
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'has_unique_value')
+            self.has_unique_value = attributes[:'has_unique_value']
+          end
+
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          end
+
+          if attributes.key?(:'field_type')
+            self.field_type = attributes[:'field_type']
           end
         end
 
@@ -86,16 +167,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @archivable.nil?
-            invalid_properties.push('invalid value for "archivable", archivable cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
-          if @read_only_definition.nil?
-            invalid_properties.push('invalid value for "read_only_definition", read_only_definition cannot be nil.')
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
-          if @read_only_value.nil?
-            invalid_properties.push('invalid value for "read_only_value", read_only_value cannot be nil.')
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
+          end
+
+          if @field_type.nil?
+            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
           end
 
           invalid_properties
@@ -104,10 +189,23 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @archivable.nil?
-          return false if @read_only_definition.nil?
-          return false if @read_only_value.nil?
+          return false if @name.nil?
+          return false if @label.nil?
+          return false if @type.nil?
+          type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration"])
+          return false unless type_validator.valid?(@type)
+          return false if @field_type.nil?
           true
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] type Object to be assigned
+        def type=(type)
+          validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration"])
+          unless validator.valid?(type)
+            fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+          end
+          @type = type
         end
 
         # Checks equality by comparing each attribute.
@@ -115,10 +213,16 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              archivable == o.archivable &&
-              read_only_definition == o.read_only_definition &&
-              read_only_options == o.read_only_options &&
-              read_only_value == o.read_only_value
+              name == o.name &&
+              label == o.label &&
+              group_name == o.group_name &&
+              description == o.description &&
+              options == o.options &&
+              display_order == o.display_order &&
+              has_unique_value == o.has_unique_value &&
+              hidden == o.hidden &&
+              type == o.type &&
+              field_type == o.field_type
         end
 
         # @see the `==` method
@@ -130,7 +234,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [archivable, read_only_definition, read_only_options, read_only_value].hash
+          [name, label, group_name, description, options, display_order, has_unique_value, hidden, type, field_type].hash
         end
 
         # Builds the object from hash
@@ -197,7 +301,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

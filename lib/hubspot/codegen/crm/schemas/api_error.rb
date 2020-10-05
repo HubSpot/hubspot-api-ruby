@@ -12,7 +12,7 @@ OpenAPI Generator version: 4.3.1
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
+    module Schemas
       class ApiError < StandardError
         attr_reader :code, :response_headers, :response_body
 

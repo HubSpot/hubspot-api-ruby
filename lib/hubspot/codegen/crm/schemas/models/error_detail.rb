@@ -14,27 +14,42 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class ObjectTypeDefinitionLabels
-        # The word for one object. (There’s no way to change this later.)
-        attr_accessor :singular
+    module Schemas
+      class ErrorDetail
+        # A human readable message describing the error along with remediation steps where appropriate
+        attr_accessor :message
 
-        # The word for multiple objects. (There’s no way to change this later.)
-        attr_accessor :plural
+        # The name of the field or parameter in which the error was found.
+        attr_accessor :_in
+
+        # The status code associated with the error detail
+        attr_accessor :code
+
+        # A specific category that contains more specific detail about the error
+        attr_accessor :sub_category
+
+        # Context about the error condition
+        attr_accessor :context
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'singular' => :'singular',
-            :'plural' => :'plural'
+            :'message' => :'message',
+            :'_in' => :'in',
+            :'code' => :'code',
+            :'sub_category' => :'subCategory',
+            :'context' => :'context'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'singular' => :'String',
-            :'plural' => :'String'
+            :'message' => :'String',
+            :'_in' => :'String',
+            :'code' => :'String',
+            :'sub_category' => :'String',
+            :'context' => :'Hash<String, Array<String>>'
           }
         end
 
@@ -48,23 +63,37 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::ObjectTypeDefinitionLabels` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::ErrorDetail` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::ObjectTypeDefinitionLabels`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::ErrorDetail`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'singular')
-            self.singular = attributes[:'singular']
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
           end
 
-          if attributes.key?(:'plural')
-            self.plural = attributes[:'plural']
+          if attributes.key?(:'_in')
+            self._in = attributes[:'_in']
+          end
+
+          if attributes.key?(:'code')
+            self.code = attributes[:'code']
+          end
+
+          if attributes.key?(:'sub_category')
+            self.sub_category = attributes[:'sub_category']
+          end
+
+          if attributes.key?(:'context')
+            if (value = attributes[:'context']).is_a?(Hash)
+              self.context = value
+            end
           end
         end
 
@@ -72,12 +101,17 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @message.nil?
+            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @message.nil?
           true
         end
 
@@ -86,8 +120,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              singular == o.singular &&
-              plural == o.plural
+              message == o.message &&
+              _in == o._in &&
+              code == o.code &&
+              sub_category == o.sub_category &&
+              context == o.context
         end
 
         # @see the `==` method
@@ -99,7 +136,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [singular, plural].hash
+          [message, _in, code, sub_category, context].hash
         end
 
         # Builds the object from hash
@@ -166,7 +203,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

@@ -14,77 +14,42 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class AssociationDefinition
-        # ID of the primary object type to link from.
-        attr_accessor :from_object_type_id
+    module Schemas
+      class Option
+        # A human-readable option label that will be shown in HubSpot.
+        attr_accessor :label
 
-        # ID of the target object type ID to link to.
-        attr_accessor :to_object_type_id
+        # The internal value of the option, which must be used when setting the property value through the API.
+        attr_accessor :value
 
-        # A unique name for this association.
-        attr_accessor :name
+        # A description of the option.
+        attr_accessor :description
 
-        attr_accessor :cardinality
+        # Options are displayed in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
+        attr_accessor :display_order
 
-        attr_accessor :inverse_cardinality
-
-        # A unique ID for this association.
-        attr_accessor :id
-
-        # When the association was defined.
-        attr_accessor :created_at
-
-        # When the association was last updated.
-        attr_accessor :updated_at
-
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
+        # Hidden options will not be displayed in HubSpot.
+        attr_accessor :hidden
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'from_object_type_id' => :'fromObjectTypeId',
-            :'to_object_type_id' => :'toObjectTypeId',
-            :'name' => :'name',
-            :'cardinality' => :'cardinality',
-            :'inverse_cardinality' => :'inverseCardinality',
-            :'id' => :'id',
-            :'created_at' => :'createdAt',
-            :'updated_at' => :'updatedAt'
+            :'label' => :'label',
+            :'value' => :'value',
+            :'description' => :'description',
+            :'display_order' => :'displayOrder',
+            :'hidden' => :'hidden'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'from_object_type_id' => :'String',
-            :'to_object_type_id' => :'String',
-            :'name' => :'String',
-            :'cardinality' => :'String',
-            :'inverse_cardinality' => :'String',
-            :'id' => :'String',
-            :'created_at' => :'DateTime',
-            :'updated_at' => :'DateTime'
+            :'label' => :'String',
+            :'value' => :'String',
+            :'description' => :'String',
+            :'display_order' => :'Integer',
+            :'hidden' => :'Boolean'
           }
         end
 
@@ -98,47 +63,35 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::AssociationDefinition` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::Option` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::AssociationDefinition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::Option`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'from_object_type_id')
-            self.from_object_type_id = attributes[:'from_object_type_id']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
 
-          if attributes.key?(:'to_object_type_id')
-            self.to_object_type_id = attributes[:'to_object_type_id']
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
           end
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
           end
 
-          if attributes.key?(:'cardinality')
-            self.cardinality = attributes[:'cardinality']
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
           end
 
-          if attributes.key?(:'inverse_cardinality')
-            self.inverse_cardinality = attributes[:'inverse_cardinality']
-          end
-
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
-          end
-
-          if attributes.key?(:'updated_at')
-            self.updated_at = attributes[:'updated_at']
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
           end
         end
 
@@ -146,24 +99,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @from_object_type_id.nil?
-            invalid_properties.push('invalid value for "from_object_type_id", from_object_type_id cannot be nil.')
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
-          if @to_object_type_id.nil?
-            invalid_properties.push('invalid value for "to_object_type_id", to_object_type_id cannot be nil.')
+          if @value.nil?
+            invalid_properties.push('invalid value for "value", value cannot be nil.')
           end
 
-          if @cardinality.nil?
-            invalid_properties.push('invalid value for "cardinality", cardinality cannot be nil.')
-          end
-
-          if @inverse_cardinality.nil?
-            invalid_properties.push('invalid value for "inverse_cardinality", inverse_cardinality cannot be nil.')
-          end
-
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          if @hidden.nil?
+            invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
           end
 
           invalid_properties
@@ -172,36 +117,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @from_object_type_id.nil?
-          return false if @to_object_type_id.nil?
-          return false if @cardinality.nil?
-          cardinality_validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          return false unless cardinality_validator.valid?(@cardinality)
-          return false if @inverse_cardinality.nil?
-          inverse_cardinality_validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          return false unless inverse_cardinality_validator.valid?(@inverse_cardinality)
-          return false if @id.nil?
+          return false if @label.nil?
+          return false if @value.nil?
+          return false if @hidden.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] cardinality Object to be assigned
-        def cardinality=(cardinality)
-          validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          unless validator.valid?(cardinality)
-            fail ArgumentError, "invalid value for \"cardinality\", must be one of #{validator.allowable_values}."
-          end
-          @cardinality = cardinality
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] inverse_cardinality Object to be assigned
-        def inverse_cardinality=(inverse_cardinality)
-          validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          unless validator.valid?(inverse_cardinality)
-            fail ArgumentError, "invalid value for \"inverse_cardinality\", must be one of #{validator.allowable_values}."
-          end
-          @inverse_cardinality = inverse_cardinality
         end
 
         # Checks equality by comparing each attribute.
@@ -209,14 +128,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              from_object_type_id == o.from_object_type_id &&
-              to_object_type_id == o.to_object_type_id &&
-              name == o.name &&
-              cardinality == o.cardinality &&
-              inverse_cardinality == o.inverse_cardinality &&
-              id == o.id &&
-              created_at == o.created_at &&
-              updated_at == o.updated_at
+              label == o.label &&
+              value == o.value &&
+              description == o.description &&
+              display_order == o.display_order &&
+              hidden == o.hidden
         end
 
         # @see the `==` method
@@ -228,7 +144,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from_object_type_id, to_object_type_id, name, cardinality, inverse_cardinality, id, created_at, updated_at].hash
+          [label, value, description, display_order, hidden].hash
         end
 
         # Builds the object from hash
@@ -295,7 +211,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

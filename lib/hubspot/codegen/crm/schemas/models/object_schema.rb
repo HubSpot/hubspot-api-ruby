@@ -14,8 +14,8 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class ObjectSchemaEgg
+    module Schemas
+      class ObjectSchema
         attr_accessor :labels
 
         # The names of properties that should be **required** when creating an object of this type.
@@ -30,13 +30,27 @@ module Hubspot
         # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
         attr_accessor :secondary_display_properties
 
+        # A unique ID for this schema's object type. Will be defined as {meta-type}-{unique ID}.
+        attr_accessor :id
+
+        # An assigned unique ID for the object, including portal ID and object name.
+        attr_accessor :fully_qualified_name
+
+        # When the object schema was created.
+        attr_accessor :created_at
+
+        # When the object schema was last updated.
+        attr_accessor :updated_at
+
+        attr_accessor :object_type_id
+
         # Properties defined for this object type.
         attr_accessor :properties
 
-        # Associations defined for this object type.
-        attr_accessor :associated_objects
+        # Associations defined for a given object type.
+        attr_accessor :associations
 
-        # A unique name for this object. For internal use only.
+        # A unique name for the schema's object type.
         attr_accessor :name
 
         # Attribute mapping from ruby-style variable name to JSON key.
@@ -47,8 +61,13 @@ module Hubspot
             :'searchable_properties' => :'searchableProperties',
             :'primary_display_property' => :'primaryDisplayProperty',
             :'secondary_display_properties' => :'secondaryDisplayProperties',
+            :'id' => :'id',
+            :'fully_qualified_name' => :'fullyQualifiedName',
+            :'created_at' => :'createdAt',
+            :'updated_at' => :'updatedAt',
+            :'object_type_id' => :'objectTypeId',
             :'properties' => :'properties',
-            :'associated_objects' => :'associatedObjects',
+            :'associations' => :'associations',
             :'name' => :'name'
           }
         end
@@ -61,8 +80,13 @@ module Hubspot
             :'searchable_properties' => :'Array<String>',
             :'primary_display_property' => :'String',
             :'secondary_display_properties' => :'Array<String>',
-            :'properties' => :'Array<ObjectTypePropertyCreate>',
-            :'associated_objects' => :'Array<String>',
+            :'id' => :'String',
+            :'fully_qualified_name' => :'String',
+            :'created_at' => :'DateTime',
+            :'updated_at' => :'DateTime',
+            :'object_type_id' => :'String',
+            :'properties' => :'Array<Property>',
+            :'associations' => :'Array<AssociationDefinition>',
             :'name' => :'String'
           }
         end
@@ -77,13 +101,13 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::ObjectSchemaEgg` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::ObjectSchema` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::ObjectSchemaEgg`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::ObjectSchema`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
@@ -114,15 +138,35 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'fully_qualified_name')
+            self.fully_qualified_name = attributes[:'fully_qualified_name']
+          end
+
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
+          end
+
+          if attributes.key?(:'updated_at')
+            self.updated_at = attributes[:'updated_at']
+          end
+
+          if attributes.key?(:'object_type_id')
+            self.object_type_id = attributes[:'object_type_id']
+          end
+
           if attributes.key?(:'properties')
             if (value = attributes[:'properties']).is_a?(Array)
               self.properties = value
             end
           end
 
-          if attributes.key?(:'associated_objects')
-            if (value = attributes[:'associated_objects']).is_a?(Array)
-              self.associated_objects = value
+          if attributes.key?(:'associations')
+            if (value = attributes[:'associations']).is_a?(Array)
+              self.associations = value
             end
           end
 
@@ -151,12 +195,24 @@ module Hubspot
             invalid_properties.push('invalid value for "secondary_display_properties", secondary_display_properties cannot be nil.')
           end
 
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          end
+
+          if @fully_qualified_name.nil?
+            invalid_properties.push('invalid value for "fully_qualified_name", fully_qualified_name cannot be nil.')
+          end
+
+          if @object_type_id.nil?
+            invalid_properties.push('invalid value for "object_type_id", object_type_id cannot be nil.')
+          end
+
           if @properties.nil?
             invalid_properties.push('invalid value for "properties", properties cannot be nil.')
           end
 
-          if @associated_objects.nil?
-            invalid_properties.push('invalid value for "associated_objects", associated_objects cannot be nil.')
+          if @associations.nil?
+            invalid_properties.push('invalid value for "associations", associations cannot be nil.')
           end
 
           if @name.nil?
@@ -173,8 +229,11 @@ module Hubspot
           return false if @required_properties.nil?
           return false if @searchable_properties.nil?
           return false if @secondary_display_properties.nil?
+          return false if @id.nil?
+          return false if @fully_qualified_name.nil?
+          return false if @object_type_id.nil?
           return false if @properties.nil?
-          return false if @associated_objects.nil?
+          return false if @associations.nil?
           return false if @name.nil?
           true
         end
@@ -189,8 +248,13 @@ module Hubspot
               searchable_properties == o.searchable_properties &&
               primary_display_property == o.primary_display_property &&
               secondary_display_properties == o.secondary_display_properties &&
+              id == o.id &&
+              fully_qualified_name == o.fully_qualified_name &&
+              created_at == o.created_at &&
+              updated_at == o.updated_at &&
+              object_type_id == o.object_type_id &&
               properties == o.properties &&
-              associated_objects == o.associated_objects &&
+              associations == o.associations &&
               name == o.name
         end
 
@@ -203,7 +267,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, properties, associated_objects, name].hash
+          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, id, fully_qualified_name, created_at, updated_at, object_type_id, properties, associations, name].hash
         end
 
         # Builds the object from hash
@@ -270,7 +334,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

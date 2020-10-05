@@ -18,7 +18,7 @@ require 'faraday'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
+    module Schemas
       class ApiClient
         # The Configuration object holding settings to be used in the API client.
         attr_accessor :config
@@ -271,7 +271,7 @@ module Hubspot
             end
           else
             # models, e.g. Pet
-            Hubspot::Crm::CrmObjectSchemas.const_get(return_type).build_from_hash(data)
+            Hubspot::Crm::Schemas.const_get(return_type).build_from_hash(data)
           end
         end
 

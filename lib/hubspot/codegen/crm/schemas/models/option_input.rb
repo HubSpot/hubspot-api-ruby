@@ -14,25 +14,42 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class Paging
-        attr_accessor :_next
+    module Schemas
+      class OptionInput
+        # A human-readable option label that will be shown in HubSpot.
+        attr_accessor :label
 
-        attr_accessor :prev
+        # The internal value of the option, which must be used when setting the property value through the API.
+        attr_accessor :value
+
+        # A description of the option.
+        attr_accessor :description
+
+        # Options are shown in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
+        attr_accessor :display_order
+
+        # Hidden options won't be shown in HubSpot.
+        attr_accessor :hidden
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'_next' => :'next',
-            :'prev' => :'prev'
+            :'label' => :'label',
+            :'value' => :'value',
+            :'description' => :'description',
+            :'display_order' => :'displayOrder',
+            :'hidden' => :'hidden'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'_next' => :'NextPage',
-            :'prev' => :'PreviousPage'
+            :'label' => :'String',
+            :'value' => :'String',
+            :'description' => :'String',
+            :'display_order' => :'Integer',
+            :'hidden' => :'Boolean'
           }
         end
 
@@ -46,23 +63,35 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::Paging` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::OptionInput` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::Paging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::OptionInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'_next')
-            self._next = attributes[:'_next']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
 
-          if attributes.key?(:'prev')
-            self.prev = attributes[:'prev']
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
           end
         end
 
@@ -70,12 +99,32 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          end
+
+          if @value.nil?
+            invalid_properties.push('invalid value for "value", value cannot be nil.')
+          end
+
+          if @display_order.nil?
+            invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
+          end
+
+          if @hidden.nil?
+            invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @label.nil?
+          return false if @value.nil?
+          return false if @display_order.nil?
+          return false if @hidden.nil?
           true
         end
 
@@ -84,8 +133,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              _next == o._next &&
-              prev == o.prev
+              label == o.label &&
+              value == o.value &&
+              description == o.description &&
+              display_order == o.display_order &&
+              hidden == o.hidden
         end
 
         # @see the `==` method
@@ -97,7 +149,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [_next, prev].hash
+          [label, value, description, display_order, hidden].hash
         end
 
         # Builds the object from hash
@@ -164,7 +216,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

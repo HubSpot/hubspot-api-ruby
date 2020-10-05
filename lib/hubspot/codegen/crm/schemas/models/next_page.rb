@@ -14,52 +14,25 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class Error
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
+    module Schemas
+      class NextPage
+        attr_accessor :after
 
-        # A unique identifier for the request. Include this value with any error reports or support tickets
-        attr_accessor :correlation_id
-
-        # The error category
-        attr_accessor :category
-
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
-
-        # further information about the error
-        attr_accessor :errors
-
-        # Context about the error condition
-        attr_accessor :context
-
-        # A map of link names to associated URIs containing documentation about the error or recommended remediation steps
-        attr_accessor :links
+        attr_accessor :link
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'message' => :'message',
-            :'correlation_id' => :'correlationId',
-            :'category' => :'category',
-            :'sub_category' => :'subCategory',
-            :'errors' => :'errors',
-            :'context' => :'context',
-            :'links' => :'links'
+            :'after' => :'after',
+            :'link' => :'link'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'message' => :'String',
-            :'correlation_id' => :'String',
-            :'category' => :'String',
-            :'sub_category' => :'String',
-            :'errors' => :'Array<ErrorDetail>',
-            :'context' => :'Hash<String, Array<String>>',
-            :'links' => :'Hash<String, String>'
+            :'after' => :'String',
+            :'link' => :'String'
           }
         end
 
@@ -73,49 +46,23 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::Error` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::NextPage` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::Error`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::NextPage`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
+          if attributes.key?(:'after')
+            self.after = attributes[:'after']
           end
 
-          if attributes.key?(:'correlation_id')
-            self.correlation_id = attributes[:'correlation_id']
-          end
-
-          if attributes.key?(:'category')
-            self.category = attributes[:'category']
-          end
-
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
-          end
-
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
-          end
-
-          if attributes.key?(:'context')
-            if (value = attributes[:'context']).is_a?(Hash)
-              self.context = value
-            end
-          end
-
-          if attributes.key?(:'links')
-            if (value = attributes[:'links']).is_a?(Hash)
-              self.links = value
-            end
+          if attributes.key?(:'link')
+            self.link = attributes[:'link']
           end
         end
 
@@ -123,16 +70,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
-          end
-
-          if @correlation_id.nil?
-            invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
-          end
-
-          if @category.nil?
-            invalid_properties.push('invalid value for "category", category cannot be nil.')
+          if @after.nil?
+            invalid_properties.push('invalid value for "after", after cannot be nil.')
           end
 
           invalid_properties
@@ -141,9 +80,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @message.nil?
-          return false if @correlation_id.nil?
-          return false if @category.nil?
+          return false if @after.nil?
           true
         end
 
@@ -152,13 +89,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              message == o.message &&
-              correlation_id == o.correlation_id &&
-              category == o.category &&
-              sub_category == o.sub_category &&
-              errors == o.errors &&
-              context == o.context &&
-              links == o.links
+              after == o.after &&
+              link == o.link
         end
 
         # @see the `==` method
@@ -170,7 +102,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [message, correlation_id, category, sub_category, errors, context, links].hash
+          [after, link].hash
         end
 
         # Builds the object from hash
@@ -237,7 +169,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

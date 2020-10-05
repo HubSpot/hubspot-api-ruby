@@ -14,42 +14,56 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class ErrorDetail
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
+    module Schemas
+      class ObjectSchemaEgg
+        attr_accessor :labels
 
-        # The name of the field or parameter in which the error was found.
-        attr_accessor :_in
+        # The names of properties that should be **required** when creating an object of this type.
+        attr_accessor :required_properties
 
-        # The status code associated with the error detail
-        attr_accessor :code
+        # Names of properties that will be indexed for this object type in by HubSpot's product search.
+        attr_accessor :searchable_properties
 
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
+        # The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+        attr_accessor :primary_display_property
 
-        # Context about the error condition
-        attr_accessor :context
+        # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+        attr_accessor :secondary_display_properties
+
+        # Properties defined for this object type.
+        attr_accessor :properties
+
+        # Associations defined for this object type.
+        attr_accessor :associated_objects
+
+        # A unique name for this object. For internal use only.
+        attr_accessor :name
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'message' => :'message',
-            :'_in' => :'in',
-            :'code' => :'code',
-            :'sub_category' => :'subCategory',
-            :'context' => :'context'
+            :'labels' => :'labels',
+            :'required_properties' => :'requiredProperties',
+            :'searchable_properties' => :'searchableProperties',
+            :'primary_display_property' => :'primaryDisplayProperty',
+            :'secondary_display_properties' => :'secondaryDisplayProperties',
+            :'properties' => :'properties',
+            :'associated_objects' => :'associatedObjects',
+            :'name' => :'name'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'message' => :'String',
-            :'_in' => :'String',
-            :'code' => :'String',
-            :'sub_category' => :'String',
-            :'context' => :'Hash<String, Array<String>>'
+            :'labels' => :'ObjectTypeDefinitionLabels',
+            :'required_properties' => :'Array<String>',
+            :'searchable_properties' => :'Array<String>',
+            :'primary_display_property' => :'String',
+            :'secondary_display_properties' => :'Array<String>',
+            :'properties' => :'Array<ObjectTypePropertyCreate>',
+            :'associated_objects' => :'Array<String>',
+            :'name' => :'String'
           }
         end
 
@@ -63,37 +77,57 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::ErrorDetail` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::ObjectSchemaEgg` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::ErrorDetail`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::ObjectSchemaEgg`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
+          if attributes.key?(:'labels')
+            self.labels = attributes[:'labels']
           end
 
-          if attributes.key?(:'_in')
-            self._in = attributes[:'_in']
-          end
-
-          if attributes.key?(:'code')
-            self.code = attributes[:'code']
-          end
-
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
-          end
-
-          if attributes.key?(:'context')
-            if (value = attributes[:'context']).is_a?(Hash)
-              self.context = value
+          if attributes.key?(:'required_properties')
+            if (value = attributes[:'required_properties']).is_a?(Array)
+              self.required_properties = value
             end
+          end
+
+          if attributes.key?(:'searchable_properties')
+            if (value = attributes[:'searchable_properties']).is_a?(Array)
+              self.searchable_properties = value
+            end
+          end
+
+          if attributes.key?(:'primary_display_property')
+            self.primary_display_property = attributes[:'primary_display_property']
+          end
+
+          if attributes.key?(:'secondary_display_properties')
+            if (value = attributes[:'secondary_display_properties']).is_a?(Array)
+              self.secondary_display_properties = value
+            end
+          end
+
+          if attributes.key?(:'properties')
+            if (value = attributes[:'properties']).is_a?(Array)
+              self.properties = value
+            end
+          end
+
+          if attributes.key?(:'associated_objects')
+            if (value = attributes[:'associated_objects']).is_a?(Array)
+              self.associated_objects = value
+            end
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
         end
 
@@ -101,8 +135,32 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          if @labels.nil?
+            invalid_properties.push('invalid value for "labels", labels cannot be nil.')
+          end
+
+          if @required_properties.nil?
+            invalid_properties.push('invalid value for "required_properties", required_properties cannot be nil.')
+          end
+
+          if @searchable_properties.nil?
+            invalid_properties.push('invalid value for "searchable_properties", searchable_properties cannot be nil.')
+          end
+
+          if @secondary_display_properties.nil?
+            invalid_properties.push('invalid value for "secondary_display_properties", secondary_display_properties cannot be nil.')
+          end
+
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
+          if @associated_objects.nil?
+            invalid_properties.push('invalid value for "associated_objects", associated_objects cannot be nil.')
+          end
+
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           invalid_properties
@@ -111,7 +169,13 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @message.nil?
+          return false if @labels.nil?
+          return false if @required_properties.nil?
+          return false if @searchable_properties.nil?
+          return false if @secondary_display_properties.nil?
+          return false if @properties.nil?
+          return false if @associated_objects.nil?
+          return false if @name.nil?
           true
         end
 
@@ -120,11 +184,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              message == o.message &&
-              _in == o._in &&
-              code == o.code &&
-              sub_category == o.sub_category &&
-              context == o.context
+              labels == o.labels &&
+              required_properties == o.required_properties &&
+              searchable_properties == o.searchable_properties &&
+              primary_display_property == o.primary_display_property &&
+              secondary_display_properties == o.secondary_display_properties &&
+              properties == o.properties &&
+              associated_objects == o.associated_objects &&
+              name == o.name
         end
 
         # @see the `==` method
@@ -136,7 +203,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [message, _in, code, sub_category, context].hash
+          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, properties, associated_objects, name].hash
         end
 
         # Builds the object from hash
@@ -203,7 +270,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

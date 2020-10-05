@@ -14,25 +14,33 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class NextPage
-        attr_accessor :after
+    module Schemas
+      class PropertyModificationMetadata
+        attr_accessor :archivable
 
-        attr_accessor :link
+        attr_accessor :read_only_definition
+
+        attr_accessor :read_only_options
+
+        attr_accessor :read_only_value
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'after' => :'after',
-            :'link' => :'link'
+            :'archivable' => :'archivable',
+            :'read_only_definition' => :'readOnlyDefinition',
+            :'read_only_options' => :'readOnlyOptions',
+            :'read_only_value' => :'readOnlyValue'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'after' => :'String',
-            :'link' => :'String'
+            :'archivable' => :'Boolean',
+            :'read_only_definition' => :'Boolean',
+            :'read_only_options' => :'Boolean',
+            :'read_only_value' => :'Boolean'
           }
         end
 
@@ -46,23 +54,31 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::NextPage` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::PropertyModificationMetadata` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::NextPage`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::PropertyModificationMetadata`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'after')
-            self.after = attributes[:'after']
+          if attributes.key?(:'archivable')
+            self.archivable = attributes[:'archivable']
           end
 
-          if attributes.key?(:'link')
-            self.link = attributes[:'link']
+          if attributes.key?(:'read_only_definition')
+            self.read_only_definition = attributes[:'read_only_definition']
+          end
+
+          if attributes.key?(:'read_only_options')
+            self.read_only_options = attributes[:'read_only_options']
+          end
+
+          if attributes.key?(:'read_only_value')
+            self.read_only_value = attributes[:'read_only_value']
           end
         end
 
@@ -70,8 +86,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @after.nil?
-            invalid_properties.push('invalid value for "after", after cannot be nil.')
+          if @archivable.nil?
+            invalid_properties.push('invalid value for "archivable", archivable cannot be nil.')
+          end
+
+          if @read_only_definition.nil?
+            invalid_properties.push('invalid value for "read_only_definition", read_only_definition cannot be nil.')
+          end
+
+          if @read_only_value.nil?
+            invalid_properties.push('invalid value for "read_only_value", read_only_value cannot be nil.')
           end
 
           invalid_properties
@@ -80,7 +104,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @after.nil?
+          return false if @archivable.nil?
+          return false if @read_only_definition.nil?
+          return false if @read_only_value.nil?
           true
         end
 
@@ -89,8 +115,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              after == o.after &&
-              link == o.link
+              archivable == o.archivable &&
+              read_only_definition == o.read_only_definition &&
+              read_only_options == o.read_only_options &&
+              read_only_value == o.read_only_value
         end
 
         # @see the `==` method
@@ -102,7 +130,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [after, link].hash
+          [archivable, read_only_definition, read_only_options, read_only_value].hash
         end
 
         # Builds the object from hash
@@ -169,7 +197,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

@@ -14,42 +14,52 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class OptionInput
-        # A human-readable option label that will be shown in HubSpot.
-        attr_accessor :label
+    module Schemas
+      class Error
+        # A human readable message describing the error along with remediation steps where appropriate
+        attr_accessor :message
 
-        # The internal value of the option, which must be used when setting the property value through the API.
-        attr_accessor :value
+        # A unique identifier for the request. Include this value with any error reports or support tickets
+        attr_accessor :correlation_id
 
-        # A description of the option.
-        attr_accessor :description
+        # The error category
+        attr_accessor :category
 
-        # Options are shown in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
-        attr_accessor :display_order
+        # A specific category that contains more specific detail about the error
+        attr_accessor :sub_category
 
-        # Hidden options won't be shown in HubSpot.
-        attr_accessor :hidden
+        # further information about the error
+        attr_accessor :errors
+
+        # Context about the error condition
+        attr_accessor :context
+
+        # A map of link names to associated URIs containing documentation about the error or recommended remediation steps
+        attr_accessor :links
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
-            :'value' => :'value',
-            :'description' => :'description',
-            :'display_order' => :'displayOrder',
-            :'hidden' => :'hidden'
+            :'message' => :'message',
+            :'correlation_id' => :'correlationId',
+            :'category' => :'category',
+            :'sub_category' => :'subCategory',
+            :'errors' => :'errors',
+            :'context' => :'context',
+            :'links' => :'links'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
-            :'value' => :'String',
-            :'description' => :'String',
-            :'display_order' => :'Integer',
-            :'hidden' => :'Boolean'
+            :'message' => :'String',
+            :'correlation_id' => :'String',
+            :'category' => :'String',
+            :'sub_category' => :'String',
+            :'errors' => :'Array<ErrorDetail>',
+            :'context' => :'Hash<String, Array<String>>',
+            :'links' => :'Hash<String, String>'
           }
         end
 
@@ -63,35 +73,49 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::OptionInput` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::Error` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::OptionInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::Error`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
           end
 
-          if attributes.key?(:'value')
-            self.value = attributes[:'value']
+          if attributes.key?(:'correlation_id')
+            self.correlation_id = attributes[:'correlation_id']
           end
 
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
+          if attributes.key?(:'category')
+            self.category = attributes[:'category']
           end
 
-          if attributes.key?(:'display_order')
-            self.display_order = attributes[:'display_order']
+          if attributes.key?(:'sub_category')
+            self.sub_category = attributes[:'sub_category']
           end
 
-          if attributes.key?(:'hidden')
-            self.hidden = attributes[:'hidden']
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
+            end
+          end
+
+          if attributes.key?(:'context')
+            if (value = attributes[:'context']).is_a?(Hash)
+              self.context = value
+            end
+          end
+
+          if attributes.key?(:'links')
+            if (value = attributes[:'links']).is_a?(Hash)
+              self.links = value
+            end
           end
         end
 
@@ -99,20 +123,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          if @message.nil?
+            invalid_properties.push('invalid value for "message", message cannot be nil.')
           end
 
-          if @value.nil?
-            invalid_properties.push('invalid value for "value", value cannot be nil.')
+          if @correlation_id.nil?
+            invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
           end
 
-          if @display_order.nil?
-            invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
-          end
-
-          if @hidden.nil?
-            invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
+          if @category.nil?
+            invalid_properties.push('invalid value for "category", category cannot be nil.')
           end
 
           invalid_properties
@@ -121,10 +141,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @label.nil?
-          return false if @value.nil?
-          return false if @display_order.nil?
-          return false if @hidden.nil?
+          return false if @message.nil?
+          return false if @correlation_id.nil?
+          return false if @category.nil?
           true
         end
 
@@ -133,11 +152,13 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
-              value == o.value &&
-              description == o.description &&
-              display_order == o.display_order &&
-              hidden == o.hidden
+              message == o.message &&
+              correlation_id == o.correlation_id &&
+              category == o.category &&
+              sub_category == o.sub_category &&
+              errors == o.errors &&
+              context == o.context &&
+              links == o.links
         end
 
         # @see the `==` method
@@ -149,7 +170,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, value, description, display_order, hidden].hash
+          [message, correlation_id, category, sub_category, errors, context, links].hash
         end
 
         # Builds the object from hash
@@ -216,7 +237,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

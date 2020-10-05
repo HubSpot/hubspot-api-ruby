@@ -14,25 +14,45 @@ require 'date'
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
-      class PreviousPage
-        attr_accessor :before
+    module Schemas
+      class ObjectTypeDefinitionPatch
+        attr_accessor :labels
 
-        attr_accessor :link
+        # The names of properties that should be **required** when creating an object of this type.
+        attr_accessor :required_properties
+
+        # Names of properties that will be indexed for this object type in by HubSpot's product search.
+        attr_accessor :searchable_properties
+
+        # The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+        attr_accessor :primary_display_property
+
+        # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+        attr_accessor :secondary_display_properties
+
+        attr_accessor :restorable
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'before' => :'before',
-            :'link' => :'link'
+            :'labels' => :'labels',
+            :'required_properties' => :'requiredProperties',
+            :'searchable_properties' => :'searchableProperties',
+            :'primary_display_property' => :'primaryDisplayProperty',
+            :'secondary_display_properties' => :'secondaryDisplayProperties',
+            :'restorable' => :'restorable'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'before' => :'String',
-            :'link' => :'String'
+            :'labels' => :'ObjectTypeDefinitionLabels',
+            :'required_properties' => :'Array<String>',
+            :'searchable_properties' => :'Array<String>',
+            :'primary_display_property' => :'String',
+            :'secondary_display_properties' => :'Array<String>',
+            :'restorable' => :'Boolean'
           }
         end
 
@@ -46,23 +66,45 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::CrmObjectSchemas::PreviousPage` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Schemas::ObjectTypeDefinitionPatch` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::CrmObjectSchemas::PreviousPage`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Schemas::ObjectTypeDefinitionPatch`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'before')
-            self.before = attributes[:'before']
+          if attributes.key?(:'labels')
+            self.labels = attributes[:'labels']
           end
 
-          if attributes.key?(:'link')
-            self.link = attributes[:'link']
+          if attributes.key?(:'required_properties')
+            if (value = attributes[:'required_properties']).is_a?(Array)
+              self.required_properties = value
+            end
+          end
+
+          if attributes.key?(:'searchable_properties')
+            if (value = attributes[:'searchable_properties']).is_a?(Array)
+              self.searchable_properties = value
+            end
+          end
+
+          if attributes.key?(:'primary_display_property')
+            self.primary_display_property = attributes[:'primary_display_property']
+          end
+
+          if attributes.key?(:'secondary_display_properties')
+            if (value = attributes[:'secondary_display_properties']).is_a?(Array)
+              self.secondary_display_properties = value
+            end
+          end
+
+          if attributes.key?(:'restorable')
+            self.restorable = attributes[:'restorable']
           end
         end
 
@@ -70,17 +112,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @before.nil?
-            invalid_properties.push('invalid value for "before", before cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @before.nil?
           true
         end
 
@@ -89,8 +126,12 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              before == o.before &&
-              link == o.link
+              labels == o.labels &&
+              required_properties == o.required_properties &&
+              searchable_properties == o.searchable_properties &&
+              primary_display_property == o.primary_display_property &&
+              secondary_display_properties == o.secondary_display_properties &&
+              restorable == o.restorable
         end
 
         # @see the `==` method
@@ -102,7 +143,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [before, link].hash
+          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, restorable].hash
         end
 
         # Builds the object from hash
@@ -169,7 +210,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Crm::CrmObjectSchemas.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Schemas.const_get(type).build_from_hash(value)
           end
         end
 

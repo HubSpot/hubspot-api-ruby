@@ -12,7 +12,7 @@ OpenAPI Generator version: 4.3.1
 
 module Hubspot
   module Crm
-    module CrmObjectSchemas
+    module Schemas
       class Configuration
         # Defines url scheme
         attr_accessor :scheme
