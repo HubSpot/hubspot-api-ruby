@@ -1,0 +1,55 @@
+<div class='container'>
+  <% if flash[:error] %>
+    <div class='alert'>
+      <span class='closebtn' onclick="this.parentElement.style.display='none';">&times;</span>
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <h3>Create New Event Template:</h3>
+
+  <%= form_for :event_template, url: create_path do |form| %>
+
+    <div class='row'>
+      <div class='column'>
+        <%= form.label :target_record_type, 'Target record type:' %>
+        <%= form.select :target_record_type, ['Contact'], {}, disabled: true %>
+        <%= form.hidden_field :target_record_type, value: 'contacts' %>
+      </div>
+
+      <div class='column'>
+        <%= form.label :header_template, 'Header template:' %>
+        <%= form.text_field :header_template %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='column'>
+        <%= form.label :detail_template, 'Details template:' %>
+        <%= form.text_field :detail_template %>
+      </div>
+
+      <div class='column'>
+        <%= form.label :email, 'Enter email from your contacts:' %>
+        <%= form.email_field :email, required: true %>
+      </div>
+    </div>
+
+    <%= form.submit  %>
+  <% end  %>
+
+  <% if @contacts_url %>
+    <h3>The result of creating timeline event:</h3>
+    <pre>
+      <p>In order to see your newly created timeline events:</p>
+
+      <p> 1) Click on the "Filter activity".</p>
+      <p> 2) Find and choose your app in "Integrations" section.</p>
+      <p> 3) After that you will be able to see the list of your events.</p>
+    </pre>
+
+    <div class='contacts-iframe'>
+      <iframe src= <%= @contacts_url %> ></iframe>
+    </div>
+  <% end %>
+</div>
