@@ -6,37 +6,35 @@
     </div>
   <% end %>
 
-  <h3>Create New Event Template:</h3>
+  <div class='template-form'>
+    <h3>Create New Event Template:</h3>
 
-  <%= form_for :event_template, url: create_path do |form| %>
+    <%= form_for :event_template, url: create_path do |form| %>
 
-    <div class='row'>
-      <div class='column'>
+      <div class='form-groups'>
         <%= form.label :target_record_type, 'Target record type:' %>
         <%= form.select :target_record_type, ['Contact'], {}, disabled: true %>
         <%= form.hidden_field :target_record_type, value: 'contacts' %>
-      </div>
 
-      <div class='column'>
         <%= form.label :header_template, 'Header template:' %>
-        <%= form.text_field :header_template %>
-      </div>
-    </div>
+        <%= form.text_area :header_template, placeholder: 'Set a header tempalte for this event', class: 'textarea' %>
 
-    <div class='row'>
-      <div class='column'>
         <%= form.label :detail_template, 'Details template:' %>
-        <%= form.text_field :detail_template %>
+        <%= form.text_area :detail_template, placeholder: 'Set a details template for this event', class: 'textarea' %>
+
+        <%= form.label :email, 'Email of the contact on whose timeline you want to render the event:' %>
+        <%= form.email_field :email, required: true, placeholder: 'Email' %>
       </div>
 
-      <div class='column'>
-        <%= form.label :email, 'Enter email from your contacts:' %>
-        <%= form.email_field :email, required: true %>
-      </div>
-    </div>
+      <pre>
+        <h4> What will happen if you press the button:</h4>
+        <p> 1) New event template will be created</p>
+        <p> 2) Object timeline will be populated with a new event (specified above)</p>
+      </pre>
 
-    <%= form.submit  %>
-  <% end  %>
+      <%= form.submit 'Render timeline' %>
+    <% end  %>
+  </div>
 
   <% if @contacts_url %>
     <h3>The result of creating timeline event:</h3>

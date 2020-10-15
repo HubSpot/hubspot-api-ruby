@@ -4,7 +4,7 @@ class TimelineEventsController < ApplicationController
   def index
     return unless params[:contact_id]
 
-    @contacts_url = 'https://app.hubspot.com/contacts/' + ENV['HUBSPOT_ACCOUNT_ID'] +
+    @contacts_url = 'https://app.hubspot.com/contacts/' + ENV['HUBSPOT_PORTAL_ID'] +
                     '/contact/' + params[:contact_id]
   end
 
