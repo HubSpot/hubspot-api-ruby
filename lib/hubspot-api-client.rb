@@ -552,11 +552,13 @@ module Hubspot
       'Crm::Extensions::Cards',
       'Crm::Imports',
       'Crm::LineItems',
+      'Crm::Objects',
       'Crm::Owners',
       'Crm::Pipelines',
       'Crm::Products',
       'Crm::Properties',
       'Crm::Quotes',
+      'Crm::Schemas',
       'Crm::Tickets',
       'Crm::Timeline'
     ].freeze
