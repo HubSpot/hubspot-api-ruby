@@ -541,6 +541,7 @@ module Hubspot
       'Webhooks',
       'Cms::AuditLogs',
       'Cms::Domains',
+      'Cms::Hubdb',
       'Cms::Performance',
       'Cms::SiteSearch',
       'Cms::UrlRedirects',
