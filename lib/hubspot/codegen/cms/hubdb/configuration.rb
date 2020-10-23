@@ -126,7 +126,7 @@ module Hubspot
 
         def initialize
           @scheme = 'https'
-          @host = 'api.hubapi.com'
+          @host = 'app.hubspot.com'
           @base_path = ''
           @api_key = {}
           @api_key_prefix = {}
@@ -194,6 +194,13 @@ module Hubspot
         # Returns Auth Settings hash for api client.
         def auth_settings
           {
+            'hapikey' =>
+              {
+                type: 'api_key',
+                in: 'query',
+                key: 'hapikey',
+                value: api_key_with_prefix('hapikey')
+              },
             'oauth2' =>
               {
                 type: 'oauth2',
@@ -208,7 +215,7 @@ module Hubspot
         def server_settings
           [
             {
-              url: "https://api.hubapi.com/",
+              url: "https://app.hubspot.com/",
               description: "No description provided",
             }
           ]

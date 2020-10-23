@@ -62,7 +62,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -135,7 +135,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -210,7 +210,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -286,7 +286,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -359,7 +359,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -435,7 +435,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -511,7 +511,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -587,7 +587,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_json_node) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -663,7 +663,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_clone_request) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -741,7 +741,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -810,7 +810,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_input) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -885,7 +885,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -955,7 +955,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1025,7 +1025,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1064,7 +1064,7 @@ module Hubspot
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
         # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
-        # @return [CollectionResponseWithTotalHubDbTableV3]
+        # @return [CollectionResponseWithTotalHubDbTableV3ForwardPaging]
         def get_all_draft_tables(opts = {})
           data, _status_code, _headers = get_all_draft_tables_with_http_info(opts)
           data
@@ -1083,7 +1083,7 @@ module Hubspot
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
         # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
-        # @return [Array<(CollectionResponseWithTotalHubDbTableV3, Integer, Hash)>] CollectionResponseWithTotalHubDbTableV3 data, response status code and response headers
+        # @return [Array<(CollectionResponseWithTotalHubDbTableV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableV3ForwardPaging data, response status code and response headers
         def get_all_draft_tables_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: DefaultApi.get_all_draft_tables ...'
@@ -1116,13 +1116,13 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
 
           return_types_map = {
-            200 => 'CollectionResponseWithTotalHubDbTableV3',
+            200 => 'CollectionResponseWithTotalHubDbTableV3ForwardPaging',
           }
 
           new_options = opts.merge(
@@ -1155,7 +1155,7 @@ module Hubspot
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
         # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
-        # @return [CollectionResponseWithTotalHubDbTableV3]
+        # @return [CollectionResponseWithTotalHubDbTableV3ForwardPaging]
         def get_all_tables(opts = {})
           data, _status_code, _headers = get_all_tables_with_http_info(opts)
           data
@@ -1174,7 +1174,7 @@ module Hubspot
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
         # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
-        # @return [Array<(CollectionResponseWithTotalHubDbTableV3, Integer, Hash)>] CollectionResponseWithTotalHubDbTableV3 data, response status code and response headers
+        # @return [Array<(CollectionResponseWithTotalHubDbTableV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableV3ForwardPaging data, response status code and response headers
         def get_all_tables_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: DefaultApi.get_all_tables ...'
@@ -1207,13 +1207,13 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
 
           return_types_map = {
-            200 => 'CollectionResponseWithTotalHubDbTableV3',
+            200 => 'CollectionResponseWithTotalHubDbTableV3ForwardPaging',
           }
 
           new_options = opts.merge(
@@ -1280,7 +1280,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1358,7 +1358,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1433,7 +1433,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1503,7 +1503,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1581,7 +1581,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1613,7 +1613,7 @@ module Hubspot
         # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
         # @option opts [Array<String>] :sort Specifies the column names to sort the results by.
-        # @return [CollectionResponseWithTotalHubDbTableRowV3]
+        # @return [CollectionResponseWithTotalHubDbTableRowV3ForwardPaging]
         def read_draft_table_rows(table_id, opts = {})
           data, _status_code, _headers = read_draft_table_rows_with_http_info(table_id, opts)
           data
@@ -1627,7 +1627,7 @@ module Hubspot
         # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
         # @option opts [Array<String>] :sort Specifies the column names to sort the results by.
-        # @return [Array<(CollectionResponseWithTotalHubDbTableRowV3, Integer, Hash)>] CollectionResponseWithTotalHubDbTableRowV3 data, response status code and response headers
+        # @return [Array<(CollectionResponseWithTotalHubDbTableRowV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableRowV3ForwardPaging data, response status code and response headers
         def read_draft_table_rows_with_http_info(table_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: DefaultApi.read_draft_table_rows ...'
@@ -1658,13 +1658,13 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
 
           return_types_map = {
-            200 => 'CollectionResponseWithTotalHubDbTableRowV3',
+            200 => 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging',
           }
 
           new_options = opts.merge(
@@ -1744,7 +1744,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1814,7 +1814,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1892,7 +1892,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_input) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -1978,7 +1978,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
@@ -2059,7 +2059,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_live_input) 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           # return_type
           return_type = opts[:return_type]
