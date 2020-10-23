@@ -15,20 +15,28 @@ require 'date'
 module Hubspot
   module Cms
     module Hubdb
-      class BatchInputJsonNode
-        attr_accessor :inputs
+      class CollectionResponseWithTotalHubDbTableRowV3ForwardPaging
+        attr_accessor :total
+
+        attr_accessor :results
+
+        attr_accessor :paging
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'inputs' => :'inputs'
+            :'total' => :'total',
+            :'results' => :'results',
+            :'paging' => :'paging'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'inputs' => :'Array<Object>'
+            :'total' => :'Integer',
+            :'results' => :'Array<HubDbTableRowV3>',
+            :'paging' => :'ForwardPaging'
           }
         end
 
@@ -42,21 +50,29 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Hubdb::BatchInputJsonNode` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Hubdb::CollectionResponseWithTotalHubDbTableRowV3ForwardPaging` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Hubdb::BatchInputJsonNode`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Hubdb::CollectionResponseWithTotalHubDbTableRowV3ForwardPaging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'inputs')
-            if (value = attributes[:'inputs']).is_a?(Array)
-              self.inputs = value
+          if attributes.key?(:'total')
+            self.total = attributes[:'total']
+          end
+
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
             end
+          end
+
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
           end
         end
 
@@ -64,8 +80,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @inputs.nil?
-            invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
+          if @total.nil?
+            invalid_properties.push('invalid value for "total", total cannot be nil.')
+          end
+
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
           invalid_properties
@@ -74,7 +94,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @inputs.nil?
+          return false if @total.nil?
+          return false if @results.nil?
           true
         end
 
@@ -83,7 +104,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              inputs == o.inputs
+              total == o.total &&
+              results == o.results &&
+              paging == o.paging
         end
 
         # @see the `==` method
@@ -95,7 +118,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [inputs].hash
+          [total, results, paging].hash
         end
 
         # Builds the object from hash
