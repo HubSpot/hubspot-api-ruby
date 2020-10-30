@@ -99,8 +99,7 @@ module Hubspot
                 else
                   fail ApiError.new(:code => response.status,
                                     :response_headers => response.headers,
-                                    :response_body => response.body),
-                       response.reason_phrase
+                                    :response_body => response.body)
                 end
               end
             rescue Faraday::TimeoutError
