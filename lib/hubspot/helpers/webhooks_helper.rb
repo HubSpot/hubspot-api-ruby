@@ -1,14 +1,13 @@
 module Hubspot
   module Helpers
     class WebhooksHelper
-      def self.validate_signature(
-        signature:,
-        client_secret:,
-        http_uri:,
-        request_body:,
-        http_method: 'POST',
-        signature_version: 'v2'
-      )
+      def self.validate_signature(options = {})
+        signature = options.fetch(:signature)
+        client_secret = options.fetch(:client_secret)
+        http_uri = options.fetch(:http_uri)
+        request_body = options.fetch(:request_body)
+        http_method = options.fetch(:http_method, 'POST')
+        signature_version = options.fetch(:signature_version, 'v2')
 
         if signature_version == 'v1'
           source_string = client_secret + request_body.to_s

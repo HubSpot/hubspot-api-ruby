@@ -2,7 +2,12 @@ module Hubspot
   class ConfigurationError < StandardError; end
 
   class InvalidSignatureError < StandardError
-    def initialize(msg: nil, signature: nil, signature_version: nil, hash_result: nil)
+    def initialize(options = {})
+      msg = options.fetch(:msg, nil)
+      signature = options.fetch(:signature, nil)
+      signature_version = options.fetch(:signature_version, nil)
+      hash_result = options.fetch(:hash_result, nil)
+      
       @signature = signature
       @signature_version = signature_version
       @hash_result = hash_result

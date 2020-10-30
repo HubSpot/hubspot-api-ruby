@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.license     = "Unlicense"
   s.required_ruby_version = ">= 1.9"
 
-  s.add_runtime_dependency 'faraday', '>= 0.14.0'
-  s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
+  s.add_runtime_dependency 'faraday', '>= 0.9.1'
+  s.add_runtime_dependency 'json', '>= 1.8.6'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
   s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'

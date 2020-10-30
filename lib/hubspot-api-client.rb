@@ -570,7 +570,7 @@ module Hubspot
       return Configuration.default unless block_given?
       yield(Configuration.default)
       CLIENTS.each do |client_class_name|
-        config_class = Hubspot.const_get("#{client_class_name}::Configuration")
+        config_class = "#{client_class_name}::Configuration".split("::").inject(Hubspot) { |n,c| n.const_get c }
         yield(config_class.default)
       end
       Configuration.default
