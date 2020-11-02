@@ -61,13 +61,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {}
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -75,8 +73,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
@@ -134,15 +131,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
+          # return_type
+          return_type = opts[:return_type] || 'Object' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'Object',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -150,8 +143,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -209,16 +201,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3) 
 
+          # return_type
+          return_type = opts[:return_type] || 'Object' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            201 => 'Object',
-            207 => 'BatchResponseHubDbTableRowV3WithErrors',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -226,8 +213,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -285,13 +271,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
+          # return_type
+          return_type = opts[:return_type] 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {}
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -299,8 +283,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -358,16 +341,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
+          # return_type
+          return_type = opts[:return_type] || 'Object' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'Object',
-            207 => 'BatchResponseHubDbTableRowV3WithErrors',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -375,8 +353,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -434,16 +411,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
+          # return_type
+          return_type = opts[:return_type] || 'Object' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'Object',
-            207 => 'BatchResponseHubDbTableRowV3WithErrors',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -451,8 +423,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -510,16 +481,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3) 
 
+          # return_type
+          return_type = opts[:return_type] || 'Object' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'Object',
-            207 => 'BatchResponseHubDbTableRowV3WithErrors',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -527,8 +493,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -586,16 +551,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_json_node) 
 
+          # return_type
+          return_type = opts[:return_type] || 'Object' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'Object',
-            207 => 'BatchResponseHubDbTableRowV3WithErrors',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -603,8 +563,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -662,15 +621,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_clone_request) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -678,8 +633,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -740,15 +694,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableRowV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableRowV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -756,8 +706,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -809,15 +758,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_input) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            201 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -825,8 +770,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -884,15 +828,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableRowV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            201 => 'HubDbTableRowV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -900,8 +840,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -954,15 +893,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'File' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'File',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -970,8 +905,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1024,15 +958,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'File' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'File',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1040,8 +970,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1115,15 +1044,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'CollectionResponseWithTotalHubDbTableV3ForwardPaging',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1131,8 +1056,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1206,15 +1130,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'CollectionResponseWithTotalHubDbTableV3ForwardPaging',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1222,8 +1142,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1279,15 +1198,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1295,8 +1210,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1357,15 +1271,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableRowV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableRowV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1373,8 +1283,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1432,15 +1341,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'ImportResult' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'ImportResult',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1448,8 +1353,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -1502,15 +1406,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1518,8 +1418,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -1580,13 +1479,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {}
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1594,8 +1491,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
@@ -1657,15 +1553,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1673,8 +1565,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
@@ -1743,15 +1634,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableRowV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableRowV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1759,8 +1646,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
@@ -1813,15 +1699,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1829,8 +1711,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
@@ -1891,15 +1772,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_input) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1907,8 +1784,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
@@ -1977,15 +1853,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableRowV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableRowV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -1993,8 +1865,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
@@ -2058,15 +1929,11 @@ module Hubspot
           # http body (model)
           post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_live_input) 
 
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          # return_type
-          return_type = opts[:return_type]
-
-          return_types_map = {
-            200 => 'HubDbTableV3',
-          }
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -2074,8 +1941,7 @@ module Hubspot
             :form_params => form_params,
             :body => post_body,
             :auth_names => auth_names,
-            :return_type => return_type,
-            :return_types_map => return_types_map
+            :return_type => return_type
           )
 
           data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
