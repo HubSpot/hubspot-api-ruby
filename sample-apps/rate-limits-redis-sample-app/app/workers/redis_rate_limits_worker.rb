@@ -37,9 +37,10 @@ class RedisRateLimitsWorker
     end
 
     def able_to_perform?(action)
-      timestamps = redis.lrange(:worker_timestamps, 0, 90)
-      ability = (timestamps.count < 90 || timestamps.last < 10.seconds.ago) ? true : false
-      Resque.logger.info("Able to #{action} contacts: #{ability}")
+      timestamps = redis.lrange(:worker_timestamps, 0, -1)
+      timestamps_limit = 10
+      ability = (timestamps.count <= timestamps_limit || timestamps[timestamps_limit] < 10.seconds.ago) ? true : false
+      Resque.logger.info("Able to #{action} contacts: #{ability} (#{timestamps.count})")
       ability
     end
 
