@@ -5,6 +5,10 @@ Ruby API v3 Client files and sample apps
 - Package version: 1.0.0
 - Build package: io.swagger.codegen.languages.RubyClientCodegen
 
+## Documentation
+
+See the [Hubspot API](https://www.rubydoc.info/github/HubSpot/hubspot-api-ruby/master) docs.
+
 ## Installation
 
 ```ruby
