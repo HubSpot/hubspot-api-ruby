@@ -21,15 +21,20 @@ namespace :retry_middleware do
     end
 
     Parallel.map((1..10).to_a, in_processes: 10) do |process|
-      loop do
+      10.times do
+        contacts = [rand(10_000), rand(10_000), rand(10_000)].map do |i|
+          ::Hubspot::Crm::Contacts::SimplePublicObjectInput.new(
+            properties: { email: "retry_middleware_app#{i}@hubspot.com" }
+          )
+        end
         contacts_object = ::Hubspot::Crm::Contacts::BatchInputSimplePublicObjectInput.new(
           inputs: contacts
         )
-        response = batch_api.create_batch(body: contacts_object, auth_names: 'oauth2')
+        response = batch_api.create(contacts_object, auth_names: 'oauth2')
         ids_object = ::Hubspot::Crm::Contacts::BatchInputSimplePublicObjectId.new(
           inputs: response.results.map(&:id)
         )
-        batch_api.archive_batch(body: ids_object , auth_names: 'oauth2')
+        batch_api.archive(ids_object, auth_names: 'oauth2')
         puts "##{process} :: #{Time.current} :: Created and deleted batch of contacts."
       end
     end
