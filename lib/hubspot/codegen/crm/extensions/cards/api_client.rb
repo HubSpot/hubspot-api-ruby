@@ -74,8 +74,8 @@ module Hubspot
                     max: opts[:max_retries],
                     interval: opts[:seconds_delay],
                     retry_statuses: statuses,
-                    methods: %i[post delete get head options put],
-                    retry_block: -> (env, options, retries, exc) { opts[:retry_block].call }
+                    methods: [:post, :delete, :get, :head, :options, :put],
+                    retry_block: ->(env, options, retries, exc) { opts[:retry_block].call }
                   }
                   conn.request :retry, retry_options
                 end
@@ -99,8 +99,7 @@ module Hubspot
                 else
                   fail ApiError.new(:code => response.status,
                                     :response_headers => response.headers,
-                                    :response_body => response.body),
-                       response.reason_phrase
+                                    :response_body => response.body)
                 end
               end
             rescue Faraday::TimeoutError
