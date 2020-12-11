@@ -74,7 +74,7 @@ module Hubspot
             :'status' => :'String',
             :'results' => :'Array<TimelineEventResponse>',
             :'num_errors' => :'Integer',
-            :'errors' => :'Array<Error>',
+            :'errors' => :'Array<StandardError>',
             :'requested_at' => :'DateTime',
             :'started_at' => :'DateTime',
             :'completed_at' => :'DateTime',
