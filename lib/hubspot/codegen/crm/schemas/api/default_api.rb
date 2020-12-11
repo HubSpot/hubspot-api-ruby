@@ -41,7 +41,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'object_type' when calling DefaultApi.purge"
           end
           # resource path
-          local_var_path = '/crm-object-schemas/v3/schemas/{objectType}/purge'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+          local_var_path = '/crm/v3/schemas/{objectType}/purge'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
