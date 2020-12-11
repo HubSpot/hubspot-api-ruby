@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 module Hubspot
   module Cms
     module Blogs
-      module Blog-posts
+      module BlogPosts
         class Configuration
           # Defines url scheme
           attr_accessor :scheme

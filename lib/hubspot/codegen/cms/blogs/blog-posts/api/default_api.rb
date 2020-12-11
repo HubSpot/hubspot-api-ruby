@@ -15,7 +15,7 @@ require 'cgi'
 module Hubspot
   module Cms
     module Blogs
-      module Blog-posts
+      module BlogPosts
         class DefaultApi
           attr_accessor :api_client
 

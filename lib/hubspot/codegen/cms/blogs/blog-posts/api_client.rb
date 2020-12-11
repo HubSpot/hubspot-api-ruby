@@ -19,7 +19,7 @@ require 'typhoeus'
 module Hubspot
   module Cms
     module Blogs
-      module Blog-posts
+      module BlogPosts
         class ApiClient
           # The Configuration object holding settings to be used in the API client.
           attr_accessor :config
@@ -240,7 +240,7 @@ module Hubspot
               end
             else
               # models, e.g. Pet
-              Hubspot::Cms::Blogs::Blog-posts.const_get(return_type).build_from_hash(data)
+              Hubspot::Cms::Blogs::BlogPosts.const_get(return_type).build_from_hash(data)
             end
           end
 
