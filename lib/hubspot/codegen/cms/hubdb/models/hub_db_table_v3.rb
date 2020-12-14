@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field. HubDB tables now support `DRAFT` and `PUBLISHED` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication.
 
 The version of the OpenAPI document: v3
 
@@ -27,6 +27,8 @@ module Hubspot
 
         # List of columns in the table
         attr_accessor :columns
+
+        attr_accessor :published
 
         # Number of rows in the table
         attr_accessor :row_count
@@ -72,6 +74,7 @@ module Hubspot
             :'name' => :'name',
             :'label' => :'label',
             :'columns' => :'columns',
+            :'published' => :'published',
             :'row_count' => :'rowCount',
             :'created_by' => :'createdBy',
             :'updated_by' => :'updatedBy',
@@ -95,6 +98,7 @@ module Hubspot
             :'name' => :'String',
             :'label' => :'String',
             :'columns' => :'Array<Column>',
+            :'published' => :'Boolean',
             :'row_count' => :'Integer',
             :'created_by' => :'SimpleUser',
             :'updated_by' => :'SimpleUser',
@@ -148,6 +152,10 @@ module Hubspot
             if (value = attributes[:'columns']).is_a?(Array)
               self.columns = value
             end
+          end
+
+          if attributes.key?(:'published')
+            self.published = attributes[:'published']
           end
 
           if attributes.key?(:'row_count')
@@ -237,6 +245,7 @@ module Hubspot
               name == o.name &&
               label == o.label &&
               columns == o.columns &&
+              published == o.published &&
               row_count == o.row_count &&
               created_by == o.created_by &&
               updated_by == o.updated_by &&
@@ -261,7 +270,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, label, columns, row_count, created_by, updated_by, published_at, dynamic_meta_tags, created_at, archived, allow_public_api_access, use_for_pages, enable_child_table_pages, column_count, allow_child_tables, updated_at].hash
+          [id, name, label, columns, published, row_count, created_by, updated_by, published_at, dynamic_meta_tags, created_at, archived, allow_public_api_access, use_for_pages, enable_child_table_pages, column_count, allow_child_tables, updated_at].hash
         end
 
         # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field. HubDB tables now support `DRAFT` and `PUBLISHED` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication.
 
 The version of the OpenAPI document: v3
 
@@ -88,28 +88,33 @@ module Hubspot
         # @note Do NOT set it to false in production code, otherwise you would face multiple types of cryptographic attacks.
         #
         # @return [true, false]
-        attr_accessor :ssl_verify
+        attr_accessor :verify_ssl
 
         ### TLS/SSL setting
-        # Any `OpenSSL::SSL::` constant (see https://ruby-doc.org/stdlib-2.5.1/libdoc/openssl/rdoc/OpenSSL/SSL.html)
+        # Set this to false to skip verifying SSL host name
+        # Default to true.
         #
         # @note Do NOT set it to false in production code, otherwise you would face multiple types of cryptographic attacks.
         #
-        attr_accessor :ssl_verify_mode
+        # @return [true, false]
+        attr_accessor :verify_ssl_host
 
         ### TLS/SSL setting
         # Set this to customize the certificate file to verify the peer.
         #
         # @return [String] the path to the certificate file
-        attr_accessor :ssl_ca_file
+        #
+        # @see The `cainfo` option of Typhoeus, `--cert` option of libcurl. Related source code:
+        # https://github.com/typhoeus/typhoeus/blob/master/lib/typhoeus/easy_factory.rb#L145
+        attr_accessor :ssl_ca_cert
 
         ### TLS/SSL setting
         # Client certificate file (for client certificate)
-        attr_accessor :ssl_client_cert
+        attr_accessor :cert_file
 
         ### TLS/SSL setting
         # Client private key file (for client certificate)
-        attr_accessor :ssl_client_key
+        attr_accessor :key_file
 
         # Set this to customize parameters encoding of array parameter with multi collectionFormat.
         # Default to nil.
@@ -126,17 +131,17 @@ module Hubspot
 
         def initialize
           @scheme = 'https'
-          @host = 'app.hubspot.com'
+          @host = 'api.hubapi.com'
           @base_path = ''
           @api_key = {}
           @api_key_prefix = {}
           @timeout = 0
           @client_side_validation = true
-          @ssl_verify = true
-          @ssl_verify_mode = nil
-          @ssl_ca_file = nil
-          @ssl_client_cert = nil
-          @ssl_client_key = nil
+          @verify_ssl = true
+          @verify_ssl_host = true
+          @params_encoding = nil
+          @cert_file = nil
+          @key_file = nil
           @debugging = false
           @inject_format = false
           @force_ending_format = false
@@ -215,7 +220,7 @@ module Hubspot
         def server_settings
           [
             {
-              url: "https://app.hubspot.com/",
+              url: "https://api.hubapi.com/",
               description: "No description provided",
             }
           ]

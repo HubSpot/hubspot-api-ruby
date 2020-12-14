@@ -70,7 +70,7 @@ module Hubspot
           {
             :'results' => :'Array<PublicAssociationMulti>',
             :'num_errors' => :'Integer',
-            :'errors' => :'Array<Error>',
+            :'errors' => :'Array<StandardError>',
             :'status' => :'String',
             :'requested_at' => :'DateTime',
             :'started_at' => :'DateTime',

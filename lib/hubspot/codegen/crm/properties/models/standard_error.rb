@@ -1,7 +1,7 @@
 =begin
-#HubDB endpoints
+#Properties
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field. HubDB tables now support `DRAFT` and `PUBLISHED` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it.
+#All HubSpot objects store data in default and custom properties. These endpoints provide access to read and modify object properties in HubSpot.
 
 The version of the OpenAPI document: v3
 
@@ -13,26 +13,50 @@ OpenAPI Generator version: 4.3.1
 require 'date'
 
 module Hubspot
-  module Cms
-    module Hubdb
-      class PreviousPage
-        attr_accessor :before
+  module Crm
+    module Properties
+      class StandardError
+        attr_accessor :status
 
-        attr_accessor :link
+        attr_accessor :id
+
+        attr_accessor :category
+
+        attr_accessor :sub_category
+
+        attr_accessor :message
+
+        attr_accessor :errors
+
+        attr_accessor :context
+
+        attr_accessor :links
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'before' => :'before',
-            :'link' => :'link'
+            :'status' => :'status',
+            :'id' => :'id',
+            :'category' => :'category',
+            :'sub_category' => :'subCategory',
+            :'message' => :'message',
+            :'errors' => :'errors',
+            :'context' => :'context',
+            :'links' => :'links'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'before' => :'String',
-            :'link' => :'String'
+            :'status' => :'String',
+            :'id' => :'String',
+            :'category' => :'ErrorCategory',
+            :'sub_category' => :'Object',
+            :'message' => :'String',
+            :'errors' => :'Array<ErrorDetail>',
+            :'context' => :'Hash<String, Array<String>>',
+            :'links' => :'Hash<String, String>'
           }
         end
 
@@ -46,23 +70,53 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Hubdb::PreviousPage` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Properties::StandardError` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Hubdb::PreviousPage`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Properties::StandardError`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'before')
-            self.before = attributes[:'before']
+          if attributes.key?(:'status')
+            self.status = attributes[:'status']
           end
 
-          if attributes.key?(:'link')
-            self.link = attributes[:'link']
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'category')
+            self.category = attributes[:'category']
+          end
+
+          if attributes.key?(:'sub_category')
+            self.sub_category = attributes[:'sub_category']
+          end
+
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
+          end
+
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
+            end
+          end
+
+          if attributes.key?(:'context')
+            if (value = attributes[:'context']).is_a?(Hash)
+              self.context = value
+            end
+          end
+
+          if attributes.key?(:'links')
+            if (value = attributes[:'links']).is_a?(Hash)
+              self.links = value
+            end
           end
         end
 
@@ -70,8 +124,28 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @before.nil?
-            invalid_properties.push('invalid value for "before", before cannot be nil.')
+          if @status.nil?
+            invalid_properties.push('invalid value for "status", status cannot be nil.')
+          end
+
+          if @category.nil?
+            invalid_properties.push('invalid value for "category", category cannot be nil.')
+          end
+
+          if @message.nil?
+            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          end
+
+          if @errors.nil?
+            invalid_properties.push('invalid value for "errors", errors cannot be nil.')
+          end
+
+          if @context.nil?
+            invalid_properties.push('invalid value for "context", context cannot be nil.')
+          end
+
+          if @links.nil?
+            invalid_properties.push('invalid value for "links", links cannot be nil.')
           end
 
           invalid_properties
@@ -80,7 +154,12 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @before.nil?
+          return false if @status.nil?
+          return false if @category.nil?
+          return false if @message.nil?
+          return false if @errors.nil?
+          return false if @context.nil?
+          return false if @links.nil?
           true
         end
 
@@ -89,8 +168,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              before == o.before &&
-              link == o.link
+              status == o.status &&
+              id == o.id &&
+              category == o.category &&
+              sub_category == o.sub_category &&
+              message == o.message &&
+              errors == o.errors &&
+              context == o.context &&
+              links == o.links
         end
 
         # @see the `==` method
@@ -102,7 +187,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [before, link].hash
+          [status, id, category, sub_category, message, errors, context, links].hash
         end
 
         # Builds the object from hash
@@ -169,7 +254,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Cms::Hubdb.const_get(type).build_from_hash(value)
+            Hubspot::Crm::Properties.const_get(type).build_from_hash(value)
           end
         end
 

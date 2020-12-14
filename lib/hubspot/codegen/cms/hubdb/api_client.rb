@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field. HubDB tables now support `DRAFT` and `PUBLISHED` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication.
 
 The version of the OpenAPI document: v3
 
@@ -14,7 +14,7 @@ require 'date'
 require 'json'
 require 'logger'
 require 'tempfile'
-require 'faraday'
+require 'typhoeus'
 
 module Hubspot
   module Cms
@@ -48,62 +48,26 @@ module Hubspot
         # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
         #   the data deserialized from response body (could be nil), response status code and response headers.
         def call_api(http_method, path, opts = {})
-          ssl_options = {
-            :ca_file => @config.ssl_ca_file,
-            :verify => @config.ssl_verify,
-            :verify_mode => @config.ssl_verify_mode,
-            :client_cert => @config.ssl_client_cert,
-            :client_key => @config.ssl_client_key
-          }
+          request = build_request(http_method, path, opts)
+          response = request.run
 
-          connection = Faraday.new(:url => config.base_url, :ssl => ssl_options) do |conn|
-            conn.basic_auth(config.username, config.password)
-            if opts[:header_params]["Content-Type"] == "multipart/form-data"
-              conn.request :multipart
-              conn.request :url_encoded
-            end
-            conn.adapter(Faraday.default_adapter)
-            conn.options[:params_encoder] = Faraday::FlatParamsEncoder
-
-            # Errors handler settings
-            if !config.error_handler.empty?
-              config.error_handler.each do |statuses, opts|
-                statuses = statuses.is_a?(Integer) ? [statuses] : statuses
-                retry_options = {
-                  max: opts[:max_retries],
-                  interval: opts[:seconds_delay],
-                  retry_statuses: statuses,
-                  methods: %i[post delete get head options put],
-                  retry_block: -> (env, options, retries, exc) { opts[:retry_block].call }
-                }
-                conn.request :retry, retry_options
-              end
-            end
+          if @config.debugging
+            @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
           end
 
-          begin
-            response = connection.public_send(http_method.to_sym.downcase) do |req|
-              build_request(http_method, path, req, opts)
+          unless response.success?
+            if response.timed_out?
+              fail ApiError.new('Connection timed out')
+            elsif response.code == 0
+              # Errors from libcurl will be made visible here
+              fail ApiError.new(:code => 0,
+                                :message => response.return_message)
+            else
+              fail ApiError.new(:code => response.code,
+                                :response_headers => response.headers,
+                                :response_body => response.body),
+                   response.status_message
             end
-
-            if @config.debugging
-              @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
-            end
-
-            unless response.success?
-              if response.status == 0
-                # Errors from libcurl will be made visible here
-                fail ApiError.new(:code => 0,
-                                  :message => response.return_message)
-              else
-                fail ApiError.new(:code => response.status,
-                                  :response_headers => response.headers,
-                                  :response_body => response.body),
-                     response.reason_phrase
-              end
-            end
-          rescue Faraday::TimeoutError
-            fail ApiError.new('Connection timed out')
           end
 
           if opts[:return_type]
@@ -111,7 +75,7 @@ module Hubspot
           else
             data = nil
           end
-          return data, response.status, response.headers
+          return data, response.code, response.headers
         end
 
         # Builds the HTTP request
@@ -123,7 +87,7 @@ module Hubspot
         # @option opts [Hash] :form_params Query parameters
         # @option opts [Object] :body HTTP body (JSON/XML)
         # @return [Typhoeus::Request] A Typhoeus Request
-        def build_request(http_method, path, request, opts = {})
+        def build_request(http_method, path, opts = {})
           url = build_request_url(path)
           http_method = http_method.to_sym.downcase
 
@@ -133,14 +97,24 @@ module Hubspot
 
           update_params_for_auth! header_params, query_params, opts[:auth_names]
 
+          # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
+          _verify_ssl_host = @config.verify_ssl_host ? 2 : 0
+
           req_opts = {
             :method => http_method,
             :headers => header_params,
             :params => query_params,
             :params_encoding => @config.params_encoding,
             :timeout => @config.timeout,
+            :ssl_verifypeer => @config.verify_ssl,
+            :ssl_verifyhost => _verify_ssl_host,
+            :sslcert => @config.cert_file,
+            :sslkey => @config.key_file,
             :verbose => @config.debugging
           }
+
+          # set custom cert, if provided
+          req_opts[:cainfo] = @config.ssl_ca_cert if @config.ssl_ca_cert
 
           if [:post, :patch, :put, :delete].include?(http_method)
             req_body = build_request_body(header_params, form_params, opts[:body])
@@ -149,10 +123,8 @@ module Hubspot
               @config.logger.debug "HTTP request body param ~BEGIN~\n#{req_body}\n~END~\n"
             end
           end
-          request.headers = header_params
-          request.body = req_body
-          request.url url
-          request.params = query_params
+
+          request = Typhoeus::Request.new(url, req_opts)
           download_file(request) if opts[:return_type] == 'File'
           request
         end
@@ -165,17 +137,13 @@ module Hubspot
         # @return [String] HTTP body data in the form of string
         def build_request_body(header_params, form_params, body)
           # http form
-          if header_params['Content-Type'] == 'application/x-www-form-urlencoded'
-            data = URI.encode_www_form(form_params)
-          elsif header_params['Content-Type'] == 'multipart/form-data'
+          if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
+              header_params['Content-Type'] == 'multipart/form-data'
             data = {}
             form_params.each do |key, value|
               case value
-              when ::File, ::Tempfile
-                # TODO hardcode to application/octet-stream, need better way to detect content type
-                data[key] = Faraday::UploadIO.new(value.path, 'application/octet-stream', value.path)
-              when ::Array, nil
-                # let Faraday handle Array and nil parameters
+              when ::File, ::Array, nil
+                # let typhoeus handle File, Array and nil parameters
                 data[key] = value
               else
                 data[key] = value.to_s
