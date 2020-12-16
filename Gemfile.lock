@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     hubspot-api-client (9.1.0)
-      faraday (>= 0.14.0)
       json (~> 2.1, >= 2.1.0)
+      typhoeus (~> 1.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -20,15 +20,13 @@ GEM
     diff-lcs (1.3)
     ethon (0.12.0)
       ffi (>= 1.3.0)
-    faraday (1.1.0)
-      multipart-post (>= 1.2, < 3)
-      ruby2_keywords
     ffi (1.13.1)
     hashdiff (1.0.0)
     json (2.4.0)
-    multipart-post (2.1.1)
     public_suffix (4.0.1)
     rake (12.0.0)
+    rake-release (1.2.1)
+      bundler (>= 1.11, < 3)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -42,7 +40,6 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.0)
-    ruby2_keywords (0.0.2)
     safe_yaml (1.0.5)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
@@ -61,8 +58,8 @@ DEPENDENCIES
   autotest-rails-pure (~> 4.1, >= 4.1.2)
   hubspot-api-client!
   rake (~> 12.0.0)
+  rake-release
   rspec (~> 3.6, >= 3.6.0)
-  typhoeus
   vcr (~> 3.0, >= 3.0.1)
   webmock (~> 1.24, >= 1.24.3)
 

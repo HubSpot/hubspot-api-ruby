@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.license     = "Unlicense"
   s.required_ruby_version = ">= 1.9"
 
-  s.add_runtime_dependency 'faraday', '>= 0.14.0'
+  s.add_runtime_dependency 'typhoeus', '~> 1.4.0'
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'autotest', '~> 4.4', '>= 4.4.6'
   s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
-  s.add_development_dependency 'typhoeus'
+  s.add_development_dependency 'rake-release'
 
   s.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(sample-apps)/})
