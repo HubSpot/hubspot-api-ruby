@@ -22,13 +22,78 @@ module Hubspot
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
+          # Delete a Blog Post
+          # Delete the Blog Post object identified by the id in the path.
+          # @param object_id [String] The Blog Post id.
+          # @param [Hash] opts the optional parameters
+          # @option opts [Boolean] :archived Whether to return only results that have been archived.
+          # @return [nil]
+          def archive(object_id, opts = {})
+            archive_with_http_info(object_id, opts)
+            nil
+          end
+
+          # Delete a Blog Post
+          # Delete the Blog Post object identified by the id in the path.
+          # @param object_id [String] The Blog Post id.
+          # @param [Hash] opts the optional parameters
+          # @option opts [Boolean] :archived Whether to return only results that have been archived.
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+          def archive_with_http_info(object_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.archive ...'
+            end
+            # verify the required parameter 'object_id' is set
+            if @api_client.config.client_side_validation && object_id.nil?
+              fail ArgumentError, "Missing the required parameter 'object_id' when calling DefaultApi.archive"
+            end
+            # resource path
+            local_var_path = '/cms/v3/blogs/posts/{objectId}'.sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+            query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
           # Archive a batch of Blog Posts
           # Archive the Blog Post objects identified in the request body.
           # @param batch_input_string [BatchInputString] The JSON array of Blog Post ids.
           # @param [Hash] opts the optional parameters
           # @return [nil]
-          def archive(batch_input_string, opts = {})
-            archive_with_http_info(batch_input_string, opts)
+          def archive_batch(batch_input_string, opts = {})
+            archive_batch_with_http_info(batch_input_string, opts)
             nil
           end
 
@@ -37,13 +102,13 @@ module Hubspot
           # @param batch_input_string [BatchInputString] The JSON array of Blog Post ids.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def archive_with_http_info(batch_input_string, opts = {})
+          def archive_batch_with_http_info(batch_input_string, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: DefaultApi.archive ...'
+              @api_client.config.logger.debug 'Calling API: DefaultApi.archive_batch ...'
             end
             # verify the required parameter 'batch_input_string' is set
             if @api_client.config.client_side_validation && batch_input_string.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling DefaultApi.archive"
+              fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling DefaultApi.archive_batch"
             end
             # resource path
             local_var_path = '/cms/v3/blogs/posts/batch/archive'
@@ -81,72 +146,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: DefaultApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
-
-          # Delete a Blog Post
-          # Delete the Blog Post object identified by the id in the path.
-          # @param object_id [String] The Blog Post id.
-          # @param [Hash] opts the optional parameters
-          # @option opts [Boolean] :archived Whether to return only results that have been archived.
-          # @return [nil]
-          def archive_0(object_id, opts = {})
-            archive_0_with_http_info(object_id, opts)
-            nil
-          end
-
-          # Delete a Blog Post
-          # Delete the Blog Post object identified by the id in the path.
-          # @param object_id [String] The Blog Post id.
-          # @param [Hash] opts the optional parameters
-          # @option opts [Boolean] :archived Whether to return only results that have been archived.
-          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def archive_0_with_http_info(object_id, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: DefaultApi.archive_0 ...'
-            end
-            # verify the required parameter 'object_id' is set
-            if @api_client.config.client_side_validation && object_id.nil?
-              fail ArgumentError, "Missing the required parameter 'object_id' when calling DefaultApi.archive_0"
-            end
-            # resource path
-            local_var_path = '/cms/v3/blogs/posts/{objectId}'.sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-            query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] 
-
-            # return_type
-            return_type = opts[:return_type] 
-
-            # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: DefaultApi#archive_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: DefaultApi#archive_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
@@ -284,8 +284,8 @@ module Hubspot
           # @param batch_input_blog_post [BatchInputBlogPost] The JSON array of new Blog Posts to create.
           # @param [Hash] opts the optional parameters
           # @return [Object]
-          def create_0(batch_input_blog_post, opts = {})
-            data, _status_code, _headers = create_0_with_http_info(batch_input_blog_post, opts)
+          def create_batch(batch_input_blog_post, opts = {})
+            data, _status_code, _headers = create_batch_with_http_info(batch_input_blog_post, opts)
             data
           end
 
@@ -294,13 +294,13 @@ module Hubspot
           # @param batch_input_blog_post [BatchInputBlogPost] The JSON array of new Blog Posts to create.
           # @param [Hash] opts the optional parameters
           # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
-          def create_0_with_http_info(batch_input_blog_post, opts = {})
+          def create_batch_with_http_info(batch_input_blog_post, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: DefaultApi.create_0 ...'
+              @api_client.config.logger.debug 'Calling API: DefaultApi.create_batch ...'
             end
             # verify the required parameter 'batch_input_blog_post' is set
             if @api_client.config.client_side_validation && batch_input_blog_post.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_blog_post' when calling DefaultApi.create_0"
+              fail ArgumentError, "Missing the required parameter 'batch_input_blog_post' when calling DefaultApi.create_batch"
             end
             # resource path
             local_var_path = '/cms/v3/blogs/posts/batch/create'
@@ -338,7 +338,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: DefaultApi#create_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: DefaultApi#create_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
@@ -763,8 +763,8 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
           # @return [Object]
-          def read(batch_input_string, opts = {})
-            data, _status_code, _headers = read_with_http_info(batch_input_string, opts)
+          def read_batch(batch_input_string, opts = {})
+            data, _status_code, _headers = read_batch_with_http_info(batch_input_string, opts)
             data
           end
 
@@ -774,13 +774,13 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
           # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
-          def read_with_http_info(batch_input_string, opts = {})
+          def read_batch_with_http_info(batch_input_string, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: DefaultApi.read ...'
+              @api_client.config.logger.debug 'Calling API: DefaultApi.read_batch ...'
             end
             # verify the required parameter 'batch_input_string' is set
             if @api_client.config.client_side_validation && batch_input_string.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling DefaultApi.read"
+              fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling DefaultApi.read_batch"
             end
             # resource path
             local_var_path = '/cms/v3/blogs/posts/batch/read'
@@ -819,7 +819,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: DefaultApi#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: DefaultApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
@@ -1086,73 +1086,6 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Update a batch of Blog Posts
-          # Update the Blog Post objects identified in the request body.
-          # @param batch_input_json_node [BatchInputJsonNode] 
-          # @param [Hash] opts the optional parameters
-          # @option opts [Boolean] :archived Whether to return only results that have been archived.
-          # @return [Object]
-          def update(batch_input_json_node, opts = {})
-            data, _status_code, _headers = update_with_http_info(batch_input_json_node, opts)
-            data
-          end
-
-          # Update a batch of Blog Posts
-          # Update the Blog Post objects identified in the request body.
-          # @param batch_input_json_node [BatchInputJsonNode] 
-          # @param [Hash] opts the optional parameters
-          # @option opts [Boolean] :archived Whether to return only results that have been archived.
-          # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
-          def update_with_http_info(batch_input_json_node, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: DefaultApi.update ...'
-            end
-            # verify the required parameter 'batch_input_json_node' is set
-            if @api_client.config.client_side_validation && batch_input_json_node.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_json_node' when calling DefaultApi.update"
-            end
-            # resource path
-            local_var_path = '/cms/v3/blogs/posts/batch/update'
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-            query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-            # HTTP header 'Content-Type'
-            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(batch_input_json_node) 
-
-            # return_type
-            return_type = opts[:return_type] || 'Object' 
-
-            # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: DefaultApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
-
           # Update a Blog Post
           # Sparse updates a single Blog Post object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
           # @param object_id [String] The Blog Post id.
@@ -1160,8 +1093,8 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
           # @return [BlogPost]
-          def update_0(object_id, blog_post, opts = {})
-            data, _status_code, _headers = update_0_with_http_info(object_id, blog_post, opts)
+          def update(object_id, blog_post, opts = {})
+            data, _status_code, _headers = update_with_http_info(object_id, blog_post, opts)
             data
           end
 
@@ -1172,17 +1105,17 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
           # @return [Array<(BlogPost, Integer, Hash)>] BlogPost data, response status code and response headers
-          def update_0_with_http_info(object_id, blog_post, opts = {})
+          def update_with_http_info(object_id, blog_post, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: DefaultApi.update_0 ...'
+              @api_client.config.logger.debug 'Calling API: DefaultApi.update ...'
             end
             # verify the required parameter 'object_id' is set
             if @api_client.config.client_side_validation && object_id.nil?
-              fail ArgumentError, "Missing the required parameter 'object_id' when calling DefaultApi.update_0"
+              fail ArgumentError, "Missing the required parameter 'object_id' when calling DefaultApi.update"
             end
             # verify the required parameter 'blog_post' is set
             if @api_client.config.client_side_validation && blog_post.nil?
-              fail ArgumentError, "Missing the required parameter 'blog_post' when calling DefaultApi.update_0"
+              fail ArgumentError, "Missing the required parameter 'blog_post' when calling DefaultApi.update"
             end
             # resource path
             local_var_path = '/cms/v3/blogs/posts/{objectId}'.sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
@@ -1221,7 +1154,74 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: DefaultApi#update_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: DefaultApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Update a batch of Blog Posts
+          # Update the Blog Post objects identified in the request body.
+          # @param batch_input_json_node [BatchInputJsonNode] 
+          # @param [Hash] opts the optional parameters
+          # @option opts [Boolean] :archived Whether to return only results that have been archived.
+          # @return [Object]
+          def update_batch(batch_input_json_node, opts = {})
+            data, _status_code, _headers = update_batch_with_http_info(batch_input_json_node, opts)
+            data
+          end
+
+          # Update a batch of Blog Posts
+          # Update the Blog Post objects identified in the request body.
+          # @param batch_input_json_node [BatchInputJsonNode] 
+          # @param [Hash] opts the optional parameters
+          # @option opts [Boolean] :archived Whether to return only results that have been archived.
+          # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+          def update_batch_with_http_info(batch_input_json_node, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: DefaultApi.update_batch ...'
+            end
+            # verify the required parameter 'batch_input_json_node' is set
+            if @api_client.config.client_side_validation && batch_input_json_node.nil?
+              fail ArgumentError, "Missing the required parameter 'batch_input_json_node' when calling DefaultApi.update_batch"
+            end
+            # resource path
+            local_var_path = '/cms/v3/blogs/posts/batch/update'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+            query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(batch_input_json_node) 
+
+            # return_type
+            return_type = opts[:return_type] || 'Object' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: DefaultApi#update_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
