@@ -32,13 +32,13 @@ describe 'GenerateApi' do
     end
   end
 
-  # unit tests for post_visitor_identification_v3_tokens_create
+  # unit tests for generate_token
   # Generate a token
   # Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
   # @param identification_token_generation_request 
   # @param [Hash] opts the optional parameters
   # @return [IdentificationTokenResponse]
-  describe 'post_visitor_identification_v3_tokens_create test' do
+  describe 'generate_token test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

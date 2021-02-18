@@ -26,8 +26,8 @@ module Hubspot
         # @param identification_token_generation_request [IdentificationTokenGenerationRequest] 
         # @param [Hash] opts the optional parameters
         # @return [IdentificationTokenResponse]
-        def post_visitor_identification_v3_tokens_create(identification_token_generation_request, opts = {})
-          data, _status_code, _headers = post_visitor_identification_v3_tokens_create_with_http_info(identification_token_generation_request, opts)
+        def generate_token(identification_token_generation_request, opts = {})
+          data, _status_code, _headers = generate_token_with_http_info(identification_token_generation_request, opts)
           data
         end
 
@@ -36,13 +36,13 @@ module Hubspot
         # @param identification_token_generation_request [IdentificationTokenGenerationRequest] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(IdentificationTokenResponse, Integer, Hash)>] IdentificationTokenResponse data, response status code and response headers
-        def post_visitor_identification_v3_tokens_create_with_http_info(identification_token_generation_request, opts = {})
+        def generate_token_with_http_info(identification_token_generation_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: GenerateApi.post_visitor_identification_v3_tokens_create ...'
+            @api_client.config.logger.debug 'Calling API: GenerateApi.generate_token ...'
           end
           # verify the required parameter 'identification_token_generation_request' is set
           if @api_client.config.client_side_validation && identification_token_generation_request.nil?
-            fail ArgumentError, "Missing the required parameter 'identification_token_generation_request' when calling GenerateApi.post_visitor_identification_v3_tokens_create"
+            fail ArgumentError, "Missing the required parameter 'identification_token_generation_request' when calling GenerateApi.generate_token"
           end
           # resource path
           local_var_path = '/conversations/v3/visitor-identification/tokens/create'
@@ -80,7 +80,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: GenerateApi#post_visitor_identification_v3_tokens_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: GenerateApi#generate_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
