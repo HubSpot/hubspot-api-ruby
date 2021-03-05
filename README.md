@@ -7,7 +7,7 @@ Ruby API v3 Client files and sample apps
 
 ## Documentation
 
-See the [Hubspot API](https://www.rubydoc.info/github/HubSpot/hubspot-api-ruby/master) docs.
+See the [Hubspot API](https://developers.hubspot.com/docs/api/overview) docs.
 
 ## Installation
 
