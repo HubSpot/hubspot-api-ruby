@@ -184,7 +184,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @access.nil?
-          access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "PRIVATE"])
+          access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
           return false unless access_validator.valid?(@access)
           return false if @url.nil?
           return false if @duplicate_validation_strategy.nil?
@@ -200,7 +200,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] access Object to be assigned
         def access=(access)
-          validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "PRIVATE"])
+          validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
           unless validator.valid?(access)
             fail ArgumentError, "invalid value for \"access\", must be one of #{validator.allowable_values}."
           end

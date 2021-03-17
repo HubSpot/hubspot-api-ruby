@@ -382,7 +382,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'File' 
+          return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -552,7 +552,7 @@ module Hubspot
         # @param file_id [String] Id of the desired file.
         # @param [Hash] opts the optional parameters
         # @option opts [String] :user_agent 
-        # @option opts [String] :file File data that will replace existing file in the file manager.
+        # @option opts [File] :file File data that will replace existing file in the file manager.
         # @option opts [String] :charset_hunch Character set of given file data.
         # @option opts [String] :options JSON String representing FileReplaceOptions
         # @return [File]
@@ -566,7 +566,7 @@ module Hubspot
         # @param file_id [String] Id of the desired file.
         # @param [Hash] opts the optional parameters
         # @option opts [String] :user_agent 
-        # @option opts [String] :file File data that will replace existing file in the file manager.
+        # @option opts [File] :file File data that will replace existing file in the file manager.
         # @option opts [String] :charset_hunch Character set of given file data.
         # @option opts [String] :options JSON String representing FileReplaceOptions
         # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
@@ -607,7 +607,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'File' 
+          return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -682,7 +682,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(file_update_input) 
 
           # return_type
-          return_type = opts[:return_type] || 'File' 
+          return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -707,7 +707,7 @@ module Hubspot
         # Upload a single file with content specified in request body.
         # @param [Hash] opts the optional parameters
         # @option opts [String] :user_agent 
-        # @option opts [String] :file File to be uploaded.
+        # @option opts [File] :file File to be uploaded.
         # @option opts [String] :folder_id Either &#39;folderId&#39; or &#39;folderPath&#39; is required. folderId is the ID of the folder the file will be uploaded to.
         # @option opts [String] :folder_path Either &#39;folderPath&#39; or &#39;folderId&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn&#39;t exist, the system will try to create one.
         # @option opts [String] :file_name Desired name for the uploaded file.
@@ -723,7 +723,7 @@ module Hubspot
         # Upload a single file with content specified in request body.
         # @param [Hash] opts the optional parameters
         # @option opts [String] :user_agent 
-        # @option opts [String] :file File to be uploaded.
+        # @option opts [File] :file File to be uploaded.
         # @option opts [String] :folder_id Either &#39;folderId&#39; or &#39;folderPath&#39; is required. folderId is the ID of the folder the file will be uploaded to.
         # @option opts [String] :folder_path Either &#39;folderPath&#39; or &#39;folderId&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn&#39;t exist, the system will try to create one.
         # @option opts [String] :file_name Desired name for the uploaded file.
@@ -761,7 +761,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'File' 
+          return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
