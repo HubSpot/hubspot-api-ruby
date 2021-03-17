@@ -15,7 +15,7 @@ require 'date'
 module Hubspot
   module Files
     module Files
-      class File
+      class HubspotFile
         # File ID.
         attr_accessor :id
 
@@ -269,7 +269,7 @@ module Hubspot
           return false if @updated_at.nil?
           return false if @archived.nil?
           return false if @access.nil?
-          access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "PRIVATE"])
+          access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
           return false unless access_validator.valid?(@access)
           true
         end
@@ -277,7 +277,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] access Object to be assigned
         def access=(access)
-          validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "PRIVATE"])
+          validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
           unless validator.valid?(access)
             fail ArgumentError, "invalid value for \"access\", must be one of #{validator.allowable_values}."
           end
