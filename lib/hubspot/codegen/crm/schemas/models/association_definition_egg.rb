@@ -25,40 +25,12 @@ module Hubspot
         # A unique name for this association.
         attr_accessor :name
 
-        attr_accessor :cardinality
-
-        attr_accessor :inverse_cardinality
-
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'from_object_type_id' => :'fromObjectTypeId',
             :'to_object_type_id' => :'toObjectTypeId',
-            :'name' => :'name',
-            :'cardinality' => :'cardinality',
-            :'inverse_cardinality' => :'inverseCardinality'
+            :'name' => :'name'
           }
         end
 
@@ -67,9 +39,7 @@ module Hubspot
           {
             :'from_object_type_id' => :'String',
             :'to_object_type_id' => :'String',
-            :'name' => :'String',
-            :'cardinality' => :'String',
-            :'inverse_cardinality' => :'String'
+            :'name' => :'String'
           }
         end
 
@@ -105,14 +75,6 @@ module Hubspot
           if attributes.key?(:'name')
             self.name = attributes[:'name']
           end
-
-          if attributes.key?(:'cardinality')
-            self.cardinality = attributes[:'cardinality']
-          end
-
-          if attributes.key?(:'inverse_cardinality')
-            self.inverse_cardinality = attributes[:'inverse_cardinality']
-          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -127,14 +89,6 @@ module Hubspot
             invalid_properties.push('invalid value for "to_object_type_id", to_object_type_id cannot be nil.')
           end
 
-          if @cardinality.nil?
-            invalid_properties.push('invalid value for "cardinality", cardinality cannot be nil.')
-          end
-
-          if @inverse_cardinality.nil?
-            invalid_properties.push('invalid value for "inverse_cardinality", inverse_cardinality cannot be nil.')
-          end
-
           invalid_properties
         end
 
@@ -143,33 +97,7 @@ module Hubspot
         def valid?
           return false if @from_object_type_id.nil?
           return false if @to_object_type_id.nil?
-          return false if @cardinality.nil?
-          cardinality_validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          return false unless cardinality_validator.valid?(@cardinality)
-          return false if @inverse_cardinality.nil?
-          inverse_cardinality_validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          return false unless inverse_cardinality_validator.valid?(@inverse_cardinality)
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] cardinality Object to be assigned
-        def cardinality=(cardinality)
-          validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          unless validator.valid?(cardinality)
-            fail ArgumentError, "invalid value for \"cardinality\", must be one of #{validator.allowable_values}."
-          end
-          @cardinality = cardinality
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] inverse_cardinality Object to be assigned
-        def inverse_cardinality=(inverse_cardinality)
-          validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          unless validator.valid?(inverse_cardinality)
-            fail ArgumentError, "invalid value for \"inverse_cardinality\", must be one of #{validator.allowable_values}."
-          end
-          @inverse_cardinality = inverse_cardinality
         end
 
         # Checks equality by comparing each attribute.
@@ -179,9 +107,7 @@ module Hubspot
           self.class == o.class &&
               from_object_type_id == o.from_object_type_id &&
               to_object_type_id == o.to_object_type_id &&
-              name == o.name &&
-              cardinality == o.cardinality &&
-              inverse_cardinality == o.inverse_cardinality
+              name == o.name
         end
 
         # @see the `==` method
@@ -193,7 +119,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from_object_type_id, to_object_type_id, name, cardinality, inverse_cardinality].hash
+          [from_object_type_id, to_object_type_id, name].hash
         end
 
         # Builds the object from hash

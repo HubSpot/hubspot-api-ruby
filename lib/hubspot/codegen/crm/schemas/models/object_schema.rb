@@ -30,6 +30,8 @@ module Hubspot
         # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
         attr_accessor :secondary_display_properties
 
+        attr_accessor :archived
+
         # A unique ID for this schema's object type. Will be defined as {meta-type}-{unique ID}.
         attr_accessor :id
 
@@ -61,6 +63,7 @@ module Hubspot
             :'searchable_properties' => :'searchableProperties',
             :'primary_display_property' => :'primaryDisplayProperty',
             :'secondary_display_properties' => :'secondaryDisplayProperties',
+            :'archived' => :'archived',
             :'id' => :'id',
             :'fully_qualified_name' => :'fullyQualifiedName',
             :'created_at' => :'createdAt',
@@ -80,6 +83,7 @@ module Hubspot
             :'searchable_properties' => :'Array<String>',
             :'primary_display_property' => :'String',
             :'secondary_display_properties' => :'Array<String>',
+            :'archived' => :'Boolean',
             :'id' => :'String',
             :'fully_qualified_name' => :'String',
             :'created_at' => :'DateTime',
@@ -136,6 +140,10 @@ module Hubspot
             if (value = attributes[:'secondary_display_properties']).is_a?(Array)
               self.secondary_display_properties = value
             end
+          end
+
+          if attributes.key?(:'archived')
+            self.archived = attributes[:'archived']
           end
 
           if attributes.key?(:'id')
@@ -195,6 +203,10 @@ module Hubspot
             invalid_properties.push('invalid value for "secondary_display_properties", secondary_display_properties cannot be nil.')
           end
 
+          if @archived.nil?
+            invalid_properties.push('invalid value for "archived", archived cannot be nil.')
+          end
+
           if @id.nil?
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
@@ -229,6 +241,7 @@ module Hubspot
           return false if @required_properties.nil?
           return false if @searchable_properties.nil?
           return false if @secondary_display_properties.nil?
+          return false if @archived.nil?
           return false if @id.nil?
           return false if @fully_qualified_name.nil?
           return false if @object_type_id.nil?
@@ -248,6 +261,7 @@ module Hubspot
               searchable_properties == o.searchable_properties &&
               primary_display_property == o.primary_display_property &&
               secondary_display_properties == o.secondary_display_properties &&
+              archived == o.archived &&
               id == o.id &&
               fully_qualified_name == o.fully_qualified_name &&
               created_at == o.created_at &&
@@ -267,7 +281,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, id, fully_qualified_name, created_at, updated_at, object_type_id, properties, associations, name].hash
+          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, archived, id, fully_qualified_name, created_at, updated_at, object_type_id, properties, associations, name].hash
         end
 
         # Builds the object from hash

@@ -50,24 +50,4 @@ describe 'AssociationDefinitionEgg' do
     end
   end
 
-  describe 'test attribute "cardinality"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.cardinality = value }.not_to raise_error
-      # end
-    end
-  end
-
-  describe 'test attribute "inverse_cardinality"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.inverse_cardinality = value }.not_to raise_error
-      # end
-    end
-  end
-
 end

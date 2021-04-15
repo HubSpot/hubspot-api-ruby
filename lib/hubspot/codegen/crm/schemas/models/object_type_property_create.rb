@@ -192,7 +192,7 @@ module Hubspot
           return false if @name.nil?
           return false if @label.nil?
           return false if @type.nil?
-          type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration"])
+          type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration", "bool"])
           return false unless type_validator.valid?(@type)
           return false if @field_type.nil?
           true
@@ -201,7 +201,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] type Object to be assigned
         def type=(type)
-          validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration"])
+          validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration", "bool"])
           unless validator.valid?(type)
             fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
           end

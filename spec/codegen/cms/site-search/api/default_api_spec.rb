@@ -61,7 +61,6 @@ describe 'DefaultApi' do
   # @option opts [String] :boost_recent Specifies a relative time window where scores of documents published outside this time window decay. This can only be used for blog posts. For example, boostRecent&#x3D;10d will boost documents published within the last 10 days. Supported timeunits are ms (milliseconds), s (seconds), m (minutes), h (hours), d (days).
   # @option opts [Integer] :table_id Specifies a specific HubDB table to search. Only returns results from the specified table. Can be used in tandem with the &#x60;hubdbQuery&#x60; parameter to further filter results.
   # @option opts [String] :hubdb_query Specify a HubDB query to further filter the search results.
-  # @option opts [String] :key_string 
   # @option opts [Array<String>] :domain A domain to match search results for. Multiple domains can be provided with &amp;.
   # @option opts [Array<String>] :type Specifies the type of content to search. Can be one or more of SITE_PAGE, LANDING_PAGE, BLOG_POST, LISTING_PAGE, and KNOWLEDGE_ARTICLE. Defaults to all content types except LANDING_PAGE and KNOWLEDGE_ARTICLE
   # @option opts [Array<String>] :path_prefix Specifies a path prefix to filter search results. Will only return results with URL paths that start with the specified parameter. Can be used multiple times.

@@ -26,7 +26,7 @@ module Hubspot
           # Filter, Sort, and Search CRM Objects
           # @param public_object_search_request [PublicObjectSearchRequest] 
           # @param [Hash] opts the optional parameters
-          # @return [CollectionResponseWithTotalSimplePublicObject]
+          # @return [CollectionResponseWithTotalSimplePublicObjectForwardPaging]
           def do_search(public_object_search_request, opts = {})
             data, _status_code, _headers = do_search_with_http_info(public_object_search_request, opts)
             data
@@ -36,7 +36,7 @@ module Hubspot
           # Filter, Sort, and Search CRM Objects
           # @param public_object_search_request [PublicObjectSearchRequest] 
           # @param [Hash] opts the optional parameters
-          # @return [Array<(CollectionResponseWithTotalSimplePublicObject, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObject data, response status code and response headers
+          # @return [Array<(CollectionResponseWithTotalSimplePublicObjectForwardPaging, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObjectForwardPaging data, response status code and response headers
           def do_search_with_http_info(public_object_search_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: SearchApi.do_search ...'
@@ -65,7 +65,7 @@ module Hubspot
             post_body = opts[:body] || @api_client.object_to_http_body(public_object_search_request) 
 
             # return_type
-            return_type = opts[:return_type] || 'CollectionResponseWithTotalSimplePublicObject' 
+            return_type = opts[:return_type] || 'CollectionResponseWithTotalSimplePublicObjectForwardPaging' 
 
             # auth_names
             auth_names = opts[:auth_names] || ['hapikey']

@@ -70,7 +70,7 @@ module Hubspot
               :'name' => :'String',
               :'label' => :'String',
               :'type' => :'String',
-              :'params' => :'Object',
+              :'params' => :'Hash<String, Object>',
               :'rows' => :'Array<Hash<String, LayoutSection>>',
               :'row_meta_data' => :'Array<RowMetaData>',
               :'cells' => :'Array<LayoutSection>',
@@ -123,7 +123,9 @@ module Hubspot
             end
 
             if attributes.key?(:'params')
-              self.params = attributes[:'params']
+              if (value = attributes[:'params']).is_a?(Hash)
+                self.params = value
+              end
             end
 
             if attributes.key?(:'rows')

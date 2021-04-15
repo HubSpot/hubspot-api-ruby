@@ -88,7 +88,7 @@ module Hubspot
           end
 
           # Archive a batch of Blog Posts
-          # Archive the Blog Post objects identified in the request body.
+          # Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform an in-app `archive` send an normal update with the `archived` field set to true.
           # @param batch_input_string [BatchInputString] The JSON array of Blog Post ids.
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -98,7 +98,7 @@ module Hubspot
           end
 
           # Archive a batch of Blog Posts
-          # Archive the Blog Post objects identified in the request body.
+          # Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app &#x60;archive&#x60; function. To perform an in-app &#x60;archive&#x60; send an normal update with the &#x60;archived&#x60; field set to true.
           # @param batch_input_string [BatchInputString] The JSON array of Blog Post ids.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

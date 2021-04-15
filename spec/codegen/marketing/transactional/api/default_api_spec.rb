@@ -44,6 +44,18 @@ describe 'DefaultApi' do
     end
   end
 
+  # unit tests for create_token
+  # Create a SMTP API token.
+  # Create a SMTP API token.
+  # @param [Hash] opts the optional parameters
+  # @option opts [SmtpApiTokenRequestEgg] :smtp_api_token_request_egg A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
+  # @return [SmtpApiTokenView]
+  describe 'create_token test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_token_by_id
   # Query a single token by ID.
   # Query a single token by ID.
@@ -66,18 +78,6 @@ describe 'DefaultApi' do
   # @option opts [Integer] :limit Maximum number of tokens to return.
   # @return [CollectionResponseSmtpApiTokenView]
   describe 'get_tokens_page test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for reate_token
-  # Create a SMTP API token.
-  # Create a SMTP API token.
-  # @param [Hash] opts the optional parameters
-  # @option opts [SmtpApiTokenRequestEgg] :smtp_api_token_request_egg A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
-  # @return [SmtpApiTokenView]
-  describe 'create_token test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

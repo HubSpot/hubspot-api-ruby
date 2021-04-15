@@ -63,10 +63,9 @@ describe 'BasicApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
   # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-  # @option opts [Boolean] :paginate_associations 
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @option opts [String] :id_property The name of a property whose values are unique for this object type
-  # @return [SimplePublicObject]
+  # @return [SimplePublicObjectWithAssociations]
   describe 'get_by_id test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -81,9 +80,8 @@ describe 'BasicApi' do
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
   # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
   # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-  # @option opts [Boolean] :paginate_associations 
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @return [CollectionResponseSimplePublicObject]
+  # @return [CollectionResponseSimplePublicObjectWithAssociationsForwardPaging]
   describe 'get_page test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -92,10 +90,11 @@ describe 'BasicApi' do
 
   # unit tests for update
   # Update
-  # Perform a partial update of an Object identified by &#x60;{lineItemId}&#x60;. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+  # Perform a partial update of an Object identified by &#x60;{lineItemId}&#x60;. &#x60;{lineItemId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
   # @param line_item_id 
   # @param simple_public_object_input 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :id_property The name of a property whose values are unique for this object type
   # @return [SimplePublicObject]
   describe 'update test' do
     it 'should work' do
