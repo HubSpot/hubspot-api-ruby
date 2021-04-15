@@ -23,8 +23,9 @@ module Hubspot
         end
         # Delete a schema
         # Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
-        # @param object_type [String] Fully qualified name or object type ID for the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [nil]
         def archive(object_type, opts = {})
           archive_with_http_info(object_type, opts)
@@ -33,8 +34,9 @@ module Hubspot
 
         # Delete a schema
         # Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
-        # @param object_type [String] Fully qualified name or object type ID for the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_with_http_info(object_type, opts = {})
           if @api_client.config.debugging
@@ -49,6 +51,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -85,7 +88,7 @@ module Hubspot
 
         # Remove an association
         # Removes an existing association from a schema.
-        # @param object_type [String] Fully qualified name or object type ID for the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param association_identifier [String] Unique ID of the association to remove.
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -96,7 +99,7 @@ module Hubspot
 
         # Remove an association
         # Removes an existing association from a schema.
-        # @param object_type [String] Fully qualified name or object type ID for the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param association_identifier [String] Unique ID of the association to remove.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -217,7 +220,7 @@ module Hubspot
 
         # Create an association
         # Defines a new association between the primary schema's object type and other object types.
-        # @param object_type [String] Fully qualified name or object type ID for the primary schema to associate.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param association_definition_egg [AssociationDefinitionEgg] Attributes that define the association.
         # @param [Hash] opts the optional parameters
         # @return [AssociationDefinition]
@@ -228,7 +231,7 @@ module Hubspot
 
         # Create an association
         # Defines a new association between the primary schema&#39;s object type and other object types.
-        # @param object_type [String] Fully qualified name or object type ID for the primary schema to associate.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param association_definition_egg [AssociationDefinitionEgg] Attributes that define the association.
         # @param [Hash] opts the optional parameters
         # @return [Array<(AssociationDefinition, Integer, Hash)>] AssociationDefinition data, response status code and response headers
@@ -286,18 +289,20 @@ module Hubspot
         end
 
         # Get all schemas
-        # Returns all object schemas that have been defined for the target account.
+        # Returns all object schemas that have been defined for your account.
         # @param [Hash] opts the optional parameters
-        # @return [CollectionResponseObjectSchema]
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @return [CollectionResponseObjectSchemaNoPaging]
         def get_all(opts = {})
           data, _status_code, _headers = get_all_with_http_info(opts)
           data
         end
 
         # Get all schemas
-        # Returns all object schemas that have been defined for the target account.
+        # Returns all object schemas that have been defined for your account.
         # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponseObjectSchema, Integer, Hash)>] CollectionResponseObjectSchema data, response status code and response headers
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @return [Array<(CollectionResponseObjectSchemaNoPaging, Integer, Hash)>] CollectionResponseObjectSchemaNoPaging data, response status code and response headers
         def get_all_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: CoreApi.get_all ...'
@@ -307,6 +312,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -320,7 +326,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseObjectSchema' 
+          return_type = opts[:return_type] || 'CollectionResponseObjectSchemaNoPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -343,7 +349,7 @@ module Hubspot
 
         # Get an existing schema
         # Returns an existing object schema.
-        # @param object_type [String] Fully qualified name or object type ID of the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param [Hash] opts the optional parameters
         # @return [ObjectSchema]
         def get_by_id(object_type, opts = {})
@@ -353,7 +359,7 @@ module Hubspot
 
         # Get an existing schema
         # Returns an existing object schema.
-        # @param object_type [String] Fully qualified name or object type ID of the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
         # @param [Hash] opts the optional parameters
         # @return [Array<(ObjectSchema, Integer, Hash)>] ObjectSchema data, response status code and response headers
         def get_by_id_with_http_info(object_type, opts = {})
@@ -405,8 +411,8 @@ module Hubspot
 
         # Update a schema
         # Update the details for an existing object schema.
-        # @param object_type [String] Fully qualified name or object type ID for the target schema.
-        # @param object_type_definition_patch [ObjectTypeDefinitionPatch] Attributes to update in the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
+        # @param object_type_definition_patch [ObjectTypeDefinitionPatch] Attributes to update in your schema.
         # @param [Hash] opts the optional parameters
         # @return [ObjectTypeDefinition]
         def update(object_type, object_type_definition_patch, opts = {})
@@ -416,8 +422,8 @@ module Hubspot
 
         # Update a schema
         # Update the details for an existing object schema.
-        # @param object_type [String] Fully qualified name or object type ID for the target schema.
-        # @param object_type_definition_patch [ObjectTypeDefinitionPatch] Attributes to update in the target schema.
+        # @param object_type [String] Fully qualified name or object type ID of your schema.
+        # @param object_type_definition_patch [ObjectTypeDefinitionPatch] Attributes to update in your schema.
         # @param [Hash] opts the optional parameters
         # @return [Array<(ObjectTypeDefinition, Integer, Hash)>] ObjectTypeDefinition data, response status code and response headers
         def update_with_http_info(object_type, object_type_definition_patch, opts = {})

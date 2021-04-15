@@ -25,8 +25,6 @@ module Hubspot
 
           attr_accessor :updated_at
 
-          attr_accessor :associations
-
           attr_accessor :archived
 
           attr_accessor :archived_at
@@ -38,7 +36,6 @@ module Hubspot
               :'properties' => :'properties',
               :'created_at' => :'createdAt',
               :'updated_at' => :'updatedAt',
-              :'associations' => :'associations',
               :'archived' => :'archived',
               :'archived_at' => :'archivedAt'
             }
@@ -51,7 +48,6 @@ module Hubspot
               :'properties' => :'Hash<String, String>',
               :'created_at' => :'DateTime',
               :'updated_at' => :'DateTime',
-              :'associations' => :'Hash<String, CollectionResponseAssociatedId>',
               :'archived' => :'Boolean',
               :'archived_at' => :'DateTime'
             }
@@ -94,12 +90,6 @@ module Hubspot
 
             if attributes.key?(:'updated_at')
               self.updated_at = attributes[:'updated_at']
-            end
-
-            if attributes.key?(:'associations')
-              if (value = attributes[:'associations']).is_a?(Hash)
-                self.associations = value
-              end
             end
 
             if attributes.key?(:'archived')
@@ -153,7 +143,6 @@ module Hubspot
                 properties == o.properties &&
                 created_at == o.created_at &&
                 updated_at == o.updated_at &&
-                associations == o.associations &&
                 archived == o.archived &&
                 archived_at == o.archived_at
           end
@@ -167,7 +156,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, properties, created_at, updated_at, associations, archived, archived_at].hash
+            [id, properties, created_at, updated_at, archived, archived_at].hash
           end
 
           # Builds the object from hash

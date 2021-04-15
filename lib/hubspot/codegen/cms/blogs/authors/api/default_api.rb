@@ -88,7 +88,7 @@ module Hubspot
           end
 
           # Archive a batch of Blog Authors
-          # Archive the Blog Author objects identified in the request body.
+          # Delete the Blog Author objects identified in the request body. Note: This is not the same as the in-app `archive` function.
           # @param batch_input_string [BatchInputString] The JSON array of Blog Author ids.
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -98,7 +98,7 @@ module Hubspot
           end
 
           # Archive a batch of Blog Authors
-          # Archive the Blog Author objects identified in the request body.
+          # Delete the Blog Author objects identified in the request body. Note: This is not the same as the in-app &#x60;archive&#x60; function.
           # @param batch_input_string [BatchInputString] The JSON array of Blog Author ids.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

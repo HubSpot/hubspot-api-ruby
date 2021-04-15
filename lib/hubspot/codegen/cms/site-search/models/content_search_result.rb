@@ -16,38 +16,55 @@ module Hubspot
   module Cms
     module SiteSearch
       class ContentSearchResult
+        # The ID of the content.
         attr_accessor :id
 
+        # The matching score of the document.
         attr_accessor :score
 
+        # The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`, `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
         attr_accessor :type
 
+        # The domain the document is hosted on.
         attr_accessor :domain
 
+        # The url of the document.
         attr_accessor :url
 
+        # URL of the featured image.
         attr_accessor :featured_image_url
 
+        # The document's language.
         attr_accessor :language
 
+        # The title of the returned document.
         attr_accessor :title
 
+        # The result's description. The content will be determined by the value of `length` in the request.
         attr_accessor :description
 
+        # For knowledge articles, the category of the article.
         attr_accessor :category
 
+        # For knowledge articles, the subcategory of the article.
         attr_accessor :subcategory
 
+        # Name of the author.
         attr_accessor :author_full_name
 
+        # If a blog post, the tags associated with it.
         attr_accessor :tags
 
+        # If a dynamic page, the ID of the HubDB table.
         attr_accessor :table_id
 
+        # If a dynamic page, the row ID in the HubDB table.
         attr_accessor :row_id
 
+        # The date the content was published.
         attr_accessor :published_date
 
+        # The ID of the document in HubSpot.
         attr_accessor :combined_id
 
         class EnumAttributeValidator
@@ -243,7 +260,7 @@ module Hubspot
           return false if @id.nil?
           return false if @score.nil?
           return false if @type.nil?
-          type_validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
+          type_validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
           return false unless type_validator.valid?(@type)
           return false if @domain.nil?
           return false if @url.nil?
@@ -255,7 +272,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] type Object to be assigned
         def type=(type)
-          validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
+          validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
           unless validator.valid?(type)
             fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
           end

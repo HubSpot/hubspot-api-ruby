@@ -51,7 +51,7 @@ module Hubspot
             fail ArgumentError, "invalid value for 'content_id' when calling DefaultApi.get_by_id, must conform to the pattern #{pattern}."
           end
 
-          allowable_values = ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"]
+          allowable_values = ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"]
           if @api_client.config.client_side_validation && opts[:'type'] && !allowable_values.include?(opts[:'type'])
             fail ArgumentError, "invalid value for \"type\", must be one of #{allowable_values}"
           end
@@ -110,7 +110,6 @@ module Hubspot
         # @option opts [String] :boost_recent Specifies a relative time window where scores of documents published outside this time window decay. This can only be used for blog posts. For example, boostRecent&#x3D;10d will boost documents published within the last 10 days. Supported timeunits are ms (milliseconds), s (seconds), m (minutes), h (hours), d (days).
         # @option opts [Integer] :table_id Specifies a specific HubDB table to search. Only returns results from the specified table. Can be used in tandem with the &#x60;hubdbQuery&#x60; parameter to further filter results.
         # @option opts [String] :hubdb_query Specify a HubDB query to further filter the search results.
-        # @option opts [String] :key_string 
         # @option opts [Array<String>] :domain A domain to match search results for. Multiple domains can be provided with &amp;.
         # @option opts [Array<String>] :type Specifies the type of content to search. Can be one or more of SITE_PAGE, LANDING_PAGE, BLOG_POST, LISTING_PAGE, and KNOWLEDGE_ARTICLE. Defaults to all content types except LANDING_PAGE and KNOWLEDGE_ARTICLE
         # @option opts [Array<String>] :path_prefix Specifies a path prefix to filter search results. Will only return results with URL paths that start with the specified parameter. Can be used multiple times.
@@ -138,7 +137,6 @@ module Hubspot
         # @option opts [String] :boost_recent Specifies a relative time window where scores of documents published outside this time window decay. This can only be used for blog posts. For example, boostRecent&#x3D;10d will boost documents published within the last 10 days. Supported timeunits are ms (milliseconds), s (seconds), m (minutes), h (hours), d (days).
         # @option opts [Integer] :table_id Specifies a specific HubDB table to search. Only returns results from the specified table. Can be used in tandem with the &#x60;hubdbQuery&#x60; parameter to further filter results.
         # @option opts [String] :hubdb_query Specify a HubDB query to further filter the search results.
-        # @option opts [String] :key_string 
         # @option opts [Array<String>] :domain A domain to match search results for. Multiple domains can be provided with &amp;.
         # @option opts [Array<String>] :type Specifies the type of content to search. Can be one or more of SITE_PAGE, LANDING_PAGE, BLOG_POST, LISTING_PAGE, and KNOWLEDGE_ARTICLE. Defaults to all content types except LANDING_PAGE and KNOWLEDGE_ARTICLE
         # @option opts [Array<String>] :path_prefix Specifies a path prefix to filter search results. Will only return results with URL paths that start with the specified parameter. Can be used multiple times.
@@ -154,7 +152,7 @@ module Hubspot
           if @api_client.config.client_side_validation && opts[:'language'] && !allowable_values.include?(opts[:'language'])
             fail ArgumentError, "invalid value for \"language\", must be one of #{allowable_values}"
           end
-          allowable_values = ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"]
+          allowable_values = ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"]
           if @api_client.config.client_side_validation && opts[:'type'] && !opts[:'type'].all? { |item| allowable_values.include?(item) }
             fail ArgumentError, "invalid value for \"type\", must include one of #{allowable_values}"
           end
@@ -179,7 +177,6 @@ module Hubspot
           query_params[:'boostRecent'] = opts[:'boost_recent'] if !opts[:'boost_recent'].nil?
           query_params[:'tableId'] = opts[:'table_id'] if !opts[:'table_id'].nil?
           query_params[:'hubdbQuery'] = opts[:'hubdb_query'] if !opts[:'hubdb_query'].nil?
-          query_params[:'keyString'] = opts[:'key_string'] if !opts[:'key_string'].nil?
           query_params[:'domain'] = @api_client.build_collection_param(opts[:'domain'], :multi) if !opts[:'domain'].nil?
           query_params[:'type'] = @api_client.build_collection_param(opts[:'type'], :multi) if !opts[:'type'].nil?
           query_params[:'pathPrefix'] = @api_client.build_collection_param(opts[:'path_prefix'], :multi) if !opts[:'path_prefix'].nil?

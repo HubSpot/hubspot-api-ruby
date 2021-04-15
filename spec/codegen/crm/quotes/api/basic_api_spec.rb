@@ -39,10 +39,9 @@ describe 'BasicApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
   # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-  # @option opts [Boolean] :paginate_associations 
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @option opts [String] :id_property The name of a property whose values are unique for this object type
-  # @return [SimplePublicObject]
+  # @return [SimplePublicObjectWithAssociations]
   describe 'get_by_id test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -57,9 +56,8 @@ describe 'BasicApi' do
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
   # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
   # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-  # @option opts [Boolean] :paginate_associations 
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @return [CollectionResponseSimplePublicObject]
+  # @return [CollectionResponseSimplePublicObjectWithAssociationsForwardPaging]
   describe 'get_page test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

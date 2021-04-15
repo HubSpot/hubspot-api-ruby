@@ -82,6 +82,24 @@ module Hubspot
           # The ID of the Blog Author associated with this Blog Post.
           attr_accessor :blog_author_id
 
+          # List of IDs for the tags associated with this Blog Post.
+          attr_accessor :tag_ids
+
+          # The HTML of the main post body.
+          attr_accessor :_post_body
+
+          # The summary of the blog post that will appear on the main listing page.
+          attr_accessor :post_summary
+
+          # The contents of the RSS body for this Blog Post.
+          attr_accessor :rss_body
+
+          # The contents of the RSS summary for this Blog Post.
+          attr_accessor :rss_summary
+
+          # Boolean to allow overriding the AMP settings for the blog.
+          attr_accessor :enable_google_amp_output_override
+
           # The html title of this Blog Post.
           attr_accessor :html_title
 
@@ -97,24 +115,6 @@ module Hubspot
 
           # Boolean to determine if this post should use a featuredImage.
           attr_accessor :use_featured_image
-
-          # List of IDs for the tags associated with this Blog Post.
-          attr_accessor :tag_ids
-
-          # Boolean to allow overriding the AMP settings for the blog.
-          attr_accessor :enable_google_amp_output_override
-
-          # The HTML of the main post body.
-          attr_accessor :_post_body
-
-          # The summary of the blog post that will appear on the main listing page.
-          attr_accessor :post_summary
-
-          # The contents of the RSS body for this Blog Post.
-          attr_accessor :rss_body
-
-          # The contents of the RSS summary for this Blog Post.
-          attr_accessor :rss_summary
 
           # Set this to create a password protected page. Entering the password will be required to view the page.
           attr_accessor :password
@@ -235,6 +235,12 @@ module Hubspot
               :'translated_from_id' => :'translatedFromId',
               :'dynamic_page_hub_db_table_id' => :'dynamicPageHubDbTableId',
               :'blog_author_id' => :'blogAuthorId',
+              :'tag_ids' => :'tagIds',
+              :'_post_body' => :'postBody',
+              :'post_summary' => :'postSummary',
+              :'rss_body' => :'rssBody',
+              :'rss_summary' => :'rssSummary',
+              :'enable_google_amp_output_override' => :'enableGoogleAmpOutputOverride',
               :'html_title' => :'htmlTitle',
               :'page_redirected' => :'pageRedirected',
               :'page_expiry_enabled' => :'pageExpiryEnabled',
@@ -242,12 +248,6 @@ module Hubspot
               :'page_expiry_redirect_id' => :'pageExpiryRedirectId',
               :'page_expiry_redirect_url' => :'pageExpiryRedirectUrl',
               :'use_featured_image' => :'useFeaturedImage',
-              :'tag_ids' => :'tagIds',
-              :'enable_google_amp_output_override' => :'enableGoogleAmpOutputOverride',
-              :'_post_body' => :'postBody',
-              :'post_summary' => :'postSummary',
-              :'rss_body' => :'rssBody',
-              :'rss_summary' => :'rssSummary',
               :'password' => :'password',
               :'attached_stylesheets' => :'attachedStylesheets',
               :'include_default_custom_css' => :'includeDefaultCustomCss',
@@ -296,12 +296,18 @@ module Hubspot
               :'subcategory' => :'String',
               :'ab_status' => :'String',
               :'folder_id' => :'String',
-              :'widget_containers' => :'Object',
-              :'widgets' => :'Object',
+              :'widget_containers' => :'Hash<String, Object>',
+              :'widgets' => :'Hash<String, Object>',
               :'language' => :'String',
               :'translated_from_id' => :'String',
               :'dynamic_page_hub_db_table_id' => :'String',
               :'blog_author_id' => :'String',
+              :'tag_ids' => :'Array<Integer>',
+              :'_post_body' => :'String',
+              :'post_summary' => :'String',
+              :'rss_body' => :'String',
+              :'rss_summary' => :'String',
+              :'enable_google_amp_output_override' => :'Boolean',
               :'html_title' => :'String',
               :'page_redirected' => :'Boolean',
               :'page_expiry_enabled' => :'Boolean',
@@ -309,14 +315,8 @@ module Hubspot
               :'page_expiry_redirect_id' => :'Integer',
               :'page_expiry_redirect_url' => :'String',
               :'use_featured_image' => :'Boolean',
-              :'tag_ids' => :'Array<Integer>',
-              :'enable_google_amp_output_override' => :'Boolean',
-              :'_post_body' => :'String',
-              :'post_summary' => :'String',
-              :'rss_body' => :'String',
-              :'rss_summary' => :'String',
               :'password' => :'String',
-              :'attached_stylesheets' => :'Array<Object>',
+              :'attached_stylesheets' => :'Array<Hash<String, Object>>',
               :'include_default_custom_css' => :'Boolean',
               :'enable_domain_stylesheets' => :'Boolean',
               :'enable_layout_stylesheets' => :'Boolean',
@@ -332,7 +332,7 @@ module Hubspot
               :'public_access_rules_enabled' => :'Boolean',
               :'public_access_rules' => :'Array<Object>',
               :'layout_sections' => :'Hash<String, LayoutSection>',
-              :'theme_settings_values' => :'Object',
+              :'theme_settings_values' => :'Hash<String, Object>',
               :'url' => :'String',
               :'publish_date' => :'DateTime',
               :'deleted_at' => :'DateTime',
@@ -436,11 +436,15 @@ module Hubspot
             end
 
             if attributes.key?(:'widget_containers')
-              self.widget_containers = attributes[:'widget_containers']
+              if (value = attributes[:'widget_containers']).is_a?(Hash)
+                self.widget_containers = value
+              end
             end
 
             if attributes.key?(:'widgets')
-              self.widgets = attributes[:'widgets']
+              if (value = attributes[:'widgets']).is_a?(Hash)
+                self.widgets = value
+              end
             end
 
             if attributes.key?(:'language')
@@ -457,6 +461,32 @@ module Hubspot
 
             if attributes.key?(:'blog_author_id')
               self.blog_author_id = attributes[:'blog_author_id']
+            end
+
+            if attributes.key?(:'tag_ids')
+              if (value = attributes[:'tag_ids']).is_a?(Array)
+                self.tag_ids = value
+              end
+            end
+
+            if attributes.key?(:'_post_body')
+              self._post_body = attributes[:'_post_body']
+            end
+
+            if attributes.key?(:'post_summary')
+              self.post_summary = attributes[:'post_summary']
+            end
+
+            if attributes.key?(:'rss_body')
+              self.rss_body = attributes[:'rss_body']
+            end
+
+            if attributes.key?(:'rss_summary')
+              self.rss_summary = attributes[:'rss_summary']
+            end
+
+            if attributes.key?(:'enable_google_amp_output_override')
+              self.enable_google_amp_output_override = attributes[:'enable_google_amp_output_override']
             end
 
             if attributes.key?(:'html_title')
@@ -485,32 +515,6 @@ module Hubspot
 
             if attributes.key?(:'use_featured_image')
               self.use_featured_image = attributes[:'use_featured_image']
-            end
-
-            if attributes.key?(:'tag_ids')
-              if (value = attributes[:'tag_ids']).is_a?(Array)
-                self.tag_ids = value
-              end
-            end
-
-            if attributes.key?(:'enable_google_amp_output_override')
-              self.enable_google_amp_output_override = attributes[:'enable_google_amp_output_override']
-            end
-
-            if attributes.key?(:'_post_body')
-              self._post_body = attributes[:'_post_body']
-            end
-
-            if attributes.key?(:'post_summary')
-              self.post_summary = attributes[:'post_summary']
-            end
-
-            if attributes.key?(:'rss_body')
-              self.rss_body = attributes[:'rss_body']
-            end
-
-            if attributes.key?(:'rss_summary')
-              self.rss_summary = attributes[:'rss_summary']
             end
 
             if attributes.key?(:'password')
@@ -588,7 +592,9 @@ module Hubspot
             end
 
             if attributes.key?(:'theme_settings_values')
-              self.theme_settings_values = attributes[:'theme_settings_values']
+              if (value = attributes[:'theme_settings_values']).is_a?(Hash)
+                self.theme_settings_values = value
+              end
             end
 
             if attributes.key?(:'url')
@@ -720,6 +726,30 @@ module Hubspot
               invalid_properties.push('invalid value for "blog_author_id", blog_author_id cannot be nil.')
             end
 
+            if @tag_ids.nil?
+              invalid_properties.push('invalid value for "tag_ids", tag_ids cannot be nil.')
+            end
+
+            if @_post_body.nil?
+              invalid_properties.push('invalid value for "_post_body", _post_body cannot be nil.')
+            end
+
+            if @post_summary.nil?
+              invalid_properties.push('invalid value for "post_summary", post_summary cannot be nil.')
+            end
+
+            if @rss_body.nil?
+              invalid_properties.push('invalid value for "rss_body", rss_body cannot be nil.')
+            end
+
+            if @rss_summary.nil?
+              invalid_properties.push('invalid value for "rss_summary", rss_summary cannot be nil.')
+            end
+
+            if @enable_google_amp_output_override.nil?
+              invalid_properties.push('invalid value for "enable_google_amp_output_override", enable_google_amp_output_override cannot be nil.')
+            end
+
             if @html_title.nil?
               invalid_properties.push('invalid value for "html_title", html_title cannot be nil.')
             end
@@ -746,30 +776,6 @@ module Hubspot
 
             if @use_featured_image.nil?
               invalid_properties.push('invalid value for "use_featured_image", use_featured_image cannot be nil.')
-            end
-
-            if @tag_ids.nil?
-              invalid_properties.push('invalid value for "tag_ids", tag_ids cannot be nil.')
-            end
-
-            if @enable_google_amp_output_override.nil?
-              invalid_properties.push('invalid value for "enable_google_amp_output_override", enable_google_amp_output_override cannot be nil.')
-            end
-
-            if @_post_body.nil?
-              invalid_properties.push('invalid value for "_post_body", _post_body cannot be nil.')
-            end
-
-            if @post_summary.nil?
-              invalid_properties.push('invalid value for "post_summary", post_summary cannot be nil.')
-            end
-
-            if @rss_body.nil?
-              invalid_properties.push('invalid value for "rss_body", rss_body cannot be nil.')
-            end
-
-            if @rss_summary.nil?
-              invalid_properties.push('invalid value for "rss_summary", rss_summary cannot be nil.')
             end
 
             if @password.nil?
@@ -903,6 +909,12 @@ module Hubspot
             return false if @translated_from_id.nil?
             return false if @dynamic_page_hub_db_table_id.nil?
             return false if @blog_author_id.nil?
+            return false if @tag_ids.nil?
+            return false if @_post_body.nil?
+            return false if @post_summary.nil?
+            return false if @rss_body.nil?
+            return false if @rss_summary.nil?
+            return false if @enable_google_amp_output_override.nil?
             return false if @html_title.nil?
             return false if @page_redirected.nil?
             return false if @page_expiry_enabled.nil?
@@ -910,12 +922,6 @@ module Hubspot
             return false if @page_expiry_redirect_id.nil?
             return false if @page_expiry_redirect_url.nil?
             return false if @use_featured_image.nil?
-            return false if @tag_ids.nil?
-            return false if @enable_google_amp_output_override.nil?
-            return false if @_post_body.nil?
-            return false if @post_summary.nil?
-            return false if @rss_body.nil?
-            return false if @rss_summary.nil?
             return false if @password.nil?
             return false if @attached_stylesheets.nil?
             return false if @include_default_custom_css.nil?
@@ -926,7 +932,7 @@ module Hubspot
             return false if @head_html.nil?
             return false if @footer_html.nil?
             return false if @content_type_category.nil?
-            content_type_category_validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6"])
+            content_type_category_validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6", "7"])
             return false unless content_type_category_validator.valid?(@content_type_category)
             return false if @current_state.nil?
             current_state_validator = EnumAttributeValidator.new('String', ["AUTOMATED", "AUTOMATED_DRAFT", "AUTOMATED_SENDING", "AUTOMATED_FOR_FORM", "AUTOMATED_FOR_FORM_BUFFER", "AUTOMATED_FOR_FORM_DRAFT", "AUTOMATED_FOR_FORM_LEGACY", "BLOG_EMAIL_DRAFT", "BLOG_EMAIL_PUBLISHED", "DRAFT", "DRAFT_AB", "DRAFT_AB_VARIANT", "ERROR", "LOSER_AB_VARIANT", "PAGE_STUB", "PRE_PROCESSING", "PROCESSING", "PUBLISHED", "PUBLISHED_AB", "PUBLISHED_AB_VARIANT", "PUBLISHED_OR_SCHEDULED", "RSS_TO_EMAIL_DRAFT", "RSS_TO_EMAIL_PUBLISHED", "SCHEDULED", "SCHEDULED_AB", "SCHEDULED_OR_PUBLISHED", "AUTOMATED_AB", "AUTOMATED_AB_VARIANT", "AUTOMATED_DRAFT_AB", "AUTOMATED_DRAFT_ABVARIANT", "AUTOMATED_LOSER_ABVARIANT"])
@@ -984,7 +990,7 @@ module Hubspot
           # Custom attribute writer method checking allowed values (enum).
           # @param [Object] content_type_category Object to be assigned
           def content_type_category=(content_type_category)
-            validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6"])
+            validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6", "7"])
             unless validator.valid?(content_type_category)
               fail ArgumentError, "invalid value for \"content_type_category\", must be one of #{validator.allowable_values}."
             end
@@ -1030,6 +1036,12 @@ module Hubspot
                 translated_from_id == o.translated_from_id &&
                 dynamic_page_hub_db_table_id == o.dynamic_page_hub_db_table_id &&
                 blog_author_id == o.blog_author_id &&
+                tag_ids == o.tag_ids &&
+                _post_body == o._post_body &&
+                post_summary == o.post_summary &&
+                rss_body == o.rss_body &&
+                rss_summary == o.rss_summary &&
+                enable_google_amp_output_override == o.enable_google_amp_output_override &&
                 html_title == o.html_title &&
                 page_redirected == o.page_redirected &&
                 page_expiry_enabled == o.page_expiry_enabled &&
@@ -1037,12 +1049,6 @@ module Hubspot
                 page_expiry_redirect_id == o.page_expiry_redirect_id &&
                 page_expiry_redirect_url == o.page_expiry_redirect_url &&
                 use_featured_image == o.use_featured_image &&
-                tag_ids == o.tag_ids &&
-                enable_google_amp_output_override == o.enable_google_amp_output_override &&
-                _post_body == o._post_body &&
-                post_summary == o.post_summary &&
-                rss_body == o.rss_body &&
-                rss_summary == o.rss_summary &&
                 password == o.password &&
                 attached_stylesheets == o.attached_stylesheets &&
                 include_default_custom_css == o.include_default_custom_css &&
@@ -1078,7 +1084,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, slug, content_group_id, campaign, category_id, state, template_path, name, mab_experiment_id, archived, author_name, ab_test_id, created_by_id, updated_by_id, domain, subcategory, ab_status, folder_id, widget_containers, widgets, language, translated_from_id, dynamic_page_hub_db_table_id, blog_author_id, html_title, page_redirected, page_expiry_enabled, page_expiry_date, page_expiry_redirect_id, page_expiry_redirect_url, use_featured_image, tag_ids, enable_google_amp_output_override, _post_body, post_summary, rss_body, rss_summary, password, attached_stylesheets, include_default_custom_css, enable_domain_stylesheets, enable_layout_stylesheets, meta_description, publish_immediately, head_html, footer_html, content_type_category, current_state, link_rel_canonical_url, featured_image, featured_image_alt_text, public_access_rules_enabled, public_access_rules, layout_sections, theme_settings_values, url, publish_date, deleted_at, created_at, published, updated_at].hash
+            [id, slug, content_group_id, campaign, category_id, state, template_path, name, mab_experiment_id, archived, author_name, ab_test_id, created_by_id, updated_by_id, domain, subcategory, ab_status, folder_id, widget_containers, widgets, language, translated_from_id, dynamic_page_hub_db_table_id, blog_author_id, tag_ids, _post_body, post_summary, rss_body, rss_summary, enable_google_amp_output_override, html_title, page_redirected, page_expiry_enabled, page_expiry_date, page_expiry_redirect_id, page_expiry_redirect_url, use_featured_image, password, attached_stylesheets, include_default_custom_css, enable_domain_stylesheets, enable_layout_stylesheets, meta_description, publish_immediately, head_html, footer_html, content_type_category, current_state, link_rel_canonical_url, featured_image, featured_image_alt_text, public_access_rules_enabled, public_access_rules, layout_sections, theme_settings_values, url, publish_date, deleted_at, created_at, published, updated_at].hash
           end
 
           # Builds the object from hash

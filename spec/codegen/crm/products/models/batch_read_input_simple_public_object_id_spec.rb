@@ -32,12 +32,6 @@ describe 'BatchReadInputSimplePublicObjectId' do
       expect(@instance).to be_instance_of(Hubspot::Crm::Products::BatchReadInputSimplePublicObjectId)
     end
   end
-  describe 'test attribute "inputs"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "properties"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -45,6 +39,12 @@ describe 'BatchReadInputSimplePublicObjectId' do
   end
 
   describe 'test attribute "id_property"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "inputs"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

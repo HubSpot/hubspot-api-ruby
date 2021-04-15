@@ -25,10 +25,6 @@ module Hubspot
         # A unique name for this association.
         attr_accessor :name
 
-        attr_accessor :cardinality
-
-        attr_accessor :inverse_cardinality
-
         # A unique ID for this association.
         attr_accessor :id
 
@@ -38,36 +34,12 @@ module Hubspot
         # When the association was last updated.
         attr_accessor :updated_at
 
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'from_object_type_id' => :'fromObjectTypeId',
             :'to_object_type_id' => :'toObjectTypeId',
             :'name' => :'name',
-            :'cardinality' => :'cardinality',
-            :'inverse_cardinality' => :'inverseCardinality',
             :'id' => :'id',
             :'created_at' => :'createdAt',
             :'updated_at' => :'updatedAt'
@@ -80,8 +52,6 @@ module Hubspot
             :'from_object_type_id' => :'String',
             :'to_object_type_id' => :'String',
             :'name' => :'String',
-            :'cardinality' => :'String',
-            :'inverse_cardinality' => :'String',
             :'id' => :'String',
             :'created_at' => :'DateTime',
             :'updated_at' => :'DateTime'
@@ -121,14 +91,6 @@ module Hubspot
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'cardinality')
-            self.cardinality = attributes[:'cardinality']
-          end
-
-          if attributes.key?(:'inverse_cardinality')
-            self.inverse_cardinality = attributes[:'inverse_cardinality']
-          end
-
           if attributes.key?(:'id')
             self.id = attributes[:'id']
           end
@@ -154,14 +116,6 @@ module Hubspot
             invalid_properties.push('invalid value for "to_object_type_id", to_object_type_id cannot be nil.')
           end
 
-          if @cardinality.nil?
-            invalid_properties.push('invalid value for "cardinality", cardinality cannot be nil.')
-          end
-
-          if @inverse_cardinality.nil?
-            invalid_properties.push('invalid value for "inverse_cardinality", inverse_cardinality cannot be nil.')
-          end
-
           if @id.nil?
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
@@ -174,34 +128,8 @@ module Hubspot
         def valid?
           return false if @from_object_type_id.nil?
           return false if @to_object_type_id.nil?
-          return false if @cardinality.nil?
-          cardinality_validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          return false unless cardinality_validator.valid?(@cardinality)
-          return false if @inverse_cardinality.nil?
-          inverse_cardinality_validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          return false unless inverse_cardinality_validator.valid?(@inverse_cardinality)
           return false if @id.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] cardinality Object to be assigned
-        def cardinality=(cardinality)
-          validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          unless validator.valid?(cardinality)
-            fail ArgumentError, "invalid value for \"cardinality\", must be one of #{validator.allowable_values}."
-          end
-          @cardinality = cardinality
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] inverse_cardinality Object to be assigned
-        def inverse_cardinality=(inverse_cardinality)
-          validator = EnumAttributeValidator.new('String', ["ONE_TO_ONE", "ONE_TO_MANY"])
-          unless validator.valid?(inverse_cardinality)
-            fail ArgumentError, "invalid value for \"inverse_cardinality\", must be one of #{validator.allowable_values}."
-          end
-          @inverse_cardinality = inverse_cardinality
         end
 
         # Checks equality by comparing each attribute.
@@ -212,8 +140,6 @@ module Hubspot
               from_object_type_id == o.from_object_type_id &&
               to_object_type_id == o.to_object_type_id &&
               name == o.name &&
-              cardinality == o.cardinality &&
-              inverse_cardinality == o.inverse_cardinality &&
               id == o.id &&
               created_at == o.created_at &&
               updated_at == o.updated_at
@@ -228,7 +154,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from_object_type_id, to_object_type_id, name, cardinality, inverse_cardinality, id, created_at, updated_at].hash
+          [from_object_type_id, to_object_type_id, name, id, created_at, updated_at].hash
         end
 
         # Builds the object from hash

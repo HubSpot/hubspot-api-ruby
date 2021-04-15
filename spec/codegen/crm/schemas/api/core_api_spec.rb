@@ -35,8 +35,9 @@ describe 'CoreApi' do
   # unit tests for archive
   # Delete a schema
   # Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
-  # @param object_type Fully qualified name or object type ID for the target schema.
+  # @param object_type Fully qualified name or object type ID of your schema.
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [nil]
   describe 'archive test' do
     it 'should work' do
@@ -47,7 +48,7 @@ describe 'CoreApi' do
   # unit tests for archive_association
   # Remove an association
   # Removes an existing association from a schema.
-  # @param object_type Fully qualified name or object type ID for the target schema.
+  # @param object_type Fully qualified name or object type ID of your schema.
   # @param association_identifier Unique ID of the association to remove.
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -72,7 +73,7 @@ describe 'CoreApi' do
   # unit tests for create_association
   # Create an association
   # Defines a new association between the primary schema&#39;s object type and other object types.
-  # @param object_type Fully qualified name or object type ID for the primary schema to associate.
+  # @param object_type Fully qualified name or object type ID of your schema.
   # @param association_definition_egg Attributes that define the association.
   # @param [Hash] opts the optional parameters
   # @return [AssociationDefinition]
@@ -84,9 +85,10 @@ describe 'CoreApi' do
 
   # unit tests for get_all
   # Get all schemas
-  # Returns all object schemas that have been defined for the target account.
+  # Returns all object schemas that have been defined for your account.
   # @param [Hash] opts the optional parameters
-  # @return [CollectionResponseObjectSchema]
+  # @option opts [Boolean] :archived Whether to return only results that have been archived.
+  # @return [CollectionResponseObjectSchemaNoPaging]
   describe 'get_all test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -96,7 +98,7 @@ describe 'CoreApi' do
   # unit tests for get_by_id
   # Get an existing schema
   # Returns an existing object schema.
-  # @param object_type Fully qualified name or object type ID of the target schema.
+  # @param object_type Fully qualified name or object type ID of your schema.
   # @param [Hash] opts the optional parameters
   # @return [ObjectSchema]
   describe 'get_by_id test' do
@@ -108,8 +110,8 @@ describe 'CoreApi' do
   # unit tests for update
   # Update a schema
   # Update the details for an existing object schema.
-  # @param object_type Fully qualified name or object type ID for the target schema.
-  # @param object_type_definition_patch Attributes to update in the target schema.
+  # @param object_type Fully qualified name or object type ID of your schema.
+  # @param object_type_definition_patch Attributes to update in your schema.
   # @param [Hash] opts the optional parameters
   # @return [ObjectTypeDefinition]
   describe 'update test' do

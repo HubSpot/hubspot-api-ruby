@@ -37,6 +37,7 @@ describe 'DefaultApi' do
   # @param owner_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :id_property 
+  # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [PublicOwner]
   describe 'get_by_id test' do
     it 'should work' do
@@ -50,7 +51,8 @@ describe 'DefaultApi' do
   # @option opts [String] :email Filter by email address (optional)
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
   # @option opts [Integer] :limit The maximum number of results to display per page.
-  # @return [CollectionResponsePublicOwner]
+  # @option opts [Boolean] :archived Whether to return only results that have been archived.
+  # @return [CollectionResponsePublicOwnerForwardPaging]
   describe 'get_page test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

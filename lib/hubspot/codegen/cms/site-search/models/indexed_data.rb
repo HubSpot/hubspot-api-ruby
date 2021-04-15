@@ -16,10 +16,13 @@ module Hubspot
   module Cms
     module SiteSearch
       class IndexedData
+        # The ID of the document in HubSpot.
         attr_accessor :id
 
+        # The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`, `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
         attr_accessor :type
 
+        # The indexed fields in HubSpot.
         attr_accessor :fields
 
         class EnumAttributeValidator
@@ -122,7 +125,7 @@ module Hubspot
         def valid?
           return false if @id.nil?
           return false if @type.nil?
-          type_validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
+          type_validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
           return false unless type_validator.valid?(@type)
           return false if @fields.nil?
           true
@@ -131,7 +134,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] type Object to be assigned
         def type=(type)
-          validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
+          validator = EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
           unless validator.valid?(type)
             fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
           end

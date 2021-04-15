@@ -33,10 +33,11 @@ describe 'DefaultApi' do
   end
 
   # unit tests for archive
-  # Archive a batch of Blog Tags
-  # Archive the Blog Tag objects identified in the request body.
-  # @param batch_input_string The JSON array of Blog Tag ids.
+  # Delete a Blog Tag
+  # Delete the Blog Tag object identified by the id in the path.
+  # @param object_id The Blog Tag id.
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [nil]
   describe 'archive test' do
     it 'should work' do
@@ -44,14 +45,13 @@ describe 'DefaultApi' do
     end
   end
 
-  # unit tests for archive_0
-  # Delete a Blog Tag
-  # Delete the Blog Tag object identified by the id in the path.
-  # @param object_id The Blog Tag id.
+  # unit tests for archive_batch
+  # Archive a batch of Blog Tags
+  # Delete the Blog Tag objects identified in the request body. Note: This is not the same as the in-app &#x60;archive&#x60; function.
+  # @param batch_input_string The JSON array of Blog Tag ids.
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [nil]
-  describe 'archive_0 test' do
+  describe 'archive_batch test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -69,13 +69,13 @@ describe 'DefaultApi' do
     end
   end
 
-  # unit tests for create_0
+  # unit tests for create_batch
   # Create a batch of Blog Tags
   # Create the Blog Tag objects detailed in the request body.
   # @param batch_input_tag The JSON array of new Blog Tags to create.
   # @param [Hash] opts the optional parameters
   # @return [Object]
-  describe 'create_0 test' do
+  describe 'create_batch test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -115,33 +115,20 @@ describe 'DefaultApi' do
     end
   end
 
-  # unit tests for read
+  # unit tests for read_batch
   # Retrieve a batch of Blog Tags
   # Retrieve the Blog Tag objects identified in the request body.
   # @param batch_input_string The JSON array of Blog Tag ids.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :archived Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
   # @return [Object]
-  describe 'read test' do
+  describe 'read_batch test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for update
-  # Update a batch of Blog Tags
-  # Update the Blog Tag objects identified in the request body.
-  # @param batch_input_json_node A JSON array of the JSON representations of the updated Blog Tags.
-  # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
-  # @return [Object]
-  describe 'update test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for update_0
   # Update a Blog Tag
   # Sparse updates a single Blog Tag object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
   # @param object_id The Blog Tag id.
@@ -149,7 +136,20 @@ describe 'DefaultApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
   # @return [Tag]
-  describe 'update_0 test' do
+  describe 'update test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for update_batch
+  # Update a batch of Blog Tags
+  # Update the Blog Tag objects identified in the request body.
+  # @param batch_input_json_node A JSON array of the JSON representations of the updated Blog Tags.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
+  # @return [Object]
+  describe 'update_batch test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

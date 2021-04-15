@@ -25,6 +25,7 @@ module Hubspot
         # @param owner_id [Integer] 
         # @param [Hash] opts the optional parameters
         # @option opts [String] :id_property  (default to 'id')
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [PublicOwner]
         def get_by_id(owner_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(owner_id, opts)
@@ -35,6 +36,7 @@ module Hubspot
         # @param owner_id [Integer] 
         # @param [Hash] opts the optional parameters
         # @option opts [String] :id_property 
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
         # @return [Array<(PublicOwner, Integer, Hash)>] PublicOwner data, response status code and response headers
         def get_by_id_with_http_info(owner_id, opts = {})
           if @api_client.config.debugging
@@ -54,6 +56,7 @@ module Hubspot
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -93,7 +96,8 @@ module Hubspot
         # @option opts [String] :email Filter by email address (optional)
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page. (default to 100)
-        # @return [CollectionResponsePublicOwner]
+        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @return [CollectionResponsePublicOwnerForwardPaging]
         def get_page(opts = {})
           data, _status_code, _headers = get_page_with_http_info(opts)
           data
@@ -104,7 +108,8 @@ module Hubspot
         # @option opts [String] :email Filter by email address (optional)
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page.
-        # @return [Array<(CollectionResponsePublicOwner, Integer, Hash)>] CollectionResponsePublicOwner data, response status code and response headers
+        # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @return [Array<(CollectionResponsePublicOwnerForwardPaging, Integer, Hash)>] CollectionResponsePublicOwnerForwardPaging data, response status code and response headers
         def get_page_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: DefaultApi.get_page ...'
@@ -117,6 +122,7 @@ module Hubspot
           query_params[:'email'] = opts[:'email'] if !opts[:'email'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -130,7 +136,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponsePublicOwner' 
+          return_type = opts[:return_type] || 'CollectionResponsePublicOwnerForwardPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']

@@ -47,7 +47,7 @@ describe 'ContentSearchResult' do
   describe 'test attribute "type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "DOCUMENT", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["LANDING_PAGE", "BLOG_POST", "SITE_PAGE", "KNOWLEDGE_ARTICLE", "LISTING_PAGE"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.type = value }.not_to raise_error
       # end

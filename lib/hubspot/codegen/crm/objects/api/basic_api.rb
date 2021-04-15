@@ -168,10 +168,9 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-        # @option opts [Boolean] :paginate_associations  (default to false)
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @option opts [String] :id_property The name of a property whose values are unique for this object type
-        # @return [SimplePublicObject]
+        # @return [SimplePublicObjectWithAssociations]
         def get_by_id(object_type, object_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(object_type, object_id, opts)
           data
@@ -184,10 +183,9 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-        # @option opts [Boolean] :paginate_associations 
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
         # @option opts [String] :id_property The name of a property whose values are unique for this object type
-        # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+        # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
         def get_by_id_with_http_info(object_type, object_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BasicApi.get_by_id ...'
@@ -207,7 +205,6 @@ module Hubspot
           query_params = opts[:query_params] || {}
           query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
           query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
-          query_params[:'paginateAssociations'] = opts[:'paginate_associations'] if !opts[:'paginate_associations'].nil?
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
           query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
 
@@ -223,7 +220,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'SimplePublicObject' 
+          return_type = opts[:return_type] || 'SimplePublicObjectWithAssociations' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -252,9 +249,8 @@ module Hubspot
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-        # @option opts [Boolean] :paginate_associations  (default to false)
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @return [CollectionResponseSimplePublicObject]
+        # @return [CollectionResponseSimplePublicObjectWithAssociationsForwardPaging]
         def get_page(object_type, opts = {})
           data, _status_code, _headers = get_page_with_http_info(object_type, opts)
           data
@@ -268,9 +264,8 @@ module Hubspot
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-        # @option opts [Boolean] :paginate_associations 
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @return [Array<(CollectionResponseSimplePublicObject, Integer, Hash)>] CollectionResponseSimplePublicObject data, response status code and response headers
+        # @return [Array<(CollectionResponseSimplePublicObjectWithAssociationsForwardPaging, Integer, Hash)>] CollectionResponseSimplePublicObjectWithAssociationsForwardPaging data, response status code and response headers
         def get_page_with_http_info(object_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BasicApi.get_page ...'
@@ -288,7 +283,6 @@ module Hubspot
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
           query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
-          query_params[:'paginateAssociations'] = opts[:'paginate_associations'] if !opts[:'paginate_associations'].nil?
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
@@ -303,7 +297,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseSimplePublicObject' 
+          return_type = opts[:return_type] || 'CollectionResponseSimplePublicObjectWithAssociationsForwardPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -325,11 +319,12 @@ module Hubspot
         end
 
         # Update
-        # Perform a partial update of an Object identified by `{objectId}`. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+        # Perform a partial update of an Object identified by `{objectId}`. `{objectId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
         # @param object_type [String] 
         # @param object_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [SimplePublicObject]
         def update(object_type, object_id, simple_public_object_input, opts = {})
           data, _status_code, _headers = update_with_http_info(object_type, object_id, simple_public_object_input, opts)
@@ -337,11 +332,12 @@ module Hubspot
         end
 
         # Update
-        # Perform a partial update of an Object identified by &#x60;{objectId}&#x60;. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+        # Perform a partial update of an Object identified by &#x60;{objectId}&#x60;. &#x60;{objectId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
         # @param object_type [String] 
         # @param object_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
         def update_with_http_info(object_type, object_id, simple_public_object_input, opts = {})
           if @api_client.config.debugging
@@ -364,6 +360,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}

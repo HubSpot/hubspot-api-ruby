@@ -37,10 +37,9 @@ describe 'AssociationsApi' do
   # @param feedback_submission_id 
   # @param to_object_type 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :paginate_associations 
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
   # @option opts [Integer] :limit The maximum number of results to display per page.
-  # @return [CollectionResponseAssociatedId]
+  # @return [CollectionResponseAssociatedIdForwardPaging]
   describe 'get_all test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

@@ -35,7 +35,7 @@ describe 'PublicImportResponse' do
   describe 'test attribute "state"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["STARTED", "PROCESSING", "DONE", "FAILED", "CANCELED"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["STARTED", "PROCESSING", "DONE", "FAILED", "CANCELED", "DEFERRED"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.state = value }.not_to raise_error
       # end

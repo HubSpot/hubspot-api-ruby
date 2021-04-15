@@ -32,14 +32,14 @@ describe 'SearchApi' do
     end
   end
 
-  # unit tests for search
+  # unit tests for do_search
   # Filter, Sort, and Search CRM Objects
   # Filter, Sort, and Search CRM Objects
   # @param object_type 
   # @param public_object_search_request 
   # @param [Hash] opts the optional parameters
-  # @return [CollectionResponseWithTotalSimplePublicObject]
-  describe 'search test' do
+  # @return [CollectionResponseWithTotalSimplePublicObjectForwardPaging]
+  describe 'do_search test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

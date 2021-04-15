@@ -26,9 +26,9 @@ module Hubspot
         # @param object_type [String] 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
-        # @return [CollectionResponseWithTotalSimplePublicObject]
-        def search(object_type, public_object_search_request, opts = {})
-          data, _status_code, _headers = search_with_http_info(object_type, public_object_search_request, opts)
+        # @return [CollectionResponseWithTotalSimplePublicObjectForwardPaging]
+        def do_search(object_type, public_object_search_request, opts = {})
+          data, _status_code, _headers = do_search_with_http_info(object_type, public_object_search_request, opts)
           data
         end
 
@@ -37,18 +37,18 @@ module Hubspot
         # @param object_type [String] 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponseWithTotalSimplePublicObject, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObject data, response status code and response headers
-        def search_with_http_info(object_type, public_object_search_request, opts = {})
+        # @return [Array<(CollectionResponseWithTotalSimplePublicObjectForwardPaging, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObjectForwardPaging data, response status code and response headers
+        def do_search_with_http_info(object_type, public_object_search_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: SearchApi.search ...'
+            @api_client.config.logger.debug 'Calling API: SearchApi.do_search ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
-            fail ArgumentError, "Missing the required parameter 'object_type' when calling SearchApi.search"
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling SearchApi.do_search"
           end
           # verify the required parameter 'public_object_search_request' is set
           if @api_client.config.client_side_validation && public_object_search_request.nil?
-            fail ArgumentError, "Missing the required parameter 'public_object_search_request' when calling SearchApi.search"
+            fail ArgumentError, "Missing the required parameter 'public_object_search_request' when calling SearchApi.do_search"
           end
           # resource path
           local_var_path = '/crm/v3/objects/{objectType}/search'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -70,7 +70,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(public_object_search_request) 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseWithTotalSimplePublicObject' 
+          return_type = opts[:return_type] || 'CollectionResponseWithTotalSimplePublicObjectForwardPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -86,7 +86,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: SearchApi#search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: SearchApi#do_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

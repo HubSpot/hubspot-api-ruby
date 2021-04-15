@@ -173,7 +173,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @state.nil?
-          state_validator = EnumAttributeValidator.new('String', ["STARTED", "PROCESSING", "DONE", "FAILED", "CANCELED"])
+          state_validator = EnumAttributeValidator.new('String', ["STARTED", "PROCESSING", "DONE", "FAILED", "CANCELED", "DEFERRED"])
           return false unless state_validator.valid?(@state)
           return false if @created_at.nil?
           return false if @metadata.nil?
@@ -186,7 +186,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] state Object to be assigned
         def state=(state)
-          validator = EnumAttributeValidator.new('String', ["STARTED", "PROCESSING", "DONE", "FAILED", "CANCELED"])
+          validator = EnumAttributeValidator.new('String', ["STARTED", "PROCESSING", "DONE", "FAILED", "CANCELED", "DEFERRED"])
           unless validator.valid?(state)
             fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
           end

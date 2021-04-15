@@ -105,8 +105,7 @@ module Hubspot
         # @param to_object_id [String] 
         # @param association_type [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :paginate_associations  (default to false)
-        # @return [SimplePublicObject]
+        # @return [SimplePublicObjectWithAssociations]
         def create(line_item_id, to_object_type, to_object_id, association_type, opts = {})
           data, _status_code, _headers = create_with_http_info(line_item_id, to_object_type, to_object_id, association_type, opts)
           data
@@ -118,8 +117,7 @@ module Hubspot
         # @param to_object_id [String] 
         # @param association_type [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :paginate_associations 
-        # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+        # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
         def create_with_http_info(line_item_id, to_object_type, to_object_id, association_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: AssociationsApi.create ...'
@@ -145,7 +143,6 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'paginateAssociations'] = opts[:'paginate_associations'] if !opts[:'paginate_associations'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -159,7 +156,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'SimplePublicObject' 
+          return_type = opts[:return_type] || 'SimplePublicObjectWithAssociations' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -184,10 +181,9 @@ module Hubspot
         # @param line_item_id [String] 
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :paginate_associations  (default to false)
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page. (default to 500)
-        # @return [CollectionResponseAssociatedId]
+        # @return [CollectionResponseAssociatedIdForwardPaging]
         def get_all(line_item_id, to_object_type, opts = {})
           data, _status_code, _headers = get_all_with_http_info(line_item_id, to_object_type, opts)
           data
@@ -197,10 +193,9 @@ module Hubspot
         # @param line_item_id [String] 
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :paginate_associations 
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page.
-        # @return [Array<(CollectionResponseAssociatedId, Integer, Hash)>] CollectionResponseAssociatedId data, response status code and response headers
+        # @return [Array<(CollectionResponseAssociatedIdForwardPaging, Integer, Hash)>] CollectionResponseAssociatedIdForwardPaging data, response status code and response headers
         def get_all_with_http_info(line_item_id, to_object_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: AssociationsApi.get_all ...'
@@ -218,7 +213,6 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'paginateAssociations'] = opts[:'paginate_associations'] if !opts[:'paginate_associations'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
@@ -234,7 +228,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseAssociatedId' 
+          return_type = opts[:return_type] || 'CollectionResponseAssociatedIdForwardPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']

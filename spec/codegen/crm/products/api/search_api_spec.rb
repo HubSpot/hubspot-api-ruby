@@ -37,7 +37,7 @@ describe 'SearchApi' do
   # Filter, Sort, and Search CRM Objects
   # @param public_object_search_request 
   # @param [Hash] opts the optional parameters
-  # @return [CollectionResponseWithTotalSimplePublicObject]
+  # @return [CollectionResponseWithTotalSimplePublicObjectForwardPaging]
   describe 'do_search test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
