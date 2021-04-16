@@ -66,7 +66,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -87,27 +87,31 @@ module Hubspot
           # Configure a calling extension
           # Used to set the menu label, target iframe URL, and dimensions for your calling extension.
           # @param app_id [Integer] The ID of the target app.
+          # @param settings_request [SettingsRequest] Settings state to create with.
           # @param [Hash] opts the optional parameters
-          # @option opts [SettingsRequest] :settings_request Settings state to create with.
           # @return [SettingsResponse]
-          def create(app_id, opts = {})
-            data, _status_code, _headers = create_with_http_info(app_id, opts)
+          def create(app_id, settings_request, opts = {})
+            data, _status_code, _headers = create_with_http_info(app_id, settings_request, opts)
             data
           end
 
           # Configure a calling extension
           # Used to set the menu label, target iframe URL, and dimensions for your calling extension.
           # @param app_id [Integer] The ID of the target app.
+          # @param settings_request [SettingsRequest] Settings state to create with.
           # @param [Hash] opts the optional parameters
-          # @option opts [SettingsRequest] :settings_request Settings state to create with.
           # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
-          def create_with_http_info(app_id, opts = {})
+          def create_with_http_info(app_id, settings_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: SettingsApi.create ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
               fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.create"
+            end
+            # verify the required parameter 'settings_request' is set
+            if @api_client.config.client_side_validation && settings_request.nil?
+              fail ArgumentError, "Missing the required parameter 'settings_request' when calling SettingsApi.create"
             end
             # resource path
             local_var_path = '/crm/v3/extensions/calling/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -126,13 +130,13 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'settings_request']) 
+            post_body = opts[:body] || @api_client.object_to_http_body(settings_request) 
 
             # return_type
             return_type = opts[:return_type] || 'SettingsResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -194,7 +198,7 @@ module Hubspot
             return_type = opts[:return_type] || 'SettingsResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -215,27 +219,31 @@ module Hubspot
           # Update settings
           # Updates existing calling extension settings.
           # @param app_id [Integer] The ID of the target app.
+          # @param settings_patch_request [SettingsPatchRequest] Updated details for the settings.
           # @param [Hash] opts the optional parameters
-          # @option opts [SettingsPatchRequest] :settings_patch_request Updated details for the settings.
           # @return [SettingsResponse]
-          def update(app_id, opts = {})
-            data, _status_code, _headers = update_with_http_info(app_id, opts)
+          def update(app_id, settings_patch_request, opts = {})
+            data, _status_code, _headers = update_with_http_info(app_id, settings_patch_request, opts)
             data
           end
 
           # Update settings
           # Updates existing calling extension settings.
           # @param app_id [Integer] The ID of the target app.
+          # @param settings_patch_request [SettingsPatchRequest] Updated details for the settings.
           # @param [Hash] opts the optional parameters
-          # @option opts [SettingsPatchRequest] :settings_patch_request Updated details for the settings.
           # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
-          def update_with_http_info(app_id, opts = {})
+          def update_with_http_info(app_id, settings_patch_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: SettingsApi.update ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
               fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.update"
+            end
+            # verify the required parameter 'settings_patch_request' is set
+            if @api_client.config.client_side_validation && settings_patch_request.nil?
+              fail ArgumentError, "Missing the required parameter 'settings_patch_request' when calling SettingsApi.update"
             end
             # resource path
             local_var_path = '/crm/v3/extensions/calling/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -254,13 +262,13 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'settings_patch_request']) 
+            post_body = opts[:body] || @api_client.object_to_http_body(settings_patch_request) 
 
             # return_type
             return_type = opts[:return_type] || 'SettingsResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,

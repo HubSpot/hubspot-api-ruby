@@ -72,7 +72,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -93,27 +93,31 @@ module Hubspot
           # Create a new card
           # Defines a new card that will become active on an account when this app is installed.
           # @param app_id [Integer] The ID of the target app.
+          # @param card_create_request [CardCreateRequest] The new card definition.
           # @param [Hash] opts the optional parameters
-          # @option opts [CardCreateRequest] :card_create_request The new card definition.
           # @return [CardResponse]
-          def create(app_id, opts = {})
-            data, _status_code, _headers = create_with_http_info(app_id, opts)
+          def create(app_id, card_create_request, opts = {})
+            data, _status_code, _headers = create_with_http_info(app_id, card_create_request, opts)
             data
           end
 
           # Create a new card
           # Defines a new card that will become active on an account when this app is installed.
           # @param app_id [Integer] The ID of the target app.
+          # @param card_create_request [CardCreateRequest] The new card definition.
           # @param [Hash] opts the optional parameters
-          # @option opts [CardCreateRequest] :card_create_request The new card definition.
           # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-          def create_with_http_info(app_id, opts = {})
+          def create_with_http_info(app_id, card_create_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.create ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.create"
+            end
+            # verify the required parameter 'card_create_request' is set
+            if @api_client.config.client_side_validation && card_create_request.nil?
+              fail ArgumentError, "Missing the required parameter 'card_create_request' when calling CardsApi.create"
             end
             # resource path
             local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -132,13 +136,13 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_create_request']) 
+            post_body = opts[:body] || @api_client.object_to_http_body(card_create_request) 
 
             # return_type
             return_type = opts[:return_type] || 'CardResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -200,7 +204,7 @@ module Hubspot
             return_type = opts[:return_type] || 'CardListResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -268,7 +272,7 @@ module Hubspot
             return_type = opts[:return_type] || 'CardResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -290,11 +294,11 @@ module Hubspot
           # Update a card definition with new details.
           # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to update.
+          # @param card_patch_request [CardPatchRequest] Card definition fields to be updated.
           # @param [Hash] opts the optional parameters
-          # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated.
           # @return [CardResponse]
-          def update(app_id, card_id, opts = {})
-            data, _status_code, _headers = update_with_http_info(app_id, card_id, opts)
+          def update(app_id, card_id, card_patch_request, opts = {})
+            data, _status_code, _headers = update_with_http_info(app_id, card_id, card_patch_request, opts)
             data
           end
 
@@ -302,10 +306,10 @@ module Hubspot
           # Update a card definition with new details.
           # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to update.
+          # @param card_patch_request [CardPatchRequest] Card definition fields to be updated.
           # @param [Hash] opts the optional parameters
-          # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated.
           # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-          def update_with_http_info(app_id, card_id, opts = {})
+          def update_with_http_info(app_id, card_id, card_patch_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.update ...'
             end
@@ -316,6 +320,10 @@ module Hubspot
             # verify the required parameter 'card_id' is set
             if @api_client.config.client_side_validation && card_id.nil?
               fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.update"
+            end
+            # verify the required parameter 'card_patch_request' is set
+            if @api_client.config.client_side_validation && card_patch_request.nil?
+              fail ArgumentError, "Missing the required parameter 'card_patch_request' when calling CardsApi.update"
             end
             # resource path
             local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
@@ -334,13 +342,13 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(opts[:'card_patch_request']) 
+            post_body = opts[:body] || @api_client.object_to_http_body(card_patch_request) 
 
             # return_type
             return_type = opts[:return_type] || 'CardResponse' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
+            auth_names = opts[:auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :header_params => header_params,
