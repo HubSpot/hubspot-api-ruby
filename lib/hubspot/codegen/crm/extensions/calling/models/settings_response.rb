@@ -32,6 +32,9 @@ module Hubspot
           # When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
           attr_accessor :is_ready
 
+          # When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+          attr_accessor :supports_custom_objects
+
           # When this calling extension was created.
           attr_accessor :created_at
 
@@ -46,6 +49,7 @@ module Hubspot
               :'height' => :'height',
               :'width' => :'width',
               :'is_ready' => :'isReady',
+              :'supports_custom_objects' => :'supportsCustomObjects',
               :'created_at' => :'createdAt',
               :'updated_at' => :'updatedAt'
             }
@@ -59,6 +63,7 @@ module Hubspot
               :'height' => :'Integer',
               :'width' => :'Integer',
               :'is_ready' => :'Boolean',
+              :'supports_custom_objects' => :'Boolean',
               :'created_at' => :'DateTime',
               :'updated_at' => :'DateTime'
             }
@@ -105,6 +110,10 @@ module Hubspot
               self.is_ready = attributes[:'is_ready']
             end
 
+            if attributes.key?(:'supports_custom_objects')
+              self.supports_custom_objects = attributes[:'supports_custom_objects']
+            end
+
             if attributes.key?(:'created_at')
               self.created_at = attributes[:'created_at']
             end
@@ -138,6 +147,10 @@ module Hubspot
               invalid_properties.push('invalid value for "is_ready", is_ready cannot be nil.')
             end
 
+            if @supports_custom_objects.nil?
+              invalid_properties.push('invalid value for "supports_custom_objects", supports_custom_objects cannot be nil.')
+            end
+
             if @created_at.nil?
               invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
             end
@@ -157,6 +170,7 @@ module Hubspot
             return false if @height.nil?
             return false if @width.nil?
             return false if @is_ready.nil?
+            return false if @supports_custom_objects.nil?
             return false if @created_at.nil?
             return false if @updated_at.nil?
             true
@@ -172,6 +186,7 @@ module Hubspot
                 height == o.height &&
                 width == o.width &&
                 is_ready == o.is_ready &&
+                supports_custom_objects == o.supports_custom_objects &&
                 created_at == o.created_at &&
                 updated_at == o.updated_at
           end
@@ -185,7 +200,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, url, height, width, is_ready, created_at, updated_at].hash
+            [name, url, height, width, is_ready, supports_custom_objects, created_at, updated_at].hash
           end
 
           # Builds the object from hash

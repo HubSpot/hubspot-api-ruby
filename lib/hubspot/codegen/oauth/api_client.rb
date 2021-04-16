@@ -54,21 +54,21 @@ module Hubspot
           @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
         end
 
-        unless response.success?
-          if config.error_handler.any?
-            config.error_handler.each do |statuses, opts|
-              statuses = statuses.is_a?(Integer) ? [statuses] : statuses
+        if !response.success? && config.error_handler.any?
+          config.error_handler.each do |statuses, opts|
+            statuses = statuses.is_a?(Integer) ? [statuses] : statuses
 
-              retries = opts[:max_retries] || 5
-              while retries > 0 && statuses.include?(response.code)
-                sleep opts[:seconds_delay] if opts[:seconds_delay]
-                response = request.run
-                opts[:retry_block].call if opts[:retry_block]
-                retries -= 1
-              end
+            retries = opts[:max_retries] || 5
+            while retries > 0 && statuses.include?(response.code)
+              sleep opts[:seconds_delay] if opts[:seconds_delay]
+              response = request.run
+              opts[:retry_block].call if opts[:retry_block]
+              retries -= 1
             end
           end
+        end
 
+        unless response.success?
           if response.timed_out?
             fail ApiError.new('Connection timed out')
           elsif response.code == 0

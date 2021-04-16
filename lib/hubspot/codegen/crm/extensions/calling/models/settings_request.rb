@@ -32,6 +32,9 @@ module Hubspot
           # When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
           attr_accessor :is_ready
 
+          # When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+          attr_accessor :supports_custom_objects
+
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
@@ -39,7 +42,8 @@ module Hubspot
               :'url' => :'url',
               :'height' => :'height',
               :'width' => :'width',
-              :'is_ready' => :'isReady'
+              :'is_ready' => :'isReady',
+              :'supports_custom_objects' => :'supportsCustomObjects'
             }
           end
 
@@ -50,7 +54,8 @@ module Hubspot
               :'url' => :'String',
               :'height' => :'Integer',
               :'width' => :'Integer',
-              :'is_ready' => :'Boolean'
+              :'is_ready' => :'Boolean',
+              :'supports_custom_objects' => :'Boolean'
             }
           end
 
@@ -94,6 +99,10 @@ module Hubspot
             if attributes.key?(:'is_ready')
               self.is_ready = attributes[:'is_ready']
             end
+
+            if attributes.key?(:'supports_custom_objects')
+              self.supports_custom_objects = attributes[:'supports_custom_objects']
+            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
@@ -128,7 +137,8 @@ module Hubspot
                 url == o.url &&
                 height == o.height &&
                 width == o.width &&
-                is_ready == o.is_ready
+                is_ready == o.is_ready &&
+                supports_custom_objects == o.supports_custom_objects
           end
 
           # @see the `==` method
@@ -140,7 +150,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, url, height, width, is_ready].hash
+            [name, url, height, width, is_ready, supports_custom_objects].hash
           end
 
           # Builds the object from hash
