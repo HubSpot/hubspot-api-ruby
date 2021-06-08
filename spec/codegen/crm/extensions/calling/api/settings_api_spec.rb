@@ -48,8 +48,8 @@ describe 'SettingsApi' do
   # Configure a calling extension
   # Used to set the menu label, target iframe URL, and dimensions for your calling extension.
   # @param app_id The ID of the target app.
+  # @param settings_request Settings state to create with.
   # @param [Hash] opts the optional parameters
-  # @option opts [SettingsRequest] :settings_request Settings state to create with.
   # @return [SettingsResponse]
   describe 'create test' do
     it 'should work' do
@@ -73,8 +73,8 @@ describe 'SettingsApi' do
   # Update settings
   # Updates existing calling extension settings.
   # @param app_id The ID of the target app.
+  # @param settings_patch_request Updated details for the settings.
   # @param [Hash] opts the optional parameters
-  # @option opts [SettingsPatchRequest] :settings_patch_request Updated details for the settings.
   # @return [SettingsResponse]
   describe 'update test' do
     it 'should work' do
