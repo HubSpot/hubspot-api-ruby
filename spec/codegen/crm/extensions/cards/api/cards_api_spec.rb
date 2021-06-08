@@ -49,8 +49,8 @@ describe 'CardsApi' do
   # Create a new card
   # Defines a new card that will become active on an account when this app is installed.
   # @param app_id The ID of the target app.
+  # @param card_create_request The new card definition.
   # @param [Hash] opts the optional parameters
-  # @option opts [CardCreateRequest] :card_create_request The new card definition.
   # @return [CardResponse]
   describe 'create test' do
     it 'should work' do
@@ -88,8 +88,8 @@ describe 'CardsApi' do
   # Update a card definition with new details.
   # @param app_id The ID of the target app.
   # @param card_id The ID of the card to update.
+  # @param card_patch_request Card definition fields to be updated.
   # @param [Hash] opts the optional parameters
-  # @option opts [CardPatchRequest] :card_patch_request Card definition fields to be updated.
   # @return [CardResponse]
   describe 'update test' do
     it 'should work' do
