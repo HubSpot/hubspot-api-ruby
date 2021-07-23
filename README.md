@@ -116,3 +116,7 @@ basic_api = ::Hubspot::Crm::Companies::BasicApi.new(api_client)
 end
 
 ```
+
+### Sample apps
+
+Please, take a look at our [Sample apps](https://github.com/HubSpot/sample-apps-list)
