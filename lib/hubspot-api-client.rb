@@ -8,22 +8,30 @@ require_rel 'hubspot'
 module Hubspot
   class << self
     CLIENTS = [
-      'OAuth',
-      'Webhooks',
+      'Automation::Actions',
       'Cms::AuditLogs',
+      'Cms::Blogs::Authors',
+      'Cms::Blogs::BlogPosts',
+      'Cms::Blogs::Tags',
       'Cms::Domains',
       'Cms::Hubdb',
       'Cms::Performance',
       'Cms::SiteSearch',
       'Cms::UrlRedirects',
+      'CommunicationPreferences',
+      'Conversations::VisitorIdentification',
       'Crm::Associations',
       'Crm::Companies',
       'Crm::Contacts',
       'Crm::Deals',
+      'Crm::Extensions::Accounting',
+      'Crm::Extensions::Calling',
       'Crm::Extensions::Cards',
+      'Crm::Extensions::Videoconferencing',
       'Crm::Imports',
       'Crm::LineItems',
       'Crm::Objects',
+      'Crm::Objects::FeedbackSubmissions',
       'Crm::Owners',
       'Crm::Pipelines',
       'Crm::Products',
@@ -31,7 +39,12 @@ module Hubspot
       'Crm::Quotes',
       'Crm::Schemas',
       'Crm::Tickets',
-      'Crm::Timeline'
+      'Crm::Timeline',
+      'Events',
+      'Files::Files',
+      'Marketing::Transactional',
+      'OAuth',
+      'Webhooks',
     ].freeze
 
     def configure
