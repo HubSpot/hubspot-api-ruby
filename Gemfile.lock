@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hubspot-api-client (10.1.0)
+    hubspot-api-client (10.1.1)
       json (~> 2.1, >= 2.1.0)
       require_all (~> 3.0.0)
       typhoeus (~> 1.4.0)
@@ -20,7 +20,7 @@ GEM
     diff-lcs (1.4.4)
     ethon (0.14.0)
       ffi (>= 1.15.0)
-    ffi (1.15.1)
+    ffi (1.15.3)
     hashdiff (1.0.1)
     json (2.5.1)
     public_suffix (4.0.6)
