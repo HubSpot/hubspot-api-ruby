@@ -113,8 +113,6 @@ end
 
 api_client = ::Hubspot::Crm::Companies::ApiClient.new(config)
 basic_api = ::Hubspot::Crm::Companies::BasicApi.new(api_client)
-end
-
 ```
 
 ### Sample apps
