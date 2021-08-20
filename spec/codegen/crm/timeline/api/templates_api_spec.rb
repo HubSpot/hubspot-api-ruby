@@ -63,7 +63,7 @@ describe 'TemplatesApi' do
   # Use this to list all event templates owned by your app.
   # @param app_id The ID of the target app.
   # @param [Hash] opts the optional parameters
-  # @return [CollectionResponseTimelineEventTemplate]
+  # @return [CollectionResponseTimelineEventTemplateNoPaging]
   describe 'get_all test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

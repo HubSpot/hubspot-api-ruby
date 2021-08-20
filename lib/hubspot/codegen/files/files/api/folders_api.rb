@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -137,7 +137,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -199,7 +199,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FolderActionResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -263,7 +263,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -291,7 +291,11 @@ module Hubspot
         # @option opts [Array<String>] :sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
         # @option opts [String] :id Search folder by given ID.
         # @option opts [DateTime] :created_at Search for folders with the given creation timestamp.
+        # @option opts [DateTime] :created_at_lte 
+        # @option opts [DateTime] :created_at_gte 
         # @option opts [DateTime] :updated_at Search for folder at given update timestamp.
+        # @option opts [DateTime] :updated_at_lte 
+        # @option opts [DateTime] :updated_at_gte 
         # @option opts [String] :name Search for folders containing the specified name.
         # @option opts [String] :path Search for folders by path.
         # @option opts [Integer] :parent_folder_id Search for folders with the given parent folder ID.
@@ -311,7 +315,11 @@ module Hubspot
         # @option opts [Array<String>] :sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
         # @option opts [String] :id Search folder by given ID.
         # @option opts [DateTime] :created_at Search for folders with the given creation timestamp.
+        # @option opts [DateTime] :created_at_lte 
+        # @option opts [DateTime] :created_at_gte 
         # @option opts [DateTime] :updated_at Search for folder at given update timestamp.
+        # @option opts [DateTime] :updated_at_lte 
+        # @option opts [DateTime] :updated_at_gte 
         # @option opts [String] :name Search for folders containing the specified name.
         # @option opts [String] :path Search for folders by path.
         # @option opts [Integer] :parent_folder_id Search for folders with the given parent folder ID.
@@ -332,7 +340,11 @@ module Hubspot
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
           query_params[:'id'] = opts[:'id'] if !opts[:'id'].nil?
           query_params[:'createdAt'] = opts[:'created_at'] if !opts[:'created_at'].nil?
+          query_params[:'createdAtLte'] = opts[:'created_at_lte'] if !opts[:'created_at_lte'].nil?
+          query_params[:'createdAtGte'] = opts[:'created_at_gte'] if !opts[:'created_at_gte'].nil?
           query_params[:'updatedAt'] = opts[:'updated_at'] if !opts[:'updated_at'].nil?
+          query_params[:'updatedAtLte'] = opts[:'updated_at_lte'] if !opts[:'updated_at_lte'].nil?
+          query_params[:'updatedAtGte'] = opts[:'updated_at_gte'] if !opts[:'updated_at_gte'].nil?
           query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
           query_params[:'path'] = opts[:'path'] if !opts[:'path'].nil?
           query_params[:'parentFolderId'] = opts[:'parent_folder_id'] if !opts[:'parent_folder_id'].nil?
@@ -352,7 +364,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseFolder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -422,7 +434,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -492,7 +504,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -556,7 +568,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FolderUpdateTaskLocator' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,

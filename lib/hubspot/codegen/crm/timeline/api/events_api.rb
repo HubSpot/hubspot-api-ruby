@@ -67,7 +67,7 @@ module Hubspot
           return_type = opts[:return_type] || 'TimelineEventResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -131,7 +131,7 @@ module Hubspot
           return_type = opts[:return_type] || 'BatchResponseTimelineEventResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -199,7 +199,7 @@ module Hubspot
           return_type = opts[:return_type] || 'TimelineEventResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -267,7 +267,7 @@ module Hubspot
           return_type = opts[:return_type] || 'EventDetail' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -338,7 +338,7 @@ module Hubspot
           return_type = opts[:return_type] || 'String' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['oauth2']
+          auth_names = opts[:auth_names] || ['oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,

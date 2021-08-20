@@ -163,7 +163,7 @@ module Hubspot
         # Use this to list all event templates owned by your app.
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
-        # @return [CollectionResponseTimelineEventTemplate]
+        # @return [CollectionResponseTimelineEventTemplateNoPaging]
         def get_all(app_id, opts = {})
           data, _status_code, _headers = get_all_with_http_info(app_id, opts)
           data
@@ -173,7 +173,7 @@ module Hubspot
         # Use this to list all event templates owned by your app.
         # @param app_id [Integer] The ID of the target app.
         # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponseTimelineEventTemplate, Integer, Hash)>] CollectionResponseTimelineEventTemplate data, response status code and response headers
+        # @return [Array<(CollectionResponseTimelineEventTemplateNoPaging, Integer, Hash)>] CollectionResponseTimelineEventTemplateNoPaging data, response status code and response headers
         def get_all_with_http_info(app_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: TemplatesApi.get_all ...'
@@ -200,7 +200,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseTimelineEventTemplate' 
+          return_type = opts[:return_type] || 'CollectionResponseTimelineEventTemplateNoPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['developer_hapikey']

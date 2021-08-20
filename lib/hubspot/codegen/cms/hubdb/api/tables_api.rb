@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
 The version of the OpenAPI document: v3
 
@@ -22,7 +22,7 @@ module Hubspot
           @api_client = api_client
         end
         # Archive a table
-        # Archive (soft delete) an existing HubDB table. This archives both the live and draft versions.
+        # Archive (soft delete) an existing HubDB table. This archives both the published and draft versions.
         # @param table_id_or_name [String] The ID or name of the table to archive.
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -32,7 +32,7 @@ module Hubspot
         end
 
         # Archive a table
-        # Archive (soft delete) an existing HubDB table. This archives both the live and draft versions.
+        # Archive (soft delete) an existing HubDB table. This archives both the published and draft versions.
         # @param table_id_or_name [String] The ID or name of the table to archive.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -135,7 +135,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -155,26 +155,26 @@ module Hubspot
 
         # Create a new table
         # Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
-        # @param hub_db_table_v3_input [HubDbTableV3Input] The JSON schema for the table being created.
+        # @param hub_db_table_v3_request [HubDbTableV3Request] The JSON schema for the table being created.
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableV3]
-        def create_table(hub_db_table_v3_input, opts = {})
-          data, _status_code, _headers = create_table_with_http_info(hub_db_table_v3_input, opts)
+        def create_table(hub_db_table_v3_request, opts = {})
+          data, _status_code, _headers = create_table_with_http_info(hub_db_table_v3_request, opts)
           data
         end
 
         # Create a new table
         # Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
-        # @param hub_db_table_v3_input [HubDbTableV3Input] The JSON schema for the table being created.
+        # @param hub_db_table_v3_request [HubDbTableV3Request] The JSON schema for the table being created.
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
-        def create_table_with_http_info(hub_db_table_v3_input, opts = {})
+        def create_table_with_http_info(hub_db_table_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: TablesApi.create_table ...'
           end
-          # verify the required parameter 'hub_db_table_v3_input' is set
-          if @api_client.config.client_side_validation && hub_db_table_v3_input.nil?
-            fail ArgumentError, "Missing the required parameter 'hub_db_table_v3_input' when calling TablesApi.create_table"
+          # verify the required parameter 'hub_db_table_v3_request' is set
+          if @api_client.config.client_side_validation && hub_db_table_v3_request.nil?
+            fail ArgumentError, "Missing the required parameter 'hub_db_table_v3_request' when calling TablesApi.create_table"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables'
@@ -193,13 +193,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_input) 
+          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_request) 
 
           # return_type
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -264,7 +264,7 @@ module Hubspot
           return_type = opts[:return_type] || 'File' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -283,7 +283,7 @@ module Hubspot
         end
 
         # Export a published version of a table
-        # Exports the `live` version of a table to CSV / EXCEL format.
+        # Exports the `published` version of a table to CSV / EXCEL format.
         # @param table_id_or_name [String] The ID or name of the table to export.
         # @param [Hash] opts the optional parameters
         # @option opts [String] :format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -294,7 +294,7 @@ module Hubspot
         end
 
         # Export a published version of a table
-        # Exports the &#x60;live&#x60; version of a table to CSV / EXCEL format.
+        # Exports the &#x60;published&#x60; version of a table to CSV / EXCEL format.
         # @param table_id_or_name [String] The ID or name of the table to export.
         # @param [Hash] opts the optional parameters
         # @option opts [String] :format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -329,7 +329,7 @@ module Hubspot
           return_type = opts[:return_type] || 'File' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -350,16 +350,16 @@ module Hubspot
         # Return all draft tables
         # Returns the details for each draft table defined in the specified account, including column definitions.
         # @param [Hash] opts the optional parameters
-        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
-        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
         # @option opts [Array<String>] :sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
         # @option opts [DateTime] :created_at Only return tables created at exactly the specified time.
         # @option opts [DateTime] :created_after Only return tables created after the specified time.
-        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
-        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
+        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
+        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @return [CollectionResponseWithTotalHubDbTableV3ForwardPaging]
         def get_all_draft_tables(opts = {})
           data, _status_code, _headers = get_all_draft_tables_with_http_info(opts)
@@ -369,16 +369,16 @@ module Hubspot
         # Return all draft tables
         # Returns the details for each draft table defined in the specified account, including column definitions.
         # @param [Hash] opts the optional parameters
-        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
-        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
         # @option opts [Array<String>] :sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
         # @option opts [DateTime] :created_at Only return tables created at exactly the specified time.
         # @option opts [DateTime] :created_after Only return tables created after the specified time.
-        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
-        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
+        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
+        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @return [Array<(CollectionResponseWithTotalHubDbTableV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableV3ForwardPaging data, response status code and response headers
         def get_all_draft_tables_with_http_info(opts = {})
           if @api_client.config.debugging
@@ -389,16 +389,16 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'updatedAfter'] = opts[:'updated_after'] if !opts[:'updated_after'].nil?
-          query_params[:'updatedBefore'] = opts[:'updated_before'] if !opts[:'updated_before'].nil?
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
+          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
           query_params[:'createdAt'] = opts[:'created_at'] if !opts[:'created_at'].nil?
           query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
           query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
           query_params[:'updatedAt'] = opts[:'updated_at'] if !opts[:'updated_at'].nil?
-          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+          query_params[:'updatedAfter'] = opts[:'updated_after'] if !opts[:'updated_after'].nil?
+          query_params[:'updatedBefore'] = opts[:'updated_before'] if !opts[:'updated_before'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -415,7 +415,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -433,38 +433,38 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get all live tables
-        # Returns the details for the `live` version of each table defined in an account, including column definitions.
+        # Get all published tables
+        # Returns the details for the `published` version of each table defined in an account, including column definitions.
         # @param [Hash] opts the optional parameters
-        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
-        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
         # @option opts [Array<String>] :sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
         # @option opts [DateTime] :created_at Only return tables created at exactly the specified time.
         # @option opts [DateTime] :created_after Only return tables created after the specified time.
-        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
-        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
+        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
+        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @return [CollectionResponseWithTotalHubDbTableV3ForwardPaging]
         def get_all_tables(opts = {})
           data, _status_code, _headers = get_all_tables_with_http_info(opts)
           data
         end
 
-        # Get all live tables
-        # Returns the details for the &#x60;live&#x60; version of each table defined in an account, including column definitions.
+        # Get all published tables
+        # Returns the details for the &#x60;published&#x60; version of each table defined in an account, including column definitions.
         # @param [Hash] opts the optional parameters
-        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
-        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
         # @option opts [Array<String>] :sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
         # @option opts [DateTime] :created_at Only return tables created at exactly the specified time.
         # @option opts [DateTime] :created_after Only return tables created after the specified time.
-        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [DateTime] :created_before Only return tables created before the specified time.
         # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
-        # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
+        # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
+        # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @return [Array<(CollectionResponseWithTotalHubDbTableV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableV3ForwardPaging data, response status code and response headers
         def get_all_tables_with_http_info(opts = {})
           if @api_client.config.debugging
@@ -475,16 +475,16 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'updatedAfter'] = opts[:'updated_after'] if !opts[:'updated_after'].nil?
-          query_params[:'updatedBefore'] = opts[:'updated_before'] if !opts[:'updated_before'].nil?
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
+          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
           query_params[:'createdAt'] = opts[:'created_at'] if !opts[:'created_at'].nil?
           query_params[:'createdAfter'] = opts[:'created_after'] if !opts[:'created_after'].nil?
-          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
           query_params[:'createdBefore'] = opts[:'created_before'] if !opts[:'created_before'].nil?
           query_params[:'updatedAt'] = opts[:'updated_at'] if !opts[:'updated_at'].nil?
-          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+          query_params[:'updatedAfter'] = opts[:'updated_after'] if !opts[:'updated_after'].nil?
+          query_params[:'updatedBefore'] = opts[:'updated_before'] if !opts[:'updated_before'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -501,7 +501,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -569,7 +569,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -587,8 +587,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get details for a live table
-        # Returns the details for the `live` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+        # Get details for a published table
+        # Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table to return.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
@@ -599,8 +599,8 @@ module Hubspot
           data
         end
 
-        # Get details for a live table
-        # Returns the details for the &#x60;live&#x60; version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+        # Get details for a published table
+        # Returns the details for the &#x60;published&#x60; version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table to return.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
@@ -637,7 +637,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -656,11 +656,11 @@ module Hubspot
         end
 
         # Import data into draft table
-        # Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/push-live` endpoint to push these changes to `live` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the overview section to check the details and format of the JSON-formatted options for the import.
+        # Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/publish` endpoint to push these changes to `published` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
         # @param table_id_or_name [String] The ID of the destination table where data will be imported.
         # @param [Hash] opts the optional parameters
-        # @option opts [File] :file The source CSV file to be imported.
         # @option opts [String] :config Configuration for the import in JSON format as described above.
+        # @option opts [File] :file The source CSV file to be imported.
         # @return [ImportResult]
         def import_draft_table(table_id_or_name, opts = {})
           data, _status_code, _headers = import_draft_table_with_http_info(table_id_or_name, opts)
@@ -668,11 +668,11 @@ module Hubspot
         end
 
         # Import data into draft table
-        # Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the &#x60;draft&#x60; version of the table. Use &#x60;/push-live&#x60; endpoint to push these changes to &#x60;live&#x60; version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as &#x60;config&#x60;.  The second part will be the CSV file you want to import and you can specify this with the name as &#x60;file&#x60;. Refer the overview section to check the details and format of the JSON-formatted options for the import.
+        # Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the &#x60;draft&#x60; version of the table. Use &#x60;/publish&#x60; endpoint to push these changes to &#x60;published&#x60; version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as &#x60;config&#x60;.  The second part will be the CSV file you want to import and you can specify this with the name as &#x60;file&#x60;. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
         # @param table_id_or_name [String] The ID of the destination table where data will be imported.
         # @param [Hash] opts the optional parameters
-        # @option opts [File] :file The source CSV file to be imported.
         # @option opts [String] :config Configuration for the import in JSON format as described above.
+        # @option opts [File] :file The source CSV file to be imported.
         # @return [Array<(ImportResult, Integer, Hash)>] ImportResult data, response status code and response headers
         def import_draft_table_with_http_info(table_id_or_name, opts = {})
           if @api_client.config.debugging
@@ -697,8 +697,8 @@ module Hubspot
 
           # form parameters
           form_params = opts[:form_params] || {}
-          form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
           form_params['config'] = opts[:'config'] if !opts[:'config'].nil?
+          form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
           # http body (model)
           post_body = opts[:body] 
@@ -707,7 +707,7 @@ module Hubspot
           return_type = opts[:return_type] || 'ImportResult' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -726,7 +726,7 @@ module Hubspot
         end
 
         # Publish a table from draft
-        # Copies the data from draft to live version of the table and also publishes the live version. This will immediately push the data to the `live` version of the table and publishes the live version, meaning any website pages using data from the table will be updated.
+        # Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
         # @param table_id_or_name [String] The ID or name of the table to publish.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -737,7 +737,7 @@ module Hubspot
         end
 
         # Publish a table from draft
-        # Copies the data from draft to live version of the table and also publishes the live version. This will immediately push the data to the &#x60;live&#x60; version of the table and publishes the live version, meaning any website pages using data from the table will be updated.
+        # Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
         # @param table_id_or_name [String] The ID or name of the table to publish.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -751,7 +751,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling TablesApi.publish_draft_table"
           end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/draft/push-live'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/draft/publish'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -772,7 +772,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -790,8 +790,73 @@ module Hubspot
           return data, status_code, headers
         end
 
+        # Unpublish a table
+        # Unpublishes the table, meaning any website pages using data from the table will not render any data.
+        # @param table_id_or_name [String] The ID or name of the table to publish.
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+        # @return [HubDbTableV3]
+        def unpublish_table(table_id_or_name, opts = {})
+          data, _status_code, _headers = unpublish_table_with_http_info(table_id_or_name, opts)
+          data
+        end
+
+        # Unpublish a table
+        # Unpublishes the table, meaning any website pages using data from the table will not render any data.
+        # @param table_id_or_name [String] The ID or name of the table to publish.
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+        # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
+        def unpublish_table_with_http_info(table_id_or_name, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: TablesApi.unpublish_table ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling TablesApi.unpublish_table"
+          end
+          # resource path
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/unpublish'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: TablesApi#unpublish_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
         # Reset a draft table
-        # Replaces the data in the `draft` version of the table with values from the `live` version. Any unpublished changes in the `draft` will be lost after this call is made.
+        # Replaces the data in the `draft` version of the table with values from the `published` version. Any unpublished changes in the `draft` will be lost after this call is made.
         # @param table_id_or_name [String] The ID or name of the table to reset.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -802,7 +867,7 @@ module Hubspot
         end
 
         # Reset a draft table
-        # Replaces the data in the &#x60;draft&#x60; version of the table with values from the &#x60;live&#x60; version. Any unpublished changes in the &#x60;draft&#x60; will be lost after this call is made.
+        # Replaces the data in the &#x60;draft&#x60; version of the table with values from the &#x60;published&#x60; version. Any unpublished changes in the &#x60;draft&#x60; will be lost after this call is made.
         # @param table_id_or_name [String] The ID or name of the table to reset.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -837,7 +902,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -856,25 +921,27 @@ module Hubspot
         end
 
         # Update an existing table
-        # Update an existing HubDB table. You can use this endpoint to add or remove columns to the table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `push-live` endpoint to push all the changes to the `live` version. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+        # Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `publish` endpoint to push all the changes to the `published` version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
         # @param table_id_or_name [String] The ID or name of the table to update.
-        # @param hub_db_table_v3_input [HubDbTableV3Input] The JSON schema for the table being updated.
+        # @param hub_db_table_v3_request [HubDbTableV3Request] The JSON schema for the table being updated.
         # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
         # @return [HubDbTableV3]
-        def update_draft_table(table_id_or_name, hub_db_table_v3_input, opts = {})
-          data, _status_code, _headers = update_draft_table_with_http_info(table_id_or_name, hub_db_table_v3_input, opts)
+        def update_draft_table(table_id_or_name, hub_db_table_v3_request, opts = {})
+          data, _status_code, _headers = update_draft_table_with_http_info(table_id_or_name, hub_db_table_v3_request, opts)
           data
         end
 
         # Update an existing table
-        # Update an existing HubDB table. You can use this endpoint to add or remove columns to the table. Tables updated using the endpoint will only modify the &#x60;draft&#x60; verion of the table. Use &#x60;push-live&#x60; endpoint to push all the changes to the &#x60;live&#x60; version. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+        # Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the &#x60;draft&#x60; verion of the table. Use &#x60;publish&#x60; endpoint to push all the changes to the &#x60;published&#x60; version. To restore a table, include the query parameter &#x60;archived&#x3D;true&#x60; and &#x60;\&quot;archived\&quot;: false&#x60; in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
         # @param table_id_or_name [String] The ID or name of the table to update.
-        # @param hub_db_table_v3_input [HubDbTableV3Input] The JSON schema for the table being updated.
+        # @param hub_db_table_v3_request [HubDbTableV3Request] The JSON schema for the table being updated.
         # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
         # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
-        def update_draft_table_with_http_info(table_id_or_name, hub_db_table_v3_input, opts = {})
+        def update_draft_table_with_http_info(table_id_or_name, hub_db_table_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: TablesApi.update_draft_table ...'
           end
@@ -882,87 +949,12 @@ module Hubspot
           if @api_client.config.client_side_validation && table_id_or_name.nil?
             fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling TablesApi.update_draft_table"
           end
-          # verify the required parameter 'hub_db_table_v3_input' is set
-          if @api_client.config.client_side_validation && hub_db_table_v3_input.nil?
-            fail ArgumentError, "Missing the required parameter 'hub_db_table_v3_input' when calling TablesApi.update_draft_table"
+          # verify the required parameter 'hub_db_table_v3_request' is set
+          if @api_client.config.client_side_validation && hub_db_table_v3_request.nil?
+            fail ArgumentError, "Missing the required parameter 'hub_db_table_v3_request' when calling TablesApi.update_draft_table"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/draft'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-          # HTTP header 'Content-Type'
-          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_input) 
-
-          # return_type
-          return_type = opts[:return_type] || 'HubDbTableV3' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TablesApi#update_draft_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Publish or unpublish a live version of a table or restore an archived table
-        # Use this endpoint to perform one of the following <ul><li> Publish a live version of a table (without copying table data from draft) </li><li>Un-publish a live version of a table (Leaving the data in the live version)</li><li>Restore an archived table</li></ul>  To publish a table, send `published` property in the JSON object with the value `true`. To unpublish a table, send `published` property in the JSON object with the value `false`.  To restore an archived table, send `archived` property in the JSON object with the value `false` along with the query parameter `archived=true`. When restoring an archived table, if an active table already exists with the same `name` or `label`, you will need to change the name of the archived table when restoring it using the `name` and `label` parameters with a new name and new label. When you restore a table, the table will be restored only in the `draft` version.  Examples:  Publish live version of a table:  ```     {       \"published\": true     } ``` Unpublish live version of a table: ```     {       \"published\": false     } ``` Restore a table: (send `archived=true` in query parameters) ```     {       \"archived\": false     } ``` Restore a table with a new name: (send `archived=true` in query parameters) ```     {       \"label\": \"New Table Name\",       \"name\": \"new_table_name\",       \"archived\": false     } ```
-        # @param table_id_or_name [String] The ID or name of the table to return.
-        # @param hub_db_table_v3_live_input [HubDbTableV3LiveInput] The JSON object as described.
-        # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-        # @return [HubDbTableV3]
-        def update_table(table_id_or_name, hub_db_table_v3_live_input, opts = {})
-          data, _status_code, _headers = update_table_with_http_info(table_id_or_name, hub_db_table_v3_live_input, opts)
-          data
-        end
-
-        # Publish or unpublish a live version of a table or restore an archived table
-        # Use this endpoint to perform one of the following &lt;ul&gt;&lt;li&gt; Publish a live version of a table (without copying table data from draft) &lt;/li&gt;&lt;li&gt;Un-publish a live version of a table (Leaving the data in the live version)&lt;/li&gt;&lt;li&gt;Restore an archived table&lt;/li&gt;&lt;/ul&gt;  To publish a table, send &#x60;published&#x60; property in the JSON object with the value &#x60;true&#x60;. To unpublish a table, send &#x60;published&#x60; property in the JSON object with the value &#x60;false&#x60;.  To restore an archived table, send &#x60;archived&#x60; property in the JSON object with the value &#x60;false&#x60; along with the query parameter &#x60;archived&#x3D;true&#x60;. When restoring an archived table, if an active table already exists with the same &#x60;name&#x60; or &#x60;label&#x60;, you will need to change the name of the archived table when restoring it using the &#x60;name&#x60; and &#x60;label&#x60; parameters with a new name and new label. When you restore a table, the table will be restored only in the &#x60;draft&#x60; version.  Examples:  Publish live version of a table:  &#x60;&#x60;&#x60;     {       \&quot;published\&quot;: true     } &#x60;&#x60;&#x60; Unpublish live version of a table: &#x60;&#x60;&#x60;     {       \&quot;published\&quot;: false     } &#x60;&#x60;&#x60; Restore a table: (send &#x60;archived&#x3D;true&#x60; in query parameters) &#x60;&#x60;&#x60;     {       \&quot;archived\&quot;: false     } &#x60;&#x60;&#x60; Restore a table with a new name: (send &#x60;archived&#x3D;true&#x60; in query parameters) &#x60;&#x60;&#x60;     {       \&quot;label\&quot;: \&quot;New Table Name\&quot;,       \&quot;name\&quot;: \&quot;new_table_name\&quot;,       \&quot;archived\&quot;: false     } &#x60;&#x60;&#x60;
-        # @param table_id_or_name [String] The ID or name of the table to return.
-        # @param hub_db_table_v3_live_input [HubDbTableV3LiveInput] The JSON object as described.
-        # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-        # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
-        def update_table_with_http_info(table_id_or_name, hub_db_table_v3_live_input, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TablesApi.update_table ...'
-          end
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling TablesApi.update_table"
-          end
-          # verify the required parameter 'hub_db_table_v3_live_input' is set
-          if @api_client.config.client_side_validation && hub_db_table_v3_live_input.nil?
-            fail ArgumentError, "Missing the required parameter 'hub_db_table_v3_live_input' when calling TablesApi.update_table"
-          end
-          # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -980,13 +972,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_live_input) 
+          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_v3_request) 
 
           # return_type
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -999,7 +991,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TablesApi#update_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: TablesApi#update_draft_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

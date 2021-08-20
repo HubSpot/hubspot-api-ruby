@@ -207,7 +207,7 @@ module Hubspot
                   key: 'hapikey',
                   value: api_key_with_prefix('hapikey')
                 },
-              'oauth2' =>
+              'oauth2_legacy' =>
                 {
                   type: 'oauth2',
                   in: 'header',

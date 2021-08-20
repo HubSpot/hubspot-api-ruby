@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
 The version of the OpenAPI document: v3
 
@@ -23,24 +23,28 @@ module Hubspot
         end
         # Clone a row
         # Clones a single row in the `draft` version of the table.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableRowV3]
-        def clone_draft_table_row(row_id, table_id_or_name, opts = {})
-          data, _status_code, _headers = clone_draft_table_row_with_http_info(row_id, table_id_or_name, opts)
+        def clone_draft_table_row(table_id_or_name, row_id, opts = {})
+          data, _status_code, _headers = clone_draft_table_row_with_http_info(table_id_or_name, row_id, opts)
           data
         end
 
         # Clone a row
         # Clones a single row in the &#x60;draft&#x60; version of the table.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableRowV3, Integer, Hash)>] HubDbTableRowV3 data, response status code and response headers
-        def clone_draft_table_row_with_http_info(row_id, table_id_or_name, opts = {})
+        def clone_draft_table_row_with_http_info(table_id_or_name, row_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.clone_draft_table_row ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.clone_draft_table_row"
           end
           # verify the required parameter 'row_id' is set
           if @api_client.config.client_side_validation && row_id.nil?
@@ -51,12 +55,8 @@ module Hubspot
             fail ArgumentError, "invalid value for 'row_id' when calling RowsApi.clone_draft_table_row, must conform to the pattern #{pattern}."
           end
 
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.clone_draft_table_row"
-          end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone'.sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s)).sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s)).sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -76,7 +76,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -95,23 +95,23 @@ module Hubspot
         end
 
         # Add a new row to a table
-        # Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `push-live` endpoint to push these changes to live version and publish them.
+        # Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `publish` endpoint to push these changes to published version.
         # @param table_id_or_name [String] The ID or name of the target table.
-        # @param hub_db_table_row_v3_input [HubDbTableRowV3Input] The row definition JSON, formatted as described above.
+        # @param hub_db_table_row_v3_request [HubDbTableRowV3Request] The row definition JSON, formatted as described above.
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableRowV3]
-        def create_table_row(table_id_or_name, hub_db_table_row_v3_input, opts = {})
-          data, _status_code, _headers = create_table_row_with_http_info(table_id_or_name, hub_db_table_row_v3_input, opts)
+        def create_table_row(table_id_or_name, hub_db_table_row_v3_request, opts = {})
+          data, _status_code, _headers = create_table_row_with_http_info(table_id_or_name, hub_db_table_row_v3_request, opts)
           data
         end
 
         # Add a new row to a table
-        # Add a new row to a HubDB table. New rows will be added to the &#x60;draft&#x60; version of the table. Use &#x60;push-live&#x60; endpoint to push these changes to live version and publish them.
+        # Add a new row to a HubDB table. New rows will be added to the &#x60;draft&#x60; version of the table. Use &#x60;publish&#x60; endpoint to push these changes to published version.
         # @param table_id_or_name [String] The ID or name of the target table.
-        # @param hub_db_table_row_v3_input [HubDbTableRowV3Input] The row definition JSON, formatted as described above.
+        # @param hub_db_table_row_v3_request [HubDbTableRowV3Request] The row definition JSON, formatted as described above.
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableRowV3, Integer, Hash)>] HubDbTableRowV3 data, response status code and response headers
-        def create_table_row_with_http_info(table_id_or_name, hub_db_table_row_v3_input, opts = {})
+        def create_table_row_with_http_info(table_id_or_name, hub_db_table_row_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.create_table_row ...'
           end
@@ -119,9 +119,9 @@ module Hubspot
           if @api_client.config.client_side_validation && table_id_or_name.nil?
             fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.create_table_row"
           end
-          # verify the required parameter 'hub_db_table_row_v3_input' is set
-          if @api_client.config.client_side_validation && hub_db_table_row_v3_input.nil?
-            fail ArgumentError, "Missing the required parameter 'hub_db_table_row_v3_input' when calling RowsApi.create_table_row"
+          # verify the required parameter 'hub_db_table_row_v3_request' is set
+          if @api_client.config.client_side_validation && hub_db_table_row_v3_request.nil?
+            fail ArgumentError, "Missing the required parameter 'hub_db_table_row_v3_request' when calling RowsApi.create_table_row"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -140,13 +140,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
+          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_request) 
 
           # return_type
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -166,24 +166,28 @@ module Hubspot
 
         # Get a row from the draft table
         # Get a single row by ID from a table's `draft` version.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableRowV3]
-        def get_draft_table_row_by_id(row_id, table_id_or_name, opts = {})
-          data, _status_code, _headers = get_draft_table_row_by_id_with_http_info(row_id, table_id_or_name, opts)
+        def get_draft_table_row_by_id(table_id_or_name, row_id, opts = {})
+          data, _status_code, _headers = get_draft_table_row_by_id_with_http_info(table_id_or_name, row_id, opts)
           data
         end
 
         # Get a row from the draft table
         # Get a single row by ID from a table&#39;s &#x60;draft&#x60; version.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableRowV3, Integer, Hash)>] HubDbTableRowV3 data, response status code and response headers
-        def get_draft_table_row_by_id_with_http_info(row_id, table_id_or_name, opts = {})
+        def get_draft_table_row_by_id_with_http_info(table_id_or_name, row_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.get_draft_table_row_by_id ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.get_draft_table_row_by_id"
           end
           # verify the required parameter 'row_id' is set
           if @api_client.config.client_side_validation && row_id.nil?
@@ -194,12 +198,8 @@ module Hubspot
             fail ArgumentError, "invalid value for 'row_id' when calling RowsApi.get_draft_table_row_by_id, must conform to the pattern #{pattern}."
           end
 
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.get_draft_table_row_by_id"
-          end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s)).sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s)).sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -219,7 +219,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -238,25 +238,29 @@ module Hubspot
         end
 
         # Get a table row
-        # Get a single row by ID from a table's `live` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
-        # @param row_id [String] The ID of the row
+        # Get a single row by ID from a table's `published` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableRowV3]
-        def get_table_row(row_id, table_id_or_name, opts = {})
-          data, _status_code, _headers = get_table_row_with_http_info(row_id, table_id_or_name, opts)
+        def get_table_row(table_id_or_name, row_id, opts = {})
+          data, _status_code, _headers = get_table_row_with_http_info(table_id_or_name, row_id, opts)
           data
         end
 
         # Get a table row
-        # Get a single row by ID from a table&#39;s &#x60;live&#x60; version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
-        # @param row_id [String] The ID of the row
+        # Get a single row by ID from a table&#39;s &#x60;published&#x60; version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableRowV3, Integer, Hash)>] HubDbTableRowV3 data, response status code and response headers
-        def get_table_row_with_http_info(row_id, table_id_or_name, opts = {})
+        def get_table_row_with_http_info(table_id_or_name, row_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.get_table_row ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.get_table_row"
           end
           # verify the required parameter 'row_id' is set
           if @api_client.config.client_side_validation && row_id.nil?
@@ -267,12 +271,8 @@ module Hubspot
             fail ArgumentError, "invalid value for 'row_id' when calling RowsApi.get_table_row, must conform to the pattern #{pattern}."
           end
 
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.get_table_row"
-          end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}'.sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s)).sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s)).sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -292,7 +292,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -311,13 +311,13 @@ module Hubspot
         end
 
         # Get rows for a table
-        # Returns a set of rows in the `live` version of the specified table. Row results can be filtered and sorted. Refer to the overview section for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+        # Returns a set of rows in the `published` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table to query.
         # @param [Hash] opts the optional parameters
-        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details.
+        # @option opts [Array<String>] :sort Specifies the column names to sort the results by. See the above description for more details.
         # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
-        # @option opts [Array<String>] :sort Specifies the column names to sort the results by. See the above description for more details.
+        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details.
         # @return [CollectionResponseWithTotalHubDbTableRowV3ForwardPaging]
         def get_table_rows(table_id_or_name, opts = {})
           data, _status_code, _headers = get_table_rows_with_http_info(table_id_or_name, opts)
@@ -325,13 +325,13 @@ module Hubspot
         end
 
         # Get rows for a table
-        # Returns a set of rows in the &#x60;live&#x60; version of the specified table. Row results can be filtered and sorted. Refer to the overview section for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+        # Returns a set of rows in the &#x60;published&#x60; version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters &#x60;column1__gt&#x3D;5&amp;sort&#x3D;-column1&#x60;, API returns the rows with values for column &#x60;column1&#x60; greater than 5 and in the descending order of &#x60;column1&#x60; values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table to query.
         # @param [Hash] opts the optional parameters
-        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details.
+        # @option opts [Array<String>] :sort Specifies the column names to sort the results by. See the above description for more details.
         # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
-        # @option opts [Array<String>] :sort Specifies the column names to sort the results by. See the above description for more details.
+        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details.
         # @return [Array<(CollectionResponseWithTotalHubDbTableRowV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableRowV3ForwardPaging data, response status code and response headers
         def get_table_rows_with_http_info(table_id_or_name, opts = {})
           if @api_client.config.debugging
@@ -346,10 +346,10 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-          query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -366,7 +366,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -386,24 +386,28 @@ module Hubspot
 
         # Permanently deletes a row
         # Permanently deletes a row from a table's `draft` version.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def purge_draft_table_row(row_id, table_id_or_name, opts = {})
-          purge_draft_table_row_with_http_info(row_id, table_id_or_name, opts)
+        def purge_draft_table_row(table_id_or_name, row_id, opts = {})
+          purge_draft_table_row_with_http_info(table_id_or_name, row_id, opts)
           nil
         end
 
         # Permanently deletes a row
         # Permanently deletes a row from a table&#39;s &#x60;draft&#x60; version.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
+        # @param row_id [String] The ID of the row
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def purge_draft_table_row_with_http_info(row_id, table_id_or_name, opts = {})
+        def purge_draft_table_row_with_http_info(table_id_or_name, row_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.purge_draft_table_row ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.purge_draft_table_row"
           end
           # verify the required parameter 'row_id' is set
           if @api_client.config.client_side_validation && row_id.nil?
@@ -414,12 +418,8 @@ module Hubspot
             fail ArgumentError, "invalid value for 'row_id' when calling RowsApi.purge_draft_table_row, must conform to the pattern #{pattern}."
           end
 
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.purge_draft_table_row"
-          end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s)).sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s)).sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -439,7 +439,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -458,13 +458,13 @@ module Hubspot
         end
 
         # Get rows from draft table
-        # Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted using the options mentioned in the overview section.
+        # Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
         # @param table_id_or_name [String] The ID or name of the table to query.
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-        # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
         # @option opts [Array<String>] :sort Specifies the column names to sort the results by.
+        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
+        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
         # @return [CollectionResponseWithTotalHubDbTableRowV3ForwardPaging]
         def read_draft_table_rows(table_id_or_name, opts = {})
           data, _status_code, _headers = read_draft_table_rows_with_http_info(table_id_or_name, opts)
@@ -472,13 +472,13 @@ module Hubspot
         end
 
         # Get rows from draft table
-        # Returns rows in the &#x60;draft&#x60; version of the specified table. Row results can be filtered and sorted using the options mentioned in the overview section.
+        # Returns rows in the &#x60;draft&#x60; version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters &#x60;column1__gt&#x3D;5&amp;sort&#x3D;-column1&#x60;, API returns the rows with values for column &#x60;column1&#x60; greater than 5 and in the descending order of &#x60;column1&#x60; values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
         # @param table_id_or_name [String] The ID or name of the table to query.
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-        # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
         # @option opts [Array<String>] :sort Specifies the column names to sort the results by.
+        # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+        # @option opts [Integer] :limit The maximum number of results to return. Default is &#x60;1000&#x60;.
+        # @option opts [Array<String>] :properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
         # @return [Array<(CollectionResponseWithTotalHubDbTableRowV3ForwardPaging, Integer, Hash)>] CollectionResponseWithTotalHubDbTableRowV3ForwardPaging data, response status code and response headers
         def read_draft_table_rows_with_http_info(table_id_or_name, opts = {})
           if @api_client.config.debugging
@@ -493,10 +493,10 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
-          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
+          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -513,7 +513,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -533,26 +533,30 @@ module Hubspot
 
         # Replaces an existing row
         # Replace a single row in the table's `draft` version. All the column values must be specified. If a column has a value in the target table and this request doesn't define that value, it will be deleted. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
-        # @param hub_db_table_row_v3_input [HubDbTableRowV3Input] The JSON object of the row
+        # @param row_id [String] The ID of the row
+        # @param hub_db_table_row_v3_request [HubDbTableRowV3Request] The JSON object of the row
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableRowV3]
-        def replace_draft_table_row(row_id, table_id_or_name, hub_db_table_row_v3_input, opts = {})
-          data, _status_code, _headers = replace_draft_table_row_with_http_info(row_id, table_id_or_name, hub_db_table_row_v3_input, opts)
+        def replace_draft_table_row(table_id_or_name, row_id, hub_db_table_row_v3_request, opts = {})
+          data, _status_code, _headers = replace_draft_table_row_with_http_info(table_id_or_name, row_id, hub_db_table_row_v3_request, opts)
           data
         end
 
         # Replaces an existing row
         # Replace a single row in the table&#39;s &#x60;draft&#x60; version. All the column values must be specified. If a column has a value in the target table and this request doesn&#39;t define that value, it will be deleted. See the &#x60;Create a row&#x60; endpoint for instructions on how to format the JSON row definitions.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
-        # @param hub_db_table_row_v3_input [HubDbTableRowV3Input] The JSON object of the row
+        # @param row_id [String] The ID of the row
+        # @param hub_db_table_row_v3_request [HubDbTableRowV3Request] The JSON object of the row
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableRowV3, Integer, Hash)>] HubDbTableRowV3 data, response status code and response headers
-        def replace_draft_table_row_with_http_info(row_id, table_id_or_name, hub_db_table_row_v3_input, opts = {})
+        def replace_draft_table_row_with_http_info(table_id_or_name, row_id, hub_db_table_row_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.replace_draft_table_row ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.replace_draft_table_row"
           end
           # verify the required parameter 'row_id' is set
           if @api_client.config.client_side_validation && row_id.nil?
@@ -563,16 +567,12 @@ module Hubspot
             fail ArgumentError, "invalid value for 'row_id' when calling RowsApi.replace_draft_table_row, must conform to the pattern #{pattern}."
           end
 
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.replace_draft_table_row"
-          end
-          # verify the required parameter 'hub_db_table_row_v3_input' is set
-          if @api_client.config.client_side_validation && hub_db_table_row_v3_input.nil?
-            fail ArgumentError, "Missing the required parameter 'hub_db_table_row_v3_input' when calling RowsApi.replace_draft_table_row"
+          # verify the required parameter 'hub_db_table_row_v3_request' is set
+          if @api_client.config.client_side_validation && hub_db_table_row_v3_request.nil?
+            fail ArgumentError, "Missing the required parameter 'hub_db_table_row_v3_request' when calling RowsApi.replace_draft_table_row"
           end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s)).sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s)).sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -588,13 +588,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
+          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_request) 
 
           # return_type
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -614,26 +614,30 @@ module Hubspot
 
         # Updates an existing row
         # Sparse updates a single row in the table's `draft` version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
-        # @param hub_db_table_row_v3_input [HubDbTableRowV3Input] The JSON object of the row with necessary fields that needs to be updated.
+        # @param row_id [String] The ID of the row
+        # @param hub_db_table_row_v3_request [HubDbTableRowV3Request] The JSON object of the row with necessary fields that needs to be updated.
         # @param [Hash] opts the optional parameters
         # @return [HubDbTableRowV3]
-        def update_draft_table_row(row_id, table_id_or_name, hub_db_table_row_v3_input, opts = {})
-          data, _status_code, _headers = update_draft_table_row_with_http_info(row_id, table_id_or_name, hub_db_table_row_v3_input, opts)
+        def update_draft_table_row(table_id_or_name, row_id, hub_db_table_row_v3_request, opts = {})
+          data, _status_code, _headers = update_draft_table_row_with_http_info(table_id_or_name, row_id, hub_db_table_row_v3_request, opts)
           data
         end
 
         # Updates an existing row
         # Sparse updates a single row in the table&#39;s &#x60;draft&#x60; version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the &#x60;Create a row&#x60; endpoint for instructions on how to format the JSON row definitions.
-        # @param row_id [String] The ID of the row
         # @param table_id_or_name [String] The ID or name of the table
-        # @param hub_db_table_row_v3_input [HubDbTableRowV3Input] The JSON object of the row with necessary fields that needs to be updated.
+        # @param row_id [String] The ID of the row
+        # @param hub_db_table_row_v3_request [HubDbTableRowV3Request] The JSON object of the row with necessary fields that needs to be updated.
         # @param [Hash] opts the optional parameters
         # @return [Array<(HubDbTableRowV3, Integer, Hash)>] HubDbTableRowV3 data, response status code and response headers
-        def update_draft_table_row_with_http_info(row_id, table_id_or_name, hub_db_table_row_v3_input, opts = {})
+        def update_draft_table_row_with_http_info(table_id_or_name, row_id, hub_db_table_row_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsApi.update_draft_table_row ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.update_draft_table_row"
           end
           # verify the required parameter 'row_id' is set
           if @api_client.config.client_side_validation && row_id.nil?
@@ -644,16 +648,12 @@ module Hubspot
             fail ArgumentError, "invalid value for 'row_id' when calling RowsApi.update_draft_table_row, must conform to the pattern #{pattern}."
           end
 
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsApi.update_draft_table_row"
-          end
-          # verify the required parameter 'hub_db_table_row_v3_input' is set
-          if @api_client.config.client_side_validation && hub_db_table_row_v3_input.nil?
-            fail ArgumentError, "Missing the required parameter 'hub_db_table_row_v3_input' when calling RowsApi.update_draft_table_row"
+          # verify the required parameter 'hub_db_table_row_v3_request' is set
+          if @api_client.config.client_side_validation && hub_db_table_row_v3_request.nil?
+            fail ArgumentError, "Missing the required parameter 'hub_db_table_row_v3_request' when calling RowsApi.update_draft_table_row"
           end
           # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s)).sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s)).sub('{' + 'rowId' + '}', CGI.escape(row_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -669,13 +669,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_input) 
+          post_body = opts[:body] || @api_client.object_to_http_body(hub_db_table_row_v3_request) 
 
           # return_type
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
 
           new_options = opts.merge(
             :header_params => header_params,

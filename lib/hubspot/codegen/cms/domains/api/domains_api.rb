@@ -68,7 +68,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Domain' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -160,7 +160,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalDomain' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['hapikey']
 
           new_options = opts.merge(
             :header_params => header_params,

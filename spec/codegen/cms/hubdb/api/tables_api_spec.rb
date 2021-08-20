@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
 The version of the OpenAPI document: v3
 
@@ -34,7 +34,7 @@ describe 'TablesApi' do
 
   # unit tests for archive_table
   # Archive a table
-  # Archive (soft delete) an existing HubDB table. This archives both the live and draft versions.
+  # Archive (soft delete) an existing HubDB table. This archives both the published and draft versions.
   # @param table_id_or_name The ID or name of the table to archive.
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -60,7 +60,7 @@ describe 'TablesApi' do
   # unit tests for create_table
   # Create a new table
   # Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
-  # @param hub_db_table_v3_input The JSON schema for the table being created.
+  # @param hub_db_table_v3_request The JSON schema for the table being created.
   # @param [Hash] opts the optional parameters
   # @return [HubDbTableV3]
   describe 'create_table test' do
@@ -84,7 +84,7 @@ describe 'TablesApi' do
 
   # unit tests for export_table
   # Export a published version of a table
-  # Exports the &#x60;live&#x60; version of a table to CSV / EXCEL format.
+  # Exports the &#x60;published&#x60; version of a table to CSV / EXCEL format.
   # @param table_id_or_name The ID or name of the table to export.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -99,16 +99,16 @@ describe 'TablesApi' do
   # Return all draft tables
   # Returns the details for each draft table defined in the specified account, including column definitions.
   # @param [Hash] opts the optional parameters
-  # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
-  # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
   # @option opts [Array<String>] :sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+  # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+  # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
   # @option opts [DateTime] :created_at Only return tables created at exactly the specified time.
   # @option opts [DateTime] :created_after Only return tables created after the specified time.
-  # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-  # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
   # @option opts [DateTime] :created_before Only return tables created before the specified time.
   # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
-  # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
+  # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
+  # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
+  # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
   # @return [CollectionResponseWithTotalHubDbTableV3ForwardPaging]
   describe 'get_all_draft_tables test' do
     it 'should work' do
@@ -117,19 +117,19 @@ describe 'TablesApi' do
   end
 
   # unit tests for get_all_tables
-  # Get all live tables
-  # Returns the details for the &#x60;live&#x60; version of each table defined in an account, including column definitions.
+  # Get all published tables
+  # Returns the details for the &#x60;published&#x60; version of each table defined in an account, including column definitions.
   # @param [Hash] opts the optional parameters
-  # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
-  # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
   # @option opts [Array<String>] :sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+  # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+  # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
   # @option opts [DateTime] :created_at Only return tables created at exactly the specified time.
   # @option opts [DateTime] :created_after Only return tables created after the specified time.
-  # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-  # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
   # @option opts [DateTime] :created_before Only return tables created before the specified time.
   # @option opts [DateTime] :updated_at Only return tables last updated at exactly the specified time.
-  # @option opts [Integer] :limit The maximum number of results to return. Default is 1000.
+  # @option opts [DateTime] :updated_after Only return tables last updated after the specified time.
+  # @option opts [DateTime] :updated_before Only return tables last updated before the specified time.
+  # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
   # @return [CollectionResponseWithTotalHubDbTableV3ForwardPaging]
   describe 'get_all_tables test' do
     it 'should work' do
@@ -152,8 +152,8 @@ describe 'TablesApi' do
   end
 
   # unit tests for get_table_details
-  # Get details for a live table
-  # Returns the details for the &#x60;live&#x60; version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+  # Get details for a published table
+  # Returns the details for the &#x60;published&#x60; version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
   # @param table_id_or_name The ID or name of the table to return.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
@@ -167,11 +167,11 @@ describe 'TablesApi' do
 
   # unit tests for import_draft_table
   # Import data into draft table
-  # Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the &#x60;draft&#x60; version of the table. Use &#x60;/push-live&#x60; endpoint to push these changes to &#x60;live&#x60; version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as &#x60;config&#x60;.  The second part will be the CSV file you want to import and you can specify this with the name as &#x60;file&#x60;. Refer the overview section to check the details and format of the JSON-formatted options for the import.
+  # Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the &#x60;draft&#x60; version of the table. Use &#x60;/publish&#x60; endpoint to push these changes to &#x60;published&#x60; version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as &#x60;config&#x60;.  The second part will be the CSV file you want to import and you can specify this with the name as &#x60;file&#x60;. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
   # @param table_id_or_name The ID of the destination table where data will be imported.
   # @param [Hash] opts the optional parameters
-  # @option opts [File] :file The source CSV file to be imported.
   # @option opts [String] :config Configuration for the import in JSON format as described above.
+  # @option opts [File] :file The source CSV file to be imported.
   # @return [ImportResult]
   describe 'import_draft_table test' do
     it 'should work' do
@@ -179,14 +179,27 @@ describe 'TablesApi' do
     end
   end
 
-  # unit tests for publish_draft_table
+  # unit tests for post_cms_v3_hubdb_tables_table_id_or_name_draft_publish
   # Publish a table from draft
-  # Copies the data from draft to live version of the table and also publishes the live version. This will immediately push the data to the &#x60;live&#x60; version of the table and publishes the live version, meaning any website pages using data from the table will be updated.
+  # Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
   # @param table_id_or_name The ID or name of the table to publish.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
   # @return [HubDbTableV3]
-  describe 'publish_draft_table test' do
+  describe 'post_cms_v3_hubdb_tables_table_id_or_name_draft_publish test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for post_cms_v3_hubdb_tables_table_id_or_name_unpublish
+  # Unpublish a table
+  # Unpublishes the table, meaning any website pages using data from the table will not render any data.
+  # @param table_id_or_name The ID or name of the table to publish.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+  # @return [HubDbTableV3]
+  describe 'post_cms_v3_hubdb_tables_table_id_or_name_unpublish test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -194,7 +207,7 @@ describe 'TablesApi' do
 
   # unit tests for reset_draft_table
   # Reset a draft table
-  # Replaces the data in the &#x60;draft&#x60; version of the table with values from the &#x60;live&#x60; version. Any unpublished changes in the &#x60;draft&#x60; will be lost after this call is made.
+  # Replaces the data in the &#x60;draft&#x60; version of the table with values from the &#x60;published&#x60; version. Any unpublished changes in the &#x60;draft&#x60; will be lost after this call is made.
   # @param table_id_or_name The ID or name of the table to reset.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -207,28 +220,14 @@ describe 'TablesApi' do
 
   # unit tests for update_draft_table
   # Update an existing table
-  # Update an existing HubDB table. You can use this endpoint to add or remove columns to the table. Tables updated using the endpoint will only modify the &#x60;draft&#x60; verion of the table. Use &#x60;push-live&#x60; endpoint to push all the changes to the &#x60;live&#x60; version. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+  # Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the &#x60;draft&#x60; verion of the table. Use &#x60;publish&#x60; endpoint to push all the changes to the &#x60;published&#x60; version. To restore a table, include the query parameter &#x60;archived&#x3D;true&#x60; and &#x60;\&quot;archived\&quot;: false&#x60; in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
   # @param table_id_or_name The ID or name of the table to update.
-  # @param hub_db_table_v3_input The JSON schema for the table being updated.
+  # @param hub_db_table_v3_request The JSON schema for the table being updated.
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
   # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
   # @return [HubDbTableV3]
   describe 'update_draft_table test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for update_table
-  # Publish or unpublish a live version of a table or restore an archived table
-  # Use this endpoint to perform one of the following &lt;ul&gt;&lt;li&gt; Publish a live version of a table (without copying table data from draft) &lt;/li&gt;&lt;li&gt;Un-publish a live version of a table (Leaving the data in the live version)&lt;/li&gt;&lt;li&gt;Restore an archived table&lt;/li&gt;&lt;/ul&gt;  To publish a table, send &#x60;published&#x60; property in the JSON object with the value &#x60;true&#x60;. To unpublish a table, send &#x60;published&#x60; property in the JSON object with the value &#x60;false&#x60;.  To restore an archived table, send &#x60;archived&#x60; property in the JSON object with the value &#x60;false&#x60; along with the query parameter &#x60;archived&#x3D;true&#x60;. When restoring an archived table, if an active table already exists with the same &#x60;name&#x60; or &#x60;label&#x60;, you will need to change the name of the archived table when restoring it using the &#x60;name&#x60; and &#x60;label&#x60; parameters with a new name and new label. When you restore a table, the table will be restored only in the &#x60;draft&#x60; version.  Examples:  Publish live version of a table:  &#x60;&#x60;&#x60;     {       \&quot;published\&quot;: true     } &#x60;&#x60;&#x60; Unpublish live version of a table: &#x60;&#x60;&#x60;     {       \&quot;published\&quot;: false     } &#x60;&#x60;&#x60; Restore a table: (send &#x60;archived&#x3D;true&#x60; in query parameters) &#x60;&#x60;&#x60;     {       \&quot;archived\&quot;: false     } &#x60;&#x60;&#x60; Restore a table with a new name: (send &#x60;archived&#x3D;true&#x60; in query parameters) &#x60;&#x60;&#x60;     {       \&quot;label\&quot;: \&quot;New Table Name\&quot;,       \&quot;name\&quot;: \&quot;new_table_name\&quot;,       \&quot;archived\&quot;: false     } &#x60;&#x60;&#x60;
-  # @param table_id_or_name The ID or name of the table to return.
-  # @param hub_db_table_v3_live_input The JSON object as described.
-  # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-  # @return [HubDbTableV3]
-  describe 'update_table test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

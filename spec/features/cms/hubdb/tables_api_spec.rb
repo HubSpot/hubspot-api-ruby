@@ -14,7 +14,7 @@ describe 'Hubspot::Cms::Hubdb::TablesApi' do
   it { is_expected.to respond_to(:get_table_details) }
   it { is_expected.to respond_to(:import_draft_table) }
   it { is_expected.to respond_to(:publish_draft_table) }
+  it { is_expected.to respond_to(:unpublish_table) }
   it { is_expected.to respond_to(:reset_draft_table) }
   it { is_expected.to respond_to(:update_draft_table) }
-  it { is_expected.to respond_to(:update_table) }
 end

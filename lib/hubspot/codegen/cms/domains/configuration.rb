@@ -206,13 +206,6 @@ module Hubspot
                 key: 'hapikey',
                 value: api_key_with_prefix('hapikey')
               },
-            'oauth2' =>
-              {
-                type: 'oauth2',
-                in: 'header',
-                key: 'Authorization',
-                value: "Bearer #{access_token}"
-              },
           }
         end
 

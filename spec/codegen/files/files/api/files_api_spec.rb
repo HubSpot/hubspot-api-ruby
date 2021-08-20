@@ -79,7 +79,11 @@ describe 'FilesApi' do
   # @option opts [Array<String>] :sort Sort files by a given field.
   # @option opts [String] :id Search files by given ID.
   # @option opts [DateTime] :created_at Search files by time of creation.
+  # @option opts [DateTime] :created_at_lte 
+  # @option opts [DateTime] :created_at_gte 
   # @option opts [DateTime] :updated_at Search files by time of latest updated.
+  # @option opts [DateTime] :updated_at_lte 
+  # @option opts [DateTime] :updated_at_gte 
   # @option opts [String] :name Search for files containing the given name.
   # @option opts [String] :path Search files by path.
   # @option opts [Integer] :parent_folder_id Search files within given folder ID.
@@ -144,7 +148,6 @@ describe 'FilesApi' do
   # Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
   # @param file_id Id of the desired file.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :user_agent 
   # @option opts [File] :file File data that will replace existing file in the file manager.
   # @option opts [String] :charset_hunch Character set of given file data.
   # @option opts [String] :options JSON String representing FileReplaceOptions
@@ -172,7 +175,6 @@ describe 'FilesApi' do
   # Upload file
   # Upload a single file with content specified in request body.
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :user_agent 
   # @option opts [File] :file File to be uploaded.
   # @option opts [String] :folder_id Either &#39;folderId&#39; or &#39;folderPath&#39; is required. folderId is the ID of the folder the file will be uploaded to.
   # @option opts [String] :folder_path Either &#39;folderPath&#39; or &#39;folderId&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn&#39;t exist, the system will try to create one.
