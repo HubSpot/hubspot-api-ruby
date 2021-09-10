@@ -22,7 +22,6 @@ module Hubspot
           @api_client = api_client
         end
         # Archive a batch of objects by ID
-        # Archive a list of objects given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
         # @param object_type [String] 
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
@@ -33,7 +32,6 @@ module Hubspot
         end
 
         # Archive a batch of objects by ID
-        # Archive a list of objects given a collection of IDs. This method will return a &#x60;204 No Content&#x60; response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
         # @param object_type [String] 
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
@@ -73,7 +71,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -92,7 +90,6 @@ module Hubspot
         end
 
         # Create a batch of objects
-        # Create a batch of objects. This follows the same rules as creating an individual object.
         # @param object_type [String] 
         # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
@@ -103,7 +100,6 @@ module Hubspot
         end
 
         # Create a batch of objects
-        # Create a batch of objects. This follows the same rules as creating an individual object.
         # @param object_type [String] 
         # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
@@ -143,7 +139,7 @@ module Hubspot
           return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -162,7 +158,6 @@ module Hubspot
         end
 
         # Read a batch of objects by internal ID, or unique property values
-        # Read a list of objects given a collection of IDs. Use the `properties` request body property to control which properties are returned.
         # @param object_type [String] 
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
@@ -174,7 +169,6 @@ module Hubspot
         end
 
         # Read a batch of objects by internal ID, or unique property values
-        # Read a list of objects given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
         # @param object_type [String] 
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
@@ -216,7 +210,7 @@ module Hubspot
           return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -235,7 +229,6 @@ module Hubspot
         end
 
         # Update a batch of objects
-        # Perform a partial upate on a batch of objects. This follows the same rules as performing partial updates on an individual object.
         # @param object_type [String] 
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
@@ -246,7 +239,6 @@ module Hubspot
         end
 
         # Update a batch of objects
-        # Perform a partial upate on a batch of objects. This follows the same rules as performing partial updates on an individual object.
         # @param object_type [String] 
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
@@ -286,7 +278,7 @@ module Hubspot
           return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

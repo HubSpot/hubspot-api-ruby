@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -135,7 +135,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -199,7 +199,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -264,7 +264,7 @@ module Hubspot
           return_type = opts[:return_type] || 'File' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -329,7 +329,7 @@ module Hubspot
           return_type = opts[:return_type] || 'File' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -415,7 +415,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -501,7 +501,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -569,7 +569,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -637,7 +637,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -707,7 +707,7 @@ module Hubspot
           return_type = opts[:return_type] || 'ImportResult' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -772,7 +772,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -786,71 +786,6 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: TablesApi#publish_draft_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Unpublish a table
-        # Unpublishes the table, meaning any website pages using data from the table will not render any data.
-        # @param table_id_or_name [String] The ID or name of the table to publish.
-        # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
-        # @return [HubDbTableV3]
-        def unpublish_table(table_id_or_name, opts = {})
-          data, _status_code, _headers = unpublish_table_with_http_info(table_id_or_name, opts)
-          data
-        end
-
-        # Unpublish a table
-        # Unpublishes the table, meaning any website pages using data from the table will not render any data.
-        # @param table_id_or_name [String] The ID or name of the table to publish.
-        # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
-        # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
-        def unpublish_table_with_http_info(table_id_or_name, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: TablesApi.unpublish_table ...'
-          end
-          # verify the required parameter 'table_id_or_name' is set
-          if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling TablesApi.unpublish_table"
-          end
-          # resource path
-          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/unpublish'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] 
-
-          # return_type
-          return_type = opts[:return_type] || 'HubDbTableV3' 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: TablesApi#unpublish_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -902,7 +837,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -916,6 +851,71 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: TablesApi#reset_draft_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Unpublish a table
+        # Unpublishes the table, meaning any website pages using data from the table will not render any data.
+        # @param table_id_or_name [String] The ID or name of the table to publish.
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+        # @return [HubDbTableV3]
+        def unpublish_table(table_id_or_name, opts = {})
+          data, _status_code, _headers = unpublish_table_with_http_info(table_id_or_name, opts)
+          data
+        end
+
+        # Unpublish a table
+        # Unpublishes the table, meaning any website pages using data from the table will not render any data.
+        # @param table_id_or_name [String] The ID or name of the table to publish.
+        # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+        # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
+        def unpublish_table_with_http_info(table_id_or_name, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: TablesApi.unpublish_table ...'
+          end
+          # verify the required parameter 'table_id_or_name' is set
+          if @api_client.config.client_side_validation && table_id_or_name.nil?
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling TablesApi.unpublish_table"
+          end
+          # resource path
+          local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/unpublish'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+          query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:body] 
+
+          # return_type
+          return_type = opts[:return_type] || 'HubDbTableV3' 
+
+          # auth_names
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+
+          new_options = opts.merge(
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: TablesApi#unpublish_table\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -978,7 +978,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

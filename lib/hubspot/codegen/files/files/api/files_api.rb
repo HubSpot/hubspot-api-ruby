@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -137,7 +137,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -199,7 +199,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FileActionResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -327,7 +327,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseFile' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -397,7 +397,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -477,7 +477,7 @@ module Hubspot
           return_type = opts[:return_type] || 'SignedUrl' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -541,7 +541,7 @@ module Hubspot
           return_type = opts[:return_type] || 'ImportFromUrlTaskLocator' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -619,7 +619,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -694,7 +694,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -770,7 +770,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubspotFile' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

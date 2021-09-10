@@ -329,7 +329,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseObjectSchemaNoPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -391,7 +391,7 @@ module Hubspot
           return_type = opts[:return_type] || 'ObjectSchema' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

@@ -213,13 +213,6 @@ module Hubspot
                 key: 'Authorization',
                 value: "Bearer #{access_token}"
               },
-            'oauth2_legacy' =>
-              {
-                type: 'oauth2',
-                in: 'header',
-                key: 'Authorization',
-                value: "Bearer #{access_token}"
-              },
           }
         end
 

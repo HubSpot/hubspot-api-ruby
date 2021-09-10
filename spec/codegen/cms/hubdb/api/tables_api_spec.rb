@@ -179,27 +179,14 @@ describe 'TablesApi' do
     end
   end
 
-  # unit tests for post_cms_v3_hubdb_tables_table_id_or_name_draft_publish
+  # unit tests for publish_draft_table
   # Publish a table from draft
   # Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
   # @param table_id_or_name The ID or name of the table to publish.
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
   # @return [HubDbTableV3]
-  describe 'post_cms_v3_hubdb_tables_table_id_or_name_draft_publish test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for post_cms_v3_hubdb_tables_table_id_or_name_unpublish
-  # Unpublish a table
-  # Unpublishes the table, meaning any website pages using data from the table will not render any data.
-  # @param table_id_or_name The ID or name of the table to publish.
-  # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
-  # @return [HubDbTableV3]
-  describe 'post_cms_v3_hubdb_tables_table_id_or_name_unpublish test' do
+  describe 'publish_draft_table test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -213,6 +200,19 @@ describe 'TablesApi' do
   # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
   # @return [HubDbTableV3]
   describe 'reset_draft_table test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for unpublish_table
+  # Unpublish a table
+  # Unpublishes the table, meaning any website pages using data from the table will not render any data.
+  # @param table_id_or_name The ID or name of the table to publish.
+  # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+  # @return [HubDbTableV3]
+  describe 'unpublish_table test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

@@ -21,8 +21,6 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Filter, Sort, and Search CRM Objects
-        # Filter, Sort, and Search CRM Objects
         # @param object_type [String] 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
@@ -32,8 +30,6 @@ module Hubspot
           data
         end
 
-        # Filter, Sort, and Search CRM Objects
-        # Filter, Sort, and Search CRM Objects
         # @param object_type [String] 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
@@ -73,7 +69,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalSimplePublicObjectForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

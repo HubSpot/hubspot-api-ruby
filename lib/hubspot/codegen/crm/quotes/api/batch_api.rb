@@ -22,7 +22,6 @@ module Hubspot
           @api_client = api_client
         end
         # Read a batch of quotes by internal ID, or unique property values
-        # Read a list of quotes given a collection of IDs. Use the `properties` request body property to control which properties are returned.
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -33,7 +32,6 @@ module Hubspot
         end
 
         # Read a batch of quotes by internal ID, or unique property values
-        # Read a list of quotes given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived.

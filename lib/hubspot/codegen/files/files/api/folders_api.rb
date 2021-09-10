@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -137,7 +137,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -199,7 +199,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FolderActionResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -263,7 +263,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -364,7 +364,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseFolder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -434,7 +434,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -504,7 +504,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -568,7 +568,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FolderUpdateTaskLocator' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2_legacy']
+          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

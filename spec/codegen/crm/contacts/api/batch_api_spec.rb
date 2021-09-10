@@ -34,7 +34,6 @@ describe 'BatchApi' do
 
   # unit tests for archive
   # Archive a batch of contacts by ID
-  # Archive a list of contacts given a collection of IDs. This method will return a &#x60;204 No Content&#x60; response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
   # @param batch_input_simple_public_object_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -46,7 +45,6 @@ describe 'BatchApi' do
 
   # unit tests for create
   # Create a batch of contacts
-  # Create a batch of contacts. This follows the same rules as creating an individual object.
   # @param batch_input_simple_public_object_input 
   # @param [Hash] opts the optional parameters
   # @return [BatchResponseSimplePublicObject]
@@ -58,7 +56,6 @@ describe 'BatchApi' do
 
   # unit tests for read
   # Read a batch of contacts by internal ID, or unique property values
-  # Read a list of contacts given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
   # @param batch_read_input_simple_public_object_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
@@ -71,7 +68,6 @@ describe 'BatchApi' do
 
   # unit tests for update
   # Update a batch of contacts
-  # Perform a partial upate on a batch of contacts. This follows the same rules as performing partial updates on an individual object.
   # @param batch_input_simple_public_object_batch_input 
   # @param [Hash] opts the optional parameters
   # @return [BatchResponseSimplePublicObject]

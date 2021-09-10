@@ -32,13 +32,13 @@ describe 'PublicImportsApi' do
     end
   end
 
-  # unit tests for get_crm_v3_imports_import_id_errors
+  # unit tests for get_errors
   # @param import_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
   # @option opts [Integer] :limit The maximum number of results to display per page.
   # @return [CollectionResponsePublicImportErrorForwardPaging]
-  describe 'get_crm_v3_imports_import_id_errors test' do
+  describe 'get_errors test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
