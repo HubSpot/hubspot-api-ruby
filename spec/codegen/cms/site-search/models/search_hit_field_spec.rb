@@ -32,13 +32,13 @@ describe 'SearchHitField' do
       expect(@instance).to be_instance_of(Hubspot::Cms::SiteSearch::SearchHitField)
     end
   end
-  describe 'test attribute "values"' do
+  describe 'test attribute "metadata_field"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "metadata_field"' do
+  describe 'test attribute "values"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

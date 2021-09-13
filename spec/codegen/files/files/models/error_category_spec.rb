@@ -32,6 +32,12 @@ describe 'ErrorCategory' do
       expect(@instance).to be_instance_of(Hubspot::Files::Files::ErrorCategory)
     end
   end
+  describe 'test attribute "name"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "http_status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -39,12 +45,6 @@ describe 'ErrorCategory' do
       # validator.allowable_values.each do |value|
       #   expect { @instance.http_status = value }.not_to raise_error
       # end
-    end
-  end
-
-  describe 'test attribute "name"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 

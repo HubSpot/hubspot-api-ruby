@@ -34,7 +34,6 @@ describe 'BatchApi' do
 
   # unit tests for read_batch
   # Read a batch of feedback submissions by internal ID, or unique property values
-  # Read a list of feedback submissions given a collection of IDs. Use the &#x60;properties&#x60; request body property to control which properties are returned.
   # @param batch_read_input_simple_public_object_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :archived Whether to return only results that have been archived.

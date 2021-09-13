@@ -91,7 +91,11 @@ describe 'FoldersApi' do
   # @option opts [Array<String>] :sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
   # @option opts [String] :id Search folder by given ID.
   # @option opts [DateTime] :created_at Search for folders with the given creation timestamp.
+  # @option opts [DateTime] :created_at_lte 
+  # @option opts [DateTime] :created_at_gte 
   # @option opts [DateTime] :updated_at Search for folder at given update timestamp.
+  # @option opts [DateTime] :updated_at_lte 
+  # @option opts [DateTime] :updated_at_gte 
   # @option opts [String] :name Search for folders containing the specified name.
   # @option opts [String] :path Search for folders by path.
   # @option opts [Integer] :parent_folder_id Search for folders with the given parent folder ID.

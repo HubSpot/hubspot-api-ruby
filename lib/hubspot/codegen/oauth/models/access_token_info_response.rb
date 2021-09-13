@@ -25,6 +25,10 @@ module Hubspot
 
       attr_accessor :scope_to_scope_group_pks
 
+      attr_accessor :trial_scopes
+
+      attr_accessor :trial_scope_to_scope_group_pks
+
       attr_accessor :hub_id
 
       attr_accessor :app_id
@@ -43,6 +47,8 @@ module Hubspot
           :'hub_domain' => :'hub_domain',
           :'scopes' => :'scopes',
           :'scope_to_scope_group_pks' => :'scope_to_scope_group_pks',
+          :'trial_scopes' => :'trial_scopes',
+          :'trial_scope_to_scope_group_pks' => :'trial_scope_to_scope_group_pks',
           :'hub_id' => :'hub_id',
           :'app_id' => :'app_id',
           :'expires_in' => :'expires_in',
@@ -59,6 +65,8 @@ module Hubspot
           :'hub_domain' => :'String',
           :'scopes' => :'Array<String>',
           :'scope_to_scope_group_pks' => :'Array<Integer>',
+          :'trial_scopes' => :'Array<String>',
+          :'trial_scope_to_scope_group_pks' => :'Array<Integer>',
           :'hub_id' => :'Integer',
           :'app_id' => :'Integer',
           :'expires_in' => :'Integer',
@@ -112,6 +120,18 @@ module Hubspot
           end
         end
 
+        if attributes.key?(:'trial_scopes')
+          if (value = attributes[:'trial_scopes']).is_a?(Array)
+            self.trial_scopes = value
+          end
+        end
+
+        if attributes.key?(:'trial_scope_to_scope_group_pks')
+          if (value = attributes[:'trial_scope_to_scope_group_pks']).is_a?(Array)
+            self.trial_scope_to_scope_group_pks = value
+          end
+        end
+
         if attributes.key?(:'hub_id')
           self.hub_id = attributes[:'hub_id']
         end
@@ -149,6 +169,14 @@ module Hubspot
           invalid_properties.push('invalid value for "scope_to_scope_group_pks", scope_to_scope_group_pks cannot be nil.')
         end
 
+        if @trial_scopes.nil?
+          invalid_properties.push('invalid value for "trial_scopes", trial_scopes cannot be nil.')
+        end
+
+        if @trial_scope_to_scope_group_pks.nil?
+          invalid_properties.push('invalid value for "trial_scope_to_scope_group_pks", trial_scope_to_scope_group_pks cannot be nil.')
+        end
+
         if @hub_id.nil?
           invalid_properties.push('invalid value for "hub_id", hub_id cannot be nil.')
         end
@@ -178,6 +206,8 @@ module Hubspot
         return false if @token.nil?
         return false if @scopes.nil?
         return false if @scope_to_scope_group_pks.nil?
+        return false if @trial_scopes.nil?
+        return false if @trial_scope_to_scope_group_pks.nil?
         return false if @hub_id.nil?
         return false if @app_id.nil?
         return false if @expires_in.nil?
@@ -196,6 +226,8 @@ module Hubspot
             hub_domain == o.hub_domain &&
             scopes == o.scopes &&
             scope_to_scope_group_pks == o.scope_to_scope_group_pks &&
+            trial_scopes == o.trial_scopes &&
+            trial_scope_to_scope_group_pks == o.trial_scope_to_scope_group_pks &&
             hub_id == o.hub_id &&
             app_id == o.app_id &&
             expires_in == o.expires_in &&
@@ -212,7 +244,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [token, user, hub_domain, scopes, scope_to_scope_group_pks, hub_id, app_id, expires_in, user_id, token_type].hash
+        [token, user, hub_domain, scopes, scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks, hub_id, app_id, expires_in, user_id, token_type].hash
       end
 
       # Builds the object from hash

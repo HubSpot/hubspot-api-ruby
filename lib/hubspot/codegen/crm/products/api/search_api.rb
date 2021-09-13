@@ -21,8 +21,6 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Filter, Sort, and Search CRM Objects
-        # Filter, Sort, and Search CRM Objects
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponseWithTotalSimplePublicObjectForwardPaging]
@@ -31,8 +29,6 @@ module Hubspot
           data
         end
 
-        # Filter, Sort, and Search CRM Objects
-        # Filter, Sort, and Search CRM Objects
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponseWithTotalSimplePublicObjectForwardPaging, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObjectForwardPaging data, response status code and response headers

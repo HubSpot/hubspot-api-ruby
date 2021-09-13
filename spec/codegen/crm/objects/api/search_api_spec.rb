@@ -33,8 +33,6 @@ describe 'SearchApi' do
   end
 
   # unit tests for do_search
-  # Filter, Sort, and Search CRM Objects
-  # Filter, Sort, and Search CRM Objects
   # @param object_type 
   # @param public_object_search_request 
   # @param [Hash] opts the optional parameters

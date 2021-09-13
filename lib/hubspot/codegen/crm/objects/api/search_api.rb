@@ -21,8 +21,6 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Filter, Sort, and Search CRM Objects
-        # Filter, Sort, and Search CRM Objects
         # @param object_type [String] 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
@@ -32,8 +30,6 @@ module Hubspot
           data
         end
 
-        # Filter, Sort, and Search CRM Objects
-        # Filter, Sort, and Search CRM Objects
         # @param object_type [String] 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters

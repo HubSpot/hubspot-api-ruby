@@ -21,12 +21,18 @@ module Hubspot
 
       attr_accessor :access_token
 
+      attr_accessor :id_token
+
+      attr_accessor :token_type
+
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
           :'refresh_token' => :'refresh_token',
           :'expires_in' => :'expires_in',
-          :'access_token' => :'access_token'
+          :'access_token' => :'access_token',
+          :'id_token' => :'id_token',
+          :'token_type' => :'token_type'
         }
       end
 
@@ -35,7 +41,9 @@ module Hubspot
         {
           :'refresh_token' => :'String',
           :'expires_in' => :'Integer',
-          :'access_token' => :'String'
+          :'access_token' => :'String',
+          :'id_token' => :'String',
+          :'token_type' => :'String'
         }
       end
 
@@ -71,6 +79,14 @@ module Hubspot
         if attributes.key?(:'access_token')
           self.access_token = attributes[:'access_token']
         end
+
+        if attributes.key?(:'id_token')
+          self.id_token = attributes[:'id_token']
+        end
+
+        if attributes.key?(:'token_type')
+          self.token_type = attributes[:'token_type']
+        end
       end
 
       # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,6 +105,10 @@ module Hubspot
           invalid_properties.push('invalid value for "access_token", access_token cannot be nil.')
         end
 
+        if @token_type.nil?
+          invalid_properties.push('invalid value for "token_type", token_type cannot be nil.')
+        end
+
         invalid_properties
       end
 
@@ -98,6 +118,7 @@ module Hubspot
         return false if @refresh_token.nil?
         return false if @expires_in.nil?
         return false if @access_token.nil?
+        return false if @token_type.nil?
         true
       end
 
@@ -108,7 +129,9 @@ module Hubspot
         self.class == o.class &&
             refresh_token == o.refresh_token &&
             expires_in == o.expires_in &&
-            access_token == o.access_token
+            access_token == o.access_token &&
+            id_token == o.id_token &&
+            token_type == o.token_type
       end
 
       # @see the `==` method
@@ -120,7 +143,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [refresh_token, expires_in, access_token].hash
+        [refresh_token, expires_in, access_token, id_token, token_type].hash
       end
 
       # Builds the object from hash

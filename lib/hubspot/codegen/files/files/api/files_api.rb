@@ -227,7 +227,11 @@ module Hubspot
         # @option opts [Array<String>] :sort Sort files by a given field.
         # @option opts [String] :id Search files by given ID.
         # @option opts [DateTime] :created_at Search files by time of creation.
+        # @option opts [DateTime] :created_at_lte 
+        # @option opts [DateTime] :created_at_gte 
         # @option opts [DateTime] :updated_at Search files by time of latest updated.
+        # @option opts [DateTime] :updated_at_lte 
+        # @option opts [DateTime] :updated_at_gte 
         # @option opts [String] :name Search for files containing the given name.
         # @option opts [String] :path Search files by path.
         # @option opts [Integer] :parent_folder_id Search files within given folder ID.
@@ -256,7 +260,11 @@ module Hubspot
         # @option opts [Array<String>] :sort Sort files by a given field.
         # @option opts [String] :id Search files by given ID.
         # @option opts [DateTime] :created_at Search files by time of creation.
+        # @option opts [DateTime] :created_at_lte 
+        # @option opts [DateTime] :created_at_gte 
         # @option opts [DateTime] :updated_at Search files by time of latest updated.
+        # @option opts [DateTime] :updated_at_lte 
+        # @option opts [DateTime] :updated_at_gte 
         # @option opts [String] :name Search for files containing the given name.
         # @option opts [String] :path Search files by path.
         # @option opts [Integer] :parent_folder_id Search files within given folder ID.
@@ -286,7 +294,11 @@ module Hubspot
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
           query_params[:'id'] = opts[:'id'] if !opts[:'id'].nil?
           query_params[:'createdAt'] = opts[:'created_at'] if !opts[:'created_at'].nil?
+          query_params[:'createdAtLte'] = opts[:'created_at_lte'] if !opts[:'created_at_lte'].nil?
+          query_params[:'createdAtGte'] = opts[:'created_at_gte'] if !opts[:'created_at_gte'].nil?
           query_params[:'updatedAt'] = opts[:'updated_at'] if !opts[:'updated_at'].nil?
+          query_params[:'updatedAtLte'] = opts[:'updated_at_lte'] if !opts[:'updated_at_lte'].nil?
+          query_params[:'updatedAtGte'] = opts[:'updated_at_gte'] if !opts[:'updated_at_gte'].nil?
           query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
           query_params[:'path'] = opts[:'path'] if !opts[:'path'].nil?
           query_params[:'parentFolderId'] = opts[:'parent_folder_id'] if !opts[:'parent_folder_id'].nil?
@@ -551,7 +563,6 @@ module Hubspot
         # Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
         # @param file_id [String] Id of the desired file.
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :user_agent 
         # @option opts [File] :file File data that will replace existing file in the file manager.
         # @option opts [String] :charset_hunch Character set of given file data.
         # @option opts [String] :options JSON String representing FileReplaceOptions
@@ -565,7 +576,6 @@ module Hubspot
         # Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
         # @param file_id [String] Id of the desired file.
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :user_agent 
         # @option opts [File] :file File data that will replace existing file in the file manager.
         # @option opts [String] :charset_hunch Character set of given file data.
         # @option opts [String] :options JSON String representing FileReplaceOptions
@@ -595,7 +605,6 @@ module Hubspot
           header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
           # HTTP header 'Content-Type'
           header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
-          header_params[:'User-Agent'] = opts[:'user_agent'] if !opts[:'user_agent'].nil?
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -706,7 +715,6 @@ module Hubspot
         # Upload file
         # Upload a single file with content specified in request body.
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :user_agent 
         # @option opts [File] :file File to be uploaded.
         # @option opts [String] :folder_id Either &#39;folderId&#39; or &#39;folderPath&#39; is required. folderId is the ID of the folder the file will be uploaded to.
         # @option opts [String] :folder_path Either &#39;folderPath&#39; or &#39;folderId&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn&#39;t exist, the system will try to create one.
@@ -722,7 +730,6 @@ module Hubspot
         # Upload file
         # Upload a single file with content specified in request body.
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :user_agent 
         # @option opts [File] :file File to be uploaded.
         # @option opts [String] :folder_id Either &#39;folderId&#39; or &#39;folderPath&#39; is required. folderId is the ID of the folder the file will be uploaded to.
         # @option opts [String] :folder_path Either &#39;folderPath&#39; or &#39;folderId&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn&#39;t exist, the system will try to create one.
@@ -746,7 +753,6 @@ module Hubspot
           header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
           # HTTP header 'Content-Type'
           header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
-          header_params[:'User-Agent'] = opts[:'user_agent'] if !opts[:'user_agent'].nil?
 
           # form parameters
           form_params = opts[:form_params] || {}

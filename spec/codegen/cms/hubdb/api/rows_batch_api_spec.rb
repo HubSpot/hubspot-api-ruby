@@ -1,7 +1,7 @@
 =begin
 #HubDB endpoints
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
 The version of the OpenAPI document: v3
 
@@ -49,7 +49,7 @@ describe 'RowsBatchApi' do
   # Create rows in batch
   # Creates rows in the &#x60;draft&#x60; version of the specified table, given an array of row objects. See the overview section for more details with an example.
   # @param table_id_or_name The ID or name of the table
-  # @param batch_input_hub_db_table_row_v3 JSON array of row objects
+  # @param batch_input_hub_db_table_row_v3_request JSON array of row objects
   # @param [Hash] opts the optional parameters
   # @return [Object]
   describe 'batch_create_draft_table_rows test' do
@@ -86,7 +86,7 @@ describe 'RowsBatchApi' do
 
   # unit tests for batch_read_table_rows
   # Get a set of rows
-  # Returns rows in the &#x60;live&#x60; version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+  # Returns rows in the &#x60;published&#x60; version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
   # @param table_id_or_name The ID or name of the table to query.
   # @param batch_input_string The JSON array of row ids
   # @param [Hash] opts the optional parameters
@@ -101,7 +101,7 @@ describe 'RowsBatchApi' do
   # Replace rows in batch in draft table
   # Replaces multiple rows as a batch in the &#x60;draft&#x60; version of the table. See the endpoint &#x60;PUT /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
   # @param table_id_or_name The ID or name of the table
-  # @param batch_input_hub_db_table_row_v3 JSON array of row objects.
+  # @param batch_input_hub_db_table_row_v3_request JSON array of row objects.
   # @param [Hash] opts the optional parameters
   # @return [Object]
   describe 'batch_replace_draft_table_rows test' do

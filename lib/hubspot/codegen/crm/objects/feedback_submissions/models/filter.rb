@@ -21,6 +21,7 @@ module Hubspot
 
           attr_accessor :property_name
 
+          # null
           attr_accessor :operator
 
           class EnumAttributeValidator
@@ -117,7 +118,7 @@ module Hubspot
           def valid?
             return false if @property_name.nil?
             return false if @operator.nil?
-            operator_validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
+            operator_validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
             return false unless operator_validator.valid?(@operator)
             true
           end
@@ -125,7 +126,7 @@ module Hubspot
           # Custom attribute writer method checking allowed values (enum).
           # @param [Object] operator Object to be assigned
           def operator=(operator)
-            validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
+            validator = EnumAttributeValidator.new('String', ["EQ", "NEQ", "LT", "LTE", "GT", "GTE", "BETWEEN", "IN", "NOT_IN", "HAS_PROPERTY", "NOT_HAS_PROPERTY", "CONTAINS_TOKEN", "NOT_CONTAINS_TOKEN"])
             unless validator.valid?(operator)
               fail ArgumentError, "invalid value for \"operator\", must be one of #{validator.allowable_values}."
             end
