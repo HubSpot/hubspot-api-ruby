@@ -31,8 +31,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'results' => :'Array<File>',
-            :'paging' => :'Paging'
+            'results': :'Array<HubspotFile>',
+            'paging': :Paging,
           }
         end
 
@@ -197,7 +197,7 @@ module Hubspot
               is_nullable = self.class.openapi_nullable.include?(attr)
               next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
             end
-            
+
             hash[param] = _to_hash(value)
           end
           hash
