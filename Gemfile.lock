@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hubspot-api-client (11.1.0)
+    hubspot-api-client (11.1.1)
       json (~> 2.1, >= 2.1.0)
       require_all (~> 3.0.0)
       typhoeus (~> 1.4.0)
@@ -18,11 +18,11 @@ GEM
     autotest-rails-pure (4.1.2)
     crack (0.4.4)
     diff-lcs (1.4.4)
-    ethon (0.14.0)
+    ethon (0.15.0)
       ffi (>= 1.15.0)
     ffi (1.15.4)
     hashdiff (1.0.1)
-    json (2.5.1)
+    json (2.6.1)
     public_suffix (4.0.6)
     rake (12.3.3)
     rake-release (1.2.1)
