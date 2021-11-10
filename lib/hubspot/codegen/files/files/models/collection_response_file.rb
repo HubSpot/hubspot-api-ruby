@@ -31,7 +31,7 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'results' => :'Array<File>',
+            :'results' => :'Array<HubspotFile>',
             :'paging' => :'Paging'
           }
         end
