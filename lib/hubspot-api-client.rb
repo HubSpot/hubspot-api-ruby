@@ -3,6 +3,7 @@ require 'logger'
 require 'require_all'
 require_rel 'hubspot/*.rb'
 require_rel 'hubspot/helpers'
+require_rel 'hubspot/discovery'
 require_rel 'hubspot'
 
 module Hubspot
