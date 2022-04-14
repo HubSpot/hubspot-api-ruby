@@ -21,16 +21,21 @@ module Hubspot
   
               params_with_defaults = params
               params_with_defaults[:opts] ||= {}
-              params_with_defaults[:opts][:auth_names] = base_params[:api_key].nil? ? 'oauth2' : 'hapikey'
+              params_with_defaults[:opts][:auth_names] = if base_params[:access_token]
+                                                           'oauth2' 
+                                                         elsif base_params[:api_key]
+                                                           'hapikey'
+                                                         elsif base_params[:developer_api_key]
+                                                           'developer_hapikey'
+                                                         else
+                                                           raise 'Unauthorized. Please, provide access_token, api_key or developer_api_key'
+                                                         end
 
               signature_params = api.method(api_method).parameters
               params_to_pass = signature_params.map do |req, param|
-                p param
                 raise "Param #{param} is required for #{api.class}\##{api_method} method" if req == :req && params_with_defaults[param].nil?
                 params_with_defaults[param]
               end
-  
-              p api.class.to_s, api_method, params_to_pass
   
               api.public_send(api_method, *params_to_pass)
             end

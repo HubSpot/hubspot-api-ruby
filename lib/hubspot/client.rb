@@ -38,8 +38,8 @@ module Hubspot
     include Hubspot::Discovery::BaseModuleClient
 
     def initialize(params)
-      raise 'Please, pass :api_key or :access_token' if params[:api_key].nil? && params[:access_token].nil?
-      @api_key = params[:api_key]
+      raise 'Please, pass :api_key or :access_token' if params[:api_key].nil? && params[:developer_api_key].nil? && params[:access_token].nil?
+      @api_key = params[:api_key] || params[:developer_api_key]
       @access_token = params[:access_token]
       @params = params
       configure_api_key if @api_key
