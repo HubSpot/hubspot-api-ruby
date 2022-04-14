@@ -6,20 +6,6 @@ module Hubspot
       module Blogs
         module Authors
           class AuthorApi
-            def self.api_methods
-              %i[
-                archive
-                archive_batch
-                create
-                create_batch
-                get_by_id
-                get_page
-                read_batch
-                update
-                update_batch
-              ].freeze
-            end
-  
             include Hubspot::Discovery::BaseApiClient
           end
         end

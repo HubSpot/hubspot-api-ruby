@@ -5,13 +5,6 @@ module Hubspot
     module Crm
       module Extensions
         class SettingsApi
-          def self.api_methods
-            %i[
-              get_by_id
-              replace
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

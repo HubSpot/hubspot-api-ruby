@@ -5,13 +5,6 @@ module Hubspot
     module Automation
       module Actions
         class RevisionsApi
-          def api_methods
-            %i[
-              get_by_id
-              get_page
-            ].freeze
-          end
-        
           include Hubspot::Discovery::BaseApiClient
         end
       end

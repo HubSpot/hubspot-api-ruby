@@ -5,12 +5,6 @@ module Hubspot
     module Crm
       module Contacts
         class SearchApi
-          def self.api_methods
-            %i[
-              do_search
-            ].freeze
-          end
-
           include Hubspot::Discovery::BaseApiClient
         end
       end

@@ -5,17 +5,6 @@ module Hubspot
     module Crm
       module Pipelines
         class PipelinesApi
-          def self.api_methods
-            %i[
-              archive
-              create
-              get_all
-              get_by_id
-              replace
-              update
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

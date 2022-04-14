@@ -5,14 +5,6 @@ module Hubspot
     module Crm
       module Deals
         class AssociationsApi
-          def self.api_methods
-            %i[
-              archive
-              create
-              get_all
-            ].freeze
-          end
-
           include Hubspot::Discovery::BaseApiClient
         end
       end

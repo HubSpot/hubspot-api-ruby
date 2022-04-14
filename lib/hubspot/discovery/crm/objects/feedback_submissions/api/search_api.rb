@@ -6,12 +6,6 @@ module Hubspot
       module Objects
         module FeedbackSubmissions
           class SearchApi
-            def self.api_methods
-              %i[
-                do_search
-              ].freeze
-            end
-    
             include Hubspot::Discovery::BaseApiClient
           end
         end

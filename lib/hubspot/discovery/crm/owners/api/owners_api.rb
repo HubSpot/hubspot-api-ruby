@@ -5,13 +5,6 @@ module Hubspot
     module Crm
       module Owners
         class OwnersApi
-          def self.api_methods
-            %i[
-              get_by_id
-              get_page
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

@@ -5,13 +5,6 @@ module Hubspot
     module Crm
       module Extensions
         class UserAccountsApi
-          def self.api_methods
-            %i[
-              archive
-              replace
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

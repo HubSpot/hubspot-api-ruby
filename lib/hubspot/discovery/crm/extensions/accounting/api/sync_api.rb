@@ -5,13 +5,6 @@ module Hubspot
     module Crm
       module Extensions
         class SyncApi
-          def self.api_methods
-            %i[
-              create_contact
-              create_product
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

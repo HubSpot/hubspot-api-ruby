@@ -5,14 +5,6 @@ module Hubspot
     module Crm
       module Extensions
         class InvoiceApi
-          def self.api_methods
-            %i[
-              create_payment
-              get_by_id
-              update
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

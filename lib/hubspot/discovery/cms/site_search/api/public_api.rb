@@ -5,13 +5,6 @@ module Hubspot
     module Cms
       module SiteSearch
         class PublicApi
-          def self.api_methods
-            %i[
-              get_by_id
-              search
-            ].freeze
-          end
-
           include Hubspot::Discovery::BaseApiClient
         end
       end

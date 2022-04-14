@@ -5,12 +5,6 @@ module Hubspot
     module Cms
       module AuditLogs
         class AuditLogsApi
-          def api_methods
-            %i[
-              get_page
-            ].freeze
-          end
-        
           include Hubspot::Discovery::BaseApiClient
         end
       end

@@ -5,12 +5,6 @@ module Hubspot
     module Crm
       module Imports
         class PublicImportsApi
-          def self.api_methods
-            %i[
-              get_errors
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

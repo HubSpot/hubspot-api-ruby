@@ -5,16 +5,6 @@ module Hubspot
     module Crm
       module Properties
         class GroupsApi
-          def self.api_methods
-            %i[
-              archive
-              create
-              get_all
-              get_by_name
-              update
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end

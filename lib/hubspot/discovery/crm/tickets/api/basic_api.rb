@@ -5,16 +5,6 @@ module Hubspot
     module Crm
       module Tickets
         class BasicApi
-          def self.api_methods
-            %i[
-              archive
-              create
-              get_by_id
-              get_page
-              update
-            ].freeze
-          end
-  
           include Hubspot::Discovery::BaseApiClient
         end
       end
