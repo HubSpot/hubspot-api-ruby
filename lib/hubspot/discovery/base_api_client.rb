@@ -42,6 +42,12 @@ module Hubspot
                                                        end
 
             signature_params = api.method(api_method).parameters
+
+            signature_param_names = signature_params.map { |_, param| param }
+            params_with_defaults.each do |param_name, param_value|
+              params_with_defaults[:opts][param_name] = param_value unless signature_param_names.include?(param_name)
+            end
+
             params_to_pass = signature_params.map do |req, param|
               raise "Param #{param} is required for #{api.class}\##{api_method} method" if req == :req && params_with_defaults[param].nil?
               params_with_defaults[param]
