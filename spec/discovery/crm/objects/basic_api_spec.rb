@@ -8,4 +8,5 @@ describe 'Hubspot::Discovery::Crm::Objects::BasicApi' do
   it { is_expected.to respond_to(:get_by_id) }
   it { is_expected.to respond_to(:get_page) }
   it { is_expected.to respond_to(:update) }
+  it { is_expected.to respond_to(:get_all) }
 end

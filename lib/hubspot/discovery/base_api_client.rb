@@ -20,6 +20,10 @@ module Hubspot
         @api ||= Kernel.const_get(codegen_api_class).new
       end
 
+      def get_all(params = {})
+        api.get_all(params)
+      end
+
       private
 
       def codegen_api_class
