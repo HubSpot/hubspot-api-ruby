@@ -11,7 +11,7 @@ describe 'Hubspot::Cms::AuditLogs::AuditLogsApi' do
     let(:params) { { auth_names: 'ouath2' } }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it { is_expected.to eq params[:auth_names] }

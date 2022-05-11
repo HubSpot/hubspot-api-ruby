@@ -20,7 +20,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:input_string) { 'test_input_string' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it 'sets auth names from params' do
@@ -47,7 +47,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:object_id) { 'test_object_id' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [{ new_options: new_options, path: local_var_path }, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [{ new_options: new_options, path: local_var_path }, 200, '']  }
     end
 
     it 'sets auth names from params' do
@@ -74,7 +74,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:blog_author) { 'test_blog_author' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it 'sets auth names from params' do
@@ -101,7 +101,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:blog_author) { 'test_blog_author' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it 'sets auth names from params' do
@@ -128,7 +128,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:object_id) { 'test_object_id' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [{ new_options: new_options, path: local_var_path }, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [{ new_options: new_options, path: local_var_path }, 200, '']  }
     end
 
     it 'sets auth names from params' do
@@ -154,7 +154,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:params) { { auth_names: 'ouath2' } }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it { is_expected.to eq params[:auth_names] }
@@ -173,7 +173,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:input_string) { 'test_input_string' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it 'sets auth_names from params' do
@@ -200,7 +200,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:input_json_node) { 'test_input_json_node' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [new_options, 200, '']  }
     end
 
     it 'sets auth_names from params' do
@@ -228,7 +228,7 @@ describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
     let(:input_json_node) { 'test_input_json_node' }
  
     before do
-      api.api_client.stub(:call_api) { |method, local_var_path, new_options| [{ new_options: new_options, path: local_var_path }, 200, '']  }
+      allow(api.api_client).to receive(:call_api) { |method, local_var_path, new_options| [{ new_options: new_options, path: local_var_path }, 200, '']  }
     end
 
     it 'sets auth names from params' do

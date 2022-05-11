@@ -4,6 +4,29 @@ module Hubspot
   class Client
     attr_reader :api_key, :access_token
 
+    def self.api_modules
+      %i[
+        automation
+        cms
+        communication_preferences
+        conversations
+        crm
+        events
+        files
+        marketing
+        o_auth
+        webhooks
+      ].freeze
+    end
+
+    include Hubspot::Discovery::BaseModuleClient
+
+    private
+
+    def self.base_module
+      'Hubspot::Discovery'
+    end
+
     def configure_api_key
       Hubspot.configure do |config|
         config.api_key['hapikey'] = api_key
@@ -15,27 +38,6 @@ module Hubspot
         config.access_token = access_token
       end
     end
-
-    def self.api_modules
-      %i[
-        automation
-        cms
-        communication_preferences
-        conversations
-        crm
-        events
-        files
-        marketing
-        oauth
-        webhooks
-      ].freeze
-    end
-
-    def self.base_module
-      'Hubspot::Discovery'
-    end
-
-    include Hubspot::Discovery::BaseModuleClient
 
     def initialize(params)
       raise 'Please, pass :api_key or :access_token' if params[:api_key].nil? && params[:developer_api_key].nil? && params[:access_token].nil?

@@ -5,15 +5,7 @@ module Hubspot
     module Crm
       module Extensions
         module Cards
-          class CardsApi
-            def self.api_methods
-              %i[
-                archive
-                get_by_id
-                replace
-              ].freeze
-            end
-    
+          class SampleResponseApi
             include Hubspot::Discovery::BaseApiClient
           end
         end

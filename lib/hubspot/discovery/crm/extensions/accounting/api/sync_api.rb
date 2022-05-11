@@ -4,8 +4,10 @@ module Hubspot
   module Discovery
     module Crm
       module Extensions
-        class SyncApi
-          include Hubspot::Discovery::BaseApiClient
+        module Accounting
+          class SyncApi
+            include Hubspot::Discovery::BaseApiClient
+          end
         end
       end
     end

@@ -4,8 +4,10 @@ module Hubspot
   module Discovery
     module Crm
       module Extensions
-        class UserAccountsApi
-          include Hubspot::Discovery::BaseApiClient
+        module Accounting
+          class UserAccountsApi
+            include Hubspot::Discovery::BaseApiClient
+          end
         end
       end
     end

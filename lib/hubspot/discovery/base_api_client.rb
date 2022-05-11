@@ -12,14 +12,18 @@ module Hubspot
         api.methods.grep(/with_http_info/).map {|elem| elem.to_s.gsub('_with_http_info', '').to_sym }
       end
 
-      private
-
-      def codegen_api_class
-        self.class.name.gsub('Discovery::', '')
+      def api_client
+        api&.api_client
       end
 
       def api
         @api ||= Kernel.const_get(codegen_api_class).new
+      end
+
+      private
+
+      def codegen_api_class
+        self.class.name.gsub('Discovery::', '')
       end
 
       def define_methods

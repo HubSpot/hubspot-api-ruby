@@ -8,7 +8,7 @@ module Hubspot
           def self.api_classes 
             %i[
               batch
-              type
+              types
             ].freeze
           end
 
