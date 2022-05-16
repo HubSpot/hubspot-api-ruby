@@ -36,6 +36,20 @@ basic_api.get_page(auth_names: 'hapikey')
 
 ```
 
+for new discovery classes since version 11.2
+```ruby
+# Load the gem
+require 'hubspot-api-client'
+
+# Setup client with hapikey authorization
+client = Hubspot::Client.new(api_key: 'demo')
+
+# Get contacts
+basic_api = client.crm.contacts.basic_api
+basic_api.get_page
+
+```
+
 ### Usage
 
 ### Get all:
@@ -45,6 +59,13 @@ get_all method is available for all major objects (Companies, Contacts, Deals, L
 basic_api = Hubspot::Crm::Contacts::BasicApi.new
 all_contacts = basic_api.get_all(auth_names: 'oauth2')
 ```
+
+for new discovery classes since version 11.2
+```ruby
+client = Hubspot::Client(access_token: 'your_oauth2_access_token')
+all_contacts = client.crm.contacts.basic_api.get_all
+```
+
 Please note that pagination is used under the hood to get all results.
 
 

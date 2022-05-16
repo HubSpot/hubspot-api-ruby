@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
   s.add_development_dependency 'rake-release'
+  s.add_development_dependency 'pry'
 
   s.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(sample-apps)/})

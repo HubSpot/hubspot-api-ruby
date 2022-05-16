@@ -1,0 +1,17 @@
+require_rel '../base_module_client'
+
+module Hubspot
+  module Discovery
+    module Marketing
+      class Client
+        def self.api_modules
+          %i[
+            transactional
+          ].freeze
+        end
+
+        include Hubspot::Discovery::BaseModuleClient
+      end
+    end
+  end
+end
