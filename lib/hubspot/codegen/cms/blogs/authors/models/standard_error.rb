@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -17,20 +17,28 @@ module Hubspot
     module Blogs
       module Authors
         class StandardError
+          # Error status.
           attr_accessor :status
 
+          # Error ID.
           attr_accessor :id
 
+          # Model definition for an error category.
           attr_accessor :category
 
+          # Error subcategory.
           attr_accessor :sub_category
 
+          # Error message.
           attr_accessor :message
 
+          # List of error details.
           attr_accessor :errors
 
+          # Error context.
           attr_accessor :context
 
+          # Error links.
           attr_accessor :links
 
           # Attribute mapping from ruby-style variable name to JSON key.

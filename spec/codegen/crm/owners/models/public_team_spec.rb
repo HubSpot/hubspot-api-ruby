@@ -1,7 +1,7 @@
 =begin
 #CRM Owners
 
-#HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team an owner belongs to. Team membership can be one of PRIMARY (default), SECONDARY, or CHILD.
+#HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team(s) an owner can access, as well as which team is the owner's primary team.
 
 The version of the OpenAPI document: v3
 
@@ -44,13 +44,9 @@ describe 'PublicTeam' do
     end
   end
 
-  describe 'test attribute "membership"' do
+  describe 'test attribute "primary"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["PRIMARY", "SECONDARY", "CHILD"])
-      # validator.allowable_values.each do |value|
-      #   expect { @instance.membership = value }.not_to raise_error
-      # end
     end
   end
 

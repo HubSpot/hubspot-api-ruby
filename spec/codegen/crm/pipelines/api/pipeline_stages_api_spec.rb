@@ -33,8 +33,8 @@ describe 'PipelineStagesApi' do
   end
 
   # unit tests for archive
-  # Archive a pipeline stage
-  # Archive the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
+  # Delete a pipeline stage
+  # Delete the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
   # @param object_type 
   # @param pipeline_id 
   # @param stage_id 
@@ -51,8 +51,8 @@ describe 'PipelineStagesApi' do
   # Create a new stage associated with the pipeline identified by &#x60;{pipelineId}&#x60;. The entire stage object, including its unique ID, will be returned in the response.
   # @param object_type 
   # @param pipeline_id 
+  # @param pipeline_stage_input 
   # @param [Hash] opts the optional parameters
-  # @option opts [PipelineStageInput] :pipeline_stage_input 
   # @return [PipelineStage]
   describe 'create test' do
     it 'should work' do
@@ -66,8 +66,7 @@ describe 'PipelineStagesApi' do
   # @param object_type 
   # @param pipeline_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @return [CollectionResponsePipelineStage]
+  # @return [CollectionResponsePipelineStageNoPaging]
   describe 'get_all test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -81,7 +80,6 @@ describe 'PipelineStagesApi' do
   # @param pipeline_id 
   # @param stage_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [PipelineStage]
   describe 'get_by_id test' do
     it 'should work' do
@@ -95,8 +93,8 @@ describe 'PipelineStagesApi' do
   # @param object_type 
   # @param pipeline_id 
   # @param stage_id 
+  # @param pipeline_stage_input 
   # @param [Hash] opts the optional parameters
-  # @option opts [PipelineStageInput] :pipeline_stage_input 
   # @return [PipelineStage]
   describe 'replace test' do
     it 'should work' do
@@ -110,9 +108,8 @@ describe 'PipelineStagesApi' do
   # @param object_type 
   # @param pipeline_id 
   # @param stage_id 
+  # @param pipeline_stage_patch_input 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @option opts [PipelineStagePatchInput] :pipeline_stage_patch_input 
   # @return [PipelineStage]
   describe 'update test' do
     it 'should work' do

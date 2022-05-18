@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -17,12 +17,16 @@ module Hubspot
     module Blogs
       module BlogPosts
         class RGBAColor
+          # Red.
           attr_accessor :r
 
+          # Green.
           attr_accessor :g
 
+          # Blue.
           attr_accessor :b
 
+          # Alpha.
           attr_accessor :a
 
           # Attribute mapping from ruby-style variable name to JSON key.

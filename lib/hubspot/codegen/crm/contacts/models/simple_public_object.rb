@@ -20,6 +20,8 @@ module Hubspot
 
         attr_accessor :properties
 
+        attr_accessor :properties_with_history
+
         attr_accessor :created_at
 
         attr_accessor :updated_at
@@ -33,6 +35,7 @@ module Hubspot
           {
             :'id' => :'id',
             :'properties' => :'properties',
+            :'properties_with_history' => :'propertiesWithHistory',
             :'created_at' => :'createdAt',
             :'updated_at' => :'updatedAt',
             :'archived' => :'archived',
@@ -45,6 +48,7 @@ module Hubspot
           {
             :'id' => :'String',
             :'properties' => :'Hash<String, String>',
+            :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
             :'created_at' => :'DateTime',
             :'updated_at' => :'DateTime',
             :'archived' => :'Boolean',
@@ -80,6 +84,12 @@ module Hubspot
           if attributes.key?(:'properties')
             if (value = attributes[:'properties']).is_a?(Hash)
               self.properties = value
+            end
+          end
+
+          if attributes.key?(:'properties_with_history')
+            if (value = attributes[:'properties_with_history']).is_a?(Hash)
+              self.properties_with_history = value
             end
           end
 
@@ -140,6 +150,7 @@ module Hubspot
           self.class == o.class &&
               id == o.id &&
               properties == o.properties &&
+              properties_with_history == o.properties_with_history &&
               created_at == o.created_at &&
               updated_at == o.updated_at &&
               archived == o.archived &&
@@ -155,7 +166,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, properties, created_at, updated_at, archived, archived_at].hash
+          [id, properties, properties_with_history, created_at, updated_at, archived, archived_at].hash
         end
 
         # Builds the object from hash

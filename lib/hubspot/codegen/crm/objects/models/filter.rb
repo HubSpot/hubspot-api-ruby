@@ -18,6 +18,8 @@ module Hubspot
       class Filter
         attr_accessor :value
 
+        attr_accessor :values
+
         attr_accessor :property_name
 
         # null
@@ -49,6 +51,7 @@ module Hubspot
         def self.attribute_map
           {
             :'value' => :'value',
+            :'values' => :'values',
             :'property_name' => :'propertyName',
             :'operator' => :'operator'
           }
@@ -58,6 +61,7 @@ module Hubspot
         def self.openapi_types
           {
             :'value' => :'String',
+            :'values' => :'Array<String>',
             :'property_name' => :'String',
             :'operator' => :'String'
           }
@@ -86,6 +90,12 @@ module Hubspot
 
           if attributes.key?(:'value')
             self.value = attributes[:'value']
+          end
+
+          if attributes.key?(:'values')
+            if (value = attributes[:'values']).is_a?(Array)
+              self.values = value
+            end
           end
 
           if attributes.key?(:'property_name')
@@ -138,6 +148,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               value == o.value &&
+              values == o.values &&
               property_name == o.property_name &&
               operator == o.operator
         end
@@ -151,7 +162,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [value, property_name, operator].hash
+          [value, values, property_name, operator].hash
         end
 
         # Builds the object from hash

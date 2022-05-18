@@ -30,6 +30,9 @@ module Hubspot
 
         attr_accessor :published
 
+        # Number of columns including deleted
+        attr_accessor :column_count
+
         # Number of rows in the table
         attr_accessor :row_count
 
@@ -58,9 +61,6 @@ module Hubspot
         # Specifies creation of multi-level dynamic pages using child tables
         attr_accessor :enable_child_table_pages
 
-        # Number of columns including deleted
-        attr_accessor :column_count
-
         # Specifies whether child tables can be created
         attr_accessor :allow_child_tables
 
@@ -75,6 +75,7 @@ module Hubspot
             :'label' => :'label',
             :'columns' => :'columns',
             :'published' => :'published',
+            :'column_count' => :'columnCount',
             :'row_count' => :'rowCount',
             :'created_by' => :'createdBy',
             :'updated_by' => :'updatedBy',
@@ -85,7 +86,6 @@ module Hubspot
             :'allow_public_api_access' => :'allowPublicApiAccess',
             :'use_for_pages' => :'useForPages',
             :'enable_child_table_pages' => :'enableChildTablePages',
-            :'column_count' => :'columnCount',
             :'allow_child_tables' => :'allowChildTables',
             :'updated_at' => :'updatedAt'
           }
@@ -99,6 +99,7 @@ module Hubspot
             :'label' => :'String',
             :'columns' => :'Array<Column>',
             :'published' => :'Boolean',
+            :'column_count' => :'Integer',
             :'row_count' => :'Integer',
             :'created_by' => :'SimpleUser',
             :'updated_by' => :'SimpleUser',
@@ -109,7 +110,6 @@ module Hubspot
             :'allow_public_api_access' => :'Boolean',
             :'use_for_pages' => :'Boolean',
             :'enable_child_table_pages' => :'Boolean',
-            :'column_count' => :'Integer',
             :'allow_child_tables' => :'Boolean',
             :'updated_at' => :'DateTime'
           }
@@ -158,6 +158,10 @@ module Hubspot
             self.published = attributes[:'published']
           end
 
+          if attributes.key?(:'column_count')
+            self.column_count = attributes[:'column_count']
+          end
+
           if attributes.key?(:'row_count')
             self.row_count = attributes[:'row_count']
           end
@@ -198,10 +202,6 @@ module Hubspot
 
           if attributes.key?(:'enable_child_table_pages')
             self.enable_child_table_pages = attributes[:'enable_child_table_pages']
-          end
-
-          if attributes.key?(:'column_count')
-            self.column_count = attributes[:'column_count']
           end
 
           if attributes.key?(:'allow_child_tables')
@@ -246,6 +246,7 @@ module Hubspot
               label == o.label &&
               columns == o.columns &&
               published == o.published &&
+              column_count == o.column_count &&
               row_count == o.row_count &&
               created_by == o.created_by &&
               updated_by == o.updated_by &&
@@ -256,7 +257,6 @@ module Hubspot
               allow_public_api_access == o.allow_public_api_access &&
               use_for_pages == o.use_for_pages &&
               enable_child_table_pages == o.enable_child_table_pages &&
-              column_count == o.column_count &&
               allow_child_tables == o.allow_child_tables &&
               updated_at == o.updated_at
         end
@@ -270,7 +270,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, label, columns, published, row_count, created_by, updated_by, published_at, dynamic_meta_tags, created_at, archived, allow_public_api_access, use_for_pages, enable_child_table_pages, column_count, allow_child_tables, updated_at].hash
+          [id, name, label, columns, published, column_count, row_count, created_by, updated_by, published_at, dynamic_meta_tags, created_at, archived, allow_public_api_access, use_for_pages, enable_child_table_pages, allow_child_tables, updated_at].hash
         end
 
         # Builds the object from hash

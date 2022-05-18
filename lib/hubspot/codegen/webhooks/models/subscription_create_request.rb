@@ -95,8 +95,6 @@ module Hubspot
 
         if attributes.key?(:'active')
           self.active = attributes[:'active']
-        else
-          self.active = false
         end
       end
 
@@ -115,7 +113,7 @@ module Hubspot
       # @return true if the model is valid
       def valid?
         return false if @event_type.nil?
-        event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion"])
+        event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange"])
         return false unless event_type_validator.valid?(@event_type)
         true
       end
@@ -123,7 +121,7 @@ module Hubspot
       # Custom attribute writer method checking allowed values (enum).
       # @param [Object] event_type Object to be assigned
       def event_type=(event_type)
-        validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion"])
+        validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange"])
         unless validator.valid?(event_type)
           fail ArgumentError, "invalid value for \"event_type\", must be one of #{validator.allowable_values}."
         end

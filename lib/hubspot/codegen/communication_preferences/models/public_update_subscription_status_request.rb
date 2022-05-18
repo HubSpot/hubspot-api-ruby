@@ -18,10 +18,10 @@ module Hubspot
       # Contact's email address.
       attr_accessor :email_address
 
-      # ID of the subscription the contact is being resubscribed to.
+      # ID of the subscription being updated for the contact.
       attr_accessor :subscription_id
 
-      # Legal basis for resubscribing the contact (required for GDPR enabled portals).
+      # Legal basis for updating the contact's status (required for GDPR enabled portals).
       attr_accessor :legal_basis
 
       # A more detailed explanation to go with the legal basis (required for GDPR enabled portals).

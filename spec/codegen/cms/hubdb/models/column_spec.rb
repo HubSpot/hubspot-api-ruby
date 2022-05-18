@@ -74,13 +74,13 @@ describe 'Column' do
     end
   end
 
-  describe 'test attribute "foreign_ids_by_name"' do
+  describe 'test attribute "foreign_ids_by_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "foreign_ids_by_id"' do
+  describe 'test attribute "foreign_ids_by_name"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

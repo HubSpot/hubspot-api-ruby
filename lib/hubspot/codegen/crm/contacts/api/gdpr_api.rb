@@ -15,37 +15,37 @@ require 'cgi'
 module Hubspot
   module Crm
     module Contacts
-      class GDPRApi
+      class GdprApi
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # DELETE
-        # Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn't found, blacklists an email address from being used in the future.
-        # @param email [String] 
+        # Gdpr DELETE
+        # Permanently delete a contact and all associated content to follow Gdpr. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+        # @param public_gdpr_delete_input [PublicGdprDeleteInput] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def purge_by_email(email, opts = {})
-          purge_by_email_with_http_info(email, opts)
+        def purge(public_gdpr_delete_input, opts = {})
+          purge_with_http_info(public_gdpr_delete_input, opts)
           nil
         end
 
-        # DELETE
-        # Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn&#39;t found, blacklists an email address from being used in the future.
-        # @param email [String] 
+        # Gdpr DELETE
+        # Permanently delete a contact and all associated content to follow Gdpr. Use optional property &#39;idProperty&#39; set to &#39;email&#39; to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+        # @param public_gdpr_delete_input [PublicGdprDeleteInput] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def purge_by_email_with_http_info(email, opts = {})
+        def purge_with_http_info(public_gdpr_delete_input, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: GDPRApi.purge_by_email ...'
+            @api_client.config.logger.debug 'Calling API: GdprApi.purge ...'
           end
-          # verify the required parameter 'email' is set
-          if @api_client.config.client_side_validation && email.nil?
-            fail ArgumentError, "Missing the required parameter 'email' when calling GDPRApi.purge_by_email"
+          # verify the required parameter 'public_gdpr_delete_input' is set
+          if @api_client.config.client_side_validation && public_gdpr_delete_input.nil?
+            fail ArgumentError, "Missing the required parameter 'public_gdpr_delete_input' when calling GdprApi.purge"
           end
           # resource path
-          local_var_path = '/crm/v3/objects/gdpr/contacts/email/{email}'.sub('{' + 'email' + '}', CGI.escape(email.to_s))
+          local_var_path = '/crm/v3/objects/contacts/gdpr-delete'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -54,12 +54,14 @@ module Hubspot
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
           header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+          # HTTP header 'Content-Type'
+          header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
 
           # form parameters
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] 
+          post_body = opts[:body] || @api_client.object_to_http_body(public_gdpr_delete_input) 
 
           # return_type
           return_type = opts[:return_type] 
@@ -76,71 +78,9 @@ module Hubspot
             :return_type => return_type
           )
 
-          data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: GDPRApi#purge_by_email\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # DELETE
-        # Permanently delete a contact by id and all associated content to follow GDPR
-        # @param contact_id [Integer] 
-        # @param [Hash] opts the optional parameters
-        # @return [nil]
-        def purge_by_id(contact_id, opts = {})
-          purge_by_id_with_http_info(contact_id, opts)
-          nil
-        end
-
-        # DELETE
-        # Permanently delete a contact by id and all associated content to follow GDPR
-        # @param contact_id [Integer] 
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def purge_by_id_with_http_info(contact_id, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: GDPRApi.purge_by_id ...'
-          end
-          # verify the required parameter 'contact_id' is set
-          if @api_client.config.client_side_validation && contact_id.nil?
-            fail ArgumentError, "Missing the required parameter 'contact_id' when calling GDPRApi.purge_by_id"
-          end
-          # resource path
-          local_var_path = '/crm/v3/objects/gdpr/contacts/{contactId}'.sub('{' + 'contactId' + '}', CGI.escape(contact_id.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:body] 
-
-          # return_type
-          return_type = opts[:return_type] 
-
-          # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: GDPRApi#purge_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: GdprApi#purge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

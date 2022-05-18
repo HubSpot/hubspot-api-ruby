@@ -33,10 +33,8 @@ describe 'SubscriptionsApi' do
   end
 
   # unit tests for archive
-  # Delete a subscription
-  # Permanently deletes a subscription. This cannot be undone.
-  # @param subscription_id The ID of subscription to delete.
-  # @param app_id The ID of the target app.
+  # @param subscription_id 
+  # @param app_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'archive test' do
@@ -46,10 +44,8 @@ describe 'SubscriptionsApi' do
   end
 
   # unit tests for create
-  # Subscribe to an event
-  # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-  # @param app_id The ID of the target app.
-  # @param subscription_create_request Details about the new subscription.
+  # @param app_id 
+  # @param subscription_create_request 
   # @param [Hash] opts the optional parameters
   # @return [SubscriptionResponse]
   describe 'create test' do
@@ -59,9 +55,7 @@ describe 'SubscriptionsApi' do
   end
 
   # unit tests for get_all
-  # Get subscription details
-  # Returns full details for all existing subscriptions for the given app.
-  # @param app_id The ID of the target app.
+  # @param app_id 
   # @param [Hash] opts the optional parameters
   # @return [SubscriptionListResponse]
   describe 'get_all test' do
@@ -71,10 +65,8 @@ describe 'SubscriptionsApi' do
   end
 
   # unit tests for get_by_id
-  # Get subscription
-  # Returns details about a subscription.
-  # @param app_id The ID of the target app.
-  # @param subscription_id The ID of the target subscription.
+  # @param subscription_id 
+  # @param app_id 
   # @param [Hash] opts the optional parameters
   # @return [SubscriptionResponse]
   describe 'get_by_id test' do
@@ -84,11 +76,9 @@ describe 'SubscriptionsApi' do
   end
 
   # unit tests for update
-  # Update a subscription
-  # Updates the details for an existing subscription.
-  # @param subscription_id The ID of the subscription to update.
-  # @param app_id The ID of the target app.
-  # @param subscription_patch_request Updated details for the subscription.
+  # @param subscription_id 
+  # @param app_id 
+  # @param subscription_patch_request 
   # @param [Hash] opts the optional parameters
   # @return [SubscriptionResponse]
   describe 'update test' do
@@ -98,10 +88,8 @@ describe 'SubscriptionsApi' do
   end
 
   # unit tests for update_batch
-  # Batch update subscriptions
-  # Activates or deactivates target app subscriptions.
-  # @param app_id The app ID of the target app.
-  # @param batch_input_subscription_batch_update_request Updated details for the specified subscriptions.
+  # @param app_id 
+  # @param batch_input_subscription_batch_update_request 
   # @param [Hash] opts the optional parameters
   # @return [BatchResponseSubscriptionResponse]
   describe 'update_batch test' do

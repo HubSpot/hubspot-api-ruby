@@ -16,30 +16,30 @@ module Hubspot
   module Crm
     module Pipelines
       class PipelineInput
-        # Pipeline stage inputs used to create the new or replacement pipeline.
-        attr_accessor :stages
-
         # A unique label used to organize pipelines in HubSpot's UI
         attr_accessor :label
 
         # The order for displaying this pipeline. If two pipelines have a matching `displayOrder`, they will be sorted alphabetically by label.
         attr_accessor :display_order
 
+        # Pipeline stage inputs used to create the new or replacement pipeline.
+        attr_accessor :stages
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'stages' => :'stages',
             :'label' => :'label',
-            :'display_order' => :'displayOrder'
+            :'display_order' => :'displayOrder',
+            :'stages' => :'stages'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'stages' => :'Array<PipelineStageInput>',
             :'label' => :'String',
-            :'display_order' => :'Integer'
+            :'display_order' => :'Integer',
+            :'stages' => :'Array<PipelineStageInput>'
           }
         end
 
@@ -64,12 +64,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'stages')
-            if (value = attributes[:'stages']).is_a?(Array)
-              self.stages = value
-            end
-          end
-
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
@@ -77,16 +71,18 @@ module Hubspot
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
           end
+
+          if attributes.key?(:'stages')
+            if (value = attributes[:'stages']).is_a?(Array)
+              self.stages = value
+            end
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @stages.nil?
-            invalid_properties.push('invalid value for "stages", stages cannot be nil.')
-          end
-
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
@@ -95,15 +91,19 @@ module Hubspot
             invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
           end
 
+          if @stages.nil?
+            invalid_properties.push('invalid value for "stages", stages cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @stages.nil?
           return false if @label.nil?
           return false if @display_order.nil?
+          return false if @stages.nil?
           true
         end
 
@@ -112,9 +112,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              stages == o.stages &&
               label == o.label &&
-              display_order == o.display_order
+              display_order == o.display_order &&
+              stages == o.stages
         end
 
         # @see the `==` method
@@ -126,7 +126,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [stages, label, display_order].hash
+          [label, display_order, stages].hash
         end
 
         # Builds the object from hash
