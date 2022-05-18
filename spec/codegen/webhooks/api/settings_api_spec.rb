@@ -33,9 +33,7 @@ describe 'SettingsApi' do
   end
 
   # unit tests for clear
-  # Clear webhook settings
-  # Resets webhook target URL to empty, and max concurrency limit to &#x60;0&#x60; for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-  # @param app_id The ID of the target app.
+  # @param app_id 
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'clear test' do
@@ -45,10 +43,8 @@ describe 'SettingsApi' do
   end
 
   # unit tests for configure
-  # Configure webhook settings
-  # Used to set the webhook target URL and max concurrency limit for the given app.
-  # @param app_id The ID of the target app.
-  # @param settings_change_request Settings state to create new with or replace existing settings with.
+  # @param app_id 
+  # @param settings_change_request 
   # @param [Hash] opts the optional parameters
   # @return [SettingsResponse]
   describe 'configure test' do
@@ -58,9 +54,7 @@ describe 'SettingsApi' do
   end
 
   # unit tests for get_all
-  # Get webhook settings
-  # Returns the current state of webhook settings for the given app. These settings include the app&#39;s configured target URL and max concurrency limit.
-  # @param app_id The ID of the target app.
+  # @param app_id 
   # @param [Hash] opts the optional parameters
   # @return [SettingsResponse]
   describe 'get_all test' do

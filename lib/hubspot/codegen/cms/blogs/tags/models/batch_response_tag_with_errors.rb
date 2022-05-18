@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -17,20 +17,28 @@ module Hubspot
     module Blogs
       module Tags
         class BatchResponseTagWithErrors
+          # Status of batch operation.
           attr_accessor :status
 
+          # Results of batch operation.
           attr_accessor :results
 
+          # Number of errors.
           attr_accessor :num_errors
 
+          # Errors in batch operation.
           attr_accessor :errors
 
+          # Time of batch operation request.
           attr_accessor :requested_at
 
+          # Time of batch operation start.
           attr_accessor :started_at
 
+          # Time of batch operation completion.
           attr_accessor :completed_at
 
+          # Links associated with batch operation.
           attr_accessor :links
 
           class EnumAttributeValidator

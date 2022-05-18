@@ -32,27 +32,14 @@ describe 'GDPRApi' do
     end
   end
 
-  # unit tests for purge_by_email
-  # DELETE
-  # Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn&#39;t found, blacklists an email address from being used in the future.
+  # unit tests for purge
+  # GDPR DELETE
+  # Permanently delete a contact and all associated content to follow GDPR. Use optional property &#39;idProperty&#39; set to &#39;email&#39; to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
   # @param object_type 
-  # @param email 
+  # @param public_gdpr_delete_input 
   # @param [Hash] opts the optional parameters
   # @return [nil]
-  describe 'purge_by_email test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for purge_by_id
-  # DELETE
-  # Permanently delete a contact by id and all associated content to follow GDPR
-  # @param object_type 
-  # @param object_id 
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'purge_by_id test' do
+  describe 'purge test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

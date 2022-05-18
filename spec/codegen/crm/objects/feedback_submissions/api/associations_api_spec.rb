@@ -46,4 +46,32 @@ describe 'AssociationsApi' do
     end
   end
 
+  # unit tests for submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type
+  # Associate a feedback submission with another object
+  # @param feedback_submission_id 
+  # @param to_object_type 
+  # @param to_object_id 
+  # @param association_type 
+  # @param [Hash] opts the optional parameters
+  # @return [SimplePublicObjectWithAssociations]
+  describe 'submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type_0
+  # Remove an association between two feedback submissions
+  # @param feedback_submission_id 
+  # @param to_object_type 
+  # @param to_object_id 
+  # @param association_type 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type_0 test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

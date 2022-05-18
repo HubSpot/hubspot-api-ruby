@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -17,8 +17,10 @@ module Hubspot
     module Blogs
       module Tags
         class CollectionResponseWithTotalTagForwardPaging
+          # Total number of blog tags.
           attr_accessor :total
 
+          # Collection of blog tags.
           attr_accessor :results
 
           attr_accessor :paging

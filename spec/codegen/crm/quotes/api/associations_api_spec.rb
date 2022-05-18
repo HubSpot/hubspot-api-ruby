@@ -32,6 +32,34 @@ describe 'AssociationsApi' do
     end
   end
 
+  # unit tests for archive
+  # Remove an association between two quotes
+  # @param quote_id 
+  # @param to_object_type 
+  # @param to_object_id 
+  # @param association_type 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'archive test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create
+  # Associate a quote with another object
+  # @param quote_id 
+  # @param to_object_type 
+  # @param to_object_id 
+  # @param association_type 
+  # @param [Hash] opts the optional parameters
+  # @return [SimplePublicObjectWithAssociations]
+  describe 'create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_all
   # List associations of a quote by type
   # @param quote_id 

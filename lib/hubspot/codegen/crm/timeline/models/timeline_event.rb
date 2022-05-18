@@ -153,10 +153,6 @@ module Hubspot
             invalid_properties.push('invalid value for "tokens", tokens cannot be nil.')
           end
 
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           invalid_properties
         end
 
@@ -165,7 +161,6 @@ module Hubspot
         def valid?
           return false if @event_template_id.nil?
           return false if @tokens.nil?
-          return false if @id.nil?
           true
         end
 

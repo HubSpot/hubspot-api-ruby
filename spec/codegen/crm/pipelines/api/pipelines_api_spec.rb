@@ -33,11 +33,12 @@ describe 'PipelinesApi' do
   end
 
   # unit tests for archive
-  # Archive a pipeline
-  # Archive the pipeline identified by &#x60;{pipelineId}&#x60;.
+  # Delete a pipeline
+  # Delete the pipeline identified by &#x60;{pipelineId}&#x60;.
   # @param object_type 
   # @param pipeline_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :validate_references_before_delete 
   # @return [nil]
   describe 'archive test' do
     it 'should work' do
@@ -49,8 +50,8 @@ describe 'PipelinesApi' do
   # Create a pipeline
   # Create a new pipeline with the provided property values. The entire pipeline object, including its unique ID, will be returned in the response.
   # @param object_type 
+  # @param pipeline_input 
   # @param [Hash] opts the optional parameters
-  # @option opts [PipelineInput] :pipeline_input 
   # @return [Pipeline]
   describe 'create test' do
     it 'should work' do
@@ -63,8 +64,7 @@ describe 'PipelinesApi' do
   # Return all pipelines for the object type specified by &#x60;{objectType}&#x60;.
   # @param object_type 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @return [CollectionResponsePipeline]
+  # @return [CollectionResponsePipelineNoPaging]
   describe 'get_all test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -77,7 +77,6 @@ describe 'PipelinesApi' do
   # @param object_type 
   # @param pipeline_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [Pipeline]
   describe 'get_by_id test' do
     it 'should work' do
@@ -90,8 +89,9 @@ describe 'PipelinesApi' do
   # Replace all the properties of an existing pipeline with the values provided. This will overwrite any existing pipeline stages. The updated pipeline will be returned in the response.
   # @param object_type 
   # @param pipeline_id 
+  # @param pipeline_input 
   # @param [Hash] opts the optional parameters
-  # @option opts [PipelineInput] :pipeline_input 
+  # @option opts [Boolean] :validate_references_before_delete 
   # @return [Pipeline]
   describe 'replace test' do
     it 'should work' do
@@ -104,9 +104,9 @@ describe 'PipelinesApi' do
   # Perform a partial update of the pipeline identified by &#x60;{pipelineId}&#x60;. The updated pipeline will be returned in the response.
   # @param object_type 
   # @param pipeline_id 
+  # @param pipeline_patch_input 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @option opts [PipelinePatchInput] :pipeline_patch_input 
+  # @option opts [Boolean] :validate_references_before_delete 
   # @return [Pipeline]
   describe 'update test' do
     it 'should work' do

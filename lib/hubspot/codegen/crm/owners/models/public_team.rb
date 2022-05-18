@@ -1,7 +1,7 @@
 =begin
 #CRM Owners
 
-#HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team an owner belongs to. Team membership can be one of PRIMARY (default), SECONDARY, or CHILD.
+#HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team(s) an owner can access, as well as which team is the owner's primary team.
 
 The version of the OpenAPI document: v3
 
@@ -20,36 +20,14 @@ module Hubspot
 
         attr_accessor :name
 
-        attr_accessor :membership
-
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
+        attr_accessor :primary
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'id' => :'id',
             :'name' => :'name',
-            :'membership' => :'membership'
+            :'primary' => :'primary'
           }
         end
 
@@ -58,7 +36,7 @@ module Hubspot
           {
             :'id' => :'String',
             :'name' => :'String',
-            :'membership' => :'String'
+            :'primary' => :'Boolean'
           }
         end
 
@@ -91,8 +69,8 @@ module Hubspot
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'membership')
-            self.membership = attributes[:'membership']
+          if attributes.key?(:'primary')
+            self.primary = attributes[:'primary']
           end
         end
 
@@ -108,6 +86,10 @@ module Hubspot
             invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
+          if @primary.nil?
+            invalid_properties.push('invalid value for "primary", primary cannot be nil.')
+          end
+
           invalid_properties
         end
 
@@ -116,19 +98,8 @@ module Hubspot
         def valid?
           return false if @id.nil?
           return false if @name.nil?
-          membership_validator = EnumAttributeValidator.new('String', ["PRIMARY", "SECONDARY", "CHILD"])
-          return false unless membership_validator.valid?(@membership)
+          return false if @primary.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] membership Object to be assigned
-        def membership=(membership)
-          validator = EnumAttributeValidator.new('String', ["PRIMARY", "SECONDARY", "CHILD"])
-          unless validator.valid?(membership)
-            fail ArgumentError, "invalid value for \"membership\", must be one of #{validator.allowable_values}."
-          end
-          @membership = membership
         end
 
         # Checks equality by comparing each attribute.
@@ -138,7 +109,7 @@ module Hubspot
           self.class == o.class &&
               id == o.id &&
               name == o.name &&
-              membership == o.membership
+              primary == o.primary
         end
 
         # @see the `==` method
@@ -150,7 +121,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, membership].hash
+          [id, name, primary].hash
         end
 
         # Builds the object from hash

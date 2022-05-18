@@ -62,6 +62,7 @@ describe 'BasicApi' do
   # @param line_item_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+  # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
   # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @option opts [String] :id_property The name of a property whose values are unique for this object type
@@ -79,6 +80,7 @@ describe 'BasicApi' do
   # @option opts [Integer] :limit The maximum number of results to display per page.
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
   # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+  # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
   # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [CollectionResponseSimplePublicObjectWithAssociationsForwardPaging]

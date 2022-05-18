@@ -21,22 +21,24 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive a pipeline
-        # Archive the pipeline identified by `{pipelineId}`.
+        # Delete a pipeline
+        # Delete the pipeline identified by `{pipelineId}`.
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :validate_references_before_delete  (default to false)
         # @return [nil]
         def archive(object_type, pipeline_id, opts = {})
           archive_with_http_info(object_type, pipeline_id, opts)
           nil
         end
 
-        # Archive a pipeline
-        # Archive the pipeline identified by &#x60;{pipelineId}&#x60;.
+        # Delete a pipeline
+        # Delete the pipeline identified by &#x60;{pipelineId}&#x60;.
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
+        # @option opts [Boolean] :validate_references_before_delete 
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_with_http_info(object_type, pipeline_id, opts = {})
           if @api_client.config.debugging
@@ -55,6 +57,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'validateReferencesBeforeDelete'] = opts[:'validate_references_before_delete'] if !opts[:'validate_references_before_delete'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -92,27 +95,31 @@ module Hubspot
         # Create a pipeline
         # Create a new pipeline with the provided property values. The entire pipeline object, including its unique ID, will be returned in the response.
         # @param object_type [String] 
+        # @param pipeline_input [PipelineInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineInput] :pipeline_input 
         # @return [Pipeline]
-        def create(object_type, opts = {})
-          data, _status_code, _headers = create_with_http_info(object_type, opts)
+        def create(object_type, pipeline_input, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, pipeline_input, opts)
           data
         end
 
         # Create a pipeline
         # Create a new pipeline with the provided property values. The entire pipeline object, including its unique ID, will be returned in the response.
         # @param object_type [String] 
+        # @param pipeline_input [PipelineInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineInput] :pipeline_input 
         # @return [Array<(Pipeline, Integer, Hash)>] Pipeline data, response status code and response headers
-        def create_with_http_info(object_type, opts = {})
+        def create_with_http_info(object_type, pipeline_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelinesApi.create ...'
           end
           # verify the required parameter 'object_type' is set
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling PipelinesApi.create"
+          end
+          # verify the required parameter 'pipeline_input' is set
+          if @api_client.config.client_side_validation && pipeline_input.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_input' when calling PipelinesApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/pipelines/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -131,7 +138,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(pipeline_input) 
 
           # return_type
           return_type = opts[:return_type] || 'Pipeline' 
@@ -159,8 +166,7 @@ module Hubspot
         # Return all pipelines for the object type specified by `{objectType}`.
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @return [CollectionResponsePipeline]
+        # @return [CollectionResponsePipelineNoPaging]
         def get_all(object_type, opts = {})
           data, _status_code, _headers = get_all_with_http_info(object_type, opts)
           data
@@ -170,8 +176,7 @@ module Hubspot
         # Return all pipelines for the object type specified by &#x60;{objectType}&#x60;.
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @return [Array<(CollectionResponsePipeline, Integer, Hash)>] CollectionResponsePipeline data, response status code and response headers
+        # @return [Array<(CollectionResponsePipelineNoPaging, Integer, Hash)>] CollectionResponsePipelineNoPaging data, response status code and response headers
         def get_all_with_http_info(object_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelinesApi.get_all ...'
@@ -185,7 +190,6 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -199,7 +203,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponsePipeline' 
+          return_type = opts[:return_type] || 'CollectionResponsePipelineNoPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -225,7 +229,6 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [Pipeline]
         def get_by_id(object_type, pipeline_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(object_type, pipeline_id, opts)
@@ -237,7 +240,6 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
         # @return [Array<(Pipeline, Integer, Hash)>] Pipeline data, response status code and response headers
         def get_by_id_with_http_info(object_type, pipeline_id, opts = {})
           if @api_client.config.debugging
@@ -256,7 +258,6 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -295,11 +296,12 @@ module Hubspot
         # Replace all the properties of an existing pipeline with the values provided. This will overwrite any existing pipeline stages. The updated pipeline will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
+        # @param pipeline_input [PipelineInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineInput] :pipeline_input 
+        # @option opts [Boolean] :validate_references_before_delete  (default to false)
         # @return [Pipeline]
-        def replace(object_type, pipeline_id, opts = {})
-          data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, opts)
+        def replace(object_type, pipeline_id, pipeline_input, opts = {})
+          data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, pipeline_input, opts)
           data
         end
 
@@ -307,10 +309,11 @@ module Hubspot
         # Replace all the properties of an existing pipeline with the values provided. This will overwrite any existing pipeline stages. The updated pipeline will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
+        # @param pipeline_input [PipelineInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineInput] :pipeline_input 
+        # @option opts [Boolean] :validate_references_before_delete 
         # @return [Array<(Pipeline, Integer, Hash)>] Pipeline data, response status code and response headers
-        def replace_with_http_info(object_type, pipeline_id, opts = {})
+        def replace_with_http_info(object_type, pipeline_id, pipeline_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelinesApi.replace ...'
           end
@@ -322,11 +325,16 @@ module Hubspot
           if @api_client.config.client_side_validation && pipeline_id.nil?
             fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelinesApi.replace"
           end
+          # verify the required parameter 'pipeline_input' is set
+          if @api_client.config.client_side_validation && pipeline_input.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_input' when calling PipelinesApi.replace"
+          end
           # resource path
           local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'validateReferencesBeforeDelete'] = opts[:'validate_references_before_delete'] if !opts[:'validate_references_before_delete'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -339,7 +347,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(pipeline_input) 
 
           # return_type
           return_type = opts[:return_type] || 'Pipeline' 
@@ -367,12 +375,12 @@ module Hubspot
         # Perform a partial update of the pipeline identified by `{pipelineId}`. The updated pipeline will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
+        # @param pipeline_patch_input [PipelinePatchInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @option opts [PipelinePatchInput] :pipeline_patch_input 
+        # @option opts [Boolean] :validate_references_before_delete  (default to false)
         # @return [Pipeline]
-        def update(object_type, pipeline_id, opts = {})
-          data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, opts)
+        def update(object_type, pipeline_id, pipeline_patch_input, opts = {})
+          data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, pipeline_patch_input, opts)
           data
         end
 
@@ -380,11 +388,11 @@ module Hubspot
         # Perform a partial update of the pipeline identified by &#x60;{pipelineId}&#x60;. The updated pipeline will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
+        # @param pipeline_patch_input [PipelinePatchInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @option opts [PipelinePatchInput] :pipeline_patch_input 
+        # @option opts [Boolean] :validate_references_before_delete 
         # @return [Array<(Pipeline, Integer, Hash)>] Pipeline data, response status code and response headers
-        def update_with_http_info(object_type, pipeline_id, opts = {})
+        def update_with_http_info(object_type, pipeline_id, pipeline_patch_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelinesApi.update ...'
           end
@@ -396,12 +404,16 @@ module Hubspot
           if @api_client.config.client_side_validation && pipeline_id.nil?
             fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelinesApi.update"
           end
+          # verify the required parameter 'pipeline_patch_input' is set
+          if @api_client.config.client_side_validation && pipeline_patch_input.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_patch_input' when calling PipelinesApi.update"
+          end
           # resource path
           local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+          query_params[:'validateReferencesBeforeDelete'] = opts[:'validate_references_before_delete'] if !opts[:'validate_references_before_delete'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -414,7 +426,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_patch_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(pipeline_patch_input) 
 
           # return_type
           return_type = opts[:return_type] || 'Pipeline' 

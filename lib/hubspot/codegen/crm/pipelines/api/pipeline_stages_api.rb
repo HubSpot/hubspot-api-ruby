@@ -21,8 +21,8 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive a pipeline stage
-        # Archive the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+        # Delete a pipeline stage
+        # Delete the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
@@ -33,8 +33,8 @@ module Hubspot
           nil
         end
 
-        # Archive a pipeline stage
-        # Archive the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
+        # Delete a pipeline stage
+        # Delete the pipeline stage identified by &#x60;{stageId}&#x60; associated with the pipeline identified by &#x60;{pipelineId}&#x60;.
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
@@ -99,11 +99,11 @@ module Hubspot
         # Create a new stage associated with the pipeline identified by `{pipelineId}`. The entire stage object, including its unique ID, will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
+        # @param pipeline_stage_input [PipelineStageInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [PipelineStage]
-        def create(object_type, pipeline_id, opts = {})
-          data, _status_code, _headers = create_with_http_info(object_type, pipeline_id, opts)
+        def create(object_type, pipeline_id, pipeline_stage_input, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, pipeline_id, pipeline_stage_input, opts)
           data
         end
 
@@ -111,10 +111,10 @@ module Hubspot
         # Create a new stage associated with the pipeline identified by &#x60;{pipelineId}&#x60;. The entire stage object, including its unique ID, will be returned in the response.
         # @param object_type [String] 
         # @param pipeline_id [String] 
+        # @param pipeline_stage_input [PipelineStageInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-        def create_with_http_info(object_type, pipeline_id, opts = {})
+        def create_with_http_info(object_type, pipeline_id, pipeline_stage_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelineStagesApi.create ...'
           end
@@ -125,6 +125,10 @@ module Hubspot
           # verify the required parameter 'pipeline_id' is set
           if @api_client.config.client_side_validation && pipeline_id.nil?
             fail ArgumentError, "Missing the required parameter 'pipeline_id' when calling PipelineStagesApi.create"
+          end
+          # verify the required parameter 'pipeline_stage_input' is set
+          if @api_client.config.client_side_validation && pipeline_stage_input.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_stage_input' when calling PipelineStagesApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s))
@@ -143,7 +147,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_stage_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(pipeline_stage_input) 
 
           # return_type
           return_type = opts[:return_type] || 'PipelineStage' 
@@ -172,8 +176,7 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @return [CollectionResponsePipelineStage]
+        # @return [CollectionResponsePipelineStageNoPaging]
         def get_all(object_type, pipeline_id, opts = {})
           data, _status_code, _headers = get_all_with_http_info(object_type, pipeline_id, opts)
           data
@@ -184,8 +187,7 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @return [Array<(CollectionResponsePipelineStage, Integer, Hash)>] CollectionResponsePipelineStage data, response status code and response headers
+        # @return [Array<(CollectionResponsePipelineStageNoPaging, Integer, Hash)>] CollectionResponsePipelineStageNoPaging data, response status code and response headers
         def get_all_with_http_info(object_type, pipeline_id, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelineStagesApi.get_all ...'
@@ -203,7 +205,6 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -217,7 +218,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponsePipelineStage' 
+          return_type = opts[:return_type] || 'CollectionResponsePipelineStageNoPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -244,7 +245,6 @@ module Hubspot
         # @param pipeline_id [String] 
         # @param stage_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [PipelineStage]
         def get_by_id(object_type, pipeline_id, stage_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(object_type, pipeline_id, stage_id, opts)
@@ -257,7 +257,6 @@ module Hubspot
         # @param pipeline_id [String] 
         # @param stage_id [String] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
         def get_by_id_with_http_info(object_type, pipeline_id, stage_id, opts = {})
           if @api_client.config.debugging
@@ -280,7 +279,6 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -320,11 +318,11 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
+        # @param pipeline_stage_input [PipelineStageInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [PipelineStage]
-        def replace(object_type, pipeline_id, stage_id, opts = {})
-          data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, stage_id, opts)
+        def replace(object_type, pipeline_id, stage_id, pipeline_stage_input, opts = {})
+          data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, stage_id, pipeline_stage_input, opts)
           data
         end
 
@@ -333,10 +331,10 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
+        # @param pipeline_stage_input [PipelineStageInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [PipelineStageInput] :pipeline_stage_input 
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-        def replace_with_http_info(object_type, pipeline_id, stage_id, opts = {})
+        def replace_with_http_info(object_type, pipeline_id, stage_id, pipeline_stage_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelineStagesApi.replace ...'
           end
@@ -351,6 +349,10 @@ module Hubspot
           # verify the required parameter 'stage_id' is set
           if @api_client.config.client_side_validation && stage_id.nil?
             fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.replace"
+          end
+          # verify the required parameter 'pipeline_stage_input' is set
+          if @api_client.config.client_side_validation && pipeline_stage_input.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_stage_input' when calling PipelineStagesApi.replace"
           end
           # resource path
           local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s)).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s))
@@ -369,7 +371,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_stage_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(pipeline_stage_input) 
 
           # return_type
           return_type = opts[:return_type] || 'PipelineStage' 
@@ -398,12 +400,11 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
+        # @param pipeline_stage_patch_input [PipelineStagePatchInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @option opts [PipelineStagePatchInput] :pipeline_stage_patch_input 
         # @return [PipelineStage]
-        def update(object_type, pipeline_id, stage_id, opts = {})
-          data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, stage_id, opts)
+        def update(object_type, pipeline_id, stage_id, pipeline_stage_patch_input, opts = {})
+          data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, stage_id, pipeline_stage_patch_input, opts)
           data
         end
 
@@ -412,11 +413,10 @@ module Hubspot
         # @param object_type [String] 
         # @param pipeline_id [String] 
         # @param stage_id [String] 
+        # @param pipeline_stage_patch_input [PipelineStagePatchInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @option opts [PipelineStagePatchInput] :pipeline_stage_patch_input 
         # @return [Array<(PipelineStage, Integer, Hash)>] PipelineStage data, response status code and response headers
-        def update_with_http_info(object_type, pipeline_id, stage_id, opts = {})
+        def update_with_http_info(object_type, pipeline_id, stage_id, pipeline_stage_patch_input, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PipelineStagesApi.update ...'
           end
@@ -432,12 +432,15 @@ module Hubspot
           if @api_client.config.client_side_validation && stage_id.nil?
             fail ArgumentError, "Missing the required parameter 'stage_id' when calling PipelineStagesApi.update"
           end
+          # verify the required parameter 'pipeline_stage_patch_input' is set
+          if @api_client.config.client_side_validation && pipeline_stage_patch_input.nil?
+            fail ArgumentError, "Missing the required parameter 'pipeline_stage_patch_input' when calling PipelineStagesApi.update"
+          end
           # resource path
           local_var_path = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'pipelineId' + '}', CGI.escape(pipeline_id.to_s)).sub('{' + 'stageId' + '}', CGI.escape(stage_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -450,7 +453,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'pipeline_stage_patch_input']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(pipeline_stage_patch_input) 
 
           # return_type
           return_type = opts[:return_type] || 'PipelineStage' 

@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -27,6 +27,7 @@ module Hubspot
 
           attr_accessor :type
 
+          # null
           attr_accessor :params
 
           attr_accessor :rows

@@ -44,4 +44,37 @@ describe 'BatchApi' do
     end
   end
 
+  # unit tests for submissions_batch_archive
+  # Archive a batch of feedback submissions by ID
+  # @param batch_input_simple_public_object_id 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'submissions_batch_archive test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for submissions_batch_create
+  # Create a batch of feedback submissions
+  # @param batch_input_simple_public_object_input 
+  # @param [Hash] opts the optional parameters
+  # @return [BatchResponseSimplePublicObject]
+  describe 'submissions_batch_create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for submissions_batch_update
+  # Update a batch of feedback submissions
+  # @param batch_input_simple_public_object_batch_input 
+  # @param [Hash] opts the optional parameters
+  # @return [BatchResponseSimplePublicObject]
+  describe 'submissions_batch_update test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

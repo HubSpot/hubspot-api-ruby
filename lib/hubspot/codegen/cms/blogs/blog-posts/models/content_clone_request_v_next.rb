@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -17,10 +17,10 @@ module Hubspot
     module Blogs
       module BlogPosts
         class ContentCloneRequestVNext
-          # The ID of the object to be cloned.
+          # ID of the object to be cloned.
           attr_accessor :id
 
-          # The name of the cloned object.
+          # Name of the cloned object.
           attr_accessor :clone_name
 
           # Attribute mapping from ruby-style variable name to JSON key.

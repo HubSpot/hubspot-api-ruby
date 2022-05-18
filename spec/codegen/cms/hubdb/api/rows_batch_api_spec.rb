@@ -38,7 +38,7 @@ describe 'RowsBatchApi' do
   # @param table_id_or_name The ID or name of the table
   # @param batch_input_string The JSON array of row ids
   # @param [Hash] opts the optional parameters
-  # @return [Object]
+  # @return [BatchResponseHubDbTableRowV3]
   describe 'batch_clone_draft_table_rows test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -51,7 +51,7 @@ describe 'RowsBatchApi' do
   # @param table_id_or_name The ID or name of the table
   # @param batch_input_hub_db_table_row_v3_request JSON array of row objects
   # @param [Hash] opts the optional parameters
-  # @return [Object]
+  # @return [BatchResponseHubDbTableRowV3]
   describe 'batch_create_draft_table_rows test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -77,7 +77,7 @@ describe 'RowsBatchApi' do
   # @param table_id_or_name The ID or name of the table
   # @param batch_input_string JSON array of row ids.
   # @param [Hash] opts the optional parameters
-  # @return [Object]
+  # @return [BatchResponseHubDbTableRowV3]
   describe 'batch_read_draft_table_rows test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -90,7 +90,7 @@ describe 'RowsBatchApi' do
   # @param table_id_or_name The ID or name of the table to query.
   # @param batch_input_string The JSON array of row ids
   # @param [Hash] opts the optional parameters
-  # @return [Object]
+  # @return [BatchResponseHubDbTableRowV3]
   describe 'batch_read_table_rows test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -103,7 +103,7 @@ describe 'RowsBatchApi' do
   # @param table_id_or_name The ID or name of the table
   # @param batch_input_hub_db_table_row_v3_request JSON array of row objects.
   # @param [Hash] opts the optional parameters
-  # @return [Object]
+  # @return [BatchResponseHubDbTableRowV3]
   describe 'batch_replace_draft_table_rows test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -116,7 +116,7 @@ describe 'RowsBatchApi' do
   # @param table_id_or_name The ID or name of the table
   # @param batch_input_json_node JSON array of row objects.
   # @param [Hash] opts the optional parameters
-  # @return [Object]
+  # @return [BatchResponseHubDbTableRowV3]
   describe 'batch_update_draft_table_rows test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

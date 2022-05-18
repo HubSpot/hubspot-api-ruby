@@ -20,9 +20,7 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # Clear webhook settings
-      # Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-      # @param app_id [Integer] The ID of the target app.
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [nil]
       def clear(app_id, opts = {})
@@ -30,9 +28,7 @@ module Hubspot
         nil
       end
 
-      # Clear webhook settings
-      # Resets webhook target URL to empty, and max concurrency limit to &#x60;0&#x60; for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-      # @param app_id [Integer] The ID of the target app.
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def clear_with_http_info(app_id, opts = {})
@@ -64,7 +60,7 @@ module Hubspot
         return_type = opts[:return_type] 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -82,10 +78,8 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Configure webhook settings
-      # Used to set the webhook target URL and max concurrency limit for the given app.
-      # @param app_id [Integer] The ID of the target app.
-      # @param settings_change_request [SettingsChangeRequest] Settings state to create new with or replace existing settings with.
+      # @param app_id [Integer] 
+      # @param settings_change_request [SettingsChangeRequest] 
       # @param [Hash] opts the optional parameters
       # @return [SettingsResponse]
       def configure(app_id, settings_change_request, opts = {})
@@ -93,10 +87,8 @@ module Hubspot
         data
       end
 
-      # Configure webhook settings
-      # Used to set the webhook target URL and max concurrency limit for the given app.
-      # @param app_id [Integer] The ID of the target app.
-      # @param settings_change_request [SettingsChangeRequest] Settings state to create new with or replace existing settings with.
+      # @param app_id [Integer] 
+      # @param settings_change_request [SettingsChangeRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
       def configure_with_http_info(app_id, settings_change_request, opts = {})
@@ -134,7 +126,7 @@ module Hubspot
         return_type = opts[:return_type] || 'SettingsResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -152,9 +144,7 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get webhook settings
-      # Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
-      # @param app_id [Integer] The ID of the target app.
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [SettingsResponse]
       def get_all(app_id, opts = {})
@@ -162,9 +152,7 @@ module Hubspot
         data
       end
 
-      # Get webhook settings
-      # Returns the current state of webhook settings for the given app. These settings include the app&#39;s configured target URL and max concurrency limit.
-      # @param app_id [Integer] The ID of the target app.
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
       def get_all_with_http_info(app_id, opts = {})
@@ -196,7 +184,7 @@ module Hubspot
         return_type = opts[:return_type] || 'SettingsResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,

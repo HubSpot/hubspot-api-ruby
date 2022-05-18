@@ -1,7 +1,7 @@
 =begin
 #Blog Post endpoints
 
-#\"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+#Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
 The version of the OpenAPI document: v3
 
@@ -24,8 +24,7 @@ module Hubspot
           # The id of the version.
           attr_accessor :id
 
-          # The timestamp (ISO8601 format) when this version was updated.
-          attr_accessor :updated
+          attr_accessor :updated_at
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
@@ -33,7 +32,7 @@ module Hubspot
               :'object' => :'object',
               :'user' => :'user',
               :'id' => :'id',
-              :'updated' => :'updated'
+              :'updated_at' => :'updatedAt'
             }
           end
 
@@ -43,7 +42,7 @@ module Hubspot
               :'object' => :'BlogPost',
               :'user' => :'VersionUser',
               :'id' => :'String',
-              :'updated' => :'DateTime'
+              :'updated_at' => :'DateTime'
             }
           end
 
@@ -80,8 +79,8 @@ module Hubspot
               self.id = attributes[:'id']
             end
 
-            if attributes.key?(:'updated')
-              self.updated = attributes[:'updated']
+            if attributes.key?(:'updated_at')
+              self.updated_at = attributes[:'updated_at']
             end
           end
 
@@ -101,8 +100,8 @@ module Hubspot
               invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
-            if @updated.nil?
-              invalid_properties.push('invalid value for "updated", updated cannot be nil.')
+            if @updated_at.nil?
+              invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
             end
 
             invalid_properties
@@ -114,7 +113,7 @@ module Hubspot
             return false if @object.nil?
             return false if @user.nil?
             return false if @id.nil?
-            return false if @updated.nil?
+            return false if @updated_at.nil?
             true
           end
 
@@ -126,7 +125,7 @@ module Hubspot
                 object == o.object &&
                 user == o.user &&
                 id == o.id &&
-                updated == o.updated
+                updated_at == o.updated_at
           end
 
           # @see the `==` method
@@ -138,7 +137,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [object, user, id, updated].hash
+            [object, user, id, updated_at].hash
           end
 
           # Builds the object from hash
