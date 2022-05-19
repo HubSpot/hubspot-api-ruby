@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'Hubspot::Cms::Blogs::Authors::AuthorApi' do
-  subject(:api) { Hubspot::Cms::Blogs::Authors::AuthorApi.new }
+describe 'Hubspot::Cms::Blogs::Authors::BlogAuthorsApi' do
+  subject(:api) { Hubspot::Cms::Blogs::Authors::BlogAuthorsApi.new }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:archive_batch) }

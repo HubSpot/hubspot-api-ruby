@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'Hubspot::Discovery::Cms::Blogs::BlogPosts::BlogPostApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').cms.blogs.blog_posts.blog_post_api }
+describe 'Hubspot::Cms::Blogs::BlogPosts::BlogPostsApi' do
+  subject(:api) { Hubspot::Cms::Blogs::BlogPosts::BlogPostsApi.new }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:archive_batch) }

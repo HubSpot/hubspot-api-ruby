@@ -10,7 +10,7 @@ module Hubspot
               associations
               basic
               batch
-              g_d_p_r
+              gdpr
               search
             ].freeze
           end

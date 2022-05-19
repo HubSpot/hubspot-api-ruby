@@ -4,8 +4,8 @@ module Hubspot
   module Discovery
     module Cms
       module Blogs
-        module Authors
-          class AuthorApi
+        module Tags
+          class BlogTagsApi
             include Hubspot::Discovery::BaseApiClient
           end
         end
