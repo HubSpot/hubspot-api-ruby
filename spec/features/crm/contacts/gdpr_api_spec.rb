@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-describe 'Hubspot::Crm::Contacts::GDPRApi' do
-  subject(:api) { Hubspot::Crm::Contacts::GDPRApi.new }
+describe 'Hubspot::Crm::Contacts::GdprApi' do
+  subject(:api) { Hubspot::Crm::Contacts::GdprApi.new }
   
-  it { is_expected.to respond_to(:purge_by_email) }
-  it { is_expected.to respond_to(:purge_by_id) }
+  it { is_expected.to respond_to(:purge) }
 end

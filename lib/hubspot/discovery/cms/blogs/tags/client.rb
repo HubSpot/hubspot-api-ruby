@@ -8,7 +8,7 @@ module Hubspot
           class Client
             def self.api_classes
               %i[
-                tag
+                blog_tags
               ].freeze
             end
   
