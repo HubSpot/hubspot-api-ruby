@@ -11,6 +11,7 @@ OpenAPI Generator version: 4.3.1
 =end
 
 require 'date'
+require_relative 'hub_spot_form_definition_create_request_all_of'
 
 module Hubspot
   module Marketing
