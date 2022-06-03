@@ -29,6 +29,7 @@ module Hubspot
           # @param feedback_submission_id [String] 
           # @param [Hash] opts the optional parameters
           # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+          # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
           # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
@@ -43,6 +44,7 @@ module Hubspot
           # @param feedback_submission_id [String] 
           # @param [Hash] opts the optional parameters
           # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+          # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
           # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
           # @option opts [Boolean] :archived Whether to return only results that have been archived.
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
@@ -61,6 +63,7 @@ module Hubspot
             # query parameters
             query_params = opts[:query_params] || {}
             query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+            query_params[:'propertiesWithHistory'] = @api_client.build_collection_param(opts[:'properties_with_history'], :multi) if !opts[:'properties_with_history'].nil?
             query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
             query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
             query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
@@ -104,6 +107,7 @@ module Hubspot
           # @option opts [Integer] :limit The maximum number of results to display per page. (default to 10)
           # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
           # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+          # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
           # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
           # @return [CollectionResponseSimplePublicObjectWithAssociationsForwardPaging]
@@ -118,6 +122,7 @@ module Hubspot
           # @option opts [Integer] :limit The maximum number of results to display per page.
           # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
           # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+          # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
           # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
           # @option opts [Boolean] :archived Whether to return only results that have been archived.
           # @return [Array<(CollectionResponseSimplePublicObjectWithAssociationsForwardPaging, Integer, Hash)>] CollectionResponseSimplePublicObjectWithAssociationsForwardPaging data, response status code and response headers
@@ -133,6 +138,7 @@ module Hubspot
             query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
             query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
             query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+            query_params[:'propertiesWithHistory'] = @api_client.build_collection_param(opts[:'properties_with_history'], :multi) if !opts[:'properties_with_history'].nil?
             query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
             query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
@@ -165,6 +171,205 @@ module Hubspot
             data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
             if @api_client.config.debugging
               @api_client.config.logger.debug "API called: BasicApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Create
+          # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+          # @param simple_public_object_input [SimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @return [SimplePublicObject]
+          def submissions(simple_public_object_input, opts = {})
+            data, _status_code, _headers = submissions_with_http_info(simple_public_object_input, opts)
+            data
+          end
+
+          # Create
+          # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+          # @param simple_public_object_input [SimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+          def submissions_with_http_info(simple_public_object_input, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BasicApi.submissions ...'
+            end
+            # verify the required parameter 'simple_public_object_input' is set
+            if @api_client.config.client_side_validation && simple_public_object_input.nil?
+              fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.submissions"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(simple_public_object_input) 
+
+            # return_type
+            return_type = opts[:return_type] || 'SimplePublicObject' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BasicApi#submissions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Archive
+          # Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
+          # @param feedback_submission_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [nil]
+          def submissions_feedback_submission_id(feedback_submission_id, opts = {})
+            submissions_feedback_submission_id_with_http_info(feedback_submission_id, opts)
+            nil
+          end
+
+          # Archive
+          # Move an Object identified by &#x60;{feedbackSubmissionId}&#x60; to the recycling bin.
+          # @param feedback_submission_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+          def submissions_feedback_submission_id_with_http_info(feedback_submission_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BasicApi.submissions_feedback_submission_id ...'
+            end
+            # verify the required parameter 'feedback_submission_id' is set
+            if @api_client.config.client_side_validation && feedback_submission_id.nil?
+              fail ArgumentError, "Missing the required parameter 'feedback_submission_id' when calling BasicApi.submissions_feedback_submission_id"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'.sub('{' + 'feedbackSubmissionId' + '}', CGI.escape(feedback_submission_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BasicApi#submissions_feedback_submission_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Update
+          # Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+          # @param feedback_submission_id [String] 
+          # @param simple_public_object_input [SimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @option opts [String] :id_property The name of a property whose values are unique for this object type
+          # @return [SimplePublicObject]
+          def submissions_feedback_submission_id_0(feedback_submission_id, simple_public_object_input, opts = {})
+            data, _status_code, _headers = submissions_feedback_submission_id_0_with_http_info(feedback_submission_id, simple_public_object_input, opts)
+            data
+          end
+
+          # Update
+          # Perform a partial update of an Object identified by &#x60;{feedbackSubmissionId}&#x60;. &#x60;{feedbackSubmissionId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+          # @param feedback_submission_id [String] 
+          # @param simple_public_object_input [SimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @option opts [String] :id_property The name of a property whose values are unique for this object type
+          # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+          def submissions_feedback_submission_id_0_with_http_info(feedback_submission_id, simple_public_object_input, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BasicApi.submissions_feedback_submission_id_0 ...'
+            end
+            # verify the required parameter 'feedback_submission_id' is set
+            if @api_client.config.client_side_validation && feedback_submission_id.nil?
+              fail ArgumentError, "Missing the required parameter 'feedback_submission_id' when calling BasicApi.submissions_feedback_submission_id_0"
+            end
+            # verify the required parameter 'simple_public_object_input' is set
+            if @api_client.config.client_side_validation && simple_public_object_input.nil?
+              fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.submissions_feedback_submission_id_0"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'.sub('{' + 'feedbackSubmissionId' + '}', CGI.escape(feedback_submission_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+            query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(simple_public_object_input) 
+
+            # return_type
+            return_type = opts[:return_type] || 'SimplePublicObject' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BasicApi#submissions_feedback_submission_id_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end

@@ -19,6 +19,8 @@ module Hubspot
         class BatchReadInputSimplePublicObjectId
           attr_accessor :properties
 
+          attr_accessor :properties_with_history
+
           attr_accessor :id_property
 
           attr_accessor :inputs
@@ -27,6 +29,7 @@ module Hubspot
           def self.attribute_map
             {
               :'properties' => :'properties',
+              :'properties_with_history' => :'propertiesWithHistory',
               :'id_property' => :'idProperty',
               :'inputs' => :'inputs'
             }
@@ -36,6 +39,7 @@ module Hubspot
           def self.openapi_types
             {
               :'properties' => :'Array<String>',
+              :'properties_with_history' => :'Array<String>',
               :'id_property' => :'String',
               :'inputs' => :'Array<SimplePublicObjectId>'
             }
@@ -68,6 +72,12 @@ module Hubspot
               end
             end
 
+            if attributes.key?(:'properties_with_history')
+              if (value = attributes[:'properties_with_history']).is_a?(Array)
+                self.properties_with_history = value
+              end
+            end
+
             if attributes.key?(:'id_property')
               self.id_property = attributes[:'id_property']
             end
@@ -87,6 +97,10 @@ module Hubspot
               invalid_properties.push('invalid value for "properties", properties cannot be nil.')
             end
 
+            if @properties_with_history.nil?
+              invalid_properties.push('invalid value for "properties_with_history", properties_with_history cannot be nil.')
+            end
+
             if @inputs.nil?
               invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
             end
@@ -98,6 +112,7 @@ module Hubspot
           # @return true if the model is valid
           def valid?
             return false if @properties.nil?
+            return false if @properties_with_history.nil?
             return false if @inputs.nil?
             true
           end
@@ -108,6 +123,7 @@ module Hubspot
             return true if self.equal?(o)
             self.class == o.class &&
                 properties == o.properties &&
+                properties_with_history == o.properties_with_history &&
                 id_property == o.id_property &&
                 inputs == o.inputs
           end
@@ -121,7 +137,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [properties, id_property, inputs].hash
+            [properties, properties_with_history, id_property, inputs].hash
           end
 
           # Builds the object from hash

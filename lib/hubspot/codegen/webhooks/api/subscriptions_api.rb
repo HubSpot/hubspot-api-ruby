@@ -20,10 +20,8 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # Delete a subscription
-      # Permanently deletes a subscription. This cannot be undone.
-      # @param subscription_id [Integer] The ID of subscription to delete.
-      # @param app_id [Integer] The ID of the target app.
+      # @param subscription_id [Integer] 
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [nil]
       def archive(subscription_id, app_id, opts = {})
@@ -31,10 +29,8 @@ module Hubspot
         nil
       end
 
-      # Delete a subscription
-      # Permanently deletes a subscription. This cannot be undone.
-      # @param subscription_id [Integer] The ID of subscription to delete.
-      # @param app_id [Integer] The ID of the target app.
+      # @param subscription_id [Integer] 
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def archive_with_http_info(subscription_id, app_id, opts = {})
@@ -70,7 +66,7 @@ module Hubspot
         return_type = opts[:return_type] 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -88,10 +84,8 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Subscribe to an event
-      # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-      # @param app_id [Integer] The ID of the target app.
-      # @param subscription_create_request [SubscriptionCreateRequest] Details about the new subscription.
+      # @param app_id [Integer] 
+      # @param subscription_create_request [SubscriptionCreateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
       def create(app_id, subscription_create_request, opts = {})
@@ -99,10 +93,8 @@ module Hubspot
         data
       end
 
-      # Subscribe to an event
-      # Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-      # @param app_id [Integer] The ID of the target app.
-      # @param subscription_create_request [SubscriptionCreateRequest] Details about the new subscription.
+      # @param app_id [Integer] 
+      # @param subscription_create_request [SubscriptionCreateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
       def create_with_http_info(app_id, subscription_create_request, opts = {})
@@ -140,7 +132,7 @@ module Hubspot
         return_type = opts[:return_type] || 'SubscriptionResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -158,9 +150,7 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get subscription details
-      # Returns full details for all existing subscriptions for the given app.
-      # @param app_id [Integer] The ID of the target app.
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionListResponse]
       def get_all(app_id, opts = {})
@@ -168,9 +158,7 @@ module Hubspot
         data
       end
 
-      # Get subscription details
-      # Returns full details for all existing subscriptions for the given app.
-      # @param app_id [Integer] The ID of the target app.
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionListResponse, Integer, Hash)>] SubscriptionListResponse data, response status code and response headers
       def get_all_with_http_info(app_id, opts = {})
@@ -202,7 +190,7 @@ module Hubspot
         return_type = opts[:return_type] || 'SubscriptionListResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -220,37 +208,33 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get subscription
-      # Returns details about a subscription.
-      # @param app_id [Integer] The ID of the target app.
-      # @param subscription_id [Integer] The ID of the target subscription.
+      # @param subscription_id [Integer] 
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
-      def get_by_id(app_id, subscription_id, opts = {})
-        data, _status_code, _headers = get_by_id_with_http_info(app_id, subscription_id, opts)
+      def get_by_id(subscription_id, app_id, opts = {})
+        data, _status_code, _headers = get_by_id_with_http_info(subscription_id, app_id, opts)
         data
       end
 
-      # Get subscription
-      # Returns details about a subscription.
-      # @param app_id [Integer] The ID of the target app.
-      # @param subscription_id [Integer] The ID of the target subscription.
+      # @param subscription_id [Integer] 
+      # @param app_id [Integer] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
-      def get_by_id_with_http_info(app_id, subscription_id, opts = {})
+      def get_by_id_with_http_info(subscription_id, app_id, opts = {})
         if @api_client.config.debugging
           @api_client.config.logger.debug 'Calling API: SubscriptionsApi.get_by_id ...'
-        end
-        # verify the required parameter 'app_id' is set
-        if @api_client.config.client_side_validation && app_id.nil?
-          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.get_by_id"
         end
         # verify the required parameter 'subscription_id' is set
         if @api_client.config.client_side_validation && subscription_id.nil?
           fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.get_by_id"
         end
+        # verify the required parameter 'app_id' is set
+        if @api_client.config.client_side_validation && app_id.nil?
+          fail ArgumentError, "Missing the required parameter 'app_id' when calling SubscriptionsApi.get_by_id"
+        end
         # resource path
-        local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s))
+        local_var_path = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'.sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
         # query parameters
         query_params = opts[:query_params] || {}
@@ -270,7 +254,7 @@ module Hubspot
         return_type = opts[:return_type] || 'SubscriptionResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -288,11 +272,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Update a subscription
-      # Updates the details for an existing subscription.
-      # @param subscription_id [Integer] The ID of the subscription to update.
-      # @param app_id [Integer] The ID of the target app.
-      # @param subscription_patch_request [SubscriptionPatchRequest] Updated details for the subscription.
+      # @param subscription_id [Integer] 
+      # @param app_id [Integer] 
+      # @param subscription_patch_request [SubscriptionPatchRequest] 
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
       def update(subscription_id, app_id, subscription_patch_request, opts = {})
@@ -300,11 +282,9 @@ module Hubspot
         data
       end
 
-      # Update a subscription
-      # Updates the details for an existing subscription.
-      # @param subscription_id [Integer] The ID of the subscription to update.
-      # @param app_id [Integer] The ID of the target app.
-      # @param subscription_patch_request [SubscriptionPatchRequest] Updated details for the subscription.
+      # @param subscription_id [Integer] 
+      # @param app_id [Integer] 
+      # @param subscription_patch_request [SubscriptionPatchRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
       def update_with_http_info(subscription_id, app_id, subscription_patch_request, opts = {})
@@ -346,7 +326,7 @@ module Hubspot
         return_type = opts[:return_type] || 'SubscriptionResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,
@@ -364,10 +344,8 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Batch update subscriptions
-      # Activates or deactivates target app subscriptions.
-      # @param app_id [Integer] The app ID of the target app.
-      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Updated details for the specified subscriptions.
+      # @param app_id [Integer] 
+      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [BatchResponseSubscriptionResponse]
       def update_batch(app_id, batch_input_subscription_batch_update_request, opts = {})
@@ -375,10 +353,8 @@ module Hubspot
         data
       end
 
-      # Batch update subscriptions
-      # Activates or deactivates target app subscriptions.
-      # @param app_id [Integer] The app ID of the target app.
-      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] Updated details for the specified subscriptions.
+      # @param app_id [Integer] 
+      # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(BatchResponseSubscriptionResponse, Integer, Hash)>] BatchResponseSubscriptionResponse data, response status code and response headers
       def update_batch_with_http_info(app_id, batch_input_subscription_batch_update_request, opts = {})
@@ -416,7 +392,7 @@ module Hubspot
         return_type = opts[:return_type] || 'BatchResponseSubscriptionResponse' 
 
         # auth_names
-        auth_names = opts[:auth_names] || ['hapikey']
+        auth_names = opts[:auth_names] || ['developer_hapikey']
 
         new_options = opts.merge(
           :header_params => header_params,

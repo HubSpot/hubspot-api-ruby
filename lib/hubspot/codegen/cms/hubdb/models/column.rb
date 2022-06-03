@@ -37,11 +37,11 @@ module Hubspot
         # Foreign Ids
         attr_accessor :foreign_ids
 
-        # Foreign ids by name
-        attr_accessor :foreign_ids_by_name
-
         # Foreign ids
         attr_accessor :foreign_ids_by_id
+
+        # Foreign ids by name
+        attr_accessor :foreign_ids_by_name
 
         # Type of the column
         attr_accessor :type
@@ -87,8 +87,8 @@ module Hubspot
             :'foreign_table_id' => :'foreignTableId',
             :'foreign_column_id' => :'foreignColumnId',
             :'foreign_ids' => :'foreignIds',
-            :'foreign_ids_by_name' => :'foreignIdsByName',
             :'foreign_ids_by_id' => :'foreignIdsById',
+            :'foreign_ids_by_name' => :'foreignIdsByName',
             :'type' => :'type',
             :'option_count' => :'optionCount',
             :'archived' => :'archived',
@@ -106,8 +106,8 @@ module Hubspot
             :'foreign_table_id' => :'Integer',
             :'foreign_column_id' => :'Integer',
             :'foreign_ids' => :'Array<ForeignId>',
-            :'foreign_ids_by_name' => :'Hash<String, ForeignId>',
             :'foreign_ids_by_id' => :'Hash<String, ForeignId>',
+            :'foreign_ids_by_name' => :'Hash<String, ForeignId>',
             :'type' => :'String',
             :'option_count' => :'Integer',
             :'archived' => :'Boolean',
@@ -166,15 +166,15 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'foreign_ids_by_name')
-            if (value = attributes[:'foreign_ids_by_name']).is_a?(Hash)
-              self.foreign_ids_by_name = value
-            end
-          end
-
           if attributes.key?(:'foreign_ids_by_id')
             if (value = attributes[:'foreign_ids_by_id']).is_a?(Hash)
               self.foreign_ids_by_id = value
+            end
+          end
+
+          if attributes.key?(:'foreign_ids_by_name')
+            if (value = attributes[:'foreign_ids_by_name']).is_a?(Hash)
+              self.foreign_ids_by_name = value
             end
           end
 
@@ -249,8 +249,8 @@ module Hubspot
               foreign_table_id == o.foreign_table_id &&
               foreign_column_id == o.foreign_column_id &&
               foreign_ids == o.foreign_ids &&
-              foreign_ids_by_name == o.foreign_ids_by_name &&
               foreign_ids_by_id == o.foreign_ids_by_id &&
+              foreign_ids_by_name == o.foreign_ids_by_name &&
               type == o.type &&
               option_count == o.option_count &&
               archived == o.archived &&
@@ -266,7 +266,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, id, width, foreign_table_id, foreign_column_id, foreign_ids, foreign_ids_by_name, foreign_ids_by_id, type, option_count, archived, options].hash
+          [name, label, id, width, foreign_table_id, foreign_column_id, foreign_ids, foreign_ids_by_id, foreign_ids_by_name, type, option_count, archived, options].hash
         end
 
         # Builds the object from hash

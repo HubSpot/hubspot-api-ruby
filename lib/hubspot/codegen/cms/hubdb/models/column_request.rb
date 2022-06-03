@@ -31,6 +31,12 @@ module Hubspot
         # Options to choose for select and multi-select columns
         attr_accessor :options
 
+        # The id of another table to which the column refers/points to.
+        attr_accessor :foreign_table_id
+
+        # The id of the column from another table to which the column refers/points to.
+        attr_accessor :foreign_column_id
+
         class EnumAttributeValidator
           attr_reader :datatype
           attr_reader :allowable_values
@@ -60,7 +66,9 @@ module Hubspot
             :'name' => :'name',
             :'label' => :'label',
             :'type' => :'type',
-            :'options' => :'options'
+            :'options' => :'options',
+            :'foreign_table_id' => :'foreignTableId',
+            :'foreign_column_id' => :'foreignColumnId'
           }
         end
 
@@ -71,7 +79,9 @@ module Hubspot
             :'name' => :'String',
             :'label' => :'String',
             :'type' => :'String',
-            :'options' => :'Array<Option>'
+            :'options' => :'Array<Option>',
+            :'foreign_table_id' => :'Integer',
+            :'foreign_column_id' => :'Integer'
           }
         end
 
@@ -116,6 +126,14 @@ module Hubspot
             if (value = attributes[:'options']).is_a?(Array)
               self.options = value
             end
+          end
+
+          if attributes.key?(:'foreign_table_id')
+            self.foreign_table_id = attributes[:'foreign_table_id']
+          end
+
+          if attributes.key?(:'foreign_column_id')
+            self.foreign_column_id = attributes[:'foreign_column_id']
           end
         end
 
@@ -178,7 +196,9 @@ module Hubspot
               name == o.name &&
               label == o.label &&
               type == o.type &&
-              options == o.options
+              options == o.options &&
+              foreign_table_id == o.foreign_table_id &&
+              foreign_column_id == o.foreign_column_id
         end
 
         # @see the `==` method
@@ -190,7 +210,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, label, type, options].hash
+          [id, name, label, type, options, foreign_table_id, foreign_column_id].hash
         end
 
         # Builds the object from hash

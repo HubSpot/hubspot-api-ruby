@@ -26,7 +26,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
-        # @return [Object]
+        # @return [BatchResponseHubDbTableRowV3]
         def batch_clone_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
           data, _status_code, _headers = batch_clone_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           data
@@ -37,7 +37,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+        # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
         def batch_clone_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_clone_draft_table_rows ...'
@@ -70,7 +70,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # return_type
-          return_type = opts[:return_type] || 'Object' 
+          return_type = opts[:return_type] || 'BatchResponseHubDbTableRowV3' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -96,7 +96,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects
         # @param [Hash] opts the optional parameters
-        # @return [Object]
+        # @return [BatchResponseHubDbTableRowV3]
         def batch_create_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
           data, _status_code, _headers = batch_create_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts)
           data
@@ -107,7 +107,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+        # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
         def batch_create_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_create_draft_table_rows ...'
@@ -140,7 +140,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3_request) 
 
           # return_type
-          return_type = opts[:return_type] || 'Object' 
+          return_type = opts[:return_type] || 'BatchResponseHubDbTableRowV3' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -236,7 +236,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
-        # @return [Object]
+        # @return [BatchResponseHubDbTableRowV3]
         def batch_read_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
           data, _status_code, _headers = batch_read_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           data
@@ -247,7 +247,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+        # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
         def batch_read_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_read_draft_table_rows ...'
@@ -280,7 +280,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # return_type
-          return_type = opts[:return_type] || 'Object' 
+          return_type = opts[:return_type] || 'BatchResponseHubDbTableRowV3' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -306,7 +306,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table to query.
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
-        # @return [Object]
+        # @return [BatchResponseHubDbTableRowV3]
         def batch_read_table_rows(table_id_or_name, batch_input_string, opts = {})
           data, _status_code, _headers = batch_read_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           data
@@ -317,7 +317,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table to query.
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+        # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
         def batch_read_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_read_table_rows ...'
@@ -350,7 +350,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_string) 
 
           # return_type
-          return_type = opts[:return_type] || 'Object' 
+          return_type = opts[:return_type] || 'BatchResponseHubDbTableRowV3' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -376,7 +376,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects.
         # @param [Hash] opts the optional parameters
-        # @return [Object]
+        # @return [BatchResponseHubDbTableRowV3]
         def batch_replace_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
           data, _status_code, _headers = batch_replace_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts)
           data
@@ -387,7 +387,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects.
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+        # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
         def batch_replace_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_replace_draft_table_rows ...'
@@ -420,7 +420,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3_request) 
 
           # return_type
-          return_type = opts[:return_type] || 'Object' 
+          return_type = opts[:return_type] || 'BatchResponseHubDbTableRowV3' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -446,7 +446,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_json_node [BatchInputJsonNode] JSON array of row objects.
         # @param [Hash] opts the optional parameters
-        # @return [Object]
+        # @return [BatchResponseHubDbTableRowV3]
         def batch_update_draft_table_rows(table_id_or_name, batch_input_json_node, opts = {})
           data, _status_code, _headers = batch_update_draft_table_rows_with_http_info(table_id_or_name, batch_input_json_node, opts)
           data
@@ -457,7 +457,7 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_json_node [BatchInputJsonNode] JSON array of row objects.
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+        # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
         def batch_update_draft_table_rows_with_http_info(table_id_or_name, batch_input_json_node, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_update_draft_table_rows ...'
@@ -490,7 +490,7 @@ module Hubspot
           post_body = opts[:body] || @api_client.object_to_http_body(batch_input_json_node) 
 
           # return_type
-          return_type = opts[:return_type] || 'Object' 
+          return_type = opts[:return_type] || 'BatchResponseHubDbTableRowV3' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
