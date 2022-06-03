@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Crm
       module Objects
-        class GDPRApi
+        class GdprApi
           include Hubspot::Discovery::BaseApiClient
         end
       end
