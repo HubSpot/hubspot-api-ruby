@@ -15,6 +15,7 @@ module Hubspot
         files
         marketing
         o_auth
+        settings
         webhooks
       ].freeze
     end

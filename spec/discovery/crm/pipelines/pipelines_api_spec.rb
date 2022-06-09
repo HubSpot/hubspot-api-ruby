@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Crm::Pipelines::PipelinesApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').crm.pipelines.pipelines_api }
+  subject(:api) { Hubspot::Client.new(access_token: 'test').crm.pipelines.pipelines_api }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:create) }

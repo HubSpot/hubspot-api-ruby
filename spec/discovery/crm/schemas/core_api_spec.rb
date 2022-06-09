@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Crm::Schemas::CoreApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').crm.schemas.core_api }
+  subject(:api) { Hubspot::Client.new(access_token: 'test').crm.schemas.core_api }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:archive_association) }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Crm::Extensions::Cards::CardsApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').crm.extensions.cards.cards_api }
+  subject(:api) { Hubspot::Client.new(access_token: 'test').crm.extensions.cards.cards_api }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:create) }

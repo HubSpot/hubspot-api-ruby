@@ -17,7 +17,12 @@ module Hubspot
 
           def self.api_modules
             %i[
+              calls
+              emails
               feedback_submissions
+              meetings
+              notes
+              tasks
             ].freeze
           end
   

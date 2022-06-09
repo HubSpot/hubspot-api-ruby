@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Webhooks::SettingsApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').webhooks.settings_api }
+  subject(:api) { Hubspot::Client.new(access_token: 'test').webhooks.settings_api }
   
   it { is_expected.to respond_to(:clear) }
   it { is_expected.to respond_to(:configure) }

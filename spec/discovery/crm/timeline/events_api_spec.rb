@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Crm::Timeline::EventsApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').crm.timeline.events_api }
+  subject(:api) { Hubspot::Client.new(access_token: 'test').crm.timeline.events_api }
   
   it { is_expected.to respond_to(:create) }
   it { is_expected.to respond_to(:create_batch) }
