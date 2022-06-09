@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Files::Files::FoldersApi' do
-  subject(:api) { Hubspot::Client.new(api_key: 'test').files.files.folders_api }
+  subject(:api) { Hubspot::Client.new(access_token: 'test').files.files.folders_api }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:archive_by_path) }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Automation::Actions::FunctionsApi' do
-  subject(:functions_api) { Hubspot::Client.new(api_key: 'test').automation.actions.functions_api }
+  subject(:functions_api) { Hubspot::Client.new(access_token: 'test').automation.actions.functions_api }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:archive_by_function_type) }

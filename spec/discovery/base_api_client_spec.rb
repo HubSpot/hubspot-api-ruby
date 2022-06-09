@@ -21,7 +21,7 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     end
   end
 
-  subject(:client) { Hubspot::Discovery::SomeApiClass.new(api_key: 'test') }
+  subject(:client) { Hubspot::Discovery::SomeApiClass.new(access_token: 'test') }
   let(:api) { client.api }
   
   it { is_expected.to respond_to(:get) }
@@ -35,13 +35,13 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     context 'with default params order' do
       let(:params) { {test_id: 'test_id_value', limit: 10} }
 
-      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"hapikey", :limit=>10}') }
+      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>10}') }
     end
 
     context 'with changed params order' do
       let(:params) { {limit: 5, test_id: 'test_id_value'} }
 
-      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"hapikey", :limit=>5}') }
+      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>5}') }
     end
   end
   
@@ -51,19 +51,19 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     context 'with default params order' do
       let(:params) { {test_id: 'test_id_value', simple_public_object_input: 'simple_public_object_input_value', limit: 10} }
 
-      it { is_expected.to eq('updated test_id: test_id_value, simple_public_object_input: simple_public_object_input_value, opts: {:auth_names=>"hapikey", :limit=>10}') }
+      it { is_expected.to eq('updated test_id: test_id_value, simple_public_object_input: simple_public_object_input_value, opts: {:auth_names=>"oauth2", :limit=>10}') }
     end
 
     context 'with reversed params order' do
       let(:params) { {limit: 5, simple_public_object_input: 'simple_public_object_input_value', test_id: 'test_id_value'} }
       
-      it { is_expected.to eq('updated test_id: test_id_value, simple_public_object_input: simple_public_object_input_value, opts: {:auth_names=>"hapikey", :limit=>5}') }
+      it { is_expected.to eq('updated test_id: test_id_value, simple_public_object_input: simple_public_object_input_value, opts: {:auth_names=>"oauth2", :limit=>5}') }
     end
 
     context 'with shuffled params order' do
       let(:params) { {simple_public_object_input: 'simple_public_object_input_value', limit: 7, test_id: 'test_id_value'} }
       
-      it { is_expected.to eq('updated test_id: test_id_value, simple_public_object_input: simple_public_object_input_value, opts: {:auth_names=>"hapikey", :limit=>7}') }
+      it { is_expected.to eq('updated test_id: test_id_value, simple_public_object_input: simple_public_object_input_value, opts: {:auth_names=>"oauth2", :limit=>7}') }
     end
   end
 end

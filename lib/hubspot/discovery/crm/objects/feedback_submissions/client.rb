@@ -11,6 +11,7 @@ module Hubspot
                 associations
                 basic
                 batch
+                public_object
                 search
               ].freeze
             end

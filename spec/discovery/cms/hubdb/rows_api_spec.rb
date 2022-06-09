@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Cms::Hubdb::RowsApi' do
-  subject(:rows_api) { Hubspot::Client.new(api_key: 'test').cms.hubdb.rows_api }
+  subject(:rows_api) { Hubspot::Client.new(access_token: 'test').cms.hubdb.rows_api }
   
   it { is_expected.to respond_to(:clone_draft_table_row) }
   it { is_expected.to respond_to(:create_table_row) }

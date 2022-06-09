@@ -19,7 +19,7 @@ describe 'Hubspot::Discovery::BaseModuleClient' do
     include Hubspot::Discovery::BaseModuleClient
   end
 
-  subject(:client) { Hubspot::Discovery::TestModuleClass.new(api_key: 'test') }
+  subject(:client) { Hubspot::Discovery::TestModuleClass.new(access_token: 'test') }
   
   it { is_expected.to respond_to(:automation) }
   it { is_expected.to respond_to(:cms) }

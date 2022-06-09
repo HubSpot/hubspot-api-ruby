@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.0.0] - 2022-06-09
+### Added
+
+- cms.source_code API client
+- crm.objects.calls API client
+- crm.objects.emails API client
+- crm.objects.meetings API client
+- crm.objects.notes API client
+- crm.objects.tasks API client
+- marketing.forms API client
+- marketing.events API client
+- settings.users API client
+
+### Changed (Breaking changes)
+
+- cms.blogs.authors.author_api => cms.blogs.authors.blog_authors_api
+- cms.blogs.blog_posts.default_api => cms.blogs.blog_posts.blog_posts_api
+- cms.blogs.tags.default_api => cms.blogs.tags.blog_tags_api
+
 ## [11.2.0] - 2022-05-12
 
 - added discovery classes

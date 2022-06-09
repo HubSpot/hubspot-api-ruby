@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Discovery::Crm::Companies::BasicApi' do
-  subject(:basic_api) { Hubspot::Client.new(api_key: 'test').crm.companies.basic_api }
+  subject(:basic_api) { Hubspot::Client.new(access_token: 'test').crm.companies.basic_api }
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:create) }

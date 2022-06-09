@@ -6,6 +6,8 @@ module Hubspot
       class Client
         def self.api_modules
           %i[
+            events
+            forms
             transactional
           ].freeze
         end

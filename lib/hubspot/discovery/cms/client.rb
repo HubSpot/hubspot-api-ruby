@@ -12,6 +12,7 @@ module Hubspot
             hubdb
             performance
             site_search
+            source_code
             url_redirects
           ].freeze
         end

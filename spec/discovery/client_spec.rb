@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Hubspot::Client' do
-  subject(:client) { Hubspot::Client.new(api_key: 'test') }
+  subject(:client) { Hubspot::Client.new(access_token: 'test') }
   
   it { is_expected.to respond_to(:automation) }
   it { is_expected.to respond_to(:cms) }
