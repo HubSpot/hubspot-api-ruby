@@ -40,7 +40,7 @@ for new discovery classes since version 11.2
 require 'hubspot-api-client'
 
 # Setup client
-client = Hubspot::Client(access_token: 'your_access_token')
+client = Hubspot::Client.new(access_token: 'your_access_token')
 
 # Get contacts
 contacts = client.crm.contacts.basic_api.get_page
@@ -58,7 +58,7 @@ all_contacts = basic_api.get_all(auth_names: 'oauth2')
 
 for new discovery classes since version 11.2
 ```ruby
-client = Hubspot::Client(access_token: 'your_oauth2_access_token')
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
 all_contacts = client.crm.contacts.basic_api.get_all
 ```
 
