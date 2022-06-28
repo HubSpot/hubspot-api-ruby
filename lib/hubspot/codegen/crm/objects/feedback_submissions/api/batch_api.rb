@@ -22,13 +22,137 @@ module Hubspot
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
+          # Archive a batch of feedback submissions by ID
+          # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
+          # @param [Hash] opts the optional parameters
+          # @return [nil]
+          def archive(batch_input_simple_public_object_id, opts = {})
+            archive_with_http_info(batch_input_simple_public_object_id, opts)
+            nil
+          end
+
+          # Archive a batch of feedback submissions by ID
+          # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+          def archive_with_http_info(batch_input_simple_public_object_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BatchApi.archive ...'
+            end
+            # verify the required parameter 'batch_input_simple_public_object_id' is set
+            if @api_client.config.client_side_validation && batch_input_simple_public_object_id.nil?
+              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_id' when calling BatchApi.archive"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions/batch/archive'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_id) 
+
+            # return_type
+            return_type = opts[:return_type] 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BatchApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Create a batch of feedback submissions
+          # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @return [BatchResponseSimplePublicObject]
+          def create(batch_input_simple_public_object_input, opts = {})
+            data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input, opts)
+            data
+          end
+
+          # Create a batch of feedback submissions
+          # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
+          def create_with_http_info(batch_input_simple_public_object_input, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
+            end
+            # verify the required parameter 'batch_input_simple_public_object_input' is set
+            if @api_client.config.client_side_validation && batch_input_simple_public_object_input.nil?
+              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input' when calling BatchApi.create"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions/batch/create'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_input) 
+
+            # return_type
+            return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BatchApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
           # Read a batch of feedback submissions by internal ID, or unique property values
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
           # @return [BatchResponseSimplePublicObject]
-          def read_batch(batch_read_input_simple_public_object_id, opts = {})
-            data, _status_code, _headers = read_batch_with_http_info(batch_read_input_simple_public_object_id, opts)
+          def read(batch_read_input_simple_public_object_id, opts = {})
+            data, _status_code, _headers = read_with_http_info(batch_read_input_simple_public_object_id, opts)
             data
           end
 
@@ -37,13 +161,13 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived.
           # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-          def read_batch_with_http_info(batch_read_input_simple_public_object_id, opts = {})
+          def read_with_http_info(batch_read_input_simple_public_object_id, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BatchApi.read_batch ...'
+              @api_client.config.logger.debug 'Calling API: BatchApi.read ...'
             end
             # verify the required parameter 'batch_read_input_simple_public_object_id' is set
             if @api_client.config.client_side_validation && batch_read_input_simple_public_object_id.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_read_input_simple_public_object_id' when calling BatchApi.read_batch"
+              fail ArgumentError, "Missing the required parameter 'batch_read_input_simple_public_object_id' when calling BatchApi.read"
             end
             # resource path
             local_var_path = '/crm/v3/objects/feedback_submissions/batch/read'
@@ -82,131 +206,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BatchApi#read_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
-
-          # Archive a batch of feedback submissions by ID
-          # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
-          # @param [Hash] opts the optional parameters
-          # @return [nil]
-          def submissions_batch_archive(batch_input_simple_public_object_id, opts = {})
-            submissions_batch_archive_with_http_info(batch_input_simple_public_object_id, opts)
-            nil
-          end
-
-          # Archive a batch of feedback submissions by ID
-          # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
-          # @param [Hash] opts the optional parameters
-          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def submissions_batch_archive_with_http_info(batch_input_simple_public_object_id, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BatchApi.submissions_batch_archive ...'
-            end
-            # verify the required parameter 'batch_input_simple_public_object_id' is set
-            if @api_client.config.client_side_validation && batch_input_simple_public_object_id.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_id' when calling BatchApi.submissions_batch_archive"
-            end
-            # resource path
-            local_var_path = '/crm/v3/objects/feedback_submissions/batch/archive'
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-            # HTTP header 'Content-Type'
-            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_id) 
-
-            # return_type
-            return_type = opts[:return_type] 
-
-            # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BatchApi#submissions_batch_archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
-
-          # Create a batch of feedback submissions
-          # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
-          # @param [Hash] opts the optional parameters
-          # @return [BatchResponseSimplePublicObject]
-          def submissions_batch_create(batch_input_simple_public_object_input, opts = {})
-            data, _status_code, _headers = submissions_batch_create_with_http_info(batch_input_simple_public_object_input, opts)
-            data
-          end
-
-          # Create a batch of feedback submissions
-          # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
-          # @param [Hash] opts the optional parameters
-          # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-          def submissions_batch_create_with_http_info(batch_input_simple_public_object_input, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BatchApi.submissions_batch_create ...'
-            end
-            # verify the required parameter 'batch_input_simple_public_object_input' is set
-            if @api_client.config.client_side_validation && batch_input_simple_public_object_input.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input' when calling BatchApi.submissions_batch_create"
-            end
-            # resource path
-            local_var_path = '/crm/v3/objects/feedback_submissions/batch/create'
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-            # HTTP header 'Content-Type'
-            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(batch_input_simple_public_object_input) 
-
-            # return_type
-            return_type = opts[:return_type] || 'BatchResponseSimplePublicObject' 
-
-            # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BatchApi#submissions_batch_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: BatchApi#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
@@ -215,8 +215,8 @@ module Hubspot
           # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
           # @param [Hash] opts the optional parameters
           # @return [BatchResponseSimplePublicObject]
-          def submissions_batch_update(batch_input_simple_public_object_batch_input, opts = {})
-            data, _status_code, _headers = submissions_batch_update_with_http_info(batch_input_simple_public_object_batch_input, opts)
+          def update(batch_input_simple_public_object_batch_input, opts = {})
+            data, _status_code, _headers = update_with_http_info(batch_input_simple_public_object_batch_input, opts)
             data
           end
 
@@ -224,13 +224,13 @@ module Hubspot
           # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-          def submissions_batch_update_with_http_info(batch_input_simple_public_object_batch_input, opts = {})
+          def update_with_http_info(batch_input_simple_public_object_batch_input, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BatchApi.submissions_batch_update ...'
+              @api_client.config.logger.debug 'Calling API: BatchApi.update ...'
             end
             # verify the required parameter 'batch_input_simple_public_object_batch_input' is set
             if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input' when calling BatchApi.submissions_batch_update"
+              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input' when calling BatchApi.update"
             end
             # resource path
             local_var_path = '/crm/v3/objects/feedback_submissions/batch/update'
@@ -268,7 +268,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BatchApi#submissions_batch_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: BatchApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end

@@ -24,6 +24,132 @@ module Hubspot
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
+          # Archive
+          # Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
+          # @param feedback_submission_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [nil]
+          def archive(feedback_submission_id, opts = {})
+            archive_with_http_info(feedback_submission_id, opts)
+            nil
+          end
+
+          # Archive
+          # Move an Object identified by &#x60;{feedbackSubmissionId}&#x60; to the recycling bin.
+          # @param feedback_submission_id [String] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+          def archive_with_http_info(feedback_submission_id, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BasicApi.archive ...'
+            end
+            # verify the required parameter 'feedback_submission_id' is set
+            if @api_client.config.client_side_validation && feedback_submission_id.nil?
+              fail ArgumentError, "Missing the required parameter 'feedback_submission_id' when calling BasicApi.archive"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'.sub('{' + 'feedbackSubmissionId' + '}', CGI.escape(feedback_submission_id.to_s))
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] 
+
+            # return_type
+            return_type = opts[:return_type] 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BasicApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
+          # Create
+          # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+          # @param simple_public_object_input [SimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @return [SimplePublicObject]
+          def create(simple_public_object_input, opts = {})
+            data, _status_code, _headers = create_with_http_info(simple_public_object_input, opts)
+            data
+          end
+
+          # Create
+          # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+          # @param simple_public_object_input [SimplePublicObjectInput] 
+          # @param [Hash] opts the optional parameters
+          # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+          def create_with_http_info(simple_public_object_input, opts = {})
+            if @api_client.config.debugging
+              @api_client.config.logger.debug 'Calling API: BasicApi.create ...'
+            end
+            # verify the required parameter 'simple_public_object_input' is set
+            if @api_client.config.client_side_validation && simple_public_object_input.nil?
+              fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.create"
+            end
+            # resource path
+            local_var_path = '/crm/v3/objects/feedback_submissions'
+
+            # query parameters
+            query_params = opts[:query_params] || {}
+
+            # header parameters
+            header_params = opts[:header_params] || {}
+            # HTTP header 'Accept' (if needed)
+            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+            # HTTP header 'Content-Type'
+            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+            # form parameters
+            form_params = opts[:form_params] || {}
+
+            # http body (model)
+            post_body = opts[:body] || @api_client.object_to_http_body(simple_public_object_input) 
+
+            # return_type
+            return_type = opts[:return_type] || 'SimplePublicObject' 
+
+            # auth_names
+            auth_names = opts[:auth_names] || ['hapikey']
+
+            new_options = opts.merge(
+              :header_params => header_params,
+              :query_params => query_params,
+              :form_params => form_params,
+              :body => post_body,
+              :auth_names => auth_names,
+              :return_type => return_type
+            )
+
+            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+            if @api_client.config.debugging
+              @api_client.config.logger.debug "API called: BasicApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            end
+            return data, status_code, headers
+          end
+
           # Read
           # Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
           # @param feedback_submission_id [String] 
@@ -175,132 +301,6 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Create
-          # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-          # @param simple_public_object_input [SimplePublicObjectInput] 
-          # @param [Hash] opts the optional parameters
-          # @return [SimplePublicObject]
-          def submissions(simple_public_object_input, opts = {})
-            data, _status_code, _headers = submissions_with_http_info(simple_public_object_input, opts)
-            data
-          end
-
-          # Create
-          # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-          # @param simple_public_object_input [SimplePublicObjectInput] 
-          # @param [Hash] opts the optional parameters
-          # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-          def submissions_with_http_info(simple_public_object_input, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BasicApi.submissions ...'
-            end
-            # verify the required parameter 'simple_public_object_input' is set
-            if @api_client.config.client_side_validation && simple_public_object_input.nil?
-              fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.submissions"
-            end
-            # resource path
-            local_var_path = '/crm/v3/objects/feedback_submissions'
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-            # HTTP header 'Content-Type'
-            header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] || @api_client.object_to_http_body(simple_public_object_input) 
-
-            # return_type
-            return_type = opts[:return_type] || 'SimplePublicObject' 
-
-            # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BasicApi#submissions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
-
-          # Archive
-          # Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
-          # @param feedback_submission_id [String] 
-          # @param [Hash] opts the optional parameters
-          # @return [nil]
-          def submissions_feedback_submission_id(feedback_submission_id, opts = {})
-            submissions_feedback_submission_id_with_http_info(feedback_submission_id, opts)
-            nil
-          end
-
-          # Archive
-          # Move an Object identified by &#x60;{feedbackSubmissionId}&#x60; to the recycling bin.
-          # @param feedback_submission_id [String] 
-          # @param [Hash] opts the optional parameters
-          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def submissions_feedback_submission_id_with_http_info(feedback_submission_id, opts = {})
-            if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BasicApi.submissions_feedback_submission_id ...'
-            end
-            # verify the required parameter 'feedback_submission_id' is set
-            if @api_client.config.client_side_validation && feedback_submission_id.nil?
-              fail ArgumentError, "Missing the required parameter 'feedback_submission_id' when calling BasicApi.submissions_feedback_submission_id"
-            end
-            # resource path
-            local_var_path = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'.sub('{' + 'feedbackSubmissionId' + '}', CGI.escape(feedback_submission_id.to_s))
-
-            # query parameters
-            query_params = opts[:query_params] || {}
-
-            # header parameters
-            header_params = opts[:header_params] || {}
-            # HTTP header 'Accept' (if needed)
-            header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-            # form parameters
-            form_params = opts[:form_params] || {}
-
-            # http body (model)
-            post_body = opts[:body] 
-
-            # return_type
-            return_type = opts[:return_type] 
-
-            # auth_names
-            auth_names = opts[:auth_names] || ['hapikey']
-
-            new_options = opts.merge(
-              :header_params => header_params,
-              :query_params => query_params,
-              :form_params => form_params,
-              :body => post_body,
-              :auth_names => auth_names,
-              :return_type => return_type
-            )
-
-            data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-            if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BasicApi#submissions_feedback_submission_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-            end
-            return data, status_code, headers
-          end
-
           # Update
           # Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
           # @param feedback_submission_id [String] 
@@ -308,8 +308,8 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
           # @return [SimplePublicObject]
-          def submissions_feedback_submission_id_0(feedback_submission_id, simple_public_object_input, opts = {})
-            data, _status_code, _headers = submissions_feedback_submission_id_0_with_http_info(feedback_submission_id, simple_public_object_input, opts)
+          def update(feedback_submission_id, simple_public_object_input, opts = {})
+            data, _status_code, _headers = update_with_http_info(feedback_submission_id, simple_public_object_input, opts)
             data
           end
 
@@ -320,17 +320,17 @@ module Hubspot
           # @param [Hash] opts the optional parameters
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
           # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-          def submissions_feedback_submission_id_0_with_http_info(feedback_submission_id, simple_public_object_input, opts = {})
+          def update_with_http_info(feedback_submission_id, simple_public_object_input, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: BasicApi.submissions_feedback_submission_id_0 ...'
+              @api_client.config.logger.debug 'Calling API: BasicApi.update ...'
             end
             # verify the required parameter 'feedback_submission_id' is set
             if @api_client.config.client_side_validation && feedback_submission_id.nil?
-              fail ArgumentError, "Missing the required parameter 'feedback_submission_id' when calling BasicApi.submissions_feedback_submission_id_0"
+              fail ArgumentError, "Missing the required parameter 'feedback_submission_id' when calling BasicApi.update"
             end
             # verify the required parameter 'simple_public_object_input' is set
             if @api_client.config.client_side_validation && simple_public_object_input.nil?
-              fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.submissions_feedback_submission_id_0"
+              fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.update"
             end
             # resource path
             local_var_path = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'.sub('{' + 'feedbackSubmissionId' + '}', CGI.escape(feedback_submission_id.to_s))
@@ -369,7 +369,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: BasicApi#submissions_feedback_submission_id_0\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: BasicApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end

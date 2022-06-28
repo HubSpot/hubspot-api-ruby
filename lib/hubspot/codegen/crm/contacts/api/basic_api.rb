@@ -157,6 +157,7 @@ module Hubspot
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [SimplePublicObjectWithAssociations]
         def get_by_id(contact_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(contact_id, opts)
@@ -171,6 +172,7 @@ module Hubspot
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
         def get_by_id_with_http_info(contact_id, opts = {})
           if @api_client.config.debugging
@@ -189,6 +191,7 @@ module Hubspot
           query_params[:'propertiesWithHistory'] = @api_client.build_collection_param(opts[:'properties_with_history'], :multi) if !opts[:'properties_with_history'].nil?
           query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+          query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -302,6 +305,7 @@ module Hubspot
         # @param contact_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [SimplePublicObject]
         def update(contact_id, simple_public_object_input, opts = {})
           data, _status_code, _headers = update_with_http_info(contact_id, simple_public_object_input, opts)
@@ -313,6 +317,7 @@ module Hubspot
         # @param contact_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
+        # @option opts [String] :id_property The name of a property whose values are unique for this object type
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
         def update_with_http_info(contact_id, simple_public_object_input, opts = {})
           if @api_client.config.debugging
@@ -331,6 +336,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'idProperty'] = opts[:'id_property'] if !opts[:'id_property'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
