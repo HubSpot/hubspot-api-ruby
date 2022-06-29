@@ -26,8 +26,8 @@ module Hubspot
           # @param public_merge_input [PublicMergeInput] 
           # @param [Hash] opts the optional parameters
           # @return [SimplePublicObject]
-          def submissions_merge(public_merge_input, opts = {})
-            data, _status_code, _headers = submissions_merge_with_http_info(public_merge_input, opts)
+          def merge(public_merge_input, opts = {})
+            data, _status_code, _headers = merge_with_http_info(public_merge_input, opts)
             data
           end
 
@@ -35,13 +35,13 @@ module Hubspot
           # @param public_merge_input [PublicMergeInput] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-          def submissions_merge_with_http_info(public_merge_input, opts = {})
+          def merge_with_http_info(public_merge_input, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: PublicObjectApi.submissions_merge ...'
+              @api_client.config.logger.debug 'Calling API: PublicObjectApi.merge ...'
             end
             # verify the required parameter 'public_merge_input' is set
             if @api_client.config.client_side_validation && public_merge_input.nil?
-              fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling PublicObjectApi.submissions_merge"
+              fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling PublicObjectApi.merge"
             end
             # resource path
             local_var_path = '/crm/v3/objects/feedback_submissions/merge'
@@ -79,7 +79,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: PublicObjectApi#submissions_merge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: PublicObjectApi#merge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
