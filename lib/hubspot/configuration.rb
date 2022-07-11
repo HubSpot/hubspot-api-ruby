@@ -1,3 +1,5 @@
+require 'cgi'
+
 module Hubspot
   class Configuration
     # Defines url scheme
@@ -166,7 +168,7 @@ module Hubspot
 
     def base_url
       url = "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '')
-      URI.encode(url)
+      CGI.escape(url)
     end
 
     # Gets API key (with prefix if set).
