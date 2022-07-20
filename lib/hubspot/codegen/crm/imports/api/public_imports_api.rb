@@ -67,7 +67,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponsePublicImportErrorForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey']
+          auth_names = opts[:auth_names] || []
 
           new_options = opts.merge(
             :header_params => header_params,

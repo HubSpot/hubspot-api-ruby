@@ -32,6 +32,30 @@ describe 'BasicApi' do
     end
   end
 
+  # unit tests for archive
+  # Archive
+  # Move an Object identified by &#x60;{feedbackSubmissionId}&#x60; to the recycling bin.
+  # @param feedback_submission_id 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'archive test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create
+  # Create
+  # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+  # @param simple_public_object_input 
+  # @param [Hash] opts the optional parameters
+  # @return [SimplePublicObject]
+  describe 'create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_by_id
   # Read
   # Read an Object identified by &#x60;{feedbackSubmissionId}&#x60;. &#x60;{feedbackSubmissionId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param.  Control what is returned via the &#x60;properties&#x60; query param.
@@ -66,31 +90,7 @@ describe 'BasicApi' do
     end
   end
 
-  # unit tests for submissions
-  # Create
-  # Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-  # @param simple_public_object_input 
-  # @param [Hash] opts the optional parameters
-  # @return [SimplePublicObject]
-  describe 'submissions test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for submissions_feedback_submission_id
-  # Archive
-  # Move an Object identified by &#x60;{feedbackSubmissionId}&#x60; to the recycling bin.
-  # @param feedback_submission_id 
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'submissions_feedback_submission_id test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for submissions_feedback_submission_id_0
+  # unit tests for update
   # Update
   # Perform a partial update of an Object identified by &#x60;{feedbackSubmissionId}&#x60;. &#x60;{feedbackSubmissionId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
   # @param feedback_submission_id 
@@ -98,7 +98,7 @@ describe 'BasicApi' do
   # @param [Hash] opts the optional parameters
   # @option opts [String] :id_property The name of a property whose values are unique for this object type
   # @return [SimplePublicObject]
-  describe 'submissions_feedback_submission_id_0 test' do
+  describe 'update test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

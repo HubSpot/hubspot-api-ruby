@@ -32,12 +32,12 @@ describe 'PublicObjectApi' do
     end
   end
 
-  # unit tests for submissions_merge
+  # unit tests for merge
   # Merge two feedback submissions with same type
   # @param public_merge_input 
   # @param [Hash] opts the optional parameters
   # @return [SimplePublicObject]
-  describe 'submissions_merge test' do
+  describe 'merge test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

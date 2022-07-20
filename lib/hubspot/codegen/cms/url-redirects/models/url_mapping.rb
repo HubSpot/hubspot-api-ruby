@@ -19,16 +19,6 @@ module Hubspot
         # The unique ID of this URL redirect.
         attr_accessor :id
 
-        attr_accessor :portal_id
-
-        attr_accessor :created
-
-        attr_accessor :updated
-
-        attr_accessor :created_by_id
-
-        attr_accessor :updated_by_id
-
         # The target incoming URL, path, or pattern to match for redirection.
         attr_accessor :route_prefix
 
@@ -38,12 +28,8 @@ module Hubspot
         # The type of redirect to create. Options include: 301 (permanent), 302 (temporary), or 305 (proxy). Find more details [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
         attr_accessor :redirect_style
 
-        attr_accessor :content_group_id
-
         # Whether the URL redirect mapping should apply only if a live page on the URL isn't found. If False, the URL redirect mapping will take precedence over any existing page.
         attr_accessor :is_only_after_not_found
-
-        attr_accessor :is_regex
 
         # Whether the `routePrefix` should match on the entire URL, including the domain.
         attr_accessor :is_match_full_url
@@ -60,104 +46,48 @@ module Hubspot
         # Whether the `routePrefix` should match both HTTP and HTTPS protocols.
         attr_accessor :is_protocol_agnostic
 
-        attr_accessor :name
-
         # Used to prioritize URL redirection. If a given URL matches more than one redirect, the one with the **lower** precedence will be used.
         attr_accessor :precedence
 
-        attr_accessor :deleted_at
+        attr_accessor :created
 
-        attr_accessor :note
-
-        attr_accessor :label
-
-        attr_accessor :internally_created
-
-        attr_accessor :cos_object_type
-
-        attr_accessor :cdn_purge_embargo_time
-
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
+        attr_accessor :updated
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'id' => :'id',
-            :'portal_id' => :'portalId',
-            :'created' => :'created',
-            :'updated' => :'updated',
-            :'created_by_id' => :'createdById',
-            :'updated_by_id' => :'updatedById',
             :'route_prefix' => :'routePrefix',
             :'destination' => :'destination',
             :'redirect_style' => :'redirectStyle',
-            :'content_group_id' => :'contentGroupId',
             :'is_only_after_not_found' => :'isOnlyAfterNotFound',
-            :'is_regex' => :'isRegex',
             :'is_match_full_url' => :'isMatchFullUrl',
             :'is_match_query_string' => :'isMatchQueryString',
             :'is_pattern' => :'isPattern',
             :'is_trailing_slash_optional' => :'isTrailingSlashOptional',
             :'is_protocol_agnostic' => :'isProtocolAgnostic',
-            :'name' => :'name',
             :'precedence' => :'precedence',
-            :'deleted_at' => :'deletedAt',
-            :'note' => :'note',
-            :'label' => :'label',
-            :'internally_created' => :'internallyCreated',
-            :'cos_object_type' => :'cosObjectType',
-            :'cdn_purge_embargo_time' => :'cdnPurgeEmbargoTime'
+            :'created' => :'created',
+            :'updated' => :'updated'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'Integer',
-            :'portal_id' => :'Integer',
-            :'created' => :'Integer',
-            :'updated' => :'Integer',
-            :'created_by_id' => :'Integer',
-            :'updated_by_id' => :'Integer',
+            :'id' => :'String',
             :'route_prefix' => :'String',
             :'destination' => :'String',
             :'redirect_style' => :'Integer',
-            :'content_group_id' => :'Integer',
             :'is_only_after_not_found' => :'Boolean',
-            :'is_regex' => :'Boolean',
             :'is_match_full_url' => :'Boolean',
             :'is_match_query_string' => :'Boolean',
             :'is_pattern' => :'Boolean',
             :'is_trailing_slash_optional' => :'Boolean',
             :'is_protocol_agnostic' => :'Boolean',
-            :'name' => :'String',
             :'precedence' => :'Integer',
-            :'deleted_at' => :'Integer',
-            :'note' => :'String',
-            :'label' => :'String',
-            :'internally_created' => :'Boolean',
-            :'cos_object_type' => :'String',
-            :'cdn_purge_embargo_time' => :'Integer'
+            :'created' => :'DateTime',
+            :'updated' => :'DateTime'
           }
         end
 
@@ -186,26 +116,6 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
-          if attributes.key?(:'portal_id')
-            self.portal_id = attributes[:'portal_id']
-          end
-
-          if attributes.key?(:'created')
-            self.created = attributes[:'created']
-          end
-
-          if attributes.key?(:'updated')
-            self.updated = attributes[:'updated']
-          end
-
-          if attributes.key?(:'created_by_id')
-            self.created_by_id = attributes[:'created_by_id']
-          end
-
-          if attributes.key?(:'updated_by_id')
-            self.updated_by_id = attributes[:'updated_by_id']
-          end
-
           if attributes.key?(:'route_prefix')
             self.route_prefix = attributes[:'route_prefix']
           end
@@ -218,16 +128,8 @@ module Hubspot
             self.redirect_style = attributes[:'redirect_style']
           end
 
-          if attributes.key?(:'content_group_id')
-            self.content_group_id = attributes[:'content_group_id']
-          end
-
           if attributes.key?(:'is_only_after_not_found')
             self.is_only_after_not_found = attributes[:'is_only_after_not_found']
-          end
-
-          if attributes.key?(:'is_regex')
-            self.is_regex = attributes[:'is_regex']
           end
 
           if attributes.key?(:'is_match_full_url')
@@ -250,36 +152,16 @@ module Hubspot
             self.is_protocol_agnostic = attributes[:'is_protocol_agnostic']
           end
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
           if attributes.key?(:'precedence')
             self.precedence = attributes[:'precedence']
           end
 
-          if attributes.key?(:'deleted_at')
-            self.deleted_at = attributes[:'deleted_at']
+          if attributes.key?(:'created')
+            self.created = attributes[:'created']
           end
 
-          if attributes.key?(:'note')
-            self.note = attributes[:'note']
-          end
-
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'internally_created')
-            self.internally_created = attributes[:'internally_created']
-          end
-
-          if attributes.key?(:'cos_object_type')
-            self.cos_object_type = attributes[:'cos_object_type']
-          end
-
-          if attributes.key?(:'cdn_purge_embargo_time')
-            self.cdn_purge_embargo_time = attributes[:'cdn_purge_embargo_time']
+          if attributes.key?(:'updated')
+            self.updated = attributes[:'updated']
           end
         end
 
@@ -289,26 +171,6 @@ module Hubspot
           invalid_properties = Array.new
           if @id.nil?
             invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
-          if @portal_id.nil?
-            invalid_properties.push('invalid value for "portal_id", portal_id cannot be nil.')
-          end
-
-          if @created.nil?
-            invalid_properties.push('invalid value for "created", created cannot be nil.')
-          end
-
-          if @updated.nil?
-            invalid_properties.push('invalid value for "updated", updated cannot be nil.')
-          end
-
-          if @created_by_id.nil?
-            invalid_properties.push('invalid value for "created_by_id", created_by_id cannot be nil.')
-          end
-
-          if @updated_by_id.nil?
-            invalid_properties.push('invalid value for "updated_by_id", updated_by_id cannot be nil.')
           end
 
           if @route_prefix.nil?
@@ -323,16 +185,8 @@ module Hubspot
             invalid_properties.push('invalid value for "redirect_style", redirect_style cannot be nil.')
           end
 
-          if @content_group_id.nil?
-            invalid_properties.push('invalid value for "content_group_id", content_group_id cannot be nil.')
-          end
-
           if @is_only_after_not_found.nil?
             invalid_properties.push('invalid value for "is_only_after_not_found", is_only_after_not_found cannot be nil.')
-          end
-
-          if @is_regex.nil?
-            invalid_properties.push('invalid value for "is_regex", is_regex cannot be nil.')
           end
 
           if @is_match_full_url.nil?
@@ -355,36 +209,8 @@ module Hubspot
             invalid_properties.push('invalid value for "is_protocol_agnostic", is_protocol_agnostic cannot be nil.')
           end
 
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
           if @precedence.nil?
             invalid_properties.push('invalid value for "precedence", precedence cannot be nil.')
-          end
-
-          if @deleted_at.nil?
-            invalid_properties.push('invalid value for "deleted_at", deleted_at cannot be nil.')
-          end
-
-          if @note.nil?
-            invalid_properties.push('invalid value for "note", note cannot be nil.')
-          end
-
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
-          end
-
-          if @internally_created.nil?
-            invalid_properties.push('invalid value for "internally_created", internally_created cannot be nil.')
-          end
-
-          if @cos_object_type.nil?
-            invalid_properties.push('invalid value for "cos_object_type", cos_object_type cannot be nil.')
-          end
-
-          if @cdn_purge_embargo_time.nil?
-            invalid_properties.push('invalid value for "cdn_purge_embargo_time", cdn_purge_embargo_time cannot be nil.')
           end
 
           invalid_properties
@@ -394,43 +220,17 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @id.nil?
-          return false if @portal_id.nil?
-          return false if @created.nil?
-          return false if @updated.nil?
-          return false if @created_by_id.nil?
-          return false if @updated_by_id.nil?
           return false if @route_prefix.nil?
           return false if @destination.nil?
           return false if @redirect_style.nil?
-          return false if @content_group_id.nil?
           return false if @is_only_after_not_found.nil?
-          return false if @is_regex.nil?
           return false if @is_match_full_url.nil?
           return false if @is_match_query_string.nil?
           return false if @is_pattern.nil?
           return false if @is_trailing_slash_optional.nil?
           return false if @is_protocol_agnostic.nil?
-          return false if @name.nil?
           return false if @precedence.nil?
-          return false if @deleted_at.nil?
-          return false if @note.nil?
-          return false if @label.nil?
-          return false if @internally_created.nil?
-          return false if @cos_object_type.nil?
-          cos_object_type_validator = EnumAttributeValidator.new('String', ["CONTENT", "EXTENSION_RESOURCE", "LAYOUT", "CUSTOM_WIDGET", "WIDGET", "FORM", "PLACEMENT", "IMAGE", "DOMAIN_SETTINGS", "SITE_SETTINGS", "EMAIL_ADDRESS", "WORKFLOW", "HUBDB_TABLE", "REDIRECT_URL", "DESIGN_FOLDER", "SITE_MAP", "DOMAIN", "BLOG", "FILE", "FOLDER", "SITE_MENU", "THEME", "CONTENT_GROUP", "FOLLOW_ME", "KNOWLEDGE_BASE", "LIST_MEMBERSHIP", "CONTACT_MEMBERSHIP", "PASSWORD_PROTECTED", "UNRESTRICTED_ACCESS", "MARKETPLACE_LISTING", "LAYOUT_SECTION", "THEME_SETTINGS", "VIDEO_PLAYER", "URL_MAPPING", "KNOWLEDGE_CATEGORY", "KNOWLEDGE_HOMEPAGE_CATEGORY", "RAW_ASSET", "GLOBAL_CONTENT", "HUBDB_TABLE_ROW", "BLOG_AUTHOR", "SERVERLESS_FUNCTION", "KNOWLEDGE_CATEGORY_TRANSLATION"])
-          return false unless cos_object_type_validator.valid?(@cos_object_type)
-          return false if @cdn_purge_embargo_time.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] cos_object_type Object to be assigned
-        def cos_object_type=(cos_object_type)
-          validator = EnumAttributeValidator.new('String', ["CONTENT", "EXTENSION_RESOURCE", "LAYOUT", "CUSTOM_WIDGET", "WIDGET", "FORM", "PLACEMENT", "IMAGE", "DOMAIN_SETTINGS", "SITE_SETTINGS", "EMAIL_ADDRESS", "WORKFLOW", "HUBDB_TABLE", "REDIRECT_URL", "DESIGN_FOLDER", "SITE_MAP", "DOMAIN", "BLOG", "FILE", "FOLDER", "SITE_MENU", "THEME", "CONTENT_GROUP", "FOLLOW_ME", "KNOWLEDGE_BASE", "LIST_MEMBERSHIP", "CONTACT_MEMBERSHIP", "PASSWORD_PROTECTED", "UNRESTRICTED_ACCESS", "MARKETPLACE_LISTING", "LAYOUT_SECTION", "THEME_SETTINGS", "VIDEO_PLAYER", "URL_MAPPING", "KNOWLEDGE_CATEGORY", "KNOWLEDGE_HOMEPAGE_CATEGORY", "RAW_ASSET", "GLOBAL_CONTENT", "HUBDB_TABLE_ROW", "BLOG_AUTHOR", "SERVERLESS_FUNCTION", "KNOWLEDGE_CATEGORY_TRANSLATION"])
-          unless validator.valid?(cos_object_type)
-            fail ArgumentError, "invalid value for \"cos_object_type\", must be one of #{validator.allowable_values}."
-          end
-          @cos_object_type = cos_object_type
         end
 
         # Checks equality by comparing each attribute.
@@ -439,30 +239,18 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               id == o.id &&
-              portal_id == o.portal_id &&
-              created == o.created &&
-              updated == o.updated &&
-              created_by_id == o.created_by_id &&
-              updated_by_id == o.updated_by_id &&
               route_prefix == o.route_prefix &&
               destination == o.destination &&
               redirect_style == o.redirect_style &&
-              content_group_id == o.content_group_id &&
               is_only_after_not_found == o.is_only_after_not_found &&
-              is_regex == o.is_regex &&
               is_match_full_url == o.is_match_full_url &&
               is_match_query_string == o.is_match_query_string &&
               is_pattern == o.is_pattern &&
               is_trailing_slash_optional == o.is_trailing_slash_optional &&
               is_protocol_agnostic == o.is_protocol_agnostic &&
-              name == o.name &&
               precedence == o.precedence &&
-              deleted_at == o.deleted_at &&
-              note == o.note &&
-              label == o.label &&
-              internally_created == o.internally_created &&
-              cos_object_type == o.cos_object_type &&
-              cdn_purge_embargo_time == o.cdn_purge_embargo_time
+              created == o.created &&
+              updated == o.updated
         end
 
         # @see the `==` method
@@ -474,7 +262,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, portal_id, created, updated, created_by_id, updated_by_id, route_prefix, destination, redirect_style, content_group_id, is_only_after_not_found, is_regex, is_match_full_url, is_match_query_string, is_pattern, is_trailing_slash_optional, is_protocol_agnostic, name, precedence, deleted_at, note, label, internally_created, cos_object_type, cdn_purge_embargo_time].hash
+          [id, route_prefix, destination, redirect_style, is_only_after_not_found, is_match_full_url, is_match_query_string, is_pattern, is_trailing_slash_optional, is_protocol_agnostic, precedence, created, updated].hash
         end
 
         # Builds the object from hash

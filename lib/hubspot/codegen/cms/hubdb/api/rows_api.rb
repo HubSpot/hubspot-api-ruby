@@ -76,7 +76,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -146,7 +146,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -219,7 +219,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -292,7 +292,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -349,7 +349,7 @@ module Hubspot
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -366,7 +366,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -439,7 +439,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -496,7 +496,7 @@ module Hubspot
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -513,7 +513,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseWithTotalHubDbTableRowV3ForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -594,7 +594,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -675,7 +675,7 @@ module Hubspot
           return_type = opts[:return_type] || 'HubDbTableRowV3' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

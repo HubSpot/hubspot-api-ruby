@@ -57,7 +57,6 @@ describe 'PublicApi' do
   # @option opts [Boolean] :autocomplete Specifies whether or not you are showing autocomplete results. Defaults to false.
   # @option opts [Float] :popularity_boost Specifies how strongly a result is boosted based on its view count. Defaults to 1.0.
   # @option opts [Float] :boost_limit Specifies the maximum amount a result will be boosted based on its view count. Defaults to 5.0. Read more about elasticsearch boosting [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-boost.html).
-  # @option opts [Float] :min_score Specifies the minimum search score threshold for returned results. This value is intentionally set low by default in order to return many results. Increase this for higher precision, but less recall.
   # @option opts [String] :boost_recent Specifies a relative time window where scores of documents published outside this time window decay. This can only be used for blog posts. For example, boostRecent&#x3D;10d will boost documents published within the last 10 days. Supported timeunits are ms (milliseconds), s (seconds), m (minutes), h (hours), d (days).
   # @option opts [Integer] :table_id Specifies a specific HubDB table to search. Only returns results from the specified table. Can be used in tandem with the &#x60;hubdbQuery&#x60; parameter to further filter results.
   # @option opts [String] :hubdb_query Specify a HubDB query to further filter the search results.

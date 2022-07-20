@@ -73,7 +73,7 @@ module Hubspot
           return_type = opts[:return_type] || 'EventDetailSettings' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['developer_hapikey', 'hapikey']
+          auth_names = opts[:auth_names] || ['developer_hapikey']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -135,7 +135,7 @@ module Hubspot
           return_type = opts[:return_type] || 'EventDetailSettings' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['developer_hapikey', 'hapikey']
+          auth_names = opts[:auth_names] || ['developer_hapikey']
 
           new_options = opts.merge(
             :header_params => header_params,

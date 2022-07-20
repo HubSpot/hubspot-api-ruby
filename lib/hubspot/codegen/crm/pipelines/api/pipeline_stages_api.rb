@@ -77,7 +77,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -153,7 +153,7 @@ module Hubspot
           return_type = opts[:return_type] || 'PipelineStage' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -221,7 +221,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponsePipelineStageNoPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -295,7 +295,7 @@ module Hubspot
           return_type = opts[:return_type] || 'PipelineStage' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -377,7 +377,7 @@ module Hubspot
           return_type = opts[:return_type] || 'PipelineStage' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -459,7 +459,7 @@ module Hubspot
           return_type = opts[:return_type] || 'PipelineStage' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

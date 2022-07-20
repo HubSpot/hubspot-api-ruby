@@ -15,25 +15,20 @@ require 'date'
 module Hubspot
   module Marketing
     module Transactional
-      class CollectionResponseSmtpApiTokenView
-        # The actual collection of tokens.
-        attr_accessor :results
-
-        attr_accessor :paging
+      class ForwardPaging
+        attr_accessor :_next
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'results' => :'results',
-            :'paging' => :'paging'
+            :'_next' => :'next'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'results' => :'Array<SmtpApiTokenView>',
-            :'paging' => :'Paging'
+            :'_next' => :'NextPage'
           }
         end
 
@@ -47,25 +42,19 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Transactional::CollectionResponseSmtpApiTokenView` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Transactional::ForwardPaging` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Transactional::CollectionResponseSmtpApiTokenView`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Transactional::ForwardPaging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'results')
-            if (value = attributes[:'results']).is_a?(Array)
-              self.results = value
-            end
-          end
-
-          if attributes.key?(:'paging')
-            self.paging = attributes[:'paging']
+          if attributes.key?(:'_next')
+            self._next = attributes[:'_next']
           end
         end
 
@@ -73,17 +62,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @results.nil?
-            invalid_properties.push('invalid value for "results", results cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @results.nil?
           true
         end
 
@@ -92,8 +76,7 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              results == o.results &&
-              paging == o.paging
+              _next == o._next
         end
 
         # @see the `==` method
@@ -105,7 +88,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [results, paging].hash
+          [_next].hash
         end
 
         # Builds the object from hash

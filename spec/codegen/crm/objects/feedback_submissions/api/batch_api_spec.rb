@@ -32,46 +32,46 @@ describe 'BatchApi' do
     end
   end
 
-  # unit tests for read_batch
+  # unit tests for archive
+  # Archive a batch of feedback submissions by ID
+  # @param batch_input_simple_public_object_id 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'archive test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create
+  # Create a batch of feedback submissions
+  # @param batch_input_simple_public_object_input 
+  # @param [Hash] opts the optional parameters
+  # @return [BatchResponseSimplePublicObject]
+  describe 'create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for read
   # Read a batch of feedback submissions by internal ID, or unique property values
   # @param batch_read_input_simple_public_object_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
   # @return [BatchResponseSimplePublicObject]
-  describe 'read_batch test' do
+  describe 'read test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  # unit tests for submissions_batch_archive
-  # Archive a batch of feedback submissions by ID
-  # @param batch_input_simple_public_object_id 
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'submissions_batch_archive test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for submissions_batch_create
-  # Create a batch of feedback submissions
-  # @param batch_input_simple_public_object_input 
-  # @param [Hash] opts the optional parameters
-  # @return [BatchResponseSimplePublicObject]
-  describe 'submissions_batch_create test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for submissions_batch_update
+  # unit tests for update
   # Update a batch of feedback submissions
   # @param batch_input_simple_public_object_batch_input 
   # @param [Hash] opts the optional parameters
   # @return [BatchResponseSimplePublicObject]
-  describe 'submissions_batch_update test' do
+  describe 'update test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

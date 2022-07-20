@@ -32,35 +32,7 @@ describe 'AssociationsApi' do
     end
   end
 
-  # unit tests for get_all
-  # List associations of a feedback submission by type
-  # @param feedback_submission_id 
-  # @param to_object_type 
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-  # @option opts [Integer] :limit The maximum number of results to display per page.
-  # @return [CollectionResponseAssociatedIdForwardPaging]
-  describe 'get_all test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type
-  # Associate a feedback submission with another object
-  # @param feedback_submission_id 
-  # @param to_object_type 
-  # @param to_object_id 
-  # @param association_type 
-  # @param [Hash] opts the optional parameters
-  # @return [SimplePublicObjectWithAssociations]
-  describe 'submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type_0
+  # unit tests for archive
   # Remove an association between two feedback submissions
   # @param feedback_submission_id 
   # @param to_object_type 
@@ -68,7 +40,35 @@ describe 'AssociationsApi' do
   # @param association_type 
   # @param [Hash] opts the optional parameters
   # @return [nil]
-  describe 'submissions_feedback_submission_id_associations_to_object_type_to_object_id_association_type_0 test' do
+  describe 'archive test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for create
+  # Associate a feedback submission with another object
+  # @param feedback_submission_id 
+  # @param to_object_type 
+  # @param to_object_id 
+  # @param association_type 
+  # @param [Hash] opts the optional parameters
+  # @return [SimplePublicObjectWithAssociations]
+  describe 'create test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_page
+  # List associations of a feedback submission by type
+  # @param feedback_submission_id 
+  # @param to_object_type 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+  # @option opts [Integer] :limit The maximum number of results to display per page.
+  # @return [CollectionResponseAssociatedIdForwardPaging]
+  describe 'get_page test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

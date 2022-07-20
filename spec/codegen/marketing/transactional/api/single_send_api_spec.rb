@@ -35,8 +35,8 @@ describe 'SingleSendApi' do
   # unit tests for send_email
   # Send a single transactional email asynchronously.
   # Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
+  # @param public_single_send_request_egg A request object describing the email to send.
   # @param [Hash] opts the optional parameters
-  # @option opts [PublicSingleSendRequestEgg] :public_single_send_request_egg A request object describing the email to send.
   # @return [EmailSendStatusView]
   describe 'send_email test' do
     it 'should work' do

@@ -23,22 +23,26 @@ module Hubspot
         end
         # Send a single transactional email asynchronously.
         # Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
+        # @param public_single_send_request_egg [PublicSingleSendRequestEgg] A request object describing the email to send.
         # @param [Hash] opts the optional parameters
-        # @option opts [PublicSingleSendRequestEgg] :public_single_send_request_egg A request object describing the email to send.
         # @return [EmailSendStatusView]
-        def send_email(opts = {})
-          data, _status_code, _headers = send_email_with_http_info(opts)
+        def send_email(public_single_send_request_egg, opts = {})
+          data, _status_code, _headers = send_email_with_http_info(public_single_send_request_egg, opts)
           data
         end
 
         # Send a single transactional email asynchronously.
         # Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
+        # @param public_single_send_request_egg [PublicSingleSendRequestEgg] A request object describing the email to send.
         # @param [Hash] opts the optional parameters
-        # @option opts [PublicSingleSendRequestEgg] :public_single_send_request_egg A request object describing the email to send.
         # @return [Array<(EmailSendStatusView, Integer, Hash)>] EmailSendStatusView data, response status code and response headers
-        def send_email_with_http_info(opts = {})
+        def send_email_with_http_info(public_single_send_request_egg, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: SingleSendApi.send_email ...'
+          end
+          # verify the required parameter 'public_single_send_request_egg' is set
+          if @api_client.config.client_side_validation && public_single_send_request_egg.nil?
+            fail ArgumentError, "Missing the required parameter 'public_single_send_request_egg' when calling SingleSendApi.send_email"
           end
           # resource path
           local_var_path = '/marketing/v3/transactional/single-email/send'
@@ -57,13 +61,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'public_single_send_request_egg']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(public_single_send_request_egg) 
 
           # return_type
           return_type = opts[:return_type] || 'EmailSendStatusView' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

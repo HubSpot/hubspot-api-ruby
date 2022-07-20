@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -85,22 +85,26 @@ module Hubspot
 
         # Create a SMTP API token.
         # Create a SMTP API token.
+        # @param smtp_api_token_request_egg [SmtpApiTokenRequestEgg] A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
         # @param [Hash] opts the optional parameters
-        # @option opts [SmtpApiTokenRequestEgg] :smtp_api_token_request_egg A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
         # @return [SmtpApiTokenView]
-        def create_token(opts = {})
-          data, _status_code, _headers = create_token_with_http_info(opts)
+        def create_token(smtp_api_token_request_egg, opts = {})
+          data, _status_code, _headers = create_token_with_http_info(smtp_api_token_request_egg, opts)
           data
         end
 
         # Create a SMTP API token.
         # Create a SMTP API token.
+        # @param smtp_api_token_request_egg [SmtpApiTokenRequestEgg] A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
         # @param [Hash] opts the optional parameters
-        # @option opts [SmtpApiTokenRequestEgg] :smtp_api_token_request_egg A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
         # @return [Array<(SmtpApiTokenView, Integer, Hash)>] SmtpApiTokenView data, response status code and response headers
-        def create_token_with_http_info(opts = {})
+        def create_token_with_http_info(smtp_api_token_request_egg, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PublicSmtpTokensApi.create_token ...'
+          end
+          # verify the required parameter 'smtp_api_token_request_egg' is set
+          if @api_client.config.client_side_validation && smtp_api_token_request_egg.nil?
+            fail ArgumentError, "Missing the required parameter 'smtp_api_token_request_egg' when calling PublicSmtpTokensApi.create_token"
           end
           # resource path
           local_var_path = '/marketing/v3/transactional/smtp-tokens'
@@ -119,13 +123,13 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'smtp_api_token_request_egg']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(smtp_api_token_request_egg) 
 
           # return_type
           return_type = opts[:return_type] || 'SmtpApiTokenView' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -187,7 +191,7 @@ module Hubspot
           return_type = opts[:return_type] || 'SmtpApiTokenView' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -212,7 +216,7 @@ module Hubspot
         # @option opts [String] :email_campaign_id Identifier assigned to the campaign provided during the token creation.
         # @option opts [String] :after Starting point to get the next set of results.
         # @option opts [Integer] :limit Maximum number of tokens to return.
-        # @return [CollectionResponseSmtpApiTokenView]
+        # @return [CollectionResponseSmtpApiTokenViewForwardPaging]
         def get_tokens_page(opts = {})
           data, _status_code, _headers = get_tokens_page_with_http_info(opts)
           data
@@ -225,7 +229,7 @@ module Hubspot
         # @option opts [String] :email_campaign_id Identifier assigned to the campaign provided during the token creation.
         # @option opts [String] :after Starting point to get the next set of results.
         # @option opts [Integer] :limit Maximum number of tokens to return.
-        # @return [Array<(CollectionResponseSmtpApiTokenView, Integer, Hash)>] CollectionResponseSmtpApiTokenView data, response status code and response headers
+        # @return [Array<(CollectionResponseSmtpApiTokenViewForwardPaging, Integer, Hash)>] CollectionResponseSmtpApiTokenViewForwardPaging data, response status code and response headers
         def get_tokens_page_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: PublicSmtpTokensApi.get_tokens_page ...'
@@ -252,10 +256,10 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseSmtpApiTokenView' 
+          return_type = opts[:return_type] || 'CollectionResponseSmtpApiTokenViewForwardPaging' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -317,7 +321,7 @@ module Hubspot
           return_type = opts[:return_type] || 'SmtpApiTokenView' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

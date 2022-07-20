@@ -69,7 +69,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -133,7 +133,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -197,7 +197,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Error' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -261,7 +261,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -325,7 +325,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -389,7 +389,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BatchResponseBlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -453,7 +453,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -517,7 +517,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Error' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -582,7 +582,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -644,7 +644,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -730,7 +730,7 @@ module Hubspot
             return_type = opts[:return_type] || 'CollectionResponseWithTotalBlogPostForwardPaging' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -798,7 +798,7 @@ module Hubspot
             return_type = opts[:return_type] || 'VersionBlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -869,7 +869,7 @@ module Hubspot
             return_type = opts[:return_type] || 'CollectionResponseWithTotalVersionBlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -931,7 +931,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -998,7 +998,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BatchResponseBlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1060,7 +1060,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1128,7 +1128,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1196,7 +1196,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1260,7 +1260,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1324,7 +1324,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1397,7 +1397,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1464,7 +1464,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BatchResponseBlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1534,7 +1534,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BlogPost' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -1598,7 +1598,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Error' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,

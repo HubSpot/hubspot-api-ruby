@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -137,7 +137,7 @@ module Hubspot
           return_type = opts[:return_type] 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -199,7 +199,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FolderActionResponse' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -263,7 +263,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -333,7 +333,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
@@ -364,7 +364,7 @@ module Hubspot
           return_type = opts[:return_type] || 'CollectionResponseFolder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -417,7 +417,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -434,7 +434,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -487,7 +487,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -504,7 +504,7 @@ module Hubspot
           return_type = opts[:return_type] || 'Folder' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,
@@ -568,7 +568,7 @@ module Hubspot
           return_type = opts[:return_type] || 'FolderUpdateTaskLocator' 
 
           # auth_names
-          auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :header_params => header_params,

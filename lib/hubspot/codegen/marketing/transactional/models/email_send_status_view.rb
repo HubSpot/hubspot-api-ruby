@@ -16,8 +16,6 @@ module Hubspot
   module Marketing
     module Transactional
       class EmailSendStatusView
-        attr_accessor :event_id
-
         # Identifier used to query the status of the send.
         attr_accessor :status_id
 
@@ -35,6 +33,8 @@ module Hubspot
 
         # Status of the send request.
         attr_accessor :status
+
+        attr_accessor :event_id
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -61,26 +61,26 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'event_id' => :'eventId',
             :'status_id' => :'statusId',
             :'send_result' => :'sendResult',
             :'requested_at' => :'requestedAt',
             :'started_at' => :'startedAt',
             :'completed_at' => :'completedAt',
-            :'status' => :'status'
+            :'status' => :'status',
+            :'event_id' => :'eventId'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'event_id' => :'EventIdView',
             :'status_id' => :'String',
             :'send_result' => :'String',
             :'requested_at' => :'DateTime',
             :'started_at' => :'DateTime',
             :'completed_at' => :'DateTime',
-            :'status' => :'String'
+            :'status' => :'String',
+            :'event_id' => :'EventIdView'
           }
         end
 
@@ -105,10 +105,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'event_id')
-            self.event_id = attributes[:'event_id']
-          end
-
           if attributes.key?(:'status_id')
             self.status_id = attributes[:'status_id']
           end
@@ -132,6 +128,10 @@ module Hubspot
           if attributes.key?(:'status')
             self.status = attributes[:'status']
           end
+
+          if attributes.key?(:'event_id')
+            self.event_id = attributes[:'event_id']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -153,7 +153,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @status_id.nil?
-          send_result_validator = EnumAttributeValidator.new('String', ["SENT", "IDEMPOTENT_IGNORE", "QUEUED", "IDEMPOTENT_FAIL", "THROTTLED", "EMAIL_DISABLED", "PORTAL_SUSPENDED", "INVALID_TO_ADDRESS", "BLOCKED_DOMAIN", "PREVIOUSLY_BOUNCED", "EMAIL_UNCONFIRMED", "PREVIOUS_SPAM", "PREVIOUSLY_UNSUBSCRIBED_MESSAGE", "PREVIOUSLY_UNSUBSCRIBED_PORTAL", "INVALID_FROM_ADDRESS", "CAMPAIGN_CANCELLED", "VALIDATION_FAILED", "MTA_IGNORE", "BLOCKED_ADDRESS", "PORTAL_OVER_LIMIT", "PORTAL_EXPIRED", "PORTAL_MISSING_MARKETING_SCOPE", "MISSING_TEMPLATE_PROPERTIES", "MISSING_REQUIRED_PARAMETER", "PORTAL_AUTHENTICATION_FAILURE", "MISSING_CONTENT", "CORRUPT_INPUT", "TEMPLATE_RENDER_EXCEPTION", "GRAYMAIL_SUPPRESSED", "UNCONFIGURED_SENDING_DOMAIN", "UNDELIVERABLE", "CANCELLED_ABUSE", "QUARANTINED_ADDRESS", "ADDRESS_ONLY_ACCEPTED_ON_PROD", "PORTAL_NOT_AUTHORIZED_FOR_APPLICATION", "ADDRESS_LIST_BOMBED", "ADDRESS_OPTED_OUT", "RECIPIENT_FATIGUE_SUPPRESSED", "TOO_MANY_RECIPIENTS", "PREVIOUSLY_UNSUBSCRIBED_BRAND", "NON_MARKETABLE_CONTACT"])
+          send_result_validator = EnumAttributeValidator.new('String', ["SENT", "IDEMPOTENT_IGNORE", "QUEUED", "IDEMPOTENT_FAIL", "THROTTLED", "EMAIL_DISABLED", "PORTAL_SUSPENDED", "INVALID_TO_ADDRESS", "BLOCKED_DOMAIN", "PREVIOUSLY_BOUNCED", "EMAIL_UNCONFIRMED", "PREVIOUS_SPAM", "PREVIOUSLY_UNSUBSCRIBED_MESSAGE", "PREVIOUSLY_UNSUBSCRIBED_PORTAL", "INVALID_FROM_ADDRESS", "CAMPAIGN_CANCELLED", "VALIDATION_FAILED", "MTA_IGNORE", "BLOCKED_ADDRESS", "PORTAL_OVER_LIMIT", "PORTAL_EXPIRED", "PORTAL_MISSING_MARKETING_SCOPE", "MISSING_TEMPLATE_PROPERTIES", "MISSING_REQUIRED_PARAMETER", "PORTAL_AUTHENTICATION_FAILURE", "MISSING_CONTENT", "CORRUPT_INPUT", "TEMPLATE_RENDER_EXCEPTION", "GRAYMAIL_SUPPRESSED", "UNCONFIGURED_SENDING_DOMAIN", "UNDELIVERABLE", "CANCELLED_ABUSE", "QUARANTINED_ADDRESS", "ADDRESS_ONLY_ACCEPTED_ON_PROD", "PORTAL_NOT_AUTHORIZED_FOR_APPLICATION", "ADDRESS_LIST_BOMBED", "ADDRESS_OPTED_OUT", "RECIPIENT_FATIGUE_SUPPRESSED", "TOO_MANY_RECIPIENTS", "PREVIOUSLY_UNSUBSCRIBED_BRAND", "NON_MARKETABLE_CONTACT", "PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT"])
           return false unless send_result_validator.valid?(@send_result)
           return false if @status.nil?
           status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
@@ -164,7 +164,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] send_result Object to be assigned
         def send_result=(send_result)
-          validator = EnumAttributeValidator.new('String', ["SENT", "IDEMPOTENT_IGNORE", "QUEUED", "IDEMPOTENT_FAIL", "THROTTLED", "EMAIL_DISABLED", "PORTAL_SUSPENDED", "INVALID_TO_ADDRESS", "BLOCKED_DOMAIN", "PREVIOUSLY_BOUNCED", "EMAIL_UNCONFIRMED", "PREVIOUS_SPAM", "PREVIOUSLY_UNSUBSCRIBED_MESSAGE", "PREVIOUSLY_UNSUBSCRIBED_PORTAL", "INVALID_FROM_ADDRESS", "CAMPAIGN_CANCELLED", "VALIDATION_FAILED", "MTA_IGNORE", "BLOCKED_ADDRESS", "PORTAL_OVER_LIMIT", "PORTAL_EXPIRED", "PORTAL_MISSING_MARKETING_SCOPE", "MISSING_TEMPLATE_PROPERTIES", "MISSING_REQUIRED_PARAMETER", "PORTAL_AUTHENTICATION_FAILURE", "MISSING_CONTENT", "CORRUPT_INPUT", "TEMPLATE_RENDER_EXCEPTION", "GRAYMAIL_SUPPRESSED", "UNCONFIGURED_SENDING_DOMAIN", "UNDELIVERABLE", "CANCELLED_ABUSE", "QUARANTINED_ADDRESS", "ADDRESS_ONLY_ACCEPTED_ON_PROD", "PORTAL_NOT_AUTHORIZED_FOR_APPLICATION", "ADDRESS_LIST_BOMBED", "ADDRESS_OPTED_OUT", "RECIPIENT_FATIGUE_SUPPRESSED", "TOO_MANY_RECIPIENTS", "PREVIOUSLY_UNSUBSCRIBED_BRAND", "NON_MARKETABLE_CONTACT"])
+          validator = EnumAttributeValidator.new('String', ["SENT", "IDEMPOTENT_IGNORE", "QUEUED", "IDEMPOTENT_FAIL", "THROTTLED", "EMAIL_DISABLED", "PORTAL_SUSPENDED", "INVALID_TO_ADDRESS", "BLOCKED_DOMAIN", "PREVIOUSLY_BOUNCED", "EMAIL_UNCONFIRMED", "PREVIOUS_SPAM", "PREVIOUSLY_UNSUBSCRIBED_MESSAGE", "PREVIOUSLY_UNSUBSCRIBED_PORTAL", "INVALID_FROM_ADDRESS", "CAMPAIGN_CANCELLED", "VALIDATION_FAILED", "MTA_IGNORE", "BLOCKED_ADDRESS", "PORTAL_OVER_LIMIT", "PORTAL_EXPIRED", "PORTAL_MISSING_MARKETING_SCOPE", "MISSING_TEMPLATE_PROPERTIES", "MISSING_REQUIRED_PARAMETER", "PORTAL_AUTHENTICATION_FAILURE", "MISSING_CONTENT", "CORRUPT_INPUT", "TEMPLATE_RENDER_EXCEPTION", "GRAYMAIL_SUPPRESSED", "UNCONFIGURED_SENDING_DOMAIN", "UNDELIVERABLE", "CANCELLED_ABUSE", "QUARANTINED_ADDRESS", "ADDRESS_ONLY_ACCEPTED_ON_PROD", "PORTAL_NOT_AUTHORIZED_FOR_APPLICATION", "ADDRESS_LIST_BOMBED", "ADDRESS_OPTED_OUT", "RECIPIENT_FATIGUE_SUPPRESSED", "TOO_MANY_RECIPIENTS", "PREVIOUSLY_UNSUBSCRIBED_BRAND", "NON_MARKETABLE_CONTACT", "PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT"])
           unless validator.valid?(send_result)
             fail ArgumentError, "invalid value for \"send_result\", must be one of #{validator.allowable_values}."
           end
@@ -186,13 +186,13 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              event_id == o.event_id &&
               status_id == o.status_id &&
               send_result == o.send_result &&
               requested_at == o.requested_at &&
               started_at == o.started_at &&
               completed_at == o.completed_at &&
-              status == o.status
+              status == o.status &&
+              event_id == o.event_id
         end
 
         # @see the `==` method
@@ -204,7 +204,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [event_id, status_id, send_result, requested_at, started_at, completed_at, status].hash
+          [status_id, send_result, requested_at, started_at, completed_at, status, event_id].hash
         end
 
         # Builds the object from hash

@@ -69,7 +69,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -133,7 +133,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -197,7 +197,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Error' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -261,7 +261,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Tag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -325,7 +325,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BatchResponseTag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -389,7 +389,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Tag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -453,7 +453,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Error' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -518,7 +518,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Tag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -604,7 +604,7 @@ module Hubspot
             return_type = opts[:return_type] || 'CollectionResponseWithTotalTagForwardPaging' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -671,7 +671,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BatchResponseTag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -735,7 +735,7 @@ module Hubspot
             return_type = opts[:return_type] 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -808,7 +808,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Tag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -875,7 +875,7 @@ module Hubspot
             return_type = opts[:return_type] || 'BatchResponseTag' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
@@ -939,7 +939,7 @@ module Hubspot
             return_type = opts[:return_type] || 'Error' 
 
             # auth_names
-            auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :header_params => header_params,
