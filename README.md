@@ -48,6 +48,10 @@ contacts = client.crm.contacts.basic_api.get_page
 
 ### Usage
 
+#### Hapikey support:
+
+Please, note that hapikey is no longer supported after v13.1.0. You can get more info about hapikey sunset [here](https://developers.hubspot.com/changelog/upcoming-api-key-sunset). Also, plese, visit a [migration guide](https://developers.hubspot.com/docs/api/migrate-an-api-key-integration-to-a-private-app) if you need help with a migration process.
+
 ### Get all:
 get_all method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
 
