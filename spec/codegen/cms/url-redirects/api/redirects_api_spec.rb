@@ -47,8 +47,8 @@ describe 'RedirectsApi' do
   # unit tests for create
   # Create a redirect
   # Creates and configures a new URL redirect.
+  # @param url_mapping_create_request_body 
   # @param [Hash] opts the optional parameters
-  # @option opts [UrlMappingCreateRequestBody] :url_mapping_create_request_body 
   # @return [UrlMapping]
   describe 'create test' do
     it 'should work' do
@@ -79,12 +79,10 @@ describe 'RedirectsApi' do
   # @option opts [DateTime] :updated_after Only return redirects last updated after this date.
   # @option opts [DateTime] :updated_before Only return redirects last updated before this date.
   # @option opts [Array<String>] :sort 
-  # @option opts [Array<String>] :properties 
   # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-  # @option opts [String] :before 
   # @option opts [Integer] :limit Maximum number of result per page
   # @option opts [Boolean] :archived Whether to return only results that have been archived.
-  # @return [CollectionResponseWithTotalUrlMapping]
+  # @return [CollectionResponseWithTotalUrlMappingForwardPaging]
   describe 'get_page test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -95,8 +93,8 @@ describe 'RedirectsApi' do
   # Update a redirect
   # Updates the settings for an existing URL redirect.
   # @param url_redirect_id 
+  # @param url_mapping 
   # @param [Hash] opts the optional parameters
-  # @option opts [UrlMapping] :url_mapping 
   # @return [UrlMapping]
   describe 'update test' do
     it 'should work' do

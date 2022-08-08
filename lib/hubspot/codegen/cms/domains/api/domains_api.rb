@@ -139,7 +139,7 @@ module Hubspot
           query_params[:'updatedAfter'] = opts[:'updated_after'] if !opts[:'updated_after'].nil?
           query_params[:'updatedBefore'] = opts[:'updated_before'] if !opts[:'updated_before'].nil?
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?

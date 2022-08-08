@@ -61,7 +61,7 @@ module Hubspot
           {
             :'id' => :'String',
             :'type' => :'String',
-            :'fields' => :'Hash<String, SearchHitField>'
+            :'fields' => :'Hash<String, IndexedField>'
           }
         end
 

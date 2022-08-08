@@ -114,16 +114,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @reply_to.nil?
-            invalid_properties.push('invalid value for "reply_to", reply_to cannot be nil.')
-          end
-
-          if @cc.nil?
-            invalid_properties.push('invalid value for "cc", cc cannot be nil.')
-          end
-
-          if @bcc.nil?
-            invalid_properties.push('invalid value for "bcc", bcc cannot be nil.')
+          if @to.nil?
+            invalid_properties.push('invalid value for "to", to cannot be nil.')
           end
 
           invalid_properties
@@ -132,9 +124,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @reply_to.nil?
-          return false if @cc.nil?
-          return false if @bcc.nil?
+          return false if @to.nil?
           true
         end
 

@@ -16,6 +16,9 @@ module Hubspot
   module Marketing
     module Transactional
       class PublicSingleSendRequestEgg
+        # The content ID for the transactional email, which can be found in email tool UI.
+        attr_accessor :email_id
+
         attr_accessor :message
 
         # The contactProperties field is a map of contact property values. Each contact property value contains a name and value property. Each property will get set on the contact record and will be visible in the template under {{ contact.NAME }}. Use these properties when you want to set a contact property while you’re sending the email. For example, when sending a reciept you may want to set a last_paid_date property, as the sending of the receipt will have information about the last payment.
@@ -24,26 +27,23 @@ module Hubspot
         # The customProperties field is a map of property values. Each property value contains a name and value property. Each property will be visible in the template under {{ custom.NAME }}. Note: Custom properties do not currently support arrays. To provide a listing in an email, one workaround is to build an HTML list (either with tables or ul) and specify it as a custom property.
         attr_accessor :custom_properties
 
-        # The content ID for the transactional email, which can be found in email tool UI.
-        attr_accessor :email_id
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'email_id' => :'emailId',
             :'message' => :'message',
             :'contact_properties' => :'contactProperties',
-            :'custom_properties' => :'customProperties',
-            :'email_id' => :'emailId'
+            :'custom_properties' => :'customProperties'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'email_id' => :'Integer',
             :'message' => :'PublicSingleSendEmail',
             :'contact_properties' => :'Hash<String, String>',
-            :'custom_properties' => :'Object',
-            :'email_id' => :'Integer'
+            :'custom_properties' => :'Hash<String, Object>'
           }
         end
 
@@ -68,6 +68,10 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'email_id')
+            self.email_id = attributes[:'email_id']
+          end
+
           if attributes.key?(:'message')
             self.message = attributes[:'message']
           end
@@ -79,11 +83,9 @@ module Hubspot
           end
 
           if attributes.key?(:'custom_properties')
-            self.custom_properties = attributes[:'custom_properties']
-          end
-
-          if attributes.key?(:'email_id')
-            self.email_id = attributes[:'email_id']
+            if (value = attributes[:'custom_properties']).is_a?(Hash)
+              self.custom_properties = value
+            end
           end
         end
 
@@ -91,20 +93,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
-          end
-
-          if @contact_properties.nil?
-            invalid_properties.push('invalid value for "contact_properties", contact_properties cannot be nil.')
-          end
-
-          if @custom_properties.nil?
-            invalid_properties.push('invalid value for "custom_properties", custom_properties cannot be nil.')
-          end
-
           if @email_id.nil?
             invalid_properties.push('invalid value for "email_id", email_id cannot be nil.')
+          end
+
+          if @message.nil?
+            invalid_properties.push('invalid value for "message", message cannot be nil.')
           end
 
           invalid_properties
@@ -113,10 +107,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @message.nil?
-          return false if @contact_properties.nil?
-          return false if @custom_properties.nil?
           return false if @email_id.nil?
+          return false if @message.nil?
           true
         end
 
@@ -125,10 +117,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              email_id == o.email_id &&
               message == o.message &&
               contact_properties == o.contact_properties &&
-              custom_properties == o.custom_properties &&
-              email_id == o.email_id
+              custom_properties == o.custom_properties
         end
 
         # @see the `==` method
@@ -140,7 +132,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [message, contact_properties, custom_properties, email_id].hash
+          [email_id, message, contact_properties, custom_properties].hash
         end
 
         # Builds the object from hash

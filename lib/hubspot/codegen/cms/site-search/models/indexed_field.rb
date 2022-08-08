@@ -1,7 +1,7 @@
 =begin
-#URL redirects
+#CMS Site Search
 
-#URL redirect operations
+#Use these endpoints for searching content on your HubSpot hosted CMS website(s).
 
 The version of the OpenAPI document: v3
 
@@ -14,21 +14,33 @@ require 'date'
 
 module Hubspot
   module Cms
-    module UrlRedirects
-      class Paging
-        attr_accessor :_next
+    module SiteSearch
+      class IndexedField
+        attr_accessor :name
+
+        attr_accessor :value
+
+        attr_accessor :values
+
+        attr_accessor :metadata_field
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'_next' => :'next'
+            :'name' => :'name',
+            :'value' => :'value',
+            :'values' => :'values',
+            :'metadata_field' => :'metadataField'
           }
         end
 
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'_next' => :'NextPage'
+            :'name' => :'String',
+            :'value' => :'Object',
+            :'values' => :'Array<Object>',
+            :'metadata_field' => :'Boolean'
           }
         end
 
@@ -42,19 +54,33 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::UrlRedirects::Paging` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::SiteSearch::IndexedField` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::UrlRedirects::Paging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::SiteSearch::IndexedField`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'_next')
-            self._next = attributes[:'_next']
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
+          end
+
+          if attributes.key?(:'values')
+            if (value = attributes[:'values']).is_a?(Array)
+              self.values = value
+            end
+          end
+
+          if attributes.key?(:'metadata_field')
+            self.metadata_field = attributes[:'metadata_field']
           end
         end
 
@@ -62,12 +88,32 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @value.nil?
+            invalid_properties.push('invalid value for "value", value cannot be nil.')
+          end
+
+          if @values.nil?
+            invalid_properties.push('invalid value for "values", values cannot be nil.')
+          end
+
+          if @metadata_field.nil?
+            invalid_properties.push('invalid value for "metadata_field", metadata_field cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @name.nil?
+          return false if @value.nil?
+          return false if @values.nil?
+          return false if @metadata_field.nil?
           true
         end
 
@@ -76,7 +122,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              _next == o._next
+              name == o.name &&
+              value == o.value &&
+              values == o.values &&
+              metadata_field == o.metadata_field
         end
 
         # @see the `==` method
@@ -88,7 +137,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [_next].hash
+          [name, value, values, metadata_field].hash
         end
 
         # Builds the object from hash
@@ -155,7 +204,7 @@ module Hubspot
               end
             end
           else # model
-            Hubspot::Cms::UrlRedirects.const_get(type).build_from_hash(value)
+            Hubspot::Cms::SiteSearch.const_get(type).build_from_hash(value)
           end
         end
 
