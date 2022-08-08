@@ -47,8 +47,8 @@ describe 'PublicSmtpTokensApi' do
   # unit tests for create_token
   # Create a SMTP API token.
   # Create a SMTP API token.
+  # @param smtp_api_token_request_egg A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
   # @param [Hash] opts the optional parameters
-  # @option opts [SmtpApiTokenRequestEgg] :smtp_api_token_request_egg A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
   # @return [SmtpApiTokenView]
   describe 'create_token test' do
     it 'should work' do
@@ -76,7 +76,7 @@ describe 'PublicSmtpTokensApi' do
   # @option opts [String] :email_campaign_id Identifier assigned to the campaign provided during the token creation.
   # @option opts [String] :after Starting point to get the next set of results.
   # @option opts [Integer] :limit Maximum number of tokens to return.
-  # @return [CollectionResponseSmtpApiTokenView]
+  # @return [CollectionResponseSmtpApiTokenViewForwardPaging]
   describe 'get_tokens_page test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

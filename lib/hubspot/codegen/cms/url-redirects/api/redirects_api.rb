@@ -85,22 +85,26 @@ module Hubspot
 
         # Create a redirect
         # Creates and configures a new URL redirect.
+        # @param url_mapping_create_request_body [UrlMappingCreateRequestBody] 
         # @param [Hash] opts the optional parameters
-        # @option opts [UrlMappingCreateRequestBody] :url_mapping_create_request_body 
         # @return [UrlMapping]
-        def create(opts = {})
-          data, _status_code, _headers = create_with_http_info(opts)
+        def create(url_mapping_create_request_body, opts = {})
+          data, _status_code, _headers = create_with_http_info(url_mapping_create_request_body, opts)
           data
         end
 
         # Create a redirect
         # Creates and configures a new URL redirect.
+        # @param url_mapping_create_request_body [UrlMappingCreateRequestBody] 
         # @param [Hash] opts the optional parameters
-        # @option opts [UrlMappingCreateRequestBody] :url_mapping_create_request_body 
         # @return [Array<(UrlMapping, Integer, Hash)>] UrlMapping data, response status code and response headers
-        def create_with_http_info(opts = {})
+        def create_with_http_info(url_mapping_create_request_body, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RedirectsApi.create ...'
+          end
+          # verify the required parameter 'url_mapping_create_request_body' is set
+          if @api_client.config.client_side_validation && url_mapping_create_request_body.nil?
+            fail ArgumentError, "Missing the required parameter 'url_mapping_create_request_body' when calling RedirectsApi.create"
           end
           # resource path
           local_var_path = '/cms/v3/url-redirects/'
@@ -119,7 +123,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'url_mapping_create_request_body']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(url_mapping_create_request_body) 
 
           # return_type
           return_type = opts[:return_type] || 'UrlMapping' 
@@ -215,12 +219,10 @@ module Hubspot
         # @option opts [DateTime] :updated_after Only return redirects last updated after this date.
         # @option opts [DateTime] :updated_before Only return redirects last updated before this date.
         # @option opts [Array<String>] :sort 
-        # @option opts [Array<String>] :properties 
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [String] :before 
         # @option opts [Integer] :limit Maximum number of result per page
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @return [CollectionResponseWithTotalUrlMapping]
+        # @return [CollectionResponseWithTotalUrlMappingForwardPaging]
         def get_page(opts = {})
           data, _status_code, _headers = get_page_with_http_info(opts)
           data
@@ -236,12 +238,10 @@ module Hubspot
         # @option opts [DateTime] :updated_after Only return redirects last updated after this date.
         # @option opts [DateTime] :updated_before Only return redirects last updated before this date.
         # @option opts [Array<String>] :sort 
-        # @option opts [Array<String>] :properties 
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-        # @option opts [String] :before 
         # @option opts [Integer] :limit Maximum number of result per page
         # @option opts [Boolean] :archived Whether to return only results that have been archived.
-        # @return [Array<(CollectionResponseWithTotalUrlMapping, Integer, Hash)>] CollectionResponseWithTotalUrlMapping data, response status code and response headers
+        # @return [Array<(CollectionResponseWithTotalUrlMappingForwardPaging, Integer, Hash)>] CollectionResponseWithTotalUrlMappingForwardPaging data, response status code and response headers
         def get_page_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RedirectsApi.get_page ...'
@@ -258,9 +258,7 @@ module Hubspot
           query_params[:'updatedAfter'] = opts[:'updated_after'] if !opts[:'updated_after'].nil?
           query_params[:'updatedBefore'] = opts[:'updated_before'] if !opts[:'updated_before'].nil?
           query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
-          query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
-          query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
@@ -276,7 +274,7 @@ module Hubspot
           post_body = opts[:body] 
 
           # return_type
-          return_type = opts[:return_type] || 'CollectionResponseWithTotalUrlMapping' 
+          return_type = opts[:return_type] || 'CollectionResponseWithTotalUrlMappingForwardPaging' 
 
           # auth_names
           auth_names = opts[:auth_names] || ['hapikey', 'oauth2']
@@ -300,27 +298,31 @@ module Hubspot
         # Update a redirect
         # Updates the settings for an existing URL redirect.
         # @param url_redirect_id [String] 
+        # @param url_mapping [UrlMapping] 
         # @param [Hash] opts the optional parameters
-        # @option opts [UrlMapping] :url_mapping 
         # @return [UrlMapping]
-        def update(url_redirect_id, opts = {})
-          data, _status_code, _headers = update_with_http_info(url_redirect_id, opts)
+        def update(url_redirect_id, url_mapping, opts = {})
+          data, _status_code, _headers = update_with_http_info(url_redirect_id, url_mapping, opts)
           data
         end
 
         # Update a redirect
         # Updates the settings for an existing URL redirect.
         # @param url_redirect_id [String] 
+        # @param url_mapping [UrlMapping] 
         # @param [Hash] opts the optional parameters
-        # @option opts [UrlMapping] :url_mapping 
         # @return [Array<(UrlMapping, Integer, Hash)>] UrlMapping data, response status code and response headers
-        def update_with_http_info(url_redirect_id, opts = {})
+        def update_with_http_info(url_redirect_id, url_mapping, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: RedirectsApi.update ...'
           end
           # verify the required parameter 'url_redirect_id' is set
           if @api_client.config.client_side_validation && url_redirect_id.nil?
             fail ArgumentError, "Missing the required parameter 'url_redirect_id' when calling RedirectsApi.update"
+          end
+          # verify the required parameter 'url_mapping' is set
+          if @api_client.config.client_side_validation && url_mapping.nil?
+            fail ArgumentError, "Missing the required parameter 'url_mapping' when calling RedirectsApi.update"
           end
           # resource path
           local_var_path = '/cms/v3/url-redirects/{urlRedirectId}'.sub('{' + 'urlRedirectId' + '}', CGI.escape(url_redirect_id.to_s))
@@ -339,7 +341,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:body] || @api_client.object_to_http_body(opts[:'url_mapping']) 
+          post_body = opts[:body] || @api_client.object_to_http_body(url_mapping) 
 
           # return_type
           return_type = opts[:return_type] || 'UrlMapping' 

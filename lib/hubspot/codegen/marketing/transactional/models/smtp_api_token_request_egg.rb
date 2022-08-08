@@ -16,7 +16,7 @@ module Hubspot
   module Marketing
     module Transactional
       class SmtpApiTokenRequestEgg
-        # Indicates whether a contact should be created for recipients of emails.
+        # Indicates whether a contact should be created for email recipients.
         attr_accessor :create_contact
 
         # A name for the campaign tied to the SMTP API token.

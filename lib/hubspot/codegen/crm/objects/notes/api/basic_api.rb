@@ -188,7 +188,7 @@ module Hubspot
 
             # query parameters
             query_params = opts[:query_params] || {}
-            query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+            query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
             query_params[:'propertiesWithHistory'] = @api_client.build_collection_param(opts[:'properties_with_history'], :multi) if !opts[:'properties_with_history'].nil?
             query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
             query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
@@ -263,7 +263,7 @@ module Hubspot
             query_params = opts[:query_params] || {}
             query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
             query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
-            query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :multi) if !opts[:'properties'].nil?
+            query_params[:'properties'] = @api_client.build_collection_param(opts[:'properties'], :csv) if !opts[:'properties'].nil?
             query_params[:'propertiesWithHistory'] = @api_client.build_collection_param(opts[:'properties_with_history'], :multi) if !opts[:'properties_with_history'].nil?
             query_params[:'associations'] = @api_client.build_collection_param(opts[:'associations'], :multi) if !opts[:'associations'].nil?
             query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
