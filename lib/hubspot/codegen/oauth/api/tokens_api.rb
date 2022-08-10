@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 require 'cgi'
 
 module Hubspot
-  module OAuth
+  module Oauth
     class TokensApi
       attr_accessor :api_client
 
