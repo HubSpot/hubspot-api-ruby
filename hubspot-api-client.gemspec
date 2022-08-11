@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "HubSpot Ruby API Gem"
   s.description = "HubSpot Ruby API client"
   s.license     = "Apache-2.0"
-  s.required_ruby_version = ">= 1.9"
+  s.required_ruby_version = ">= 2.7"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.4.0'
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
