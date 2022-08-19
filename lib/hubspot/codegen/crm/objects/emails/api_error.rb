@@ -14,7 +14,7 @@ module Hubspot
   module Crm
     module Objects
       module Emails
-        class ApiError < StandardError
+        class ApiError < ::StandardError
           attr_reader :code, :response_headers, :response_body
 
           # Usage examples:
