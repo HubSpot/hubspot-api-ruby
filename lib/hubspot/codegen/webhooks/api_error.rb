@@ -12,7 +12,7 @@ OpenAPI Generator version: 4.3.1
 
 module Hubspot
   module Webhooks
-    class ApiError < StandardError
+    class ApiError < ::StandardError
       attr_reader :code, :response_headers, :response_body
 
       # Usage examples:

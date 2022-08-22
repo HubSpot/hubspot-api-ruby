@@ -13,7 +13,7 @@ OpenAPI Generator version: 4.3.1
 module Hubspot
   module Cms
     module SourceCode
-      class ApiError < StandardError
+      class ApiError < ::StandardError
         attr_reader :code, :response_headers, :response_body
 
         # Usage examples:

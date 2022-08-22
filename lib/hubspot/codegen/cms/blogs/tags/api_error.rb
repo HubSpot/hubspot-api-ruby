@@ -14,7 +14,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
-        class ApiError < StandardError
+        class ApiError < ::StandardError
           attr_reader :code, :response_headers, :response_body
 
           # Usage examples:
