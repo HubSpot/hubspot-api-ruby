@@ -6,6 +6,9 @@ describe 'Hubspot::Discovery::BaseApiClient' do
   end
 
   class Hubspot::SomeApiClass
+    def initialize(api_client)
+    end
+
     def get(test_id, opts = {})
       "got test_id: #{test_id}, opts: #{opts}"
     end
@@ -18,6 +21,11 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     end
 
     def update_with_http_info
+    end
+  end
+
+  class Hubspot::ApiClient
+    def initialize(config)
     end
   end
 
