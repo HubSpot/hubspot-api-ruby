@@ -1,3 +1,5 @@
+require_rel '../helpers/camel_case'
+
 module Hubspot
   module Discovery
     module BaseApiClient
@@ -17,7 +19,7 @@ module Hubspot
       end
 
       def api_client
-        @api_client ||= Kernel.const_get("#{self.class.name.gsub('Discovery::', '').gsub(/(.*)::.*/, '\1')}::ApiClient").new(config)
+        @api_client ||= Kernel.const_get("#{codegen_module_name}::ApiClient").new(config)
       end
 
       def api
@@ -40,6 +42,10 @@ module Hubspot
 
       def codegen_api_class
         self.class.name.gsub('Discovery::', '')
+      end
+
+      def codegen_module_name
+        codegen_api_class.gsub(/(.*)::.*/, '\1')
       end
 
       def define_methods
@@ -65,11 +71,15 @@ module Hubspot
 
             signature_param_names = signature_params.map { |_, param| param }
             params_with_defaults.each do |param_name, param_value|
-              params_with_defaults[:opts][param_name] = param_value unless signature_param_names.include?(param_name)
+              params_with_defaults[:opts][param_name] = param_value if !signature_param_names.include?(param_name) && param_name != :body
             end
 
             params_to_pass = signature_params.map do |req, param|
+              model_name = Hubspot::Helpers::CamelCase.new.format(param.to_s)
+              Kernel.const_get("#{codegen_module_name}::#{model_name}").build_from_hash(params_with_defaults[:body])
+            rescue NameError
               raise "Param #{param} is required for #{api.class}\##{api_method} method" if req == :req && params_with_defaults[param].nil?
+
               params_with_defaults[param]
             end
 
