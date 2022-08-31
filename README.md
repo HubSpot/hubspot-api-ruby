@@ -116,6 +116,47 @@ object_schema_egg = ::Hubspot::Crm::Schemas::ObjectSchemaEgg.new(
 api_response = api.create(object_schema_egg)
 ```
 
+for new discovery classes since version 14.3
+```ruby
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
+
+labels = {
+  singular: 'My object',
+  plural: 'My objects'
+}
+
+option = {
+  label: 'Option A',
+  value: 'A',
+  description: 'Choice number one',
+  display_order: 1,
+  hidden: false
+}
+
+property = {
+  name: 'property001',
+  label: 'My object property',
+  group_name: 'my_object_information',
+  options: [option],
+  display_order: 2,
+  type: 'enumeration',
+  field_type: 'select'
+}
+
+body = {
+  labels: labels,
+  required_properties: ['property001'],
+  searchable_properties: [],
+  primary_display_property: 'property001',
+  secondary_display_properties: [],
+  properties: [property],
+  associated_objects: ['CONTACT'],
+  name: 'my_object'
+}
+
+api_response = client.crm.schemas.core_api.create(body: body)
+```
+
 
 ### Error handling
 
