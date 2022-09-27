@@ -160,6 +160,18 @@ api_response = client.crm.schemas.core_api.create(body: body)
 
 ### Error handling
 
+for new discovery classes since version 14.4
+
+#### You can rescue an ApiError by passing a block to the method
+
+```ruby
+require 'hubspot-api-client'
+
+client = Hubspot::Client.new(access_token: 'your_access_token')
+
+contacts = client.crm.contacts.basic_api.get_page { |error| error.message }
+```
+
 #### You can set number of retry attempts and delay in seconds before retry on specific status code of response.
 
 Available params:

@@ -22,10 +22,23 @@ describe 'Hubspot::Discovery::BaseApiClient' do
 
     def update_with_http_info
     end
+
+    def raise_error
+      raise Hubspot::ApiError
+    end
+
+    def raise_error_with_http_info
+    end
   end
 
   class Hubspot::ApiClient
     def initialize(config)
+    end
+  end
+
+  class Hubspot::ApiError < ::StandardError
+    def message
+      'test error'
     end
   end
 
@@ -65,6 +78,13 @@ describe 'Hubspot::Discovery::BaseApiClient' do
 
       it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>5}') }
     end
+
+    context 'with error handle block' do
+      subject(:get) { client.get(params) { |e| e.message } }
+      let(:params) { {test_id: 'test_id_value', limit: 10} }
+
+      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>10}') }
+    end
   end
   
   describe '#update' do
@@ -93,5 +113,18 @@ describe 'Hubspot::Discovery::BaseApiClient' do
 
       it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>10}') }
     end
+
+    context 'with block' do
+      subject(:update) { client.update(params) { |e| e.message } }
+      let(:params) { {test_id: 'test_id_value', body: body, limit: 10} }
+
+      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>10}') }
+    end
+  end
+
+  describe '#raise_error' do
+    subject(:raise_error) { client.raise_error { |e| e.message } }
+
+    it { is_expected.to eq('test error') }
   end
 end
