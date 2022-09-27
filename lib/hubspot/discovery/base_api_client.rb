@@ -1,5 +1,4 @@
 require_rel '../helpers/camel_case'
-require 'pry'
 
 module Hubspot
   module Discovery
