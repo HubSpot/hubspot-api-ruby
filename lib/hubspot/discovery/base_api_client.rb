@@ -48,13 +48,24 @@ module Hubspot
         codegen_api_class.gsub(/(.*)::.*/, '\1')
       end
 
+      def call_api(api_method, params_to_pass)
+        api.public_send(api_method, *params_to_pass)
+      end
+
+      def call_api_with_rescue(api_method, params_to_pass)
+        error = Kernel.const_get("#{codegen_module_name}::ApiError")
+        call_api(api_method, params_to_pass)
+      rescue error => e
+        yield(e)
+      end
+
       def define_methods
         define_api_methods
       end
       
       def define_api_methods
         api_methods.each do |api_method|
-          self.class.define_method(api_method) do |params = {}|
+          self.class.define_method(api_method) do |params = {}, &block|
             params_with_defaults = params
             params_with_defaults[:opts] ||= {}
             params_with_defaults[:opts][:auth_names] = if base_params[:access_token]
@@ -83,7 +94,8 @@ module Hubspot
               params_with_defaults[param]
             end
 
-            api.public_send(api_method, *params_to_pass)
+            return call_api_with_rescue(api_method, params_to_pass, &block) unless block.nil?
+            call_api(api_method, params_to_pass)
           end
         end
       end
