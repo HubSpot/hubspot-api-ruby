@@ -29,6 +29,16 @@ describe 'Hubspot::Discovery::BaseApiClient' do
 
     def raise_error_with_http_info
     end
+
+    def raise_error_on_third_call
+      @calls_count ||= 0
+      @calls_count += 1
+      raise Hubspot::ApiError if @calls_count < 3
+      'ok'
+    end
+
+    def raise_error_on_third_call_with_http_info
+    end
   end
 
   class Hubspot::ApiClient
@@ -39,6 +49,10 @@ describe 'Hubspot::Discovery::BaseApiClient' do
   class Hubspot::ApiError < ::StandardError
     def message
       'test error'
+    end
+
+    def code
+      429
     end
   end
 
@@ -126,5 +140,27 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     subject(:raise_error) { client.raise_error { |e| e.message } }
 
     it { is_expected.to eq('test error') }
+  end
+
+  describe '#raise_error_on_third_call' do
+    subject(:raise_error_on_third_call) { client.raise_error_on_third_call(retry: retry_config) }
+
+    context 'with 2 retries' do
+      let(:retry_config) { {429 => { max_retries: 2 }} }
+
+      it { is_expected.to eq('ok') }
+
+      context 'with range config' do
+        let(:retry_config) { {429..442 => { max_retries: 2 }} }
+
+        it { is_expected.to eq('ok') }
+      end
+    end
+
+    context 'with 1 retry' do
+      let(:retry_config) { {429 => { max_retries: 1 }} }
+
+      it { is_expected.to have_attributes(code: 429, message: 'test error') }
+    end
   end
 end
