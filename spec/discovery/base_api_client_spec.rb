@@ -75,8 +75,8 @@ describe 'Hubspot::Discovery::BaseApiClient' do
   
   it { is_expected.to respond_to(:get) }
   it { is_expected.to respond_to(:update) }
-  it { is_expected.not_to respond_to(:get_with_http_info) }
-  it { is_expected.not_to respond_to(:update_with_http_info) }
+  it { is_expected.to respond_to(:get_with_http_info) }
+  it { is_expected.to respond_to(:update_with_http_info) }
 
   describe '#get' do
     subject(:get) { client.get(params) }

@@ -11,7 +11,10 @@ module Hubspot
       end
 
       def api_methods
-        api.methods.grep(/with_http_info/).map {|elem| elem.to_s.gsub('_with_http_info', '').to_sym }
+        api.methods.grep(/with_http_info/).inject([]) do |methods, method|
+          methods << method
+          methods << method.to_s.gsub('_with_http_info', '').to_sym
+        end
       end
 
       def config
