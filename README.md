@@ -196,6 +196,28 @@ api_client = ::Hubspot::Crm::Companies::ApiClient.new(config)
 basic_api = ::Hubspot::Crm::Companies::BasicApi.new(api_client)
 ```
 
+for new discovery classes since version 14.5
+
+Available params:
+  - max_retries (maximum number of retries)
+  - seconds_delay (pause in seconds between retries)
+  - passing a block (block that handles errors occured)
+
+
+```ruby
+require 'hubspot-api-client'
+
+# Set handlers of statuses you want to handle
+retry_config = {
+  500..530 => { max_retries: 2, seconds_delay: 2 },
+  400 => { max_retries: 3, seconds_delay: 3 }
+}
+
+client = Hubspot::Client.new(access_token: 'your_access_token')
+
+contacts = client.crm.contacts.basic_api.get_page(retry: retry_config) { |error| error.code }
+```
+
 ### Sample apps
 
 Please, take a look at our [Sample apps](https://github.com/HubSpot/sample-apps-list)

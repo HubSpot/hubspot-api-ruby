@@ -59,6 +59,32 @@ module Hubspot
         yield(e)
       end
 
+      def call_api_with_retry(api_method, params_to_pass, retry_config, &block)
+        call_api_with_rescue(api_method, params_to_pass) do |error|
+          opts = retry_config.detect{ |k,v| k === error.code }&.last
+          retries = opts&.dig(:max_retries) || 5
+
+          block.call(error) unless block.nil?
+
+          response = error
+
+          while retries > 0 && opts
+            sleep opts[:seconds_delay] if opts[:seconds_delay]
+            response = call_api_with_rescue(api_method, params_to_pass) do |e|
+              block.call(e) unless block.nil?
+              e
+            end
+
+            return response unless response.respond_to?(:code)
+
+            opts = retry_config.detect{ |k,v| k === response.code }&.last
+            retries -= 1
+          end
+
+          response
+        end
+      end
+
       def define_methods
         define_api_methods
       end
@@ -82,7 +108,7 @@ module Hubspot
 
             signature_param_names = signature_params.map { |_, param| param }
             params_with_defaults.each do |param_name, param_value|
-              params_with_defaults[:opts][param_name] = param_value if !signature_param_names.include?(param_name) && param_name != :body
+              params_with_defaults[:opts][param_name] = param_value if !signature_param_names.include?(param_name) && param_name != :body && param_name != :retry
             end
 
             params_to_pass = signature_params.map do |req, param|
@@ -94,6 +120,7 @@ module Hubspot
               params_with_defaults[param]
             end
 
+            return call_api_with_retry(api_method, params_to_pass, params[:retry], &block) unless params[:retry].nil?
             return call_api_with_rescue(api_method, params_to_pass, &block) unless block.nil?
             call_api(api_method, params_to_pass)
           end
