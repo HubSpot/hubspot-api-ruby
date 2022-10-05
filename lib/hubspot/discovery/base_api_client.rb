@@ -1,4 +1,5 @@
-require_rel '../helpers/camel_case'
+require_relative '../helpers/camel_case'
+require_relative '../helpers/snake_case'
 
 module Hubspot
   module Discovery
@@ -49,6 +50,10 @@ module Hubspot
 
       def codegen_module_name
         codegen_api_class.gsub(/(.*)::.*/, '\1')
+      end
+
+      def codegen_module_path
+        Hubspot::Helpers::SnakeCase.format(codegen_module_name)
       end
 
       def call_api(api_method, params_to_pass)

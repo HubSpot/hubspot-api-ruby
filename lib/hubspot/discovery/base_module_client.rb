@@ -1,4 +1,4 @@
-require_rel '../helpers/camel_case'
+require_relative '../helpers/camel_case'
 
 module Hubspot
   module Discovery

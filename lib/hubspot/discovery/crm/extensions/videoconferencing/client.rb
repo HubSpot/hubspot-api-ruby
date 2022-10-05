@@ -1,4 +1,4 @@
-require_rel '../../../base_module_client'
+require_relative '../../../base_module_client'
 
 module Hubspot
   module Discovery

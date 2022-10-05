@@ -1,4 +1,4 @@
-require_rel 'discovery'
+require_relative 'discovery/base_module_client'
 
 module Hubspot
   class Client
