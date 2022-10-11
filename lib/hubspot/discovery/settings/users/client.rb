@@ -5,15 +5,15 @@ module Hubspot
     module Settings
       module Users
         class Client
-          def self.api_classes
+          include Hubspot::Discovery::BaseModuleClient
+
+          def api_classes
             %i[
               roles
               teams
               users
             ].freeze
           end
-  
-          include Hubspot::Discovery::BaseModuleClient
         end
       end
     end

@@ -2,7 +2,14 @@ require_relative 'discovery/base_module_client'
 
 module Hubspot
   class Client
-    def self.api_modules
+    include Hubspot::Discovery::BaseModuleClient
+
+    def initialize(params)
+      raise 'Please, pass :api_key or :access_token' if params[:api_key].nil? && params[:developer_api_key].nil? && params[:access_token].nil?
+      super
+    end
+
+    def api_modules
       %i[
         automation
         cms
@@ -18,17 +25,8 @@ module Hubspot
       ].freeze
     end
 
-    include Hubspot::Discovery::BaseModuleClient
-
-    private
-
-    def self.base_module
+    def base_module
       'Hubspot::Discovery'
-    end
-
-    def initialize(params)
-      raise 'Please, pass :api_key or :access_token' if params[:api_key].nil? && params[:developer_api_key].nil? && params[:access_token].nil?
-      @params = params
     end
   end
 end

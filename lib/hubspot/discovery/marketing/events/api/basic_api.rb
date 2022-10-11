@@ -1,4 +1,5 @@
 require_relative '../../../base_api_client'
+require_relative '../../../../helpers/get_all_helper'
 
 module Hubspot
   module Discovery

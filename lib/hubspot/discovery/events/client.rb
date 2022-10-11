@@ -4,13 +4,13 @@ module Hubspot
   module Discovery
     module Events
       class Client
-        def self.api_classes
+        include Hubspot::Discovery::BaseModuleClient
+
+        def api_classes
           %i[
             events
           ].freeze
         end
-
-        include Hubspot::Discovery::BaseModuleClient
       end
     end
   end

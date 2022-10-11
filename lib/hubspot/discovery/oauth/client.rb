@@ -4,7 +4,9 @@ module Hubspot
   module Discovery
     module OAuth
       class Client
-        def self.api_classes
+        include Hubspot::Discovery::BaseModuleClient
+
+        def api_classes
           %i[
             access_tokens
             refresh_tokens
@@ -12,7 +14,9 @@ module Hubspot
           ].freeze
         end
 
-        include Hubspot::Discovery::BaseModuleClient
+        def discovery_module_path
+          super.gsub('o_auth', 'oauth')
+        end
       end
     end
   end

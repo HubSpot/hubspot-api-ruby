@@ -6,13 +6,13 @@ module Hubspot
       module Blogs
         module Authors
           class Client
-            def self.api_classes
+            include Hubspot::Discovery::BaseModuleClient
+
+            def api_classes
               %i[
                 blog_authors
               ].freeze
             end
-  
-            include Hubspot::Discovery::BaseModuleClient
           end
         end
       end

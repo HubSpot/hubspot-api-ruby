@@ -5,17 +5,9 @@ module Hubspot
     module Crm
       module Objects
         class Client
-          def self.api_classes
-            %i[
-              associations
-              basic
-              batch
-              gdpr
-              search
-            ].freeze
-          end
+          include Hubspot::Discovery::BaseModuleClient
 
-          def self.api_modules
+          def api_modules
             %i[
               calls
               emails
@@ -25,8 +17,16 @@ module Hubspot
               tasks
             ].freeze
           end
-  
-          include Hubspot::Discovery::BaseModuleClient
+
+          def api_classes
+            %i[
+              associations
+              basic
+              batch
+              gdpr
+              search
+            ].freeze
+          end
         end
       end
     end

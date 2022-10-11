@@ -4,13 +4,13 @@ module Hubspot
   module Discovery
     module Automation
       class Client
-        def self.api_modules
+        include Hubspot::Discovery::BaseModuleClient
+
+        def api_modules
           %i[
             actions
           ].freeze
         end
-
-        include Hubspot::Discovery::BaseModuleClient
       end
     end
   end

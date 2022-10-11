@@ -5,15 +5,15 @@ module Hubspot
     module Crm
       module Timeline
         class Client
-          def self.api_classes
+          include Hubspot::Discovery::BaseModuleClient
+
+          def api_classes
             %i[
               events
               templates
               tokens
             ].freeze
           end
-  
-          include Hubspot::Discovery::BaseModuleClient
         end
       end
     end

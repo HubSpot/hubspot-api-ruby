@@ -5,7 +5,9 @@ module Hubspot
     module Crm
       module Extensions
         class Client
-          def self.api_modules
+          include Hubspot::Discovery::BaseModuleClient
+
+          def api_modules
             %i[
               accounting
               calling
@@ -13,8 +15,6 @@ module Hubspot
               videoconferencing
             ].freeze
           end
-  
-          include Hubspot::Discovery::BaseModuleClient
         end
       end
     end

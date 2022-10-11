@@ -6,13 +6,13 @@ module Hubspot
       module Extensions
         module Calling
           class Client
-            def self.api_classes
+            include Hubspot::Discovery::BaseModuleClient
+
+            def api_classes
               %i[
                 settings
               ].freeze
             end
-    
-            include Hubspot::Discovery::BaseModuleClient
           end
         end
       end

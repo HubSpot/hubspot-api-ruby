@@ -5,14 +5,14 @@ module Hubspot
     module Crm
       module Associations
         class Client
-          def self.api_classes 
+          include Hubspot::Discovery::BaseModuleClient
+
+          def api_classes 
             %i[
               batch
               types
             ].freeze
           end
-
-          include Hubspot::Discovery::BaseModuleClient
         end
       end
     end

@@ -1,5 +1,5 @@
 require_relative '../helpers/camel_case'
-require_relative '../helpers/snake_case'
+require_relative '../helpers/path'
 
 module Hubspot
   module Discovery
@@ -23,10 +23,13 @@ module Hubspot
       end
 
       def api_client
-        @api_client ||= Kernel.const_get("#{codegen_module_name}::ApiClient").new(config)
+        require_with_mapping "#{codegen_module_path}/api_client"
+        @api_client ||= Kernel.const_get( "#{codegen_module_name}::ApiClient").new(config)
       end
 
       def api
+        class_name = codegen_api_path.gsub(/(.*)\/(.*)/, '\2')
+        require_with_mapping codegen_api_path.gsub(class_name, "api/#{class_name}")
         @api ||= Kernel.const_get(codegen_api_class).new(api_client)
       end
 
@@ -37,11 +40,16 @@ module Hubspot
       private
 
       def new_config
-        config = Kernel.const_get("#{self.class.name.gsub('Discovery::', '').gsub(/(.*)::.*/, '\1')}::Configuration").new
+        require_with_mapping "#{codegen_module_path}/configuration"
+        config = Kernel.const_get("#{codegen_module_name}::Configuration").new
         config.access_token = base_params[:access_token] if base_params[:access_token]
         config.api_key['hapikey'] = base_params[:api_key] if base_params[:api_key]
         config.api_key['hapikey'] = base_params[:developer_api_key] if base_params[:developer_api_key]
         config
+      end
+
+      def require_with_mapping(path)
+        Hubspot::Helpers::Path.new.require_with_mapping(path)
       end
 
       def codegen_api_class
@@ -49,11 +57,15 @@ module Hubspot
       end
 
       def codegen_module_name
-        codegen_api_class.gsub(/(.*)::.*/, '\1')
+        @codegen_module_name ||= codegen_api_class.gsub(/(.*)::.*/, '\1')
+      end
+
+      def codegen_api_path
+        @codegen_api_path ||= Hubspot::Helpers::Path.new.format(self.class.name).gsub('discovery/', 'codegen/')
       end
 
       def codegen_module_path
-        Hubspot::Helpers::SnakeCase.format(codegen_module_name)
+        @codegen_module_path ||= codegen_api_path.gsub(/(.*)\/.*/, '\1')
       end
 
       def call_api(api_method, params_to_pass)
@@ -61,6 +73,7 @@ module Hubspot
       end
 
       def call_api_with_rescue(api_method, params_to_pass)
+        require_with_mapping "#{codegen_module_path}/api_error"
         error = Kernel.const_get("#{codegen_module_name}::ApiError")
         call_api(api_method, params_to_pass)
       rescue error => e

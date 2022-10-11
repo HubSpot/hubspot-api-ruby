@@ -5,14 +5,14 @@ module Hubspot
     module Crm
       module Imports
         class Client
-          def self.api_classes
+          include Hubspot::Discovery::BaseModuleClient
+
+          def api_classes
             %i[
               core
               public_imports
             ].freeze
           end
-  
-          include Hubspot::Discovery::BaseModuleClient
         end
       end
     end
