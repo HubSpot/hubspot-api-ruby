@@ -143,9 +143,13 @@ module Hubspot
               params_with_defaults[:opts][param_name] = param_value if !signature_param_names.include?(param_name) && param_name != :body && param_name != :retry
             end
 
+            require 'pry'
+            binding.pry
+
             params_to_pass = signature_params.map do |req, param|
               if params_with_defaults[param].nil?
                 model_name = Hubspot::Helpers::CamelCase.new.format(param.to_s)
+                require_with_mapping "#{codegen_module_path}/models/#{param.to_s}"
                 Kernel.const_get("#{codegen_module_name}::#{model_name}").build_from_hash(params_with_defaults[:body])
               else
                 params_with_defaults[param]
