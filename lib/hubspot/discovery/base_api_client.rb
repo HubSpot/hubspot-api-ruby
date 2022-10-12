@@ -24,6 +24,7 @@ module Hubspot
 
       def api_client
         require_with_mapping "#{codegen_module_path}/api_client"
+        require_api_error
         @api_client ||= Kernel.const_get( "#{codegen_module_name}::ApiClient").new(config)
       end
 
@@ -60,7 +61,13 @@ module Hubspot
           codegen_model = Hubspot::Helpers::Path.new.format(const)
           Hubspot::Helpers::Path.new.require_with_mapping("#{codegen_module_path}/models/#{codegen_model}")
           super
+        rescue LoadError
+          super
         end
+      end
+
+      def require_api_error
+        require_with_mapping "#{codegen_module_path}/api_error"
       end
 
       def codegen_api_class
@@ -84,7 +91,7 @@ module Hubspot
       end
 
       def call_api_with_rescue(api_method, params_to_pass)
-        require_with_mapping "#{codegen_module_path}/api_error"
+        require_api_error
         error = Kernel.const_get("#{codegen_module_name}::ApiError")
         call_api(api_method, params_to_pass)
       rescue error => e
