@@ -30,6 +30,7 @@ module Hubspot
       def api
         class_name = codegen_api_path.gsub(/(.*)\/(.*)/, '\2')
         require_with_mapping codegen_api_path.gsub(class_name, "api/#{class_name}")
+        require_api_models
         @api ||= Kernel.const_get(codegen_api_class).new(api_client)
       end
 
@@ -50,6 +51,16 @@ module Hubspot
 
       def require_with_mapping(path)
         Hubspot::Helpers::Path.new.require_with_mapping(path)
+      end
+
+      def require_api_models
+        def (Kernel.const_get(codegen_module_name)).const_get(const)
+          require 'hubspot/helpers/path'
+          codegen_module_path = Hubspot::Helpers::Path.new.format(self.name).gsub('hubspot/', 'hubspot/codegen/')
+          codegen_model = Hubspot::Helpers::Path.new.format(const)
+          Hubspot::Helpers::Path.new.require_with_mapping("#{codegen_module_path}/models/#{codegen_model}")
+          super
+        end
       end
 
       def codegen_api_class
