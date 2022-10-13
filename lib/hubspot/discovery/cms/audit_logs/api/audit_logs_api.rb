@@ -1,4 +1,4 @@
-require_rel '../../../base_api_client'
+require_relative '../../../base_api_client'
 
 module Hubspot
   module Discovery
@@ -6,6 +6,10 @@ module Hubspot
       module AuditLogs
         class AuditLogsApi
           include Hubspot::Discovery::BaseApiClient
+
+          def codegen_api_path
+            super.gsub('audit_logs/', 'audit-logs/')
+          end
         end
       end
     end

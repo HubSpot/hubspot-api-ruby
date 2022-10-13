@@ -1,8 +1,14 @@
 require 'spec_helper'
+require 'hubspot/discovery/base_api_client'
+require 'hubspot/configuration'
 
 describe 'Hubspot::Discovery::BaseApiClient' do
   class Hubspot::Discovery::SomeApiClass
     include Hubspot::Discovery::BaseApiClient
+
+    def require_with_mapping(path)
+      path
+    end
   end
 
   class Hubspot::SomeApiClass

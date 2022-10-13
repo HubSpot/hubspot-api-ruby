@@ -1,9 +1,9 @@
-require_rel '../../../base_api_client'
+require_relative '../../../base_api_client'
 
 module Hubspot
   module Discovery
     module Crm
-      module Deals
+      module Contacts
         class AssociationsApi
           include Hubspot::Discovery::BaseApiClient
         end

@@ -1,15 +1,16 @@
 require 'spec_helper'
+require 'hubspot/discovery/base_module_client'
 
 describe 'Hubspot::Discovery::BaseModuleClient' do
   class Hubspot::Discovery::TestModuleClass
-    def self.api_classes
+    def api_classes
       %i[
         settings
         subscriptions
       ].freeze
     end
 
-    def self.api_modules
+    def api_modules
       %i[
         automation
         cms
