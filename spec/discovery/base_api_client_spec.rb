@@ -6,7 +6,7 @@ describe 'Hubspot::Discovery::BaseApiClient' do
   class Hubspot::Discovery::SomeApiClass
     include Hubspot::Discovery::BaseApiClient
 
-    def require_with_mapping(path)
+    def require_codegen(path)
       path
     end
   end
