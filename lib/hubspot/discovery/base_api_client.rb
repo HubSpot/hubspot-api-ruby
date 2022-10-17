@@ -23,14 +23,14 @@ module Hubspot
       end
 
       def api_client
-        require_with_mapping "#{codegen_module_path}/api_client"
+        require_codegen "#{codegen_module_path}/api_client"
         require_api_error
         @api_client ||= Kernel.const_get( "#{codegen_module_name}::ApiClient").new(config)
       end
 
       def api
         class_name = codegen_api_path.gsub(/(.*)\/(.*)/, '\2')
-        require_with_mapping codegen_api_path.gsub(class_name, "api/#{class_name}")
+        require_codegen codegen_api_path.gsub(class_name, "api/#{class_name}")
         require_api_models
         @api ||= Kernel.const_get(codegen_api_class).new(api_client)
       end
@@ -42,7 +42,7 @@ module Hubspot
       private
 
       def new_config
-        require_with_mapping "#{codegen_module_path}/configuration"
+        require_codegen "#{codegen_module_path}/configuration"
         config = Kernel.const_get("#{codegen_module_name}::Configuration").new
         config.access_token = base_params[:access_token] if base_params[:access_token]
         config.api_key['hapikey'] = base_params[:api_key] if base_params[:api_key]
@@ -50,8 +50,8 @@ module Hubspot
         config
       end
 
-      def require_with_mapping(path)
-        Hubspot::Helpers::Path.new.require_with_mapping(path)
+      def require_codegen(path)
+        Hubspot::Helpers::Path.new.require_with_codegen_mapping(path)
       end
 
       def require_api_models
@@ -59,7 +59,7 @@ module Hubspot
           require 'hubspot/helpers/path'
           codegen_module_path = Hubspot::Helpers::Path.new.format(self.name).gsub('hubspot/', 'hubspot/codegen/')
           codegen_model = Hubspot::Helpers::Path.new.format(const)
-          Hubspot::Helpers::Path.new.require_with_mapping("#{codegen_module_path}/models/#{codegen_model}")
+          Hubspot::Helpers::Path.new.require_with_codegen_mapping("#{codegen_module_path}/models/#{codegen_model}")
           super
         rescue LoadError
           super
@@ -67,7 +67,7 @@ module Hubspot
       end
 
       def require_api_error
-        require_with_mapping "#{codegen_module_path}/api_error"
+        require_codegen "#{codegen_module_path}/api_error"
       end
 
       def codegen_api_class
@@ -153,7 +153,7 @@ module Hubspot
             params_to_pass = signature_params.map do |req, param|
               if params_with_defaults[param].nil?
                 model_name = Hubspot::Helpers::CamelCase.new.format(param.to_s)
-                require_with_mapping "#{codegen_module_path}/models/#{param.to_s}"
+                require_codegen "#{codegen_module_path}/models/#{param.to_s}"
                 Kernel.const_get("#{codegen_module_name}::#{model_name}").build_from_hash(params_with_defaults[:body])
               else
                 params_with_defaults[param]

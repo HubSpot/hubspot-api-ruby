@@ -6,10 +6,6 @@ module Hubspot
       module UrlRedirects
         class RedirectsApi
           include Hubspot::Discovery::BaseApiClient
-
-          def codegen_api_path
-            super.gsub('url_redirects', 'url-redirects')
-          end
         end
       end
     end

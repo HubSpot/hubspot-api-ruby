@@ -6,10 +6,6 @@ module Hubspot
       module AuditLogs
         class AuditLogsApi
           include Hubspot::Discovery::BaseApiClient
-
-          def codegen_api_path
-            super.gsub('audit_logs/', 'audit-logs/')
-          end
         end
       end
     end
