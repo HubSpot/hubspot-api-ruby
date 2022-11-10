@@ -61,7 +61,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'TaskLocator'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"SourceCodeExtractApi.do_async",
@@ -120,7 +120,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ActionResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"SourceCodeExtractApi.get_async_status",

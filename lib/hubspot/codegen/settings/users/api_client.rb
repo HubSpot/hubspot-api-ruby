@@ -111,6 +111,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
           follow_location = opts[:follow_location] || true
 
+          update_params_for_auth! header_params, query_params, opts[:auth_names]
 
           # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
           _verify_ssl_host = @config.verify_ssl_host ? 2 : 0

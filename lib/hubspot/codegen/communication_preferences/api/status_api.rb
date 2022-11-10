@@ -64,7 +64,7 @@ module Hubspot
         return_type = opts[:debug_return_type] || 'PublicSubscriptionStatusesResponse'
 
         # auth_names
-        auth_names = opts[:debug_auth_names] || ['hapikey']
+        auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
         new_options = opts.merge(
           :operation => :"StatusApi.get_email_status",
@@ -132,7 +132,7 @@ module Hubspot
         return_type = opts[:debug_return_type] || 'PublicSubscriptionStatus'
 
         # auth_names
-        auth_names = opts[:debug_auth_names] || ['hapikey']
+        auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
         new_options = opts.merge(
           :operation => :"StatusApi.subscribe",
@@ -200,7 +200,7 @@ module Hubspot
         return_type = opts[:debug_return_type] || 'PublicSubscriptionStatus'
 
         # auth_names
-        auth_names = opts[:debug_auth_names] || ['hapikey']
+        auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
         new_options = opts.merge(
           :operation => :"StatusApi.unsubscribe",

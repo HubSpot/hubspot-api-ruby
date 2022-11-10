@@ -80,7 +80,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'InvoiceUpdateResponse'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"InvoiceApi.create_payment",
@@ -150,7 +150,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'InvoiceReadResponse'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"InvoiceApi.get_by_id",
@@ -231,7 +231,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'InvoiceUpdateResponse'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"InvoiceApi.update",

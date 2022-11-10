@@ -77,7 +77,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'ActionResponse'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"SyncApi.create_contact",
@@ -151,7 +151,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'ActionResponse'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"SyncApi.create_product",
