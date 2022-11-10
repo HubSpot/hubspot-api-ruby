@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.archive",
@@ -138,7 +138,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.archive_by_path",
@@ -201,7 +201,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'FolderActionResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.check_update_status",
@@ -269,7 +269,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Folder'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.create",
@@ -371,7 +371,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseFolder'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.do_search",
@@ -442,7 +442,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Folder'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.get_by_id",
@@ -513,7 +513,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Folder'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.get_by_path",
@@ -581,7 +581,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'FolderUpdateTaskLocator'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"FoldersApi.update_properties",

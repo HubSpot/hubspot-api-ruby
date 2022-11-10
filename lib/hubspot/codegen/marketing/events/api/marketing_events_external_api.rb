@@ -68,7 +68,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.archive",
@@ -132,7 +132,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Error'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.archive_batch",
@@ -209,7 +209,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'MarketingEventDefaultResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.complete",
@@ -273,7 +273,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'MarketingEventDefaultResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.create",
@@ -339,7 +339,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'MarketingEventDefaultResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.do_cancel",
@@ -422,7 +422,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Error'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.do_email_upsert_by_id",
@@ -482,7 +482,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.do_search",
@@ -546,7 +546,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseMarketingEventPublicDefaultResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.do_upsert",
@@ -629,7 +629,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Error'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.do_upsert_by_id",
@@ -695,7 +695,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'MarketingEventPublicReadResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.get_by_id",
@@ -765,7 +765,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'MarketingEventPublicDefaultResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.replace",
@@ -842,7 +842,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'MarketingEventPublicDefaultResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"MarketingEventsExternalApi.update",

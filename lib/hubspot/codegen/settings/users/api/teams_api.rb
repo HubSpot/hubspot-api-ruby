@@ -59,7 +59,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponsePublicTeamNoPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TeamsApi.get_all",

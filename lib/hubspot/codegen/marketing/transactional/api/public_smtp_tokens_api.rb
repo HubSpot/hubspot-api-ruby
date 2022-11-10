@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicSmtpTokensApi.archive_token",
@@ -133,7 +133,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'SmtpApiTokenView'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicSmtpTokensApi.create_token",
@@ -196,7 +196,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'SmtpApiTokenView'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicSmtpTokensApi.get_token_by_id",
@@ -265,7 +265,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseSmtpApiTokenViewForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicSmtpTokensApi.get_tokens_page",
@@ -328,7 +328,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'SmtpApiTokenView'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicSmtpTokensApi.reset_password",

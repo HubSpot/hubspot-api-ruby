@@ -83,7 +83,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'PublicPerformanceResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicPerformanceApi.get_page",
@@ -164,7 +164,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'PublicPerformanceResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicPerformanceApi.get_uptime",
