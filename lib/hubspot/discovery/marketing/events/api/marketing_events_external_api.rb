@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Marketing
       module Events
-        class SubscriberStateChangesApi
+        class MarketingEventsExternalApi
           include Hubspot::Discovery::BaseApiClient
         end
       end
