@@ -76,7 +76,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_clone_draft_table_rows",
@@ -150,7 +150,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_create_draft_table_rows",
@@ -224,7 +224,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_purge_draft_table_rows",
@@ -298,7 +298,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_read_draft_table_rows",
@@ -372,7 +372,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_read_table_rows",
@@ -446,7 +446,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_replace_draft_table_rows",
@@ -520,7 +520,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.batch_update_draft_table_rows",

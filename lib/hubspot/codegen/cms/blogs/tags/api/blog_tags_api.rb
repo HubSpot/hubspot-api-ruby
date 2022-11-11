@@ -69,7 +69,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.archive",
@@ -137,7 +137,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.archive_batch",
@@ -205,7 +205,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Error'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.attach_to_lang_group",
@@ -273,7 +273,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Tag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.create",
@@ -341,7 +341,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'BatchResponseTag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.create_batch",
@@ -409,7 +409,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Tag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.create_lang_variation",
@@ -477,7 +477,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Error'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.detach_from_lang_group",
@@ -543,7 +543,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Tag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.get_by_id",
@@ -630,7 +630,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'CollectionResponseWithTotalTagForwardPaging'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.get_page",
@@ -701,7 +701,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'BatchResponseTag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.read_batch",
@@ -769,7 +769,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.set_lang_primary",
@@ -846,7 +846,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Tag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.update",
@@ -917,7 +917,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'BatchResponseTag'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.update_batch",
@@ -985,7 +985,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'Error'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey']
+            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
             new_options = opts.merge(
               :operation => :"BlogTagsApi.update_langs",

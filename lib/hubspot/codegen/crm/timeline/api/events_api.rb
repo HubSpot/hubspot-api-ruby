@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'TimelineEventResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"EventsApi.create",
@@ -138,7 +138,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseTimelineEventResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"EventsApi.create_batch",
@@ -207,7 +207,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'TimelineEventResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"EventsApi.get_by_id",
@@ -276,7 +276,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'EventDetail'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"EventsApi.get_detail_by_id",
@@ -348,7 +348,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'String'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || []
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"EventsApi.get_render_by_id",

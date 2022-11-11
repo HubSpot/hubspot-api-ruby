@@ -77,7 +77,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'IndexedData'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicApi.get_by_id",
@@ -197,7 +197,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'PublicSearchResults'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicApi.search",

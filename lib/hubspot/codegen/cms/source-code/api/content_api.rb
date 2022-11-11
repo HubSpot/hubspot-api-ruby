@@ -76,7 +76,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"ContentApi.archive",
@@ -158,7 +158,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'AssetFileMetadata'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"ContentApi.create",
@@ -232,7 +232,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Error'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"ContentApi.get",
@@ -314,7 +314,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'AssetFileMetadata'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"ContentApi.replace",
