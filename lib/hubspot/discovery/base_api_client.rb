@@ -124,19 +124,6 @@ module Hubspot
         end
       end
 
-      def convert_body(body)
-        converted_body = {}
-        body.each do |key, value|
-          camel_case_key = Hubspot::Helpers::CamelCase.new.format(key.to_s)
-          camel_case_key = camel_case_key[0, 1].downcase + camel_case_key[1..-1]
-          converted_value = value
-          converted_value = convert_body(value) if value.is_a?(Hash)
-          converted_value = value.map { |elem| elem.is_a?(Hash) ? convert_body(elem) : elem } if value.is_a?(Array)
-          converted_body[camel_case_key.to_sym] = converted_value
-        end
-        converted_body
-      end
-
       def define_methods
         define_api_methods
       end
@@ -167,8 +154,7 @@ module Hubspot
               if params_with_defaults[param].nil?
                 model_name = Hubspot::Helpers::CamelCase.new.format(param.to_s)
                 require_codegen "#{codegen_module_path}/models/#{param.to_s}"
-                converted_body = convert_body(params_with_defaults[:body])
-                Kernel.const_get("#{codegen_module_name}::#{model_name}").build_from_hash(converted_body)
+                Kernel.const_get("#{codegen_module_name}::#{model_name}").build_from_hash(params_with_defaults[:body])
               else
                 params_with_defaults[param]
               end
