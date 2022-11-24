@@ -133,7 +133,7 @@ module Hubspot
           self.class.define_method(api_method) do |params = {}, &block|
             params_with_defaults = params
             params_with_defaults[:opts] ||= {}
-            params_with_defaults[:opts][:auth_names] = if base_params[:access_token]
+            params_with_defaults[:opts][:debug_auth_names] = if base_params[:access_token]
                                                          'oauth2' 
                                                        elsif base_params[:api_key]
                                                          'hapikey'

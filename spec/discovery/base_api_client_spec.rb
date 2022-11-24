@@ -90,20 +90,20 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     context 'with default params order' do
       let(:params) { {test_id: 'test_id_value', limit: 10} }
 
-      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>10}') }
+      it { is_expected.to eq('got test_id: test_id_value, opts: {:debug_auth_names=>"oauth2", :limit=>10}') }
     end
 
     context 'with changed params order' do
       let(:params) { {limit: 5, test_id: 'test_id_value'} }
 
-      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>5}') }
+      it { is_expected.to eq('got test_id: test_id_value, opts: {:debug_auth_names=>"oauth2", :limit=>5}') }
     end
 
     context 'with error handle block' do
       subject(:get) { client.get(params) { |e| e.message } }
       let(:params) { {test_id: 'test_id_value', limit: 10} }
 
-      it { is_expected.to eq('got test_id: test_id_value, opts: {:auth_names=>"oauth2", :limit=>10}') }
+      it { is_expected.to eq('got test_id: test_id_value, opts: {:debug_auth_names=>"oauth2", :limit=>10}') }
     end
   end
   
@@ -113,32 +113,32 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     context 'with default params order' do
       let(:params) { {test_id: 'test_id_value', simple_public_object_input: Hubspot::SimplePublicObjectInput.new(body), limit: 10} }
 
-      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>10}') }
+      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:debug_auth_names=>"oauth2", :limit=>10}') }
     end
 
     context 'with reversed params order' do
       let(:params) { {limit: 5, simple_public_object_input: Hubspot::SimplePublicObjectInput.new(body), test_id: 'test_id_value'} }
       
-      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>5}') }
+      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:debug_auth_names=>"oauth2", :limit=>5}') }
     end
 
     context 'with shuffled params order' do
       let(:params) { {simple_public_object_input: Hubspot::SimplePublicObjectInput.new(body), limit: 7, test_id: 'test_id_value'} }
       
-      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>7}') }
+      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:debug_auth_names=>"oauth2", :limit=>7}') }
     end
 
     context 'with body' do
       let(:params) { {test_id: 'test_id_value', body: body, limit: 10} }
 
-      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>10}') }
+      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:debug_auth_names=>"oauth2", :limit=>10}') }
     end
 
     context 'with block' do
       subject(:update) { client.update(params) { |e| e.message } }
       let(:params) { {test_id: 'test_id_value', body: body, limit: 10} }
 
-      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:auth_names=>"oauth2", :limit=>10}') }
+      it { is_expected.to eq('updated test_id: test_id_value, name: test_name, email: test_email, opts: {:debug_auth_names=>"oauth2", :limit=>10}') }
     end
   end
 
