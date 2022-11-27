@@ -19,13 +19,13 @@ module Hubspot
       class AssociatedId
         attr_accessor :id
 
-        attr_accessor :type
+        attr_accessor :types
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'type' => :'type'
+            :'id' => :'toObjectId',
+            :'types' => :'associationTypes'
           }
         end
 
@@ -38,7 +38,7 @@ module Hubspot
         def self.openapi_types
           {
             :'id' => :'String',
-            :'type' => :'String'
+            :'types' => :'Array<AssociationType>'
           }
         end
 
@@ -67,8 +67,8 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
+          if attributes.key?(:'types')
+            self.type = attributes[:'types']
           end
         end
 
@@ -80,8 +80,8 @@ module Hubspot
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
-          if @type.nil?
-            invalid_properties.push('invalid value for "type", type cannot be nil.')
+          if @types.nil?
+            invalid_properties.push('invalid value for "types", types cannot be nil.')
           end
 
           invalid_properties
@@ -91,7 +91,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @id.nil?
-          return false if @type.nil?
+          return false if @types.nil?
           true
         end
 
@@ -101,7 +101,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               id == o.id &&
-              type == o.type
+              types == o.types
         end
 
         # @see the `==` method
@@ -113,7 +113,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, type].hash
+          [id, types].hash
         end
 
         # Builds the object from hash
