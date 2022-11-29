@@ -104,11 +104,11 @@ module Hubspot
         # @param company_id [String] 
         # @param to_object_type [String] 
         # @param to_object_id [String] 
-        # @param association_type [String] 
+        # @param association_types [Array]
         # @param [Hash] opts the optional parameters
         # @return [SimplePublicObjectWithAssociations]
-        def create(company_id, to_object_type, to_object_id, association_type, opts = {})
-          data, _status_code, _headers = create_with_http_info(company_id, to_object_type, to_object_id, association_type, opts)
+        def create(company_id, to_object_type, to_object_id, association_types, opts = {})
+          data, _status_code, _headers = create_with_http_info(company_id, to_object_type, to_object_id, association_types, opts)
           data
         end
 
@@ -116,10 +116,10 @@ module Hubspot
         # @param company_id [String] 
         # @param to_object_type [String] 
         # @param to_object_id [String] 
-        # @param association_type [String] 
+        # @param association_types [Array]
         # @param [Hash] opts the optional parameters
         # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
-        def create_with_http_info(company_id, to_object_type, to_object_id, association_type, opts = {})
+        def create_with_http_info(company_id, to_object_type, to_object_id, association_types, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: AssociationsApi.create ...'
           end
@@ -135,12 +135,12 @@ module Hubspot
           if @api_client.config.client_side_validation && to_object_id.nil?
             fail ArgumentError, "Missing the required parameter 'to_object_id' when calling AssociationsApi.create"
           end
-          # verify the required parameter 'association_type' is set
-          if @api_client.config.client_side_validation && association_type.nil?
-            fail ArgumentError, "Missing the required parameter 'association_type' when calling AssociationsApi.create"
+          # verify the required parameter 'association_types' is set
+          if @api_client.config.client_side_validation && association_types.nil?
+            fail ArgumentError, "Missing the required parameter 'association_types' when calling AssociationsApi.create"
           end
           # resource path
-          local_var_path = '/crm/v4/objects/companies/{companyId}/associations/{toObjectType}/{toObjectId}'.sub('{' + 'companyId' + '}', CGI.escape(company_id.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s)).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s)).sub('{' + 'associationType' + '}', CGI.escape(association_type.to_s))
+          local_var_path = '/crm/v4/objects/companies/{companyId}/associations/{toObjectType}/{toObjectId}'.sub('{' + 'companyId' + '}', CGI.escape(company_id.to_s)).sub('{' + 'toObjectType' + '}', CGI.escape(to_object_type.to_s)).sub('{' + 'toObjectId' + '}', CGI.escape(to_object_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -154,7 +154,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body]
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(association_types)
 
           # return_type
           return_type = opts[:debug_return_type] || 'SimplePublicObjectWithAssociations'

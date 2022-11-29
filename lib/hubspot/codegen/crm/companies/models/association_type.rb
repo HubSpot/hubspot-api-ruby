@@ -17,6 +17,10 @@ module Hubspot
   module Crm
     module Companies
       class AssociationType
+
+        PRIMARY_COMPANY_ASSOCIATION_TYPE = { associationTypeId: 2, associationCategory: "HUBSPOT_DEFINED" }
+        OTHER_COMPANY_ASSOCIATION_TYPE = { associationTypeId: 280, associationCategory: "HUBSPOT_DEFINED" }
+
         attr_accessor :id
         attr_accessor :category
         attr_accessor :label
