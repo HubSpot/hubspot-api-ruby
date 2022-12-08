@@ -67,7 +67,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponsePublicImportErrorForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey']
+          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
             :operation => :"PublicImportsApi.get_errors",

@@ -17,18 +17,21 @@ module Hubspot
   module Crm
     module Imports
       class ImportRowCore
+        attr_accessor :line_number
+
+        attr_accessor :row_data
+
         attr_accessor :file_id
 
         attr_accessor :page_name
 
-        attr_accessor :line_number
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'line_number' => :'lineNumber',
+            :'row_data' => :'rowData',
             :'file_id' => :'fileId',
-            :'page_name' => :'pageName',
-            :'line_number' => :'lineNumber'
+            :'page_name' => :'pageName'
           }
         end
 
@@ -40,9 +43,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'line_number' => :'Integer',
+            :'row_data' => :'Array<String>',
             :'file_id' => :'Integer',
-            :'page_name' => :'String',
-            :'line_number' => :'Integer'
+            :'page_name' => :'String'
           }
         end
 
@@ -67,6 +71,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'line_number')
+            self.line_number = attributes[:'line_number']
+          end
+
+          if attributes.key?(:'row_data')
+            if (value = attributes[:'row_data']).is_a?(Array)
+              self.row_data = value
+            end
+          end
+
           if attributes.key?(:'file_id')
             self.file_id = attributes[:'file_id']
           end
@@ -74,22 +88,22 @@ module Hubspot
           if attributes.key?(:'page_name')
             self.page_name = attributes[:'page_name']
           end
-
-          if attributes.key?(:'line_number')
-            self.line_number = attributes[:'line_number']
-          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @file_id.nil?
-            invalid_properties.push('invalid value for "file_id", file_id cannot be nil.')
-          end
-
           if @line_number.nil?
             invalid_properties.push('invalid value for "line_number", line_number cannot be nil.')
+          end
+
+          if @row_data.nil?
+            invalid_properties.push('invalid value for "row_data", row_data cannot be nil.')
+          end
+
+          if @file_id.nil?
+            invalid_properties.push('invalid value for "file_id", file_id cannot be nil.')
           end
 
           invalid_properties
@@ -98,8 +112,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @file_id.nil?
           return false if @line_number.nil?
+          return false if @row_data.nil?
+          return false if @file_id.nil?
           true
         end
 
@@ -108,9 +123,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              line_number == o.line_number &&
+              row_data == o.row_data &&
               file_id == o.file_id &&
-              page_name == o.page_name &&
-              line_number == o.line_number
+              page_name == o.page_name
         end
 
         # @see the `==` method
@@ -122,7 +138,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [file_id, page_name, line_number].hash
+          [line_number, row_data, file_id, page_name].hash
         end
 
         # Builds the object from hash
