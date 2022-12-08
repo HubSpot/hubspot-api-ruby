@@ -19,6 +19,8 @@ module Hubspot
       class PublicImportError
         attr_accessor :error_type
 
+        attr_accessor :source_data
+
         attr_accessor :object_type
 
         attr_accessor :invalid_value
@@ -28,8 +30,6 @@ module Hubspot
         attr_accessor :object_type_id
 
         attr_accessor :known_column_number
-
-        attr_accessor :source_data
 
         attr_accessor :created_at
 
@@ -61,12 +61,12 @@ module Hubspot
         def self.attribute_map
           {
             :'error_type' => :'errorType',
+            :'source_data' => :'sourceData',
             :'object_type' => :'objectType',
             :'invalid_value' => :'invalidValue',
             :'extra_context' => :'extraContext',
             :'object_type_id' => :'objectTypeId',
             :'known_column_number' => :'knownColumnNumber',
-            :'source_data' => :'sourceData',
             :'created_at' => :'createdAt',
             :'id' => :'id'
           }
@@ -81,12 +81,12 @@ module Hubspot
         def self.openapi_types
           {
             :'error_type' => :'String',
+            :'source_data' => :'ImportRowCore',
             :'object_type' => :'String',
             :'invalid_value' => :'String',
             :'extra_context' => :'String',
             :'object_type_id' => :'String',
             :'known_column_number' => :'Integer',
-            :'source_data' => :'ImportRowCore',
             :'created_at' => :'Integer',
             :'id' => :'String'
           }
@@ -117,6 +117,10 @@ module Hubspot
             self.error_type = attributes[:'error_type']
           end
 
+          if attributes.key?(:'source_data')
+            self.source_data = attributes[:'source_data']
+          end
+
           if attributes.key?(:'object_type')
             self.object_type = attributes[:'object_type']
           end
@@ -137,10 +141,6 @@ module Hubspot
             self.known_column_number = attributes[:'known_column_number']
           end
 
-          if attributes.key?(:'source_data')
-            self.source_data = attributes[:'source_data']
-          end
-
           if attributes.key?(:'created_at')
             self.created_at = attributes[:'created_at']
           end
@@ -158,12 +158,12 @@ module Hubspot
             invalid_properties.push('invalid value for "error_type", error_type cannot be nil.')
           end
 
-          if @known_column_number.nil?
-            invalid_properties.push('invalid value for "known_column_number", known_column_number cannot be nil.')
-          end
-
           if @source_data.nil?
             invalid_properties.push('invalid value for "source_data", source_data cannot be nil.')
+          end
+
+          if @known_column_number.nil?
+            invalid_properties.push('invalid value for "known_column_number", known_column_number cannot be nil.')
           end
 
           if @created_at.nil?
@@ -181,12 +181,12 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @error_type.nil?
-          error_type_validator = EnumAttributeValidator.new('String', ["INCORRECT_NUMBER_OF_COLUMNS", "INVALID_OBJECT_ID", "INVALID_ASSOCIATION_IDENTIFIER", "NO_OBJECT_ID_FROM_ASSOCIATION_IDENTIFIER", "MULTIPLE_COMPANIES_WITH_THIS_DOMAIN", "PROPERTY_DEFINITION_NOT_FOUND", "PROPERTY_VALUE_NOT_FOUND", "COULD_NOT_FIND_OWNER", "MULTIPLE_OWNERS_FOUND", "COULD_NOT_PARSE_NUMBER", "COULD_NOT_PARSE_DATE", "COULD_NOT_PARSE_TERM", "OUTSIDE_VALID_TIME_RANGE", "OUTSIDE_VALID_TERM_RANGE", "COULD_NOT_PARSE_ROW", "INVALID_ENUMERATION_OPTION", "AMBIGUOUS_ENUMERATION_OPTION", "FAILED_VALIDATION", "FAILED_TO_CREATE_ASSOCIATION", "FILE_NOT_FOUND", "INVALID_COLUMN_CONFIGURATION", "INVALID_FILE_TYPE", "INVALID_SPREADSHEET", "INVALID_SHEET_COUNT", "FAILED_TO_PROCESS_OBJECT_WITH_EMPTY_PROPERTY_VALUES", "UNKNOWN_BAD_REQUEST", "GDPR_BLACKLISTED_EMAIL", "DUPLICATE_ASSOCIATION_ID", "LIMIT_EXCEEDED", "INVALID_ALTERNATE_ID", "INVALID_EMAIL", "INVALID_DOMAIN", "DUPLICATE_ROW_CONTENT", "INVALID_NUMBER_SIZE", "UNKNOWN_ERROR", "FAILED_TO_OPT_OUT_CONTACT", "INVALID_REQUIRED_PROPERTY", "DUPLICATE_ALTERNATE_ID", "DUPLICATE_OBJECT_ID", "DUPLICATE_UNIQUE_PROPERTY_VALUE"])
+          error_type_validator = EnumAttributeValidator.new('String', ["INCORRECT_NUMBER_OF_COLUMNS", "INVALID_OBJECT_ID", "INVALID_ASSOCIATION_IDENTIFIER", "NO_OBJECT_ID_FROM_ASSOCIATION_IDENTIFIER", "MULTIPLE_COMPANIES_WITH_THIS_DOMAIN", "PROPERTY_DEFINITION_NOT_FOUND", "PROPERTY_VALUE_NOT_FOUND", "COULD_NOT_FIND_OWNER", "MULTIPLE_OWNERS_FOUND", "COULD_NOT_FIND_BUSINESS_UNIT", "COULD_NOT_PARSE_NUMBER", "COULD_NOT_PARSE_DATE", "COULD_NOT_PARSE_TERM", "OUTSIDE_VALID_TIME_RANGE", "OUTSIDE_VALID_TERM_RANGE", "COULD_NOT_PARSE_ROW", "INVALID_ENUMERATION_OPTION", "AMBIGUOUS_ENUMERATION_OPTION", "FAILED_VALIDATION", "FAILED_TO_CREATE_ASSOCIATION", "FILE_NOT_FOUND", "INVALID_COLUMN_CONFIGURATION", "INVALID_FILE_TYPE", "INVALID_SPREADSHEET", "INVALID_SHEET_COUNT", "FAILED_TO_PROCESS_OBJECT_WITH_EMPTY_PROPERTY_VALUES", "UNKNOWN_BAD_REQUEST", "GDPR_BLACKLISTED_EMAIL", "DUPLICATE_ASSOCIATION_ID", "LIMIT_EXCEEDED", "INVALID_ALTERNATE_ID", "INVALID_EMAIL", "INVALID_DOMAIN", "DUPLICATE_ROW_CONTENT", "INVALID_NUMBER_SIZE", "UNKNOWN_ERROR", "FAILED_TO_OPT_OUT_CONTACT", "INVALID_REQUIRED_PROPERTY", "MISSING_REQUIRED_PROPERTY", "DUPLICATE_ALTERNATE_ID", "DUPLICATE_OBJECT_ID", "DUPLICATE_UNIQUE_PROPERTY_VALUE", "BLANK_VALUE_PROVIDED", "UNKNOWN_ASSOCIATION_RECORD_ID", "INVALID_RECORD_ID", "DUPLICATE_RECORD_ID", "INVALID_CUSTOM_PROPERTY_VALIDATION", "CREATE_ONLY_IMPORT", "UPDATE_ONLY_IMPORT", "COLUMN_TOO_LARGE"])
           return false unless error_type_validator.valid?(@error_type)
-          object_type_validator = EnumAttributeValidator.new('String', ["CONTACT", "COMPANY", "DEAL", "ENGAGEMENT", "TICKET", "OWNER", "PRODUCT", "LINE_ITEM", "BET_DELIVERABLE_SERVICE", "CONTENT", "CONVERSATION", "BET_ALERT", "PORTAL", "QUOTE", "FORM_SUBMISSION_INBOUNDDB", "QUOTA", "UNSUBSCRIBE", "COMMUNICATION", "FEEDBACK_SUBMISSION", "ATTRIBUTION", "SALESFORCE_SYNC_ERROR", "RESTORABLE_CRM_OBJECT", "HUB", "LANDING_PAGE", "PRODUCT_OR_FOLDER", "TASK", "FORM", "MARKETING_EMAIL", "AD_ACCOUNT", "AD_CAMPAIGN", "AD_GROUP", "AD", "KEYWORD", "CAMPAIGN", "SOCIAL_CHANNEL", "SOCIAL_POST", "SITE_PAGE", "BLOG_POST", "IMPORT", "EXPORT", "CTA", "TASK_TEMPLATE", "AUTOMATION_PLATFORM_FLOW", "OBJECT_LIST", "NOTE", "MEETING_EVENT", "CALL", "EMAIL", "PUBLISHING_TASK", "CONVERSATION_SESSION", "CONTACT_CREATE_ATTRIBUTION", "INVOICE", "MARKETING_EVENT", "CONVERSATION_INBOX", "CHATFLOW", "MEDIA_BRIDGE", "SEQUENCE", "SEQUENCE_STEP", "FORECAST", "SNIPPET", "TEMPLATE", "DEAL_CREATE_ATTRIBUTION", "QUOTE_TEMPLATE", "QUOTE_MODULE", "QUOTE_MODULE_FIELD", "QUOTE_FIELD", "SEQUENCE_ENROLLMENT", "SUBSCRIPTION", "ACCEPTANCE_TEST", "SOCIAL_BROADCAST", "DEAL_SPLIT", "DEAL_REGISTRATION", "GOAL_TARGET", "GOAL_TARGET_GROUP", "PORTAL_OBJECT_SYNC_MESSAGE", "FILE_MANAGER_FILE", "FILE_MANAGER_FOLDER", "SEQUENCE_STEP_ENROLLMENT", "APPROVAL", "APPROVAL_STEP", "CTA_VARIANT", "UNKNOWN"])
+          return false if @source_data.nil?
+          object_type_validator = EnumAttributeValidator.new('String', ["CONTACT", "COMPANY", "DEAL", "ENGAGEMENT", "TICKET", "OWNER", "PRODUCT", "LINE_ITEM", "BET_DELIVERABLE_SERVICE", "CONTENT", "CONVERSATION", "BET_ALERT", "PORTAL", "QUOTE", "FORM_SUBMISSION_INBOUNDDB", "QUOTA", "UNSUBSCRIBE", "COMMUNICATION", "FEEDBACK_SUBMISSION", "ATTRIBUTION", "SALESFORCE_SYNC_ERROR", "RESTORABLE_CRM_OBJECT", "HUB", "LANDING_PAGE", "PRODUCT_OR_FOLDER", "TASK", "FORM", "MARKETING_EMAIL", "AD_ACCOUNT", "AD_CAMPAIGN", "AD_GROUP", "AD", "KEYWORD", "CAMPAIGN", "SOCIAL_CHANNEL", "SOCIAL_POST", "SITE_PAGE", "BLOG_POST", "IMPORT", "EXPORT", "CTA", "TASK_TEMPLATE", "AUTOMATION_PLATFORM_FLOW", "OBJECT_LIST", "NOTE", "MEETING_EVENT", "CALL", "EMAIL", "PUBLISHING_TASK", "CONVERSATION_SESSION", "CONTACT_CREATE_ATTRIBUTION", "INVOICE", "MARKETING_EVENT", "CONVERSATION_INBOX", "CHATFLOW", "MEDIA_BRIDGE", "SEQUENCE", "SEQUENCE_STEP", "FORECAST", "SNIPPET", "TEMPLATE", "DEAL_CREATE_ATTRIBUTION", "QUOTE_TEMPLATE", "QUOTE_MODULE", "QUOTE_MODULE_FIELD", "QUOTE_FIELD", "SEQUENCE_ENROLLMENT", "SUBSCRIPTION", "ACCEPTANCE_TEST", "SOCIAL_BROADCAST", "DEAL_SPLIT", "DEAL_REGISTRATION", "GOAL_TARGET", "GOAL_TARGET_GROUP", "PORTAL_OBJECT_SYNC_MESSAGE", "FILE_MANAGER_FILE", "FILE_MANAGER_FOLDER", "SEQUENCE_STEP_ENROLLMENT", "APPROVAL", "APPROVAL_STEP", "CTA_VARIANT", "SALES_DOCUMENT", "DISCOUNT", "FEE", "TAX", "MARKETING_CALENDAR", "PERMISSIONS_TESTING", "PRIVACY_SCANNER_COOKIE", "DATA_SYNC_STATE", "WEB_INTERACTIVE", "PLAYBOOK", "FOLDER", "PLAYBOOK_QUESTION", "PLAYBOOK_SUBMISSION", "PLAYBOOK_SUBMISSION_ANSWER", "COMMERCE_PAYMENT", "GSC_PROPERTY", "SOX_PROTECTED_DUMMY_TYPE", "BLOG_LISTING_PAGE", "QUARANTINED_SUBMISSION", "PAYMENT_SCHEDULE", "PAYMENT_SCHEDULE_INSTALLMENT", "MARKETING_CAMPAIGN_UTM", "DISCOUNT_TEMPLATE", "DISCOUNT_CODE", "FEEDBACK_SURVEY", "CMS_URL", "SALES_TASK", "SALES_WORKLOAD", "USER", "POSTAL_MAIL", "SCHEMAS_BACKEND_TEST", "PAYMENT_LINK", "SUBMISSION_TAG", "CAMPAIGN_STEP", "SCHEDULING_PAGE", "SOX_PROTECTED_TEST_TYPE", "ORDER", "MARKETING_SMS", "PARTNER_ACCOUNT", "CAMPAIGN_TEMPLATE", "CAMPAIGN_TEMPLATE_STEP", "UNKNOWN"])
           return false unless object_type_validator.valid?(@object_type)
           return false if @known_column_number.nil?
-          return false if @source_data.nil?
           return false if @created_at.nil?
           return false if @id.nil?
           true
@@ -195,7 +195,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] error_type Object to be assigned
         def error_type=(error_type)
-          validator = EnumAttributeValidator.new('String', ["INCORRECT_NUMBER_OF_COLUMNS", "INVALID_OBJECT_ID", "INVALID_ASSOCIATION_IDENTIFIER", "NO_OBJECT_ID_FROM_ASSOCIATION_IDENTIFIER", "MULTIPLE_COMPANIES_WITH_THIS_DOMAIN", "PROPERTY_DEFINITION_NOT_FOUND", "PROPERTY_VALUE_NOT_FOUND", "COULD_NOT_FIND_OWNER", "MULTIPLE_OWNERS_FOUND", "COULD_NOT_PARSE_NUMBER", "COULD_NOT_PARSE_DATE", "COULD_NOT_PARSE_TERM", "OUTSIDE_VALID_TIME_RANGE", "OUTSIDE_VALID_TERM_RANGE", "COULD_NOT_PARSE_ROW", "INVALID_ENUMERATION_OPTION", "AMBIGUOUS_ENUMERATION_OPTION", "FAILED_VALIDATION", "FAILED_TO_CREATE_ASSOCIATION", "FILE_NOT_FOUND", "INVALID_COLUMN_CONFIGURATION", "INVALID_FILE_TYPE", "INVALID_SPREADSHEET", "INVALID_SHEET_COUNT", "FAILED_TO_PROCESS_OBJECT_WITH_EMPTY_PROPERTY_VALUES", "UNKNOWN_BAD_REQUEST", "GDPR_BLACKLISTED_EMAIL", "DUPLICATE_ASSOCIATION_ID", "LIMIT_EXCEEDED", "INVALID_ALTERNATE_ID", "INVALID_EMAIL", "INVALID_DOMAIN", "DUPLICATE_ROW_CONTENT", "INVALID_NUMBER_SIZE", "UNKNOWN_ERROR", "FAILED_TO_OPT_OUT_CONTACT", "INVALID_REQUIRED_PROPERTY", "DUPLICATE_ALTERNATE_ID", "DUPLICATE_OBJECT_ID", "DUPLICATE_UNIQUE_PROPERTY_VALUE"])
+          validator = EnumAttributeValidator.new('String', ["INCORRECT_NUMBER_OF_COLUMNS", "INVALID_OBJECT_ID", "INVALID_ASSOCIATION_IDENTIFIER", "NO_OBJECT_ID_FROM_ASSOCIATION_IDENTIFIER", "MULTIPLE_COMPANIES_WITH_THIS_DOMAIN", "PROPERTY_DEFINITION_NOT_FOUND", "PROPERTY_VALUE_NOT_FOUND", "COULD_NOT_FIND_OWNER", "MULTIPLE_OWNERS_FOUND", "COULD_NOT_FIND_BUSINESS_UNIT", "COULD_NOT_PARSE_NUMBER", "COULD_NOT_PARSE_DATE", "COULD_NOT_PARSE_TERM", "OUTSIDE_VALID_TIME_RANGE", "OUTSIDE_VALID_TERM_RANGE", "COULD_NOT_PARSE_ROW", "INVALID_ENUMERATION_OPTION", "AMBIGUOUS_ENUMERATION_OPTION", "FAILED_VALIDATION", "FAILED_TO_CREATE_ASSOCIATION", "FILE_NOT_FOUND", "INVALID_COLUMN_CONFIGURATION", "INVALID_FILE_TYPE", "INVALID_SPREADSHEET", "INVALID_SHEET_COUNT", "FAILED_TO_PROCESS_OBJECT_WITH_EMPTY_PROPERTY_VALUES", "UNKNOWN_BAD_REQUEST", "GDPR_BLACKLISTED_EMAIL", "DUPLICATE_ASSOCIATION_ID", "LIMIT_EXCEEDED", "INVALID_ALTERNATE_ID", "INVALID_EMAIL", "INVALID_DOMAIN", "DUPLICATE_ROW_CONTENT", "INVALID_NUMBER_SIZE", "UNKNOWN_ERROR", "FAILED_TO_OPT_OUT_CONTACT", "INVALID_REQUIRED_PROPERTY", "MISSING_REQUIRED_PROPERTY", "DUPLICATE_ALTERNATE_ID", "DUPLICATE_OBJECT_ID", "DUPLICATE_UNIQUE_PROPERTY_VALUE", "BLANK_VALUE_PROVIDED", "UNKNOWN_ASSOCIATION_RECORD_ID", "INVALID_RECORD_ID", "DUPLICATE_RECORD_ID", "INVALID_CUSTOM_PROPERTY_VALIDATION", "CREATE_ONLY_IMPORT", "UPDATE_ONLY_IMPORT", "COLUMN_TOO_LARGE"])
           unless validator.valid?(error_type)
             fail ArgumentError, "invalid value for \"error_type\", must be one of #{validator.allowable_values}."
           end
@@ -205,7 +205,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] object_type Object to be assigned
         def object_type=(object_type)
-          validator = EnumAttributeValidator.new('String', ["CONTACT", "COMPANY", "DEAL", "ENGAGEMENT", "TICKET", "OWNER", "PRODUCT", "LINE_ITEM", "BET_DELIVERABLE_SERVICE", "CONTENT", "CONVERSATION", "BET_ALERT", "PORTAL", "QUOTE", "FORM_SUBMISSION_INBOUNDDB", "QUOTA", "UNSUBSCRIBE", "COMMUNICATION", "FEEDBACK_SUBMISSION", "ATTRIBUTION", "SALESFORCE_SYNC_ERROR", "RESTORABLE_CRM_OBJECT", "HUB", "LANDING_PAGE", "PRODUCT_OR_FOLDER", "TASK", "FORM", "MARKETING_EMAIL", "AD_ACCOUNT", "AD_CAMPAIGN", "AD_GROUP", "AD", "KEYWORD", "CAMPAIGN", "SOCIAL_CHANNEL", "SOCIAL_POST", "SITE_PAGE", "BLOG_POST", "IMPORT", "EXPORT", "CTA", "TASK_TEMPLATE", "AUTOMATION_PLATFORM_FLOW", "OBJECT_LIST", "NOTE", "MEETING_EVENT", "CALL", "EMAIL", "PUBLISHING_TASK", "CONVERSATION_SESSION", "CONTACT_CREATE_ATTRIBUTION", "INVOICE", "MARKETING_EVENT", "CONVERSATION_INBOX", "CHATFLOW", "MEDIA_BRIDGE", "SEQUENCE", "SEQUENCE_STEP", "FORECAST", "SNIPPET", "TEMPLATE", "DEAL_CREATE_ATTRIBUTION", "QUOTE_TEMPLATE", "QUOTE_MODULE", "QUOTE_MODULE_FIELD", "QUOTE_FIELD", "SEQUENCE_ENROLLMENT", "SUBSCRIPTION", "ACCEPTANCE_TEST", "SOCIAL_BROADCAST", "DEAL_SPLIT", "DEAL_REGISTRATION", "GOAL_TARGET", "GOAL_TARGET_GROUP", "PORTAL_OBJECT_SYNC_MESSAGE", "FILE_MANAGER_FILE", "FILE_MANAGER_FOLDER", "SEQUENCE_STEP_ENROLLMENT", "APPROVAL", "APPROVAL_STEP", "CTA_VARIANT", "UNKNOWN"])
+          validator = EnumAttributeValidator.new('String', ["CONTACT", "COMPANY", "DEAL", "ENGAGEMENT", "TICKET", "OWNER", "PRODUCT", "LINE_ITEM", "BET_DELIVERABLE_SERVICE", "CONTENT", "CONVERSATION", "BET_ALERT", "PORTAL", "QUOTE", "FORM_SUBMISSION_INBOUNDDB", "QUOTA", "UNSUBSCRIBE", "COMMUNICATION", "FEEDBACK_SUBMISSION", "ATTRIBUTION", "SALESFORCE_SYNC_ERROR", "RESTORABLE_CRM_OBJECT", "HUB", "LANDING_PAGE", "PRODUCT_OR_FOLDER", "TASK", "FORM", "MARKETING_EMAIL", "AD_ACCOUNT", "AD_CAMPAIGN", "AD_GROUP", "AD", "KEYWORD", "CAMPAIGN", "SOCIAL_CHANNEL", "SOCIAL_POST", "SITE_PAGE", "BLOG_POST", "IMPORT", "EXPORT", "CTA", "TASK_TEMPLATE", "AUTOMATION_PLATFORM_FLOW", "OBJECT_LIST", "NOTE", "MEETING_EVENT", "CALL", "EMAIL", "PUBLISHING_TASK", "CONVERSATION_SESSION", "CONTACT_CREATE_ATTRIBUTION", "INVOICE", "MARKETING_EVENT", "CONVERSATION_INBOX", "CHATFLOW", "MEDIA_BRIDGE", "SEQUENCE", "SEQUENCE_STEP", "FORECAST", "SNIPPET", "TEMPLATE", "DEAL_CREATE_ATTRIBUTION", "QUOTE_TEMPLATE", "QUOTE_MODULE", "QUOTE_MODULE_FIELD", "QUOTE_FIELD", "SEQUENCE_ENROLLMENT", "SUBSCRIPTION", "ACCEPTANCE_TEST", "SOCIAL_BROADCAST", "DEAL_SPLIT", "DEAL_REGISTRATION", "GOAL_TARGET", "GOAL_TARGET_GROUP", "PORTAL_OBJECT_SYNC_MESSAGE", "FILE_MANAGER_FILE", "FILE_MANAGER_FOLDER", "SEQUENCE_STEP_ENROLLMENT", "APPROVAL", "APPROVAL_STEP", "CTA_VARIANT", "SALES_DOCUMENT", "DISCOUNT", "FEE", "TAX", "MARKETING_CALENDAR", "PERMISSIONS_TESTING", "PRIVACY_SCANNER_COOKIE", "DATA_SYNC_STATE", "WEB_INTERACTIVE", "PLAYBOOK", "FOLDER", "PLAYBOOK_QUESTION", "PLAYBOOK_SUBMISSION", "PLAYBOOK_SUBMISSION_ANSWER", "COMMERCE_PAYMENT", "GSC_PROPERTY", "SOX_PROTECTED_DUMMY_TYPE", "BLOG_LISTING_PAGE", "QUARANTINED_SUBMISSION", "PAYMENT_SCHEDULE", "PAYMENT_SCHEDULE_INSTALLMENT", "MARKETING_CAMPAIGN_UTM", "DISCOUNT_TEMPLATE", "DISCOUNT_CODE", "FEEDBACK_SURVEY", "CMS_URL", "SALES_TASK", "SALES_WORKLOAD", "USER", "POSTAL_MAIL", "SCHEMAS_BACKEND_TEST", "PAYMENT_LINK", "SUBMISSION_TAG", "CAMPAIGN_STEP", "SCHEDULING_PAGE", "SOX_PROTECTED_TEST_TYPE", "ORDER", "MARKETING_SMS", "PARTNER_ACCOUNT", "CAMPAIGN_TEMPLATE", "CAMPAIGN_TEMPLATE_STEP", "UNKNOWN"])
           unless validator.valid?(object_type)
             fail ArgumentError, "invalid value for \"object_type\", must be one of #{validator.allowable_values}."
           end
@@ -218,12 +218,12 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               error_type == o.error_type &&
+              source_data == o.source_data &&
               object_type == o.object_type &&
               invalid_value == o.invalid_value &&
               extra_context == o.extra_context &&
               object_type_id == o.object_type_id &&
               known_column_number == o.known_column_number &&
-              source_data == o.source_data &&
               created_at == o.created_at &&
               id == o.id
         end
@@ -237,7 +237,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [error_type, object_type, invalid_value, extra_context, object_type_id, known_column_number, source_data, created_at, id].hash
+          [error_type, source_data, object_type, invalid_value, extra_context, object_type_id, known_column_number, created_at, id].hash
         end
 
         # Builds the object from hash

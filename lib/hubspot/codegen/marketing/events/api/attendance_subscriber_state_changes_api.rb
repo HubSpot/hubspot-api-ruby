@@ -85,7 +85,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseSubscriberVidResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"AttendanceSubscriberStateChangesApi.create",
@@ -168,7 +168,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseSubscriberEmailResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"AttendanceSubscriberStateChangesApi.create_by_email",
