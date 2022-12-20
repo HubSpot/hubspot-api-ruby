@@ -14,6 +14,7 @@ module Hubspot
               feedback_submissions
               meetings
               notes
+              postal_mail
               tasks
             ].freeze
           end
