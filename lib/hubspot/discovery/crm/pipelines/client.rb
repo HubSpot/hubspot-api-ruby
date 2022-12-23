@@ -10,7 +10,9 @@ module Hubspot
           def api_classes
             %i[
               pipeline_stages
+              pipeline_stage_audits
               pipelines
+              pipeline_audits
             ].freeze
           end
         end
