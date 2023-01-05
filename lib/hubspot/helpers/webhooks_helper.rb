@@ -1,3 +1,4 @@
+# @deprecated
 module Hubspot
   module Helpers
     class WebhooksHelper
