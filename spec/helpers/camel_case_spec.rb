@@ -8,4 +8,4 @@ describe "Hubspot::Helpers::CamelCase" do
       expect(result).to eql "SomeTestTextInSnakeCase"
     end
 
-  end
+end
