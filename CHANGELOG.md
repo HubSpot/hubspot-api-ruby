@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v16.2.0...HEAD)
 
 
-## [16.1.1] - 2023-01-09
+## [16.2.0] - 2023-01-09
 ### Added
 
 - Signature's util 'HubSpot.utils.signature'
