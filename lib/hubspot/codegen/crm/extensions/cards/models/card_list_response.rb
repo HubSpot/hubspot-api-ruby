@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # List of card definitions
         class CardListResponse
           # List of card definitions
           attr_accessor :results

@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Request body object for setting a new primary language.
         class SetNewLanguagePrimaryRequestVNext
           # ID of object to set as primary in multi-language group.
           attr_accessor :id

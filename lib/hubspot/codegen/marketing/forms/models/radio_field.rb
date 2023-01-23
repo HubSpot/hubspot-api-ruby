@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field consisting of a set of radio options, out of which one can be selected at a time.
       class RadioField
         # Determines how the field will be displayed and validated.
         attr_accessor :field_type

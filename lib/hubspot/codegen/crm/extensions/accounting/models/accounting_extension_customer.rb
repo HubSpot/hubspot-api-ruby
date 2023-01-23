@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Representation of a customer in the external accounting system.
         class AccountingExtensionCustomer
           # The customer's email address
           attr_accessor :email_address

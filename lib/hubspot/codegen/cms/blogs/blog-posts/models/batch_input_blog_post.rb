@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Wrapper for providing an array of blog posts as inputs.
         class BatchInputBlogPost
           # Blog posts to input.
           attr_accessor :inputs

@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Transactional
+      # The ID of a send event.
       class EventIdView
         # Time of event creation.
         attr_accessor :created

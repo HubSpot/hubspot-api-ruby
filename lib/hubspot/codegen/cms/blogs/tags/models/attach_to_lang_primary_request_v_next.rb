@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Request body object fro attaching objects to multi-language groups.
         class AttachToLangPrimaryRequestVNext
           # ID of the object to add to a multi-language group.
           attr_accessor :id

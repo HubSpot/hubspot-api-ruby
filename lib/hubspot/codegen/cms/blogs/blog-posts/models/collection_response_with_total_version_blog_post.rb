@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Response object for collections of blog post versions with pagination information.
         class CollectionResponseWithTotalVersionBlogPost
           # Total number of blog post versions.
           attr_accessor :total

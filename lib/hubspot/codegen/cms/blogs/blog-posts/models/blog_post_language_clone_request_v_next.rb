@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Request body object for creating new blog post language variant.
         class BlogPostLanguageCloneRequestVNext
           # ID of blog post to clone.
           attr_accessor :id

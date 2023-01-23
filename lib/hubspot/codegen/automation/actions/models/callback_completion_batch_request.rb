@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # Any information to send back to Workflows when completing an action callback as part of a batch request.
       class CallbackCompletionBatchRequest
         # The ID of the callback to complete.
         attr_accessor :callback_id

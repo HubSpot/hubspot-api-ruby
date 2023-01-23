@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Model definition for forward paging.
         class ForwardPaging
           attr_accessor :_next
 

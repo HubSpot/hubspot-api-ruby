@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Authors
+        # Response object for batch operations on blog authors.
         class BatchResponseBlogAuthor
           # Status of batch operation.
           attr_accessor :status

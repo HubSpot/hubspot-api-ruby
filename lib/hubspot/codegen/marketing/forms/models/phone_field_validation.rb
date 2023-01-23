@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # Describes how a phone number should be validated.
       class PhoneFieldValidation
         attr_accessor :min_allowed_digits
 

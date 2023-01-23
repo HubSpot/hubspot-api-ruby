@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # Styling options for the form
       class FormStyle
         attr_accessor :font_family
 

@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Request object for updating languages within a multi-language group.
         class UpdateLanguagesRequestVNext
           # ID of the primary object in the multi-language group.
           attr_accessor :primary_id

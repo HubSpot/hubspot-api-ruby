@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Conversations
     module VisitorIdentification
+      # The identification token to be passed to the Conversations JS API to identify the visitor
       class IdentificationTokenResponse
         attr_accessor :token
 

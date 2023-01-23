@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # A serverless function associated with this custom workflow action.
       class ActionFunction
         # The function source code.
         attr_accessor :function_source

@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Calling
+        # Settings create request
         class SettingsRequest
           # The name of your calling service to display to users.
           attr_accessor :name

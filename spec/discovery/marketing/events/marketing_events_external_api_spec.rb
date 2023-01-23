@@ -10,7 +10,6 @@ describe 'Hubspot::Discovery::Marketing::Events::MarketingEventsExternalApi' do
   it { is_expected.to respond_to(:do_cancel) }
   it { is_expected.to respond_to(:archive_batch) }
   it { is_expected.to respond_to(:do_email_upsert_by_id) }
-  it { is_expected.to respond_to(:do_search) }
   it { is_expected.to respond_to(:do_upsert) }
   it { is_expected.to respond_to(:do_upsert_by_id) }
   it { is_expected.to respond_to(:get_by_id) }

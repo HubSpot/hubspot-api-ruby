@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Indicates what elements of creating invoices in HubSpot is supported for the integration.
         class CreateInvoiceFeature
           # Indicates if creating invoices in HubSpot is supported for the integration.
           attr_accessor :enabled

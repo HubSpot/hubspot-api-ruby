@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Indicates if importing invoices from the external account system into HubSpot is supported for the integration.
         class ImportInvoiceFeature
           # Indicates if importing invoices from the external account system into HubSpot.
           attr_accessor :enabled

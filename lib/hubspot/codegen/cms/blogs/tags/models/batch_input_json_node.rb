@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Wrapper for providing an array of JSON nodes as inputs.
         class BatchInputJsonNode
           # JSON nodes to input.
           attr_accessor :inputs

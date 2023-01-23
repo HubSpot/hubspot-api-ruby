@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Outlines the features that are supported by the external accounting system.
         class AccountingFeatures
           attr_accessor :create_invoice
 

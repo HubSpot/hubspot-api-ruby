@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # What should happen after the customer submits the form.
       class FormPostSubmitAction
         # The action to take after submit. The default action is displaying a thank you message.
         attr_accessor :type

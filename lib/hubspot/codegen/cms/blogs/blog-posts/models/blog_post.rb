@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Model definition for a Blog Post.
         class BlogPost
           # The unique ID of the Blog Post.
           attr_accessor :id

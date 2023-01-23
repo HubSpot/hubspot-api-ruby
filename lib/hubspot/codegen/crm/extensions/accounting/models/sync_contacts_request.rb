@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # A request to import external accounting contact properties in HubSpot
         class SyncContactsRequest
           # The ID of the account in the external accounting system. This is the value that will be passed as `accountId` for all outbound calls for the user from HubSpot to the external accounting system.
           attr_accessor :account_id

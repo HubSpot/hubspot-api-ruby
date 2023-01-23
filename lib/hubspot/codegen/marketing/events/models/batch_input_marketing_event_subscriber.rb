@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Events
+      # List of HubSpot contacts to subscribe to the marketing event
       class BatchInputMarketingEventSubscriber
         # List of HubSpot contacts to subscribe to the marketing event
         attr_accessor :inputs

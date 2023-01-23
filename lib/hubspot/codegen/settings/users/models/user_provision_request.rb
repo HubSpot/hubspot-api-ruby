@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Settings
     module Users
+      # A user creation request
       class UserProvisionRequest
         # The created user's email
         attr_accessor :email

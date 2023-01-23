@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Files
     module Files
+      # Information on the task that has been started, and where to check it's status.
       class FolderUpdateTaskLocator
         # The ID of the task
         attr_accessor :id

@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # A color defined by RGB values.
         class RGBAColor
           # Red.
           attr_accessor :r

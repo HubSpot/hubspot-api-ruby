@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Model definition for a Tag.
         class Tag
           # The unique ID of the Blog Tag.
           attr_accessor :id

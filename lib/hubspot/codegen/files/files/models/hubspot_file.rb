@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Files
     module Files
+      # File
       class HubspotFile
         # File ID.
         attr_accessor :id

@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # An option for a field value.
       class Option
         # The user-facing label for the option.
         attr_accessor :label

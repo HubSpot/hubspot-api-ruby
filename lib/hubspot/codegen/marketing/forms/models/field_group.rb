@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A collection of up to three form fields usually displayed in a row.
       class FieldGroup
         attr_accessor :group_type
 

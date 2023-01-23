@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # Body for a patch with optional fields
         class CardPatchRequest
           # The top-level title for this card. Displayed to users in the CRM UI.
           attr_accessor :title

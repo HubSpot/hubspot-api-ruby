@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Authors
+        # Response object for collections of blog authors with pagination information.
         class CollectionResponseWithTotalBlogAuthorForwardPaging
           # Total number of blog authors.
           attr_accessor :total

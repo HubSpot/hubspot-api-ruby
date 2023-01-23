@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Files
     module Files
+      # Collections of files
       class CollectionResponseFile
         attr_accessor :results
 

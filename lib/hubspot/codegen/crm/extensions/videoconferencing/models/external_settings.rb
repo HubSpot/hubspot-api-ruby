@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Videoconferencing
+        # The URLs of the various actions provided by the video conferencing application. All URLs must use the `https` protocol.
         class ExternalSettings
           # The URL that HubSpot will send requests to create a new video conference.
           attr_accessor :create_meeting_url

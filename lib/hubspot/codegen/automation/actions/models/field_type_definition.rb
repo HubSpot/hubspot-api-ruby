@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # The data type expected by an input field.
       class FieldTypeDefinition
         # The input field name.
         attr_accessor :name

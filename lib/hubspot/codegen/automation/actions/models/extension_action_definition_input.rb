@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # State of custom workflow action to be created.
       class ExtensionActionDefinitionInput
         # A list of functions associated with the custom workflow action.
         attr_accessor :functions

@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # State of card definition to be created
         class CardCreateRequest
           # The top-level title for this card. Displayed to users in the CRM UI.
           attr_accessor :title

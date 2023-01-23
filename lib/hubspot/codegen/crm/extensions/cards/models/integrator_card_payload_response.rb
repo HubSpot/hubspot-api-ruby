@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.
         class IntegratorCardPayloadResponse
           # The total number of card properties that will be sent in this response.
           attr_accessor :total_count

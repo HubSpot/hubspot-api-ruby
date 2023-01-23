@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Model definition for paging.
         class Paging
           attr_accessor :_next
 

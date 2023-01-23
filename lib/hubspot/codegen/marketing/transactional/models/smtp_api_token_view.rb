@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Transactional
+      # A SMTP API token provides both an ID and password that can be used to send email through the HubSpot SMTP API.
       class SmtpApiTokenView
         # User name to log into the HubSpot SMTP server.
         attr_accessor :id

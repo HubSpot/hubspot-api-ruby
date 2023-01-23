@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Settings
     module Users
+      # A user
       class PublicUser
         # The user's unique ID
         attr_accessor :id

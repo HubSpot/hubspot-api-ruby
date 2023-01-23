@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # A response to a search for taxes.
         class TaxSearchResponse
           # Designates if the response is a success ('OK') or failure ('ERR').
           attr_accessor :result

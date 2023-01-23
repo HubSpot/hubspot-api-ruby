@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Transactional
+      # A request object to create a SMTP API token
       class SmtpApiTokenRequestEgg
         # Indicates whether a contact should be created for email recipients.
         attr_accessor :create_contact

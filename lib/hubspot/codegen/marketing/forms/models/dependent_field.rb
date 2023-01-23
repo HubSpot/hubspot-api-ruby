@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field that will be displayed based on what the customer entered in another field.
       class DependentField
         attr_accessor :dependent_condition
 

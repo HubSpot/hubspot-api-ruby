@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Settings
     module Users
+      # A user to update
       class PublicUserUpdate
         # The user's role
         attr_accessor :role_id

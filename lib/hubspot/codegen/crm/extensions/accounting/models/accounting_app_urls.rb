@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # The URL endpoints that HubSpot will send requests to an external accounting system for certain actions.
         class AccountingAppUrls
           # A URL that specifies the endpoint where invoices can be retrieved.
           attr_accessor :get_invoice_url

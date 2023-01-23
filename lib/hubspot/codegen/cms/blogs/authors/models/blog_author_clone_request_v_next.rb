@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Authors
+        # Request body object for cloning blog authors.
         class BlogAuthorCloneRequestVNext
           # ID of the object to be cloned.
           attr_accessor :id

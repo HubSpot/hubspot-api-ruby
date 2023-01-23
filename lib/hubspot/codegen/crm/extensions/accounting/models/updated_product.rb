@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # A request to import external accounting product properties in HubSpot
         class UpdatedProduct
           # The operation to be performed.
           attr_accessor :sync_action

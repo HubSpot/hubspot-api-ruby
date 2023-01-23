@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Response object for collections of blog tags with pagination information.
         class CollectionResponseWithTotalTagForwardPaging
           # Total number of blog tags.
           attr_accessor :total

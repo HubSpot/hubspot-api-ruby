@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # The invoice data to update in HubSpot
         class InvoiceUpdateRequest
           attr_accessor :external_invoice_number
 

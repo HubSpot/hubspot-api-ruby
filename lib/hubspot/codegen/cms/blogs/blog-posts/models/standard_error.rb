@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Model definition for a standard error.
         class StandardError
           # Error status.
           attr_accessor :status

@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Authors
+        # Wrapper for providing an array of blog authors as inputs.
         class BatchInputBlogAuthor
           # Blog authors to input.
           attr_accessor :inputs

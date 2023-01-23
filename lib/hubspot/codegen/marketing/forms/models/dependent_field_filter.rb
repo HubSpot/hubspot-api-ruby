@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A condition based on customer input
       class DependentFieldFilter
         attr_accessor :operator
 

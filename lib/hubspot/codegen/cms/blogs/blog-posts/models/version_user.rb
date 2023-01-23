@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Model definition for a version user. Contains addition information about the user who created a version.
         class VersionUser
           # The unique ID of the User.
           attr_accessor :id

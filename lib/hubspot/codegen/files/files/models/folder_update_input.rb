@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Files
     module Files
+      # Object for updating folders.
       class FolderUpdateInput
         # Id of the folder to change.
         attr_accessor :id

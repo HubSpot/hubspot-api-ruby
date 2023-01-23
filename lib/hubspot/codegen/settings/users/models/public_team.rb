@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Settings
     module Users
+      # A team that can be assigned to a user
       class PublicTeam
         # The team's unique ID
         attr_accessor :id

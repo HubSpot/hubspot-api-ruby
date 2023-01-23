@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # Options for styling the form.
       class FormDisplayOptions
         # Whether the form will render as raw HTML as opposed to inside an iFrame.
         attr_accessor :render_raw_html

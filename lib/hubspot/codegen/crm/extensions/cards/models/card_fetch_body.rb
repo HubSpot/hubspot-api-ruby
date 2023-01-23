@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # Configuration for this card's data fetch request.
         class CardFetchBody
           # URL to a service endpoints that will respond with card details. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
           attr_accessor :target_url

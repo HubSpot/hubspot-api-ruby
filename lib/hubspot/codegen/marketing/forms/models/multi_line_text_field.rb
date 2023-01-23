@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field consisting of a multiple-line text box.
       class MultiLineTextField
         # Determines how the field will be displayed and validated.
         attr_accessor :field_type

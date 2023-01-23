@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # The URL Settings, which defines the URL endpoints that HubSpot will send requests to an external accounting application for certain actions.
         class AccountingAppSettings
           # The ID of the accounting app. This is the identifier of the application created in your HubSpot developer portal.
           attr_accessor :app_id

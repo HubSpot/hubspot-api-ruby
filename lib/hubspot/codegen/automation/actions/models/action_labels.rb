@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # User-facing labels for this custom workflow action.
       class ActionLabels
         # A map of input field names to the user-facing labels.
         attr_accessor :input_field_labels

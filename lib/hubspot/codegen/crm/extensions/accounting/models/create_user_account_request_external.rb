@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Information about the account in your external account system.
         class CreateUserAccountRequestExternal
           # The id of the account in your system.
           attr_accessor :account_id
