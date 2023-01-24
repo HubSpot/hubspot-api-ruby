@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # Current state of Card Definition
         class CardResponse
           # Generated unique ID for card.
           attr_accessor :id

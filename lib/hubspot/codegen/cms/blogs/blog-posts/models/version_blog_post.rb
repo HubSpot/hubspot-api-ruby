@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Model definition of a version of a blog post.
         class VersionBlogPost
           attr_accessor :object
 

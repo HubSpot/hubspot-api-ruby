@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Request body object for cloning blog tags.
         class TagCloneRequestVNext
           # ID of the object to be cloned.
           attr_accessor :id

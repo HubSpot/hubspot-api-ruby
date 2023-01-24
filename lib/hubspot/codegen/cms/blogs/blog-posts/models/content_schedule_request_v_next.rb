@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Request body object for scheduling the publish of content
         class ContentScheduleRequestVNext
           # The ID of the object to be scheduled.
           attr_accessor :id

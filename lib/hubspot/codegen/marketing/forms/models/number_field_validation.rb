@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # Describes how a numeric value should be validated.
       class NumberFieldValidation
         attr_accessor :min_allowed_digits
 

@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Response object for collections of blog posts with pagination information.
         class CollectionResponseWithTotalBlogPostForwardPaging
           # Total number of blog posts.
           attr_accessor :total

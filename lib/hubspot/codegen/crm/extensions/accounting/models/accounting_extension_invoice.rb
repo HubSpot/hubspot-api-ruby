@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Representation of an invoice in the external accounting system.
         class AccountingExtensionInvoice
           # The total amount due.
           attr_accessor :amount_due

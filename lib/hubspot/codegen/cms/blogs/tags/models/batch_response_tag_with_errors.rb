@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Response object for batch operations on blog tags with errors.
         class BatchResponseTagWithErrors
           # Status of batch operation.
           attr_accessor :status

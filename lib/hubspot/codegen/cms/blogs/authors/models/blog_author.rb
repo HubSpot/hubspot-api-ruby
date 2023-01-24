@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Authors
+        # Model definition for a Blog Author.
         class BlogAuthor
           # The unique ID of the Blog Author.
           attr_accessor :id

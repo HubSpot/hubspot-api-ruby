@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Lists the individual aspects of creating invoices that are enabled for the integration, as part of the create invoice flow in HubSpot.
         class CreateInvoiceSubFeatures
           # Indicates if a new customer can be created in the external accounting system.
           attr_accessor :create_customer

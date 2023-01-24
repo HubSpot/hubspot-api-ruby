@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # Option definition for STATUS dataTypes.
         class DisplayOption
           # JSON-friendly unique name for option.
           attr_accessor :name

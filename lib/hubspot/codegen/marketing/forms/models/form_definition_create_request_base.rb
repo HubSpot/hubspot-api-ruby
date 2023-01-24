@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      module FormDefinitionCreateRequestBase
         class << self
           # List of class defined in oneOf (OpenAPI v3)
           def openapi_one_of

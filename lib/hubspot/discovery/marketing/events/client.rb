@@ -11,6 +11,7 @@ module Hubspot
             %i[
               attendance_subscriber_state_changes
               marketing_events_external
+              search
               settings_external
             ].freeze
           end

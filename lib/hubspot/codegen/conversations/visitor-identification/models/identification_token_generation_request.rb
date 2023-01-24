@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Conversations
     module VisitorIdentification
+      # Information used to generate a token
       class IdentificationTokenGenerationRequest
         # The email of the visitor that you wish to identify
         attr_accessor :email

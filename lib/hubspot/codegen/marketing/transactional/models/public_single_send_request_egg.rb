@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Transactional
+      # A request to send a single transactional email asynchronously.
       class PublicSingleSendRequestEgg
         # The content ID for the transactional email, which can be found in email tool UI.
         attr_accessor :email_id

@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # Any information to send back to Workflows when completing an action callback.
       class CallbackCompletionRequest
         # A map of action output names and values.
         attr_accessor :output_fields

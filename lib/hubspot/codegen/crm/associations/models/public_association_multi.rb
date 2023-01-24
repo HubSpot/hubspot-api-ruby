@@ -22,11 +22,14 @@ module Hubspot
         # The IDs of objects that are associated with the object identified by the ID in 'from'.
         attr_accessor :to
 
+        attr_accessor :paging
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'from' => :'from',
-            :'to' => :'to'
+            :'to' => :'to',
+            :'paging' => :'paging'
           }
         end
 
@@ -39,7 +42,8 @@ module Hubspot
         def self.openapi_types
           {
             :'from' => :'PublicObjectId',
-            :'to' => :'Array<AssociatedId>'
+            :'to' => :'Array<AssociatedId>',
+            :'paging' => :'Paging'
           }
         end
 
@@ -73,6 +77,10 @@ module Hubspot
               self.to = value
             end
           end
+
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -104,7 +112,8 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               from == o.from &&
-              to == o.to
+              to == o.to &&
+              paging == o.paging
         end
 
         # @see the `==` method
@@ -116,7 +125,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from, to].hash
+          [from, to, paging].hash
         end
 
         # Builds the object from hash

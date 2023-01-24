@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Transactional
+      # A JSON object containing anything you want to override.
       class PublicSingleSendEmail
         # The From header for the email.
         attr_accessor :from

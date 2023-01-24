@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # Configures what properties of the enrolled CRM object are included in the action execution request
       class ObjectRequestOptions
         # A list of properties of the CRM object to include with the request to the `actionUrl`.
         attr_accessor :properties

@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field used to select a date
       class DatepickerField
         # Determines how the field will be displayed and validated.
         attr_accessor :field_type

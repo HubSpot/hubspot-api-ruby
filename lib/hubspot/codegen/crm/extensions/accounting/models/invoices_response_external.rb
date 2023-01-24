@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # A response to a request for invoices.
         class InvoicesResponseExternal
           # Designates if the response is a success ('OK') or failure ('ERR').
           attr_accessor :result

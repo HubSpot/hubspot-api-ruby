@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # A response to the request for an exchange rate value. It represents the exchange rate from the source currency to the target currency.
         class ExchangeRateResponse
           # Designates if the response is a success ('OK') or failure ('ERR').
           attr_accessor :result

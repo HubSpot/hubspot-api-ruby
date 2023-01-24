@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Transactional
+      # Describes the status of an email send request.
       class EmailSendStatusView
         # Identifier used to query the status of the send.
         attr_accessor :status_id

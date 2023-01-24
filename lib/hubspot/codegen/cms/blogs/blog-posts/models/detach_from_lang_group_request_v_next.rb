@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
+        # Request body object for detaching objects from multi-language groups.
         class DetachFromLangGroupRequestVNext
           # ID of the object to remove from a multi-language group.
           attr_accessor :id

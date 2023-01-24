@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Represents an address of a customer
         class Address
           # The country of the address.
           attr_accessor :country

@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Calling
+        # Current settings state
         class SettingsResponse
           # The name of your calling service to display to users.
           attr_accessor :name

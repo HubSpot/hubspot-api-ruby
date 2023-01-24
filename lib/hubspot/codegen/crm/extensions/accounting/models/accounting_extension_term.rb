@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Representation of payment terms that are defined in the external accounting system. One of 'dueDays' or 'dueDate' is required.
         class AccountingExtensionTerm
           # The due date for payment of the invoice, in ISO-8601 date format (yyyy-MM-dd)
           attr_accessor :due_date

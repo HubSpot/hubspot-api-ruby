@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # Configuration for custom workflow action.
       class ExtensionActionDefinition
         # The ID of the custom action.
         attr_accessor :id

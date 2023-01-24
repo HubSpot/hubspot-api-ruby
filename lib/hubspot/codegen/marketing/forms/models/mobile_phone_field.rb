@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field used for collecting a mobile phone number.
       class MobilePhoneField
         # Determines how the field will be displayed and validated.
         attr_accessor :field_type

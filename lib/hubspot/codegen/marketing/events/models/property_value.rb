@@ -44,6 +44,8 @@ module Hubspot
 
         attr_accessor :persistence_timestamp
 
+        attr_accessor :use_timestamp_as_persistence_timestamp
+
         class EnumAttributeValidator
           attr_reader :datatype
           attr_reader :allowable_values
@@ -81,7 +83,8 @@ module Hubspot
             :'source_metadata' => :'sourceMetadata',
             :'request_id' => :'requestId',
             :'updated_by_user_id' => :'updatedByUserId',
-            :'persistence_timestamp' => :'persistenceTimestamp'
+            :'persistence_timestamp' => :'persistenceTimestamp',
+            :'use_timestamp_as_persistence_timestamp' => :'useTimestampAsPersistenceTimestamp'
           }
         end
 
@@ -105,7 +108,8 @@ module Hubspot
             :'source_metadata' => :'String',
             :'request_id' => :'String',
             :'updated_by_user_id' => :'Integer',
-            :'persistence_timestamp' => :'Integer'
+            :'persistence_timestamp' => :'Integer',
+            :'use_timestamp_as_persistence_timestamp' => :'Boolean'
           }
         end
 
@@ -182,6 +186,10 @@ module Hubspot
 
           if attributes.key?(:'persistence_timestamp')
             self.persistence_timestamp = attributes[:'persistence_timestamp']
+          end
+
+          if attributes.key?(:'use_timestamp_as_persistence_timestamp')
+            self.use_timestamp_as_persistence_timestamp = attributes[:'use_timestamp_as_persistence_timestamp']
           end
         end
 
@@ -282,7 +290,8 @@ module Hubspot
               source_metadata == o.source_metadata &&
               request_id == o.request_id &&
               updated_by_user_id == o.updated_by_user_id &&
-              persistence_timestamp == o.persistence_timestamp
+              persistence_timestamp == o.persistence_timestamp &&
+              use_timestamp_as_persistence_timestamp == o.use_timestamp_as_persistence_timestamp
         end
 
         # @see the `==` method
@@ -294,7 +303,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, value, timestamp, source_id, source_label, source, selected_by_user, selected_by_user_timestamp, source_vid, source_metadata, request_id, updated_by_user_id, persistence_timestamp].hash
+          [name, value, timestamp, source_id, source_label, source, selected_by_user, selected_by_user_timestamp, source_vid, source_metadata, request_id, updated_by_user_id, persistence_timestamp, use_timestamp_as_persistence_timestamp].hash
         end
 
         # Builds the object from hash

@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Settings
     module Users
+      # A role that can be assigned to a user
       class PublicPermissionSet
         # The role's unique ID
         attr_accessor :id

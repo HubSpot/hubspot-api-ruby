@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # Describes how an email address should be validated.
       class EmailFieldValidation
         # A list of email domains to block.
         attr_accessor :blocked_email_domains

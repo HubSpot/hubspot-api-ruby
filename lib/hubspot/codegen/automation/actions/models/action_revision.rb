@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # A revision of this custom action.
       class ActionRevision
         attr_accessor :definition
 

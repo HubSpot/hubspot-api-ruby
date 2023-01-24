@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Files
     module Files
+      # Object for creating a folder.
       class FolderInput
         # Desired name for the folder.
         attr_accessor :name

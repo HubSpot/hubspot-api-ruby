@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
+        # Definition for a card display property.
         class CardDisplayProperty
           # An internal identifier for this property. This value must be unique TODO.
           attr_accessor :name

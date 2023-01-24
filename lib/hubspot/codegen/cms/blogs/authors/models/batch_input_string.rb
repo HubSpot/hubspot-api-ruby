@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Authors
+        # Wrapper for providing an array of strings as inputs.
         class BatchInputString
           # Strings to input.
           attr_accessor :inputs

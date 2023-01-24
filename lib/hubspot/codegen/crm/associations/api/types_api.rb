@@ -26,7 +26,7 @@ module Hubspot
         # @param from_object_type [String] 
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @return [CollectionResponsePublicAssociationDefiniton]
+        # @return [CollectionResponsePublicAssociationDefinitionNoPaging]
         def get_all(from_object_type, to_object_type, opts = {})
           data, _status_code, _headers = get_all_with_http_info(from_object_type, to_object_type, opts)
           data
@@ -37,7 +37,7 @@ module Hubspot
         # @param from_object_type [String] 
         # @param to_object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponsePublicAssociationDefiniton, Integer, Hash)>] CollectionResponsePublicAssociationDefiniton data, response status code and response headers
+        # @return [Array<(CollectionResponsePublicAssociationDefinitionNoPaging, Integer, Hash)>] CollectionResponsePublicAssociationDefinitionNoPaging data, response status code and response headers
         def get_all_with_http_info(from_object_type, to_object_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: TypesApi.get_all ...'
@@ -68,7 +68,7 @@ module Hubspot
           post_body = opts[:debug_body]
 
           # return_type
-          return_type = opts[:debug_return_type] || 'CollectionResponsePublicAssociationDefiniton'
+          return_type = opts[:debug_return_type] || 'CollectionResponsePublicAssociationDefinitionNoPaging'
 
           # auth_names
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']

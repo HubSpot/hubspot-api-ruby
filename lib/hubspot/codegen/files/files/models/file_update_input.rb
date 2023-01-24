@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Files
     module Files
+      # Object for updating files.
       class FileUpdateInput
         # New name for the file.
         attr_accessor :name

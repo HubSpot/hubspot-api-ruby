@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # Fields on custom workflow action to be updated.
       class ExtensionActionDefinitionPatch
         # The URL that will accept an HTTPS request each time workflows executes the custom action.
         attr_accessor :action_url

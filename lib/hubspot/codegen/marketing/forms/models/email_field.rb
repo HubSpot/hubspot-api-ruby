@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field used for collecting an email address.
       class EmailField
         # Determines how the field will be displayed and validated.
         attr_accessor :field_type

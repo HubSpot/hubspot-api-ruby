@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # A serverless function associated with this custom workflow action.
       class ActionFunctionIdentifier
         # The type of function. This determines when the function will be called.
         attr_accessor :function_type

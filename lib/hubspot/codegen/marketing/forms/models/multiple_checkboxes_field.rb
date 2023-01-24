@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Forms
+      # A form field consisting of a set of checkboxes allowing multiple choices to be selected at one time.
       class MultipleCheckboxesField
         # Determines how the field will be displayed and validated.
         attr_accessor :field_type

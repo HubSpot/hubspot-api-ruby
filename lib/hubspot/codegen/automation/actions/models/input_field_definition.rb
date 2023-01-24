@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Automation
     module Actions
+      # Configuration for an input field on the custom action
       class InputFieldDefinition
         attr_accessor :type_definition
 

@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Represents a unit price
         class UnitPrice
           # The actual unit price amount.
           attr_accessor :amount

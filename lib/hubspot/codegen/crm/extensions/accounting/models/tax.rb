@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # Representation of a tax defined in the external accounting system.
         class Tax
           # The code/ID of the tax in the external accounting system.
           attr_accessor :code

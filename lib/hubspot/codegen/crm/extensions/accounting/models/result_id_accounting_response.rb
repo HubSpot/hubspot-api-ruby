@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # A response to the creation of an entity (eg. invoice, customer).
         class ResultIdAccountingResponse
           # Designates if the response is a success ('OK') or failure ('ERR').
           attr_accessor :result

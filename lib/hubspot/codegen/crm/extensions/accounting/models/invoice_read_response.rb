@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Extensions
       module Accounting
+        # The invoice data stored in HubSpot
         class InvoiceReadResponse
           # The invoice number. Note that this is _not_ the ID of the invoice, but the number that the billed customer will see.
           attr_accessor :external_invoice_number

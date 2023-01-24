@@ -16,6 +16,7 @@ require 'time'
 module Hubspot
   module Marketing
     module Events
+      # List of marketing event details to create or update
       class BatchInputMarketingEventEmailSubscriber
         # List of marketing event details to create or update
         attr_accessor :inputs

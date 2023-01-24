@@ -441,66 +441,6 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # @param q [String] 
-        # @param [Hash] opts the optional parameters
-        # @return [CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging]
-        def do_search(q, opts = {})
-          data, _status_code, _headers = do_search_with_http_info(q, opts)
-          data
-        end
-
-        # @param q [String] 
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging, Integer, Hash)>] CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging data, response status code and response headers
-        def do_search_with_http_info(q, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: MarketingEventsExternalApi.do_search ...'
-          end
-          # verify the required parameter 'q' is set
-          if @api_client.config.client_side_validation && q.nil?
-            fail ArgumentError, "Missing the required parameter 'q' when calling MarketingEventsExternalApi.do_search"
-          end
-          # resource path
-          local_var_path = '/marketing/v3/marketing-events/events/search'
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'q'] = q
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:debug_body]
-
-          # return_type
-          return_type = opts[:debug_return_type] || 'CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging'
-
-          # auth_names
-          auth_names = opts[:debug_auth_names] || ['oauth2']
-
-          new_options = opts.merge(
-            :operation => :"MarketingEventsExternalApi.do_search",
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: MarketingEventsExternalApi#do_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
         # @param batch_input_marketing_event_create_request_params [BatchInputMarketingEventCreateRequestParams] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseMarketingEventPublicDefaultResponse]

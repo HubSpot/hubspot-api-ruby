@@ -17,6 +17,7 @@ module Hubspot
   module Cms
     module Blogs
       module Tags
+        # Wrapper for providing an array of blog tags as inputs.
         class BatchInputTag
           # Blog tags to input.
           attr_accessor :inputs
