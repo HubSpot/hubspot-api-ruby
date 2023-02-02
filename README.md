@@ -39,7 +39,7 @@ contacts = client.crm.contacts.basic_api.get_page
 Please, note that hapikey is no longer supported after v13.1.0. You can get more info about hapikey sunset [here](https://developers.hubspot.com/changelog/upcoming-api-key-sunset). Also, plese, visit a [migration guide](https://developers.hubspot.com/docs/api/migrate-an-api-key-integration-to-a-private-app) if you need help with a migration process.
 
 ### Get all:
-get_all method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
+`get_all` method is available for all objects (Companies, Contacts, Deals and etc).
 
 ```ruby
 client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
@@ -50,6 +50,38 @@ You'll need to create a [private app](https://developers.hubspot.com/docs/api/pr
 
 Please note that pagination is used under the hood to get all results.
 
+## Search:
+`do_search` method is available for all objects (Companies, Contacts, Deals and etc).
+
+Only 3 `FilterGroups` with max 3 `Filters` are supported.
+
+### Example search by date
+```ruby
+require 'hubspot-api-client'
+require 'date'
+
+api_client = Hubspot::Client.new(access_token: "YOUR_ACCESS_TOKEN")
+# timestamp in milliseconds
+timestamp = (DateTime.parse("XXXX-XX-XXTXX:XX:XX.XXXZ").to_time.to_f * 1000).to_i.to_s
+body = {
+  "filterGroups":
+    [
+      {
+        "filters":[
+          {
+            "value": timestamp,
+            "propertyName":"lastmodifieddate",
+            "operator":"EQ"
+          }
+        ]
+      }
+    ]
+}
+api_response = api_client.crm.contacts.search_api.do_search(
+  body: body
+)
+puts api_response
+```
 
 ### Crm Object Schemas client usage:
 
