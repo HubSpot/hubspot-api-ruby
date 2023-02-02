@@ -50,6 +50,36 @@ You'll need to create a [private app](https://developers.hubspot.com/docs/api/pr
 
 Please note that pagination is used under the hood to get all results.
 
+## Search by date:
+do_search method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like:
+
+
+```ruby
+require 'hubspot-api-client'
+require 'date'
+
+api_client = Hubspot::Client.new(access_token: "YOUR_ACCESS_TOKEN")
+# timestamp in milliseconds
+timestamp = (DateTime.parse("XXXX-XX-XXTXX:XX:XX.XXXZ").to_time.to_f * 1000).to_i.to_s
+body = {
+  "filterGroups":
+    [
+      {
+        "filters":[
+          {
+            "value": timestamp,
+            "propertyName":"lastmodifieddate",
+            "operator":"EQ"
+          }
+        ]
+      }
+    ]
+}
+api_response = api_client.crm.contacts.search_api.do_search(
+  body: body
+)
+puts api_response
+```
 
 ### Crm Object Schemas client usage:
 
