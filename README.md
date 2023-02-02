@@ -50,10 +50,12 @@ You'll need to create a [private app](https://developers.hubspot.com/docs/api/pr
 
 Please note that pagination is used under the hood to get all results.
 
-## Search by date:
-do_search method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like:
+## Search:
+do_search method is available for all objects (Companies, Contacts, Deals and etc).
 
+Only 3 FilterGroups with max 3 Filters are supported.
 
+### Example search by date
 ```ruby
 require 'hubspot-api-client'
 require 'date'
