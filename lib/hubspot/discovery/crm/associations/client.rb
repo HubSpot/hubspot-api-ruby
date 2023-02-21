@@ -14,7 +14,7 @@ module Hubspot
               batch
               types
             ].freeze
-            end
+          end
         end
       end
     end
