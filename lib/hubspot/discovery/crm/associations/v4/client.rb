@@ -7,7 +7,6 @@ module Hubspot
         module V4
           class Client
             include Hubspot::Discovery::BaseModuleClient
-
             def api_classes
               %i[
                 batch
