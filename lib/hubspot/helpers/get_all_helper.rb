@@ -12,8 +12,9 @@ module Hubspot
       def get_all(opts = {})
         after = nil
         objects = []
+        opts[:limit] ||= MAX_PAGE_SIZE
         loop do
-          page_opts = opts.merge(limit: MAX_PAGE_SIZE, after: after)
+          page_opts = opts.merge(after: after)
           page = get_page(page_opts)
           objects.concat(page.results)
           break objects if page.paging.nil?
