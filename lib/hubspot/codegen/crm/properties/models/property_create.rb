@@ -50,6 +50,15 @@ module Hubspot
         # Whether or not the property can be used in a HubSpot form.
         attr_accessor :form_field
 
+        # Applicable only for 'enumeration' type properties.  Should be set to true in conjunction with a 'referencedObjectType' of 'OWNER'.  Otherwise false.
+        attr_accessor :external_options
+
+        # Should be set to 'OWNER' when 'externalOptions' is true, which causes the property to dynamically pull option values from the current HubSpot users.
+        attr_accessor :referenced_object_type
+
+        # Represents a formula that is used to compute a calculated property.
+        attr_accessor :calculation_formula
+
         class EnumAttributeValidator
           attr_reader :datatype
           attr_reader :allowable_values
@@ -85,7 +94,10 @@ module Hubspot
             :'display_order' => :'displayOrder',
             :'has_unique_value' => :'hasUniqueValue',
             :'hidden' => :'hidden',
-            :'form_field' => :'formField'
+            :'form_field' => :'formField',
+            :'external_options' => :'externalOptions',
+            :'referenced_object_type' => :'referencedObjectType',
+            :'calculation_formula' => :'calculationFormula'
           }
         end
 
@@ -107,7 +119,10 @@ module Hubspot
             :'display_order' => :'Integer',
             :'has_unique_value' => :'Boolean',
             :'hidden' => :'Boolean',
-            :'form_field' => :'Boolean'
+            :'form_field' => :'Boolean',
+            :'external_options' => :'Boolean',
+            :'referenced_object_type' => :'String',
+            :'calculation_formula' => :'String'
           }
         end
 
@@ -177,6 +192,18 @@ module Hubspot
           if attributes.key?(:'form_field')
             self.form_field = attributes[:'form_field']
           end
+
+          if attributes.key?(:'external_options')
+            self.external_options = attributes[:'external_options']
+          end
+
+          if attributes.key?(:'referenced_object_type')
+            self.referenced_object_type = attributes[:'referenced_object_type']
+          end
+
+          if attributes.key?(:'calculation_formula')
+            self.calculation_formula = attributes[:'calculation_formula']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -212,10 +239,10 @@ module Hubspot
           return false if @name.nil?
           return false if @label.nil?
           return false if @type.nil?
-          type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration"])
+          type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration", "bool"])
           return false unless type_validator.valid?(@type)
           return false if @field_type.nil?
-          field_type_validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox"])
+          field_type_validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox", "calculation_equation"])
           return false unless field_type_validator.valid?(@field_type)
           return false if @group_name.nil?
           true
@@ -224,7 +251,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] type Object to be assigned
         def type=(type)
-          validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration"])
+          validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration", "bool"])
           unless validator.valid?(type)
             fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
           end
@@ -234,7 +261,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] field_type Object to be assigned
         def field_type=(field_type)
-          validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox"])
+          validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox", "calculation_equation"])
           unless validator.valid?(field_type)
             fail ArgumentError, "invalid value for \"field_type\", must be one of #{validator.allowable_values}."
           end
@@ -256,7 +283,10 @@ module Hubspot
               display_order == o.display_order &&
               has_unique_value == o.has_unique_value &&
               hidden == o.hidden &&
-              form_field == o.form_field
+              form_field == o.form_field &&
+              external_options == o.external_options &&
+              referenced_object_type == o.referenced_object_type &&
+              calculation_formula == o.calculation_formula
         end
 
         # @see the `==` method
@@ -268,7 +298,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, type, field_type, group_name, description, options, display_order, has_unique_value, hidden, form_field].hash
+          [name, label, type, field_type, group_name, description, options, display_order, has_unique_value, hidden, form_field, external_options, referenced_object_type, calculation_formula].hash
         end
 
         # Builds the object from hash

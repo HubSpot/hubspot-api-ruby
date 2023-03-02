@@ -83,6 +83,9 @@ module Hubspot
         # Whether or not the property can be used in a HubSpot form.
         attr_accessor :form_field
 
+        # Represents a formula that is used to compute a calculated property.
+        attr_accessor :calculation_formula
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
@@ -108,7 +111,8 @@ module Hubspot
             :'hubspot_defined' => :'hubspotDefined',
             :'show_currency_symbol' => :'showCurrencySymbol',
             :'modification_metadata' => :'modificationMetadata',
-            :'form_field' => :'formField'
+            :'form_field' => :'formField',
+            :'calculation_formula' => :'calculationFormula'
           }
         end
 
@@ -142,7 +146,8 @@ module Hubspot
             :'hubspot_defined' => :'Boolean',
             :'show_currency_symbol' => :'Boolean',
             :'modification_metadata' => :'PropertyModificationMetadata',
-            :'form_field' => :'Boolean'
+            :'form_field' => :'Boolean',
+            :'calculation_formula' => :'String'
           }
         end
 
@@ -260,6 +265,10 @@ module Hubspot
           if attributes.key?(:'form_field')
             self.form_field = attributes[:'form_field']
           end
+
+          if attributes.key?(:'calculation_formula')
+            self.calculation_formula = attributes[:'calculation_formula']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -337,7 +346,8 @@ module Hubspot
               hubspot_defined == o.hubspot_defined &&
               show_currency_symbol == o.show_currency_symbol &&
               modification_metadata == o.modification_metadata &&
-              form_field == o.form_field
+              form_field == o.form_field &&
+              calculation_formula == o.calculation_formula
         end
 
         # @see the `==` method
@@ -349,7 +359,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [updated_at, created_at, archived_at, name, label, type, field_type, description, group_name, options, created_user_id, updated_user_id, referenced_object_type, display_order, calculated, external_options, archived, has_unique_value, hidden, hubspot_defined, show_currency_symbol, modification_metadata, form_field].hash
+          [updated_at, created_at, archived_at, name, label, type, field_type, description, group_name, options, created_user_id, updated_user_id, referenced_object_type, display_order, calculated, external_options, archived, has_unique_value, hidden, hubspot_defined, show_currency_symbol, modification_metadata, form_field, calculation_formula].hash
         end
 
         # Builds the object from hash
