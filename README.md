@@ -64,14 +64,14 @@ api_client = Hubspot::Client.new(access_token: "YOUR_ACCESS_TOKEN")
 # timestamp in milliseconds
 timestamp = (DateTime.parse("XXXX-XX-XXTXX:XX:XX.XXXZ").to_time.to_f * 1000).to_i.to_s
 body = {
-  "filterGroups":
+  filter_groups:
     [
       {
-        "filters":[
+        filters:[
           {
-            "value": timestamp,
-            "propertyName":"lastmodifieddate",
-            "operator":"EQ"
+            value: timestamp,
+            property_name: "lastmodifieddate",
+            operator: "EQ"
           }
         ]
       }
