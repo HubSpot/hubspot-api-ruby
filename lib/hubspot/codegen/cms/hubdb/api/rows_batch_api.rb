@@ -27,8 +27,8 @@ module Hubspot
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseHubDbTableRowV3]
-        def batch_clone_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
-          data, _status_code, _headers = batch_clone_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
+        def clone_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
+          data, _status_code, _headers = clone_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           data
         end
 
@@ -38,17 +38,17 @@ module Hubspot
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
-        def batch_clone_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
+        def clone_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_clone_draft_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.clone_draft_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_clone_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.clone_draft_table_rows"
           end
           # verify the required parameter 'batch_input_string' is set
           if @api_client.config.client_side_validation && batch_input_string.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.batch_clone_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.clone_draft_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/clone'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -79,7 +79,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_clone_draft_table_rows",
+            :operation => :"RowsBatchApi.clone_draft_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -90,7 +90,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_clone_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#clone_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -101,8 +101,8 @@ module Hubspot
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseHubDbTableRowV3]
-        def batch_create_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
-          data, _status_code, _headers = batch_create_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts)
+        def create_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
+          data, _status_code, _headers = create_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts)
           data
         end
 
@@ -112,17 +112,17 @@ module Hubspot
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
-        def batch_create_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
+        def create_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_create_draft_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.create_draft_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_create_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.create_draft_table_rows"
           end
           # verify the required parameter 'batch_input_hub_db_table_row_v3_request' is set
           if @api_client.config.client_side_validation && batch_input_hub_db_table_row_v3_request.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_hub_db_table_row_v3_request' when calling RowsBatchApi.batch_create_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'batch_input_hub_db_table_row_v3_request' when calling RowsBatchApi.create_draft_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -153,7 +153,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_create_draft_table_rows",
+            :operation => :"RowsBatchApi.create_draft_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -164,7 +164,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_create_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#create_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -175,8 +175,8 @@ module Hubspot
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def batch_purge_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
-          batch_purge_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
+        def purge_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
+          purge_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           nil
         end
 
@@ -186,17 +186,17 @@ module Hubspot
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def batch_purge_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
+        def purge_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_purge_draft_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.purge_draft_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_purge_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.purge_draft_table_rows"
           end
           # verify the required parameter 'batch_input_string' is set
           if @api_client.config.client_side_validation && batch_input_string.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.batch_purge_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.purge_draft_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/purge'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -227,7 +227,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_purge_draft_table_rows",
+            :operation => :"RowsBatchApi.purge_draft_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -238,7 +238,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_purge_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#purge_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -249,8 +249,8 @@ module Hubspot
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseHubDbTableRowV3]
-        def batch_read_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
-          data, _status_code, _headers = batch_read_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
+        def read_draft_table_rows(table_id_or_name, batch_input_string, opts = {})
+          data, _status_code, _headers = read_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           data
         end
 
@@ -260,17 +260,17 @@ module Hubspot
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
-        def batch_read_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
+        def read_draft_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_read_draft_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.read_draft_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_read_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.read_draft_table_rows"
           end
           # verify the required parameter 'batch_input_string' is set
           if @api_client.config.client_side_validation && batch_input_string.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.batch_read_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.read_draft_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/read'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -301,7 +301,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_read_draft_table_rows",
+            :operation => :"RowsBatchApi.read_draft_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -312,7 +312,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_read_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#read_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -323,8 +323,8 @@ module Hubspot
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseHubDbTableRowV3]
-        def batch_read_table_rows(table_id_or_name, batch_input_string, opts = {})
-          data, _status_code, _headers = batch_read_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
+        def read_table_rows(table_id_or_name, batch_input_string, opts = {})
+          data, _status_code, _headers = read_table_rows_with_http_info(table_id_or_name, batch_input_string, opts)
           data
         end
 
@@ -334,17 +334,17 @@ module Hubspot
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
-        def batch_read_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
+        def read_table_rows_with_http_info(table_id_or_name, batch_input_string, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_read_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.read_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_read_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.read_table_rows"
           end
           # verify the required parameter 'batch_input_string' is set
           if @api_client.config.client_side_validation && batch_input_string.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.batch_read_table_rows"
+            fail ArgumentError, "Missing the required parameter 'batch_input_string' when calling RowsBatchApi.read_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/batch/read'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -375,7 +375,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_read_table_rows",
+            :operation => :"RowsBatchApi.read_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -386,7 +386,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_read_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#read_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -394,31 +394,31 @@ module Hubspot
         # Replace rows in batch in draft table
         # Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
-        # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects.
+        # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseHubDbTableRowV3]
-        def batch_replace_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
-          data, _status_code, _headers = batch_replace_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts)
+        def replace_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_batch_update_request, opts = {})
+          data, _status_code, _headers = replace_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_batch_update_request, opts)
           data
         end
 
         # Replace rows in batch in draft table
         # Replaces multiple rows as a batch in the &#x60;draft&#x60; version of the table. See the endpoint &#x60;PUT /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
-        # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects.
+        # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
-        def batch_replace_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_request, opts = {})
+        def replace_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_batch_update_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_replace_draft_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.replace_draft_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_replace_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.replace_draft_table_rows"
           end
-          # verify the required parameter 'batch_input_hub_db_table_row_v3_request' is set
-          if @api_client.config.client_side_validation && batch_input_hub_db_table_row_v3_request.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_hub_db_table_row_v3_request' when calling RowsBatchApi.batch_replace_draft_table_rows"
+          # verify the required parameter 'batch_input_hub_db_table_row_v3_batch_update_request' is set
+          if @api_client.config.client_side_validation && batch_input_hub_db_table_row_v3_batch_update_request.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_hub_db_table_row_v3_batch_update_request' when calling RowsBatchApi.replace_draft_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -440,7 +440,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3_request)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3_batch_update_request)
 
           # return_type
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
@@ -449,7 +449,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_replace_draft_table_rows",
+            :operation => :"RowsBatchApi.replace_draft_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -460,7 +460,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_replace_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#replace_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -468,31 +468,31 @@ module Hubspot
         # Update rows in batch in draft table
         # Updates multiple rows as a batch in the `draft` version of the table. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
-        # @param batch_input_json_node [BatchInputJsonNode] JSON array of row objects.
+        # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseHubDbTableRowV3]
-        def batch_update_draft_table_rows(table_id_or_name, batch_input_json_node, opts = {})
-          data, _status_code, _headers = batch_update_draft_table_rows_with_http_info(table_id_or_name, batch_input_json_node, opts)
+        def update_draft_table_rows(table_id_or_name, batch_input_hub_db_table_row_v3_batch_update_request, opts = {})
+          data, _status_code, _headers = update_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_batch_update_request, opts)
           data
         end
 
         # Update rows in batch in draft table
         # Updates multiple rows as a batch in the &#x60;draft&#x60; version of the table. See the endpoint &#x60;PATCH /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
-        # @param batch_input_json_node [BatchInputJsonNode] JSON array of row objects.
+        # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseHubDbTableRowV3, Integer, Hash)>] BatchResponseHubDbTableRowV3 data, response status code and response headers
-        def batch_update_draft_table_rows_with_http_info(table_id_or_name, batch_input_json_node, opts = {})
+        def update_draft_table_rows_with_http_info(table_id_or_name, batch_input_hub_db_table_row_v3_batch_update_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: RowsBatchApi.batch_update_draft_table_rows ...'
+            @api_client.config.logger.debug 'Calling API: RowsBatchApi.update_draft_table_rows ...'
           end
           # verify the required parameter 'table_id_or_name' is set
           if @api_client.config.client_side_validation && table_id_or_name.nil?
-            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.batch_update_draft_table_rows"
+            fail ArgumentError, "Missing the required parameter 'table_id_or_name' when calling RowsBatchApi.update_draft_table_rows"
           end
-          # verify the required parameter 'batch_input_json_node' is set
-          if @api_client.config.client_side_validation && batch_input_json_node.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_json_node' when calling RowsBatchApi.batch_update_draft_table_rows"
+          # verify the required parameter 'batch_input_hub_db_table_row_v3_batch_update_request' is set
+          if @api_client.config.client_side_validation && batch_input_hub_db_table_row_v3_batch_update_request.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_hub_db_table_row_v3_batch_update_request' when calling RowsBatchApi.update_draft_table_rows"
           end
           # resource path
           local_var_path = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/update'.sub('{' + 'tableIdOrName' + '}', CGI.escape(table_id_or_name.to_s))
@@ -514,7 +514,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_json_node)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_hub_db_table_row_v3_batch_update_request)
 
           # return_type
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
@@ -523,7 +523,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
 
           new_options = opts.merge(
-            :operation => :"RowsBatchApi.batch_update_draft_table_rows",
+            :operation => :"RowsBatchApi.update_draft_table_rows",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -534,7 +534,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: RowsBatchApi#batch_update_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RowsBatchApi#update_draft_table_rows\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

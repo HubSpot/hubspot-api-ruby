@@ -168,7 +168,7 @@ module Hubspot
         # Read all existing property groups for the specified object type and HubSpot account.
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @return [CollectionResponsePropertyGroup]
+        # @return [CollectionResponsePropertyGroupNoPaging]
         def get_all(object_type, opts = {})
           data, _status_code, _headers = get_all_with_http_info(object_type, opts)
           data
@@ -178,7 +178,7 @@ module Hubspot
         # Read all existing property groups for the specified object type and HubSpot account.
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponsePropertyGroup, Integer, Hash)>] CollectionResponsePropertyGroup data, response status code and response headers
+        # @return [Array<(CollectionResponsePropertyGroupNoPaging, Integer, Hash)>] CollectionResponsePropertyGroupNoPaging data, response status code and response headers
         def get_all_with_http_info(object_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: GroupsApi.get_all ...'
@@ -205,7 +205,7 @@ module Hubspot
           post_body = opts[:debug_body]
 
           # return_type
-          return_type = opts[:debug_return_type] || 'CollectionResponsePropertyGroup'
+          return_type = opts[:debug_return_type] || 'CollectionResponsePropertyGroupNoPaging'
 
           # auth_names
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']

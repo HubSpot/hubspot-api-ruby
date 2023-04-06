@@ -26,8 +26,8 @@ module Hubspot
       # @option opts [String] :client_secret 
       # @option opts [String] :refresh_token 
       # @return [TokenResponseIF]
-      def create_token(opts = {})
-        data, _status_code, _headers = create_token_with_http_info(opts)
+      def create(opts = {})
+        data, _status_code, _headers = create_with_http_info(opts)
         data
       end
 
@@ -39,9 +39,9 @@ module Hubspot
       # @option opts [String] :client_secret 
       # @option opts [String] :refresh_token 
       # @return [Array<(TokenResponseIF, Integer, Hash)>] TokenResponseIF data, response status code and response headers
-      def create_token_with_http_info(opts = {})
+      def create_with_http_info(opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: TokensApi.create_token ...'
+          @api_client.config.logger.debug 'Calling API: TokensApi.create ...'
         end
         allowable_values = ["authorization_code", "refresh_token"]
         if @api_client.config.client_side_validation && opts[:'grant_type'] && !allowable_values.include?(opts[:'grant_type'])
@@ -82,7 +82,7 @@ module Hubspot
         auth_names = opts[:debug_auth_names] || []
 
         new_options = opts.merge(
-          :operation => :"TokensApi.create_token",
+          :operation => :"TokensApi.create",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -93,7 +93,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: TokensApi#create_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: TokensApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end

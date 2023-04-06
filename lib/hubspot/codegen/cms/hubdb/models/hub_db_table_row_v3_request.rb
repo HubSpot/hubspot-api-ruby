@@ -29,13 +29,16 @@ module Hubspot
         # List of key value pairs with the column name and column value
         attr_accessor :values
 
+        attr_accessor :display_index
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'path' => :'path',
             :'name' => :'name',
             :'child_table_id' => :'childTableId',
-            :'values' => :'values'
+            :'values' => :'values',
+            :'display_index' => :'displayIndex'
           }
         end
 
@@ -50,7 +53,8 @@ module Hubspot
             :'path' => :'String',
             :'name' => :'String',
             :'child_table_id' => :'Integer',
-            :'values' => :'Hash<String, Object>'
+            :'values' => :'Hash<String, Object>',
+            :'display_index' => :'Integer'
           }
         end
 
@@ -92,6 +96,10 @@ module Hubspot
               self.values = value
             end
           end
+
+          if attributes.key?(:'display_index')
+            self.display_index = attributes[:'display_index']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -120,7 +128,8 @@ module Hubspot
               path == o.path &&
               name == o.name &&
               child_table_id == o.child_table_id &&
-              values == o.values
+              values == o.values &&
+              display_index == o.display_index
         end
 
         # @see the `==` method
@@ -132,7 +141,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [path, name, child_table_id, values].hash
+          [path, name, child_table_id, values, display_index].hash
         end
 
         # Builds the object from hash

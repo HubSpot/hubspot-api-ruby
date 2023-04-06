@@ -20,11 +20,17 @@ module Hubspot
         # The id of the table row
         attr_accessor :id
 
+        # List of key value pairs with the column name and column value
+        attr_accessor :values
+
         # Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
         attr_accessor :path
 
         # Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
         attr_accessor :name
+
+        # Specifies the value for the column child table id
+        attr_accessor :child_table_id
 
         # Timestamp at which the row is created
         attr_accessor :created_at
@@ -32,22 +38,19 @@ module Hubspot
         # Timestamp at which the row is updated last time
         attr_accessor :updated_at
 
-        # Specifies the value for the column child table id
-        attr_accessor :child_table_id
-
-        # List of key value pairs with the column name and column value
-        attr_accessor :values
+        attr_accessor :published_at
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'id' => :'id',
+            :'values' => :'values',
             :'path' => :'path',
             :'name' => :'name',
+            :'child_table_id' => :'childTableId',
             :'created_at' => :'createdAt',
             :'updated_at' => :'updatedAt',
-            :'child_table_id' => :'childTableId',
-            :'values' => :'values'
+            :'published_at' => :'publishedAt'
           }
         end
 
@@ -60,12 +63,13 @@ module Hubspot
         def self.openapi_types
           {
             :'id' => :'String',
+            :'values' => :'Hash<String, Object>',
             :'path' => :'String',
             :'name' => :'String',
+            :'child_table_id' => :'String',
             :'created_at' => :'Time',
             :'updated_at' => :'Time',
-            :'child_table_id' => :'String',
-            :'values' => :'Hash<String, Object>'
+            :'published_at' => :'Time'
           }
         end
 
@@ -94,12 +98,22 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
+          if attributes.key?(:'values')
+            if (value = attributes[:'values']).is_a?(Hash)
+              self.values = value
+            end
+          end
+
           if attributes.key?(:'path')
             self.path = attributes[:'path']
           end
 
           if attributes.key?(:'name')
             self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'child_table_id')
+            self.child_table_id = attributes[:'child_table_id']
           end
 
           if attributes.key?(:'created_at')
@@ -110,14 +124,8 @@ module Hubspot
             self.updated_at = attributes[:'updated_at']
           end
 
-          if attributes.key?(:'child_table_id')
-            self.child_table_id = attributes[:'child_table_id']
-          end
-
-          if attributes.key?(:'values')
-            if (value = attributes[:'values']).is_a?(Hash)
-              self.values = value
-            end
+          if attributes.key?(:'published_at')
+            self.published_at = attributes[:'published_at']
           end
         end
 
@@ -145,12 +153,13 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               id == o.id &&
+              values == o.values &&
               path == o.path &&
               name == o.name &&
+              child_table_id == o.child_table_id &&
               created_at == o.created_at &&
               updated_at == o.updated_at &&
-              child_table_id == o.child_table_id &&
-              values == o.values
+              published_at == o.published_at
         end
 
         # @see the `==` method
@@ -162,7 +171,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, path, name, created_at, updated_at, child_table_id, values].hash
+          [id, values, path, name, child_table_id, created_at, updated_at, published_at].hash
         end
 
         # Builds the object from hash

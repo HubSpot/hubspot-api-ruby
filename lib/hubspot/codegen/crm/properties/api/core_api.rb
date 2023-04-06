@@ -169,7 +169,8 @@ module Hubspot
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @return [CollectionResponseProperty]
+        # @option opts [String] :properties 
+        # @return [CollectionResponsePropertyNoPaging]
         def get_all(object_type, opts = {})
           data, _status_code, _headers = get_all_with_http_info(object_type, opts)
           data
@@ -180,7 +181,8 @@ module Hubspot
         # @param object_type [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @return [Array<(CollectionResponseProperty, Integer, Hash)>] CollectionResponseProperty data, response status code and response headers
+        # @option opts [String] :properties 
+        # @return [Array<(CollectionResponsePropertyNoPaging, Integer, Hash)>] CollectionResponsePropertyNoPaging data, response status code and response headers
         def get_all_with_http_info(object_type, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: CoreApi.get_all ...'
@@ -195,6 +197,7 @@ module Hubspot
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+          query_params[:'properties'] = opts[:'properties'] if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -208,7 +211,7 @@ module Hubspot
           post_body = opts[:debug_body]
 
           # return_type
-          return_type = opts[:debug_return_type] || 'CollectionResponseProperty'
+          return_type = opts[:debug_return_type] || 'CollectionResponsePropertyNoPaging'
 
           # auth_names
           auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
@@ -236,6 +239,7 @@ module Hubspot
         # @param property_name [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @option opts [String] :properties 
         # @return [Property]
         def get_by_name(object_type, property_name, opts = {})
           data, _status_code, _headers = get_by_name_with_http_info(object_type, property_name, opts)
@@ -248,6 +252,7 @@ module Hubspot
         # @param property_name [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
+        # @option opts [String] :properties 
         # @return [Array<(Property, Integer, Hash)>] Property data, response status code and response headers
         def get_by_name_with_http_info(object_type, property_name, opts = {})
           if @api_client.config.debugging
@@ -267,6 +272,7 @@ module Hubspot
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+          query_params[:'properties'] = opts[:'properties'] if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}

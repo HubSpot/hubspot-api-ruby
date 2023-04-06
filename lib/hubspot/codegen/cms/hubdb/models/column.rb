@@ -26,6 +26,11 @@ module Hubspot
         # Column Id
         attr_accessor :id
 
+        attr_accessor :deleted
+
+        # Options to choose for select and multi-select columns
+        attr_accessor :options
+
         # Column width for HubDB UI
         attr_accessor :width
 
@@ -35,26 +40,22 @@ module Hubspot
         # Foreign Column id
         attr_accessor :foreign_column_id
 
+        attr_accessor :description
+
         # Foreign Ids
         attr_accessor :foreign_ids
-
-        # Foreign ids
-        attr_accessor :foreign_ids_by_id
-
-        # Foreign ids by name
-        attr_accessor :foreign_ids_by_name
 
         # Type of the column
         attr_accessor :type
 
+        # Foreign ids by name
+        attr_accessor :foreign_ids_by_name
+
+        # Foreign ids
+        attr_accessor :foreign_ids_by_id
+
         # Number of options available
         attr_accessor :option_count
-
-        # Specifies whether the column is archived
-        attr_accessor :archived
-
-        # Options to choose for select and multi-select columns
-        attr_accessor :options
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -84,16 +85,17 @@ module Hubspot
             :'name' => :'name',
             :'label' => :'label',
             :'id' => :'id',
+            :'deleted' => :'deleted',
+            :'options' => :'options',
             :'width' => :'width',
             :'foreign_table_id' => :'foreignTableId',
             :'foreign_column_id' => :'foreignColumnId',
+            :'description' => :'description',
             :'foreign_ids' => :'foreignIds',
-            :'foreign_ids_by_id' => :'foreignIdsById',
-            :'foreign_ids_by_name' => :'foreignIdsByName',
             :'type' => :'type',
-            :'option_count' => :'optionCount',
-            :'archived' => :'archived',
-            :'options' => :'options'
+            :'foreign_ids_by_name' => :'foreignIdsByName',
+            :'foreign_ids_by_id' => :'foreignIdsById',
+            :'option_count' => :'optionCount'
           }
         end
 
@@ -108,16 +110,17 @@ module Hubspot
             :'name' => :'String',
             :'label' => :'String',
             :'id' => :'String',
+            :'deleted' => :'Boolean',
+            :'options' => :'Array<Option>',
             :'width' => :'Integer',
             :'foreign_table_id' => :'Integer',
             :'foreign_column_id' => :'Integer',
+            :'description' => :'String',
             :'foreign_ids' => :'Array<ForeignId>',
-            :'foreign_ids_by_id' => :'Hash<String, ForeignId>',
-            :'foreign_ids_by_name' => :'Hash<String, ForeignId>',
             :'type' => :'String',
-            :'option_count' => :'Integer',
-            :'archived' => :'Boolean',
-            :'options' => :'Array<Option>'
+            :'foreign_ids_by_name' => :'Hash<String, ForeignId>',
+            :'foreign_ids_by_id' => :'Hash<String, ForeignId>',
+            :'option_count' => :'Integer'
           }
         end
 
@@ -154,6 +157,16 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
+          if attributes.key?(:'deleted')
+            self.deleted = attributes[:'deleted']
+          end
+
+          if attributes.key?(:'options')
+            if (value = attributes[:'options']).is_a?(Array)
+              self.options = value
+            end
+          end
+
           if attributes.key?(:'width')
             self.width = attributes[:'width']
           end
@@ -166,9 +179,23 @@ module Hubspot
             self.foreign_column_id = attributes[:'foreign_column_id']
           end
 
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
           if attributes.key?(:'foreign_ids')
             if (value = attributes[:'foreign_ids']).is_a?(Array)
               self.foreign_ids = value
+            end
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          end
+
+          if attributes.key?(:'foreign_ids_by_name')
+            if (value = attributes[:'foreign_ids_by_name']).is_a?(Hash)
+              self.foreign_ids_by_name = value
             end
           end
 
@@ -178,28 +205,8 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'foreign_ids_by_name')
-            if (value = attributes[:'foreign_ids_by_name']).is_a?(Hash)
-              self.foreign_ids_by_name = value
-            end
-          end
-
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
-          end
-
           if attributes.key?(:'option_count')
             self.option_count = attributes[:'option_count']
-          end
-
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
-          end
-
-          if attributes.key?(:'options')
-            if (value = attributes[:'options']).is_a?(Array)
-              self.options = value
-            end
           end
         end
 
@@ -228,7 +235,7 @@ module Hubspot
           return false if @name.nil?
           return false if @label.nil?
           return false if @type.nil?
-          type_validator = EnumAttributeValidator.new('String', ["NULL", "TEXT", "NUMBER", "URL", "IMAGE", "SELECT", "MULTISELECT", "BOOLEAN", "LOCATION", "DATE", "DATETIME", "CURRENCY", "RICHTEXT", "FOREIGN_ID", "VIDEO", "CTA"])
+          type_validator = EnumAttributeValidator.new('String', ["NULL", "TEXT", "NUMBER", "URL", "IMAGE", "SELECT", "MULTISELECT", "BOOLEAN", "LOCATION", "DATE", "DATETIME", "CURRENCY", "RICHTEXT", "FOREIGN_ID", "VIDEO", "CTA", "FILE"])
           return false unless type_validator.valid?(@type)
           true
         end
@@ -236,7 +243,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] type Object to be assigned
         def type=(type)
-          validator = EnumAttributeValidator.new('String', ["NULL", "TEXT", "NUMBER", "URL", "IMAGE", "SELECT", "MULTISELECT", "BOOLEAN", "LOCATION", "DATE", "DATETIME", "CURRENCY", "RICHTEXT", "FOREIGN_ID", "VIDEO", "CTA"])
+          validator = EnumAttributeValidator.new('String', ["NULL", "TEXT", "NUMBER", "URL", "IMAGE", "SELECT", "MULTISELECT", "BOOLEAN", "LOCATION", "DATE", "DATETIME", "CURRENCY", "RICHTEXT", "FOREIGN_ID", "VIDEO", "CTA", "FILE"])
           unless validator.valid?(type)
             fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
           end
@@ -251,16 +258,17 @@ module Hubspot
               name == o.name &&
               label == o.label &&
               id == o.id &&
+              deleted == o.deleted &&
+              options == o.options &&
               width == o.width &&
               foreign_table_id == o.foreign_table_id &&
               foreign_column_id == o.foreign_column_id &&
+              description == o.description &&
               foreign_ids == o.foreign_ids &&
-              foreign_ids_by_id == o.foreign_ids_by_id &&
-              foreign_ids_by_name == o.foreign_ids_by_name &&
               type == o.type &&
-              option_count == o.option_count &&
-              archived == o.archived &&
-              options == o.options
+              foreign_ids_by_name == o.foreign_ids_by_name &&
+              foreign_ids_by_id == o.foreign_ids_by_id &&
+              option_count == o.option_count
         end
 
         # @see the `==` method
@@ -272,7 +280,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, id, width, foreign_table_id, foreign_column_id, foreign_ids, foreign_ids_by_id, foreign_ids_by_name, type, option_count, archived, options].hash
+          [name, label, id, deleted, options, width, foreign_table_id, foreign_column_id, description, foreign_ids, type, foreign_ids_by_name, foreign_ids_by_id, option_count].hash
         end
 
         # Builds the object from hash

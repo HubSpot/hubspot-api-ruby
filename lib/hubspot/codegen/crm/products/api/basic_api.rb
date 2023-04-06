@@ -88,26 +88,26 @@ module Hubspot
 
         # Create
         # Create a product with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard products is provided.
-        # @param simple_public_object_input [SimplePublicObjectInput] 
+        # @param simple_public_object_input_for_create [SimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [SimplePublicObject]
-        def create(simple_public_object_input, opts = {})
-          data, _status_code, _headers = create_with_http_info(simple_public_object_input, opts)
+        def create(simple_public_object_input_for_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(simple_public_object_input_for_create, opts)
           data
         end
 
         # Create
         # Create a product with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard products is provided.
-        # @param simple_public_object_input [SimplePublicObjectInput] 
+        # @param simple_public_object_input_for_create [SimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-        def create_with_http_info(simple_public_object_input, opts = {})
+        def create_with_http_info(simple_public_object_input_for_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BasicApi.create ...'
           end
-          # verify the required parameter 'simple_public_object_input' is set
-          if @api_client.config.client_side_validation && simple_public_object_input.nil?
-            fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.create"
+          # verify the required parameter 'simple_public_object_input_for_create' is set
+          if @api_client.config.client_side_validation && simple_public_object_input_for_create.nil?
+            fail ArgumentError, "Missing the required parameter 'simple_public_object_input_for_create' when calling BasicApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/products'
@@ -129,7 +129,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_public_object_input)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_public_object_input_for_create)
 
           # return_type
           return_type = opts[:debug_return_type] || 'SimplePublicObject'

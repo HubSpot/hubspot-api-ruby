@@ -21,6 +21,8 @@ module Hubspot
 
         attr_accessor :name
 
+        attr_accessor :label
+
         attr_accessor :type
 
         attr_accessor :order
@@ -30,6 +32,7 @@ module Hubspot
           {
             :'id' => :'id',
             :'name' => :'name',
+            :'label' => :'label',
             :'type' => :'type',
             :'order' => :'order'
           }
@@ -45,6 +48,7 @@ module Hubspot
           {
             :'id' => :'String',
             :'name' => :'String',
+            :'label' => :'String',
             :'type' => :'String',
             :'order' => :'Integer'
           }
@@ -77,6 +81,10 @@ module Hubspot
 
           if attributes.key?(:'name')
             self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
 
           if attributes.key?(:'type')
@@ -128,6 +136,7 @@ module Hubspot
           self.class == o.class &&
               id == o.id &&
               name == o.name &&
+              label == o.label &&
               type == o.type &&
               order == o.order
         end
@@ -141,7 +150,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, type, order].hash
+          [id, name, label, type, order].hash
         end
 
         # Builds the object from hash

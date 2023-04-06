@@ -536,8 +536,8 @@ module Hubspot
         # Get the details for the `draft` version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
         # @param table_id_or_name [String] The ID or name of the table to return.
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
         # @return [HubDbTableV3]
         def get_draft_table_details_by_id(table_id_or_name, opts = {})
           data, _status_code, _headers = get_draft_table_details_by_id_with_http_info(table_id_or_name, opts)
@@ -548,8 +548,8 @@ module Hubspot
         # Get the details for the &#x60;draft&#x60; version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
         # @param table_id_or_name [String] The ID or name of the table to return.
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
         # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
         def get_draft_table_details_by_id_with_http_info(table_id_or_name, opts = {})
           if @api_client.config.debugging
@@ -564,8 +564,8 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
           query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -605,8 +605,8 @@ module Hubspot
         # Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table to return.
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
         # @return [HubDbTableV3]
         def get_table_details(table_id_or_name, opts = {})
           data, _status_code, _headers = get_table_details_with_http_info(table_id_or_name, opts)
@@ -617,8 +617,8 @@ module Hubspot
         # Returns the details for the &#x60;published&#x60; version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
         # @param table_id_or_name [String] The ID or name of the table to return.
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+        # @option opts [Boolean] :archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
         # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
         def get_table_details_with_http_info(table_id_or_name, opts = {})
           if @api_client.config.debugging
@@ -633,8 +633,8 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
           query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -947,8 +947,8 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table to update.
         # @param hub_db_table_v3_request [HubDbTableV3Request] The JSON schema for the table being updated.
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @return [HubDbTableV3]
         def update_draft_table(table_id_or_name, hub_db_table_v3_request, opts = {})
           data, _status_code, _headers = update_draft_table_with_http_info(table_id_or_name, hub_db_table_v3_request, opts)
@@ -960,8 +960,8 @@ module Hubspot
         # @param table_id_or_name [String] The ID or name of the table to update.
         # @param hub_db_table_v3_request [HubDbTableV3Request] The JSON schema for the table being updated.
         # @param [Hash] opts the optional parameters
-        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @option opts [Boolean] :include_foreign_ids Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+        # @option opts [Boolean] :archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
         # @return [Array<(HubDbTableV3, Integer, Hash)>] HubDbTableV3 data, response status code and response headers
         def update_draft_table_with_http_info(table_id_or_name, hub_db_table_v3_request, opts = {})
           if @api_client.config.debugging
@@ -980,8 +980,8 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
           query_params[:'includeForeignIds'] = opts[:'include_foreign_ids'] if !opts[:'include_foreign_ids'].nil?
+          query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
