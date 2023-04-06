@@ -21,21 +21,21 @@ module Hubspot
       # @param token [String] 
       # @param [Hash] opts the optional parameters
       # @return [nil]
-      def archive_refresh_token(token, opts = {})
-        archive_refresh_token_with_http_info(token, opts)
+      def archive(token, opts = {})
+        archive_with_http_info(token, opts)
         nil
       end
 
       # @param token [String] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-      def archive_refresh_token_with_http_info(token, opts = {})
+      def archive_with_http_info(token, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: RefreshTokensApi.archive_refresh_token ...'
+          @api_client.config.logger.debug 'Calling API: RefreshTokensApi.archive ...'
         end
         # verify the required parameter 'token' is set
         if @api_client.config.client_side_validation && token.nil?
-          fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.archive_refresh_token"
+          fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.archive"
         end
         # resource path
         local_var_path = '/oauth/v1/refresh-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
@@ -61,7 +61,7 @@ module Hubspot
         auth_names = opts[:debug_auth_names] || []
 
         new_options = opts.merge(
-          :operation => :"RefreshTokensApi.archive_refresh_token",
+          :operation => :"RefreshTokensApi.archive",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -72,7 +72,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: RefreshTokensApi#archive_refresh_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: RefreshTokensApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end
@@ -80,21 +80,21 @@ module Hubspot
       # @param token [String] 
       # @param [Hash] opts the optional parameters
       # @return [RefreshTokenInfoResponse]
-      def get_refresh_token(token, opts = {})
-        data, _status_code, _headers = get_refresh_token_with_http_info(token, opts)
+      def get(token, opts = {})
+        data, _status_code, _headers = get_with_http_info(token, opts)
         data
       end
 
       # @param token [String] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(RefreshTokenInfoResponse, Integer, Hash)>] RefreshTokenInfoResponse data, response status code and response headers
-      def get_refresh_token_with_http_info(token, opts = {})
+      def get_with_http_info(token, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: RefreshTokensApi.get_refresh_token ...'
+          @api_client.config.logger.debug 'Calling API: RefreshTokensApi.get ...'
         end
         # verify the required parameter 'token' is set
         if @api_client.config.client_side_validation && token.nil?
-          fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.get_refresh_token"
+          fail ArgumentError, "Missing the required parameter 'token' when calling RefreshTokensApi.get"
         end
         # resource path
         local_var_path = '/oauth/v1/refresh-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
@@ -120,7 +120,7 @@ module Hubspot
         auth_names = opts[:debug_auth_names] || []
 
         new_options = opts.merge(
-          :operation => :"RefreshTokensApi.get_refresh_token",
+          :operation => :"RefreshTokensApi.get",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -131,7 +131,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: RefreshTokensApi#get_refresh_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: RefreshTokensApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end

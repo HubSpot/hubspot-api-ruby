@@ -21,21 +21,21 @@ module Hubspot
       # @param token [String] 
       # @param [Hash] opts the optional parameters
       # @return [AccessTokenInfoResponse]
-      def get_access_token(token, opts = {})
-        data, _status_code, _headers = get_access_token_with_http_info(token, opts)
+      def get(token, opts = {})
+        data, _status_code, _headers = get_with_http_info(token, opts)
         data
       end
 
       # @param token [String] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(AccessTokenInfoResponse, Integer, Hash)>] AccessTokenInfoResponse data, response status code and response headers
-      def get_access_token_with_http_info(token, opts = {})
+      def get_with_http_info(token, opts = {})
         if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: AccessTokensApi.get_access_token ...'
+          @api_client.config.logger.debug 'Calling API: AccessTokensApi.get ...'
         end
         # verify the required parameter 'token' is set
         if @api_client.config.client_side_validation && token.nil?
-          fail ArgumentError, "Missing the required parameter 'token' when calling AccessTokensApi.get_access_token"
+          fail ArgumentError, "Missing the required parameter 'token' when calling AccessTokensApi.get"
         end
         # resource path
         local_var_path = '/oauth/v1/access-tokens/{token}'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
@@ -61,7 +61,7 @@ module Hubspot
         auth_names = opts[:debug_auth_names] || []
 
         new_options = opts.merge(
-          :operation => :"AccessTokensApi.get_access_token",
+          :operation => :"AccessTokensApi.get",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -72,7 +72,7 @@ module Hubspot
 
         data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
         if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: AccessTokensApi#get_access_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          @api_client.config.logger.debug "API called: AccessTokensApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end

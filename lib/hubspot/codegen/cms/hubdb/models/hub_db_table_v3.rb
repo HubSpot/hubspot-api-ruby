@@ -31,6 +31,8 @@ module Hubspot
 
         attr_accessor :published
 
+        attr_accessor :deleted
+
         # Number of columns including deleted
         attr_accessor :column_count
 
@@ -41,29 +43,28 @@ module Hubspot
 
         attr_accessor :updated_by
 
-        # Timestamp at which the table is published recently
-        attr_accessor :published_at
-
-        # Specifies the key value pairs of the metadata fields with the associated column ids
-        attr_accessor :dynamic_meta_tags
-
-        # Timestamp at which the table is created
-        attr_accessor :created_at
-
-        # Specifies whether table is archived or not
-        attr_accessor :archived
-
-        # Specifies whether the table can be read by public without authorization
-        attr_accessor :allow_public_api_access
-
         # Specifies whether the table can be used for creation of dynamic pages
         attr_accessor :use_for_pages
+
+        # Specifies whether child tables can be created
+        attr_accessor :allow_child_tables
 
         # Specifies creation of multi-level dynamic pages using child tables
         attr_accessor :enable_child_table_pages
 
-        # Specifies whether child tables can be created
-        attr_accessor :allow_child_tables
+        attr_accessor :is_ordered_manually
+
+        # Specifies the key value pairs of the metadata fields with the associated column ids
+        attr_accessor :dynamic_meta_tags
+
+        # Specifies whether the table can be read by public without authorization
+        attr_accessor :allow_public_api_access
+
+        # Timestamp at which the table is created
+        attr_accessor :created_at
+
+        # Timestamp at which the table is published recently
+        attr_accessor :published_at
 
         # Timestamp at which the table is updated recently
         attr_accessor :updated_at
@@ -76,18 +77,19 @@ module Hubspot
             :'label' => :'label',
             :'columns' => :'columns',
             :'published' => :'published',
+            :'deleted' => :'deleted',
             :'column_count' => :'columnCount',
             :'row_count' => :'rowCount',
             :'created_by' => :'createdBy',
             :'updated_by' => :'updatedBy',
-            :'published_at' => :'publishedAt',
-            :'dynamic_meta_tags' => :'dynamicMetaTags',
-            :'created_at' => :'createdAt',
-            :'archived' => :'archived',
-            :'allow_public_api_access' => :'allowPublicApiAccess',
             :'use_for_pages' => :'useForPages',
-            :'enable_child_table_pages' => :'enableChildTablePages',
             :'allow_child_tables' => :'allowChildTables',
+            :'enable_child_table_pages' => :'enableChildTablePages',
+            :'is_ordered_manually' => :'isOrderedManually',
+            :'dynamic_meta_tags' => :'dynamicMetaTags',
+            :'allow_public_api_access' => :'allowPublicApiAccess',
+            :'created_at' => :'createdAt',
+            :'published_at' => :'publishedAt',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -105,18 +107,19 @@ module Hubspot
             :'label' => :'String',
             :'columns' => :'Array<Column>',
             :'published' => :'Boolean',
+            :'deleted' => :'Boolean',
             :'column_count' => :'Integer',
             :'row_count' => :'Integer',
             :'created_by' => :'SimpleUser',
             :'updated_by' => :'SimpleUser',
-            :'published_at' => :'Time',
-            :'dynamic_meta_tags' => :'Hash<String, Integer>',
-            :'created_at' => :'Time',
-            :'archived' => :'Boolean',
-            :'allow_public_api_access' => :'Boolean',
             :'use_for_pages' => :'Boolean',
-            :'enable_child_table_pages' => :'Boolean',
             :'allow_child_tables' => :'Boolean',
+            :'enable_child_table_pages' => :'Boolean',
+            :'is_ordered_manually' => :'Boolean',
+            :'dynamic_meta_tags' => :'Hash<String, Integer>',
+            :'allow_public_api_access' => :'Boolean',
+            :'created_at' => :'Time',
+            :'published_at' => :'Time',
             :'updated_at' => :'Time'
           }
         end
@@ -164,6 +167,10 @@ module Hubspot
             self.published = attributes[:'published']
           end
 
+          if attributes.key?(:'deleted')
+            self.deleted = attributes[:'deleted']
+          end
+
           if attributes.key?(:'column_count')
             self.column_count = attributes[:'column_count']
           end
@@ -180,8 +187,20 @@ module Hubspot
             self.updated_by = attributes[:'updated_by']
           end
 
-          if attributes.key?(:'published_at')
-            self.published_at = attributes[:'published_at']
+          if attributes.key?(:'use_for_pages')
+            self.use_for_pages = attributes[:'use_for_pages']
+          end
+
+          if attributes.key?(:'allow_child_tables')
+            self.allow_child_tables = attributes[:'allow_child_tables']
+          end
+
+          if attributes.key?(:'enable_child_table_pages')
+            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
+          end
+
+          if attributes.key?(:'is_ordered_manually')
+            self.is_ordered_manually = attributes[:'is_ordered_manually']
           end
 
           if attributes.key?(:'dynamic_meta_tags')
@@ -190,28 +209,16 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
-          end
-
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
-          end
-
           if attributes.key?(:'allow_public_api_access')
             self.allow_public_api_access = attributes[:'allow_public_api_access']
           end
 
-          if attributes.key?(:'use_for_pages')
-            self.use_for_pages = attributes[:'use_for_pages']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
-          if attributes.key?(:'enable_child_table_pages')
-            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
-          end
-
-          if attributes.key?(:'allow_child_tables')
-            self.allow_child_tables = attributes[:'allow_child_tables']
+          if attributes.key?(:'published_at')
+            self.published_at = attributes[:'published_at']
           end
 
           if attributes.key?(:'updated_at')
@@ -252,18 +259,19 @@ module Hubspot
               label == o.label &&
               columns == o.columns &&
               published == o.published &&
+              deleted == o.deleted &&
               column_count == o.column_count &&
               row_count == o.row_count &&
               created_by == o.created_by &&
               updated_by == o.updated_by &&
-              published_at == o.published_at &&
-              dynamic_meta_tags == o.dynamic_meta_tags &&
-              created_at == o.created_at &&
-              archived == o.archived &&
-              allow_public_api_access == o.allow_public_api_access &&
               use_for_pages == o.use_for_pages &&
-              enable_child_table_pages == o.enable_child_table_pages &&
               allow_child_tables == o.allow_child_tables &&
+              enable_child_table_pages == o.enable_child_table_pages &&
+              is_ordered_manually == o.is_ordered_manually &&
+              dynamic_meta_tags == o.dynamic_meta_tags &&
+              allow_public_api_access == o.allow_public_api_access &&
+              created_at == o.created_at &&
+              published_at == o.published_at &&
               updated_at == o.updated_at
         end
 
@@ -276,7 +284,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, label, columns, published, column_count, row_count, created_by, updated_by, published_at, dynamic_meta_tags, created_at, archived, allow_public_api_access, use_for_pages, enable_child_table_pages, allow_child_tables, updated_at].hash
+          [id, name, label, columns, published, deleted, column_count, row_count, created_by, updated_by, use_for_pages, allow_child_tables, enable_child_table_pages, is_ordered_manually, dynamic_meta_tags, allow_public_api_access, created_at, published_at, updated_at].hash
         end
 
         # Builds the object from hash

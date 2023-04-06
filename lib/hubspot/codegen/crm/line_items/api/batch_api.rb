@@ -88,25 +88,25 @@ module Hubspot
         end
 
         # Create a batch of line items
-        # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
+        # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
-        def create(batch_input_simple_public_object_input, opts = {})
-          data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input, opts)
+        def create(batch_input_simple_public_object_input_for_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input_for_create, opts)
           data
         end
 
         # Create a batch of line items
-        # @param batch_input_simple_public_object_input [BatchInputSimplePublicObjectInput] 
+        # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def create_with_http_info(batch_input_simple_public_object_input, opts = {})
+        def create_with_http_info(batch_input_simple_public_object_input_for_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
-          # verify the required parameter 'batch_input_simple_public_object_input' is set
-          if @api_client.config.client_side_validation && batch_input_simple_public_object_input.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input' when calling BatchApi.create"
+          # verify the required parameter 'batch_input_simple_public_object_input_for_create' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_input_for_create.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/line_items/batch/create'
@@ -128,7 +128,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_input)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_input_for_create)
 
           # return_type
           return_type = opts[:debug_return_type] || 'BatchResponseSimplePublicObject'
