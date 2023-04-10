@@ -10,7 +10,6 @@ module Hubspot
 
             def api_classes
               %i[
-                associations
                 basic
                 batch
                 public_object
