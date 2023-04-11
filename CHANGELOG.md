@@ -5,7 +5,76 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v16.4.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v17.0.0-beta.1...HEAD)
+
+## [17.0.0-beta.1] - 2023-04-11
+### Updated
+
+- Rename `cms.hubdb.rows_batch_api.batch_clone_draft_table_rows` => `cms.hubdb.rows_batch_api.clone_draft_table_rows`.
+- Rename `cms.hubdb.rows_batch_api.batch_create_draft_table_rows` => `cms.hubdb.rows_batch_api.create_draft_table_rows`.
+- Rename `cms.hubdb.rows_batch_api.batch_purge_draft_table_rows` => `cms.hubdb.rows_batch_api.purge_draft_table_rows`.
+- Rename `cms.hubdb.rows_batch_api.batch_ReadDrafttable_rows` => `cms.hubdb.rows_batch_api.read_draft_table_rows`.
+- Rename `cms.hubdb.rows_batch_api.batch_read_table_rows` => `cms.hubdb.rows_batch_api.read_table_rows`.
+- Rename `cms.hubdb.rows_batch_api.batch_replace_draft_table_rows` => `cms.hubdb.rows_batch_api.replace_draft_table_rows`.
+- Rename `cms.hubdb.rows_batch_api.batch_update_draft_table_rows` => `cms.hubdb.rows_batch_api.update_draft_table_rows`.
+- `cms.hubdb.tables_api.get_draft_table_details_by_id` => `cms.hubdb.tables_api.get_draft_table_details_by_id(+include_foreign_ids: bool)`
+- `cms.hubdb.tables_api.get_table_details` => `cms.hubdb.tables_api.get_table_details(+include_foreign_ids: bool)`
+- `cms.hubdb.tables_api.update_draft_table` => `cms.hubdb.tables_api.update_draft_table(+include_foreign_ids: bool)`
+- Removed `crm.companies.associations_api`.
+- Removed `crm.contacts.associations_api`.
+- Removed `crm.deals.associations_api`.
+- Removed `crm.line_items.associations_api`.
+- Removed `crm.objects.calls.associations_api`.
+- Removed `crm.objects.emails.associations_api`.
+- Removed `crm.objects.feedback_submissions.associations_api`.
+- Removed `crm.objects.meetings.associations_api`.
+- Removed `crm.objects.notes.associations_api`.
+- Removed `crm.objects.postal_mail.associations_api`.
+- Removed `crm.objects.tasks.associations_api`.
+- Removed `crm.products.associations_api`.
+- Removed `crm.quotes.associations_api`.
+- Removed `crm.tickets.associations_api`.
+- `crm.companies.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.companies.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.contacts.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.contacts.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.deals.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.deals.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.line_items.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.line_items.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.calls.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.calls.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.emails.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.emails.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.feedback_submissions.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.feedback_submissions.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.meetings.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.meetings.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.notes.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.notes.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.postal_mail.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.postal_mail.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.tasks.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.tasks.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.products.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.products.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.quotes.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.quotes.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.tickets.basic_api.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.tickets.batch_api.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `marketing.events.marketing_events_external_api.do_search` => `marketing.events.search_api.do_search`
+- Rename `oauth.access_tokens_api.get_accessToken` => `oauth.access_tokens_api.get`.
+- Rename `oauth.refresh_tokens_api.archive_refresh_token` => `oauth.refresh_tokens_api.archive`.
+- Rename `oauth.refresh_tokens_api.get_refreshToken` => `oauth.refresh_tokens_api.get`.
+- Rename `oauth.tokens_api.create_token` => `oauth.tokens_api.create`.
+
+### Added
+
+- Added param `properties` to `crm.properties.core_api.get_all`.
+- Added param `properties` to `crm.properties.core_api.get_by_name`.
+- Added `high_value` param to all Filters.
 
 ## [16.4.0] - 2023-03-02
 ### Added
