@@ -16,9 +16,9 @@ require 'time'
 module Hubspot
   module Webhooks
     class ErrorCategory
-      attr_accessor :http_status
-
       attr_accessor :name
+
+      attr_accessor :http_status
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -45,8 +45,8 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'http_status' => :'httpStatus',
-          :'name' => :'name'
+          :'name' => :'name',
+          :'http_status' => :'httpStatus'
         }
       end
 
@@ -58,8 +58,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'http_status' => :'String',
-          :'name' => :'String'
+          :'name' => :'String',
+          :'http_status' => :'String'
         }
       end
 
@@ -84,12 +84,12 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'http_status')
-          self.http_status = attributes[:'http_status']
-        end
-
         if attributes.key?(:'name')
           self.name = attributes[:'name']
+        end
+
+        if attributes.key?(:'http_status')
+          self.http_status = attributes[:'http_status']
         end
       end
 
@@ -97,12 +97,12 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @http_status.nil?
-          invalid_properties.push('invalid value for "http_status", http_status cannot be nil.')
-        end
-
         if @name.nil?
           invalid_properties.push('invalid value for "name", name cannot be nil.')
+        end
+
+        if @http_status.nil?
+          invalid_properties.push('invalid value for "http_status", http_status cannot be nil.')
         end
 
         invalid_properties
@@ -111,10 +111,10 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
+        return false if @name.nil?
         return false if @http_status.nil?
         http_status_validator = EnumAttributeValidator.new('String', ["CONTINUE", "SWITCHING_PROTOCOLS", "PROCESSING", "OK", "CREATED", "ACCEPTED", "NON_AUTHORITATIVE_INFORMATION", "NO_CONTENT", "RESET_CONTENT", "PARTIAL_CONTENT", "MULTI_STATUS", "ALREADY_REPORTED", "IM_USED", "MULTIPLE_CHOICES", "MOVED_PERMANENTLY", "FOUND", "SEE_OTHER", "NOT_MODIFIED", "USE_PROXY", "TEMPORARY_REDIRECT", "PERMANENT_REDIRECT", "BAD_REQUEST", "UNAUTHORIZED", "PAYMENT_REQUIRED", "FORBIDDEN", "NOT_FOUND", "METHOD_NOT_ALLOWED", "NOT_ACCEPTABLE", "PROXY_AUTHENTICATION_REQUIRED", "REQUEST_TIMEOUT", "CONFLICT", "GONE", "LENGTH_REQUIRED", "PRECONDITION_FAILED", "REQUEST_ENTITY_TOO_LARGE", "REQUEST_URI_TOO_LONG", "UNSUPPORTED_MEDIA_TYPE", "REQUESTED_RANGE_NOT_SATISFIABLE", "EXPECTATION_FAILED", "IM_A_TEAPOT", "MISDIRECTED_REQUEST", "UNPROCESSABLE_ENTITY", "LOCKED", "FAILED_DEPENDENCY", "UPGRADE_REQUIRED", "PRECONDITION_REQUIRED", "TOO_MANY_REQUESTS", "REQUEST_HEADERS_FIELDS_TOO_LARGE", "INTERNAL_STALE_SERVICE_DISCOVERY", "UNAVAILABLE_FOR_LEGAL_REASONS", "MIGRATION_IN_PROGRESS", "INTERNAL_SERVER_ERROR", "NOT_IMPLEMENTED", "BAD_GATEWAY", "SERVICE_UNAVAILABLE", "GATEWAY_TIMEOUT", "HTTP_VERSION_NOT_SUPPORTED", "VARIANT_ALSO_NEGOTIATES", "INSUFFICIENT_STORAGE", "LOOP_DETECTED", "NOT_EXTENDED", "NETWORK_AUTHENTICATION_REQUIRED"])
         return false unless http_status_validator.valid?(@http_status)
-        return false if @name.nil?
         true
       end
 
@@ -133,8 +133,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            http_status == o.http_status &&
-            name == o.name
+            name == o.name &&
+            http_status == o.http_status
       end
 
       # @see the `==` method
@@ -146,7 +146,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [http_status, name].hash
+        [name, http_status].hash
       end
 
       # Builds the object from hash
