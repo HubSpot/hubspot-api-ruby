@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hubspot-api-client (17.0.0-beta.2)
+    hubspot-api-client (17.0.0-beta.3)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.4.0)
 
