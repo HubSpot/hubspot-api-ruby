@@ -7,12 +7,14 @@ module Hubspot
         class Client
           include Hubspot::Discovery::BaseModuleClient
           def api_modules
-            %i[v4].freeze
+            %i[
+              v4
+              schema
+            ].freeze
           end
           def api_classes 
             %i[
               batch
-              types
             ].freeze
           end
         end

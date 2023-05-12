@@ -10,6 +10,7 @@ module Hubspot
           def api_modules
             %i[
               calls
+              communications
               emails
               feedback_submissions
               meetings
