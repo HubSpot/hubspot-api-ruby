@@ -1,5 +1,6 @@
 require 'date'
 require_relative "../../lib/hubspot/helpers/signature"
+require_relative "../../lib/hubspot/exceptions"
 
 TEST_DATA = {
   :client_secret=> "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
@@ -49,7 +50,7 @@ describe "Hubspot::Helpers::Signature.get_signature" do
       client_secret: TEST_DATA[:client_secret],
       request_body: TEST_DATA[:request_body],
       signature_version: "wrong_signature_version"
-    ) }.to raise_error(StandardError)
+    ) }.to raise_error(Hubspot::InvalidSignatureVersionError)
     end
 
 end
@@ -102,7 +103,7 @@ describe "Hubspot::Helpers::Signature.is_valid" do
       request_body: TEST_DATA[:request_body],
       http_uri: TEST_DATA[:http_uri],
       signature_version: "v3"
-    ) }.to raise_error(StandardError)
+    ) }.to raise_error(Hubspot::InvalidSignatureTimestampError)
   end
   it "should raise exception if :signature_version=>v3 and :timestamp=>wrong_timestamp" do
     expect {  signature.is_valid(
@@ -112,6 +113,6 @@ describe "Hubspot::Helpers::Signature.is_valid" do
       http_uri: TEST_DATA[:http_uri],
       timestamp: "wrong_timestamp",
       signature_version: "v3"
-    ) }.to raise_error(StandardError)
+    ) }.to raise_error(Hubspot::InvalidSignatureTimestampError)
   end
 end
