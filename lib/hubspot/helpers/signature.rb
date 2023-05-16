@@ -17,7 +17,7 @@ module Hubspot
         if signature_version == "v3"
           current_time = DateTime.now.strftime("%s").to_i
           if current_time - timestamp.to_i > MAX_ALLOWED_TIMESTAMP
-            raise StandardError("Timestamp is invalid, reject request.")
+            raise InvalidSignatureTimestampError.new(timestamp)
           end
         end
         hashed_signature = get_signature(
@@ -54,7 +54,7 @@ module Hubspot
             hash_result =  OpenSSL::HMAC.base64digest('SHA256', client_secret, source_string.encode('utf-8'))
             return hash_result
            else
-             raise StandardError("Not supported signature version: #{signature_version}")
+             raise InvalidSignatureVersionError.new(signature_version)
         end
       end
     end

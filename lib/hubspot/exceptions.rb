@@ -1,14 +1,16 @@
 module Hubspot
   class ConfigurationError < StandardError; end
-
-  class InvalidSignatureError < StandardError
-    def initialize(msg: nil, signature: nil, signature_version: nil, hash_result: nil)
-      @signature = signature
+  class InvalidSignatureVersionError < StandardError
+    def initialize(signature_version)
       @signature_version = signature_version
-      @hash_result = hash_result
-      msg = "Invalid signature passed to request" if msg.nil?
+      super("Invalid signature version passed to request: #{@signature_version}")
+    end
+  end
 
-      super(msg)
+  class InvalidSignatureTimestampError < StandardError
+    def initialize(timestamp)
+      @timestamp = timestamp
+      super("Signature timestamp is invalid: #{@timestamp}.")
     end
   end
 end
