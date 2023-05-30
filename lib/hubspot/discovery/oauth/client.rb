@@ -13,10 +13,6 @@ module Hubspot
             tokens
           ].freeze
         end
-
-        def discovery_module_path
-          super.gsub('o_auth', 'oauth')
-        end
       end
     end
   end

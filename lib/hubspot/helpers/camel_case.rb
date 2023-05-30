@@ -2,7 +2,11 @@ module Hubspot
   module Helpers
     class CamelCase
       def format(string)
-        string.split('_').collect(&:capitalize).join
+        if string == 'oauth'
+          'OAuth'
+        else
+          string.split('_').collect(&:capitalize).join
+        end
       end
     end
   end

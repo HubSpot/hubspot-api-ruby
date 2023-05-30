@@ -8,12 +8,11 @@ module Hubspot
       end
 
       def require_with_mapping(path)
-        require path.gsub('o_auth', 'oauth')
+        require path
       end
 
       def require_with_codegen_mapping(path)
         require path
-          .gsub('o_auth', 'oauth')
           .gsub('audit_logs/', 'audit-logs/')
           .gsub('blog_posts/', 'blog-posts/')
           .gsub('site_search', 'site-search')
