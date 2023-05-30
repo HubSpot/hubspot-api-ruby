@@ -2,7 +2,8 @@ module Hubspot
   module Helpers
     class SnakeCase
       def format(string)
-        string.gsub(/::/, '/').
+        string.gsub('OAuth', 'Oauth').
+        gsub(/::/, '/').
         gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
         gsub(/([a-z\d])([A-Z])/,'\1_\2').
         tr("-", "_").

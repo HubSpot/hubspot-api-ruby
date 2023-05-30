@@ -19,7 +19,7 @@ module Hubspot
         events
         files
         marketing
-        o_auth
+        oauth
         settings
         webhooks
       ].freeze
