@@ -20,7 +20,7 @@ describe 'get_auth_url' do
       client_id: data[:client_id],
       redirect_uri: data[:redirect_uri]
     }
-    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}&state="
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
 
     result = Hubspot::OAuthHelper.authorize_url(data[:client_id], data[:redirect_uri])
 
@@ -33,7 +33,7 @@ describe 'get_auth_url' do
       redirect_uri: data[:redirect_uri],
       scope: data[:scope].join(' ')
     }
-    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}&state="
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
 
     result = Hubspot::OAuthHelper.authorize_url(data[:client_id], data[:redirect_uri], data[:scope])
 
@@ -46,9 +46,29 @@ describe 'get_auth_url' do
       redirect_uri: data[:redirect_uri],
       scope: data[:optional_scope].join(' ')
     }
-    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}&state="
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
 
     result = Hubspot::OAuthHelper.authorize_url(data[:client_id], data[:redirect_uri], data[:optional_scope])
+
+    expect(result).to eq(expected_url)
+  end
+  it 'returns the correct URL' do
+    expected_params = {
+      client_id: data[:client_id],
+      redirect_uri: data[:redirect_uri],
+      scope: data[:scope].join(' '),
+      optional_scope: data[:optional_scope].join(' '),
+      state: "test_state"
+    }
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
+
+    result = Hubspot::OAuthHelper.authorize_url(
+      data[:client_id],
+      data[:redirect_uri],
+      data[:scope],
+      data[:optional_scope],
+      "test_state"
+    )
 
     expect(result).to eq(expected_url)
   end
