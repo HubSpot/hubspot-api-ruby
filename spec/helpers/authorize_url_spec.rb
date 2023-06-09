@@ -20,7 +20,7 @@ describe 'get_auth_url' do
       client_id: data[:client_id],
       redirect_uri: data[:redirect_uri]
     }
-    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}&state="
 
     result = Hubspot::OAuthHelper.authorize_url(data[:client_id], data[:redirect_uri])
 
@@ -33,7 +33,7 @@ describe 'get_auth_url' do
       redirect_uri: data[:redirect_uri],
       scope: data[:scope].join(' ')
     }
-    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}&state="
 
     result = Hubspot::OAuthHelper.authorize_url(data[:client_id], data[:redirect_uri], data[:scope])
 
@@ -46,7 +46,7 @@ describe 'get_auth_url' do
       redirect_uri: data[:redirect_uri],
       scope: data[:optional_scope].join(' ')
     }
-    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}"
+    expected_url = "#{AUTHORIZE_URL}?#{URI.encode_www_form(expected_params)}&state="
 
     result = Hubspot::OAuthHelper.authorize_url(data[:client_id], data[:redirect_uri], data[:optional_scope])
 
