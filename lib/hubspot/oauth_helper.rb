@@ -2,15 +2,19 @@ module Hubspot
   class OAuthHelper
     AUTHORIZE_URL = 'https://app.hubspot.com/oauth/authorize'.freeze
     class << self
-      def authorize_url(client_id:, redirect_uri:, scope:, optional_scope: [])
-        query = URI.encode_www_form(
-          client_id: client_id,
-          redirect_uri: redirect_uri,
-          scope: Array(scope),
-          optional_scope: Array(optional_scope)
-        )
+      def authorize_url(client_id, redirect_uri, scopes = nil, optional_scopes = nil, state = nil)
+        query_params = {
+          "client_id" => client_id,
+          "redirect_uri" => redirect_uri
+        }
 
-        "#{AUTHORIZE_URL}?#{query}"
+        query_params["scope"] = scopes.join(' ') if scopes
+        query_params["optional_scope"] = optional_scopes.join(' ') if optional_scopes
+        query_params['state'] ||= state if state
+
+        params = URI.encode_www_form(query_params)
+
+        "#{AUTHORIZE_URL}?#{params}"
       end
     end
   end
