@@ -5,8 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v17.0.0.pre.beta.4...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v17.0.0...HEAD)
 
+
+## [17.0.0.pre.beta.4] - 2023-06-14
+
+## Updated
+
+- Fix `Hubspot::OAuthHelper.authorize_url()` (don't add empty scopes or optional scopes to OAuth url)
 
 ## [17.0.0.pre.beta.4] - 2023-05-17
 
