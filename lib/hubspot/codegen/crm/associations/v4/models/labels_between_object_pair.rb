@@ -20,11 +20,11 @@ module Hubspot
         class LabelsBetweenObjectPair
           attr_accessor :from_object_type_id
 
-          attr_accessor :from_object_id
+          attr_accessor :to_object_id
 
           attr_accessor :to_object_type_id
 
-          attr_accessor :to_object_id
+          attr_accessor :from_object_id
 
           attr_accessor :labels
 
@@ -32,9 +32,9 @@ module Hubspot
           def self.attribute_map
             {
               :'from_object_type_id' => :'fromObjectTypeId',
-              :'from_object_id' => :'fromObjectId',
-              :'to_object_type_id' => :'toObjectTypeId',
               :'to_object_id' => :'toObjectId',
+              :'to_object_type_id' => :'toObjectTypeId',
+              :'from_object_id' => :'fromObjectId',
               :'labels' => :'labels'
             }
           end
@@ -48,9 +48,9 @@ module Hubspot
           def self.openapi_types
             {
               :'from_object_type_id' => :'String',
-              :'from_object_id' => :'Integer',
-              :'to_object_type_id' => :'String',
               :'to_object_id' => :'Integer',
+              :'to_object_type_id' => :'String',
+              :'from_object_id' => :'Integer',
               :'labels' => :'Array<String>'
             }
           end
@@ -80,16 +80,16 @@ module Hubspot
               self.from_object_type_id = attributes[:'from_object_type_id']
             end
 
-            if attributes.key?(:'from_object_id')
-              self.from_object_id = attributes[:'from_object_id']
+            if attributes.key?(:'to_object_id')
+              self.to_object_id = attributes[:'to_object_id']
             end
 
             if attributes.key?(:'to_object_type_id')
               self.to_object_type_id = attributes[:'to_object_type_id']
             end
 
-            if attributes.key?(:'to_object_id')
-              self.to_object_id = attributes[:'to_object_id']
+            if attributes.key?(:'from_object_id')
+              self.from_object_id = attributes[:'from_object_id']
             end
 
             if attributes.key?(:'labels')
@@ -107,16 +107,16 @@ module Hubspot
               invalid_properties.push('invalid value for "from_object_type_id", from_object_type_id cannot be nil.')
             end
 
-            if @from_object_id.nil?
-              invalid_properties.push('invalid value for "from_object_id", from_object_id cannot be nil.')
+            if @to_object_id.nil?
+              invalid_properties.push('invalid value for "to_object_id", to_object_id cannot be nil.')
             end
 
             if @to_object_type_id.nil?
               invalid_properties.push('invalid value for "to_object_type_id", to_object_type_id cannot be nil.')
             end
 
-            if @to_object_id.nil?
-              invalid_properties.push('invalid value for "to_object_id", to_object_id cannot be nil.')
+            if @from_object_id.nil?
+              invalid_properties.push('invalid value for "from_object_id", from_object_id cannot be nil.')
             end
 
             if @labels.nil?
@@ -130,9 +130,9 @@ module Hubspot
           # @return true if the model is valid
           def valid?
             return false if @from_object_type_id.nil?
-            return false if @from_object_id.nil?
-            return false if @to_object_type_id.nil?
             return false if @to_object_id.nil?
+            return false if @to_object_type_id.nil?
+            return false if @from_object_id.nil?
             return false if @labels.nil?
             true
           end
@@ -143,9 +143,9 @@ module Hubspot
             return true if self.equal?(o)
             self.class == o.class &&
                 from_object_type_id == o.from_object_type_id &&
-                from_object_id == o.from_object_id &&
-                to_object_type_id == o.to_object_type_id &&
                 to_object_id == o.to_object_id &&
+                to_object_type_id == o.to_object_type_id &&
+                from_object_id == o.from_object_id &&
                 labels == o.labels
           end
 
@@ -158,7 +158,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [from_object_type_id, from_object_id, to_object_type_id, to_object_id, labels].hash
+            [from_object_type_id, to_object_id, to_object_type_id, from_object_id, labels].hash
           end
 
           # Builds the object from hash

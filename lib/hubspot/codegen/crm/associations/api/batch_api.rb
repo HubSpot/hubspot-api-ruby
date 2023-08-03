@@ -82,7 +82,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"BatchApi.archive",
@@ -162,7 +162,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponsePublicAssociation'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"BatchApi.create",
@@ -242,7 +242,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponsePublicAssociationMulti'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"BatchApi.read",

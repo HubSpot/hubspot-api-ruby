@@ -18,11 +18,11 @@ module Hubspot
     module Associations
       module V4
         class AssociationSpecWithLabel
-          attr_accessor :category
-
           attr_accessor :type_id
 
           attr_accessor :label
+
+          attr_accessor :category
 
           class EnumAttributeValidator
             attr_reader :datatype
@@ -49,9 +49,9 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'category' => :'category',
               :'type_id' => :'typeId',
-              :'label' => :'label'
+              :'label' => :'label',
+              :'category' => :'category'
             }
           end
 
@@ -63,9 +63,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'category' => :'String',
               :'type_id' => :'Integer',
-              :'label' => :'String'
+              :'label' => :'String',
+              :'category' => :'String'
             }
           end
 
@@ -90,10 +90,6 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'category')
-              self.category = attributes[:'category']
-            end
-
             if attributes.key?(:'type_id')
               self.type_id = attributes[:'type_id']
             end
@@ -101,18 +97,22 @@ module Hubspot
             if attributes.key?(:'label')
               self.label = attributes[:'label']
             end
+
+            if attributes.key?(:'category')
+              self.category = attributes[:'category']
+            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @category.nil?
-              invalid_properties.push('invalid value for "category", category cannot be nil.')
-            end
-
             if @type_id.nil?
               invalid_properties.push('invalid value for "type_id", type_id cannot be nil.')
+            end
+
+            if @category.nil?
+              invalid_properties.push('invalid value for "category", category cannot be nil.')
             end
 
             invalid_properties
@@ -121,10 +121,10 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @type_id.nil?
             return false if @category.nil?
             category_validator = EnumAttributeValidator.new('String', ["HUBSPOT_DEFINED", "USER_DEFINED", "INTEGRATOR_DEFINED"])
             return false unless category_validator.valid?(@category)
-            return false if @type_id.nil?
             true
           end
 
@@ -143,9 +143,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                category == o.category &&
                 type_id == o.type_id &&
-                label == o.label
+                label == o.label &&
+                category == o.category
           end
 
           # @see the `==` method
@@ -157,7 +157,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [category, type_id, label].hash
+            [type_id, label, category].hash
           end
 
           # Builds the object from hash

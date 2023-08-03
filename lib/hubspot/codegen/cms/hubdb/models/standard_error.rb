@@ -57,7 +57,7 @@ module Hubspot
           {
             :'status' => :'String',
             :'id' => :'String',
-            :'category' => :'Object',
+            :'category' => :'String',
             :'sub_category' => :'Object',
             :'message' => :'String',
             :'errors' => :'Array<ErrorDetail>',

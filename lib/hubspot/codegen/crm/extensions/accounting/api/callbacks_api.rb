@@ -77,7 +77,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.create_customer",
@@ -151,7 +151,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.create_exchange_rate",
@@ -225,7 +225,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.create_invoice",
@@ -299,7 +299,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.create_term",
@@ -373,7 +373,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.do_customer_search",
@@ -447,7 +447,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.do_invoice_search",
@@ -521,7 +521,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.do_product_search",
@@ -595,7 +595,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.do_tax_search",
@@ -669,7 +669,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.get_by_id",
@@ -743,7 +743,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"CallbacksApi.invoice_pdf",

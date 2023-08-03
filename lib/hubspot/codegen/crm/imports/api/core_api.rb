@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ActionResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.cancel",
@@ -133,7 +133,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'PublicImportResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.create",
@@ -196,7 +196,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'PublicImportResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.get_by_id",
@@ -262,7 +262,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponsePublicImportResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.get_page",
