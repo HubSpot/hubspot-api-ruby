@@ -18,15 +18,15 @@ module Hubspot
     module Associations
       module V4
         class MultiAssociatedObjectWithLabel
-          attr_accessor :to_object_id
-
           attr_accessor :association_types
+
+          attr_accessor :to_object_id
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'to_object_id' => :'toObjectId',
-              :'association_types' => :'associationTypes'
+              :'association_types' => :'associationTypes',
+              :'to_object_id' => :'toObjectId'
             }
           end
 
@@ -38,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'to_object_id' => :'Integer',
-              :'association_types' => :'Array<AssociationSpecWithLabel>'
+              :'association_types' => :'Array<AssociationSpecWithLabel>',
+              :'to_object_id' => :'Integer'
             }
           end
 
@@ -64,14 +64,14 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'to_object_id')
-              self.to_object_id = attributes[:'to_object_id']
-            end
-
             if attributes.key?(:'association_types')
               if (value = attributes[:'association_types']).is_a?(Array)
                 self.association_types = value
               end
+            end
+
+            if attributes.key?(:'to_object_id')
+              self.to_object_id = attributes[:'to_object_id']
             end
           end
 
@@ -79,12 +79,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @to_object_id.nil?
-              invalid_properties.push('invalid value for "to_object_id", to_object_id cannot be nil.')
-            end
-
             if @association_types.nil?
               invalid_properties.push('invalid value for "association_types", association_types cannot be nil.')
+            end
+
+            if @to_object_id.nil?
+              invalid_properties.push('invalid value for "to_object_id", to_object_id cannot be nil.')
             end
 
             invalid_properties
@@ -93,8 +93,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @to_object_id.nil?
             return false if @association_types.nil?
+            return false if @to_object_id.nil?
             true
           end
 
@@ -103,8 +103,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                to_object_id == o.to_object_id &&
-                association_types == o.association_types
+                association_types == o.association_types &&
+                to_object_id == o.to_object_id
           end
 
           # @see the `==` method
@@ -116,7 +116,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [to_object_id, association_types].hash
+            [association_types, to_object_id].hash
           end
 
           # Builds the object from hash

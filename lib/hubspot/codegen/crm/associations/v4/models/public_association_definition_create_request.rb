@@ -18,15 +18,15 @@ module Hubspot
     module Associations
       module V4
         class PublicAssociationDefinitionCreateRequest
-          attr_accessor :label
-
           attr_accessor :name
+
+          attr_accessor :label
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'label' => :'label',
-              :'name' => :'name'
+              :'name' => :'name',
+              :'label' => :'label'
             }
           end
 
@@ -38,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'label' => :'String',
-              :'name' => :'String'
+              :'name' => :'String',
+              :'label' => :'String'
             }
           end
 
@@ -64,12 +64,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'label')
-              self.label = attributes[:'label']
-            end
-
             if attributes.key?(:'name')
               self.name = attributes[:'name']
+            end
+
+            if attributes.key?(:'label')
+              self.label = attributes[:'label']
             end
           end
 
@@ -77,12 +77,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @label.nil?
-              invalid_properties.push('invalid value for "label", label cannot be nil.')
-            end
-
             if @name.nil?
               invalid_properties.push('invalid value for "name", name cannot be nil.')
+            end
+
+            if @label.nil?
+              invalid_properties.push('invalid value for "label", label cannot be nil.')
             end
 
             invalid_properties
@@ -91,8 +91,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @label.nil?
             return false if @name.nil?
+            return false if @label.nil?
             true
           end
 
@@ -101,8 +101,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                label == o.label &&
-                name == o.name
+                name == o.name &&
+                label == o.label
           end
 
           # @see the `==` method
@@ -114,7 +114,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [label, name].hash
+            [name, label].hash
           end
 
           # Builds the object from hash

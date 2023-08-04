@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Domain'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"DomainsApi.get_by_id",
@@ -152,7 +152,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseWithTotalDomainForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"DomainsApi.get_page",

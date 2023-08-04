@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.archive_table",
@@ -139,7 +139,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.clone_draft_table",
@@ -207,7 +207,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.create_table",
@@ -273,7 +273,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'File'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.export_draft_table",
@@ -339,7 +339,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'File'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.export_table",
@@ -426,7 +426,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.get_all_draft_tables",
@@ -513,7 +513,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseWithTotalHubDbTableV3ForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.get_all_tables",
@@ -582,7 +582,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.get_draft_table_details_by_id",
@@ -651,7 +651,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.get_table_details",
@@ -725,7 +725,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ImportResult'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.import_draft_table",
@@ -791,7 +791,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.publish_draft_table",
@@ -857,7 +857,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.reset_draft_table",
@@ -923,7 +923,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.unpublish_table",
@@ -1003,7 +1003,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubDbTableV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"TablesApi.update_draft_table",

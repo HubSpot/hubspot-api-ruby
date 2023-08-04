@@ -18,18 +18,18 @@ module Hubspot
     module Associations
       module V4
         class PublicAssociationMultiPost
+          attr_accessor :types
+
           attr_accessor :from
 
           attr_accessor :to
 
-          attr_accessor :types
-
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'types' => :'types',
               :'from' => :'from',
-              :'to' => :'to',
-              :'types' => :'types'
+              :'to' => :'to'
             }
           end
 
@@ -41,9 +41,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'types' => :'Array<AssociationSpec>',
               :'from' => :'PublicObjectId',
-              :'to' => :'PublicObjectId',
-              :'types' => :'Array<AssociationSpec>'
+              :'to' => :'PublicObjectId'
             }
           end
 
@@ -68,6 +68,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'types')
+              if (value = attributes[:'types']).is_a?(Array)
+                self.types = value
+              end
+            end
+
             if attributes.key?(:'from')
               self.from = attributes[:'from']
             end
@@ -75,18 +81,16 @@ module Hubspot
             if attributes.key?(:'to')
               self.to = attributes[:'to']
             end
-
-            if attributes.key?(:'types')
-              if (value = attributes[:'types']).is_a?(Array)
-                self.types = value
-              end
-            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @types.nil?
+              invalid_properties.push('invalid value for "types", types cannot be nil.')
+            end
+
             if @from.nil?
               invalid_properties.push('invalid value for "from", from cannot be nil.')
             end
@@ -95,19 +99,15 @@ module Hubspot
               invalid_properties.push('invalid value for "to", to cannot be nil.')
             end
 
-            if @types.nil?
-              invalid_properties.push('invalid value for "types", types cannot be nil.')
-            end
-
             invalid_properties
           end
 
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @types.nil?
             return false if @from.nil?
             return false if @to.nil?
-            return false if @types.nil?
             true
           end
 
@@ -116,9 +116,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                types == o.types &&
                 from == o.from &&
-                to == o.to &&
-                types == o.types
+                to == o.to
           end
 
           # @see the `==` method
@@ -130,7 +130,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [from, to, types].hash
+            [types, from, to].hash
           end
 
           # Builds the object from hash

@@ -22,7 +22,7 @@ module Hubspot
           @api_client = api_client
         end
         # Clone rows in batch
-        # Clones rows in the `draft` version of the specified table, given a set of row ids.
+        # Clones rows in the `draft` version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
@@ -33,7 +33,7 @@ module Hubspot
         end
 
         # Clone rows in batch
-        # Clones rows in the &#x60;draft&#x60; version of the specified table, given a set of row ids.
+        # Clones rows in the &#x60;draft&#x60; version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] The JSON array of row ids
         # @param [Hash] opts the optional parameters
@@ -76,7 +76,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.clone_draft_table_rows",
@@ -96,7 +96,7 @@ module Hubspot
         end
 
         # Create rows in batch
-        # Creates rows in the `draft` version of the specified table, given an array of row objects. See the overview section for more details with an example.
+        # Creates rows in the `draft` version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects
         # @param [Hash] opts the optional parameters
@@ -107,7 +107,7 @@ module Hubspot
         end
 
         # Create rows in batch
-        # Creates rows in the &#x60;draft&#x60; version of the specified table, given an array of row objects. See the overview section for more details with an example.
+        # Creates rows in the &#x60;draft&#x60; version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_request [BatchInputHubDbTableRowV3Request] JSON array of row objects
         # @param [Hash] opts the optional parameters
@@ -150,7 +150,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.create_draft_table_rows",
@@ -170,7 +170,7 @@ module Hubspot
         end
 
         # Permanently deletes rows
-        # Permanently deletes rows from the `draft` version of the table, given a set of row ids.
+        # Permanently deletes rows from the `draft` version of the table, given a set of row ids. Maximum of 100 row ids per call.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
@@ -181,7 +181,7 @@ module Hubspot
         end
 
         # Permanently deletes rows
-        # Permanently deletes rows from the &#x60;draft&#x60; version of the table, given a set of row ids.
+        # Permanently deletes rows from the &#x60;draft&#x60; version of the table, given a set of row ids. Maximum of 100 row ids per call.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_string [BatchInputString] JSON array of row ids.
         # @param [Hash] opts the optional parameters
@@ -224,7 +224,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.purge_draft_table_rows",
@@ -298,7 +298,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.read_draft_table_rows",
@@ -372,7 +372,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.read_table_rows",
@@ -392,7 +392,7 @@ module Hubspot
         end
 
         # Replace rows in batch in draft table
-        # Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
+        # Replaces multiple rows as a batch in the `draft` version of the table, with a maximum of 100 rows per call. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
@@ -403,7 +403,7 @@ module Hubspot
         end
 
         # Replace rows in batch in draft table
-        # Replaces multiple rows as a batch in the &#x60;draft&#x60; version of the table. See the endpoint &#x60;PUT /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
+        # Replaces multiple rows as a batch in the &#x60;draft&#x60; version of the table, with a maximum of 100 rows per call. See the endpoint &#x60;PUT /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
@@ -446,7 +446,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.replace_draft_table_rows",
@@ -466,7 +466,7 @@ module Hubspot
         end
 
         # Update rows in batch in draft table
-        # Updates multiple rows as a batch in the `draft` version of the table. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
+        # Updates multiple rows as a batch in the `draft` version of the table, with a maximum of 100 rows per call. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
@@ -477,7 +477,7 @@ module Hubspot
         end
 
         # Update rows in batch in draft table
-        # Updates multiple rows as a batch in the &#x60;draft&#x60; version of the table. See the endpoint &#x60;PATCH /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
+        # Updates multiple rows as a batch in the &#x60;draft&#x60; version of the table, with a maximum of 100 rows per call. See the endpoint &#x60;PATCH /tables/{tableIdOrName}/rows/{rowId}/draft&#x60; for details on updating a single row.
         # @param table_id_or_name [String] The ID or name of the table
         # @param batch_input_hub_db_table_row_v3_batch_update_request [BatchInputHubDbTableRowV3BatchUpdateRequest] JSON array of row objects.
         # @param [Hash] opts the optional parameters
@@ -520,7 +520,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'BatchResponseHubDbTableRowV3'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RowsBatchApi.update_draft_table_rows",

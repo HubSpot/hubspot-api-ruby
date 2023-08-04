@@ -86,7 +86,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"BasicApi.archive",
@@ -178,7 +178,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'LabelsBetweenObjectPair'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"BasicApi.create",
@@ -259,7 +259,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'BatchResponsePublicDefaultAssociation'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"BasicApi.create_default",
@@ -279,7 +279,7 @@ module Hubspot
           end
 
           # List
-          # List all associations of an object by object type. Limit 1000 per call.
+          # List all associations of an object by object type. Limit 500 per call.
           # @param object_type [String] 
           # @param object_id [Integer] 
           # @param to_object_type [String] 
@@ -293,7 +293,7 @@ module Hubspot
           end
 
           # List
-          # List all associations of an object by object type. Limit 1000 per call.
+          # List all associations of an object by object type. Limit 500 per call.
           # @param object_type [String] 
           # @param object_id [Integer] 
           # @param to_object_type [String] 
@@ -340,7 +340,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'CollectionResponseMultiAssociatedObjectWithLabelForwardPaging'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+            auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
               :operation => :"BasicApi.get_page",

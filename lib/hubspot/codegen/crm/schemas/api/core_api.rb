@@ -68,7 +68,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.archive",
@@ -137,7 +137,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.archive_association",
@@ -205,7 +205,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ObjectSchema'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.create",
@@ -279,7 +279,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'AssociationDefinition'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.create_association",
@@ -339,7 +339,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseObjectSchemaNoPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.get_all",
@@ -402,7 +402,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ObjectSchema'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.get_by_id",
@@ -476,7 +476,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ObjectTypeDefinition'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"CoreApi.update",

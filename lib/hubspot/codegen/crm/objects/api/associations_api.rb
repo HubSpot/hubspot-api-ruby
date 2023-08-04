@@ -87,7 +87,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"AssociationsApi.archive",
@@ -172,7 +172,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'SimplePublicObjectWithAssociations'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"AssociationsApi.create",
@@ -251,7 +251,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseAssociatedIdForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"AssociationsApi.get_all",

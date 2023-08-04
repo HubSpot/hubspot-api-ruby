@@ -70,7 +70,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.archive",
@@ -138,7 +138,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.archive_gdpr",
@@ -201,7 +201,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'FileActionResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.check_import",
@@ -330,7 +330,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseFile'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.do_search",
@@ -401,7 +401,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubspotFile'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.get_by_id",
@@ -482,7 +482,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'SignedUrl'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.get_signed_url",
@@ -550,7 +550,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ImportFromUrlTaskLocator'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.import_from_url",
@@ -632,7 +632,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubspotFile'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.replace",
@@ -711,7 +711,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubspotFile'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.update_properties",
@@ -791,7 +791,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'HubspotFile'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"FilesApi.upload",

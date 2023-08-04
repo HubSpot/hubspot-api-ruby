@@ -74,7 +74,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PipelinesApi.archive",
@@ -148,7 +148,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Pipeline'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PipelinesApi.create",
@@ -211,7 +211,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponsePipelineNoPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PipelinesApi.get_all",
@@ -280,7 +280,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Pipeline'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PipelinesApi.get_by_id",
@@ -363,7 +363,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Pipeline'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PipelinesApi.replace",
@@ -446,7 +446,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'Pipeline'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"PipelinesApi.update",
