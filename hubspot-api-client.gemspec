@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
   s.license     = "Apache-2.0"
   s.required_ruby_version = ">= 2.7"
 
-  s.add_runtime_dependency 'typhoeus', '~> 1.4.0'
+  s.add_runtime_dependency 'faraday', '~> 2.7'
+  s.add_runtime_dependency 'faraday-multipart', '~> 1.0'
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
@@ -24,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
   s.add_development_dependency 'rake-release', '~> 1.3'
   s.add_development_dependency 'pry', '~> 0.14'
+  s.add_development_dependency 'typhoeus'
 
   s.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(sample-apps)/})

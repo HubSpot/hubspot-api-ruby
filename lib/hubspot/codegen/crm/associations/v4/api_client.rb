@@ -15,7 +15,8 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'time'
-require 'typhoeus'
+require 'faraday'
+require 'faraday/multipart' if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2.0')
 
 module Hubspot
   module Crm
@@ -50,14 +51,16 @@ module Hubspot
           # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
           #   the data deserialized from response body (could be nil), response status code and response headers.
           def call_api(http_method, path, opts = {})
-            request = build_request(http_method, path, opts)
-            response = request.run
+            begin
+              response = connection(opts).public_send(http_method.to_sym.downcase) do |req|
+                build_request(http_method, path, req, opts)
+              end
 
-            if @config.debugging
-              @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
-            end
+              if config.debugging
+                config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
+              end
 
-            if !response.success? && config.error_handler.any?
+              if !response.success? && config.error_handler.any?
               config.error_handler.each do |statuses, opts|
                 statuses = statuses.is_a?(Integer) ? [statuses] : statuses
 
@@ -72,18 +75,19 @@ module Hubspot
             end
 
             unless response.success?
-              if response.timed_out?
-                fail ApiError.new('Connection timed out')
-              elsif response.code == 0
-                # Errors from libcurl will be made visible here
-                fail ApiError.new(:code => 0,
-                                  :message => response.return_message)
-              else
-                fail ApiError.new(:code => response.code,
-                                  :response_headers => response.headers,
-                                  :response_body => response.body),
-                     response.status_message
+                if response.status == 0
+                  # Errors from libcurl will be made visible here
+                  fail ApiError.new(code: 0,
+                                    message: response.return_message)
+                else
+                  fail ApiError.new(code: response.status,
+                                    response_headers: response.headers,
+                                    response_body: response.body),
+                       response.reason_phrase
+                end
               end
+            rescue Faraday::TimeoutError
+              fail ApiError.new('Connection timed out')
             end
 
             if opts[:return_type]
@@ -91,7 +95,7 @@ module Hubspot
             else
               data = nil
             end
-            return data, response.code, response.headers
+            return data, response.status, response.headers
           end
 
           # Builds the HTTP request
@@ -102,48 +106,33 @@ module Hubspot
           # @option opts [Hash] :query_params Query parameters
           # @option opts [Hash] :form_params Query parameters
           # @option opts [Object] :body HTTP body (JSON/XML)
-          # @return [Typhoeus::Request] A Typhoeus Request
-          def build_request(http_method, path, opts = {})
+          # @return [Faraday::Request] A Faraday Request
+          def build_request(http_method, path, request, opts = {})
             url = build_request_url(path, opts)
             http_method = http_method.to_sym.downcase
 
             header_params = @default_headers.merge(opts[:header_params] || {})
             query_params = opts[:query_params] || {}
             form_params = opts[:form_params] || {}
-            follow_location = opts[:follow_location] || true
 
             update_params_for_auth! header_params, query_params, opts[:auth_names]
 
-            # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
-            _verify_ssl_host = @config.verify_ssl_host ? 2 : 0
-
-            req_opts = {
-              :method => http_method,
-              :headers => header_params,
-              :params => query_params,
-              :params_encoding => @config.params_encoding,
-              :timeout => @config.timeout,
-              :ssl_verifypeer => @config.verify_ssl,
-              :ssl_verifyhost => _verify_ssl_host,
-              :sslcert => @config.cert_file,
-              :sslkey => @config.key_file,
-              :verbose => @config.debugging,
-              :followlocation => follow_location
-            }
-
-            # set custom cert, if provided
-            req_opts[:cainfo] = @config.ssl_ca_cert if @config.ssl_ca_cert
-
             if [:post, :patch, :put, :delete].include?(http_method)
               req_body = build_request_body(header_params, form_params, opts[:body])
-              req_opts.update :body => req_body
-              if @config.debugging
-                @config.logger.debug "HTTP request body param ~BEGIN~\n#{req_body}\n~END~\n"
+              if config.debugging
+                config.logger.debug "HTTP request body param ~BEGIN~\n#{req_body}\n~END~\n"
               end
             end
+            request.headers = header_params
+            request.body = req_body
 
-            request = Typhoeus::Request.new(url, req_opts)
-            download_file(request) if opts[:return_type] == 'File'
+            # Overload default options only if provided
+            request.options.params_encoder = config.params_encoder if config.params_encoder
+            request.options.timeout        = config.timeout        if config.timeout
+
+            request.url url
+            request.params = query_params
+            download_file(request) if opts[:return_type] == 'File' || opts[:return_type] == 'Binary'
             request
           end
 
@@ -155,13 +144,17 @@ module Hubspot
           # @return [String] HTTP body data in the form of string
           def build_request_body(header_params, form_params, body)
             # http form
-            if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
-                header_params['Content-Type'] == 'multipart/form-data'
+            if header_params['Content-Type'] == 'application/x-www-form-urlencoded'
+              data = URI.encode_www_form(form_params)
+            elsif header_params['Content-Type'] == 'multipart/form-data'
               data = {}
               form_params.each do |key, value|
                 case value
-                when ::File, ::Array, nil
-                  # let typhoeus handle File, Array and nil parameters
+                when ::File, ::Tempfile
+                  # TODO hardcode to application/octet-stream, need better way to detect content type
+                  data[key] = Faraday::FilePart.new(value.path, 'application/octet-stream', value.path)
+                when ::Array, nil
+                  # let Faraday handle Array and nil parameters
                   data[key] = value
                 else
                   data[key] = value.to_s
@@ -175,40 +168,55 @@ module Hubspot
             data
           end
 
-          # Save response body into a file in (the defined) temporary folder, using the filename
-          # from the "Content-Disposition" header if provided, otherwise a random filename.
-          # The response body is written to the file in chunks in order to handle files which
-          # size is larger than maximum Ruby String or even larger than the maximum memory a Ruby
-          # process can use.
-          #
-          # @see Configuration#temp_folder_path
           def download_file(request)
-            tempfile = nil
-            encoding = nil
-            request.on_headers do |response|
-              content_disposition = response.headers['Content-Disposition']
-              if content_disposition && content_disposition =~ /filename=/i
-                filename = content_disposition[/filename=['"]?([^'"\s]+)['"]?/, 1]
-                prefix = sanitize_filename(filename)
+            @stream = []
+
+            # handle streaming Responses
+            request.options.on_data = Proc.new do |chunk, overall_received_bytes|
+              @stream << chunk
+            end
+          end
+
+          def connection(opts)
+            opts[:header_params]['Content-Type'] == 'multipart/form-data' ? connection_multipart : connection_regular
+          end
+
+          def connection_multipart
+            @connection_multipart ||= build_connection do |conn|
+              conn.request :multipart
+              conn.request :url_encoded
+            end
+          end
+
+          def connection_regular
+            @connection_regular ||= build_connection
+          end
+
+          def build_connection
+            Faraday.new(url: config.base_url, ssl: ssl_options) do |conn|
+              basic_auth(conn)
+              config.configure_middleware(conn)
+              yield(conn) if block_given?
+              conn.adapter(Faraday.default_adapter)
+            end
+          end
+
+          def ssl_options
+            {
+              ca_file: config.ssl_ca_file,
+              verify: config.ssl_verify,
+              verify_mode: config.ssl_verify_mode,
+              client_cert: config.ssl_client_cert,
+              client_key: config.ssl_client_key
+            }
+          end
+
+          def basic_auth(conn)
+            if config.username && config.password
+              if Gem::Version.new(Faraday::VERSION) >= Gem::Version.new('2.0')
+                conn.request(:authorization, :basic, config.username, config.password)
               else
-                prefix = 'download-'
-              end
-              prefix = prefix + '-' unless prefix.end_with?('-')
-              encoding = response.body.encoding
-              tempfile = Tempfile.open(prefix, @config.temp_folder_path, encoding: encoding)
-              @tempfile = tempfile
-            end
-            request.on_body do |chunk|
-              chunk.force_encoding(encoding)
-              tempfile.write(chunk)
-            end
-            request.on_complete do |response|
-              if tempfile
-                tempfile.close
-                @config.logger.info "Temp file written to #{tempfile.path}, please copy the file to a proper folder "\
-                                    "with e.g. `FileUtils.cp(tempfile.path, '/new/file/path')` otherwise the temp file "\
-                                    "will be deleted automatically with GC. It's also recommended to delete the temp file "\
-                                    "explicitly with `tempfile.delete`"
+                conn.request(:basic_auth, config.username, config.password)
               end
             end
           end
@@ -234,7 +242,32 @@ module Hubspot
 
             # handle file downloading - return the File instance processed in request callbacks
             # note that response body is empty when the file is written in chunks in request on_body callback
-            return @tempfile if return_type == 'File'
+            if return_type == 'File'
+              if @config.return_binary_data == true
+                # return byte stream
+                encoding = body.encoding
+                return @stream.join.force_encoding(encoding)
+              else
+                # return file instead of binary data
+                content_disposition = response.headers['Content-Disposition']
+                if content_disposition && content_disposition =~ /filename=/i
+                  filename = content_disposition[/filename=['"]?([^'"\s]+)['"]?/, 1]
+                  prefix = sanitize_filename(filename)
+                else
+                  prefix = 'download-'
+                end
+                prefix = prefix + '-' unless prefix.end_with?('-')
+                encoding = body.encoding
+                @tempfile = Tempfile.open(prefix, @config.temp_folder_path, encoding: encoding)
+                @tempfile.write(@stream.join.force_encoding(encoding))
+                @tempfile.close
+                @config.logger.info "Temp file written to #{@tempfile.path}, please copy the file to a proper folder "\
+                                    "with e.g. `FileUtils.cp(tempfile.path, '/new/file/path')` otherwise the temp file "\
+                                    "will be deleted automatically with GC. It's also recommended to delete the temp file "\
+                                    "explicitly with `tempfile.delete`"
+                return @tempfile
+              end
+            end
 
             return nil if body.nil? || body.empty?
 
