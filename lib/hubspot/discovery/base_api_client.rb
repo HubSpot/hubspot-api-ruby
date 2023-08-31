@@ -46,7 +46,7 @@ module Hubspot
         config = Kernel.const_get("#{codegen_module_name}::Configuration").new
         config.access_token = base_params[:access_token] if base_params[:access_token]
         config.api_key['hapikey'] = base_params[:api_key] if base_params[:api_key]
-        config.api_key['hapikey'] = base_params[:developer_api_key] if base_params[:developer_api_key]
+        config.api_key['developer_hapikey'] = base_params[:developer_api_key] if base_params[:developer_api_key]
         config
       end
 
