@@ -296,7 +296,7 @@ module Hubspot
                 end
               else
                 # models (e.g. Pet) or oneOf
-                klass = Hubspot::Crm::Associations::V4.const_get(return_type)
+                klass = Hubspot::Crm::Associations::V4::Schema.const_get(return_type)
                 klass.respond_to?(:openapi_one_of) ? klass.build(data) : klass.build_from_hash(data)
               end
             end
