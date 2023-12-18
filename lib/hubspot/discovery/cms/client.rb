@@ -12,6 +12,7 @@ module Hubspot
             blogs
             domains
             hubdb
+            pages
             performance
             site_search
             source_code
