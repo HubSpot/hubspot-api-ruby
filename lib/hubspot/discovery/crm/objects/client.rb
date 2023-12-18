@@ -17,6 +17,7 @@ module Hubspot
               notes
               postal_mail
               tasks
+              taxes
             ].freeze
           end
 
