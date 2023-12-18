@@ -12,5 +12,6 @@ describe 'Hubspot::Client' do
   it { is_expected.to respond_to(:files) }
   it { is_expected.to respond_to(:marketing) }
   it { is_expected.to respond_to(:oauth) }
+  it { is_expected.to respond_to(:settings) }
   it { is_expected.to respond_to(:webhooks) }
 end
