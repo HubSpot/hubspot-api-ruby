@@ -16,6 +16,7 @@ module Hubspot
             extensions
             imports
             line_items
+            lists
             objects
             owners
             pipelines

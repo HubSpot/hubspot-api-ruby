@@ -7,6 +7,7 @@ describe 'Hubspot::Client' do
   it { is_expected.to respond_to(:blogs) }
   it { is_expected.to respond_to(:domains) }
   it { is_expected.to respond_to(:hubdb) }
+  it { is_expected.to respond_to(:pages) }
   it { is_expected.to respond_to(:performance) }
   it { is_expected.to respond_to(:site_search) }
   it { is_expected.to respond_to(:url_redirects) }

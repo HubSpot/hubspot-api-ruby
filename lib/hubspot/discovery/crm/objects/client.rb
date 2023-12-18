@@ -13,10 +13,12 @@ module Hubspot
               communications
               emails
               feedback_submissions
+              goals
               meetings
               notes
               postal_mail
               tasks
+              taxes
             ].freeze
           end
 
