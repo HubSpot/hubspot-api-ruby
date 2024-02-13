@@ -16,8 +16,20 @@ require 'time'
 module Hubspot
   module CommunicationPreferences
     class SubscriptionDefinition
-      # The ID of the definition.
-      attr_accessor :id
+      # A default description that is used by some HubSpot tools and cannot be edited.
+      attr_accessor :is_internal
+
+      # Time at which the definition was created.
+      attr_accessor :created_at
+
+      # A subscription definition created by HubSpot.
+      attr_accessor :is_default
+
+      # The method or technology used to contact.
+      attr_accessor :communication_method
+
+      # The purpose of this subscription or the department in your organization that uses it.
+      attr_accessor :purpose
 
       # The name of the subscription.
       attr_accessor :name
@@ -25,23 +37,11 @@ module Hubspot
       # A description of the subscription.
       attr_accessor :description
 
-      # The purpose of this subscription or the department in your organization that uses it.
-      attr_accessor :purpose
-
-      # The method or technology used to contact.
-      attr_accessor :communication_method
+      # The ID of the definition.
+      attr_accessor :id
 
       # Whether the definition is active or archived.
       attr_accessor :is_active
-
-      # A subscription definition created by HubSpot.
-      attr_accessor :is_default
-
-      # A default description that is used by some HubSpot tools and cannot be edited.
-      attr_accessor :is_internal
-
-      # Time at which the definition was created.
-      attr_accessor :created_at
 
       # Time at which the definition was last updated.
       attr_accessor :updated_at
@@ -49,15 +49,15 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'id' => :'id',
-          :'name' => :'name',
-          :'description' => :'description',
-          :'purpose' => :'purpose',
-          :'communication_method' => :'communicationMethod',
-          :'is_active' => :'isActive',
-          :'is_default' => :'isDefault',
           :'is_internal' => :'isInternal',
           :'created_at' => :'createdAt',
+          :'is_default' => :'isDefault',
+          :'communication_method' => :'communicationMethod',
+          :'purpose' => :'purpose',
+          :'name' => :'name',
+          :'description' => :'description',
+          :'id' => :'id',
+          :'is_active' => :'isActive',
           :'updated_at' => :'updatedAt'
         }
       end
@@ -70,15 +70,15 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'id' => :'String',
-          :'name' => :'String',
-          :'description' => :'String',
-          :'purpose' => :'String',
-          :'communication_method' => :'String',
-          :'is_active' => :'Boolean',
-          :'is_default' => :'Boolean',
           :'is_internal' => :'Boolean',
           :'created_at' => :'Time',
+          :'is_default' => :'Boolean',
+          :'communication_method' => :'String',
+          :'purpose' => :'String',
+          :'name' => :'String',
+          :'description' => :'String',
+          :'id' => :'String',
+          :'is_active' => :'Boolean',
           :'updated_at' => :'Time'
         }
       end
@@ -104,8 +104,24 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'id')
-          self.id = attributes[:'id']
+        if attributes.key?(:'is_internal')
+          self.is_internal = attributes[:'is_internal']
+        end
+
+        if attributes.key?(:'created_at')
+          self.created_at = attributes[:'created_at']
+        end
+
+        if attributes.key?(:'is_default')
+          self.is_default = attributes[:'is_default']
+        end
+
+        if attributes.key?(:'communication_method')
+          self.communication_method = attributes[:'communication_method']
+        end
+
+        if attributes.key?(:'purpose')
+          self.purpose = attributes[:'purpose']
         end
 
         if attributes.key?(:'name')
@@ -116,28 +132,12 @@ module Hubspot
           self.description = attributes[:'description']
         end
 
-        if attributes.key?(:'purpose')
-          self.purpose = attributes[:'purpose']
-        end
-
-        if attributes.key?(:'communication_method')
-          self.communication_method = attributes[:'communication_method']
+        if attributes.key?(:'id')
+          self.id = attributes[:'id']
         end
 
         if attributes.key?(:'is_active')
           self.is_active = attributes[:'is_active']
-        end
-
-        if attributes.key?(:'is_default')
-          self.is_default = attributes[:'is_default']
-        end
-
-        if attributes.key?(:'is_internal')
-          self.is_internal = attributes[:'is_internal']
-        end
-
-        if attributes.key?(:'created_at')
-          self.created_at = attributes[:'created_at']
         end
 
         if attributes.key?(:'updated_at')
@@ -149,8 +149,16 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @id.nil?
-          invalid_properties.push('invalid value for "id", id cannot be nil.')
+        if @is_internal.nil?
+          invalid_properties.push('invalid value for "is_internal", is_internal cannot be nil.')
+        end
+
+        if @created_at.nil?
+          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+        end
+
+        if @is_default.nil?
+          invalid_properties.push('invalid value for "is_default", is_default cannot be nil.')
         end
 
         if @name.nil?
@@ -161,20 +169,12 @@ module Hubspot
           invalid_properties.push('invalid value for "description", description cannot be nil.')
         end
 
+        if @id.nil?
+          invalid_properties.push('invalid value for "id", id cannot be nil.')
+        end
+
         if @is_active.nil?
           invalid_properties.push('invalid value for "is_active", is_active cannot be nil.')
-        end
-
-        if @is_default.nil?
-          invalid_properties.push('invalid value for "is_default", is_default cannot be nil.')
-        end
-
-        if @is_internal.nil?
-          invalid_properties.push('invalid value for "is_internal", is_internal cannot be nil.')
-        end
-
-        if @created_at.nil?
-          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
         end
 
         if @updated_at.nil?
@@ -187,13 +187,13 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @id.nil?
-        return false if @name.nil?
-        return false if @description.nil?
-        return false if @is_active.nil?
-        return false if @is_default.nil?
         return false if @is_internal.nil?
         return false if @created_at.nil?
+        return false if @is_default.nil?
+        return false if @name.nil?
+        return false if @description.nil?
+        return false if @id.nil?
+        return false if @is_active.nil?
         return false if @updated_at.nil?
         true
       end
@@ -203,15 +203,15 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            id == o.id &&
-            name == o.name &&
-            description == o.description &&
-            purpose == o.purpose &&
-            communication_method == o.communication_method &&
-            is_active == o.is_active &&
-            is_default == o.is_default &&
             is_internal == o.is_internal &&
             created_at == o.created_at &&
+            is_default == o.is_default &&
+            communication_method == o.communication_method &&
+            purpose == o.purpose &&
+            name == o.name &&
+            description == o.description &&
+            id == o.id &&
+            is_active == o.is_active &&
             updated_at == o.updated_at
       end
 
@@ -224,7 +224,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [id, name, description, purpose, communication_method, is_active, is_default, is_internal, created_at, updated_at].hash
+        [is_internal, created_at, is_default, communication_method, purpose, name, description, id, is_active, updated_at].hash
       end
 
       # Builds the object from hash

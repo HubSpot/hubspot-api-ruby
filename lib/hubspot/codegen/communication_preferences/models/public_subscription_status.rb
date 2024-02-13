@@ -16,8 +16,8 @@ require 'time'
 module Hubspot
   module CommunicationPreferences
     class PublicSubscriptionStatus
-      # The ID for the subscription.
-      attr_accessor :id
+      # The ID of the brand that the subscription is associated with, if there is one.
+      attr_accessor :brand_id
 
       # The name of the subscription.
       attr_accessor :name
@@ -25,23 +25,23 @@ module Hubspot
       # A description of the subscription.
       attr_accessor :description
 
+      # The legal reason for the current status of the subscription.
+      attr_accessor :legal_basis
+
+      # The name of the preferences group that the subscription is associated with.
+      attr_accessor :preference_group_name
+
+      # The ID for the subscription.
+      attr_accessor :id
+
+      # A more detailed explanation to go with the legal basis.
+      attr_accessor :legal_basis_explanation
+
       # Whether the contact is subscribed.
       attr_accessor :status
 
       # Where the status is determined from e.g. PORTAL_WIDE_STATUS if the contact opted out from the portal.
       attr_accessor :source_of_status
-
-      # The ID of the brand that the subscription is associated with, if there is one.
-      attr_accessor :brand_id
-
-      # The name of the preferences group that the subscription is associated with.
-      attr_accessor :preference_group_name
-
-      # The legal reason for the current status of the subscription.
-      attr_accessor :legal_basis
-
-      # A more detailed explanation to go with the legal basis.
-      attr_accessor :legal_basis_explanation
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -68,15 +68,15 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'id' => :'id',
+          :'brand_id' => :'brandId',
           :'name' => :'name',
           :'description' => :'description',
-          :'status' => :'status',
-          :'source_of_status' => :'sourceOfStatus',
-          :'brand_id' => :'brandId',
-          :'preference_group_name' => :'preferenceGroupName',
           :'legal_basis' => :'legalBasis',
-          :'legal_basis_explanation' => :'legalBasisExplanation'
+          :'preference_group_name' => :'preferenceGroupName',
+          :'id' => :'id',
+          :'legal_basis_explanation' => :'legalBasisExplanation',
+          :'status' => :'status',
+          :'source_of_status' => :'sourceOfStatus'
         }
       end
 
@@ -88,15 +88,15 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'id' => :'String',
+          :'brand_id' => :'Integer',
           :'name' => :'String',
           :'description' => :'String',
-          :'status' => :'String',
-          :'source_of_status' => :'String',
-          :'brand_id' => :'Integer',
-          :'preference_group_name' => :'String',
           :'legal_basis' => :'String',
-          :'legal_basis_explanation' => :'String'
+          :'preference_group_name' => :'String',
+          :'id' => :'String',
+          :'legal_basis_explanation' => :'String',
+          :'status' => :'String',
+          :'source_of_status' => :'String'
         }
       end
 
@@ -121,8 +121,8 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'id')
-          self.id = attributes[:'id']
+        if attributes.key?(:'brand_id')
+          self.brand_id = attributes[:'brand_id']
         end
 
         if attributes.key?(:'name')
@@ -133,6 +133,22 @@ module Hubspot
           self.description = attributes[:'description']
         end
 
+        if attributes.key?(:'legal_basis')
+          self.legal_basis = attributes[:'legal_basis']
+        end
+
+        if attributes.key?(:'preference_group_name')
+          self.preference_group_name = attributes[:'preference_group_name']
+        end
+
+        if attributes.key?(:'id')
+          self.id = attributes[:'id']
+        end
+
+        if attributes.key?(:'legal_basis_explanation')
+          self.legal_basis_explanation = attributes[:'legal_basis_explanation']
+        end
+
         if attributes.key?(:'status')
           self.status = attributes[:'status']
         end
@@ -140,38 +156,22 @@ module Hubspot
         if attributes.key?(:'source_of_status')
           self.source_of_status = attributes[:'source_of_status']
         end
-
-        if attributes.key?(:'brand_id')
-          self.brand_id = attributes[:'brand_id']
-        end
-
-        if attributes.key?(:'preference_group_name')
-          self.preference_group_name = attributes[:'preference_group_name']
-        end
-
-        if attributes.key?(:'legal_basis')
-          self.legal_basis = attributes[:'legal_basis']
-        end
-
-        if attributes.key?(:'legal_basis_explanation')
-          self.legal_basis_explanation = attributes[:'legal_basis_explanation']
-        end
       end
 
       # Show invalid properties with the reasons. Usually used together with valid?
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @id.nil?
-          invalid_properties.push('invalid value for "id", id cannot be nil.')
-        end
-
         if @name.nil?
           invalid_properties.push('invalid value for "name", name cannot be nil.')
         end
 
         if @description.nil?
           invalid_properties.push('invalid value for "description", description cannot be nil.')
+        end
+
+        if @id.nil?
+          invalid_properties.push('invalid value for "id", id cannot be nil.')
         end
 
         if @status.nil?
@@ -188,18 +188,28 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @id.nil?
         return false if @name.nil?
         return false if @description.nil?
+        legal_basis_validator = EnumAttributeValidator.new('String', ["LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER"])
+        return false unless legal_basis_validator.valid?(@legal_basis)
+        return false if @id.nil?
         return false if @status.nil?
         status_validator = EnumAttributeValidator.new('String', ["SUBSCRIBED", "NOT_SUBSCRIBED"])
         return false unless status_validator.valid?(@status)
         return false if @source_of_status.nil?
         source_of_status_validator = EnumAttributeValidator.new('String', ["PORTAL_WIDE_STATUS", "BRAND_WIDE_STATUS", "SUBSCRIPTION_STATUS"])
         return false unless source_of_status_validator.valid?(@source_of_status)
-        legal_basis_validator = EnumAttributeValidator.new('String', ["LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER"])
-        return false unless legal_basis_validator.valid?(@legal_basis)
         true
+      end
+
+      # Custom attribute writer method checking allowed values (enum).
+      # @param [Object] legal_basis Object to be assigned
+      def legal_basis=(legal_basis)
+        validator = EnumAttributeValidator.new('String', ["LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER"])
+        unless validator.valid?(legal_basis)
+          fail ArgumentError, "invalid value for \"legal_basis\", must be one of #{validator.allowable_values}."
+        end
+        @legal_basis = legal_basis
       end
 
       # Custom attribute writer method checking allowed values (enum).
@@ -222,30 +232,20 @@ module Hubspot
         @source_of_status = source_of_status
       end
 
-      # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] legal_basis Object to be assigned
-      def legal_basis=(legal_basis)
-        validator = EnumAttributeValidator.new('String', ["LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER"])
-        unless validator.valid?(legal_basis)
-          fail ArgumentError, "invalid value for \"legal_basis\", must be one of #{validator.allowable_values}."
-        end
-        @legal_basis = legal_basis
-      end
-
       # Checks equality by comparing each attribute.
       # @param [Object] Object to be compared
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            id == o.id &&
+            brand_id == o.brand_id &&
             name == o.name &&
             description == o.description &&
-            status == o.status &&
-            source_of_status == o.source_of_status &&
-            brand_id == o.brand_id &&
-            preference_group_name == o.preference_group_name &&
             legal_basis == o.legal_basis &&
-            legal_basis_explanation == o.legal_basis_explanation
+            preference_group_name == o.preference_group_name &&
+            id == o.id &&
+            legal_basis_explanation == o.legal_basis_explanation &&
+            status == o.status &&
+            source_of_status == o.source_of_status
       end
 
       # @see the `==` method
@@ -257,7 +257,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [id, name, description, status, source_of_status, brand_id, preference_group_name, legal_basis, legal_basis_explanation].hash
+        [brand_id, name, description, legal_basis, preference_group_name, id, legal_basis_explanation, status, source_of_status].hash
       end
 
       # Builds the object from hash
