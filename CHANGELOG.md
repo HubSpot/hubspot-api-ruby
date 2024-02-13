@@ -5,7 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v17.2.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v18..0...HEAD)
+
+## [18.0.0] - 2024-02-14
+
+## Updated
+
+- `automation.actions.definitions_api.create(app_id, extension_action_definition_input, opts = {} => app_id, public_action_definition_egg, opts = {}): ExtensionActionDefinition => PublicActionDefinition`
+- `automation.actions.definitions_api.get_by_id(): ExtensionActionDefinition => PublicActionDefinition`
+- `automation.actions.definitions_api.get_page(): CollectionResponseExtensionActionDefinitionForwardPaging => CollectionResponsePublicActionDefinitionForwardPaging`
+- `automation.actions.definitions_api.update(definition_id, app_id, extension_action_definition_patch, opts = {} => definition_id, app_id, public_action_definition_patch, opts = {}): ExtensionActionDefinition => PublicActionDefinition`
+- Added new function type `POST_ACTION_EXECUTION` to all methods of `automation.actions.functions_api`
+- `automation.actions.functions_api.create_or_replace(): ActionFunctionIdentifier => PublicActionFunctionIdentifier`
+- `automation.actions.functions_api.create_or_replace_by_function_type(): ActionFunctionIdentifier => PublicActionFunctionIdentifier`
+- `automation.actions.functions_api.get_by_function_type(): ActionFunction => PublicActionFunction`
+- `automation.actions.functions_api.get_by_id(): ActionFunction => PublicActionFunction`
+- `automation.actions.functions_api.get_page(): CollectionResponseActionFunctionIdentifierNoPaging => CollectionResponsePublicActionFunctionIdentifierNoPaging`
+- `automation.actions.revisions_api.get_by_id(): ActionRevision => PublicActionRevision`
+- `automation.actions.revisions_api.get_page(): CollectionResponseActionRevisionForwardPaging => CollectionResponsePublicActionRevisionForwardPaging`
+- Added new params to `automation.actions.models.FieldTypeDefinition`
+- Added new param to `automation.actions.models.InputFieldDefinition`
+- Added `automation.actions.models.OutputFieldDefinition`
+- Added `automation.actions.models.PublicExecutionTranslationRule`
+
+## Removed `hapikey` from
+- `communication_preferences` Apis.
+- `conversations.visitor_identification` Api.
+
 
 ## [17.2.0] - 2023-12-19
 
