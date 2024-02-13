@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `automation.actions.revisions_api.get_by_id(): ActionRevision => PublicActionRevision`
 - `automation.actions.revisions_api.get_page(): CollectionResponseActionRevisionForwardPaging => CollectionResponsePublicActionRevisionForwardPaging`
 - Update params to `automation.actions.models.FieldTypeDefinition`:
+
 ```ruby
   {
     :'help_text' => :'String',
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     :'external_options' => :'Boolean'
   }
 ```
+
 - Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`
 - Added `automation.actions.models.OutputFieldDefinition`
 - Added `automation.actions.models.PublicExecutionTranslationRule`
