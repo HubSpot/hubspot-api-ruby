@@ -5,7 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v17.2.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v18..0...HEAD)
+
+## [18.0.0] - 2024-02-14
+
+## Updated
+
+- `automation.actions.definitions_api.create(app_id, extension_action_definition_input, opts = {}): ExtensionActionDefinition` => 
+  `automation.actions.definitions_api.create(app_id, public_action_definition_egg, opts = {}): PublicActionDefinition`
+- `automation.actions.definitions_api.get_by_id(): ExtensionActionDefinition => PublicActionDefinition`
+- `automation.actions.definitions_api.get_page(): CollectionResponseExtensionActionDefinitionForwardPaging` => `CollectionResponsePublicActionDefinitionForwardPaging`
+- `automation.actions.definitions_api.update(definition_id, app_id, extension_action_definition_patch, opts = {}): ExtensionActionDefinition` => 
+  `automation.actions.definitions_api.update(definition_id, app_id, public_action_definition_patch, opts = {}): PublicActionDefinition`
+- Added new function type `POST_ACTION_EXECUTION` to all methods of `automation.actions.functions_api`
+- `automation.actions.functions_api.create_or_replace(): ActionFunctionIdentifier => PublicActionFunctionIdentifier`
+- `automation.actions.functions_api.create_or_replace_by_function_type(): ActionFunctionIdentifier => PublicActionFunctionIdentifier`
+- `automation.actions.functions_api.get_by_function_type(): ActionFunction => PublicActionFunction`
+- `automation.actions.functions_api.get_by_id(): ActionFunction => PublicActionFunction`
+- `automation.actions.functions_api.get_page(): CollectionResponseActionFunctionIdentifierNoPaging => CollectionResponsePublicActionFunctionIdentifierNoPaging`
+- `automation.actions.revisions_api.get_by_id(): ActionRevision => PublicActionRevision`
+- `automation.actions.revisions_api.get_page(): CollectionResponseActionRevisionForwardPaging => CollectionResponsePublicActionRevisionForwardPaging`
+- Update params to `automation.actions.models.FieldTypeDefinition`:
+
+```ruby
+  {
+    :'help_text' => :'String',
+    :'referenced_object_type' => :'String',
+    :'name' => :'String',
+    :'options' => :'Array<Option>',
+    :'description' => :'String',
+    :'external_options_reference_type' => :'String',
+    :'label' => :'String',
+    :'type' => :'String',
+    :'field_type' => :'String',
+    :'options_url' => :'String',
+    :'external_options' => :'Boolean'
+  }
+```
+
+- Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`
+- Added `automation.actions.models.OutputFieldDefinition`
+- Added `automation.actions.models.PublicExecutionTranslationRule`
+
+## Removed `hapikey` from
+- `communication_preferences` Apis.
+- `conversations.visitor_identification` Api.
+
 
 ## [17.2.0] - 2023-12-19
 
