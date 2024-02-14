@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `cms.source_code.content_api.get()` => `cms.source_code.content_api.download()`
 - `cms.source_code.content_api.replace()` => `cms.source_code.content_api.create_or_update()`
 
-- Removed `EnumAttributeValidator` from few models `blogs: authors, blog_posts, tags`
+- Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`
 - Update params to `automation.actions.models.FieldTypeDefinition`:
 
 ```ruby
