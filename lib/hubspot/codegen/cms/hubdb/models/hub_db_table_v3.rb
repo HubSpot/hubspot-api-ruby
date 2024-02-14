@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,54 +17,54 @@ module Hubspot
   module Cms
     module Hubdb
       class HubDbTableV3
-        # Id of the table
-        attr_accessor :id
-
-        # Name of the table
-        attr_accessor :name
-
-        # Label of the table
-        attr_accessor :label
-
-        # List of columns in the table
-        attr_accessor :columns
-
-        attr_accessor :published
-
-        attr_accessor :deleted
-
-        # Number of columns including deleted
-        attr_accessor :column_count
-
-        # Number of rows in the table
-        attr_accessor :row_count
-
-        attr_accessor :created_by
-
-        attr_accessor :updated_by
-
-        # Specifies whether the table can be used for creation of dynamic pages
-        attr_accessor :use_for_pages
-
-        # Specifies whether child tables can be created
-        attr_accessor :allow_child_tables
-
-        # Specifies creation of multi-level dynamic pages using child tables
-        attr_accessor :enable_child_table_pages
-
-        attr_accessor :is_ordered_manually
-
         # Specifies the key value pairs of the metadata fields with the associated column ids
         attr_accessor :dynamic_meta_tags
+
+        attr_accessor :updated_by
 
         # Specifies whether the table can be read by public without authorization
         attr_accessor :allow_public_api_access
 
-        # Timestamp at which the table is created
-        attr_accessor :created_at
+        # Specifies whether the table can be used for creation of dynamic pages
+        attr_accessor :use_for_pages
 
         # Timestamp at which the table is published recently
         attr_accessor :published_at
+
+        # List of columns in the table
+        attr_accessor :columns
+
+        # Label of the table
+        attr_accessor :label
+
+        attr_accessor :published
+
+        # Number of columns including deleted
+        attr_accessor :column_count
+
+        # Specifies whether child tables can be created
+        attr_accessor :allow_child_tables
+
+        # Timestamp at which the table is created
+        attr_accessor :created_at
+
+        attr_accessor :deleted
+
+        attr_accessor :created_by
+
+        # Name of the table
+        attr_accessor :name
+
+        # Specifies creation of multi-level dynamic pages using child tables
+        attr_accessor :enable_child_table_pages
+
+        # Id of the table
+        attr_accessor :id
+
+        # Number of rows in the table
+        attr_accessor :row_count
+
+        attr_accessor :is_ordered_manually
 
         # Timestamp at which the table is updated recently
         attr_accessor :updated_at
@@ -72,24 +72,24 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'name' => :'name',
-            :'label' => :'label',
-            :'columns' => :'columns',
-            :'published' => :'published',
-            :'deleted' => :'deleted',
-            :'column_count' => :'columnCount',
-            :'row_count' => :'rowCount',
-            :'created_by' => :'createdBy',
-            :'updated_by' => :'updatedBy',
-            :'use_for_pages' => :'useForPages',
-            :'allow_child_tables' => :'allowChildTables',
-            :'enable_child_table_pages' => :'enableChildTablePages',
-            :'is_ordered_manually' => :'isOrderedManually',
             :'dynamic_meta_tags' => :'dynamicMetaTags',
+            :'updated_by' => :'updatedBy',
             :'allow_public_api_access' => :'allowPublicApiAccess',
-            :'created_at' => :'createdAt',
+            :'use_for_pages' => :'useForPages',
             :'published_at' => :'publishedAt',
+            :'columns' => :'columns',
+            :'label' => :'label',
+            :'published' => :'published',
+            :'column_count' => :'columnCount',
+            :'allow_child_tables' => :'allowChildTables',
+            :'created_at' => :'createdAt',
+            :'deleted' => :'deleted',
+            :'created_by' => :'createdBy',
+            :'name' => :'name',
+            :'enable_child_table_pages' => :'enableChildTablePages',
+            :'id' => :'id',
+            :'row_count' => :'rowCount',
+            :'is_ordered_manually' => :'isOrderedManually',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -102,24 +102,24 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'name' => :'String',
-            :'label' => :'String',
-            :'columns' => :'Array<Column>',
-            :'published' => :'Boolean',
-            :'deleted' => :'Boolean',
-            :'column_count' => :'Integer',
-            :'row_count' => :'Integer',
-            :'created_by' => :'SimpleUser',
-            :'updated_by' => :'SimpleUser',
-            :'use_for_pages' => :'Boolean',
-            :'allow_child_tables' => :'Boolean',
-            :'enable_child_table_pages' => :'Boolean',
-            :'is_ordered_manually' => :'Boolean',
             :'dynamic_meta_tags' => :'Hash<String, Integer>',
+            :'updated_by' => :'SimpleUser',
             :'allow_public_api_access' => :'Boolean',
-            :'created_at' => :'Time',
+            :'use_for_pages' => :'Boolean',
             :'published_at' => :'Time',
+            :'columns' => :'Array<Column>',
+            :'label' => :'String',
+            :'published' => :'Boolean',
+            :'column_count' => :'Integer',
+            :'allow_child_tables' => :'Boolean',
+            :'created_at' => :'Time',
+            :'deleted' => :'Boolean',
+            :'created_by' => :'SimpleUser',
+            :'name' => :'String',
+            :'enable_child_table_pages' => :'Boolean',
+            :'id' => :'String',
+            :'row_count' => :'Integer',
+            :'is_ordered_manually' => :'Boolean',
             :'updated_at' => :'Time'
           }
         end
@@ -145,16 +145,26 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'dynamic_meta_tags')
+            if (value = attributes[:'dynamic_meta_tags']).is_a?(Hash)
+              self.dynamic_meta_tags = value
+            end
           end
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'updated_by')
+            self.updated_by = attributes[:'updated_by']
           end
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
+          if attributes.key?(:'allow_public_api_access')
+            self.allow_public_api_access = attributes[:'allow_public_api_access']
+          end
+
+          if attributes.key?(:'use_for_pages')
+            self.use_for_pages = attributes[:'use_for_pages']
+          end
+
+          if attributes.key?(:'published_at')
+            self.published_at = attributes[:'published_at']
           end
 
           if attributes.key?(:'columns')
@@ -163,62 +173,52 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'published')
-            self.published = attributes[:'published']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
 
-          if attributes.key?(:'deleted')
-            self.deleted = attributes[:'deleted']
+          if attributes.key?(:'published')
+            self.published = attributes[:'published']
           end
 
           if attributes.key?(:'column_count')
             self.column_count = attributes[:'column_count']
           end
 
-          if attributes.key?(:'row_count')
-            self.row_count = attributes[:'row_count']
-          end
-
-          if attributes.key?(:'created_by')
-            self.created_by = attributes[:'created_by']
-          end
-
-          if attributes.key?(:'updated_by')
-            self.updated_by = attributes[:'updated_by']
-          end
-
-          if attributes.key?(:'use_for_pages')
-            self.use_for_pages = attributes[:'use_for_pages']
-          end
-
           if attributes.key?(:'allow_child_tables')
             self.allow_child_tables = attributes[:'allow_child_tables']
-          end
-
-          if attributes.key?(:'enable_child_table_pages')
-            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
-          end
-
-          if attributes.key?(:'is_ordered_manually')
-            self.is_ordered_manually = attributes[:'is_ordered_manually']
-          end
-
-          if attributes.key?(:'dynamic_meta_tags')
-            if (value = attributes[:'dynamic_meta_tags']).is_a?(Hash)
-              self.dynamic_meta_tags = value
-            end
-          end
-
-          if attributes.key?(:'allow_public_api_access')
-            self.allow_public_api_access = attributes[:'allow_public_api_access']
           end
 
           if attributes.key?(:'created_at')
             self.created_at = attributes[:'created_at']
           end
 
-          if attributes.key?(:'published_at')
-            self.published_at = attributes[:'published_at']
+          if attributes.key?(:'deleted')
+            self.deleted = attributes[:'deleted']
+          end
+
+          if attributes.key?(:'created_by')
+            self.created_by = attributes[:'created_by']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'enable_child_table_pages')
+            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'row_count')
+            self.row_count = attributes[:'row_count']
+          end
+
+          if attributes.key?(:'is_ordered_manually')
+            self.is_ordered_manually = attributes[:'is_ordered_manually']
           end
 
           if attributes.key?(:'updated_at')
@@ -230,12 +230,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
+          end
+
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           invalid_properties
@@ -244,8 +244,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
           return false if @label.nil?
+          return false if @name.nil?
           true
         end
 
@@ -254,24 +254,24 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              name == o.name &&
-              label == o.label &&
-              columns == o.columns &&
-              published == o.published &&
-              deleted == o.deleted &&
-              column_count == o.column_count &&
-              row_count == o.row_count &&
-              created_by == o.created_by &&
-              updated_by == o.updated_by &&
-              use_for_pages == o.use_for_pages &&
-              allow_child_tables == o.allow_child_tables &&
-              enable_child_table_pages == o.enable_child_table_pages &&
-              is_ordered_manually == o.is_ordered_manually &&
               dynamic_meta_tags == o.dynamic_meta_tags &&
+              updated_by == o.updated_by &&
               allow_public_api_access == o.allow_public_api_access &&
-              created_at == o.created_at &&
+              use_for_pages == o.use_for_pages &&
               published_at == o.published_at &&
+              columns == o.columns &&
+              label == o.label &&
+              published == o.published &&
+              column_count == o.column_count &&
+              allow_child_tables == o.allow_child_tables &&
+              created_at == o.created_at &&
+              deleted == o.deleted &&
+              created_by == o.created_by &&
+              name == o.name &&
+              enable_child_table_pages == o.enable_child_table_pages &&
+              id == o.id &&
+              row_count == o.row_count &&
+              is_ordered_manually == o.is_ordered_manually &&
               updated_at == o.updated_at
         end
 
@@ -284,7 +284,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, label, columns, published, deleted, column_count, row_count, created_by, updated_by, use_for_pages, allow_child_tables, enable_child_table_pages, is_ordered_manually, dynamic_meta_tags, allow_public_api_access, created_at, published_at, updated_at].hash
+          [dynamic_meta_tags, updated_by, allow_public_api_access, use_for_pages, published_at, columns, label, published, column_count, allow_child_tables, created_at, deleted, created_by, name, enable_child_table_pages, id, row_count, is_ordered_manually, updated_at].hash
         end
 
         # Builds the object from hash

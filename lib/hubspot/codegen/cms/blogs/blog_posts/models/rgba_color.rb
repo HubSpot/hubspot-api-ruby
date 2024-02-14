@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,25 +19,25 @@ module Hubspot
       module BlogPosts
         # A color defined by RGB values.
         class RGBAColor
+          # Alpha.
+          attr_accessor :a
+
           # Red.
           attr_accessor :r
-
-          # Green.
-          attr_accessor :g
 
           # Blue.
           attr_accessor :b
 
-          # Alpha.
-          attr_accessor :a
+          # Green.
+          attr_accessor :g
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'a' => :'a',
               :'r' => :'r',
-              :'g' => :'g',
               :'b' => :'b',
-              :'a' => :'a'
+              :'g' => :'g'
             }
           end
 
@@ -49,10 +49,10 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'a' => :'Float',
               :'r' => :'Integer',
-              :'g' => :'Integer',
               :'b' => :'Integer',
-              :'a' => :'Float'
+              :'g' => :'Integer'
             }
           end
 
@@ -77,20 +77,20 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'r')
-              self.r = attributes[:'r']
+            if attributes.key?(:'a')
+              self.a = attributes[:'a']
             end
 
-            if attributes.key?(:'g')
-              self.g = attributes[:'g']
+            if attributes.key?(:'r')
+              self.r = attributes[:'r']
             end
 
             if attributes.key?(:'b')
               self.b = attributes[:'b']
             end
 
-            if attributes.key?(:'a')
-              self.a = attributes[:'a']
+            if attributes.key?(:'g')
+              self.g = attributes[:'g']
             end
           end
 
@@ -98,20 +98,20 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @r.nil?
-              invalid_properties.push('invalid value for "r", r cannot be nil.')
+            if @a.nil?
+              invalid_properties.push('invalid value for "a", a cannot be nil.')
             end
 
-            if @g.nil?
-              invalid_properties.push('invalid value for "g", g cannot be nil.')
+            if @r.nil?
+              invalid_properties.push('invalid value for "r", r cannot be nil.')
             end
 
             if @b.nil?
               invalid_properties.push('invalid value for "b", b cannot be nil.')
             end
 
-            if @a.nil?
-              invalid_properties.push('invalid value for "a", a cannot be nil.')
+            if @g.nil?
+              invalid_properties.push('invalid value for "g", g cannot be nil.')
             end
 
             invalid_properties
@@ -120,10 +120,10 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @r.nil?
-            return false if @g.nil?
-            return false if @b.nil?
             return false if @a.nil?
+            return false if @r.nil?
+            return false if @b.nil?
+            return false if @g.nil?
             true
           end
 
@@ -132,10 +132,10 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                a == o.a &&
                 r == o.r &&
-                g == o.g &&
                 b == o.b &&
-                a == o.a
+                g == o.g
           end
 
           # @see the `==` method
@@ -147,7 +147,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [r, g, b, a].hash
+            [a, r, b, g].hash
           end
 
           # Builds the object from hash

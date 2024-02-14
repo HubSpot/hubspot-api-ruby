@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,33 +17,41 @@ module Hubspot
   module Cms
     module Hubdb
       class StandardError
-        attr_accessor :status
-
-        attr_accessor :id
-
-        attr_accessor :category
-
+        # 
         attr_accessor :sub_category
 
-        attr_accessor :message
-
-        attr_accessor :errors
-
+        # 
         attr_accessor :context
 
+        # 
         attr_accessor :links
+
+        # 
+        attr_accessor :id
+
+        # 
+        attr_accessor :category
+
+        # 
+        attr_accessor :message
+
+        # 
+        attr_accessor :errors
+
+        # 
+        attr_accessor :status
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'status' => :'status',
+            :'sub_category' => :'subCategory',
+            :'context' => :'context',
+            :'links' => :'links',
             :'id' => :'id',
             :'category' => :'category',
-            :'sub_category' => :'subCategory',
             :'message' => :'message',
             :'errors' => :'errors',
-            :'context' => :'context',
-            :'links' => :'links'
+            :'status' => :'status'
           }
         end
 
@@ -55,14 +63,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'status' => :'String',
+            :'sub_category' => :'Object',
+            :'context' => :'Hash<String, Array<String>>',
+            :'links' => :'Hash<String, String>',
             :'id' => :'String',
             :'category' => :'String',
-            :'sub_category' => :'Object',
             :'message' => :'String',
             :'errors' => :'Array<ErrorDetail>',
-            :'context' => :'Hash<String, Array<String>>',
-            :'links' => :'Hash<String, String>'
+            :'status' => :'String'
           }
         end
 
@@ -87,30 +95,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'status')
-            self.status = attributes[:'status']
-          end
-
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
-          if attributes.key?(:'category')
-            self.category = attributes[:'category']
-          end
-
           if attributes.key?(:'sub_category')
             self.sub_category = attributes[:'sub_category']
-          end
-
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
-          end
-
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
           end
 
           if attributes.key?(:'context')
@@ -124,14 +110,40 @@ module Hubspot
               self.links = value
             end
           end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'category')
+            self.category = attributes[:'category']
+          end
+
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
+          end
+
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
+            end
+          end
+
+          if attributes.key?(:'status')
+            self.status = attributes[:'status']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @status.nil?
-            invalid_properties.push('invalid value for "status", status cannot be nil.')
+          if @context.nil?
+            invalid_properties.push('invalid value for "context", context cannot be nil.')
+          end
+
+          if @links.nil?
+            invalid_properties.push('invalid value for "links", links cannot be nil.')
           end
 
           if @category.nil?
@@ -146,12 +158,8 @@ module Hubspot
             invalid_properties.push('invalid value for "errors", errors cannot be nil.')
           end
 
-          if @context.nil?
-            invalid_properties.push('invalid value for "context", context cannot be nil.')
-          end
-
-          if @links.nil?
-            invalid_properties.push('invalid value for "links", links cannot be nil.')
+          if @status.nil?
+            invalid_properties.push('invalid value for "status", status cannot be nil.')
           end
 
           invalid_properties
@@ -160,12 +168,12 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @status.nil?
+          return false if @context.nil?
+          return false if @links.nil?
           return false if @category.nil?
           return false if @message.nil?
           return false if @errors.nil?
-          return false if @context.nil?
-          return false if @links.nil?
+          return false if @status.nil?
           true
         end
 
@@ -174,14 +182,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              status == o.status &&
+              sub_category == o.sub_category &&
+              context == o.context &&
+              links == o.links &&
               id == o.id &&
               category == o.category &&
-              sub_category == o.sub_category &&
               message == o.message &&
               errors == o.errors &&
-              context == o.context &&
-              links == o.links
+              status == o.status
         end
 
         # @see the `==` method
@@ -193,7 +201,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [status, id, category, sub_category, message, errors, context, links].hash
+          [sub_category, context, links, id, category, message, errors, status].hash
         end
 
         # Builds the object from hash

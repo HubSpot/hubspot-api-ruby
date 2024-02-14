@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -23,28 +23,6 @@ module Hubspot
           attr_accessor :background_size
 
           attr_accessor :background_position
-
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
-
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
-
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
@@ -128,19 +106,7 @@ module Hubspot
             return false if @image_url.nil?
             return false if @background_size.nil?
             return false if @background_position.nil?
-            background_position_validator = EnumAttributeValidator.new('String', ["TOP_LEFT", "TOP_CENTER", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"])
-            return false unless background_position_validator.valid?(@background_position)
             true
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] background_position Object to be assigned
-          def background_position=(background_position)
-            validator = EnumAttributeValidator.new('String', ["TOP_LEFT", "TOP_CENTER", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"])
-            unless validator.valid?(background_position)
-              fail ArgumentError, "invalid value for \"background_position\", must be one of #{validator.allowable_values}."
-            end
-            @background_position = background_position
           end
 
           # Checks equality by comparing each attribute.

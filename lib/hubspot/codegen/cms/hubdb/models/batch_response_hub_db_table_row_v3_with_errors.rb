@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,21 +17,29 @@ module Hubspot
   module Cms
     module Hubdb
       class BatchResponseHubDbTableRowV3WithErrors
-        attr_accessor :status
-
-        attr_accessor :results
-
-        attr_accessor :num_errors
-
-        attr_accessor :errors
-
-        attr_accessor :requested_at
-
-        attr_accessor :started_at
-
+        # 
         attr_accessor :completed_at
 
+        # 
+        attr_accessor :num_errors
+
+        # 
+        attr_accessor :requested_at
+
+        # 
+        attr_accessor :started_at
+
+        # 
         attr_accessor :links
+
+        # 
+        attr_accessor :results
+
+        # 
+        attr_accessor :errors
+
+        # 
+        attr_accessor :status
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -58,14 +66,14 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'status' => :'status',
-            :'results' => :'results',
+            :'completed_at' => :'completedAt',
             :'num_errors' => :'numErrors',
-            :'errors' => :'errors',
             :'requested_at' => :'requestedAt',
             :'started_at' => :'startedAt',
-            :'completed_at' => :'completedAt',
-            :'links' => :'links'
+            :'links' => :'links',
+            :'results' => :'results',
+            :'errors' => :'errors',
+            :'status' => :'status'
           }
         end
 
@@ -77,14 +85,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'status' => :'String',
-            :'results' => :'Array<HubDbTableRowV3>',
+            :'completed_at' => :'Time',
             :'num_errors' => :'Integer',
-            :'errors' => :'Array<StandardError>',
             :'requested_at' => :'Time',
             :'started_at' => :'Time',
-            :'completed_at' => :'Time',
-            :'links' => :'Hash<String, String>'
+            :'links' => :'Hash<String, String>',
+            :'results' => :'Array<HubDbTableRowV3>',
+            :'errors' => :'Array<StandardError>',
+            :'status' => :'String'
           }
         end
 
@@ -109,24 +117,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'status')
-            self.status = attributes[:'status']
-          end
-
-          if attributes.key?(:'results')
-            if (value = attributes[:'results']).is_a?(Array)
-              self.results = value
-            end
+          if attributes.key?(:'completed_at')
+            self.completed_at = attributes[:'completed_at']
           end
 
           if attributes.key?(:'num_errors')
             self.num_errors = attributes[:'num_errors']
-          end
-
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
           end
 
           if attributes.key?(:'requested_at')
@@ -137,14 +133,26 @@ module Hubspot
             self.started_at = attributes[:'started_at']
           end
 
-          if attributes.key?(:'completed_at')
-            self.completed_at = attributes[:'completed_at']
-          end
-
           if attributes.key?(:'links')
             if (value = attributes[:'links']).is_a?(Hash)
               self.links = value
             end
+          end
+
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
+            end
+          end
+
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
+            end
+          end
+
+          if attributes.key?(:'status')
+            self.status = attributes[:'status']
           end
         end
 
@@ -152,20 +160,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @status.nil?
-            invalid_properties.push('invalid value for "status", status cannot be nil.')
-          end
-
-          if @results.nil?
-            invalid_properties.push('invalid value for "results", results cannot be nil.')
+          if @completed_at.nil?
+            invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
           end
 
           if @started_at.nil?
             invalid_properties.push('invalid value for "started_at", started_at cannot be nil.')
           end
 
-          if @completed_at.nil?
-            invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
+          end
+
+          if @status.nil?
+            invalid_properties.push('invalid value for "status", status cannot be nil.')
           end
 
           invalid_properties
@@ -174,12 +182,12 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @completed_at.nil?
+          return false if @started_at.nil?
+          return false if @results.nil?
           return false if @status.nil?
           status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
           return false unless status_validator.valid?(@status)
-          return false if @results.nil?
-          return false if @started_at.nil?
-          return false if @completed_at.nil?
           true
         end
 
@@ -198,14 +206,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              status == o.status &&
-              results == o.results &&
+              completed_at == o.completed_at &&
               num_errors == o.num_errors &&
-              errors == o.errors &&
               requested_at == o.requested_at &&
               started_at == o.started_at &&
-              completed_at == o.completed_at &&
-              links == o.links
+              links == o.links &&
+              results == o.results &&
+              errors == o.errors &&
+              status == o.status
         end
 
         # @see the `==` method
@@ -217,7 +225,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [status, results, num_errors, errors, requested_at, started_at, completed_at, links].hash
+          [completed_at, num_errors, requested_at, started_at, links, results, errors, status].hash
         end
 
         # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,21 +19,21 @@ module Hubspot
       module BlogPosts
         # Model definition of a version of a blog post.
         class VersionBlogPost
-          attr_accessor :object
+          # The id of the version.
+          attr_accessor :id
 
           attr_accessor :user
 
-          # The id of the version.
-          attr_accessor :id
+          attr_accessor :object
 
           attr_accessor :updated_at
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'object' => :'object',
-              :'user' => :'user',
               :'id' => :'id',
+              :'user' => :'user',
+              :'object' => :'object',
               :'updated_at' => :'updatedAt'
             }
           end
@@ -46,9 +46,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'object' => :'BlogPost',
-              :'user' => :'VersionUser',
               :'id' => :'String',
+              :'user' => :'VersionUser',
+              :'object' => :'BlogPost',
               :'updated_at' => :'Time'
             }
           end
@@ -74,16 +74,16 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'object')
-              self.object = attributes[:'object']
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
 
             if attributes.key?(:'user')
               self.user = attributes[:'user']
             end
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
+            if attributes.key?(:'object')
+              self.object = attributes[:'object']
             end
 
             if attributes.key?(:'updated_at')
@@ -95,16 +95,16 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @object.nil?
-              invalid_properties.push('invalid value for "object", object cannot be nil.')
+            if @id.nil?
+              invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
             if @user.nil?
               invalid_properties.push('invalid value for "user", user cannot be nil.')
             end
 
-            if @id.nil?
-              invalid_properties.push('invalid value for "id", id cannot be nil.')
+            if @object.nil?
+              invalid_properties.push('invalid value for "object", object cannot be nil.')
             end
 
             if @updated_at.nil?
@@ -117,9 +117,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @object.nil?
-            return false if @user.nil?
             return false if @id.nil?
+            return false if @user.nil?
+            return false if @object.nil?
             return false if @updated_at.nil?
             true
           end
@@ -129,9 +129,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                object == o.object &&
-                user == o.user &&
                 id == o.id &&
+                user == o.user &&
+                object == o.object &&
                 updated_at == o.updated_at
           end
 
@@ -144,7 +144,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [object, user, id, updated_at].hash
+            [id, user, object, updated_at].hash
           end
 
           # Builds the object from hash

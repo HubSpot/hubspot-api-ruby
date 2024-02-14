@@ -1,5 +1,5 @@
 =begin
-#CMS Performance API
+#CMS Performance
 
 #Use these endpoints to get a time series view of your website's performance.
 
@@ -29,35 +29,33 @@ module Hubspot
         # The number of responses that had an http status code of 504.
         attr_accessor :_504
 
-        # The timestamp in milliseconds of the start of this interval.
-        attr_accessor :start_timestamp
-
-        # The timestamp in milliseconds of the end of this interval.
-        attr_accessor :end_timestamp
-
         attr_accessor :start_datetime
-
-        attr_accessor :end_datetime
-
-        # The total number of requests received in this period.
-        attr_accessor :total_requests
-
-        # The total number of requests that were served cached responses.
-        attr_accessor :cache_hits
-
-        # The percentage of requests that were served cached responses.
-        attr_accessor :cache_hit_rate
-
-        attr_accessor :total_request_time
-
-        # The average response time in milliseconds from the origin to the edge.
-        attr_accessor :avg_origin_response_time
 
         # The average response time in milliseconds.
         attr_accessor :response_time_ms
 
+        # The 95th percentile response time.
+        attr_accessor :_95th
+
+        # The total number of requests received in this period.
+        attr_accessor :total_requests
+
+        # The percentage of requests that were served cached responses.
+        attr_accessor :cache_hit_rate
+
+        # The 99th percentile response time.
+        attr_accessor :_99th
+
+        attr_accessor :total_request_time
+
         # The number of responses that had an http status code between 1000-1999.
         attr_accessor :_100_x
+
+        # The 50th percentile response time.
+        attr_accessor :_50th
+
+        # The total number of requests that were served cached responses.
+        attr_accessor :cache_hits
 
         # The number of responses that had an http status code between 200-299.
         attr_accessor :_20_x
@@ -68,17 +66,19 @@ module Hubspot
         # The number of responses that had an http status code between 400-499.
         attr_accessor :_40_x
 
+        # The timestamp in milliseconds of the end of this interval.
+        attr_accessor :end_timestamp
+
         # The number of responses that had an http status code between 500-599.
         attr_accessor :_50_x
 
-        # The 50th percentile response time.
-        attr_accessor :_50th
+        # The timestamp in milliseconds of the start of this interval.
+        attr_accessor :start_timestamp
 
-        # The 95th percentile response time.
-        attr_accessor :_95th
+        attr_accessor :end_datetime
 
-        # The 99th percentile response time.
-        attr_accessor :_99th
+        # The average response time in milliseconds from the origin to the edge.
+        attr_accessor :avg_origin_response_time
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
@@ -87,24 +87,24 @@ module Hubspot
             :'_404' => :'404',
             :'_500' => :'500',
             :'_504' => :'504',
-            :'start_timestamp' => :'startTimestamp',
-            :'end_timestamp' => :'endTimestamp',
             :'start_datetime' => :'startDatetime',
-            :'end_datetime' => :'endDatetime',
-            :'total_requests' => :'totalRequests',
-            :'cache_hits' => :'cacheHits',
-            :'cache_hit_rate' => :'cacheHitRate',
-            :'total_request_time' => :'totalRequestTime',
-            :'avg_origin_response_time' => :'avgOriginResponseTime',
             :'response_time_ms' => :'responseTimeMs',
+            :'_95th' => :'95th',
+            :'total_requests' => :'totalRequests',
+            :'cache_hit_rate' => :'cacheHitRate',
+            :'_99th' => :'99th',
+            :'total_request_time' => :'totalRequestTime',
             :'_100_x' => :'100X',
+            :'_50th' => :'50th',
+            :'cache_hits' => :'cacheHits',
             :'_20_x' => :'20X',
             :'_30_x' => :'30X',
             :'_40_x' => :'40X',
+            :'end_timestamp' => :'endTimestamp',
             :'_50_x' => :'50X',
-            :'_50th' => :'50th',
-            :'_95th' => :'95th',
-            :'_99th' => :'99th'
+            :'start_timestamp' => :'startTimestamp',
+            :'end_datetime' => :'endDatetime',
+            :'avg_origin_response_time' => :'avgOriginResponseTime'
           }
         end
 
@@ -120,24 +120,24 @@ module Hubspot
             :'_404' => :'Integer',
             :'_500' => :'Integer',
             :'_504' => :'Integer',
-            :'start_timestamp' => :'Integer',
-            :'end_timestamp' => :'Integer',
             :'start_datetime' => :'String',
-            :'end_datetime' => :'String',
-            :'total_requests' => :'Integer',
-            :'cache_hits' => :'Integer',
-            :'cache_hit_rate' => :'Float',
-            :'total_request_time' => :'Integer',
-            :'avg_origin_response_time' => :'Integer',
             :'response_time_ms' => :'Integer',
+            :'_95th' => :'Integer',
+            :'total_requests' => :'Integer',
+            :'cache_hit_rate' => :'Float',
+            :'_99th' => :'Integer',
+            :'total_request_time' => :'Integer',
             :'_100_x' => :'Integer',
+            :'_50th' => :'Integer',
+            :'cache_hits' => :'Integer',
             :'_20_x' => :'Integer',
             :'_30_x' => :'Integer',
             :'_40_x' => :'Integer',
+            :'end_timestamp' => :'Integer',
             :'_50_x' => :'Integer',
-            :'_50th' => :'Integer',
-            :'_95th' => :'Integer',
-            :'_99th' => :'Integer'
+            :'start_timestamp' => :'Integer',
+            :'end_datetime' => :'String',
+            :'avg_origin_response_time' => :'Integer'
           }
         end
 
@@ -178,48 +178,44 @@ module Hubspot
             self._504 = attributes[:'_504']
           end
 
-          if attributes.key?(:'start_timestamp')
-            self.start_timestamp = attributes[:'start_timestamp']
-          end
-
-          if attributes.key?(:'end_timestamp')
-            self.end_timestamp = attributes[:'end_timestamp']
-          end
-
           if attributes.key?(:'start_datetime')
             self.start_datetime = attributes[:'start_datetime']
-          end
-
-          if attributes.key?(:'end_datetime')
-            self.end_datetime = attributes[:'end_datetime']
-          end
-
-          if attributes.key?(:'total_requests')
-            self.total_requests = attributes[:'total_requests']
-          end
-
-          if attributes.key?(:'cache_hits')
-            self.cache_hits = attributes[:'cache_hits']
-          end
-
-          if attributes.key?(:'cache_hit_rate')
-            self.cache_hit_rate = attributes[:'cache_hit_rate']
-          end
-
-          if attributes.key?(:'total_request_time')
-            self.total_request_time = attributes[:'total_request_time']
-          end
-
-          if attributes.key?(:'avg_origin_response_time')
-            self.avg_origin_response_time = attributes[:'avg_origin_response_time']
           end
 
           if attributes.key?(:'response_time_ms')
             self.response_time_ms = attributes[:'response_time_ms']
           end
 
+          if attributes.key?(:'_95th')
+            self._95th = attributes[:'_95th']
+          end
+
+          if attributes.key?(:'total_requests')
+            self.total_requests = attributes[:'total_requests']
+          end
+
+          if attributes.key?(:'cache_hit_rate')
+            self.cache_hit_rate = attributes[:'cache_hit_rate']
+          end
+
+          if attributes.key?(:'_99th')
+            self._99th = attributes[:'_99th']
+          end
+
+          if attributes.key?(:'total_request_time')
+            self.total_request_time = attributes[:'total_request_time']
+          end
+
           if attributes.key?(:'_100_x')
             self._100_x = attributes[:'_100_x']
+          end
+
+          if attributes.key?(:'_50th')
+            self._50th = attributes[:'_50th']
+          end
+
+          if attributes.key?(:'cache_hits')
+            self.cache_hits = attributes[:'cache_hits']
           end
 
           if attributes.key?(:'_20_x')
@@ -234,20 +230,24 @@ module Hubspot
             self._40_x = attributes[:'_40_x']
           end
 
+          if attributes.key?(:'end_timestamp')
+            self.end_timestamp = attributes[:'end_timestamp']
+          end
+
           if attributes.key?(:'_50_x')
             self._50_x = attributes[:'_50_x']
           end
 
-          if attributes.key?(:'_50th')
-            self._50th = attributes[:'_50th']
+          if attributes.key?(:'start_timestamp')
+            self.start_timestamp = attributes[:'start_timestamp']
           end
 
-          if attributes.key?(:'_95th')
-            self._95th = attributes[:'_95th']
+          if attributes.key?(:'end_datetime')
+            self.end_datetime = attributes[:'end_datetime']
           end
 
-          if attributes.key?(:'_99th')
-            self._99th = attributes[:'_99th']
+          if attributes.key?(:'avg_origin_response_time')
+            self.avg_origin_response_time = attributes[:'avg_origin_response_time']
           end
         end
 
@@ -271,48 +271,36 @@ module Hubspot
             invalid_properties.push('invalid value for "_504", _504 cannot be nil.')
           end
 
-          if @start_timestamp.nil?
-            invalid_properties.push('invalid value for "start_timestamp", start_timestamp cannot be nil.')
+          if @response_time_ms.nil?
+            invalid_properties.push('invalid value for "response_time_ms", response_time_ms cannot be nil.')
           end
 
-          if @end_timestamp.nil?
-            invalid_properties.push('invalid value for "end_timestamp", end_timestamp cannot be nil.')
-          end
-
-          if @start_datetime.nil?
-            invalid_properties.push('invalid value for "start_datetime", start_datetime cannot be nil.')
-          end
-
-          if @end_datetime.nil?
-            invalid_properties.push('invalid value for "end_datetime", end_datetime cannot be nil.')
+          if @_95th.nil?
+            invalid_properties.push('invalid value for "_95th", _95th cannot be nil.')
           end
 
           if @total_requests.nil?
             invalid_properties.push('invalid value for "total_requests", total_requests cannot be nil.')
           end
 
-          if @cache_hits.nil?
-            invalid_properties.push('invalid value for "cache_hits", cache_hits cannot be nil.')
-          end
-
           if @cache_hit_rate.nil?
             invalid_properties.push('invalid value for "cache_hit_rate", cache_hit_rate cannot be nil.')
           end
 
-          if @total_request_time.nil?
-            invalid_properties.push('invalid value for "total_request_time", total_request_time cannot be nil.')
-          end
-
-          if @avg_origin_response_time.nil?
-            invalid_properties.push('invalid value for "avg_origin_response_time", avg_origin_response_time cannot be nil.')
-          end
-
-          if @response_time_ms.nil?
-            invalid_properties.push('invalid value for "response_time_ms", response_time_ms cannot be nil.')
+          if @_99th.nil?
+            invalid_properties.push('invalid value for "_99th", _99th cannot be nil.')
           end
 
           if @_100_x.nil?
             invalid_properties.push('invalid value for "_100_x", _100_x cannot be nil.')
+          end
+
+          if @_50th.nil?
+            invalid_properties.push('invalid value for "_50th", _50th cannot be nil.')
+          end
+
+          if @cache_hits.nil?
+            invalid_properties.push('invalid value for "cache_hits", cache_hits cannot be nil.')
           end
 
           if @_20_x.nil?
@@ -327,20 +315,20 @@ module Hubspot
             invalid_properties.push('invalid value for "_40_x", _40_x cannot be nil.')
           end
 
+          if @end_timestamp.nil?
+            invalid_properties.push('invalid value for "end_timestamp", end_timestamp cannot be nil.')
+          end
+
           if @_50_x.nil?
             invalid_properties.push('invalid value for "_50_x", _50_x cannot be nil.')
           end
 
-          if @_50th.nil?
-            invalid_properties.push('invalid value for "_50th", _50th cannot be nil.')
+          if @start_timestamp.nil?
+            invalid_properties.push('invalid value for "start_timestamp", start_timestamp cannot be nil.')
           end
 
-          if @_95th.nil?
-            invalid_properties.push('invalid value for "_95th", _95th cannot be nil.')
-          end
-
-          if @_99th.nil?
-            invalid_properties.push('invalid value for "_99th", _99th cannot be nil.')
+          if @avg_origin_response_time.nil?
+            invalid_properties.push('invalid value for "avg_origin_response_time", avg_origin_response_time cannot be nil.')
           end
 
           invalid_properties
@@ -353,24 +341,21 @@ module Hubspot
           return false if @_404.nil?
           return false if @_500.nil?
           return false if @_504.nil?
-          return false if @start_timestamp.nil?
-          return false if @end_timestamp.nil?
-          return false if @start_datetime.nil?
-          return false if @end_datetime.nil?
-          return false if @total_requests.nil?
-          return false if @cache_hits.nil?
-          return false if @cache_hit_rate.nil?
-          return false if @total_request_time.nil?
-          return false if @avg_origin_response_time.nil?
           return false if @response_time_ms.nil?
+          return false if @_95th.nil?
+          return false if @total_requests.nil?
+          return false if @cache_hit_rate.nil?
+          return false if @_99th.nil?
           return false if @_100_x.nil?
+          return false if @_50th.nil?
+          return false if @cache_hits.nil?
           return false if @_20_x.nil?
           return false if @_30_x.nil?
           return false if @_40_x.nil?
+          return false if @end_timestamp.nil?
           return false if @_50_x.nil?
-          return false if @_50th.nil?
-          return false if @_95th.nil?
-          return false if @_99th.nil?
+          return false if @start_timestamp.nil?
+          return false if @avg_origin_response_time.nil?
           true
         end
 
@@ -383,24 +368,24 @@ module Hubspot
               _404 == o._404 &&
               _500 == o._500 &&
               _504 == o._504 &&
-              start_timestamp == o.start_timestamp &&
-              end_timestamp == o.end_timestamp &&
               start_datetime == o.start_datetime &&
-              end_datetime == o.end_datetime &&
-              total_requests == o.total_requests &&
-              cache_hits == o.cache_hits &&
-              cache_hit_rate == o.cache_hit_rate &&
-              total_request_time == o.total_request_time &&
-              avg_origin_response_time == o.avg_origin_response_time &&
               response_time_ms == o.response_time_ms &&
+              _95th == o._95th &&
+              total_requests == o.total_requests &&
+              cache_hit_rate == o.cache_hit_rate &&
+              _99th == o._99th &&
+              total_request_time == o.total_request_time &&
               _100_x == o._100_x &&
+              _50th == o._50th &&
+              cache_hits == o.cache_hits &&
               _20_x == o._20_x &&
               _30_x == o._30_x &&
               _40_x == o._40_x &&
+              end_timestamp == o.end_timestamp &&
               _50_x == o._50_x &&
-              _50th == o._50th &&
-              _95th == o._95th &&
-              _99th == o._99th
+              start_timestamp == o.start_timestamp &&
+              end_datetime == o.end_datetime &&
+              avg_origin_response_time == o.avg_origin_response_time
         end
 
         # @see the `==` method
@@ -412,7 +397,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [_403, _404, _500, _504, start_timestamp, end_timestamp, start_datetime, end_datetime, total_requests, cache_hits, cache_hit_rate, total_request_time, avg_origin_response_time, response_time_ms, _100_x, _20_x, _30_x, _40_x, _50_x, _50th, _95th, _99th].hash
+          [_403, _404, _500, _504, start_datetime, response_time_ms, _95th, total_requests, cache_hit_rate, _99th, total_request_time, _100_x, _50th, cache_hits, _20_x, _30_x, _40_x, end_timestamp, _50_x, start_timestamp, end_datetime, avg_origin_response_time].hash
         end
 
         # Builds the object from hash

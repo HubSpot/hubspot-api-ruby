@@ -17,15 +17,15 @@ module Hubspot
   module Cms
     module SourceCode
       class TaskLocator
-        attr_accessor :id
-
         attr_accessor :links
+
+        attr_accessor :id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'links' => :'links'
+            :'links' => :'links',
+            :'id' => :'id'
           }
         end
 
@@ -37,8 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'links' => :'Hash<String, String>'
+            :'links' => :'Hash<String, String>',
+            :'id' => :'String'
           }
         end
 
@@ -63,14 +63,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
           if attributes.key?(:'links')
             if (value = attributes[:'links']).is_a?(Hash)
               self.links = value
             end
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
         end
 
@@ -97,8 +97,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              links == o.links
+              links == o.links &&
+              id == o.id
         end
 
         # @see the `==` method
@@ -110,7 +110,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, links].hash
+          [links, id].hash
         end
 
         # Builds the object from hash

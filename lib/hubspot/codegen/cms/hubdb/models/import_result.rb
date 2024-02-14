@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,25 +17,25 @@ module Hubspot
   module Cms
     module Hubdb
       class ImportResult
-        # List of errors during import
-        attr_accessor :errors
+        # Specifies whether row limit exceeded during import
+        attr_accessor :row_limit_exceeded
 
         # Specifies number of duplicate rows
         attr_accessor :duplicate_rows
 
-        # Specifies whether row limit exceeded during import
-        attr_accessor :row_limit_exceeded
-
         # Specifies number of rows imported
         attr_accessor :rows_imported
+
+        # List of errors during import
+        attr_accessor :errors
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'errors' => :'errors',
-            :'duplicate_rows' => :'duplicateRows',
             :'row_limit_exceeded' => :'rowLimitExceeded',
-            :'rows_imported' => :'rowsImported'
+            :'duplicate_rows' => :'duplicateRows',
+            :'rows_imported' => :'rowsImported',
+            :'errors' => :'errors'
           }
         end
 
@@ -47,10 +47,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'errors' => :'Array<Error>',
-            :'duplicate_rows' => :'Integer',
             :'row_limit_exceeded' => :'Boolean',
-            :'rows_imported' => :'Integer'
+            :'duplicate_rows' => :'Integer',
+            :'rows_imported' => :'Integer',
+            :'errors' => :'Array<Error>'
           }
         end
 
@@ -75,22 +75,22 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
+          if attributes.key?(:'row_limit_exceeded')
+            self.row_limit_exceeded = attributes[:'row_limit_exceeded']
           end
 
           if attributes.key?(:'duplicate_rows')
             self.duplicate_rows = attributes[:'duplicate_rows']
           end
 
-          if attributes.key?(:'row_limit_exceeded')
-            self.row_limit_exceeded = attributes[:'row_limit_exceeded']
-          end
-
           if attributes.key?(:'rows_imported')
             self.rows_imported = attributes[:'rows_imported']
+          end
+
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
+            end
           end
         end
 
@@ -98,20 +98,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @errors.nil?
-            invalid_properties.push('invalid value for "errors", errors cannot be nil.')
+          if @row_limit_exceeded.nil?
+            invalid_properties.push('invalid value for "row_limit_exceeded", row_limit_exceeded cannot be nil.')
           end
 
           if @duplicate_rows.nil?
             invalid_properties.push('invalid value for "duplicate_rows", duplicate_rows cannot be nil.')
           end
 
-          if @row_limit_exceeded.nil?
-            invalid_properties.push('invalid value for "row_limit_exceeded", row_limit_exceeded cannot be nil.')
-          end
-
           if @rows_imported.nil?
             invalid_properties.push('invalid value for "rows_imported", rows_imported cannot be nil.')
+          end
+
+          if @errors.nil?
+            invalid_properties.push('invalid value for "errors", errors cannot be nil.')
           end
 
           invalid_properties
@@ -120,10 +120,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @errors.nil?
-          return false if @duplicate_rows.nil?
           return false if @row_limit_exceeded.nil?
+          return false if @duplicate_rows.nil?
           return false if @rows_imported.nil?
+          return false if @errors.nil?
           true
         end
 
@@ -132,10 +132,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              errors == o.errors &&
-              duplicate_rows == o.duplicate_rows &&
               row_limit_exceeded == o.row_limit_exceeded &&
-              rows_imported == o.rows_imported
+              duplicate_rows == o.duplicate_rows &&
+              rows_imported == o.rows_imported &&
+              errors == o.errors
         end
 
         # @see the `==` method
@@ -147,7 +147,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [errors, duplicate_rows, row_limit_exceeded, rows_imported].hash
+          [row_limit_exceeded, duplicate_rows, rows_imported, errors].hash
         end
 
         # Builds the object from hash

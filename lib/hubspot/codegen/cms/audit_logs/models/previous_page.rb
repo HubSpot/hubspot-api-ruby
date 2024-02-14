@@ -1,7 +1,7 @@
 =begin
-#Hubdb
+#Cms Content Audit
 
-#HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+#Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
 
 The version of the OpenAPI document: v3
 
@@ -15,43 +15,17 @@ require 'time'
 
 module Hubspot
   module Cms
-    module Hubdb
-      class HubDbTableV3Request
-        # Specifies the key value pairs of the metadata fields with the associated column ids
-        attr_accessor :dynamic_meta_tags
+    module AuditLogs
+      class PreviousPage
+        attr_accessor :before
 
-        # Specifies whether the table can be read by public without authorization
-        attr_accessor :allow_public_api_access
-
-        # Specifies whether the table can be used for creation of dynamic pages
-        attr_accessor :use_for_pages
-
-        # List of columns in the table
-        attr_accessor :columns
-
-        # Name of the table
-        attr_accessor :name
-
-        # Specifies creation of multi-level dynamic pages using child tables
-        attr_accessor :enable_child_table_pages
-
-        # Label of the table
-        attr_accessor :label
-
-        # Specifies whether child tables can be created
-        attr_accessor :allow_child_tables
+        attr_accessor :link
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'dynamic_meta_tags' => :'dynamicMetaTags',
-            :'allow_public_api_access' => :'allowPublicApiAccess',
-            :'use_for_pages' => :'useForPages',
-            :'columns' => :'columns',
-            :'name' => :'name',
-            :'enable_child_table_pages' => :'enableChildTablePages',
-            :'label' => :'label',
-            :'allow_child_tables' => :'allowChildTables'
+            :'before' => :'before',
+            :'link' => :'link'
           }
         end
 
@@ -63,14 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'dynamic_meta_tags' => :'Hash<String, Integer>',
-            :'allow_public_api_access' => :'Boolean',
-            :'use_for_pages' => :'Boolean',
-            :'columns' => :'Array<ColumnRequest>',
-            :'name' => :'String',
-            :'enable_child_table_pages' => :'Boolean',
-            :'label' => :'String',
-            :'allow_child_tables' => :'Boolean'
+            :'before' => :'String',
+            :'link' => :'String'
           }
         end
 
@@ -84,51 +52,23 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Hubdb::HubDbTableV3Request` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::AuditLogs::PreviousPage` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Hubdb::HubDbTableV3Request`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::AuditLogs::PreviousPage`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'dynamic_meta_tags')
-            if (value = attributes[:'dynamic_meta_tags']).is_a?(Hash)
-              self.dynamic_meta_tags = value
-            end
+          if attributes.key?(:'before')
+            self.before = attributes[:'before']
           end
 
-          if attributes.key?(:'allow_public_api_access')
-            self.allow_public_api_access = attributes[:'allow_public_api_access']
-          end
-
-          if attributes.key?(:'use_for_pages')
-            self.use_for_pages = attributes[:'use_for_pages']
-          end
-
-          if attributes.key?(:'columns')
-            if (value = attributes[:'columns']).is_a?(Array)
-              self.columns = value
-            end
-          end
-
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'enable_child_table_pages')
-            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
-          end
-
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'allow_child_tables')
-            self.allow_child_tables = attributes[:'allow_child_tables']
+          if attributes.key?(:'link')
+            self.link = attributes[:'link']
           end
         end
 
@@ -136,12 +76,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          if @before.nil?
+            invalid_properties.push('invalid value for "before", before cannot be nil.')
           end
 
           invalid_properties
@@ -150,8 +86,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
-          return false if @label.nil?
+          return false if @before.nil?
           true
         end
 
@@ -160,14 +95,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              dynamic_meta_tags == o.dynamic_meta_tags &&
-              allow_public_api_access == o.allow_public_api_access &&
-              use_for_pages == o.use_for_pages &&
-              columns == o.columns &&
-              name == o.name &&
-              enable_child_table_pages == o.enable_child_table_pages &&
-              label == o.label &&
-              allow_child_tables == o.allow_child_tables
+              before == o.before &&
+              link == o.link
         end
 
         # @see the `==` method
@@ -179,7 +108,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [dynamic_meta_tags, allow_public_api_access, use_for_pages, columns, name, enable_child_table_pages, label, allow_child_tables].hash
+          [before, link].hash
         end
 
         # Builds the object from hash
@@ -250,7 +179,7 @@ module Hubspot
             end
           else # model
             # models (e.g. Pet) or oneOf
-            klass = Hubspot::Cms::Hubdb.const_get(type)
+            klass = Hubspot::Cms::AuditLogs.const_get(type)
             klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
           end
         end

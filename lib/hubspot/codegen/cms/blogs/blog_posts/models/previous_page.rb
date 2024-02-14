@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,8 +19,10 @@ module Hubspot
       module BlogPosts
         # Model definition for a previous page
         class PreviousPage
+          # 
           attr_accessor :before
 
+          # 
           attr_accessor :link
 
           # Attribute mapping from ruby-style variable name to JSON key.

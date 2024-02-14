@@ -26,6 +26,7 @@ module Hubspot
         # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
         # @param path [String] The file system location of the file.
         # @param [Hash] opts the optional parameters
+        # @option opts [String] :properties 
         # @return [AssetFileMetadata]
         def get(environment, path, opts = {})
           data, _status_code, _headers = get_with_http_info(environment, path, opts)
@@ -37,6 +38,7 @@ module Hubspot
         # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
         # @param path [String] The file system location of the file.
         # @param [Hash] opts the optional parameters
+        # @option opts [String] :properties 
         # @return [Array<(AssetFileMetadata, Integer, Hash)>] AssetFileMetadata data, response status code and response headers
         def get_with_http_info(environment, path, opts = {})
           if @api_client.config.debugging
@@ -60,6 +62,7 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
+          query_params[:'properties'] = opts[:'properties'] if !opts[:'properties'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -76,7 +79,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'AssetFileMetadata'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"MetadataApi.get",

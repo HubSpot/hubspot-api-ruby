@@ -1,5 +1,5 @@
 =begin
-#CMS Performance API
+#CMS Performance
 
 #Use these endpoints to get a time series view of your website's performance.
 
@@ -17,19 +17,19 @@ module Hubspot
   module Cms
     module Performance
       class PublicPerformanceResponse
+        attr_accessor :path
+
+        attr_accessor :period
+
+        attr_accessor :start_interval
+
         attr_accessor :data
 
         attr_accessor :domain
 
-        attr_accessor :path
-
-        attr_accessor :start_interval
-
-        attr_accessor :end_interval
-
         attr_accessor :interval
 
-        attr_accessor :period
+        attr_accessor :end_interval
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -56,13 +56,13 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'path' => :'path',
+            :'period' => :'period',
+            :'start_interval' => :'startInterval',
             :'data' => :'data',
             :'domain' => :'domain',
-            :'path' => :'path',
-            :'start_interval' => :'startInterval',
-            :'end_interval' => :'endInterval',
             :'interval' => :'interval',
-            :'period' => :'period'
+            :'end_interval' => :'endInterval'
           }
         end
 
@@ -74,13 +74,13 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'path' => :'String',
+            :'period' => :'String',
+            :'start_interval' => :'Integer',
             :'data' => :'Array<PerformanceView>',
             :'domain' => :'String',
-            :'path' => :'String',
-            :'start_interval' => :'Integer',
-            :'end_interval' => :'Integer',
             :'interval' => :'String',
-            :'period' => :'String'
+            :'end_interval' => :'Integer'
           }
         end
 
@@ -105,6 +105,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'path')
+            self.path = attributes[:'path']
+          end
+
+          if attributes.key?(:'period')
+            self.period = attributes[:'period']
+          end
+
+          if attributes.key?(:'start_interval')
+            self.start_interval = attributes[:'start_interval']
+          end
+
           if attributes.key?(:'data')
             if (value = attributes[:'data']).is_a?(Array)
               self.data = value
@@ -115,24 +127,12 @@ module Hubspot
             self.domain = attributes[:'domain']
           end
 
-          if attributes.key?(:'path')
-            self.path = attributes[:'path']
-          end
-
-          if attributes.key?(:'start_interval')
-            self.start_interval = attributes[:'start_interval']
-          end
-
-          if attributes.key?(:'end_interval')
-            self.end_interval = attributes[:'end_interval']
-          end
-
           if attributes.key?(:'interval')
             self.interval = attributes[:'interval']
           end
 
-          if attributes.key?(:'period')
-            self.period = attributes[:'period']
+          if attributes.key?(:'end_interval')
+            self.end_interval = attributes[:'end_interval']
           end
         end
 
@@ -140,20 +140,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @data.nil?
-            invalid_properties.push('invalid value for "data", data cannot be nil.')
-          end
-
           if @start_interval.nil?
             invalid_properties.push('invalid value for "start_interval", start_interval cannot be nil.')
           end
 
-          if @end_interval.nil?
-            invalid_properties.push('invalid value for "end_interval", end_interval cannot be nil.')
+          if @data.nil?
+            invalid_properties.push('invalid value for "data", data cannot be nil.')
           end
 
           if @interval.nil?
             invalid_properties.push('invalid value for "interval", interval cannot be nil.')
+          end
+
+          if @end_interval.nil?
+            invalid_properties.push('invalid value for "end_interval", end_interval cannot be nil.')
           end
 
           invalid_properties
@@ -162,25 +162,15 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @data.nil?
+          period_validator = EnumAttributeValidator.new('String', ["ONE_MINUTE", "FIVE_MINUTES", "TEN_MINUTES", "FIFTEEN_MINUTES", "THIRTY_MINUTES", "ONE_HOUR", "FOUR_HOURS", "TWELVE_HOURS", "ONE_DAY", "ONE_WEEK"])
+          return false unless period_validator.valid?(@period)
           return false if @start_interval.nil?
-          return false if @end_interval.nil?
+          return false if @data.nil?
           return false if @interval.nil?
           interval_validator = EnumAttributeValidator.new('String', ["ONE_MINUTE", "FIVE_MINUTES", "TEN_MINUTES", "FIFTEEN_MINUTES", "THIRTY_MINUTES", "ONE_HOUR", "FOUR_HOURS", "TWELVE_HOURS", "ONE_DAY", "ONE_WEEK"])
           return false unless interval_validator.valid?(@interval)
-          period_validator = EnumAttributeValidator.new('String', ["ONE_MINUTE", "FIVE_MINUTES", "TEN_MINUTES", "FIFTEEN_MINUTES", "THIRTY_MINUTES", "ONE_HOUR", "FOUR_HOURS", "TWELVE_HOURS", "ONE_DAY", "ONE_WEEK"])
-          return false unless period_validator.valid?(@period)
+          return false if @end_interval.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] interval Object to be assigned
-        def interval=(interval)
-          validator = EnumAttributeValidator.new('String', ["ONE_MINUTE", "FIVE_MINUTES", "TEN_MINUTES", "FIFTEEN_MINUTES", "THIRTY_MINUTES", "ONE_HOUR", "FOUR_HOURS", "TWELVE_HOURS", "ONE_DAY", "ONE_WEEK"])
-          unless validator.valid?(interval)
-            fail ArgumentError, "invalid value for \"interval\", must be one of #{validator.allowable_values}."
-          end
-          @interval = interval
         end
 
         # Custom attribute writer method checking allowed values (enum).
@@ -193,18 +183,28 @@ module Hubspot
           @period = period
         end
 
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] interval Object to be assigned
+        def interval=(interval)
+          validator = EnumAttributeValidator.new('String', ["ONE_MINUTE", "FIVE_MINUTES", "TEN_MINUTES", "FIFTEEN_MINUTES", "THIRTY_MINUTES", "ONE_HOUR", "FOUR_HOURS", "TWELVE_HOURS", "ONE_DAY", "ONE_WEEK"])
+          unless validator.valid?(interval)
+            fail ArgumentError, "invalid value for \"interval\", must be one of #{validator.allowable_values}."
+          end
+          @interval = interval
+        end
+
         # Checks equality by comparing each attribute.
         # @param [Object] Object to be compared
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              path == o.path &&
+              period == o.period &&
+              start_interval == o.start_interval &&
               data == o.data &&
               domain == o.domain &&
-              path == o.path &&
-              start_interval == o.start_interval &&
-              end_interval == o.end_interval &&
               interval == o.interval &&
-              period == o.period
+              end_interval == o.end_interval
         end
 
         # @see the `==` method
@@ -216,7 +216,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [data, domain, path, start_interval, end_interval, interval, period].hash
+          [path, period, start_interval, data, domain, interval, end_interval].hash
         end
 
         # Builds the object from hash

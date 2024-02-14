@@ -1,5 +1,5 @@
 =begin
-#URL redirects
+#CMS Url Redirects
 
 #URL redirect operations
 
@@ -17,29 +17,29 @@ module Hubspot
   module Cms
     module UrlRedirects
       class ErrorDetail
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
-
-        # The name of the field or parameter in which the error was found.
-        attr_accessor :_in
+        # A specific category that contains more specific detail about the error
+        attr_accessor :sub_category
 
         # The status code associated with the error detail
         attr_accessor :code
 
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
+        # The name of the field or parameter in which the error was found.
+        attr_accessor :_in
 
         # Context about the error condition
         attr_accessor :context
 
+        # A human readable message describing the error along with remediation steps where appropriate
+        attr_accessor :message
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'message' => :'message',
-            :'_in' => :'in',
-            :'code' => :'code',
             :'sub_category' => :'subCategory',
-            :'context' => :'context'
+            :'code' => :'code',
+            :'_in' => :'in',
+            :'context' => :'context',
+            :'message' => :'message'
           }
         end
 
@@ -51,11 +51,11 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'message' => :'String',
-            :'_in' => :'String',
-            :'code' => :'String',
             :'sub_category' => :'String',
-            :'context' => :'Hash<String, Array<String>>'
+            :'code' => :'String',
+            :'_in' => :'String',
+            :'context' => :'Hash<String, Array<String>>',
+            :'message' => :'String'
           }
         end
 
@@ -80,26 +80,26 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
-          end
-
-          if attributes.key?(:'_in')
-            self._in = attributes[:'_in']
+          if attributes.key?(:'sub_category')
+            self.sub_category = attributes[:'sub_category']
           end
 
           if attributes.key?(:'code')
             self.code = attributes[:'code']
           end
 
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
+          if attributes.key?(:'_in')
+            self._in = attributes[:'_in']
           end
 
           if attributes.key?(:'context')
             if (value = attributes[:'context']).is_a?(Hash)
               self.context = value
             end
+          end
+
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
           end
         end
 
@@ -126,11 +126,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              message == o.message &&
-              _in == o._in &&
-              code == o.code &&
               sub_category == o.sub_category &&
-              context == o.context
+              code == o.code &&
+              _in == o._in &&
+              context == o.context &&
+              message == o.message
         end
 
         # @see the `==` method
@@ -142,7 +142,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [message, _in, code, sub_category, context].hash
+          [sub_category, code, _in, context, message].hash
         end
 
         # Builds the object from hash

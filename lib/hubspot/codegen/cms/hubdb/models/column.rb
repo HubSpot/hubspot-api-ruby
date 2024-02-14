@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,16 +17,27 @@ module Hubspot
   module Cms
     module Hubdb
       class Column
-        # Name of the column
-        attr_accessor :name
+        # Foreign table id referenced
+        attr_accessor :foreign_table_id
+
+        attr_accessor :description
 
         # Label of the column
         attr_accessor :label
 
-        # Column Id
-        attr_accessor :id
+        # Type of the column
+        attr_accessor :type
+
+        # Number of options available
+        attr_accessor :option_count
+
+        # Foreign Ids
+        attr_accessor :foreign_ids
 
         attr_accessor :deleted
+
+        # Name of the column
+        attr_accessor :name
 
         # Options to choose for select and multi-select columns
         attr_accessor :options
@@ -34,28 +45,17 @@ module Hubspot
         # Column width for HubDB UI
         attr_accessor :width
 
-        # Foreign table id referenced
-        attr_accessor :foreign_table_id
-
-        # Foreign Column id
-        attr_accessor :foreign_column_id
-
-        attr_accessor :description
-
-        # Foreign Ids
-        attr_accessor :foreign_ids
-
-        # Type of the column
-        attr_accessor :type
-
-        # Foreign ids by name
-        attr_accessor :foreign_ids_by_name
+        # Column Id
+        attr_accessor :id
 
         # Foreign ids
         attr_accessor :foreign_ids_by_id
 
-        # Number of options available
-        attr_accessor :option_count
+        # Foreign Column id
+        attr_accessor :foreign_column_id
+
+        # Foreign ids by name
+        attr_accessor :foreign_ids_by_name
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -82,20 +82,20 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
+            :'foreign_table_id' => :'foreignTableId',
+            :'description' => :'description',
             :'label' => :'label',
-            :'id' => :'id',
+            :'type' => :'type',
+            :'option_count' => :'optionCount',
+            :'foreign_ids' => :'foreignIds',
             :'deleted' => :'deleted',
+            :'name' => :'name',
             :'options' => :'options',
             :'width' => :'width',
-            :'foreign_table_id' => :'foreignTableId',
-            :'foreign_column_id' => :'foreignColumnId',
-            :'description' => :'description',
-            :'foreign_ids' => :'foreignIds',
-            :'type' => :'type',
-            :'foreign_ids_by_name' => :'foreignIdsByName',
+            :'id' => :'id',
             :'foreign_ids_by_id' => :'foreignIdsById',
-            :'option_count' => :'optionCount'
+            :'foreign_column_id' => :'foreignColumnId',
+            :'foreign_ids_by_name' => :'foreignIdsByName'
           }
         end
 
@@ -107,20 +107,20 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
+            :'foreign_table_id' => :'Integer',
+            :'description' => :'String',
             :'label' => :'String',
-            :'id' => :'String',
+            :'type' => :'String',
+            :'option_count' => :'Integer',
+            :'foreign_ids' => :'Array<ForeignId>',
             :'deleted' => :'Boolean',
+            :'name' => :'String',
             :'options' => :'Array<Option>',
             :'width' => :'Integer',
-            :'foreign_table_id' => :'Integer',
-            :'foreign_column_id' => :'Integer',
-            :'description' => :'String',
-            :'foreign_ids' => :'Array<ForeignId>',
-            :'type' => :'String',
-            :'foreign_ids_by_name' => :'Hash<String, ForeignId>',
+            :'id' => :'String',
             :'foreign_ids_by_id' => :'Hash<String, ForeignId>',
-            :'option_count' => :'Integer'
+            :'foreign_column_id' => :'Integer',
+            :'foreign_ids_by_name' => :'Hash<String, ForeignId>'
           }
         end
 
@@ -145,20 +145,38 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'foreign_table_id')
+            self.foreign_table_id = attributes[:'foreign_table_id']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
           end
 
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          end
+
+          if attributes.key?(:'option_count')
+            self.option_count = attributes[:'option_count']
+          end
+
+          if attributes.key?(:'foreign_ids')
+            if (value = attributes[:'foreign_ids']).is_a?(Array)
+              self.foreign_ids = value
+            end
           end
 
           if attributes.key?(:'deleted')
             self.deleted = attributes[:'deleted']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'options')
@@ -171,32 +189,8 @@ module Hubspot
             self.width = attributes[:'width']
           end
 
-          if attributes.key?(:'foreign_table_id')
-            self.foreign_table_id = attributes[:'foreign_table_id']
-          end
-
-          if attributes.key?(:'foreign_column_id')
-            self.foreign_column_id = attributes[:'foreign_column_id']
-          end
-
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
-          end
-
-          if attributes.key?(:'foreign_ids')
-            if (value = attributes[:'foreign_ids']).is_a?(Array)
-              self.foreign_ids = value
-            end
-          end
-
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
-          end
-
-          if attributes.key?(:'foreign_ids_by_name')
-            if (value = attributes[:'foreign_ids_by_name']).is_a?(Hash)
-              self.foreign_ids_by_name = value
-            end
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
 
           if attributes.key?(:'foreign_ids_by_id')
@@ -205,8 +199,14 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'option_count')
-            self.option_count = attributes[:'option_count']
+          if attributes.key?(:'foreign_column_id')
+            self.foreign_column_id = attributes[:'foreign_column_id']
+          end
+
+          if attributes.key?(:'foreign_ids_by_name')
+            if (value = attributes[:'foreign_ids_by_name']).is_a?(Hash)
+              self.foreign_ids_by_name = value
+            end
           end
         end
 
@@ -214,10 +214,6 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
@@ -226,17 +222,21 @@ module Hubspot
             invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
           return false if @label.nil?
           return false if @type.nil?
           type_validator = EnumAttributeValidator.new('String', ["NULL", "TEXT", "NUMBER", "URL", "IMAGE", "SELECT", "MULTISELECT", "BOOLEAN", "LOCATION", "DATE", "DATETIME", "CURRENCY", "RICHTEXT", "FOREIGN_ID", "VIDEO", "CTA", "FILE"])
           return false unless type_validator.valid?(@type)
+          return false if @name.nil?
           true
         end
 
@@ -255,20 +255,20 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
+              foreign_table_id == o.foreign_table_id &&
+              description == o.description &&
               label == o.label &&
-              id == o.id &&
+              type == o.type &&
+              option_count == o.option_count &&
+              foreign_ids == o.foreign_ids &&
               deleted == o.deleted &&
+              name == o.name &&
               options == o.options &&
               width == o.width &&
-              foreign_table_id == o.foreign_table_id &&
-              foreign_column_id == o.foreign_column_id &&
-              description == o.description &&
-              foreign_ids == o.foreign_ids &&
-              type == o.type &&
-              foreign_ids_by_name == o.foreign_ids_by_name &&
+              id == o.id &&
               foreign_ids_by_id == o.foreign_ids_by_id &&
-              option_count == o.option_count
+              foreign_column_id == o.foreign_column_id &&
+              foreign_ids_by_name == o.foreign_ids_by_name
         end
 
         # @see the `==` method
@@ -280,7 +280,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, id, deleted, options, width, foreign_table_id, foreign_column_id, description, foreign_ids, type, foreign_ids_by_name, foreign_ids_by_id, option_count].hash
+          [foreign_table_id, description, label, type, option_count, foreign_ids, deleted, name, options, width, id, foreign_ids_by_id, foreign_column_id, foreign_ids_by_name].hash
         end
 
         # Builds the object from hash

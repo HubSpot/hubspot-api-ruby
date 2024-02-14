@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,40 +17,40 @@ module Hubspot
   module Cms
     module Hubdb
       class HubDbTableRowV3
-        # The id of the table row
-        attr_accessor :id
-
-        # List of key value pairs with the column name and column value
-        attr_accessor :values
-
         # Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
         attr_accessor :path
-
-        # Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
-        attr_accessor :name
-
-        # Specifies the value for the column child table id
-        attr_accessor :child_table_id
 
         # Timestamp at which the row is created
         attr_accessor :created_at
 
-        # Timestamp at which the row is updated last time
-        attr_accessor :updated_at
+        # Specifies the value for the column child table id
+        attr_accessor :child_table_id
 
         attr_accessor :published_at
+
+        # List of key value pairs with the column name and column value
+        attr_accessor :values
+
+        # Specifies the value for `hs_name` column, which will be used as title in the dynamic pages
+        attr_accessor :name
+
+        # The id of the table row
+        attr_accessor :id
+
+        # Timestamp at which the row is updated last time
+        attr_accessor :updated_at
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'values' => :'values',
             :'path' => :'path',
-            :'name' => :'name',
-            :'child_table_id' => :'childTableId',
             :'created_at' => :'createdAt',
-            :'updated_at' => :'updatedAt',
-            :'published_at' => :'publishedAt'
+            :'child_table_id' => :'childTableId',
+            :'published_at' => :'publishedAt',
+            :'values' => :'values',
+            :'name' => :'name',
+            :'id' => :'id',
+            :'updated_at' => :'updatedAt'
           }
         end
 
@@ -62,14 +62,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'values' => :'Hash<String, Object>',
             :'path' => :'String',
-            :'name' => :'String',
-            :'child_table_id' => :'String',
             :'created_at' => :'Time',
-            :'updated_at' => :'Time',
-            :'published_at' => :'Time'
+            :'child_table_id' => :'String',
+            :'published_at' => :'Time',
+            :'values' => :'Hash<String, Object>',
+            :'name' => :'String',
+            :'id' => :'String',
+            :'updated_at' => :'Time'
           }
         end
 
@@ -94,8 +94,20 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'path')
+            self.path = attributes[:'path']
+          end
+
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
+          end
+
+          if attributes.key?(:'child_table_id')
+            self.child_table_id = attributes[:'child_table_id']
+          end
+
+          if attributes.key?(:'published_at')
+            self.published_at = attributes[:'published_at']
           end
 
           if attributes.key?(:'values')
@@ -104,28 +116,16 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'path')
-            self.path = attributes[:'path']
-          end
-
           if attributes.key?(:'name')
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'child_table_id')
-            self.child_table_id = attributes[:'child_table_id']
-          end
-
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
 
           if attributes.key?(:'updated_at')
             self.updated_at = attributes[:'updated_at']
-          end
-
-          if attributes.key?(:'published_at')
-            self.published_at = attributes[:'published_at']
           end
         end
 
@@ -152,14 +152,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              values == o.values &&
               path == o.path &&
-              name == o.name &&
-              child_table_id == o.child_table_id &&
               created_at == o.created_at &&
-              updated_at == o.updated_at &&
-              published_at == o.published_at
+              child_table_id == o.child_table_id &&
+              published_at == o.published_at &&
+              values == o.values &&
+              name == o.name &&
+              id == o.id &&
+              updated_at == o.updated_at
         end
 
         # @see the `==` method
@@ -171,7 +171,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, values, path, name, child_table_id, created_at, updated_at, published_at].hash
+          [path, created_at, child_table_id, published_at, values, name, id, updated_at].hash
         end
 
         # Builds the object from hash

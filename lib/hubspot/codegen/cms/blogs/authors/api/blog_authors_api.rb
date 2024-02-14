@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Authors
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -160,17 +160,17 @@ module Hubspot
           # Attach a Blog Author to a multi-language group.
           # @param attach_to_lang_primary_request_v_next [AttachToLangPrimaryRequestVNext] The JSON representation of the AttachToLangPrimaryRequest object.
           # @param [Hash] opts the optional parameters
-          # @return [Error]
+          # @return [nil]
           def attach_to_lang_group(attach_to_lang_primary_request_v_next, opts = {})
-            data, _status_code, _headers = attach_to_lang_group_with_http_info(attach_to_lang_primary_request_v_next, opts)
-            data
+            attach_to_lang_group_with_http_info(attach_to_lang_primary_request_v_next, opts)
+            nil
           end
 
           # Attach a Blog Author to a multi-language group
           # Attach a Blog Author to a multi-language group.
           # @param attach_to_lang_primary_request_v_next [AttachToLangPrimaryRequestVNext] The JSON representation of the AttachToLangPrimaryRequest object.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
           def attach_to_lang_group_with_http_info(attach_to_lang_primary_request_v_next, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BlogAuthorsApi.attach_to_lang_group ...'
@@ -202,7 +202,7 @@ module Hubspot
             post_body = opts[:debug_body] || @api_client.object_to_http_body(attach_to_lang_primary_request_v_next)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'Error'
+            return_type = opts[:debug_return_type]
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['oauth2']
@@ -432,17 +432,17 @@ module Hubspot
           # Detach a Blog Author from a multi-language group.
           # @param detach_from_lang_group_request_v_next [DetachFromLangGroupRequestVNext] The JSON representation of the DetachFromLangGroupRequest object.
           # @param [Hash] opts the optional parameters
-          # @return [Error]
+          # @return [nil]
           def detach_from_lang_group(detach_from_lang_group_request_v_next, opts = {})
-            data, _status_code, _headers = detach_from_lang_group_with_http_info(detach_from_lang_group_request_v_next, opts)
-            data
+            detach_from_lang_group_with_http_info(detach_from_lang_group_request_v_next, opts)
+            nil
           end
 
           # Detach a Blog Author from a multi-language group
           # Detach a Blog Author from a multi-language group.
           # @param detach_from_lang_group_request_v_next [DetachFromLangGroupRequestVNext] The JSON representation of the DetachFromLangGroupRequest object.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
           def detach_from_lang_group_with_http_info(detach_from_lang_group_request_v_next, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BlogAuthorsApi.detach_from_lang_group ...'
@@ -474,7 +474,7 @@ module Hubspot
             post_body = opts[:debug_body] || @api_client.object_to_http_body(detach_from_lang_group_request_v_next)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'Error'
+            return_type = opts[:debug_return_type]
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['oauth2']
@@ -501,6 +501,7 @@ module Hubspot
           # @param object_id [String] The Blog Author id.
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+          # @option opts [String] :property 
           # @return [BlogAuthor]
           def get_by_id(object_id, opts = {})
             data, _status_code, _headers = get_by_id_with_http_info(object_id, opts)
@@ -512,6 +513,7 @@ module Hubspot
           # @param object_id [String] The Blog Author id.
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+          # @option opts [String] :property 
           # @return [Array<(BlogAuthor, Integer, Hash)>] BlogAuthor data, response status code and response headers
           def get_by_id_with_http_info(object_id, opts = {})
             if @api_client.config.debugging
@@ -527,6 +529,7 @@ module Hubspot
             # query parameters
             query_params = opts[:query_params] || {}
             query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+            query_params[:'property'] = opts[:'property'] if !opts[:'property'].nil?
 
             # header parameters
             header_params = opts[:header_params] || {}
@@ -575,6 +578,7 @@ module Hubspot
           # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
           # @option opts [Integer] :limit The maximum number of results to return. Default is 100.
           # @option opts [Boolean] :archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+          # @option opts [String] :property 
           # @return [CollectionResponseWithTotalBlogAuthorForwardPaging]
           def get_page(opts = {})
             data, _status_code, _headers = get_page_with_http_info(opts)
@@ -594,6 +598,7 @@ module Hubspot
           # @option opts [String] :after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
           # @option opts [Integer] :limit The maximum number of results to return. Default is 100.
           # @option opts [Boolean] :archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+          # @option opts [String] :property 
           # @return [Array<(CollectionResponseWithTotalBlogAuthorForwardPaging, Integer, Hash)>] CollectionResponseWithTotalBlogAuthorForwardPaging data, response status code and response headers
           def get_page_with_http_info(opts = {})
             if @api_client.config.debugging
@@ -614,6 +619,7 @@ module Hubspot
             query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
             query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
             query_params[:'archived'] = opts[:'archived'] if !opts[:'archived'].nil?
+            query_params[:'property'] = opts[:'property'] if !opts[:'property'].nil?
 
             # header parameters
             header_params = opts[:header_params] || {}
@@ -940,17 +946,17 @@ module Hubspot
           # Explicitly set new languages for each Blog Author in a multi-language group.
           # @param update_languages_request_v_next [UpdateLanguagesRequestVNext] The JSON representation of the UpdateLanguagesRequest object.
           # @param [Hash] opts the optional parameters
-          # @return [Error]
+          # @return [nil]
           def update_langs(update_languages_request_v_next, opts = {})
-            data, _status_code, _headers = update_langs_with_http_info(update_languages_request_v_next, opts)
-            data
+            update_langs_with_http_info(update_languages_request_v_next, opts)
+            nil
           end
 
           # Update languages of multi-language group
           # Explicitly set new languages for each Blog Author in a multi-language group.
           # @param update_languages_request_v_next [UpdateLanguagesRequestVNext] The JSON representation of the UpdateLanguagesRequest object.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
+          # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
           def update_langs_with_http_info(update_languages_request_v_next, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BlogAuthorsApi.update_langs ...'
@@ -982,7 +988,7 @@ module Hubspot
             post_body = opts[:debug_body] || @api_client.object_to_http_body(update_languages_request_v_next)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'Error'
+            return_type = opts[:debug_return_type]
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['oauth2']

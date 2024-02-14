@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Tags
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,15 +19,17 @@ module Hubspot
       module Tags
         # Model definition for a next page.
         class NextPage
-          attr_accessor :after
-
+          # 
           attr_accessor :link
+
+          # 
+          attr_accessor :after
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'after' => :'after',
-              :'link' => :'link'
+              :'link' => :'link',
+              :'after' => :'after'
             }
           end
 
@@ -39,8 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'after' => :'String',
-              :'link' => :'String'
+              :'link' => :'String',
+              :'after' => :'String'
             }
           end
 
@@ -65,12 +67,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'after')
-              self.after = attributes[:'after']
-            end
-
             if attributes.key?(:'link')
               self.link = attributes[:'link']
+            end
+
+            if attributes.key?(:'after')
+              self.after = attributes[:'after']
             end
           end
 
@@ -97,8 +99,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                after == o.after &&
-                link == o.link
+                link == o.link &&
+                after == o.after
           end
 
           # @see the `==` method
@@ -110,7 +112,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [after, link].hash
+            [link, after].hash
           end
 
           # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#CMS Audit Logs
+#Cms Content Audit
 
 #Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
 
@@ -24,14 +24,14 @@ module Hubspot
         # Query audit logs
         # Returns audit logs based on filters.
         # @param [Hash] opts the optional parameters
-        # @option opts [Array<String>] :object_id Comma separated list of object ids to filter by.
         # @option opts [Array<String>] :user_id Comma separated list of user ids to filter by.
+        # @option opts [Array<String>] :event_type Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+        # @option opts [Array<String>] :object_type Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+        # @option opts [Array<String>] :object_id Comma separated list of object ids to filter by.
         # @option opts [String] :after Timestamp after which audit logs will be returned
         # @option opts [String] :before Timestamp before which audit logs will be returned
-        # @option opts [Array<String>] :sort The sort direction for the audit logs. (Can only sort by timestamp).
-        # @option opts [Array<String>] :event_type Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
         # @option opts [Integer] :limit The number of logs to return.
-        # @option opts [Array<String>] :object_type Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+        # @option opts [Array<String>] :sort The sort direction for the audit logs. (Can only sort by timestamp).
         # @return [CollectionResponsePublicAuditLog]
         def get_page(opts = {})
           data, _status_code, _headers = get_page_with_http_info(opts)
@@ -41,14 +41,14 @@ module Hubspot
         # Query audit logs
         # Returns audit logs based on filters.
         # @param [Hash] opts the optional parameters
-        # @option opts [Array<String>] :object_id Comma separated list of object ids to filter by.
         # @option opts [Array<String>] :user_id Comma separated list of user ids to filter by.
+        # @option opts [Array<String>] :event_type Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+        # @option opts [Array<String>] :object_type Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+        # @option opts [Array<String>] :object_id Comma separated list of object ids to filter by.
         # @option opts [String] :after Timestamp after which audit logs will be returned
         # @option opts [String] :before Timestamp before which audit logs will be returned
-        # @option opts [Array<String>] :sort The sort direction for the audit logs. (Can only sort by timestamp).
-        # @option opts [Array<String>] :event_type Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
         # @option opts [Integer] :limit The number of logs to return.
-        # @option opts [Array<String>] :object_type Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+        # @option opts [Array<String>] :sort The sort direction for the audit logs. (Can only sort by timestamp).
         # @return [Array<(CollectionResponsePublicAuditLog, Integer, Hash)>] CollectionResponsePublicAuditLog data, response status code and response headers
         def get_page_with_http_info(opts = {})
           if @api_client.config.debugging
@@ -59,14 +59,14 @@ module Hubspot
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'objectId'] = @api_client.build_collection_param(opts[:'object_id'], :multi) if !opts[:'object_id'].nil?
           query_params[:'userId'] = @api_client.build_collection_param(opts[:'user_id'], :multi) if !opts[:'user_id'].nil?
+          query_params[:'eventType'] = @api_client.build_collection_param(opts[:'event_type'], :multi) if !opts[:'event_type'].nil?
+          query_params[:'objectType'] = @api_client.build_collection_param(opts[:'object_type'], :multi) if !opts[:'object_type'].nil?
+          query_params[:'objectId'] = @api_client.build_collection_param(opts[:'object_id'], :multi) if !opts[:'object_id'].nil?
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
-          query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
-          query_params[:'eventType'] = @api_client.build_collection_param(opts[:'event_type'], :multi) if !opts[:'event_type'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-          query_params[:'objectType'] = @api_client.build_collection_param(opts[:'object_type'], :multi) if !opts[:'object_type'].nil?
+          query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -83,7 +83,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponsePublicAuditLog'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"AuditLogsApi.get_page",
