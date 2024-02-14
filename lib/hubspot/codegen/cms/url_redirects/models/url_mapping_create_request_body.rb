@@ -1,5 +1,5 @@
 =begin
-#URL redirects
+#CMS Url Redirects
 
 #URL redirect operations
 
@@ -17,39 +17,39 @@ module Hubspot
   module Cms
     module UrlRedirects
       class UrlMappingCreateRequestBody
-        attr_accessor :precedence
-
-        attr_accessor :is_only_after_not_found
-
-        attr_accessor :is_match_full_url
+        attr_accessor :is_trailing_slash_optional
 
         attr_accessor :is_match_query_string
 
-        attr_accessor :is_pattern
-
-        attr_accessor :is_trailing_slash_optional
-
-        attr_accessor :is_protocol_agnostic
+        attr_accessor :redirect_style
 
         attr_accessor :route_prefix
 
+        attr_accessor :is_match_full_url
+
+        attr_accessor :is_protocol_agnostic
+
         attr_accessor :destination
 
-        attr_accessor :redirect_style
+        attr_accessor :is_only_after_not_found
+
+        attr_accessor :is_pattern
+
+        attr_accessor :precedence
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'precedence' => :'precedence',
-            :'is_only_after_not_found' => :'isOnlyAfterNotFound',
-            :'is_match_full_url' => :'isMatchFullUrl',
-            :'is_match_query_string' => :'isMatchQueryString',
-            :'is_pattern' => :'isPattern',
             :'is_trailing_slash_optional' => :'isTrailingSlashOptional',
-            :'is_protocol_agnostic' => :'isProtocolAgnostic',
+            :'is_match_query_string' => :'isMatchQueryString',
+            :'redirect_style' => :'redirectStyle',
             :'route_prefix' => :'routePrefix',
+            :'is_match_full_url' => :'isMatchFullUrl',
+            :'is_protocol_agnostic' => :'isProtocolAgnostic',
             :'destination' => :'destination',
-            :'redirect_style' => :'redirectStyle'
+            :'is_only_after_not_found' => :'isOnlyAfterNotFound',
+            :'is_pattern' => :'isPattern',
+            :'precedence' => :'precedence'
           }
         end
 
@@ -61,16 +61,16 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'precedence' => :'Integer',
-            :'is_only_after_not_found' => :'Boolean',
-            :'is_match_full_url' => :'Boolean',
-            :'is_match_query_string' => :'Boolean',
-            :'is_pattern' => :'Boolean',
             :'is_trailing_slash_optional' => :'Boolean',
-            :'is_protocol_agnostic' => :'Boolean',
+            :'is_match_query_string' => :'Boolean',
+            :'redirect_style' => :'Integer',
             :'route_prefix' => :'String',
+            :'is_match_full_url' => :'Boolean',
+            :'is_protocol_agnostic' => :'Boolean',
             :'destination' => :'String',
-            :'redirect_style' => :'Integer'
+            :'is_only_after_not_found' => :'Boolean',
+            :'is_pattern' => :'Boolean',
+            :'precedence' => :'Integer'
           }
         end
 
@@ -95,44 +95,44 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'precedence')
-            self.precedence = attributes[:'precedence']
-          end
-
-          if attributes.key?(:'is_only_after_not_found')
-            self.is_only_after_not_found = attributes[:'is_only_after_not_found']
-          end
-
-          if attributes.key?(:'is_match_full_url')
-            self.is_match_full_url = attributes[:'is_match_full_url']
+          if attributes.key?(:'is_trailing_slash_optional')
+            self.is_trailing_slash_optional = attributes[:'is_trailing_slash_optional']
           end
 
           if attributes.key?(:'is_match_query_string')
             self.is_match_query_string = attributes[:'is_match_query_string']
           end
 
-          if attributes.key?(:'is_pattern')
-            self.is_pattern = attributes[:'is_pattern']
-          end
-
-          if attributes.key?(:'is_trailing_slash_optional')
-            self.is_trailing_slash_optional = attributes[:'is_trailing_slash_optional']
-          end
-
-          if attributes.key?(:'is_protocol_agnostic')
-            self.is_protocol_agnostic = attributes[:'is_protocol_agnostic']
+          if attributes.key?(:'redirect_style')
+            self.redirect_style = attributes[:'redirect_style']
           end
 
           if attributes.key?(:'route_prefix')
             self.route_prefix = attributes[:'route_prefix']
           end
 
+          if attributes.key?(:'is_match_full_url')
+            self.is_match_full_url = attributes[:'is_match_full_url']
+          end
+
+          if attributes.key?(:'is_protocol_agnostic')
+            self.is_protocol_agnostic = attributes[:'is_protocol_agnostic']
+          end
+
           if attributes.key?(:'destination')
             self.destination = attributes[:'destination']
           end
 
-          if attributes.key?(:'redirect_style')
-            self.redirect_style = attributes[:'redirect_style']
+          if attributes.key?(:'is_only_after_not_found')
+            self.is_only_after_not_found = attributes[:'is_only_after_not_found']
+          end
+
+          if attributes.key?(:'is_pattern')
+            self.is_pattern = attributes[:'is_pattern']
+          end
+
+          if attributes.key?(:'precedence')
+            self.precedence = attributes[:'precedence']
           end
         end
 
@@ -140,6 +140,10 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @redirect_style.nil?
+            invalid_properties.push('invalid value for "redirect_style", redirect_style cannot be nil.')
+          end
+
           if @route_prefix.nil?
             invalid_properties.push('invalid value for "route_prefix", route_prefix cannot be nil.')
           end
@@ -148,19 +152,15 @@ module Hubspot
             invalid_properties.push('invalid value for "destination", destination cannot be nil.')
           end
 
-          if @redirect_style.nil?
-            invalid_properties.push('invalid value for "redirect_style", redirect_style cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @redirect_style.nil?
           return false if @route_prefix.nil?
           return false if @destination.nil?
-          return false if @redirect_style.nil?
           true
         end
 
@@ -169,16 +169,16 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              precedence == o.precedence &&
-              is_only_after_not_found == o.is_only_after_not_found &&
-              is_match_full_url == o.is_match_full_url &&
-              is_match_query_string == o.is_match_query_string &&
-              is_pattern == o.is_pattern &&
               is_trailing_slash_optional == o.is_trailing_slash_optional &&
-              is_protocol_agnostic == o.is_protocol_agnostic &&
+              is_match_query_string == o.is_match_query_string &&
+              redirect_style == o.redirect_style &&
               route_prefix == o.route_prefix &&
+              is_match_full_url == o.is_match_full_url &&
+              is_protocol_agnostic == o.is_protocol_agnostic &&
               destination == o.destination &&
-              redirect_style == o.redirect_style
+              is_only_after_not_found == o.is_only_after_not_found &&
+              is_pattern == o.is_pattern &&
+              precedence == o.precedence
         end
 
         # @see the `==` method
@@ -190,7 +190,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [precedence, is_only_after_not_found, is_match_full_url, is_match_query_string, is_pattern, is_trailing_slash_optional, is_protocol_agnostic, route_prefix, destination, redirect_style].hash
+          [is_trailing_slash_optional, is_match_query_string, redirect_style, route_prefix, is_match_full_url, is_protocol_agnostic, destination, is_only_after_not_found, is_pattern, precedence].hash
         end
 
         # Builds the object from hash

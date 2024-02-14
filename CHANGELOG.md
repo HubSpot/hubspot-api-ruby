@@ -25,6 +25,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `automation.actions.functions_api.get_page(): CollectionResponseActionFunctionIdentifierNoPaging => CollectionResponsePublicActionFunctionIdentifierNoPaging`
 - `automation.actions.revisions_api.get_by_id(): ActionRevision => PublicActionRevision`
 - `automation.actions.revisions_api.get_page(): CollectionResponseActionRevisionForwardPaging => CollectionResponsePublicActionRevisionForwardPaging`
+- `cms.blogs.authors.blog_authors_api.attach_to_lang_group(): Error` => `nil`
+- `cms.blogs.authors.blog_authors_api.detach_from_lang_group(): Error` => `nil`
+- `cms.blogs.authors.blog_authors_api.update_langs(): Error` => `nil`
+- `cms.blogs.blog_posts.blog_posts_api.attach_to_lang_group(): Error` => `nil`
+- `cms.blogs.blog_posts.blog_posts_api.detach_from_lang_group(): Error` => `nil`
+- `cms.blogs.blog_posts.blog_posts_api.update_langs(): Error` => `nil`
+- `cms.blogs.tags.blog_tags_api.attach_to_lang_group(): Error` => `nil`
+- `cms.blogs.tags.blog_tags_api.detach_from_lang_group(): Error` => `nil`
+- `cms.blogs.tags.blog_tags_api.update_langs(): Error` => `nil`
+- `cms.source_code.content_api.get()` => `cms.source_code.content_api.download()`
+- `cms.source_code.content_api.replace()` => `cms.source_code.content_api.create_or_update()`
+
+- Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`
 - Update params to `automation.actions.models.FieldTypeDefinition`:
 
 ```ruby
@@ -44,10 +57,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 
 - Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`
+- Added new param `prev` to `cms.audit_log.models.Paging`
+- Added new param `meta` to `cms.audit_log.models.PublicAuditLog`
+- Added new param `hash` to `cms.source_code.models.AssetFileMetadata`
+- Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`
+- Added new param `property` to `cms.blogs.blog_posts.blog_posts_api.get_by_id()` and `cms.blogs.blog_posts.blog_posts_api.get_page()`
+- Added new param `property` to `cms.blogs.tags.blog_tags_api.get_by_id()` and `cms.blogs.tags.blog_tags_api.get_page()`
+- Added new param `properties` to `cms.source_code.metadata_api.get()`
 - Added `automation.actions.models.OutputFieldDefinition`
+- Added `cms.audit_logs.models.PreviousPage`
 - Added `automation.actions.models.PublicExecutionTranslationRule`
 
 ## Removed `hapikey` from
+- `cms.audit_logs` Api.
+- `cms.site_search` Api.
+- `cms.url_redirects` Api.
+- `cms.source_code` Apis.
+- `cms.blogs.blog_posts` Api.
 - `communication_preferences` Apis.
 - `conversations.visitor_identification` Api.
 

@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,17 +19,17 @@ module Hubspot
       module BlogPosts
         # Request body object for cloning content.
         class ContentCloneRequestVNext
-          # ID of the object to be cloned.
-          attr_accessor :id
-
           # Name of the cloned object.
           attr_accessor :clone_name
+
+          # ID of the object to be cloned.
+          attr_accessor :id
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'clone_name' => :'cloneName'
+              :'clone_name' => :'cloneName',
+              :'id' => :'id'
             }
           end
 
@@ -41,8 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'clone_name' => :'String'
+              :'clone_name' => :'String',
+              :'id' => :'String'
             }
           end
 
@@ -67,12 +67,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
             if attributes.key?(:'clone_name')
               self.clone_name = attributes[:'clone_name']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
           end
 
@@ -99,8 +99,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                clone_name == o.clone_name
+                clone_name == o.clone_name &&
+                id == o.id
           end
 
           # @see the `==` method
@@ -112,7 +112,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, clone_name].hash
+            [clone_name, id].hash
           end
 
           # Builds the object from hash

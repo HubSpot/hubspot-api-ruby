@@ -17,20 +17,20 @@ module Hubspot
   module Cms
     module SiteSearch
       class IndexedField
+        attr_accessor :values
+
         attr_accessor :name
 
         attr_accessor :value
-
-        attr_accessor :values
 
         attr_accessor :metadata_field
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'values' => :'values',
             :'name' => :'name',
             :'value' => :'value',
-            :'values' => :'values',
             :'metadata_field' => :'metadataField'
           }
         end
@@ -43,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'values' => :'Array<Object>',
             :'name' => :'String',
             :'value' => :'Object',
-            :'values' => :'Array<Object>',
             :'metadata_field' => :'Boolean'
           }
         end
@@ -71,18 +71,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'values')
+            if (value = attributes[:'values']).is_a?(Array)
+              self.values = value
+            end
+          end
+
           if attributes.key?(:'name')
             self.name = attributes[:'name']
           end
 
           if attributes.key?(:'value')
             self.value = attributes[:'value']
-          end
-
-          if attributes.key?(:'values')
-            if (value = attributes[:'values']).is_a?(Array)
-              self.values = value
-            end
           end
 
           if attributes.key?(:'metadata_field')
@@ -94,16 +94,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @values.nil?
+            invalid_properties.push('invalid value for "values", values cannot be nil.')
+          end
+
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           if @value.nil?
             invalid_properties.push('invalid value for "value", value cannot be nil.')
-          end
-
-          if @values.nil?
-            invalid_properties.push('invalid value for "values", values cannot be nil.')
           end
 
           if @metadata_field.nil?
@@ -116,9 +116,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @values.nil?
           return false if @name.nil?
           return false if @value.nil?
-          return false if @values.nil?
           return false if @metadata_field.nil?
           true
         end
@@ -128,9 +128,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              values == o.values &&
               name == o.name &&
               value == o.value &&
-              values == o.values &&
               metadata_field == o.metadata_field
         end
 
@@ -143,7 +143,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, value, values, metadata_field].hash
+          [values, name, value, metadata_field].hash
         end
 
         # Builds the object from hash

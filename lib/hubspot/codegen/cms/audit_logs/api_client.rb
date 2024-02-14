@@ -1,5 +1,5 @@
 =begin
-#CMS Audit Logs
+#Cms Content Audit
 
 #Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
 

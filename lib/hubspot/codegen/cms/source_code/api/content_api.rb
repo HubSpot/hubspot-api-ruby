@@ -76,7 +76,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"ContentApi.archive",
@@ -158,7 +158,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'AssetFileMetadata'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"ContentApi.create",
@@ -177,80 +177,6 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Download a file
-        # Downloads the byte contents of the file at the specified path in the specified environment.
-        # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-        # @param path [String] The file system location of the file.
-        # @param [Hash] opts the optional parameters
-        # @return [Error]
-        def get(environment, path, opts = {})
-          data, _status_code, _headers = get_with_http_info(environment, path, opts)
-          data
-        end
-
-        # Download a file
-        # Downloads the byte contents of the file at the specified path in the specified environment.
-        # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-        # @param path [String] The file system location of the file.
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
-        def get_with_http_info(environment, path, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ContentApi.get ...'
-          end
-          # verify the required parameter 'environment' is set
-          if @api_client.config.client_side_validation && environment.nil?
-            fail ArgumentError, "Missing the required parameter 'environment' when calling ContentApi.get"
-          end
-          # verify the required parameter 'path' is set
-          if @api_client.config.client_side_validation && path.nil?
-            fail ArgumentError, "Missing the required parameter 'path' when calling ContentApi.get"
-          end
-          pattern = Regexp.new(/.+/)
-          if @api_client.config.client_side_validation && path !~ pattern
-            fail ArgumentError, "invalid value for 'path' when calling ContentApi.get, must conform to the pattern #{pattern}."
-          end
-
-          # resource path
-          local_var_path = '/cms/v3/source-code/{environment}/content/{path}'.sub('{' + 'environment' + '}', CGI.escape(environment.to_s)).sub('{' + 'path' + '}', CGI.escape(path.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:debug_body]
-
-          # return_type
-          return_type = opts[:debug_return_type] || 'Error'
-
-          # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
-
-          new_options = opts.merge(
-            :operation => :"ContentApi.get",
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ContentApi#get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
         # Create or update a file
         # Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
         # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
@@ -258,8 +184,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [File] :file The file to upload.
         # @return [AssetFileMetadata]
-        def replace(environment, path, opts = {})
-          data, _status_code, _headers = replace_with_http_info(environment, path, opts)
+        def create_or_update(environment, path, opts = {})
+          data, _status_code, _headers = create_or_update_with_http_info(environment, path, opts)
           data
         end
 
@@ -270,21 +196,21 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [File] :file The file to upload.
         # @return [Array<(AssetFileMetadata, Integer, Hash)>] AssetFileMetadata data, response status code and response headers
-        def replace_with_http_info(environment, path, opts = {})
+        def create_or_update_with_http_info(environment, path, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ContentApi.replace ...'
+            @api_client.config.logger.debug 'Calling API: ContentApi.create_or_update ...'
           end
           # verify the required parameter 'environment' is set
           if @api_client.config.client_side_validation && environment.nil?
-            fail ArgumentError, "Missing the required parameter 'environment' when calling ContentApi.replace"
+            fail ArgumentError, "Missing the required parameter 'environment' when calling ContentApi.create_or_update"
           end
           # verify the required parameter 'path' is set
           if @api_client.config.client_side_validation && path.nil?
-            fail ArgumentError, "Missing the required parameter 'path' when calling ContentApi.replace"
+            fail ArgumentError, "Missing the required parameter 'path' when calling ContentApi.create_or_update"
           end
           pattern = Regexp.new(/.+/)
           if @api_client.config.client_side_validation && path !~ pattern
-            fail ArgumentError, "invalid value for 'path' when calling ContentApi.replace, must conform to the pattern #{pattern}."
+            fail ArgumentError, "invalid value for 'path' when calling ContentApi.create_or_update, must conform to the pattern #{pattern}."
           end
 
           # resource path
@@ -314,10 +240,10 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'AssetFileMetadata'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"ContentApi.replace",
+            :operation => :"ContentApi.create_or_update",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -328,7 +254,81 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ContentApi#replace\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: ContentApi#create_or_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Download a file
+        # Downloads the byte contents of the file at the specified path in the specified environment.
+        # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+        # @param path [String] The file system location of the file.
+        # @param [Hash] opts the optional parameters
+        # @return [Error]
+        def download(environment, path, opts = {})
+          data, _status_code, _headers = download_with_http_info(environment, path, opts)
+          data
+        end
+
+        # Download a file
+        # Downloads the byte contents of the file at the specified path in the specified environment.
+        # @param environment [String] The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+        # @param path [String] The file system location of the file.
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
+        def download_with_http_info(environment, path, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: ContentApi.download ...'
+          end
+          # verify the required parameter 'environment' is set
+          if @api_client.config.client_side_validation && environment.nil?
+            fail ArgumentError, "Missing the required parameter 'environment' when calling ContentApi.download"
+          end
+          # verify the required parameter 'path' is set
+          if @api_client.config.client_side_validation && path.nil?
+            fail ArgumentError, "Missing the required parameter 'path' when calling ContentApi.download"
+          end
+          pattern = Regexp.new(/.+/)
+          if @api_client.config.client_side_validation && path !~ pattern
+            fail ArgumentError, "invalid value for 'path' when calling ContentApi.download, must conform to the pattern #{pattern}."
+          end
+
+          # resource path
+          local_var_path = '/cms/v3/source-code/{environment}/content/{path}'.sub('{' + 'environment' + '}', CGI.escape(environment.to_s)).sub('{' + 'path' + '}', CGI.escape(path.to_s))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:debug_body]
+
+          # return_type
+          return_type = opts[:debug_return_type] || 'Error'
+
+          # auth_names
+          auth_names = opts[:debug_auth_names] || ['oauth2']
+
+          new_options = opts.merge(
+            :operation => :"ContentApi.download",
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: ContentApi#download\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

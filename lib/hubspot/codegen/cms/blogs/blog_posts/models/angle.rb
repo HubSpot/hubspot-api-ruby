@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,37 +18,15 @@ module Hubspot
     module Blogs
       module BlogPosts
         class Angle
-          attr_accessor :value
-
           attr_accessor :units
 
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
-
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
-
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
+          attr_accessor :value
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'value' => :'value',
-              :'units' => :'units'
+              :'units' => :'units',
+              :'value' => :'value'
             }
           end
 
@@ -60,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'value' => :'Float',
-              :'units' => :'String'
+              :'units' => :'String',
+              :'value' => :'Float'
             }
           end
 
@@ -86,12 +64,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'value')
-              self.value = attributes[:'value']
-            end
-
             if attributes.key?(:'units')
               self.units = attributes[:'units']
+            end
+
+            if attributes.key?(:'value')
+              self.value = attributes[:'value']
             end
           end
 
@@ -99,12 +77,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @value.nil?
-              invalid_properties.push('invalid value for "value", value cannot be nil.')
-            end
-
             if @units.nil?
               invalid_properties.push('invalid value for "units", units cannot be nil.')
+            end
+
+            if @value.nil?
+              invalid_properties.push('invalid value for "value", value cannot be nil.')
             end
 
             invalid_properties
@@ -113,21 +91,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @value.nil?
             return false if @units.nil?
-            units_validator = EnumAttributeValidator.new('String', ["deg", "grad", "rad", "turn"])
-            return false unless units_validator.valid?(@units)
+            return false if @value.nil?
             true
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] units Object to be assigned
-          def units=(units)
-            validator = EnumAttributeValidator.new('String', ["deg", "grad", "rad", "turn"])
-            unless validator.valid?(units)
-              fail ArgumentError, "invalid value for \"units\", must be one of #{validator.allowable_values}."
-            end
-            @units = units
           end
 
           # Checks equality by comparing each attribute.
@@ -135,8 +101,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                value == o.value &&
-                units == o.units
+                units == o.units &&
+                value == o.value
           end
 
           # @see the `==` method
@@ -148,7 +114,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [value, units].hash
+            [units, value].hash
           end
 
           # Builds the object from hash

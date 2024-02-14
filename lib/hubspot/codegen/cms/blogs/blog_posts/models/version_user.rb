@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,21 +19,21 @@ module Hubspot
       module BlogPosts
         # Model definition for a version user. Contains addition information about the user who created a version.
         class VersionUser
+          # The first and last name of the User.
+          attr_accessor :full_name
+
           # The unique ID of the User.
           attr_accessor :id
 
           # The email address of the user.
           attr_accessor :email
 
-          # The first and last name of the User.
-          attr_accessor :full_name
-
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'full_name' => :'fullName',
               :'id' => :'id',
-              :'email' => :'email',
-              :'full_name' => :'fullName'
+              :'email' => :'email'
             }
           end
 
@@ -45,9 +45,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'full_name' => :'String',
               :'id' => :'String',
-              :'email' => :'String',
-              :'full_name' => :'String'
+              :'email' => :'String'
             }
           end
 
@@ -72,6 +72,10 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'full_name')
+              self.full_name = attributes[:'full_name']
+            end
+
             if attributes.key?(:'id')
               self.id = attributes[:'id']
             end
@@ -79,16 +83,16 @@ module Hubspot
             if attributes.key?(:'email')
               self.email = attributes[:'email']
             end
-
-            if attributes.key?(:'full_name')
-              self.full_name = attributes[:'full_name']
-            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @full_name.nil?
+              invalid_properties.push('invalid value for "full_name", full_name cannot be nil.')
+            end
+
             if @id.nil?
               invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
@@ -97,19 +101,15 @@ module Hubspot
               invalid_properties.push('invalid value for "email", email cannot be nil.')
             end
 
-            if @full_name.nil?
-              invalid_properties.push('invalid value for "full_name", full_name cannot be nil.')
-            end
-
             invalid_properties
           end
 
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @full_name.nil?
             return false if @id.nil?
             return false if @email.nil?
-            return false if @full_name.nil?
             true
           end
 
@@ -118,9 +118,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                full_name == o.full_name &&
                 id == o.id &&
-                email == o.email &&
-                full_name == o.full_name
+                email == o.email
           end
 
           # @see the `==` method
@@ -132,7 +132,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, email, full_name].hash
+            [full_name, id, email].hash
           end
 
           # Builds the object from hash

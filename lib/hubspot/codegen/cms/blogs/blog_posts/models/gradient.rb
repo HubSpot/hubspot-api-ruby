@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,17 +18,17 @@ module Hubspot
     module Blogs
       module BlogPosts
         class Gradient
-          attr_accessor :side_or_corner
-
           attr_accessor :angle
+
+          attr_accessor :side_or_corner
 
           attr_accessor :colors
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'side_or_corner' => :'sideOrCorner',
               :'angle' => :'angle',
+              :'side_or_corner' => :'sideOrCorner',
               :'colors' => :'colors'
             }
           end
@@ -41,8 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'side_or_corner' => :'SideOrCorner',
               :'angle' => :'Angle',
+              :'side_or_corner' => :'SideOrCorner',
               :'colors' => :'Array<ColorStop>'
             }
           end
@@ -68,12 +68,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'side_or_corner')
-              self.side_or_corner = attributes[:'side_or_corner']
-            end
-
             if attributes.key?(:'angle')
               self.angle = attributes[:'angle']
+            end
+
+            if attributes.key?(:'side_or_corner')
+              self.side_or_corner = attributes[:'side_or_corner']
             end
 
             if attributes.key?(:'colors')
@@ -87,12 +87,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @side_or_corner.nil?
-              invalid_properties.push('invalid value for "side_or_corner", side_or_corner cannot be nil.')
-            end
-
             if @angle.nil?
               invalid_properties.push('invalid value for "angle", angle cannot be nil.')
+            end
+
+            if @side_or_corner.nil?
+              invalid_properties.push('invalid value for "side_or_corner", side_or_corner cannot be nil.')
             end
 
             if @colors.nil?
@@ -105,8 +105,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @side_or_corner.nil?
             return false if @angle.nil?
+            return false if @side_or_corner.nil?
             return false if @colors.nil?
             true
           end
@@ -116,8 +116,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                side_or_corner == o.side_or_corner &&
                 angle == o.angle &&
+                side_or_corner == o.side_or_corner &&
                 colors == o.colors
           end
 
@@ -130,7 +130,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [side_or_corner, angle, colors].hash
+            [angle, side_or_corner, colors].hash
           end
 
           # Builds the object from hash

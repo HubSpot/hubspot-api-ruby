@@ -1,5 +1,5 @@
 =begin
-#CMS Audit Logs
+#Cms Content Audit
 
 #Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
 
@@ -17,14 +17,7 @@ module Hubspot
   module Cms
     module AuditLogs
       class PublicAuditLog
-        # The ID of the object.
-        attr_accessor :object_id
-
-        # The ID of the user who caused the event.
-        attr_accessor :user_id
-
-        # The timestamp at which the event occurred.
-        attr_accessor :timestamp
+        attr_accessor :meta
 
         # The internal name of the object in HubSpot.
         attr_accessor :object_name
@@ -35,8 +28,17 @@ module Hubspot
         # The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
         attr_accessor :event
 
+        # The ID of the user who caused the event.
+        attr_accessor :user_id
+
+        # The ID of the object.
+        attr_accessor :object_id
+
         # The type of the object (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
         attr_accessor :object_type
+
+        # The timestamp at which the event occurred.
+        attr_accessor :timestamp
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -63,13 +65,14 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'object_id' => :'objectId',
-            :'user_id' => :'userId',
-            :'timestamp' => :'timestamp',
+            :'meta' => :'meta',
             :'object_name' => :'objectName',
             :'full_name' => :'fullName',
             :'event' => :'event',
-            :'object_type' => :'objectType'
+            :'user_id' => :'userId',
+            :'object_id' => :'objectId',
+            :'object_type' => :'objectType',
+            :'timestamp' => :'timestamp'
           }
         end
 
@@ -81,13 +84,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'object_id' => :'String',
-            :'user_id' => :'String',
-            :'timestamp' => :'Time',
+            :'meta' => :'Object',
             :'object_name' => :'String',
             :'full_name' => :'String',
             :'event' => :'String',
-            :'object_type' => :'String'
+            :'user_id' => :'String',
+            :'object_id' => :'String',
+            :'object_type' => :'String',
+            :'timestamp' => :'Time'
           }
         end
 
@@ -112,16 +116,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'object_id')
-            self.object_id = attributes[:'object_id']
-          end
-
-          if attributes.key?(:'user_id')
-            self.user_id = attributes[:'user_id']
-          end
-
-          if attributes.key?(:'timestamp')
-            self.timestamp = attributes[:'timestamp']
+          if attributes.key?(:'meta')
+            self.meta = attributes[:'meta']
           end
 
           if attributes.key?(:'object_name')
@@ -136,8 +132,20 @@ module Hubspot
             self.event = attributes[:'event']
           end
 
+          if attributes.key?(:'user_id')
+            self.user_id = attributes[:'user_id']
+          end
+
+          if attributes.key?(:'object_id')
+            self.object_id = attributes[:'object_id']
+          end
+
           if attributes.key?(:'object_type')
             self.object_type = attributes[:'object_type']
+          end
+
+          if attributes.key?(:'timestamp')
+            self.timestamp = attributes[:'timestamp']
           end
         end
 
@@ -145,18 +153,6 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @object_id.nil?
-            invalid_properties.push('invalid value for "object_id", object_id cannot be nil.')
-          end
-
-          if @user_id.nil?
-            invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
-          end
-
-          if @timestamp.nil?
-            invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
-          end
-
           if @object_name.nil?
             invalid_properties.push('invalid value for "object_name", object_name cannot be nil.')
           end
@@ -169,8 +165,20 @@ module Hubspot
             invalid_properties.push('invalid value for "event", event cannot be nil.')
           end
 
+          if @user_id.nil?
+            invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
+          end
+
+          if @object_id.nil?
+            invalid_properties.push('invalid value for "object_id", object_id cannot be nil.')
+          end
+
           if @object_type.nil?
             invalid_properties.push('invalid value for "object_type", object_type cannot be nil.')
+          end
+
+          if @timestamp.nil?
+            invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
           end
 
           invalid_properties
@@ -179,24 +187,24 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @object_id.nil?
-          return false if @user_id.nil?
-          return false if @timestamp.nil?
           return false if @object_name.nil?
           return false if @full_name.nil?
           return false if @event.nil?
-          event_validator = EnumAttributeValidator.new('String', ["CREATED", "UPDATED", "PUBLISHED", "DELETED", "UNPUBLISHED"])
+          event_validator = EnumAttributeValidator.new('String', ["CREATED", "UPDATED", "PUBLISHED", "DELETED", "UNPUBLISHED", "RESTORE"])
           return false unless event_validator.valid?(@event)
+          return false if @user_id.nil?
+          return false if @object_id.nil?
           return false if @object_type.nil?
-          object_type_validator = EnumAttributeValidator.new('String', ["BLOG", "BLOG_POST", "LANDING_PAGE", "WEBSITE_PAGE", "TEMPLATE", "MODULE", "GLOBAL_MODULE", "SERVERLESS_FUNCTION", "DOMAIN", "URL_MAPPING", "EMAIL", "CONTENT_SETTINGS", "HUBDB_TABLE", "KNOWLEDGE_BASE_ARTICLE", "KNOWLEDGE_BASE", "THEME", "CSS", "JS"])
+          object_type_validator = EnumAttributeValidator.new('String', ["BLOG", "BLOG_POST", "LANDING_PAGE", "WEBSITE_PAGE", "TEMPLATE", "MODULE", "GLOBAL_MODULE", "SERVERLESS_FUNCTION", "DOMAIN", "URL_MAPPING", "EMAIL", "CONTENT_SETTINGS", "HUBDB_TABLE", "KNOWLEDGE_BASE_ARTICLE", "KNOWLEDGE_BASE", "THEME", "CSS", "JS", "CTA", "FILE"])
           return false unless object_type_validator.valid?(@object_type)
+          return false if @timestamp.nil?
           true
         end
 
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] event Object to be assigned
         def event=(event)
-          validator = EnumAttributeValidator.new('String', ["CREATED", "UPDATED", "PUBLISHED", "DELETED", "UNPUBLISHED"])
+          validator = EnumAttributeValidator.new('String', ["CREATED", "UPDATED", "PUBLISHED", "DELETED", "UNPUBLISHED", "RESTORE"])
           unless validator.valid?(event)
             fail ArgumentError, "invalid value for \"event\", must be one of #{validator.allowable_values}."
           end
@@ -206,7 +214,7 @@ module Hubspot
         # Custom attribute writer method checking allowed values (enum).
         # @param [Object] object_type Object to be assigned
         def object_type=(object_type)
-          validator = EnumAttributeValidator.new('String', ["BLOG", "BLOG_POST", "LANDING_PAGE", "WEBSITE_PAGE", "TEMPLATE", "MODULE", "GLOBAL_MODULE", "SERVERLESS_FUNCTION", "DOMAIN", "URL_MAPPING", "EMAIL", "CONTENT_SETTINGS", "HUBDB_TABLE", "KNOWLEDGE_BASE_ARTICLE", "KNOWLEDGE_BASE", "THEME", "CSS", "JS"])
+          validator = EnumAttributeValidator.new('String', ["BLOG", "BLOG_POST", "LANDING_PAGE", "WEBSITE_PAGE", "TEMPLATE", "MODULE", "GLOBAL_MODULE", "SERVERLESS_FUNCTION", "DOMAIN", "URL_MAPPING", "EMAIL", "CONTENT_SETTINGS", "HUBDB_TABLE", "KNOWLEDGE_BASE_ARTICLE", "KNOWLEDGE_BASE", "THEME", "CSS", "JS", "CTA", "FILE"])
           unless validator.valid?(object_type)
             fail ArgumentError, "invalid value for \"object_type\", must be one of #{validator.allowable_values}."
           end
@@ -218,13 +226,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              object_id == o.object_id &&
-              user_id == o.user_id &&
-              timestamp == o.timestamp &&
+              meta == o.meta &&
               object_name == o.object_name &&
               full_name == o.full_name &&
               event == o.event &&
-              object_type == o.object_type
+              user_id == o.user_id &&
+              object_id == o.object_id &&
+              object_type == o.object_type &&
+              timestamp == o.timestamp
         end
 
         # @see the `==` method
@@ -236,7 +245,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [object_id, user_id, timestamp, object_name, full_name, event, object_type].hash
+          [meta, object_name, full_name, event, user_id, object_id, object_type, timestamp].hash
         end
 
         # Builds the object from hash

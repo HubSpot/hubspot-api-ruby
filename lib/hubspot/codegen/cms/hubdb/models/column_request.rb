@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,23 +17,23 @@ module Hubspot
   module Cms
     module Hubdb
       class ColumnRequest
-        # Column Id
-        attr_accessor :id
+        # The id of another table to which the column refers/points to.
+        attr_accessor :foreign_table_id
 
         # Name of the column
         attr_accessor :name
+
+        # Options to choose for select and multi-select columns
+        attr_accessor :options
+
+        # Column Id
+        attr_accessor :id
 
         # Label of the column
         attr_accessor :label
 
         # Type of the column
         attr_accessor :type
-
-        # Options to choose for select and multi-select columns
-        attr_accessor :options
-
-        # The id of another table to which the column refers/points to.
-        attr_accessor :foreign_table_id
 
         # The id of the column from another table to which the column refers/points to.
         attr_accessor :foreign_column_id
@@ -63,12 +63,12 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
+            :'foreign_table_id' => :'foreignTableId',
             :'name' => :'name',
+            :'options' => :'options',
+            :'id' => :'id',
             :'label' => :'label',
             :'type' => :'type',
-            :'options' => :'options',
-            :'foreign_table_id' => :'foreignTableId',
             :'foreign_column_id' => :'foreignColumnId'
           }
         end
@@ -81,12 +81,12 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'Integer',
+            :'foreign_table_id' => :'Integer',
             :'name' => :'String',
+            :'options' => :'Array<Option>',
+            :'id' => :'Integer',
             :'label' => :'String',
             :'type' => :'String',
-            :'options' => :'Array<Option>',
-            :'foreign_table_id' => :'Integer',
             :'foreign_column_id' => :'Integer'
           }
         end
@@ -112,20 +112,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'foreign_table_id')
+            self.foreign_table_id = attributes[:'foreign_table_id']
           end
 
           if attributes.key?(:'name')
             self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
           end
 
           if attributes.key?(:'options')
@@ -134,8 +126,16 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'foreign_table_id')
-            self.foreign_table_id = attributes[:'foreign_table_id']
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
           end
 
           if attributes.key?(:'foreign_column_id')
@@ -147,12 +147,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @options.nil?
+            invalid_properties.push('invalid value for "options", options cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           if @label.nil?
@@ -163,23 +167,19 @@ module Hubspot
             invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
-          if @options.nil?
-            invalid_properties.push('invalid value for "options", options cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
           return false if @name.nil?
+          return false if @options.nil?
+          return false if @id.nil?
           return false if @label.nil?
           return false if @type.nil?
           type_validator = EnumAttributeValidator.new('String', ["NULL", "TEXT", "NUMBER", "URL", "IMAGE", "SELECT", "MULTISELECT", "BOOLEAN", "LOCATION", "DATE", "DATETIME", "CURRENCY", "RICHTEXT", "FOREIGN_ID", "VIDEO", "CTA", "FILE"])
           return false unless type_validator.valid?(@type)
-          return false if @options.nil?
           true
         end
 
@@ -198,12 +198,12 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
+              foreign_table_id == o.foreign_table_id &&
               name == o.name &&
+              options == o.options &&
+              id == o.id &&
               label == o.label &&
               type == o.type &&
-              options == o.options &&
-              foreign_table_id == o.foreign_table_id &&
               foreign_column_id == o.foreign_column_id
         end
 
@@ -216,7 +216,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, label, type, options, foreign_table_id, foreign_column_id].hash
+          [foreign_table_id, name, options, id, label, type, foreign_column_id].hash
         end
 
         # Builds the object from hash
