@@ -34,10 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `cms.blogs.tags.blog_tags_api.attach_to_lang_group(): Error` => `nil`
 - `cms.blogs.tags.blog_tags_api.detach_from_lang_group(): Error` => `nil`
 - `cms.blogs.tags.blog_tags_api.update_langs(): Error` => `nil`
-- `cms.source_code.content_api.get(): Error` => `cms.source_code.content_api.create_or_update(): AssetFileMetadata`
-- `cms.source_code.content_api.replace(): AssetFileMetadata` => `cms.source_code.content_api.download(): Error`
+- `cms.source_code.content_api.get()` => `cms.source_code.content_api.download()`
+- `cms.source_code.content_api.replace()` => `cms.source_code.content_api.create_or_update()`
 
-- Removed `EnumAttributeValidator` from `blogs.models`
+- Removed `EnumAttributeValidator` from few models `blogs: authors, blog_posts, tags`
 - Update params to `automation.actions.models.FieldTypeDefinition`:
 
 ```ruby
@@ -63,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`
 - Added new param `property` to `cms.blogs.blog_posts.blog_posts_api.get_by_id()` and `cms.blogs.blog_posts.blog_posts_api.get_page()`
 - Added new param `property` to `cms.blogs.tags.blog_tags_api.get_by_id()` and `cms.blogs.tags.blog_tags_api.get_page()`
-- Added new param `property` to `cms.source_code.metadata_api.get()`
+- Added new param `properties` to `cms.source_code.metadata_api.get()`
 - Added `automation.actions.models.OutputFieldDefinition`
 - Added `cms.audit_logs.models.PreviousPage`
 - Added `automation.actions.models.PublicExecutionTranslationRule`
