@@ -68,6 +68,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `cms.audit_logs.models.PreviousPage`
 - Added `automation.actions.models.PublicExecutionTranslationRule`
 
+### Changes in CRM Associations API (associations) v4
+
+- Methods `archive`, `create`, and `create_default` of class `BasicApi` now accept parameters `$object_id` and `$to_object_id` of type `string` instead of `int`.
+- Method `getPage` of class `BasicApi` now accepts parameter `$object_id` of type `string` instead of `int`.
+- Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
+- Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
+- Changed the type of property `category` in class `ErrorCategory` to `string`.
+
+### Changes in AssociationsV4 Models
+
+- Type of errors array in class `BatchResponsePublicDefaultAssociation` changed from `StandardError1[]` to `StandardError[]`.
+- Added parameter `inverseLabel` to classes `PublicAssociationDefinitionCreateRequest` and `PublicAssociationDefinitionUpdateRequest`.
+
+### Changes in Schema API Methods
+
+- Method `delete` of class `DefinitionsApi` is now replaced with method `archive`.
+
+### Changes in Oauth models
+
+- Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`
+
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
 - `cms.site_search` Api.
