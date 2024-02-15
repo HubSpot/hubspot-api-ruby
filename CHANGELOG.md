@@ -70,8 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes in CRM Associations API (associations) v4
 
-- Methods `archive`, `create`, and `create_default` of class `BasicApi` now accept parameters `$object_id` and `$to_object_id` of type `string` instead of `int`.
-- Method `getPage` of class `BasicApi` now accepts parameter `$object_id` of type `string` instead of `int`.
+- Methods `archive`, `create`, and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
+- Method `getPage` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
 - Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
 - Changed the type of property `category` in class `ErrorCategory` to `string`.
@@ -83,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes in Schema API Methods
 
-- Method `delete` of class `DefinitionsApi` is now replaced with method `archive`.
+- Method `delete` renamed to `archive` in class `DefinitionsApi`.
 
 ### Changes in Oauth models
 
