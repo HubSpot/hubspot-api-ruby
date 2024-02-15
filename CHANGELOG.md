@@ -15,10 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `cms.audit_logs.models.PreviousPage`
 
 ### Automation Actions Definitions API:
-- Updated `create` method to accept `public_action_definition_egg` instead of `extension_action_definition_input`.
+- Updated `create` method to accept `public_action_definition_egg` instead of `extension_action_definition_input` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 - Updated `get_by_id` method to return `PublicActionDefinition` instead of `ExtensionActionDefinition`.
 - Updated `get_page` method to return `CollectionResponsePublicActionDefinitionForwardPaging` instead of `CollectionResponseExtensionActionDefinitionForwardPaging`.
-- Updated `update` method to accept `public_action_definition_patch` instead of `extension_action_definition_patch`.
+- Updated `update` method to accept `public_action_definition_patch` instead of `extension_action_definition_patch` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 
 ### Automation Actions Functions API:
 - Added new function type `POST_ACTION_EXECUTION` to all methods.
