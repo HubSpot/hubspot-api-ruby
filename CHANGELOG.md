@@ -9,18 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [18.0.0] - 2024-02-14
 
-### Cms AuditLogs Api:
-- Added new param `prev` to `cms.audit_log.models.Paging`
-- Added new param `meta` to `cms.audit_log.models.PublicAuditLog`
-- Added `cms.audit_logs.models.PreviousPage`
+### Changes in Cms AuditLogs Api:
+- Added new param `prev` to `cms.audit_log.models.Paging`.
+- Added new param `meta` to `cms.audit_log.models.PublicAuditLog`.
+- Added `cms.audit_logs.models.PreviousPage`.
 
-### Automation Actions Definitions API:
+### Changes in Automation Actions Definitions API:
 - Updated `create` method to accept `public_action_definition_egg` instead of `extension_action_definition_input` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 - Updated `get_by_id` method to return `PublicActionDefinition` instead of `ExtensionActionDefinition`.
 - Updated `get_page` method to return `CollectionResponsePublicActionDefinitionForwardPaging` instead of `CollectionResponseExtensionActionDefinitionForwardPaging`.
 - Updated `update` method to accept `public_action_definition_patch` instead of `extension_action_definition_patch` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 
-### Automation Actions Functions API:
+### Changes in Automation Actions Functions API:
 - Added new function type `POST_ACTION_EXECUTION` to all methods.
 - Updated `create_or_replace` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
 - Updated `create_or_replace_by_function_type` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
@@ -28,14 +28,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `get_by_id` method to return `PublicActionFunction` instead of `ActionFunction`.
 - Updated `get_page` method to return `CollectionResponsePublicActionFunctionIdentifierNoPaging` instead of `CollectionResponseActionFunctionIdentifierNoPaging`.
 
-### Automation Actions Revisions API:
+### Changes in Automation Actions Revisions API:
 - Updated `get_by_id` method to return `PublicActionRevision` instead of `ActionRevision`.
 - Updated `get_page` method to return `CollectionResponsePublicActionRevisionForwardPaging` instead of `CollectionResponseActionRevisionForwardPaging`.
 
-### Changes Automation Actions models:
-- Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`
-- Added `automation.actions.models.OutputFieldDefinition`
-- Added `automation.actions.models.PublicExecutionTranslationRule`
+### Changes in Automation Actions models:
+- Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`.
+- Added `automation.actions.models.OutputFieldDefinition`.
+- Added `automation.actions.models.PublicExecutionTranslationRule`.
 - Update params to `automation.actions.models.FieldTypeDefinition`:
 
 ```ruby
@@ -54,26 +54,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   }
 ```
 
-### CMS Blogs Authors API:
-- Updated `attach_to_lang_group`, `detach_from_lang_group`, and `update_langs` methods to return `nil` instead of `Error`.
-- Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`
-
-### CMS Blogs Posts API:
-- Updated `attach_to_lang_group`, `detach_from_lang_group`, and `update_langs` methods to return `nil` instead of `Error`.
-- Added new param `property` to `cms.blogs.blog_posts.blog_posts_api.get_by_id()` and `cms.blogs.blog_posts.blog_posts_api.get_page()`
-
-### CMS Blogs Tags API:
-- Updated `attach_to_lang_group`, `detach_from_lang_group`, and `update_langs` methods to return `nil` instead of `Error`.
-- Added new param `property` to `cms.blogs.tags.blog_tags_api.get_by_id()` and `cms.blogs.tags.blog_tags_api.get_page()`
+### Changes in CMS Blog APIs:
+- Updated `attach_to_lang_group`, `detach_from_lang_group` and `update_langs` methods to return `nil` instead of `Error`.
+- Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`.
 
 ### Changes Blog models:
-- Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`
+- Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`.
 
 ### CMS Source Code API:
-- Renamed `download` method to `download()` instead of `get()`.
-- Renamed `create_or_update` method to `create_or_update()` instead of `replace()`.
-- Added new param `hash` to `cms.source_code.models.AssetFileMetadata`
-- Added new param `properties` to `cms.source_code.metadata_api.get()`
+- Renamed method `download()` to `get()`.
+- Renamed method `create_or_update()` to `replace()`.
+- Added new param `hash` to `cms.source_code.models.AssetFileMetadata`.
+- Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
 ### Changes in CRM Associations API (associations) v4
 
@@ -85,7 +77,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes in AssociationsV4 Models
 
-- Type of errors array in class `BatchResponsePublicDefaultAssociation` changed from `StandardError1[]` to `StandardError[]`.
+- Changed the type of property `errors` in class `BatchResponsePublicDefaultAssociation` from `StandardError1[]` to `StandardError[]`.
 - Added parameter `inverseLabel` to classes `PublicAssociationDefinitionCreateRequest` and `PublicAssociationDefinitionUpdateRequest`.
 
 ### Changes in Schema API Methods
@@ -94,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes in Oauth models
 
-- Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`
+- Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
 
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
