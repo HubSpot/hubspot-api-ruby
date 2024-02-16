@@ -1,5 +1,6 @@
 require_relative '../../../base_module_client'
 
+# DEPRECATED.
 module Hubspot
   module Discovery
     module Crm
