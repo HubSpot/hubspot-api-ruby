@@ -17,31 +17,52 @@ module Hubspot
   module Crm
     module Schemas
       class ObjectTypePropertyCreate
-        # The internal property name, which must be used when referencing the property from the API.
-        attr_accessor :name
+        attr_accessor :hidden
 
-        # A human-readable property label that will be shown in HubSpot.
-        attr_accessor :label
-
-        # The name of the group this property belongs to.
-        attr_accessor :group_name
-
-        # A description of the property that will be shown as help text in HubSpot.
-        attr_accessor :description
-
-        # A list of available options for the property. This field is only required for enumerated properties.
-        attr_accessor :options
+        # Controls how the property options will be sorted in the HubSpot UI.
+        attr_accessor :option_sort_strategy
 
         # The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
         attr_accessor :display_order
 
-        # Whether or not the property's value must be unique. Once set, this can't be changed.
-        attr_accessor :has_unique_value
+        # A description of the property that will be shown as help text in HubSpot.
+        attr_accessor :description
 
-        attr_accessor :hidden
+        # Whether the property will display the currency symbol in the HubSpot UI.
+        attr_accessor :show_currency_symbol
+
+        # A human-readable property label that will be shown in HubSpot.
+        attr_accessor :label
 
         # The data type of the property.
         attr_accessor :type
+
+        # Whether the property can be used in a HubSpot form.
+        attr_accessor :form_field
+
+        # The name of the group this property belongs to.
+        attr_accessor :group_name
+
+        # Defines the options this property will return, e.g. OWNER would return name of users on the portal.
+        attr_accessor :referenced_object_type
+
+        # Controls how text properties are formatted in the HubSpot UI
+        attr_accessor :text_display_hint
+
+        # The internal property name, which must be used when referencing the property from the API.
+        attr_accessor :name
+
+        # A list of available options for the property. This field is only required for enumerated properties.
+        attr_accessor :options
+
+        # Allow users to search for information entered to this field (limited to 3 properties)
+        attr_accessor :searchable_in_global_search
+
+        # Controls how numeric properties are formatted in the HubSpot UI
+        attr_accessor :number_display_hint
+
+        # Whether or not the property's value must be unique. Once set, this can't be changed.
+        attr_accessor :has_unique_value
 
         # Controls how the property appears in HubSpot.
         attr_accessor :field_type
@@ -71,15 +92,22 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
-            :'label' => :'label',
-            :'group_name' => :'groupName',
-            :'description' => :'description',
-            :'options' => :'options',
-            :'display_order' => :'displayOrder',
-            :'has_unique_value' => :'hasUniqueValue',
             :'hidden' => :'hidden',
+            :'option_sort_strategy' => :'optionSortStrategy',
+            :'display_order' => :'displayOrder',
+            :'description' => :'description',
+            :'show_currency_symbol' => :'showCurrencySymbol',
+            :'label' => :'label',
             :'type' => :'type',
+            :'form_field' => :'formField',
+            :'group_name' => :'groupName',
+            :'referenced_object_type' => :'referencedObjectType',
+            :'text_display_hint' => :'textDisplayHint',
+            :'name' => :'name',
+            :'options' => :'options',
+            :'searchable_in_global_search' => :'searchableInGlobalSearch',
+            :'number_display_hint' => :'numberDisplayHint',
+            :'has_unique_value' => :'hasUniqueValue',
             :'field_type' => :'fieldType'
           }
         end
@@ -92,15 +120,22 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
-            :'label' => :'String',
-            :'group_name' => :'String',
-            :'description' => :'String',
-            :'options' => :'Array<OptionInput>',
-            :'display_order' => :'Integer',
-            :'has_unique_value' => :'Boolean',
             :'hidden' => :'Boolean',
+            :'option_sort_strategy' => :'String',
+            :'display_order' => :'Integer',
+            :'description' => :'String',
+            :'show_currency_symbol' => :'Boolean',
+            :'label' => :'String',
             :'type' => :'String',
+            :'form_field' => :'Boolean',
+            :'group_name' => :'String',
+            :'referenced_object_type' => :'String',
+            :'text_display_hint' => :'String',
+            :'name' => :'String',
+            :'options' => :'Array<OptionInput>',
+            :'searchable_in_global_search' => :'Boolean',
+            :'number_display_hint' => :'String',
+            :'has_unique_value' => :'Boolean',
             :'field_type' => :'String'
           }
         end
@@ -126,20 +161,52 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
+          end
+
+          if attributes.key?(:'option_sort_strategy')
+            self.option_sort_strategy = attributes[:'option_sort_strategy']
+          end
+
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
+          if attributes.key?(:'show_currency_symbol')
+            self.show_currency_symbol = attributes[:'show_currency_symbol']
           end
 
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
 
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          end
+
+          if attributes.key?(:'form_field')
+            self.form_field = attributes[:'form_field']
+          end
+
           if attributes.key?(:'group_name')
             self.group_name = attributes[:'group_name']
           end
 
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
+          if attributes.key?(:'referenced_object_type')
+            self.referenced_object_type = attributes[:'referenced_object_type']
+          end
+
+          if attributes.key?(:'text_display_hint')
+            self.text_display_hint = attributes[:'text_display_hint']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'options')
@@ -148,20 +215,16 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'display_order')
-            self.display_order = attributes[:'display_order']
+          if attributes.key?(:'searchable_in_global_search')
+            self.searchable_in_global_search = attributes[:'searchable_in_global_search']
+          end
+
+          if attributes.key?(:'number_display_hint')
+            self.number_display_hint = attributes[:'number_display_hint']
           end
 
           if attributes.key?(:'has_unique_value')
             self.has_unique_value = attributes[:'has_unique_value']
-          end
-
-          if attributes.key?(:'hidden')
-            self.hidden = attributes[:'hidden']
-          end
-
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
           end
 
           if attributes.key?(:'field_type')
@@ -173,16 +236,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
           if @type.nil?
             invalid_properties.push('invalid value for "type", type cannot be nil.')
+          end
+
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           if @field_type.nil?
@@ -195,13 +258,29 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
+          option_sort_strategy_validator = EnumAttributeValidator.new('String', ["DISPLAY_ORDER", "ALPHABETICAL"])
+          return false unless option_sort_strategy_validator.valid?(@option_sort_strategy)
           return false if @label.nil?
           return false if @type.nil?
           type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration", "bool"])
           return false unless type_validator.valid?(@type)
+          text_display_hint_validator = EnumAttributeValidator.new('String', ["unformatted_single_line", "multi_line", "email", "phone_number", "domain_name", "ip_address", "physical_address", "postal_code"])
+          return false unless text_display_hint_validator.valid?(@text_display_hint)
+          return false if @name.nil?
+          number_display_hint_validator = EnumAttributeValidator.new('String', ["unformatted", "formatted", "currency", "percentage", "duration", "probability"])
+          return false unless number_display_hint_validator.valid?(@number_display_hint)
           return false if @field_type.nil?
           true
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] option_sort_strategy Object to be assigned
+        def option_sort_strategy=(option_sort_strategy)
+          validator = EnumAttributeValidator.new('String', ["DISPLAY_ORDER", "ALPHABETICAL"])
+          unless validator.valid?(option_sort_strategy)
+            fail ArgumentError, "invalid value for \"option_sort_strategy\", must be one of #{validator.allowable_values}."
+          end
+          @option_sort_strategy = option_sort_strategy
         end
 
         # Custom attribute writer method checking allowed values (enum).
@@ -214,20 +293,47 @@ module Hubspot
           @type = type
         end
 
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] text_display_hint Object to be assigned
+        def text_display_hint=(text_display_hint)
+          validator = EnumAttributeValidator.new('String', ["unformatted_single_line", "multi_line", "email", "phone_number", "domain_name", "ip_address", "physical_address", "postal_code"])
+          unless validator.valid?(text_display_hint)
+            fail ArgumentError, "invalid value for \"text_display_hint\", must be one of #{validator.allowable_values}."
+          end
+          @text_display_hint = text_display_hint
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] number_display_hint Object to be assigned
+        def number_display_hint=(number_display_hint)
+          validator = EnumAttributeValidator.new('String', ["unformatted", "formatted", "currency", "percentage", "duration", "probability"])
+          unless validator.valid?(number_display_hint)
+            fail ArgumentError, "invalid value for \"number_display_hint\", must be one of #{validator.allowable_values}."
+          end
+          @number_display_hint = number_display_hint
+        end
+
         # Checks equality by comparing each attribute.
         # @param [Object] Object to be compared
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
-              label == o.label &&
-              group_name == o.group_name &&
-              description == o.description &&
-              options == o.options &&
-              display_order == o.display_order &&
-              has_unique_value == o.has_unique_value &&
               hidden == o.hidden &&
+              option_sort_strategy == o.option_sort_strategy &&
+              display_order == o.display_order &&
+              description == o.description &&
+              show_currency_symbol == o.show_currency_symbol &&
+              label == o.label &&
               type == o.type &&
+              form_field == o.form_field &&
+              group_name == o.group_name &&
+              referenced_object_type == o.referenced_object_type &&
+              text_display_hint == o.text_display_hint &&
+              name == o.name &&
+              options == o.options &&
+              searchable_in_global_search == o.searchable_in_global_search &&
+              number_display_hint == o.number_display_hint &&
+              has_unique_value == o.has_unique_value &&
               field_type == o.field_type
         end
 
@@ -240,7 +346,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, group_name, description, options, display_order, has_unique_value, hidden, type, field_type].hash
+          [hidden, option_sort_strategy, display_order, description, show_currency_symbol, label, type, form_field, group_name, referenced_object_type, text_display_hint, name, options, searchable_in_global_search, number_display_hint, has_unique_value, field_type].hash
         end
 
         # Builds the object from hash

@@ -17,8 +17,14 @@ module Hubspot
   module Crm
     module Properties
       class PropertyCreate
-        # The internal property name, which must be used when referencing the property via the API.
-        attr_accessor :name
+        # If true, the property won't be visible and can't be used in HubSpot.
+        attr_accessor :hidden
+
+        # Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property to be displayed after any positive values.
+        attr_accessor :display_order
+
+        # A description of the property that will be shown as help text in HubSpot.
+        attr_accessor :description
 
         # A human-readable property label that will be shown in HubSpot.
         attr_accessor :label
@@ -26,38 +32,32 @@ module Hubspot
         # The data type of the property.
         attr_accessor :type
 
-        # Controls how the property appears in HubSpot.
-        attr_accessor :field_type
+        # Whether or not the property can be used in a HubSpot form.
+        attr_accessor :form_field
 
         # The name of the property group the property belongs to.
         attr_accessor :group_name
 
-        # A description of the property that will be shown as help text in HubSpot.
-        attr_accessor :description
+        # Should be set to 'OWNER' when 'externalOptions' is true, which causes the property to dynamically pull option values from the current HubSpot users.
+        attr_accessor :referenced_object_type
+
+        # The internal property name, which must be used when referencing the property via the API.
+        attr_accessor :name
 
         # A list of valid options for the property. This field is required for enumerated properties.
         attr_accessor :options
 
-        # Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property to be displayed after any positive values.
-        attr_accessor :display_order
+        # Represents a formula that is used to compute a calculated property.
+        attr_accessor :calculation_formula
 
         # Whether or not the property's value must be unique. Once set, this can't be changed.
         attr_accessor :has_unique_value
 
-        # If true, the property won't be visible and can't be used in HubSpot.
-        attr_accessor :hidden
-
-        # Whether or not the property can be used in a HubSpot form.
-        attr_accessor :form_field
+        # Controls how the property appears in HubSpot.
+        attr_accessor :field_type
 
         # Applicable only for 'enumeration' type properties.  Should be set to true in conjunction with a 'referencedObjectType' of 'OWNER'.  Otherwise false.
         attr_accessor :external_options
-
-        # Should be set to 'OWNER' when 'externalOptions' is true, which causes the property to dynamically pull option values from the current HubSpot users.
-        attr_accessor :referenced_object_type
-
-        # Represents a formula that is used to compute a calculated property.
-        attr_accessor :calculation_formula
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -84,20 +84,20 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
+            :'hidden' => :'hidden',
+            :'display_order' => :'displayOrder',
+            :'description' => :'description',
             :'label' => :'label',
             :'type' => :'type',
-            :'field_type' => :'fieldType',
-            :'group_name' => :'groupName',
-            :'description' => :'description',
-            :'options' => :'options',
-            :'display_order' => :'displayOrder',
-            :'has_unique_value' => :'hasUniqueValue',
-            :'hidden' => :'hidden',
             :'form_field' => :'formField',
-            :'external_options' => :'externalOptions',
+            :'group_name' => :'groupName',
             :'referenced_object_type' => :'referencedObjectType',
-            :'calculation_formula' => :'calculationFormula'
+            :'name' => :'name',
+            :'options' => :'options',
+            :'calculation_formula' => :'calculationFormula',
+            :'has_unique_value' => :'hasUniqueValue',
+            :'field_type' => :'fieldType',
+            :'external_options' => :'externalOptions'
           }
         end
 
@@ -109,20 +109,20 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
+            :'hidden' => :'Boolean',
+            :'display_order' => :'Integer',
+            :'description' => :'String',
             :'label' => :'String',
             :'type' => :'String',
-            :'field_type' => :'String',
-            :'group_name' => :'String',
-            :'description' => :'String',
-            :'options' => :'Array<OptionInput>',
-            :'display_order' => :'Integer',
-            :'has_unique_value' => :'Boolean',
-            :'hidden' => :'Boolean',
             :'form_field' => :'Boolean',
-            :'external_options' => :'Boolean',
+            :'group_name' => :'String',
             :'referenced_object_type' => :'String',
-            :'calculation_formula' => :'String'
+            :'name' => :'String',
+            :'options' => :'Array<OptionInput>',
+            :'calculation_formula' => :'String',
+            :'has_unique_value' => :'Boolean',
+            :'field_type' => :'String',
+            :'external_options' => :'Boolean'
           }
         end
 
@@ -147,8 +147,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
+          end
+
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
           end
 
           if attributes.key?(:'label')
@@ -159,16 +167,20 @@ module Hubspot
             self.type = attributes[:'type']
           end
 
-          if attributes.key?(:'field_type')
-            self.field_type = attributes[:'field_type']
+          if attributes.key?(:'form_field')
+            self.form_field = attributes[:'form_field']
           end
 
           if attributes.key?(:'group_name')
             self.group_name = attributes[:'group_name']
           end
 
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
+          if attributes.key?(:'referenced_object_type')
+            self.referenced_object_type = attributes[:'referenced_object_type']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'options')
@@ -177,32 +189,20 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'display_order')
-            self.display_order = attributes[:'display_order']
+          if attributes.key?(:'calculation_formula')
+            self.calculation_formula = attributes[:'calculation_formula']
           end
 
           if attributes.key?(:'has_unique_value')
             self.has_unique_value = attributes[:'has_unique_value']
           end
 
-          if attributes.key?(:'hidden')
-            self.hidden = attributes[:'hidden']
-          end
-
-          if attributes.key?(:'form_field')
-            self.form_field = attributes[:'form_field']
+          if attributes.key?(:'field_type')
+            self.field_type = attributes[:'field_type']
           end
 
           if attributes.key?(:'external_options')
             self.external_options = attributes[:'external_options']
-          end
-
-          if attributes.key?(:'referenced_object_type')
-            self.referenced_object_type = attributes[:'referenced_object_type']
-          end
-
-          if attributes.key?(:'calculation_formula')
-            self.calculation_formula = attributes[:'calculation_formula']
           end
         end
 
@@ -210,10 +210,6 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
@@ -222,12 +218,16 @@ module Hubspot
             invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
-          if @field_type.nil?
-            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
-          end
-
           if @group_name.nil?
             invalid_properties.push('invalid value for "group_name", group_name cannot be nil.')
+          end
+
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @field_type.nil?
+            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
           end
 
           invalid_properties
@@ -236,15 +236,15 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
           return false if @label.nil?
           return false if @type.nil?
           type_validator = EnumAttributeValidator.new('String', ["string", "number", "date", "datetime", "enumeration", "bool"])
           return false unless type_validator.valid?(@type)
+          return false if @group_name.nil?
+          return false if @name.nil?
           return false if @field_type.nil?
           field_type_validator = EnumAttributeValidator.new('String', ["textarea", "text", "date", "file", "number", "select", "radio", "checkbox", "booleancheckbox", "calculation_equation"])
           return false unless field_type_validator.valid?(@field_type)
-          return false if @group_name.nil?
           true
         end
 
@@ -273,20 +273,20 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
+              hidden == o.hidden &&
+              display_order == o.display_order &&
+              description == o.description &&
               label == o.label &&
               type == o.type &&
-              field_type == o.field_type &&
-              group_name == o.group_name &&
-              description == o.description &&
-              options == o.options &&
-              display_order == o.display_order &&
-              has_unique_value == o.has_unique_value &&
-              hidden == o.hidden &&
               form_field == o.form_field &&
-              external_options == o.external_options &&
+              group_name == o.group_name &&
               referenced_object_type == o.referenced_object_type &&
-              calculation_formula == o.calculation_formula
+              name == o.name &&
+              options == o.options &&
+              calculation_formula == o.calculation_formula &&
+              has_unique_value == o.has_unique_value &&
+              field_type == o.field_type &&
+              external_options == o.external_options
         end
 
         # @see the `==` method
@@ -298,7 +298,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, type, field_type, group_name, description, options, display_order, has_unique_value, hidden, form_field, external_options, referenced_object_type, calculation_formula].hash
+          [hidden, display_order, description, label, type, form_field, group_name, referenced_object_type, name, options, calculation_formula, has_unique_value, field_type, external_options].hash
         end
 
         # Builds the object from hash

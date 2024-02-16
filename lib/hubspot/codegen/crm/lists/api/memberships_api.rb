@@ -170,8 +170,8 @@ module Hubspot
         # @param membership_change_request [MembershipChangeRequest] The IDs of the records to add and/or remove from the list.
         # @param [Hash] opts the optional parameters
         # @return [MembershipsUpdateResponse]
-        def add_remove(list_id, membership_change_request, opts = {})
-          data, _status_code, _headers = add_remove_with_http_info(list_id, membership_change_request, opts)
+        def add_and_remove(list_id, membership_change_request, opts = {})
+          data, _status_code, _headers = add_and_remove_with_http_info(list_id, membership_change_request, opts)
           data
         end
 
@@ -181,17 +181,17 @@ module Hubspot
         # @param membership_change_request [MembershipChangeRequest] The IDs of the records to add and/or remove from the list.
         # @param [Hash] opts the optional parameters
         # @return [Array<(MembershipsUpdateResponse, Integer, Hash)>] MembershipsUpdateResponse data, response status code and response headers
-        def add_remove_with_http_info(list_id, membership_change_request, opts = {})
+        def add_and_remove_with_http_info(list_id, membership_change_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: MembershipsApi.add_remove ...'
+            @api_client.config.logger.debug 'Calling API: MembershipsApi.add_and_remove ...'
           end
           # verify the required parameter 'list_id' is set
           if @api_client.config.client_side_validation && list_id.nil?
-            fail ArgumentError, "Missing the required parameter 'list_id' when calling MembershipsApi.add_remove"
+            fail ArgumentError, "Missing the required parameter 'list_id' when calling MembershipsApi.add_and_remove"
           end
           # verify the required parameter 'membership_change_request' is set
           if @api_client.config.client_side_validation && membership_change_request.nil?
-            fail ArgumentError, "Missing the required parameter 'membership_change_request' when calling MembershipsApi.add_remove"
+            fail ArgumentError, "Missing the required parameter 'membership_change_request' when calling MembershipsApi.add_and_remove"
           end
           # resource path
           local_var_path = '/crm/v3/lists/{listId}/memberships/add-and-remove'.sub('{' + 'listId' + '}', CGI.escape(list_id.to_s))
@@ -222,7 +222,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"MembershipsApi.add_remove",
+            :operation => :"MembershipsApi.add_and_remove",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -233,7 +233,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: MembershipsApi#add_remove\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: MembershipsApi#add_and_remove\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

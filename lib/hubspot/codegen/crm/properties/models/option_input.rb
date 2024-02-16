@@ -17,29 +17,29 @@ module Hubspot
   module Crm
     module Properties
       class OptionInput
+        # Hidden options won't be shown in HubSpot.
+        attr_accessor :hidden
+
+        # Options are shown in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
+        attr_accessor :display_order
+
+        # A description of the option.
+        attr_accessor :description
+
         # A human-readable option label that will be shown in HubSpot.
         attr_accessor :label
 
         # The internal value of the option, which must be used when setting the property value through the API.
         attr_accessor :value
 
-        # A description of the option.
-        attr_accessor :description
-
-        # Options are shown in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
-        attr_accessor :display_order
-
-        # Hidden options won't be shown in HubSpot.
-        attr_accessor :hidden
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
-            :'value' => :'value',
-            :'description' => :'description',
+            :'hidden' => :'hidden',
             :'display_order' => :'displayOrder',
-            :'hidden' => :'hidden'
+            :'description' => :'description',
+            :'label' => :'label',
+            :'value' => :'value'
           }
         end
 
@@ -51,11 +51,11 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
-            :'value' => :'String',
-            :'description' => :'String',
+            :'hidden' => :'Boolean',
             :'display_order' => :'Integer',
-            :'hidden' => :'Boolean'
+            :'description' => :'String',
+            :'label' => :'String',
+            :'value' => :'String'
           }
         end
 
@@ -80,6 +80,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
+          end
+
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
@@ -87,24 +99,16 @@ module Hubspot
           if attributes.key?(:'value')
             self.value = attributes[:'value']
           end
-
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
-          end
-
-          if attributes.key?(:'display_order')
-            self.display_order = attributes[:'display_order']
-          end
-
-          if attributes.key?(:'hidden')
-            self.hidden = attributes[:'hidden']
-          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @hidden.nil?
+            invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
+          end
+
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
@@ -113,19 +117,15 @@ module Hubspot
             invalid_properties.push('invalid value for "value", value cannot be nil.')
           end
 
-          if @hidden.nil?
-            invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @hidden.nil?
           return false if @label.nil?
           return false if @value.nil?
-          return false if @hidden.nil?
           true
         end
 
@@ -134,11 +134,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
-              value == o.value &&
-              description == o.description &&
+              hidden == o.hidden &&
               display_order == o.display_order &&
-              hidden == o.hidden
+              description == o.description &&
+              label == o.label &&
+              value == o.value
         end
 
         # @see the `==` method
@@ -150,7 +150,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, value, description, display_order, hidden].hash
+          [hidden, display_order, description, label, value].hash
         end
 
         # Builds the object from hash

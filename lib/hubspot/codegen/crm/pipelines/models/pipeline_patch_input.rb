@@ -1,5 +1,5 @@
 =begin
-#CRM Pipelines
+#Pipelines
 
 #Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
 
@@ -17,21 +17,21 @@ module Hubspot
   module Crm
     module Pipelines
       class PipelinePatchInput
-        # A unique label used to organize pipelines in HubSpot's UI
-        attr_accessor :label
+        # Whether the pipeline is archived. This property should only be provided when restoring an archived pipeline. If it's provided in any other call, the request will fail and a `400 Bad Request` will be returned.
+        attr_accessor :archived
 
         # The order for displaying this pipeline. If two pipelines have a matching `displayOrder`, they will be sorted alphabetically by label.
         attr_accessor :display_order
 
-        # Whether the pipeline is archived. This property should only be provided when restoring an archived pipeline. If it's provided in any other call, the request will fail and a `400 Bad Request` will be returned.
-        attr_accessor :archived
+        # A unique label used to organize pipelines in HubSpot's UI
+        attr_accessor :label
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
+            :'archived' => :'archived',
             :'display_order' => :'displayOrder',
-            :'archived' => :'archived'
+            :'label' => :'label'
           }
         end
 
@@ -43,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
+            :'archived' => :'Boolean',
             :'display_order' => :'Integer',
-            :'archived' => :'Boolean'
+            :'label' => :'String'
           }
         end
 
@@ -70,16 +70,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
+          if attributes.key?(:'archived')
+            self.archived = attributes[:'archived']
           end
 
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
           end
 
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
         end
 
@@ -101,9 +101,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
+              archived == o.archived &&
               display_order == o.display_order &&
-              archived == o.archived
+              label == o.label
         end
 
         # @see the `==` method
@@ -115,7 +115,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, display_order, archived].hash
+          [archived, display_order, label].hash
         end
 
         # Builds the object from hash

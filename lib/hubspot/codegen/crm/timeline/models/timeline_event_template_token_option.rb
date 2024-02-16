@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -17,15 +17,15 @@ module Hubspot
   module Crm
     module Timeline
       class TimelineEventTemplateTokenOption
-        attr_accessor :value
-
         attr_accessor :label
+
+        attr_accessor :value
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'value' => :'value',
-            :'label' => :'label'
+            :'label' => :'label',
+            :'value' => :'value'
           }
         end
 
@@ -37,8 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'value' => :'String',
-            :'label' => :'String'
+            :'label' => :'String',
+            :'value' => :'String'
           }
         end
 
@@ -63,12 +63,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'value')
-            self.value = attributes[:'value']
-          end
-
           if attributes.key?(:'label')
             self.label = attributes[:'label']
+          end
+
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
           end
         end
 
@@ -76,12 +76,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @value.nil?
-            invalid_properties.push('invalid value for "value", value cannot be nil.')
-          end
-
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
+          end
+
+          if @value.nil?
+            invalid_properties.push('invalid value for "value", value cannot be nil.')
           end
 
           invalid_properties
@@ -90,8 +90,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @value.nil?
           return false if @label.nil?
+          return false if @value.nil?
           true
         end
 
@@ -100,8 +100,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              value == o.value &&
-              label == o.label
+              label == o.label &&
+              value == o.value
         end
 
         # @see the `==` method
@@ -113,7 +113,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [value, label].hash
+          [label, value].hash
         end
 
         # Builds the object from hash

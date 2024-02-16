@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -17,11 +17,8 @@ module Hubspot
   module Crm
     module Timeline
       class TimelineEventTemplateToken
-        # Used for list segmentation and reporting.
-        attr_accessor :label
-
-        # The name of the CRM object property. This will populate the CRM object property associated with the event. With enough of these, you can fully build CRM objects via the Timeline API.
-        attr_accessor :object_property_name
+        # The date and time that the Event Template Token was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
+        attr_accessor :created_at
 
         # If type is `enumeration`, we should have a list of options to choose from.
         attr_accessor :options
@@ -29,11 +26,14 @@ module Hubspot
         # The name of the token referenced in the templates. This must be unique for the specific template. It may only contain alphanumeric characters, periods, dashes, or underscores (. - _).
         attr_accessor :name
 
+        # Used for list segmentation and reporting.
+        attr_accessor :label
+
+        # The name of the CRM object property. This will populate the CRM object property associated with the event. With enough of these, you can fully build CRM objects via the Timeline API.
+        attr_accessor :object_property_name
+
         # The data type of the token. You can currently choose from [string, number, date, enumeration].
         attr_accessor :type
-
-        # The date and time that the Event Template Token was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
-        attr_accessor :created_at
 
         # The date and time that the Event Template Token was last updated, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
         attr_accessor :updated_at
@@ -63,12 +63,12 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
-            :'object_property_name' => :'objectPropertyName',
+            :'created_at' => :'createdAt',
             :'options' => :'options',
             :'name' => :'name',
+            :'label' => :'label',
+            :'object_property_name' => :'objectPropertyName',
             :'type' => :'type',
-            :'created_at' => :'createdAt',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -81,12 +81,12 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
-            :'object_property_name' => :'String',
+            :'created_at' => :'Time',
             :'options' => :'Array<TimelineEventTemplateTokenOption>',
             :'name' => :'String',
+            :'label' => :'String',
+            :'object_property_name' => :'String',
             :'type' => :'String',
-            :'created_at' => :'Time',
             :'updated_at' => :'Time'
           }
         end
@@ -112,12 +112,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'object_property_name')
-            self.object_property_name = attributes[:'object_property_name']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
           if attributes.key?(:'options')
@@ -130,12 +126,16 @@ module Hubspot
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
 
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
+          if attributes.key?(:'object_property_name')
+            self.object_property_name = attributes[:'object_property_name']
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
           end
 
           if attributes.key?(:'updated_at')
@@ -147,16 +147,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
-          end
-
-          if @options.nil?
-            invalid_properties.push('invalid value for "options", options cannot be nil.')
-          end
-
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
           if @type.nil?
@@ -169,9 +165,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @label.nil?
-          return false if @options.nil?
           return false if @name.nil?
+          return false if @label.nil?
           return false if @type.nil?
           type_validator = EnumAttributeValidator.new('String', ["date", "enumeration", "number", "string"])
           return false unless type_validator.valid?(@type)
@@ -193,12 +188,12 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
-              object_property_name == o.object_property_name &&
+              created_at == o.created_at &&
               options == o.options &&
               name == o.name &&
+              label == o.label &&
+              object_property_name == o.object_property_name &&
               type == o.type &&
-              created_at == o.created_at &&
               updated_at == o.updated_at
         end
 
@@ -211,7 +206,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, object_property_name, options, name, type, created_at, updated_at].hash
+          [created_at, options, name, label, object_property_name, type, updated_at].hash
         end
 
         # Builds the object from hash

@@ -20,18 +20,18 @@ module Hubspot
         # ID of the primary object type to link from.
         attr_accessor :from_object_type_id
 
-        # ID of the target object type ID to link to.
-        attr_accessor :to_object_type_id
-
         # A unique name for this association.
         attr_accessor :name
+
+        # ID of the target object type ID to link to.
+        attr_accessor :to_object_type_id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'from_object_type_id' => :'fromObjectTypeId',
-            :'to_object_type_id' => :'toObjectTypeId',
-            :'name' => :'name'
+            :'name' => :'name',
+            :'to_object_type_id' => :'toObjectTypeId'
           }
         end
 
@@ -44,8 +44,8 @@ module Hubspot
         def self.openapi_types
           {
             :'from_object_type_id' => :'String',
-            :'to_object_type_id' => :'String',
-            :'name' => :'String'
+            :'name' => :'String',
+            :'to_object_type_id' => :'String'
           }
         end
 
@@ -74,12 +74,12 @@ module Hubspot
             self.from_object_type_id = attributes[:'from_object_type_id']
           end
 
-          if attributes.key?(:'to_object_type_id')
-            self.to_object_type_id = attributes[:'to_object_type_id']
-          end
-
           if attributes.key?(:'name')
             self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'to_object_type_id')
+            self.to_object_type_id = attributes[:'to_object_type_id']
           end
         end
 
@@ -112,8 +112,8 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               from_object_type_id == o.from_object_type_id &&
-              to_object_type_id == o.to_object_type_id &&
-              name == o.name
+              name == o.name &&
+              to_object_type_id == o.to_object_type_id
         end
 
         # @see the `==` method
@@ -125,7 +125,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from_object_type_id, to_object_type_id, name].hash
+          [from_object_type_id, name, to_object_type_id].hash
         end
 
         # Builds the object from hash

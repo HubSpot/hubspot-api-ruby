@@ -1,5 +1,5 @@
 =begin
-#CRM Owners
+#Crm Owners
 
 #HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team(s) an owner can access, as well as which team is the owner's primary team.
 
@@ -17,17 +17,17 @@ module Hubspot
   module Crm
     module Owners
       class PublicTeam
-        attr_accessor :id
-
         attr_accessor :name
+
+        attr_accessor :id
 
         attr_accessor :primary
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
             :'name' => :'name',
+            :'id' => :'id',
             :'primary' => :'primary'
           }
         end
@@ -40,8 +40,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
             :'name' => :'String',
+            :'id' => :'String',
             :'primary' => :'Boolean'
           }
         end
@@ -67,12 +67,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
           if attributes.key?(:'name')
             self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
 
           if attributes.key?(:'primary')
@@ -84,12 +84,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           if @primary.nil?
@@ -102,8 +102,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
           return false if @name.nil?
+          return false if @id.nil?
           return false if @primary.nil?
           true
         end
@@ -113,8 +113,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
               name == o.name &&
+              id == o.id &&
               primary == o.primary
         end
 
@@ -127,7 +127,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, primary].hash
+          [name, id, primary].hash
         end
 
         # Builds the object from hash

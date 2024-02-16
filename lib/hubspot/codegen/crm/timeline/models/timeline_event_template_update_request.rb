@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -17,14 +17,11 @@ module Hubspot
   module Crm
     module Timeline
       class TimelineEventTemplateUpdateRequest
-        # The template name.
-        attr_accessor :name
-
-        # This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
-        attr_accessor :header_template
-
         # This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline when you expand the details.
         attr_accessor :detail_template
+
+        # The template name.
+        attr_accessor :name
 
         # A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
         attr_accessor :tokens
@@ -32,14 +29,17 @@ module Hubspot
         # The template ID.
         attr_accessor :id
 
+        # This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
+        attr_accessor :header_template
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
-            :'header_template' => :'headerTemplate',
             :'detail_template' => :'detailTemplate',
+            :'name' => :'name',
             :'tokens' => :'tokens',
-            :'id' => :'id'
+            :'id' => :'id',
+            :'header_template' => :'headerTemplate'
           }
         end
 
@@ -51,11 +51,11 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
-            :'header_template' => :'String',
             :'detail_template' => :'String',
+            :'name' => :'String',
             :'tokens' => :'Array<TimelineEventTemplateToken>',
-            :'id' => :'String'
+            :'id' => :'String',
+            :'header_template' => :'String'
           }
         end
 
@@ -80,16 +80,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'header_template')
-            self.header_template = attributes[:'header_template']
-          end
-
           if attributes.key?(:'detail_template')
             self.detail_template = attributes[:'detail_template']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'tokens')
@@ -100,6 +96,10 @@ module Hubspot
 
           if attributes.key?(:'id')
             self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'header_template')
+            self.header_template = attributes[:'header_template']
           end
         end
 
@@ -136,11 +136,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
-              header_template == o.header_template &&
               detail_template == o.detail_template &&
+              name == o.name &&
               tokens == o.tokens &&
-              id == o.id
+              id == o.id &&
+              header_template == o.header_template
         end
 
         # @see the `==` method
@@ -152,7 +152,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, header_template, detail_template, tokens, id].hash
+          [detail_template, name, tokens, id, header_template].hash
         end
 
         # Builds the object from hash

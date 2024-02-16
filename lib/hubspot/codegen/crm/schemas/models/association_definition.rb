@@ -17,11 +17,11 @@ module Hubspot
   module Crm
     module Schemas
       class AssociationDefinition
+        # When the association was defined.
+        attr_accessor :created_at
+
         # ID of the primary object type to link from.
         attr_accessor :from_object_type_id
-
-        # ID of the target object type ID to link to.
-        attr_accessor :to_object_type_id
 
         # A unique name for this association.
         attr_accessor :name
@@ -29,8 +29,8 @@ module Hubspot
         # A unique ID for this association.
         attr_accessor :id
 
-        # When the association was defined.
-        attr_accessor :created_at
+        # ID of the target object type ID to link to.
+        attr_accessor :to_object_type_id
 
         # When the association was last updated.
         attr_accessor :updated_at
@@ -38,11 +38,11 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'created_at' => :'createdAt',
             :'from_object_type_id' => :'fromObjectTypeId',
-            :'to_object_type_id' => :'toObjectTypeId',
             :'name' => :'name',
             :'id' => :'id',
-            :'created_at' => :'createdAt',
+            :'to_object_type_id' => :'toObjectTypeId',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -55,11 +55,11 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'created_at' => :'Time',
             :'from_object_type_id' => :'String',
-            :'to_object_type_id' => :'String',
             :'name' => :'String',
             :'id' => :'String',
-            :'created_at' => :'Time',
+            :'to_object_type_id' => :'String',
             :'updated_at' => :'Time'
           }
         end
@@ -85,12 +85,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'from_object_type_id')
-            self.from_object_type_id = attributes[:'from_object_type_id']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
-          if attributes.key?(:'to_object_type_id')
-            self.to_object_type_id = attributes[:'to_object_type_id']
+          if attributes.key?(:'from_object_type_id')
+            self.from_object_type_id = attributes[:'from_object_type_id']
           end
 
           if attributes.key?(:'name')
@@ -101,8 +101,8 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
+          if attributes.key?(:'to_object_type_id')
+            self.to_object_type_id = attributes[:'to_object_type_id']
           end
 
           if attributes.key?(:'updated_at')
@@ -118,12 +118,12 @@ module Hubspot
             invalid_properties.push('invalid value for "from_object_type_id", from_object_type_id cannot be nil.')
           end
 
-          if @to_object_type_id.nil?
-            invalid_properties.push('invalid value for "to_object_type_id", to_object_type_id cannot be nil.')
-          end
-
           if @id.nil?
             invalid_properties.push('invalid value for "id", id cannot be nil.')
+          end
+
+          if @to_object_type_id.nil?
+            invalid_properties.push('invalid value for "to_object_type_id", to_object_type_id cannot be nil.')
           end
 
           invalid_properties
@@ -133,8 +133,8 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @from_object_type_id.nil?
-          return false if @to_object_type_id.nil?
           return false if @id.nil?
+          return false if @to_object_type_id.nil?
           true
         end
 
@@ -143,11 +143,11 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              created_at == o.created_at &&
               from_object_type_id == o.from_object_type_id &&
-              to_object_type_id == o.to_object_type_id &&
               name == o.name &&
               id == o.id &&
-              created_at == o.created_at &&
+              to_object_type_id == o.to_object_type_id &&
               updated_at == o.updated_at
         end
 
@@ -160,7 +160,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from_object_type_id, to_object_type_id, name, id, created_at, updated_at].hash
+          [created_at, from_object_type_id, name, id, to_object_type_id, updated_at].hash
         end
 
         # Builds the object from hash
