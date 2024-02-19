@@ -69,7 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes in CRM Associations API (associations) v4
 
-- Methods `archive`, `create`, and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
+- Methods `archive`, `create` and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
 - Method `getPage` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
 - Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
@@ -87,6 +87,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changes in Oauth models
 
 - Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
+
+### Changes in CRM Imports Model:
+- Added `import_template` and `import_source` params to class `PublicImportResponse`.
+
+### Changes in CRM Lists Memberships API:
+- Renamed method `add_remove()` to `add_and_remove()`.
+
+### Changes in CRM Pipelines API:
+- Added param `validate_deal_stage_usages_before_delete` to `archive()`, `replace()` and `update()` methods.
+
+### Changes in CRM Pipelines Model:
+- Added `write_permissions` param to class `PipelineStage`.
+
+### Changes in CRM Schemas Models:
+- Added `description` param to class `ObjectTypeDefinitionPatch`.
+- Added new params: `option_sort_strategy`, `show_currency_symbol`, `form_field`, `referenced_object_type`, `text_display_hint`, `searchable_in_global_search`
+and `number_display_hint` to class `ObjectTypePropertyCreate`.
+
+### Changes in CRM Timeline Events API:
+- Updated `create_batch()` method to return `nil` insted `BatchResponseTimelineEventResponse`.
+
+### Changes in CRM Timeline Model:
+- Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
