@@ -58,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `attach_to_lang_group`, `detach_from_lang_group` and `update_langs` methods to return `nil` instead of `Error`.
 - Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`.
 
-### Changes Blog models:
+### Changes in Blog models:
 - Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`.
 
 ### CMS Source Code API:
@@ -68,7 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
 ### Changes in CRM Associations API (associations) v4
-
 - Methods `archive`, `create`, and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
 - Method `getPage` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
@@ -76,17 +75,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the type of property `category` in class `ErrorCategory` to `string`.
 
 ### Changes in AssociationsV4 Models
-
 - Changed the type of property `errors` in class `BatchResponsePublicDefaultAssociation` from `StandardError1[]` to `StandardError[]`.
 - Added parameter `inverseLabel` to classes `PublicAssociationDefinitionCreateRequest` and `PublicAssociationDefinitionUpdateRequest`.
 
 ### Changes in Schema API Methods
-
 - Method `delete` renamed to `archive` in class `DefinitionsApi`.
 
 ### Changes in Oauth models
-
 - Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
+
+### Changes in CRM Imports Model:
+- Added `import_template` and `import_source` params to class `PublicImportResponse`.
+
+### Changes in CRM Lists Memberships API:
+- Renamed method `add_remove()` to `add_and_remove()`.
+
+### Changes in CRM Pipelines Pipelines API :
+- Added param `validate_deal_stage_usages_before_delete` to `archive()`, `replace()` and `update()` methods.
+
+### Changes in CRM Pipelines Model:
+- Added `write_permissions` param to class `PipelineStage`.
+
+### Changes in CRM Schemas Models:
+- Added `description` param to class `ObjectTypeDefinitionPatch`.
+- Added new params: `option_sort_strategy`, `show_currency_symbol`, `form_field`, `referenced_object_type`, `text_display_hint`, `searchable_in_global_search`
+and `number_display_hint` to class `ObjectTypePropertyCreate`.
+
+### Changes in CRM Timeline Events API:
+- Updated `create_batch()` method to return `nil` insted `BatchResponseTimelineEventResponse`.
+
+### Changes in CRM Timeline Model:
+- Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
+
 
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
