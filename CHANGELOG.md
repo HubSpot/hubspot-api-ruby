@@ -88,6 +88,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
 
+### Changes in CRM Imports Model:
+- Added `import_template` and `import_source` params to class `PublicImportResponse`.
+
+### Changes in CRM Lists Memberships API:
+- Renamed method `add_remove()` to `add_and_remove()`.
+
+### Changes in CRM Pipelines Client:
+- Added param `validate_deal_stage_usages_before_delete` to `archive()`, `replace()` and `update()` methods.
+- Added `write_permissions` param to `crm.peplines.models.PipelineStage`.
+
+### Changes in CRM Schemas Models:
+- Added `description` param to class `ObjectTypeDefinitionPatch`.
+- Added new params: `option_sort_strategy`, `show_currency_symbol`, `form_field`, `referenced_object_type`, `text_display_hint`, `searchable_in_global_search`
+and `number_display_hint` to class `ObjectTypePropertyCreate`.
+
+### Changes in CRM Timeline Events Client:
+- Updated `create_batch()` method to return `nil` insted `BatchResponseTimelineEventResponse`.
+- Changed the type of parameter `category` from `ErrorCategory` to `string` in class `crm.timeline.models.StandardError`.
+
+
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
 - `cms.site_search` Api.
