@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -23,11 +23,11 @@ module Hubspot
         # The label of the modal window that displays the iframe contents.
         attr_accessor :header_label
 
-        # The URI of the iframe contents.
-        attr_accessor :url
-
         # The width of the modal window in pixels.
         attr_accessor :width
+
+        # The URI of the iframe contents.
+        attr_accessor :url
 
         # The height of the modal window in pixels.
         attr_accessor :height
@@ -37,8 +37,8 @@ module Hubspot
           {
             :'link_label' => :'linkLabel',
             :'header_label' => :'headerLabel',
-            :'url' => :'url',
             :'width' => :'width',
+            :'url' => :'url',
             :'height' => :'height'
           }
         end
@@ -53,8 +53,8 @@ module Hubspot
           {
             :'link_label' => :'String',
             :'header_label' => :'String',
-            :'url' => :'String',
             :'width' => :'Integer',
+            :'url' => :'String',
             :'height' => :'Integer'
           }
         end
@@ -88,12 +88,12 @@ module Hubspot
             self.header_label = attributes[:'header_label']
           end
 
-          if attributes.key?(:'url')
-            self.url = attributes[:'url']
-          end
-
           if attributes.key?(:'width')
             self.width = attributes[:'width']
+          end
+
+          if attributes.key?(:'url')
+            self.url = attributes[:'url']
           end
 
           if attributes.key?(:'height')
@@ -113,12 +113,12 @@ module Hubspot
             invalid_properties.push('invalid value for "header_label", header_label cannot be nil.')
           end
 
-          if @url.nil?
-            invalid_properties.push('invalid value for "url", url cannot be nil.')
-          end
-
           if @width.nil?
             invalid_properties.push('invalid value for "width", width cannot be nil.')
+          end
+
+          if @url.nil?
+            invalid_properties.push('invalid value for "url", url cannot be nil.')
           end
 
           if @height.nil?
@@ -133,8 +133,8 @@ module Hubspot
         def valid?
           return false if @link_label.nil?
           return false if @header_label.nil?
-          return false if @url.nil?
           return false if @width.nil?
+          return false if @url.nil?
           return false if @height.nil?
           true
         end
@@ -146,8 +146,8 @@ module Hubspot
           self.class == o.class &&
               link_label == o.link_label &&
               header_label == o.header_label &&
-              url == o.url &&
               width == o.width &&
+              url == o.url &&
               height == o.height
         end
 
@@ -160,7 +160,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [link_label, header_label, url, width, height].hash
+          [link_label, header_label, width, url, height].hash
         end
 
         # Builds the object from hash

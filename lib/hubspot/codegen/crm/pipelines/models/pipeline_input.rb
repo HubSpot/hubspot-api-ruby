@@ -1,5 +1,5 @@
 =begin
-#CRM Pipelines
+#Pipelines
 
 #Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
 
@@ -17,21 +17,21 @@ module Hubspot
   module Crm
     module Pipelines
       class PipelineInput
-        # A unique label used to organize pipelines in HubSpot's UI
-        attr_accessor :label
-
         # The order for displaying this pipeline. If two pipelines have a matching `displayOrder`, they will be sorted alphabetically by label.
         attr_accessor :display_order
 
         # Pipeline stage inputs used to create the new or replacement pipeline.
         attr_accessor :stages
 
+        # A unique label used to organize pipelines in HubSpot's UI
+        attr_accessor :label
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
             :'display_order' => :'displayOrder',
-            :'stages' => :'stages'
+            :'stages' => :'stages',
+            :'label' => :'label'
           }
         end
 
@@ -43,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
             :'display_order' => :'Integer',
-            :'stages' => :'Array<PipelineStageInput>'
+            :'stages' => :'Array<PipelineStageInput>',
+            :'label' => :'String'
           }
         end
 
@@ -70,10 +70,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
           end
@@ -83,16 +79,16 @@ module Hubspot
               self.stages = value
             end
           end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
-          end
-
           if @display_order.nil?
             invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
           end
@@ -101,15 +97,19 @@ module Hubspot
             invalid_properties.push('invalid value for "stages", stages cannot be nil.')
           end
 
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @label.nil?
           return false if @display_order.nil?
           return false if @stages.nil?
+          return false if @label.nil?
           true
         end
 
@@ -118,9 +118,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
               display_order == o.display_order &&
-              stages == o.stages
+              stages == o.stages &&
+              label == o.label
         end
 
         # @see the `==` method
@@ -132,7 +132,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, display_order, stages].hash
+          [display_order, stages, label].hash
         end
 
         # Builds the object from hash

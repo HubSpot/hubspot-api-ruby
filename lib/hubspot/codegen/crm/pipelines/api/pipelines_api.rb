@@ -1,5 +1,5 @@
 =begin
-#CRM Pipelines
+#Pipelines
 
 #Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
 
@@ -27,6 +27,7 @@ module Hubspot
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :validate_references_before_delete  (default to false)
+        # @option opts [Boolean] :validate_deal_stage_usages_before_delete  (default to false)
         # @return [nil]
         def archive(object_type, pipeline_id, opts = {})
           archive_with_http_info(object_type, pipeline_id, opts)
@@ -39,6 +40,7 @@ module Hubspot
         # @param pipeline_id [String] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :validate_references_before_delete  (default to false)
+        # @option opts [Boolean] :validate_deal_stage_usages_before_delete  (default to false)
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_with_http_info(object_type, pipeline_id, opts = {})
           if @api_client.config.debugging
@@ -58,6 +60,7 @@ module Hubspot
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'validateReferencesBeforeDelete'] = opts[:'validate_references_before_delete'] if !opts[:'validate_references_before_delete'].nil?
+          query_params[:'validateDealStageUsagesBeforeDelete'] = opts[:'validate_deal_stage_usages_before_delete'] if !opts[:'validate_deal_stage_usages_before_delete'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -306,6 +309,7 @@ module Hubspot
         # @param pipeline_input [PipelineInput] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :validate_references_before_delete  (default to false)
+        # @option opts [Boolean] :validate_deal_stage_usages_before_delete  (default to false)
         # @return [Pipeline]
         def replace(object_type, pipeline_id, pipeline_input, opts = {})
           data, _status_code, _headers = replace_with_http_info(object_type, pipeline_id, pipeline_input, opts)
@@ -319,6 +323,7 @@ module Hubspot
         # @param pipeline_input [PipelineInput] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :validate_references_before_delete  (default to false)
+        # @option opts [Boolean] :validate_deal_stage_usages_before_delete  (default to false)
         # @return [Array<(Pipeline, Integer, Hash)>] Pipeline data, response status code and response headers
         def replace_with_http_info(object_type, pipeline_id, pipeline_input, opts = {})
           if @api_client.config.debugging
@@ -342,6 +347,7 @@ module Hubspot
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'validateReferencesBeforeDelete'] = opts[:'validate_references_before_delete'] if !opts[:'validate_references_before_delete'].nil?
+          query_params[:'validateDealStageUsagesBeforeDelete'] = opts[:'validate_deal_stage_usages_before_delete'] if !opts[:'validate_deal_stage_usages_before_delete'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -389,6 +395,7 @@ module Hubspot
         # @param pipeline_patch_input [PipelinePatchInput] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :validate_references_before_delete  (default to false)
+        # @option opts [Boolean] :validate_deal_stage_usages_before_delete  (default to false)
         # @return [Pipeline]
         def update(object_type, pipeline_id, pipeline_patch_input, opts = {})
           data, _status_code, _headers = update_with_http_info(object_type, pipeline_id, pipeline_patch_input, opts)
@@ -402,6 +409,7 @@ module Hubspot
         # @param pipeline_patch_input [PipelinePatchInput] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :validate_references_before_delete  (default to false)
+        # @option opts [Boolean] :validate_deal_stage_usages_before_delete  (default to false)
         # @return [Array<(Pipeline, Integer, Hash)>] Pipeline data, response status code and response headers
         def update_with_http_info(object_type, pipeline_id, pipeline_patch_input, opts = {})
           if @api_client.config.debugging
@@ -425,6 +433,7 @@ module Hubspot
           # query parameters
           query_params = opts[:query_params] || {}
           query_params[:'validateReferencesBeforeDelete'] = opts[:'validate_references_before_delete'] if !opts[:'validate_references_before_delete'].nil?
+          query_params[:'validateDealStageUsagesBeforeDelete'] = opts[:'validate_deal_stage_usages_before_delete'] if !opts[:'validate_deal_stage_usages_before_delete'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}

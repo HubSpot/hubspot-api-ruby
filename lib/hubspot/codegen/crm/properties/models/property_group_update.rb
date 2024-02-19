@@ -17,17 +17,17 @@ module Hubspot
   module Crm
     module Properties
       class PropertyGroupUpdate
-        # A human-readable label that will be shown in HubSpot.
-        attr_accessor :label
-
         # Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
         attr_accessor :display_order
+
+        # A human-readable label that will be shown in HubSpot.
+        attr_accessor :label
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
-            :'display_order' => :'displayOrder'
+            :'display_order' => :'displayOrder',
+            :'label' => :'label'
           }
         end
 
@@ -39,8 +39,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
-            :'display_order' => :'Integer'
+            :'display_order' => :'Integer',
+            :'label' => :'String'
           }
         end
 
@@ -65,12 +65,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
         end
 
@@ -92,8 +92,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
-              display_order == o.display_order
+              display_order == o.display_order &&
+              label == o.label
         end
 
         # @see the `==` method
@@ -105,7 +105,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, display_order].hash
+          [display_order, label].hash
         end
 
         # Builds the object from hash

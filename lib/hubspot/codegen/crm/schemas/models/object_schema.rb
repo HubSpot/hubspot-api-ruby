@@ -17,7 +17,25 @@ module Hubspot
   module Crm
     module Schemas
       class ObjectSchema
+        # Associations defined for a given object type.
+        attr_accessor :associations
+
+        # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+        attr_accessor :secondary_display_properties
+
+        attr_accessor :object_type_id
+
+        attr_accessor :description
+
+        # An assigned unique ID for the object, including portal ID and object name.
+        attr_accessor :fully_qualified_name
+
         attr_accessor :labels
+
+        attr_accessor :archived
+
+        # When the object schema was created.
+        attr_accessor :created_at
 
         # The names of properties that should be **required** when creating an object of this type.
         attr_accessor :required_properties
@@ -28,51 +46,36 @@ module Hubspot
         # The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
         attr_accessor :primary_display_property
 
-        # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
-        attr_accessor :secondary_display_properties
-
-        attr_accessor :archived
+        # A unique name for the schema's object type.
+        attr_accessor :name
 
         # A unique ID for this schema's object type. Will be defined as {meta-type}-{unique ID}.
         attr_accessor :id
 
-        # An assigned unique ID for the object, including portal ID and object name.
-        attr_accessor :fully_qualified_name
-
-        # When the object schema was created.
-        attr_accessor :created_at
+        # Properties defined for this object type.
+        attr_accessor :properties
 
         # When the object schema was last updated.
         attr_accessor :updated_at
 
-        attr_accessor :object_type_id
-
-        # Properties defined for this object type.
-        attr_accessor :properties
-
-        # Associations defined for a given object type.
-        attr_accessor :associations
-
-        # A unique name for the schema's object type.
-        attr_accessor :name
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'associations' => :'associations',
+            :'secondary_display_properties' => :'secondaryDisplayProperties',
+            :'object_type_id' => :'objectTypeId',
+            :'description' => :'description',
+            :'fully_qualified_name' => :'fullyQualifiedName',
             :'labels' => :'labels',
+            :'archived' => :'archived',
+            :'created_at' => :'createdAt',
             :'required_properties' => :'requiredProperties',
             :'searchable_properties' => :'searchableProperties',
             :'primary_display_property' => :'primaryDisplayProperty',
-            :'secondary_display_properties' => :'secondaryDisplayProperties',
-            :'archived' => :'archived',
+            :'name' => :'name',
             :'id' => :'id',
-            :'fully_qualified_name' => :'fullyQualifiedName',
-            :'created_at' => :'createdAt',
-            :'updated_at' => :'updatedAt',
-            :'object_type_id' => :'objectTypeId',
             :'properties' => :'properties',
-            :'associations' => :'associations',
-            :'name' => :'name'
+            :'updated_at' => :'updatedAt'
           }
         end
 
@@ -84,20 +87,21 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'associations' => :'Array<AssociationDefinition>',
+            :'secondary_display_properties' => :'Array<String>',
+            :'object_type_id' => :'String',
+            :'description' => :'String',
+            :'fully_qualified_name' => :'String',
             :'labels' => :'ObjectTypeDefinitionLabels',
+            :'archived' => :'Boolean',
+            :'created_at' => :'Time',
             :'required_properties' => :'Array<String>',
             :'searchable_properties' => :'Array<String>',
             :'primary_display_property' => :'String',
-            :'secondary_display_properties' => :'Array<String>',
-            :'archived' => :'Boolean',
+            :'name' => :'String',
             :'id' => :'String',
-            :'fully_qualified_name' => :'String',
-            :'created_at' => :'Time',
-            :'updated_at' => :'Time',
-            :'object_type_id' => :'String',
             :'properties' => :'Array<Property>',
-            :'associations' => :'Array<AssociationDefinition>',
-            :'name' => :'String'
+            :'updated_at' => :'Time'
           }
         end
 
@@ -122,8 +126,40 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'associations')
+            if (value = attributes[:'associations']).is_a?(Array)
+              self.associations = value
+            end
+          end
+
+          if attributes.key?(:'secondary_display_properties')
+            if (value = attributes[:'secondary_display_properties']).is_a?(Array)
+              self.secondary_display_properties = value
+            end
+          end
+
+          if attributes.key?(:'object_type_id')
+            self.object_type_id = attributes[:'object_type_id']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
+          if attributes.key?(:'fully_qualified_name')
+            self.fully_qualified_name = attributes[:'fully_qualified_name']
+          end
+
           if attributes.key?(:'labels')
             self.labels = attributes[:'labels']
+          end
+
+          if attributes.key?(:'archived')
+            self.archived = attributes[:'archived']
+          end
+
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
           if attributes.key?(:'required_properties')
@@ -142,34 +178,12 @@ module Hubspot
             self.primary_display_property = attributes[:'primary_display_property']
           end
 
-          if attributes.key?(:'secondary_display_properties')
-            if (value = attributes[:'secondary_display_properties']).is_a?(Array)
-              self.secondary_display_properties = value
-            end
-          end
-
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'id')
             self.id = attributes[:'id']
-          end
-
-          if attributes.key?(:'fully_qualified_name')
-            self.fully_qualified_name = attributes[:'fully_qualified_name']
-          end
-
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
-          end
-
-          if attributes.key?(:'updated_at')
-            self.updated_at = attributes[:'updated_at']
-          end
-
-          if attributes.key?(:'object_type_id')
-            self.object_type_id = attributes[:'object_type_id']
           end
 
           if attributes.key?(:'properties')
@@ -178,14 +192,8 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'associations')
-            if (value = attributes[:'associations']).is_a?(Array)
-              self.associations = value
-            end
-          end
-
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'updated_at')
+            self.updated_at = attributes[:'updated_at']
           end
         end
 
@@ -193,6 +201,10 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @associations.nil?
+            invalid_properties.push('invalid value for "associations", associations cannot be nil.')
+          end
+
           if @labels.nil?
             invalid_properties.push('invalid value for "labels", labels cannot be nil.')
           end
@@ -201,40 +213,16 @@ module Hubspot
             invalid_properties.push('invalid value for "required_properties", required_properties cannot be nil.')
           end
 
-          if @searchable_properties.nil?
-            invalid_properties.push('invalid value for "searchable_properties", searchable_properties cannot be nil.')
-          end
-
-          if @secondary_display_properties.nil?
-            invalid_properties.push('invalid value for "secondary_display_properties", secondary_display_properties cannot be nil.')
-          end
-
-          if @archived.nil?
-            invalid_properties.push('invalid value for "archived", archived cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           if @id.nil?
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
-          if @fully_qualified_name.nil?
-            invalid_properties.push('invalid value for "fully_qualified_name", fully_qualified_name cannot be nil.')
-          end
-
-          if @object_type_id.nil?
-            invalid_properties.push('invalid value for "object_type_id", object_type_id cannot be nil.')
-          end
-
           if @properties.nil?
             invalid_properties.push('invalid value for "properties", properties cannot be nil.')
-          end
-
-          if @associations.nil?
-            invalid_properties.push('invalid value for "associations", associations cannot be nil.')
-          end
-
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           invalid_properties
@@ -243,17 +231,12 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @associations.nil?
           return false if @labels.nil?
           return false if @required_properties.nil?
-          return false if @searchable_properties.nil?
-          return false if @secondary_display_properties.nil?
-          return false if @archived.nil?
-          return false if @id.nil?
-          return false if @fully_qualified_name.nil?
-          return false if @object_type_id.nil?
-          return false if @properties.nil?
-          return false if @associations.nil?
           return false if @name.nil?
+          return false if @id.nil?
+          return false if @properties.nil?
           true
         end
 
@@ -262,20 +245,21 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              associations == o.associations &&
+              secondary_display_properties == o.secondary_display_properties &&
+              object_type_id == o.object_type_id &&
+              description == o.description &&
+              fully_qualified_name == o.fully_qualified_name &&
               labels == o.labels &&
+              archived == o.archived &&
+              created_at == o.created_at &&
               required_properties == o.required_properties &&
               searchable_properties == o.searchable_properties &&
               primary_display_property == o.primary_display_property &&
-              secondary_display_properties == o.secondary_display_properties &&
-              archived == o.archived &&
+              name == o.name &&
               id == o.id &&
-              fully_qualified_name == o.fully_qualified_name &&
-              created_at == o.created_at &&
-              updated_at == o.updated_at &&
-              object_type_id == o.object_type_id &&
               properties == o.properties &&
-              associations == o.associations &&
-              name == o.name
+              updated_at == o.updated_at
         end
 
         # @see the `==` method
@@ -287,7 +271,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, archived, id, fully_qualified_name, created_at, updated_at, object_type_id, properties, associations, name].hash
+          [associations, secondary_display_properties, object_type_id, description, fully_qualified_name, labels, archived, created_at, required_properties, searchable_properties, primary_display_property, name, id, properties, updated_at].hash
         end
 
         # Builds the object from hash

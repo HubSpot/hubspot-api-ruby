@@ -1,5 +1,5 @@
 =begin
-#CRM Pipelines
+#Pipelines
 
 #Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
 
@@ -17,21 +17,21 @@ module Hubspot
   module Crm
     module Pipelines
       class PipelineStageInput
-        # A label used to organize pipeline stages in HubSpot's UI. Each pipeline stage's label must be unique within that pipeline.
-        attr_accessor :label
+        # A JSON object containing properties that are not present on all object pipelines.  For `deals` pipelines, the `probability` field is required (`{ \"probability\": 0.5 }`), and represents the likelihood a deal will close. Possible values are between 0.0 and 1.0 in increments of 0.1.  For `tickets` pipelines, the `ticketState` field is optional (`{ \"ticketState\": \"OPEN\" }`), and represents whether the ticket remains open or has been closed by a member of your Support team. Possible values are `OPEN` or `CLOSED`.
+        attr_accessor :metadata
 
         # The order for displaying this pipeline stage. If two pipeline stages have a matching `displayOrder`, they will be sorted alphabetically by label.
         attr_accessor :display_order
 
-        # A JSON object containing properties that are not present on all object pipelines.  For `deals` pipelines, the `probability` field is required (`{ \"probability\": 0.5 }`), and represents the likelihood a deal will close. Possible values are between 0.0 and 1.0 in increments of 0.1.  For `tickets` pipelines, the `ticketState` field is optional (`{ \"ticketState\": \"OPEN\" }`), and represents whether the ticket remains open or has been closed by a member of your Support team. Possible values are `OPEN` or `CLOSED`.
-        attr_accessor :metadata
+        # A label used to organize pipeline stages in HubSpot's UI. Each pipeline stage's label must be unique within that pipeline.
+        attr_accessor :label
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
+            :'metadata' => :'metadata',
             :'display_order' => :'displayOrder',
-            :'metadata' => :'metadata'
+            :'label' => :'label'
           }
         end
 
@@ -43,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
+            :'metadata' => :'Hash<String, String>',
             :'display_order' => :'Integer',
-            :'metadata' => :'Hash<String, String>'
+            :'label' => :'String'
           }
         end
 
@@ -70,18 +70,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
+          if attributes.key?(:'metadata')
+            if (value = attributes[:'metadata']).is_a?(Hash)
+              self.metadata = value
+            end
           end
 
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
           end
 
-          if attributes.key?(:'metadata')
-            if (value = attributes[:'metadata']).is_a?(Hash)
-              self.metadata = value
-            end
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
         end
 
@@ -89,16 +89,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          if @metadata.nil?
+            invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
           end
 
           if @display_order.nil?
             invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
           end
 
-          if @metadata.nil?
-            invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
           invalid_properties
@@ -107,9 +107,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @label.nil?
-          return false if @display_order.nil?
           return false if @metadata.nil?
+          return false if @display_order.nil?
+          return false if @label.nil?
           true
         end
 
@@ -118,9 +118,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
+              metadata == o.metadata &&
               display_order == o.display_order &&
-              metadata == o.metadata
+              label == o.label
         end
 
         # @see the `==` method
@@ -132,7 +132,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, display_order, metadata].hash
+          [metadata, display_order, label].hash
         end
 
         # Builds the object from hash

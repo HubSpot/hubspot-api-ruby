@@ -17,7 +17,8 @@ module Hubspot
   module Crm
     module Schemas
       class ObjectSchemaEgg
-        attr_accessor :labels
+        # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+        attr_accessor :secondary_display_properties
 
         # The names of properties that should be **required** when creating an object of this type.
         attr_accessor :required_properties
@@ -28,29 +29,31 @@ module Hubspot
         # The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
         attr_accessor :primary_display_property
 
-        # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
-        attr_accessor :secondary_display_properties
+        # A unique name for this object. For internal use only.
+        attr_accessor :name
 
-        # Properties defined for this object type.
-        attr_accessor :properties
+        attr_accessor :description
 
         # Associations defined for this object type.
         attr_accessor :associated_objects
 
-        # A unique name for this object. For internal use only.
-        attr_accessor :name
+        # Properties defined for this object type.
+        attr_accessor :properties
+
+        attr_accessor :labels
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'labels' => :'labels',
+            :'secondary_display_properties' => :'secondaryDisplayProperties',
             :'required_properties' => :'requiredProperties',
             :'searchable_properties' => :'searchableProperties',
             :'primary_display_property' => :'primaryDisplayProperty',
-            :'secondary_display_properties' => :'secondaryDisplayProperties',
-            :'properties' => :'properties',
+            :'name' => :'name',
+            :'description' => :'description',
             :'associated_objects' => :'associatedObjects',
-            :'name' => :'name'
+            :'properties' => :'properties',
+            :'labels' => :'labels'
           }
         end
 
@@ -62,14 +65,15 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'labels' => :'ObjectTypeDefinitionLabels',
+            :'secondary_display_properties' => :'Array<String>',
             :'required_properties' => :'Array<String>',
             :'searchable_properties' => :'Array<String>',
             :'primary_display_property' => :'String',
-            :'secondary_display_properties' => :'Array<String>',
-            :'properties' => :'Array<ObjectTypePropertyCreate>',
+            :'name' => :'String',
+            :'description' => :'String',
             :'associated_objects' => :'Array<String>',
-            :'name' => :'String'
+            :'properties' => :'Array<ObjectTypePropertyCreate>',
+            :'labels' => :'ObjectTypeDefinitionLabels'
           }
         end
 
@@ -94,8 +98,10 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'labels')
-            self.labels = attributes[:'labels']
+          if attributes.key?(:'secondary_display_properties')
+            if (value = attributes[:'secondary_display_properties']).is_a?(Array)
+              self.secondary_display_properties = value
+            end
           end
 
           if attributes.key?(:'required_properties')
@@ -114,9 +120,17 @@ module Hubspot
             self.primary_display_property = attributes[:'primary_display_property']
           end
 
-          if attributes.key?(:'secondary_display_properties')
-            if (value = attributes[:'secondary_display_properties']).is_a?(Array)
-              self.secondary_display_properties = value
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
+          if attributes.key?(:'associated_objects')
+            if (value = attributes[:'associated_objects']).is_a?(Array)
+              self.associated_objects = value
             end
           end
 
@@ -126,14 +140,8 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'associated_objects')
-            if (value = attributes[:'associated_objects']).is_a?(Array)
-              self.associated_objects = value
-            end
-          end
-
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'labels')
+            self.labels = attributes[:'labels']
           end
         end
 
@@ -141,32 +149,24 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @labels.nil?
-            invalid_properties.push('invalid value for "labels", labels cannot be nil.')
-          end
-
           if @required_properties.nil?
             invalid_properties.push('invalid value for "required_properties", required_properties cannot be nil.')
           end
 
-          if @searchable_properties.nil?
-            invalid_properties.push('invalid value for "searchable_properties", searchable_properties cannot be nil.')
-          end
-
-          if @secondary_display_properties.nil?
-            invalid_properties.push('invalid value for "secondary_display_properties", secondary_display_properties cannot be nil.')
-          end
-
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           if @associated_objects.nil?
             invalid_properties.push('invalid value for "associated_objects", associated_objects cannot be nil.')
           end
 
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
+          if @labels.nil?
+            invalid_properties.push('invalid value for "labels", labels cannot be nil.')
           end
 
           invalid_properties
@@ -175,13 +175,11 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @labels.nil?
           return false if @required_properties.nil?
-          return false if @searchable_properties.nil?
-          return false if @secondary_display_properties.nil?
-          return false if @properties.nil?
-          return false if @associated_objects.nil?
           return false if @name.nil?
+          return false if @associated_objects.nil?
+          return false if @properties.nil?
+          return false if @labels.nil?
           true
         end
 
@@ -190,14 +188,15 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              labels == o.labels &&
+              secondary_display_properties == o.secondary_display_properties &&
               required_properties == o.required_properties &&
               searchable_properties == o.searchable_properties &&
               primary_display_property == o.primary_display_property &&
-              secondary_display_properties == o.secondary_display_properties &&
-              properties == o.properties &&
+              name == o.name &&
+              description == o.description &&
               associated_objects == o.associated_objects &&
-              name == o.name
+              properties == o.properties &&
+              labels == o.labels
         end
 
         # @see the `==` method
@@ -209,7 +208,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [labels, required_properties, searchable_properties, primary_display_property, secondary_display_properties, properties, associated_objects, name].hash
+          [secondary_display_properties, required_properties, searchable_properties, primary_display_property, name, description, associated_objects, properties, labels].hash
         end
 
         # Builds the object from hash

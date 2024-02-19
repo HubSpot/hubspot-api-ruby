@@ -1,5 +1,5 @@
 =begin
-#CRM Owners
+#Crm Owners
 
 #HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team(s) an owner can access, as well as which team is the owner's primary team.
 
@@ -17,15 +17,15 @@ module Hubspot
   module Crm
     module Owners
       class CollectionResponsePublicOwnerForwardPaging
-        attr_accessor :results
-
         attr_accessor :paging
+
+        attr_accessor :results
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'results' => :'results',
-            :'paging' => :'paging'
+            :'paging' => :'paging',
+            :'results' => :'results'
           }
         end
 
@@ -37,8 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'results' => :'Array<PublicOwner>',
-            :'paging' => :'ForwardPaging'
+            :'paging' => :'ForwardPaging',
+            :'results' => :'Array<PublicOwner>'
           }
         end
 
@@ -63,14 +63,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
+          end
+
           if attributes.key?(:'results')
             if (value = attributes[:'results']).is_a?(Array)
               self.results = value
             end
-          end
-
-          if attributes.key?(:'paging')
-            self.paging = attributes[:'paging']
           end
         end
 
@@ -97,8 +97,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              results == o.results &&
-              paging == o.paging
+              paging == o.paging &&
+              results == o.results
         end
 
         # @see the `==` method
@@ -110,7 +110,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [results, paging].hash
+          [paging, results].hash
         end
 
         # Builds the object from hash

@@ -17,24 +17,24 @@ module Hubspot
   module Crm
     module Properties
       class PropertyGroup
+        attr_accessor :archived
+
         # The internal property group name, which must be used when referencing the property group via the API.
         attr_accessor :name
-
-        # A human-readable label that will be shown in HubSpot.
-        attr_accessor :label
 
         # Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
         attr_accessor :display_order
 
-        attr_accessor :archived
+        # A human-readable label that will be shown in HubSpot.
+        attr_accessor :label
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'archived' => :'archived',
             :'name' => :'name',
-            :'label' => :'label',
             :'display_order' => :'displayOrder',
-            :'archived' => :'archived'
+            :'label' => :'label'
           }
         end
 
@@ -46,10 +46,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'archived' => :'Boolean',
             :'name' => :'String',
-            :'label' => :'String',
             :'display_order' => :'Integer',
-            :'archived' => :'Boolean'
+            :'label' => :'String'
           }
         end
 
@@ -74,20 +74,20 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'archived')
+            self.archived = attributes[:'archived']
           end
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
           end
 
-          if attributes.key?(:'archived')
-            self.archived = attributes[:'archived']
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
         end
 
@@ -95,20 +95,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          if @archived.nil?
+            invalid_properties.push('invalid value for "archived", archived cannot be nil.')
           end
 
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           if @display_order.nil?
             invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
           end
 
-          if @archived.nil?
-            invalid_properties.push('invalid value for "archived", archived cannot be nil.')
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
           invalid_properties
@@ -117,10 +117,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
-          return false if @label.nil?
-          return false if @display_order.nil?
           return false if @archived.nil?
+          return false if @name.nil?
+          return false if @display_order.nil?
+          return false if @label.nil?
           true
         end
 
@@ -129,10 +129,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              archived == o.archived &&
               name == o.name &&
-              label == o.label &&
               display_order == o.display_order &&
-              archived == o.archived
+              label == o.label
         end
 
         # @see the `==` method
@@ -144,7 +144,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, display_order, archived].hash
+          [archived, name, display_order, label].hash
         end
 
         # Builds the object from hash

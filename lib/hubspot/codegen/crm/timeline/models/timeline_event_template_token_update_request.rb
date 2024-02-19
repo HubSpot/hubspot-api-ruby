@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -17,21 +17,21 @@ module Hubspot
   module Crm
     module Timeline
       class TimelineEventTemplateTokenUpdateRequest
+        # If type is `enumeration`, we should have a list of options to choose from.
+        attr_accessor :options
+
         # Used for list segmentation and reporting.
         attr_accessor :label
 
         # The name of the CRM object property. This will populate the CRM object property associated with the event. With enough of these, you can fully build CRM objects via the Timeline API.
         attr_accessor :object_property_name
 
-        # If type is `enumeration`, we should have a list of options to choose from.
-        attr_accessor :options
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'options' => :'options',
             :'label' => :'label',
-            :'object_property_name' => :'objectPropertyName',
-            :'options' => :'options'
+            :'object_property_name' => :'objectPropertyName'
           }
         end
 
@@ -43,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'options' => :'Array<TimelineEventTemplateTokenOption>',
             :'label' => :'String',
-            :'object_property_name' => :'String',
-            :'options' => :'Array<TimelineEventTemplateTokenOption>'
+            :'object_property_name' => :'String'
           }
         end
 
@@ -70,18 +70,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'options')
+            if (value = attributes[:'options']).is_a?(Array)
+              self.options = value
+            end
+          end
+
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
 
           if attributes.key?(:'object_property_name')
             self.object_property_name = attributes[:'object_property_name']
-          end
-
-          if attributes.key?(:'options')
-            if (value = attributes[:'options']).is_a?(Array)
-              self.options = value
-            end
           end
         end
 
@@ -93,10 +93,6 @@ module Hubspot
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
-          if @options.nil?
-            invalid_properties.push('invalid value for "options", options cannot be nil.')
-          end
-
           invalid_properties
         end
 
@@ -104,7 +100,6 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @label.nil?
-          return false if @options.nil?
           true
         end
 
@@ -113,9 +108,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              options == o.options &&
               label == o.label &&
-              object_property_name == o.object_property_name &&
-              options == o.options
+              object_property_name == o.object_property_name
         end
 
         # @see the `==` method
@@ -127,7 +122,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, object_property_name, options].hash
+          [options, label, object_property_name].hash
         end
 
         # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -17,11 +17,27 @@ module Hubspot
   module Crm
     module Timeline
       class TimelineEventResponse
+        # The event template ID.
+        attr_accessor :event_template_id
+
+        attr_accessor :created_at
+
+        # Additional event-specific data that can be interpreted by the template's markdown.
+        attr_accessor :extra_data
+
+        attr_accessor :timeline_i_frame
+
+        # The event domain (often paired with utk).
+        attr_accessor :domain
+
+        # A collection of token keys and values associated with the template tokens.
+        attr_accessor :tokens
+
         # Identifier for the event. This should be unique to the app and event template. If you use the same ID for different CRM objects, the last to be processed will win and the first will not have a record. You can also use `{{uuid}}` anywhere in the ID to generate a unique string, guaranteeing uniqueness.
         attr_accessor :id
 
-        # The event template ID.
-        attr_accessor :event_template_id
+        # Use the `utk` parameter to associate an event with a contact by `usertoken`. This is recommended if you don't know a user's email, but have an identifying user token in your cookie.
+        attr_accessor :utk
 
         # The email address used for contact-specific events. This can be used to identify existing contacts, create new ones, or change the email for an existing contact (if paired with the `objectId`).
         attr_accessor :email
@@ -29,43 +45,27 @@ module Hubspot
         # The CRM object identifier. This is required for every event other than contacts (where utk or email can be used).
         attr_accessor :object_id
 
-        # Use the `utk` parameter to associate an event with a contact by `usertoken`. This is recommended if you don't know a user's email, but have an identifying user token in your cookie.
-        attr_accessor :utk
-
-        # The event domain (often paired with utk).
-        attr_accessor :domain
-
         # The time the event occurred. If not passed in, the curren time will be assumed. This is used to determine where an event is shown on a CRM object's timeline.
         attr_accessor :timestamp
-
-        # A collection of token keys and values associated with the template tokens.
-        attr_accessor :tokens
-
-        # Additional event-specific data that can be interpreted by the template's markdown.
-        attr_accessor :extra_data
-
-        attr_accessor :timeline_i_frame
 
         # The ObjectType associated with the EventTemplate.
         attr_accessor :object_type
 
-        attr_accessor :created_at
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
             :'event_template_id' => :'eventTemplateId',
-            :'email' => :'email',
-            :'object_id' => :'objectId',
-            :'utk' => :'utk',
-            :'domain' => :'domain',
-            :'timestamp' => :'timestamp',
-            :'tokens' => :'tokens',
+            :'created_at' => :'createdAt',
             :'extra_data' => :'extraData',
             :'timeline_i_frame' => :'timelineIFrame',
-            :'object_type' => :'objectType',
-            :'created_at' => :'createdAt'
+            :'domain' => :'domain',
+            :'tokens' => :'tokens',
+            :'id' => :'id',
+            :'utk' => :'utk',
+            :'email' => :'email',
+            :'object_id' => :'objectId',
+            :'timestamp' => :'timestamp',
+            :'object_type' => :'objectType'
           }
         end
 
@@ -77,18 +77,18 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
             :'event_template_id' => :'String',
-            :'email' => :'String',
-            :'object_id' => :'String',
-            :'utk' => :'String',
-            :'domain' => :'String',
-            :'timestamp' => :'Time',
-            :'tokens' => :'Hash<String, String>',
+            :'created_at' => :'Time',
             :'extra_data' => :'Object',
             :'timeline_i_frame' => :'TimelineEventIFrame',
-            :'object_type' => :'String',
-            :'created_at' => :'Time'
+            :'domain' => :'String',
+            :'tokens' => :'Hash<String, String>',
+            :'id' => :'String',
+            :'utk' => :'String',
+            :'email' => :'String',
+            :'object_id' => :'String',
+            :'timestamp' => :'Time',
+            :'object_type' => :'String'
           }
         end
 
@@ -113,38 +113,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
           if attributes.key?(:'event_template_id')
             self.event_template_id = attributes[:'event_template_id']
           end
 
-          if attributes.key?(:'email')
-            self.email = attributes[:'email']
-          end
-
-          if attributes.key?(:'object_id')
-            self.object_id = attributes[:'object_id']
-          end
-
-          if attributes.key?(:'utk')
-            self.utk = attributes[:'utk']
-          end
-
-          if attributes.key?(:'domain')
-            self.domain = attributes[:'domain']
-          end
-
-          if attributes.key?(:'timestamp')
-            self.timestamp = attributes[:'timestamp']
-          end
-
-          if attributes.key?(:'tokens')
-            if (value = attributes[:'tokens']).is_a?(Hash)
-              self.tokens = value
-            end
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
           if attributes.key?(:'extra_data')
@@ -155,12 +129,38 @@ module Hubspot
             self.timeline_i_frame = attributes[:'timeline_i_frame']
           end
 
-          if attributes.key?(:'object_type')
-            self.object_type = attributes[:'object_type']
+          if attributes.key?(:'domain')
+            self.domain = attributes[:'domain']
           end
 
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
+          if attributes.key?(:'tokens')
+            if (value = attributes[:'tokens']).is_a?(Hash)
+              self.tokens = value
+            end
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'utk')
+            self.utk = attributes[:'utk']
+          end
+
+          if attributes.key?(:'email')
+            self.email = attributes[:'email']
+          end
+
+          if attributes.key?(:'object_id')
+            self.object_id = attributes[:'object_id']
+          end
+
+          if attributes.key?(:'timestamp')
+            self.timestamp = attributes[:'timestamp']
+          end
+
+          if attributes.key?(:'object_type')
+            self.object_type = attributes[:'object_type']
           end
         end
 
@@ -168,16 +168,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           if @event_template_id.nil?
             invalid_properties.push('invalid value for "event_template_id", event_template_id cannot be nil.')
           end
 
           if @tokens.nil?
             invalid_properties.push('invalid value for "tokens", tokens cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           if @object_type.nil?
@@ -190,9 +190,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
           return false if @event_template_id.nil?
           return false if @tokens.nil?
+          return false if @id.nil?
           return false if @object_type.nil?
           true
         end
@@ -202,18 +202,18 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
               event_template_id == o.event_template_id &&
-              email == o.email &&
-              object_id == o.object_id &&
-              utk == o.utk &&
-              domain == o.domain &&
-              timestamp == o.timestamp &&
-              tokens == o.tokens &&
+              created_at == o.created_at &&
               extra_data == o.extra_data &&
               timeline_i_frame == o.timeline_i_frame &&
-              object_type == o.object_type &&
-              created_at == o.created_at
+              domain == o.domain &&
+              tokens == o.tokens &&
+              id == o.id &&
+              utk == o.utk &&
+              email == o.email &&
+              object_id == o.object_id &&
+              timestamp == o.timestamp &&
+              object_type == o.object_type
         end
 
         # @see the `==` method
@@ -225,7 +225,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, event_template_id, email, object_id, utk, domain, timestamp, tokens, extra_data, timeline_i_frame, object_type, created_at].hash
+          [event_template_id, created_at, extra_data, timeline_i_frame, domain, tokens, id, utk, email, object_id, timestamp, object_type].hash
         end
 
         # Builds the object from hash

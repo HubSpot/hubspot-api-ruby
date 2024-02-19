@@ -17,6 +17,24 @@ module Hubspot
   module Crm
     module Properties
       class PropertyUpdate
+        # The name of the property group the property belongs to.
+        attr_accessor :group_name
+
+        # If true, the property won't be visible and can't be used in HubSpot.
+        attr_accessor :hidden
+
+        # A list of valid options for the property.
+        attr_accessor :options
+
+        # Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the Property to be displayed after any positive values.
+        attr_accessor :display_order
+
+        # A description of the property that will be shown as help text in HubSpot.
+        attr_accessor :description
+
+        # Represents a formula that is used to compute a calculated property.
+        attr_accessor :calculation_formula
+
         # A human-readable property label that will be shown in HubSpot.
         attr_accessor :label
 
@@ -26,26 +44,8 @@ module Hubspot
         # Controls how the property appears in HubSpot.
         attr_accessor :field_type
 
-        # The name of the property group the property belongs to.
-        attr_accessor :group_name
-
-        # A description of the property that will be shown as help text in HubSpot.
-        attr_accessor :description
-
-        # A list of valid options for the property.
-        attr_accessor :options
-
-        # Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the Property to be displayed after any positive values.
-        attr_accessor :display_order
-
-        # If true, the property won't be visible and can't be used in HubSpot.
-        attr_accessor :hidden
-
         # Whether or not the property can be used in a HubSpot form.
         attr_accessor :form_field
-
-        # Represents a formula that is used to compute a calculated property.
-        attr_accessor :calculation_formula
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -72,16 +72,16 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'group_name' => :'groupName',
+            :'hidden' => :'hidden',
+            :'options' => :'options',
+            :'display_order' => :'displayOrder',
+            :'description' => :'description',
+            :'calculation_formula' => :'calculationFormula',
             :'label' => :'label',
             :'type' => :'type',
             :'field_type' => :'fieldType',
-            :'group_name' => :'groupName',
-            :'description' => :'description',
-            :'options' => :'options',
-            :'display_order' => :'displayOrder',
-            :'hidden' => :'hidden',
-            :'form_field' => :'formField',
-            :'calculation_formula' => :'calculationFormula'
+            :'form_field' => :'formField'
           }
         end
 
@@ -93,16 +93,16 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'group_name' => :'String',
+            :'hidden' => :'Boolean',
+            :'options' => :'Array<OptionInput>',
+            :'display_order' => :'Integer',
+            :'description' => :'String',
+            :'calculation_formula' => :'String',
             :'label' => :'String',
             :'type' => :'String',
             :'field_type' => :'String',
-            :'group_name' => :'String',
-            :'description' => :'String',
-            :'options' => :'Array<OptionInput>',
-            :'display_order' => :'Integer',
-            :'hidden' => :'Boolean',
-            :'form_field' => :'Boolean',
-            :'calculation_formula' => :'String'
+            :'form_field' => :'Boolean'
           }
         end
 
@@ -127,24 +127,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
-          end
-
-          if attributes.key?(:'field_type')
-            self.field_type = attributes[:'field_type']
-          end
-
           if attributes.key?(:'group_name')
             self.group_name = attributes[:'group_name']
           end
 
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
           end
 
           if attributes.key?(:'options')
@@ -157,16 +145,28 @@ module Hubspot
             self.display_order = attributes[:'display_order']
           end
 
-          if attributes.key?(:'hidden')
-            self.hidden = attributes[:'hidden']
-          end
-
-          if attributes.key?(:'form_field')
-            self.form_field = attributes[:'form_field']
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
           end
 
           if attributes.key?(:'calculation_formula')
             self.calculation_formula = attributes[:'calculation_formula']
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          end
+
+          if attributes.key?(:'field_type')
+            self.field_type = attributes[:'field_type']
+          end
+
+          if attributes.key?(:'form_field')
+            self.form_field = attributes[:'form_field']
           end
         end
 
@@ -212,16 +212,16 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              group_name == o.group_name &&
+              hidden == o.hidden &&
+              options == o.options &&
+              display_order == o.display_order &&
+              description == o.description &&
+              calculation_formula == o.calculation_formula &&
               label == o.label &&
               type == o.type &&
               field_type == o.field_type &&
-              group_name == o.group_name &&
-              description == o.description &&
-              options == o.options &&
-              display_order == o.display_order &&
-              hidden == o.hidden &&
-              form_field == o.form_field &&
-              calculation_formula == o.calculation_formula
+              form_field == o.form_field
         end
 
         # @see the `==` method
@@ -233,7 +233,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, type, field_type, group_name, description, options, display_order, hidden, form_field, calculation_formula].hash
+          [group_name, hidden, options, display_order, description, calculation_formula, label, type, field_type, form_field].hash
         end
 
         # Builds the object from hash
