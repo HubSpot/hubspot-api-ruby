@@ -1,5 +1,5 @@
 =begin
-#Calling Extensions API
+#Calling Extensions
 
 #Provides a way for apps to add custom calling options to a contact record. This works in conjunction with the [Calling SDK](#), which is used to build your phone/calling UI. The endpoints here allow your service to appear as an option to HubSpot users when they access the *Call* action on a contact record. Once accessed, your custom phone/calling UI will be displayed in an iframe at the specified URL with the specified dimensions on that record.
 
@@ -19,8 +19,17 @@ module Hubspot
       module Calling
         # Settings create request
         class SettingsRequest
+          # When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+          attr_accessor :supports_custom_objects
+
+          # When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
+          attr_accessor :is_ready
+
           # The name of your calling service to display to users.
           attr_accessor :name
+
+          # The target width of the iframe that will contain your phone/calling UI.
+          attr_accessor :width
 
           # The URL to your phone/calling UI, built with the [Calling SDK](#).
           attr_accessor :url
@@ -28,24 +37,15 @@ module Hubspot
           # The target height of the iframe that will contain your phone/calling UI.
           attr_accessor :height
 
-          # The target width of the iframe that will contain your phone/calling UI.
-          attr_accessor :width
-
-          # When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
-          attr_accessor :is_ready
-
-          # When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
-          attr_accessor :supports_custom_objects
-
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'name' => :'name',
-              :'url' => :'url',
-              :'height' => :'height',
-              :'width' => :'width',
+              :'supports_custom_objects' => :'supportsCustomObjects',
               :'is_ready' => :'isReady',
-              :'supports_custom_objects' => :'supportsCustomObjects'
+              :'name' => :'name',
+              :'width' => :'width',
+              :'url' => :'url',
+              :'height' => :'height'
             }
           end
 
@@ -57,12 +57,12 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'name' => :'String',
-              :'url' => :'String',
-              :'height' => :'Integer',
-              :'width' => :'Integer',
+              :'supports_custom_objects' => :'Boolean',
               :'is_ready' => :'Boolean',
-              :'supports_custom_objects' => :'Boolean'
+              :'name' => :'String',
+              :'width' => :'Integer',
+              :'url' => :'String',
+              :'height' => :'Integer'
             }
           end
 
@@ -87,8 +87,20 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'supports_custom_objects')
+              self.supports_custom_objects = attributes[:'supports_custom_objects']
+            end
+
+            if attributes.key?(:'is_ready')
+              self.is_ready = attributes[:'is_ready']
+            end
+
             if attributes.key?(:'name')
               self.name = attributes[:'name']
+            end
+
+            if attributes.key?(:'width')
+              self.width = attributes[:'width']
             end
 
             if attributes.key?(:'url')
@@ -97,18 +109,6 @@ module Hubspot
 
             if attributes.key?(:'height')
               self.height = attributes[:'height']
-            end
-
-            if attributes.key?(:'width')
-              self.width = attributes[:'width']
-            end
-
-            if attributes.key?(:'is_ready')
-              self.is_ready = attributes[:'is_ready']
-            end
-
-            if attributes.key?(:'supports_custom_objects')
-              self.supports_custom_objects = attributes[:'supports_custom_objects']
             end
           end
 
@@ -140,12 +140,12 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                name == o.name &&
-                url == o.url &&
-                height == o.height &&
-                width == o.width &&
+                supports_custom_objects == o.supports_custom_objects &&
                 is_ready == o.is_ready &&
-                supports_custom_objects == o.supports_custom_objects
+                name == o.name &&
+                width == o.width &&
+                url == o.url &&
+                height == o.height
           end
 
           # @see the `==` method
@@ -157,7 +157,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, url, height, width, is_ready, supports_custom_objects].hash
+            [supports_custom_objects, is_ready, name, width, url, height].hash
           end
 
           # Builds the object from hash

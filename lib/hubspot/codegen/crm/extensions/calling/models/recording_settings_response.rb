@@ -1,7 +1,7 @@
 =begin
-#CRM cards
+#Calling Extensions
 
-#Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
+#Provides a way for apps to add custom calling options to a contact record. This works in conjunction with the [Calling SDK](#), which is used to build your phone/calling UI. The endpoints here allow your service to appear as an option to HubSpot users when they access the *Call* action on a contact record. Once accessed, your custom phone/calling UI will be displayed in an iframe at the specified URL with the specified dimensions on that record.
 
 The version of the OpenAPI document: v3
 
@@ -16,16 +16,14 @@ require 'time'
 module Hubspot
   module Crm
     module Extensions
-      module Cards
-        # List of card definitions
-        class CardListResponse
-          # List of card definitions
-          attr_accessor :results
+      module Calling
+        class RecordingSettingsResponse
+          attr_accessor :url_to_retrieve_authed_recording
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'results' => :'results'
+              :'url_to_retrieve_authed_recording' => :'urlToRetrieveAuthedRecording'
             }
           end
 
@@ -37,7 +35,7 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'results' => :'Array<CardResponse>'
+              :'url_to_retrieve_authed_recording' => :'String'
             }
           end
 
@@ -51,21 +49,19 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Cards::CardListResponse` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Calling::RecordingSettingsResponse` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Cards::CardListResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Calling::RecordingSettingsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'results')
-              if (value = attributes[:'results']).is_a?(Array)
-                self.results = value
-              end
+            if attributes.key?(:'url_to_retrieve_authed_recording')
+              self.url_to_retrieve_authed_recording = attributes[:'url_to_retrieve_authed_recording']
             end
           end
 
@@ -73,8 +69,8 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @results.nil?
-              invalid_properties.push('invalid value for "results", results cannot be nil.')
+            if @url_to_retrieve_authed_recording.nil?
+              invalid_properties.push('invalid value for "url_to_retrieve_authed_recording", url_to_retrieve_authed_recording cannot be nil.')
             end
 
             invalid_properties
@@ -83,7 +79,7 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @results.nil?
+            return false if @url_to_retrieve_authed_recording.nil?
             true
           end
 
@@ -92,7 +88,7 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                results == o.results
+                url_to_retrieve_authed_recording == o.url_to_retrieve_authed_recording
           end
 
           # @see the `==` method
@@ -104,7 +100,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [results].hash
+            [url_to_retrieve_authed_recording].hash
           end
 
           # Builds the object from hash
@@ -175,7 +171,7 @@ module Hubspot
               end
             else # model
               # models (e.g. Pet) or oneOf
-              klass = Hubspot::Crm::Extensions::Cards.const_get(type)
+              klass = Hubspot::Crm::Extensions::Calling.const_get(type)
               klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
             end
           end

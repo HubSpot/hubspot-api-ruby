@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -40,7 +40,7 @@ module Hubspot
               @api_client.config.logger.debug 'Calling API: SampleResponseApi.get_cards_sample_response ...'
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/sample-response'
+            local_var_path = '/crm/v3/extensions/cards-dev/sample-response'
 
             # query parameters
             query_params = opts[:query_params] || {}

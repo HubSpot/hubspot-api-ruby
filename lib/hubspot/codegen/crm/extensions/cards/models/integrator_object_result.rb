@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -18,23 +18,23 @@ module Hubspot
     module Extensions
       module Cards
         class IntegratorObjectResult
-          attr_accessor :id
-
-          attr_accessor :title
-
           attr_accessor :link_url
 
           attr_accessor :tokens
+
+          attr_accessor :id
+
+          attr_accessor :title
 
           attr_accessor :actions
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'title' => :'title',
               :'link_url' => :'linkUrl',
               :'tokens' => :'tokens',
+              :'id' => :'id',
+              :'title' => :'title',
               :'actions' => :'actions'
             }
           end
@@ -47,10 +47,10 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'title' => :'String',
               :'link_url' => :'String',
               :'tokens' => :'Array<ObjectToken>',
+              :'id' => :'String',
+              :'title' => :'String',
               :'actions' => :'Array<IntegratorObjectResultActionsInner>'
             }
           end
@@ -76,14 +76,6 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
-            if attributes.key?(:'title')
-              self.title = attributes[:'title']
-            end
-
             if attributes.key?(:'link_url')
               self.link_url = attributes[:'link_url']
             end
@@ -92,6 +84,14 @@ module Hubspot
               if (value = attributes[:'tokens']).is_a?(Array)
                 self.tokens = value
               end
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
+            end
+
+            if attributes.key?(:'title')
+              self.title = attributes[:'title']
             end
 
             if attributes.key?(:'actions')
@@ -105,16 +105,16 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @tokens.nil?
+              invalid_properties.push('invalid value for "tokens", tokens cannot be nil.')
+            end
+
             if @id.nil?
               invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
             if @title.nil?
               invalid_properties.push('invalid value for "title", title cannot be nil.')
-            end
-
-            if @tokens.nil?
-              invalid_properties.push('invalid value for "tokens", tokens cannot be nil.')
             end
 
             if @actions.nil?
@@ -127,9 +127,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @tokens.nil?
             return false if @id.nil?
             return false if @title.nil?
-            return false if @tokens.nil?
             return false if @actions.nil?
             true
           end
@@ -139,10 +139,10 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                title == o.title &&
                 link_url == o.link_url &&
                 tokens == o.tokens &&
+                id == o.id &&
+                title == o.title &&
                 actions == o.actions
           end
 
@@ -155,7 +155,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, title, link_url, tokens, actions].hash
+            [link_url, tokens, id, title, actions].hash
           end
 
           # Builds the object from hash

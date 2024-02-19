@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -118,7 +118,7 @@ module Hubspot
           # @return true if the model is valid
           def valid?
             return false if @name.nil?
-            name_validator = EnumAttributeValidator.new('String', ["contacts", "deals", "companies", "tickets"])
+            name_validator = EnumAttributeValidator.new('String', ["contacts", "deals", "companies", "tickets", "marketing_events"])
             return false unless name_validator.valid?(@name)
             return false if @properties_to_send.nil?
             true
@@ -127,7 +127,7 @@ module Hubspot
           # Custom attribute writer method checking allowed values (enum).
           # @param [Object] name Object to be assigned
           def name=(name)
-            validator = EnumAttributeValidator.new('String', ["contacts", "deals", "companies", "tickets"])
+            validator = EnumAttributeValidator.new('String', ["contacts", "deals", "companies", "tickets", "marketing_events"])
             unless validator.valid?(name)
               fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
             end

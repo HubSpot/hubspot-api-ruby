@@ -1,5 +1,5 @@
 =begin
-#Video Conference Extension
+#Video Conferencing Extension
 
 #These APIs allow you to specify URLs that can be used to interact with a video conferencing application, to allow HubSpot to add video conference links to meeting requests with contacts.
 
@@ -66,7 +66,7 @@ module Hubspot
             return_type = opts[:debug_return_type]
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || []
+            auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :operation => :"SettingsApi.archive",
@@ -129,7 +129,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'ExternalSettings'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || []
+            auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :operation => :"SettingsApi.get_by_id",
@@ -203,7 +203,7 @@ module Hubspot
             return_type = opts[:debug_return_type] || 'ExternalSettings'
 
             # auth_names
-            auth_names = opts[:debug_auth_names] || []
+            auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
               :operation => :"SettingsApi.replace",

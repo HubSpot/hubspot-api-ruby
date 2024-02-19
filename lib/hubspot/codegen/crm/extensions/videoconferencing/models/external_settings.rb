@@ -1,5 +1,5 @@
 =begin
-#Video Conference Extension
+#Video Conferencing Extension
 
 #These APIs allow you to specify URLs that can be used to interact with a video conferencing application, to allow HubSpot to add video conference links to meeting requests with contacts.
 
@@ -19,6 +19,11 @@ module Hubspot
       module Videoconferencing
         # The URLs of the various actions provided by the video conferencing application. All URLs must use the `https` protocol.
         class ExternalSettings
+          # The URL that HubSpot will use to verify that a user exists in the video conference application.
+          attr_accessor :user_verify_url
+
+          attr_accessor :fetch_accounts_uri
+
           # The URL that HubSpot will send requests to create a new video conference.
           attr_accessor :create_meeting_url
 
@@ -28,16 +33,14 @@ module Hubspot
           # The URL that HubSpot will send notifications of meetings that have been deleted in HubSpot.
           attr_accessor :delete_meeting_url
 
-          # The URL that HubSpot will use to verify that a user exists in the video conference application.
-          attr_accessor :user_verify_url
-
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'user_verify_url' => :'userVerifyUrl',
+              :'fetch_accounts_uri' => :'fetchAccountsUri',
               :'create_meeting_url' => :'createMeetingUrl',
               :'update_meeting_url' => :'updateMeetingUrl',
-              :'delete_meeting_url' => :'deleteMeetingUrl',
-              :'user_verify_url' => :'userVerifyUrl'
+              :'delete_meeting_url' => :'deleteMeetingUrl'
             }
           end
 
@@ -49,10 +52,11 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'user_verify_url' => :'String',
+              :'fetch_accounts_uri' => :'String',
               :'create_meeting_url' => :'String',
               :'update_meeting_url' => :'String',
-              :'delete_meeting_url' => :'String',
-              :'user_verify_url' => :'String'
+              :'delete_meeting_url' => :'String'
             }
           end
 
@@ -77,6 +81,14 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'user_verify_url')
+              self.user_verify_url = attributes[:'user_verify_url']
+            end
+
+            if attributes.key?(:'fetch_accounts_uri')
+              self.fetch_accounts_uri = attributes[:'fetch_accounts_uri']
+            end
+
             if attributes.key?(:'create_meeting_url')
               self.create_meeting_url = attributes[:'create_meeting_url']
             end
@@ -87,10 +99,6 @@ module Hubspot
 
             if attributes.key?(:'delete_meeting_url')
               self.delete_meeting_url = attributes[:'delete_meeting_url']
-            end
-
-            if attributes.key?(:'user_verify_url')
-              self.user_verify_url = attributes[:'user_verify_url']
             end
           end
 
@@ -117,10 +125,11 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                user_verify_url == o.user_verify_url &&
+                fetch_accounts_uri == o.fetch_accounts_uri &&
                 create_meeting_url == o.create_meeting_url &&
                 update_meeting_url == o.update_meeting_url &&
-                delete_meeting_url == o.delete_meeting_url &&
-                user_verify_url == o.user_verify_url
+                delete_meeting_url == o.delete_meeting_url
           end
 
           # @see the `==` method
@@ -132,7 +141,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [create_meeting_url, update_meeting_url, delete_meeting_url, user_verify_url].hash
+            [user_verify_url, fetch_accounts_uri, create_meeting_url, update_meeting_url, delete_meeting_url].hash
           end
 
           # Builds the object from hash

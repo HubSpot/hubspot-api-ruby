@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -17,36 +17,50 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
-        # Current state of Card Definition
-        class CardResponse
-          # Generated unique ID for card.
-          attr_accessor :id
+        class CardAuditResponse
+          attr_accessor :action_type
 
-          # When this card was created.
-          attr_accessor :created_at
+          attr_accessor :object_type_id
 
-          # The last time this card was updated.
-          attr_accessor :updated_at
+          attr_accessor :auth_source
 
-          # Displayed title of this card.
-          attr_accessor :title
+          attr_accessor :changed_at
 
-          attr_accessor :fetch
+          attr_accessor :application_id
 
-          attr_accessor :display
+          attr_accessor :initiating_user_id
 
-          attr_accessor :actions
+          class EnumAttributeValidator
+            attr_reader :datatype
+            attr_reader :allowable_values
+
+            def initialize(datatype, allowable_values)
+              @allowable_values = allowable_values.map do |value|
+                case datatype.to_s
+                when /Integer/i
+                  value.to_i
+                when /Float/i
+                  value.to_f
+                else
+                  value
+                end
+              end
+            end
+
+            def valid?(value)
+              !value || allowable_values.include?(value)
+            end
+          end
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'created_at' => :'createdAt',
-              :'updated_at' => :'updatedAt',
-              :'title' => :'title',
-              :'fetch' => :'fetch',
-              :'display' => :'display',
-              :'actions' => :'actions'
+              :'action_type' => :'actionType',
+              :'object_type_id' => :'objectTypeId',
+              :'auth_source' => :'authSource',
+              :'changed_at' => :'changedAt',
+              :'application_id' => :'applicationId',
+              :'initiating_user_id' => :'initiatingUserId'
             }
           end
 
@@ -58,13 +72,12 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'created_at' => :'Time',
-              :'updated_at' => :'Time',
-              :'title' => :'String',
-              :'fetch' => :'CardFetchBody',
-              :'display' => :'CardDisplayBody',
-              :'actions' => :'CardActions'
+              :'action_type' => :'String',
+              :'object_type_id' => :'Integer',
+              :'auth_source' => :'String',
+              :'changed_at' => :'Integer',
+              :'application_id' => :'Integer',
+              :'initiating_user_id' => :'Integer'
             }
           end
 
@@ -78,43 +91,39 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Cards::CardResponse` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Cards::CardAuditResponse` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Cards::CardResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Cards::CardAuditResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
+            if attributes.key?(:'action_type')
+              self.action_type = attributes[:'action_type']
             end
 
-            if attributes.key?(:'created_at')
-              self.created_at = attributes[:'created_at']
+            if attributes.key?(:'object_type_id')
+              self.object_type_id = attributes[:'object_type_id']
             end
 
-            if attributes.key?(:'updated_at')
-              self.updated_at = attributes[:'updated_at']
+            if attributes.key?(:'auth_source')
+              self.auth_source = attributes[:'auth_source']
             end
 
-            if attributes.key?(:'title')
-              self.title = attributes[:'title']
+            if attributes.key?(:'changed_at')
+              self.changed_at = attributes[:'changed_at']
             end
 
-            if attributes.key?(:'fetch')
-              self.fetch = attributes[:'fetch']
+            if attributes.key?(:'application_id')
+              self.application_id = attributes[:'application_id']
             end
 
-            if attributes.key?(:'display')
-              self.display = attributes[:'display']
-            end
-
-            if attributes.key?(:'actions')
-              self.actions = attributes[:'actions']
+            if attributes.key?(:'initiating_user_id')
+              self.initiating_user_id = attributes[:'initiating_user_id']
             end
           end
 
@@ -122,24 +131,28 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @id.nil?
-              invalid_properties.push('invalid value for "id", id cannot be nil.')
+            if @action_type.nil?
+              invalid_properties.push('invalid value for "action_type", action_type cannot be nil.')
             end
 
-            if @title.nil?
-              invalid_properties.push('invalid value for "title", title cannot be nil.')
+            if @object_type_id.nil?
+              invalid_properties.push('invalid value for "object_type_id", object_type_id cannot be nil.')
             end
 
-            if @fetch.nil?
-              invalid_properties.push('invalid value for "fetch", fetch cannot be nil.')
+            if @auth_source.nil?
+              invalid_properties.push('invalid value for "auth_source", auth_source cannot be nil.')
             end
 
-            if @display.nil?
-              invalid_properties.push('invalid value for "display", display cannot be nil.')
+            if @changed_at.nil?
+              invalid_properties.push('invalid value for "changed_at", changed_at cannot be nil.')
             end
 
-            if @actions.nil?
-              invalid_properties.push('invalid value for "actions", actions cannot be nil.')
+            if @application_id.nil?
+              invalid_properties.push('invalid value for "application_id", application_id cannot be nil.')
+            end
+
+            if @initiating_user_id.nil?
+              invalid_properties.push('invalid value for "initiating_user_id", initiating_user_id cannot be nil.')
             end
 
             invalid_properties
@@ -148,12 +161,37 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @id.nil?
-            return false if @title.nil?
-            return false if @fetch.nil?
-            return false if @display.nil?
-            return false if @actions.nil?
+            return false if @action_type.nil?
+            action_type_validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "DELETE"])
+            return false unless action_type_validator.valid?(@action_type)
+            return false if @object_type_id.nil?
+            return false if @auth_source.nil?
+            auth_source_validator = EnumAttributeValidator.new('String', ["INTERNAL", "APP", "EXTERNAL"])
+            return false unless auth_source_validator.valid?(@auth_source)
+            return false if @changed_at.nil?
+            return false if @application_id.nil?
+            return false if @initiating_user_id.nil?
             true
+          end
+
+          # Custom attribute writer method checking allowed values (enum).
+          # @param [Object] action_type Object to be assigned
+          def action_type=(action_type)
+            validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "DELETE"])
+            unless validator.valid?(action_type)
+              fail ArgumentError, "invalid value for \"action_type\", must be one of #{validator.allowable_values}."
+            end
+            @action_type = action_type
+          end
+
+          # Custom attribute writer method checking allowed values (enum).
+          # @param [Object] auth_source Object to be assigned
+          def auth_source=(auth_source)
+            validator = EnumAttributeValidator.new('String', ["INTERNAL", "APP", "EXTERNAL"])
+            unless validator.valid?(auth_source)
+              fail ArgumentError, "invalid value for \"auth_source\", must be one of #{validator.allowable_values}."
+            end
+            @auth_source = auth_source
           end
 
           # Checks equality by comparing each attribute.
@@ -161,13 +199,12 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                created_at == o.created_at &&
-                updated_at == o.updated_at &&
-                title == o.title &&
-                fetch == o.fetch &&
-                display == o.display &&
-                actions == o.actions
+                action_type == o.action_type &&
+                object_type_id == o.object_type_id &&
+                auth_source == o.auth_source &&
+                changed_at == o.changed_at &&
+                application_id == o.application_id &&
+                initiating_user_id == o.initiating_user_id
           end
 
           # @see the `==` method
@@ -179,7 +216,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, created_at, updated_at, title, fetch, display, actions].hash
+            [action_type, object_type_id, auth_source, changed_at, application_id, initiating_user_id].hash
           end
 
           # Builds the object from hash
