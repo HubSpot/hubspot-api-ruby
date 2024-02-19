@@ -95,7 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed method `add_remove()` to `add_and_remove()`.
 
 ### Changes in CRM Pipelines Client:
-- Added param `validate_deal_stage_usages_before_delete` to `archive()`, `replace()` and `update()` methods.
+- Added param `validate_deal_stage_usages_before_delete` to `crm.peplines.peplines_api` for `archive()`, `replace()` and `update()` methods.
 - Added `write_permissions` param to `crm.peplines.models.PipelineStage`.
 
 ### Changes in CRM Schemas Models:
@@ -103,8 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new params: `option_sort_strategy`, `show_currency_symbol`, `form_field`, `referenced_object_type`, `text_display_hint`, `searchable_in_global_search`
 and `number_display_hint` to class `ObjectTypePropertyCreate`.
 
-### Changes in CRM Timeline Events Client:
-- Updated `create_batch()` method to return `nil` insted `BatchResponseTimelineEventResponse`.
+### Changes in CRM Timeline Client:
+- Updated `crm.timeline.events_api.create_batch()` method to return `nil` insted `BatchResponseTimelineEventResponse`.
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `crm.timeline.models.StandardError`.
 
 
