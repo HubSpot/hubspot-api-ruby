@@ -125,6 +125,12 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in CRM Extensions Videoconferencing Model:
 - Added new param `fetch_accounts_uri` to `ExternalSettings`.
 
+#### Changes in Events Send API:
+- Renamed `behavioral_events_tracking_api` to `custom_event_data_api`.
+
+#### Changes in Events Model:
+- Added new param `prev` to `Paging`.
+
 ## Added new Client API:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 
