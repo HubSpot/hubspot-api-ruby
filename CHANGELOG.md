@@ -63,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes in CMS Source Code API:
 - Renamed method from `get()` to `download()`.
-- Renamed method from  `replace()` to `create_or_update()`.
+- Renamed method from `replace()` to `create_or_update()`.
 - Added new param `hash` to `cms.source_code.models.AssetFileMetadata`.
 - Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
