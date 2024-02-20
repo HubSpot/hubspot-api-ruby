@@ -1,5 +1,5 @@
 =begin
-#HubSpot Events API
+#Events
 
 #API for accessing CRM object events.
 
@@ -16,32 +16,32 @@ require 'time'
 module Hubspot
   module Events
     class ExternalUnifiedEvent
-      # The objectType for the object which did the event.
-      attr_accessor :object_type
-
-      # The objectId of the object which did the event.
-      attr_accessor :object_id
+      # An ISO 8601 timestamp when the event occurred.
+      attr_accessor :occurred_at
 
       # The format of the `eventType` string is `ae{appId}_{eventTypeLabel}`, `pe{portalId}_{eventTypeLabel}`, or just `e_{eventTypeLabel}` for HubSpot events.
       attr_accessor :event_type
 
-      # An ISO 8601 timestamp when the event occurred.
-      attr_accessor :occurred_at
-
       # A unique identifier for the event.
       attr_accessor :id
 
+      # The objectId of the object which did the event.
+      attr_accessor :object_id
+
       attr_accessor :properties
+
+      # The objectType for the object which did the event.
+      attr_accessor :object_type
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'object_type' => :'objectType',
-          :'object_id' => :'objectId',
-          :'event_type' => :'eventType',
           :'occurred_at' => :'occurredAt',
+          :'event_type' => :'eventType',
           :'id' => :'id',
-          :'properties' => :'properties'
+          :'object_id' => :'objectId',
+          :'properties' => :'properties',
+          :'object_type' => :'objectType'
         }
       end
 
@@ -53,12 +53,12 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'object_type' => :'String',
-          :'object_id' => :'String',
-          :'event_type' => :'String',
           :'occurred_at' => :'Time',
+          :'event_type' => :'String',
           :'id' => :'String',
-          :'properties' => :'Hash<String, String>'
+          :'object_id' => :'String',
+          :'properties' => :'Hash<String, String>',
+          :'object_type' => :'String'
         }
       end
 
@@ -83,24 +83,20 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'object_type')
-          self.object_type = attributes[:'object_type']
-        end
-
-        if attributes.key?(:'object_id')
-          self.object_id = attributes[:'object_id']
+        if attributes.key?(:'occurred_at')
+          self.occurred_at = attributes[:'occurred_at']
         end
 
         if attributes.key?(:'event_type')
           self.event_type = attributes[:'event_type']
         end
 
-        if attributes.key?(:'occurred_at')
-          self.occurred_at = attributes[:'occurred_at']
-        end
-
         if attributes.key?(:'id')
           self.id = attributes[:'id']
+        end
+
+        if attributes.key?(:'object_id')
+          self.object_id = attributes[:'object_id']
         end
 
         if attributes.key?(:'properties')
@@ -108,34 +104,34 @@ module Hubspot
             self.properties = value
           end
         end
+
+        if attributes.key?(:'object_type')
+          self.object_type = attributes[:'object_type']
+        end
       end
 
       # Show invalid properties with the reasons. Usually used together with valid?
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @object_type.nil?
-          invalid_properties.push('invalid value for "object_type", object_type cannot be nil.')
-        end
-
-        if @object_id.nil?
-          invalid_properties.push('invalid value for "object_id", object_id cannot be nil.')
+        if @occurred_at.nil?
+          invalid_properties.push('invalid value for "occurred_at", occurred_at cannot be nil.')
         end
 
         if @event_type.nil?
           invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
         end
 
-        if @occurred_at.nil?
-          invalid_properties.push('invalid value for "occurred_at", occurred_at cannot be nil.')
-        end
-
         if @id.nil?
           invalid_properties.push('invalid value for "id", id cannot be nil.')
         end
 
-        if @properties.nil?
-          invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+        if @object_id.nil?
+          invalid_properties.push('invalid value for "object_id", object_id cannot be nil.')
+        end
+
+        if @object_type.nil?
+          invalid_properties.push('invalid value for "object_type", object_type cannot be nil.')
         end
 
         invalid_properties
@@ -144,12 +140,11 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @object_type.nil?
-        return false if @object_id.nil?
-        return false if @event_type.nil?
         return false if @occurred_at.nil?
+        return false if @event_type.nil?
         return false if @id.nil?
-        return false if @properties.nil?
+        return false if @object_id.nil?
+        return false if @object_type.nil?
         true
       end
 
@@ -158,12 +153,12 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            object_type == o.object_type &&
-            object_id == o.object_id &&
-            event_type == o.event_type &&
             occurred_at == o.occurred_at &&
+            event_type == o.event_type &&
             id == o.id &&
-            properties == o.properties
+            object_id == o.object_id &&
+            properties == o.properties &&
+            object_type == o.object_type
       end
 
       # @see the `==` method
@@ -175,7 +170,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [object_type, object_id, event_type, occurred_at, id, properties].hash
+        [occurred_at, event_type, id, object_id, properties, object_type].hash
       end
 
       # Builds the object from hash

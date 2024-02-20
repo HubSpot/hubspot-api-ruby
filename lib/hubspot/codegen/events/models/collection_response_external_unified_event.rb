@@ -1,5 +1,5 @@
 =begin
-#HubSpot Events API
+#Events
 
 #API for accessing CRM object events.
 
@@ -16,15 +16,16 @@ require 'time'
 module Hubspot
   module Events
     class CollectionResponseExternalUnifiedEvent
-      attr_accessor :results
-
       attr_accessor :paging
+
+      # 
+      attr_accessor :results
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'results' => :'results',
-          :'paging' => :'paging'
+          :'paging' => :'paging',
+          :'results' => :'results'
         }
       end
 
@@ -36,8 +37,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'results' => :'Array<ExternalUnifiedEvent>',
-          :'paging' => :'Paging'
+          :'paging' => :'Paging',
+          :'results' => :'Array<ExternalUnifiedEvent>'
         }
       end
 
@@ -62,14 +63,14 @@ module Hubspot
           h[k.to_sym] = v
         }
 
+        if attributes.key?(:'paging')
+          self.paging = attributes[:'paging']
+        end
+
         if attributes.key?(:'results')
           if (value = attributes[:'results']).is_a?(Array)
             self.results = value
           end
-        end
-
-        if attributes.key?(:'paging')
-          self.paging = attributes[:'paging']
         end
       end
 
@@ -96,8 +97,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            results == o.results &&
-            paging == o.paging
+            paging == o.paging &&
+            results == o.results
       end
 
       # @see the `==` method
@@ -109,7 +110,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [results, paging].hash
+        [paging, results].hash
       end
 
       # Builds the object from hash
