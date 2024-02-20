@@ -15,22 +15,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `cms.audit_logs.models.PreviousPage`.
 
 ### Changes in Automation Actions Definitions API:
-- Updated `create` method to accept `public_action_definition_egg` instead of `extension_action_definition_input` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
-- Updated `get_by_id` method to return `PublicActionDefinition` instead of `ExtensionActionDefinition`.
-- Updated `get_page` method to return `CollectionResponsePublicActionDefinitionForwardPaging` instead of `CollectionResponseExtensionActionDefinitionForwardPaging`.
-- Updated `update` method to accept `public_action_definition_patch` instead of `extension_action_definition_patch` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
+- Updated `create()` method to accept `public_action_definition_egg` instead of `extension_action_definition_input` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
+- Updated `get_by_id()` method to return `PublicActionDefinition` instead of `ExtensionActionDefinition`.
+- Updated `get_page()` method to return `CollectionResponsePublicActionDefinitionForwardPaging` instead of `CollectionResponseExtensionActionDefinitionForwardPaging`.
+- Updated `update()` method to accept `public_action_definition_patch` instead of `extension_action_definition_patch` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 
 ### Changes in Automation Actions Functions API:
 - Added new function type `POST_ACTION_EXECUTION` to all methods.
-- Updated `create_or_replace` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
-- Updated `create_or_replace_by_function_type` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
-- Updated `get_by_function_type` method to return `PublicActionFunction` instead of `ActionFunction`.
-- Updated `get_by_id` method to return `PublicActionFunction` instead of `ActionFunction`.
-- Updated `get_page` method to return `CollectionResponsePublicActionFunctionIdentifierNoPaging` instead of `CollectionResponseActionFunctionIdentifierNoPaging`.
+- Updated `create_or_replace()` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
+- Updated `create_or_replace_by_function_type()` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
+- Updated `get_by_function_type()` method to return `PublicActionFunction` instead of `ActionFunction`.
+- Updated `get_by_id()` method to return `PublicActionFunction` instead of `ActionFunction`.
+- Updated `get_page()` method to return `CollectionResponsePublicActionFunctionIdentifierNoPaging` instead of `CollectionResponseActionFunctionIdentifierNoPaging`.
 
 ### Changes in Automation Actions Revisions API:
-- Updated `get_by_id` method to return `PublicActionRevision` instead of `ActionRevision`.
-- Updated `get_page` method to return `CollectionResponsePublicActionRevisionForwardPaging` instead of `CollectionResponseActionRevisionForwardPaging`.
+- Updated `get_by_id()` method to return `PublicActionRevision` instead of `ActionRevision`.
+- Updated `get_page()` method to return `CollectionResponsePublicActionRevisionForwardPaging` instead of `CollectionResponseActionRevisionForwardPaging`.
 
 ### Changes in Automation Actions models:
 - Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`.
@@ -55,21 +55,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 
 ### Changes in CMS Blog APIs:
-- Updated `attach_to_lang_group`, `detach_from_lang_group` and `update_langs` methods to return `nil` instead of `Error`.
+- Updated `attach_to_lang_group()`, `detach_from_lang_group()` and `update_langs()` methods to return `nil` instead of `Error`.
 - Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`.
 
 ### Changes in Blog models:
 - Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`.
 
 ### Changes in CMS Source Code API:
-- Renamed method from `get()` to `download()`.
-- Renamed method from `replace()` to `create_or_update()`.
+- Renamed method from `cms.source_code.content_api.get()` to `cms.source_code.content_api.download()`.
+- Renamed method from `cms.source_code.content_api.replace()` to `cms.source_code.content_api.create_or_update()`.
 - Added new param `hash` to `cms.source_code.models.AssetFileMetadata`.
 - Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
 ### Changes in CRM Associations API (associations) v4
-- Methods `archive`, `create` and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
-- Method `getPage` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
+- Methods `archive()`, `create()` and `create_default()` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
+- Method `get_page()` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
 - Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
 - Changed the type of property `category` in class `ErrorCategory` to `string`.
