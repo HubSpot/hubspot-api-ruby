@@ -17,45 +17,16 @@ module Hubspot
   module Crm
     module Extensions
       module Cards
-        # Option definition for STATUS dataTypes.
-        class DisplayOption
-          # JSON-friendly unique name for option.
-          attr_accessor :name
+        class PublicCardFetchBody
+          attr_accessor :object_types
 
-          # The text that will be displayed to users for this option.
-          attr_accessor :label
-
-          # The type of status.
-          attr_accessor :type
-
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
-
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
-
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
+          attr_accessor :target_url
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'name' => :'name',
-              :'label' => :'label',
-              :'type' => :'type'
+              :'object_types' => :'objectTypes',
+              :'target_url' => :'targetUrl'
             }
           end
 
@@ -67,9 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'name' => :'String',
-              :'label' => :'String',
-              :'type' => :'String'
+              :'object_types' => :'Array<CardObjectTypeBody>',
+              :'target_url' => :'String'
             }
           end
 
@@ -83,27 +53,25 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Cards::DisplayOption` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Cards::PublicCardFetchBody` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Cards::DisplayOption`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Cards::PublicCardFetchBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
+            if attributes.key?(:'object_types')
+              if (value = attributes[:'object_types']).is_a?(Array)
+                self.object_types = value
+              end
             end
 
-            if attributes.key?(:'label')
-              self.label = attributes[:'label']
-            end
-
-            if attributes.key?(:'type')
-              self.type = attributes[:'type']
+            if attributes.key?(:'target_url')
+              self.target_url = attributes[:'target_url']
             end
           end
 
@@ -111,16 +79,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @name.nil?
-              invalid_properties.push('invalid value for "name", name cannot be nil.')
+            if @object_types.nil?
+              invalid_properties.push('invalid value for "object_types", object_types cannot be nil.')
             end
 
-            if @label.nil?
-              invalid_properties.push('invalid value for "label", label cannot be nil.')
-            end
-
-            if @type.nil?
-              invalid_properties.push('invalid value for "type", type cannot be nil.')
+            if @target_url.nil?
+              invalid_properties.push('invalid value for "target_url", target_url cannot be nil.')
             end
 
             invalid_properties
@@ -129,22 +93,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @name.nil?
-            return false if @label.nil?
-            return false if @type.nil?
-            type_validator = EnumAttributeValidator.new('String', ["DEFAULT", "SUCCESS", "WARNING", "DANGER", "INFO"])
-            return false unless type_validator.valid?(@type)
+            return false if @object_types.nil?
+            return false if @target_url.nil?
             true
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] type Object to be assigned
-          def type=(type)
-            validator = EnumAttributeValidator.new('String', ["DEFAULT", "SUCCESS", "WARNING", "DANGER", "INFO"])
-            unless validator.valid?(type)
-              fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-            end
-            @type = type
           end
 
           # Checks equality by comparing each attribute.
@@ -152,9 +103,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                name == o.name &&
-                label == o.label &&
-                type == o.type
+                object_types == o.object_types &&
+                target_url == o.target_url
           end
 
           # @see the `==` method
@@ -166,7 +116,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, label, type].hash
+            [object_types, target_url].hash
           end
 
           # Builds the object from hash

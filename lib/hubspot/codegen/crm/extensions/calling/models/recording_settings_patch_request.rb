@@ -1,7 +1,7 @@
 =begin
-#Public App Crm Cards
+#Calling Extensions
 
-#Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
+#Provides a way for apps to add custom calling options to a contact record. This works in conjunction with the [Calling SDK](#), which is used to build your phone/calling UI. The endpoints here allow your service to appear as an option to HubSpot users when they access the *Call* action on a contact record. Once accessed, your custom phone/calling UI will be displayed in an iframe at the specified URL with the specified dimensions on that record.
 
 The version of the OpenAPI document: v3
 
@@ -16,46 +16,14 @@ require 'time'
 module Hubspot
   module Crm
     module Extensions
-      module Cards
-        # Option definition for STATUS dataTypes.
-        class DisplayOption
-          # JSON-friendly unique name for option.
-          attr_accessor :name
-
-          # The text that will be displayed to users for this option.
-          attr_accessor :label
-
-          # The type of status.
-          attr_accessor :type
-
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
-
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
-
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
+      module Calling
+        class RecordingSettingsPatchRequest
+          attr_accessor :url_to_retrieve_authed_recording
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'name' => :'name',
-              :'label' => :'label',
-              :'type' => :'type'
+              :'url_to_retrieve_authed_recording' => :'urlToRetrieveAuthedRecording'
             }
           end
 
@@ -67,9 +35,7 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'name' => :'String',
-              :'label' => :'String',
-              :'type' => :'String'
+              :'url_to_retrieve_authed_recording' => :'String'
             }
           end
 
@@ -83,27 +49,19 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Cards::DisplayOption` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Calling::RecordingSettingsPatchRequest` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Cards::DisplayOption`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Calling::RecordingSettingsPatchRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
-            end
-
-            if attributes.key?(:'label')
-              self.label = attributes[:'label']
-            end
-
-            if attributes.key?(:'type')
-              self.type = attributes[:'type']
+            if attributes.key?(:'url_to_retrieve_authed_recording')
+              self.url_to_retrieve_authed_recording = attributes[:'url_to_retrieve_authed_recording']
             end
           end
 
@@ -111,40 +69,13 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @name.nil?
-              invalid_properties.push('invalid value for "name", name cannot be nil.')
-            end
-
-            if @label.nil?
-              invalid_properties.push('invalid value for "label", label cannot be nil.')
-            end
-
-            if @type.nil?
-              invalid_properties.push('invalid value for "type", type cannot be nil.')
-            end
-
             invalid_properties
           end
 
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @name.nil?
-            return false if @label.nil?
-            return false if @type.nil?
-            type_validator = EnumAttributeValidator.new('String', ["DEFAULT", "SUCCESS", "WARNING", "DANGER", "INFO"])
-            return false unless type_validator.valid?(@type)
             true
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] type Object to be assigned
-          def type=(type)
-            validator = EnumAttributeValidator.new('String', ["DEFAULT", "SUCCESS", "WARNING", "DANGER", "INFO"])
-            unless validator.valid?(type)
-              fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-            end
-            @type = type
           end
 
           # Checks equality by comparing each attribute.
@@ -152,9 +83,7 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                name == o.name &&
-                label == o.label &&
-                type == o.type
+                url_to_retrieve_authed_recording == o.url_to_retrieve_authed_recording
           end
 
           # @see the `==` method
@@ -166,7 +95,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, label, type].hash
+            [url_to_retrieve_authed_recording].hash
           end
 
           # Builds the object from hash
@@ -237,7 +166,7 @@ module Hubspot
               end
             else # model
               # models (e.g. Pet) or oneOf
-              klass = Hubspot::Crm::Extensions::Cards.const_get(type)
+              klass = Hubspot::Crm::Extensions::Calling.const_get(type)
               klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
             end
           end

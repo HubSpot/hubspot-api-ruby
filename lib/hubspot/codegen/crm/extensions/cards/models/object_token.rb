@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -18,11 +18,11 @@ module Hubspot
     module Extensions
       module Cards
         class ObjectToken
+          attr_accessor :data_type
+
           attr_accessor :name
 
           attr_accessor :label
-
-          attr_accessor :data_type
 
           attr_accessor :value
 
@@ -51,9 +51,9 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'data_type' => :'dataType',
               :'name' => :'name',
               :'label' => :'label',
-              :'data_type' => :'dataType',
               :'value' => :'value'
             }
           end
@@ -66,9 +66,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'data_type' => :'String',
               :'name' => :'String',
               :'label' => :'String',
-              :'data_type' => :'String',
               :'value' => :'String'
             }
           end
@@ -94,16 +94,16 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'data_type')
+              self.data_type = attributes[:'data_type']
+            end
+
             if attributes.key?(:'name')
               self.name = attributes[:'name']
             end
 
             if attributes.key?(:'label')
               self.label = attributes[:'label']
-            end
-
-            if attributes.key?(:'data_type')
-              self.data_type = attributes[:'data_type']
             end
 
             if attributes.key?(:'value')
@@ -146,9 +146,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                data_type == o.data_type &&
                 name == o.name &&
                 label == o.label &&
-                data_type == o.data_type &&
                 value == o.value
           end
 
@@ -161,7 +161,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, label, data_type, value].hash
+            [data_type, name, label, value].hash
           end
 
           # Builds the object from hash

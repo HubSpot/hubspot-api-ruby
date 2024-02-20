@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -19,17 +19,17 @@ module Hubspot
       module Cards
         # Definition for a card display property.
         class CardDisplayProperty
-          # An internal identifier for this property. This value must be unique TODO.
-          attr_accessor :name
-
-          # The label for this property as you'd like it displayed to users.
-          attr_accessor :label
-
           # Type of data represented by this property.
           attr_accessor :data_type
 
+          # An internal identifier for this property. This value must be unique TODO.
+          attr_accessor :name
+
           # An array of available options that can be displayed. Only used in when `dataType` is `STATUS`.
           attr_accessor :options
+
+          # The label for this property as you'd like it displayed to users.
+          attr_accessor :label
 
           class EnumAttributeValidator
             attr_reader :datatype
@@ -56,10 +56,10 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'name' => :'name',
-              :'label' => :'label',
               :'data_type' => :'dataType',
-              :'options' => :'options'
+              :'name' => :'name',
+              :'options' => :'options',
+              :'label' => :'label'
             }
           end
 
@@ -71,10 +71,10 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'name' => :'String',
-              :'label' => :'String',
               :'data_type' => :'String',
-              :'options' => :'Array<DisplayOption>'
+              :'name' => :'String',
+              :'options' => :'Array<DisplayOption>',
+              :'label' => :'String'
             }
           end
 
@@ -99,16 +99,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
-            end
-
-            if attributes.key?(:'label')
-              self.label = attributes[:'label']
-            end
-
             if attributes.key?(:'data_type')
               self.data_type = attributes[:'data_type']
+            end
+
+            if attributes.key?(:'name')
+              self.name = attributes[:'name']
             end
 
             if attributes.key?(:'options')
@@ -116,26 +112,30 @@ module Hubspot
                 self.options = value
               end
             end
+
+            if attributes.key?(:'label')
+              self.label = attributes[:'label']
+            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @name.nil?
-              invalid_properties.push('invalid value for "name", name cannot be nil.')
-            end
-
-            if @label.nil?
-              invalid_properties.push('invalid value for "label", label cannot be nil.')
-            end
-
             if @data_type.nil?
               invalid_properties.push('invalid value for "data_type", data_type cannot be nil.')
             end
 
+            if @name.nil?
+              invalid_properties.push('invalid value for "name", name cannot be nil.')
+            end
+
             if @options.nil?
               invalid_properties.push('invalid value for "options", options cannot be nil.')
+            end
+
+            if @label.nil?
+              invalid_properties.push('invalid value for "label", label cannot be nil.')
             end
 
             invalid_properties
@@ -144,12 +144,12 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @name.nil?
-            return false if @label.nil?
             return false if @data_type.nil?
             data_type_validator = EnumAttributeValidator.new('String', ["BOOLEAN", "CURRENCY", "DATE", "DATETIME", "EMAIL", "LINK", "NUMERIC", "STRING", "STATUS"])
             return false unless data_type_validator.valid?(@data_type)
+            return false if @name.nil?
             return false if @options.nil?
+            return false if @label.nil?
             true
           end
 
@@ -168,10 +168,10 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                name == o.name &&
-                label == o.label &&
                 data_type == o.data_type &&
-                options == o.options
+                name == o.name &&
+                options == o.options &&
+                label == o.label
           end
 
           # @see the `==` method
@@ -183,7 +183,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, label, data_type, options].hash
+            [data_type, name, options, label].hash
           end
 
           # Builds the object from hash

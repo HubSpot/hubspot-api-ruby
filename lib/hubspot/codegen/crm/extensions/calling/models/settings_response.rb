@@ -1,5 +1,5 @@
 =begin
-#Calling Extensions API
+#Calling Extensions
 
 #Provides a way for apps to add custom calling options to a contact record. This works in conjunction with the [Calling SDK](#), which is used to build your phone/calling UI. The endpoints here allow your service to appear as an option to HubSpot users when they access the *Call* action on a contact record. Once accessed, your custom phone/calling UI will be displayed in an iframe at the specified URL with the specified dimensions on that record.
 
@@ -19,8 +19,20 @@ module Hubspot
       module Calling
         # Current settings state
         class SettingsResponse
+          # When this calling extension was created.
+          attr_accessor :created_at
+
+          # When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+          attr_accessor :supports_custom_objects
+
+          # When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
+          attr_accessor :is_ready
+
           # The name of your calling service to display to users.
           attr_accessor :name
+
+          # The target width of the iframe that will contain your phone/calling UI.
+          attr_accessor :width
 
           # The URL to your phone/calling UI, built with the [Calling SDK](#).
           attr_accessor :url
@@ -28,31 +40,19 @@ module Hubspot
           # The target height of the iframe that will contain your phone/calling UI.
           attr_accessor :height
 
-          # The target width of the iframe that will contain your phone/calling UI.
-          attr_accessor :width
-
-          # When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
-          attr_accessor :is_ready
-
-          # When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
-          attr_accessor :supports_custom_objects
-
-          # When this calling extension was created.
-          attr_accessor :created_at
-
           # The last time the settings for this calling extension were modified.
           attr_accessor :updated_at
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'created_at' => :'createdAt',
+              :'supports_custom_objects' => :'supportsCustomObjects',
+              :'is_ready' => :'isReady',
               :'name' => :'name',
+              :'width' => :'width',
               :'url' => :'url',
               :'height' => :'height',
-              :'width' => :'width',
-              :'is_ready' => :'isReady',
-              :'supports_custom_objects' => :'supportsCustomObjects',
-              :'created_at' => :'createdAt',
               :'updated_at' => :'updatedAt'
             }
           end
@@ -65,13 +65,13 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'created_at' => :'Time',
+              :'supports_custom_objects' => :'Boolean',
+              :'is_ready' => :'Boolean',
               :'name' => :'String',
+              :'width' => :'Integer',
               :'url' => :'String',
               :'height' => :'Integer',
-              :'width' => :'Integer',
-              :'is_ready' => :'Boolean',
-              :'supports_custom_objects' => :'Boolean',
-              :'created_at' => :'Time',
               :'updated_at' => :'Time'
             }
           end
@@ -97,8 +97,24 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'created_at')
+              self.created_at = attributes[:'created_at']
+            end
+
+            if attributes.key?(:'supports_custom_objects')
+              self.supports_custom_objects = attributes[:'supports_custom_objects']
+            end
+
+            if attributes.key?(:'is_ready')
+              self.is_ready = attributes[:'is_ready']
+            end
+
             if attributes.key?(:'name')
               self.name = attributes[:'name']
+            end
+
+            if attributes.key?(:'width')
+              self.width = attributes[:'width']
             end
 
             if attributes.key?(:'url')
@@ -107,22 +123,6 @@ module Hubspot
 
             if attributes.key?(:'height')
               self.height = attributes[:'height']
-            end
-
-            if attributes.key?(:'width')
-              self.width = attributes[:'width']
-            end
-
-            if attributes.key?(:'is_ready')
-              self.is_ready = attributes[:'is_ready']
-            end
-
-            if attributes.key?(:'supports_custom_objects')
-              self.supports_custom_objects = attributes[:'supports_custom_objects']
-            end
-
-            if attributes.key?(:'created_at')
-              self.created_at = attributes[:'created_at']
             end
 
             if attributes.key?(:'updated_at')
@@ -134,8 +134,24 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @created_at.nil?
+              invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+            end
+
+            if @supports_custom_objects.nil?
+              invalid_properties.push('invalid value for "supports_custom_objects", supports_custom_objects cannot be nil.')
+            end
+
+            if @is_ready.nil?
+              invalid_properties.push('invalid value for "is_ready", is_ready cannot be nil.')
+            end
+
             if @name.nil?
               invalid_properties.push('invalid value for "name", name cannot be nil.')
+            end
+
+            if @width.nil?
+              invalid_properties.push('invalid value for "width", width cannot be nil.')
             end
 
             if @url.nil?
@@ -144,22 +160,6 @@ module Hubspot
 
             if @height.nil?
               invalid_properties.push('invalid value for "height", height cannot be nil.')
-            end
-
-            if @width.nil?
-              invalid_properties.push('invalid value for "width", width cannot be nil.')
-            end
-
-            if @is_ready.nil?
-              invalid_properties.push('invalid value for "is_ready", is_ready cannot be nil.')
-            end
-
-            if @supports_custom_objects.nil?
-              invalid_properties.push('invalid value for "supports_custom_objects", supports_custom_objects cannot be nil.')
-            end
-
-            if @created_at.nil?
-              invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
             end
 
             if @updated_at.nil?
@@ -172,13 +172,13 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @created_at.nil?
+            return false if @supports_custom_objects.nil?
+            return false if @is_ready.nil?
             return false if @name.nil?
+            return false if @width.nil?
             return false if @url.nil?
             return false if @height.nil?
-            return false if @width.nil?
-            return false if @is_ready.nil?
-            return false if @supports_custom_objects.nil?
-            return false if @created_at.nil?
             return false if @updated_at.nil?
             true
           end
@@ -188,13 +188,13 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                created_at == o.created_at &&
+                supports_custom_objects == o.supports_custom_objects &&
+                is_ready == o.is_ready &&
                 name == o.name &&
+                width == o.width &&
                 url == o.url &&
                 height == o.height &&
-                width == o.width &&
-                is_ready == o.is_ready &&
-                supports_custom_objects == o.supports_custom_objects &&
-                created_at == o.created_at &&
                 updated_at == o.updated_at
           end
 
@@ -207,7 +207,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [name, url, height, width, is_ready, supports_custom_objects, created_at, updated_at].hash
+            [created_at, supports_custom_objects, is_ready, name, width, url, height, updated_at].hash
           end
 
           # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -24,35 +24,35 @@ module Hubspot
           end
           # Delete a card
           # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
-          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to delete.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [nil]
-          def archive(app_id, card_id, opts = {})
-            archive_with_http_info(app_id, card_id, opts)
+          def archive(card_id, app_id, opts = {})
+            archive_with_http_info(card_id, app_id, opts)
             nil
           end
 
           # Delete a card
           # Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can&#39;t be undone.
-          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to delete.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def archive_with_http_info(app_id, card_id, opts = {})
+          def archive_with_http_info(card_id, app_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.archive ...'
-            end
-            # verify the required parameter 'app_id' is set
-            if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.archive"
             end
             # verify the required parameter 'card_id' is set
             if @api_client.config.client_side_validation && card_id.nil?
               fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.archive"
             end
+            # verify the required parameter 'app_id' is set
+            if @api_client.config.client_side_validation && app_id.nil?
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.archive"
+            end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
+            local_var_path = '/crm/v3/extensions/cards-dev/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -96,7 +96,7 @@ module Hubspot
           # @param app_id [Integer] The ID of the target app.
           # @param card_create_request [CardCreateRequest] The new card definition.
           # @param [Hash] opts the optional parameters
-          # @return [CardResponse]
+          # @return [PublicCardResponse]
           def create(app_id, card_create_request, opts = {})
             data, _status_code, _headers = create_with_http_info(app_id, card_create_request, opts)
             data
@@ -107,7 +107,7 @@ module Hubspot
           # @param app_id [Integer] The ID of the target app.
           # @param card_create_request [CardCreateRequest] The new card definition.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
+          # @return [Array<(PublicCardResponse, Integer, Hash)>] PublicCardResponse data, response status code and response headers
           def create_with_http_info(app_id, card_create_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.create ...'
@@ -121,7 +121,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'card_create_request' when calling CardsApi.create"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+            local_var_path = '/crm/v3/extensions/cards-dev/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -143,7 +143,7 @@ module Hubspot
             post_body = opts[:debug_body] || @api_client.object_to_http_body(card_create_request)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'CardResponse'
+            return_type = opts[:debug_return_type] || 'PublicCardResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
@@ -169,7 +169,7 @@ module Hubspot
           # Returns a list of cards for a given app.
           # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
-          # @return [CardListResponse]
+          # @return [PublicCardListResponse]
           def get_all(app_id, opts = {})
             data, _status_code, _headers = get_all_with_http_info(app_id, opts)
             data
@@ -179,7 +179,7 @@ module Hubspot
           # Returns a list of cards for a given app.
           # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(CardListResponse, Integer, Hash)>] CardListResponse data, response status code and response headers
+          # @return [Array<(PublicCardListResponse, Integer, Hash)>] PublicCardListResponse data, response status code and response headers
           def get_all_with_http_info(app_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.get_all ...'
@@ -189,7 +189,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.get_all"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+            local_var_path = '/crm/v3/extensions/cards-dev/{appId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -206,7 +206,7 @@ module Hubspot
             post_body = opts[:debug_body]
 
             # return_type
-            return_type = opts[:debug_return_type] || 'CardListResponse'
+            return_type = opts[:debug_return_type] || 'PublicCardListResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
@@ -230,35 +230,35 @@ module Hubspot
 
           # Get a card.
           # Returns the definition for a card with the given ID.
-          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the target card.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
-          # @return [CardResponse]
-          def get_by_id(app_id, card_id, opts = {})
-            data, _status_code, _headers = get_by_id_with_http_info(app_id, card_id, opts)
+          # @return [PublicCardResponse]
+          def get_by_id(card_id, app_id, opts = {})
+            data, _status_code, _headers = get_by_id_with_http_info(card_id, app_id, opts)
             data
           end
 
           # Get a card.
           # Returns the definition for a card with the given ID.
-          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the target card.
+          # @param app_id [Integer] The ID of the target app.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-          def get_by_id_with_http_info(app_id, card_id, opts = {})
+          # @return [Array<(PublicCardResponse, Integer, Hash)>] PublicCardResponse data, response status code and response headers
+          def get_by_id_with_http_info(card_id, app_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.get_by_id ...'
-            end
-            # verify the required parameter 'app_id' is set
-            if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.get_by_id"
             end
             # verify the required parameter 'card_id' is set
             if @api_client.config.client_side_validation && card_id.nil?
               fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.get_by_id"
             end
+            # verify the required parameter 'app_id' is set
+            if @api_client.config.client_side_validation && app_id.nil?
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.get_by_id"
+            end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
+            local_var_path = '/crm/v3/extensions/cards-dev/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -275,7 +275,7 @@ module Hubspot
             post_body = opts[:debug_body]
 
             # return_type
-            return_type = opts[:debug_return_type] || 'CardResponse'
+            return_type = opts[:debug_return_type] || 'PublicCardResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
@@ -299,41 +299,41 @@ module Hubspot
 
           # Update a card
           # Update a card definition with new details.
-          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to update.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_patch_request [CardPatchRequest] Card definition fields to be updated.
           # @param [Hash] opts the optional parameters
-          # @return [CardResponse]
-          def update(app_id, card_id, card_patch_request, opts = {})
-            data, _status_code, _headers = update_with_http_info(app_id, card_id, card_patch_request, opts)
+          # @return [PublicCardResponse]
+          def update(card_id, app_id, card_patch_request, opts = {})
+            data, _status_code, _headers = update_with_http_info(card_id, app_id, card_patch_request, opts)
             data
           end
 
           # Update a card
           # Update a card definition with new details.
-          # @param app_id [Integer] The ID of the target app.
           # @param card_id [String] The ID of the card to update.
+          # @param app_id [Integer] The ID of the target app.
           # @param card_patch_request [CardPatchRequest] Card definition fields to be updated.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(CardResponse, Integer, Hash)>] CardResponse data, response status code and response headers
-          def update_with_http_info(app_id, card_id, card_patch_request, opts = {})
+          # @return [Array<(PublicCardResponse, Integer, Hash)>] PublicCardResponse data, response status code and response headers
+          def update_with_http_info(card_id, app_id, card_patch_request, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: CardsApi.update ...'
-            end
-            # verify the required parameter 'app_id' is set
-            if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.update"
             end
             # verify the required parameter 'card_id' is set
             if @api_client.config.client_side_validation && card_id.nil?
               fail ArgumentError, "Missing the required parameter 'card_id' when calling CardsApi.update"
+            end
+            # verify the required parameter 'app_id' is set
+            if @api_client.config.client_side_validation && app_id.nil?
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling CardsApi.update"
             end
             # verify the required parameter 'card_patch_request' is set
             if @api_client.config.client_side_validation && card_patch_request.nil?
               fail ArgumentError, "Missing the required parameter 'card_patch_request' when calling CardsApi.update"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/cards/{appId}/{cardId}'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s)).sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s))
+            local_var_path = '/crm/v3/extensions/cards-dev/{appId}/{cardId}'.sub('{' + 'cardId' + '}', CGI.escape(card_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -355,7 +355,7 @@ module Hubspot
             post_body = opts[:debug_body] || @api_client.object_to_http_body(card_patch_request)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'CardResponse'
+            return_type = opts[:debug_return_type] || 'PublicCardResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']

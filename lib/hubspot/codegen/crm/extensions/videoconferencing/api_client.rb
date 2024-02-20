@@ -1,5 +1,5 @@
 =begin
-#Video Conference Extension
+#Video Conferencing Extension
 
 #These APIs allow you to specify URLs that can be used to interact with a video conferencing application, to allow HubSpot to add video conference links to meeting requests with contacts.
 
@@ -112,6 +112,7 @@ module Hubspot
             form_params = opts[:form_params] || {}
             follow_location = opts[:follow_location] || true
 
+            update_params_for_auth! header_params, query_params, opts[:auth_names]
 
             # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
             _verify_ssl_host = @config.verify_ssl_host ? 2 : 0

@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -19,21 +19,21 @@ module Hubspot
       module Cards
         # The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.
         class IntegratorCardPayloadResponse
-          # The total number of card properties that will be sent in this response.
-          attr_accessor :total_count
+          attr_accessor :response_version
+
+          # The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets'). If not provided, this falls back to the card's title.
+          attr_accessor :card_label
 
           # URL to a page the integrator has built that displays all details for this card. This URL will be displayed to users under a `See more [x]` link if there are more than five items in your response, where `[x]` is the value of `itemLabel`.
           attr_accessor :all_items_link_url
 
-          # The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets'). If not provided, this falls back to the card's title.
-          attr_accessor :card_label
+          # The total number of card properties that will be sent in this response.
+          attr_accessor :total_count
 
           attr_accessor :top_level_actions
 
           # A list of up to five valid card sub categories.
           attr_accessor :sections
-
-          attr_accessor :response_version
 
           class EnumAttributeValidator
             attr_reader :datatype
@@ -60,12 +60,12 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'total_count' => :'totalCount',
-              :'all_items_link_url' => :'allItemsLinkUrl',
+              :'response_version' => :'responseVersion',
               :'card_label' => :'cardLabel',
+              :'all_items_link_url' => :'allItemsLinkUrl',
+              :'total_count' => :'totalCount',
               :'top_level_actions' => :'topLevelActions',
-              :'sections' => :'sections',
-              :'response_version' => :'responseVersion'
+              :'sections' => :'sections'
             }
           end
 
@@ -77,12 +77,12 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'total_count' => :'Integer',
-              :'all_items_link_url' => :'String',
+              :'response_version' => :'String',
               :'card_label' => :'String',
+              :'all_items_link_url' => :'String',
+              :'total_count' => :'Integer',
               :'top_level_actions' => :'TopLevelActions',
-              :'sections' => :'Array<IntegratorObjectResult>',
-              :'response_version' => :'String'
+              :'sections' => :'Array<IntegratorObjectResult>'
             }
           end
 
@@ -107,16 +107,20 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'total_count')
-              self.total_count = attributes[:'total_count']
+            if attributes.key?(:'response_version')
+              self.response_version = attributes[:'response_version']
+            end
+
+            if attributes.key?(:'card_label')
+              self.card_label = attributes[:'card_label']
             end
 
             if attributes.key?(:'all_items_link_url')
               self.all_items_link_url = attributes[:'all_items_link_url']
             end
 
-            if attributes.key?(:'card_label')
-              self.card_label = attributes[:'card_label']
+            if attributes.key?(:'total_count')
+              self.total_count = attributes[:'total_count']
             end
 
             if attributes.key?(:'top_level_actions')
@@ -127,10 +131,6 @@ module Hubspot
               if (value = attributes[:'sections']).is_a?(Array)
                 self.sections = value
               end
-            end
-
-            if attributes.key?(:'response_version')
-              self.response_version = attributes[:'response_version']
             end
           end
 
@@ -148,9 +148,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @total_count.nil?
             response_version_validator = EnumAttributeValidator.new('String', ["v1", "v3"])
             return false unless response_version_validator.valid?(@response_version)
+            return false if @total_count.nil?
             true
           end
 
@@ -169,12 +169,12 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                total_count == o.total_count &&
-                all_items_link_url == o.all_items_link_url &&
+                response_version == o.response_version &&
                 card_label == o.card_label &&
+                all_items_link_url == o.all_items_link_url &&
+                total_count == o.total_count &&
                 top_level_actions == o.top_level_actions &&
-                sections == o.sections &&
-                response_version == o.response_version
+                sections == o.sections
           end
 
           # @see the `==` method
@@ -186,7 +186,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [total_count, all_items_link_url, card_label, top_level_actions, sections, response_version].hash
+            [response_version, card_label, all_items_link_url, total_count, top_level_actions, sections].hash
           end
 
           # Builds the object from hash
