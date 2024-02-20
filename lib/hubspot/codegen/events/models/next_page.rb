@@ -1,5 +1,5 @@
 =begin
-#Events
+#HubSpot Events API
 
 #API for accessing CRM object events.
 
@@ -16,17 +16,15 @@ require 'time'
 module Hubspot
   module Events
     class NextPage
-      # 
-      attr_accessor :link
-
-      # 
       attr_accessor :after
+
+      attr_accessor :link
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'link' => :'link',
-          :'after' => :'after'
+          :'after' => :'after',
+          :'link' => :'link'
         }
       end
 
@@ -38,8 +36,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'link' => :'String',
-          :'after' => :'String'
+          :'after' => :'String',
+          :'link' => :'String'
         }
       end
 
@@ -64,12 +62,12 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'link')
-          self.link = attributes[:'link']
-        end
-
         if attributes.key?(:'after')
           self.after = attributes[:'after']
+        end
+
+        if attributes.key?(:'link')
+          self.link = attributes[:'link']
         end
       end
 
@@ -96,8 +94,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            link == o.link &&
-            after == o.after
+            after == o.after &&
+            link == o.link
       end
 
       # @see the `==` method
@@ -109,7 +107,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [link, after].hash
+        [after, link].hash
       end
 
       # Builds the object from hash

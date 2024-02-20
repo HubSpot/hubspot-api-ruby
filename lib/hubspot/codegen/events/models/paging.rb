@@ -1,5 +1,5 @@
 =begin
-#Events
+#HubSpot Events API
 
 #API for accessing CRM object events.
 
@@ -18,13 +18,10 @@ module Hubspot
     class Paging
       attr_accessor :_next
 
-      attr_accessor :prev
-
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'_next' => :'next',
-          :'prev' => :'prev'
+          :'_next' => :'next'
         }
       end
 
@@ -36,8 +33,7 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'_next' => :'NextPage',
-          :'prev' => :'PreviousPage'
+          :'_next' => :'NextPage'
         }
       end
 
@@ -65,10 +61,6 @@ module Hubspot
         if attributes.key?(:'_next')
           self._next = attributes[:'_next']
         end
-
-        if attributes.key?(:'prev')
-          self.prev = attributes[:'prev']
-        end
       end
 
       # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,8 +81,7 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            _next == o._next &&
-            prev == o.prev
+            _next == o._next
       end
 
       # @see the `==` method
@@ -102,7 +93,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [_next, prev].hash
+        [_next].hash
       end
 
       # Builds the object from hash

@@ -15,14 +15,14 @@ require 'cgi'
 module Hubspot
   module Events
     module Send
-      class CustomEventDataApi
+      class BehavioralEventsTrackingApi
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Send custom event completion
-        # Endpoint to send an instance of a custom event.
+        # Sends Custom Behavioral Event
+        # Endpoint to send an instance of a behavioral event
         # @param behavioral_event_http_completion_request [BehavioralEventHttpCompletionRequest] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -31,18 +31,18 @@ module Hubspot
           nil
         end
 
-        # Send custom event completion
-        # Endpoint to send an instance of a custom event.
+        # Sends Custom Behavioral Event
+        # Endpoint to send an instance of a behavioral event
         # @param behavioral_event_http_completion_request [BehavioralEventHttpCompletionRequest] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def call_send_with_http_info(behavioral_event_http_completion_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: CustomEventDataApi.call_send ...'
+            @api_client.config.logger.debug 'Calling API: BehavioralEventsTrackingApi.call_send ...'
           end
           # verify the required parameter 'behavioral_event_http_completion_request' is set
           if @api_client.config.client_side_validation && behavioral_event_http_completion_request.nil?
-            fail ArgumentError, "Missing the required parameter 'behavioral_event_http_completion_request' when calling CustomEventDataApi.call_send"
+            fail ArgumentError, "Missing the required parameter 'behavioral_event_http_completion_request' when calling BehavioralEventsTrackingApi.call_send"
           end
           # resource path
           local_var_path = '/events/v3/send'
@@ -73,7 +73,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"CustomEventDataApi.call_send",
+            :operation => :"BehavioralEventsTrackingApi.call_send",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -84,7 +84,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: CustomEventDataApi#call_send\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BehavioralEventsTrackingApi#call_send\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

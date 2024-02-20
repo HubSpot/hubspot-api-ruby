@@ -1,5 +1,5 @@
 =begin
-#Events
+#HubSpot Events API
 
 #API for accessing CRM object events.
 
@@ -20,66 +20,53 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
+      # Returns a collection of events matching a query.
       # @param [Hash] opts the optional parameters
-      # @option opts [String] :object_type 
-      # @option opts [String] :event_type 
-      # @option opts [Time] :occurred_after 
-      # @option opts [Time] :occurred_before 
-      # @option opts [Integer] :object_id 
-      # @option opts [String] :index_table_name 
-      # @option opts [String] :index_specific_metadata 
-      # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+      # @option opts [Time] :occurred_after The starting time as an ISO 8601 timestamp.
+      # @option opts [Time] :occurred_before The ending time as an ISO 8601 timestamp.
+      # @option opts [String] :object_type The type of object being selected. Valid values are hubspot named object types (e.g. &#x60;contact&#x60;).
+      # @option opts [Integer] :object_id The id of the selected object. If not present, then the &#x60;objectProperty&#x60; parameter is required.
+      # @option opts [String] :event_type Limits the response to the specified event type.  For example &#x60;&amp;eventType&#x3D;e_visited_page&#x60; returns only &#x60;e_visited_page&#x60; events.  If not present all event types are returned.
+      # @option opts [String] :after An additional parameter that may be used to get the next &#x60;limit&#x60; set of results.
       # @option opts [String] :before 
-      # @option opts [Integer] :limit The maximum number of results to display per page.
-      # @option opts [Array<String>] :sort 
-      # @option opts [Object] :object_property_propname 
-      # @option opts [Object] :property_propname 
-      # @option opts [Array<String>] :id 
+      # @option opts [Integer] :limit The maximum number of events to return, defaults to 20.
+      # @option opts [Array<String>] :sort Selects the sort field and order. Defaults to ascending, prefix with &#x60;-&#x60; for descending order. &#x60;occurredAt&#x60; is the only field supported for sorting.
       # @return [CollectionResponseExternalUnifiedEvent]
       def get_page(opts = {})
         data, _status_code, _headers = get_page_with_http_info(opts)
         data
       end
 
+      # Returns a collection of events matching a query.
       # @param [Hash] opts the optional parameters
-      # @option opts [String] :object_type 
-      # @option opts [String] :event_type 
-      # @option opts [Time] :occurred_after 
-      # @option opts [Time] :occurred_before 
-      # @option opts [Integer] :object_id 
-      # @option opts [String] :index_table_name 
-      # @option opts [String] :index_specific_metadata 
-      # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+      # @option opts [Time] :occurred_after The starting time as an ISO 8601 timestamp.
+      # @option opts [Time] :occurred_before The ending time as an ISO 8601 timestamp.
+      # @option opts [String] :object_type The type of object being selected. Valid values are hubspot named object types (e.g. &#x60;contact&#x60;).
+      # @option opts [Integer] :object_id The id of the selected object. If not present, then the &#x60;objectProperty&#x60; parameter is required.
+      # @option opts [String] :event_type Limits the response to the specified event type.  For example &#x60;&amp;eventType&#x3D;e_visited_page&#x60; returns only &#x60;e_visited_page&#x60; events.  If not present all event types are returned.
+      # @option opts [String] :after An additional parameter that may be used to get the next &#x60;limit&#x60; set of results.
       # @option opts [String] :before 
-      # @option opts [Integer] :limit The maximum number of results to display per page.
-      # @option opts [Array<String>] :sort 
-      # @option opts [Object] :object_property_propname 
-      # @option opts [Object] :property_propname 
-      # @option opts [Array<String>] :id 
+      # @option opts [Integer] :limit The maximum number of events to return, defaults to 20.
+      # @option opts [Array<String>] :sort Selects the sort field and order. Defaults to ascending, prefix with &#x60;-&#x60; for descending order. &#x60;occurredAt&#x60; is the only field supported for sorting.
       # @return [Array<(CollectionResponseExternalUnifiedEvent, Integer, Hash)>] CollectionResponseExternalUnifiedEvent data, response status code and response headers
       def get_page_with_http_info(opts = {})
         if @api_client.config.debugging
           @api_client.config.logger.debug 'Calling API: EventsApi.get_page ...'
         end
         # resource path
-        local_var_path = '/events/v3/events/'
+        local_var_path = '/events/v3/events'
 
         # query parameters
         query_params = opts[:query_params] || {}
-        query_params[:'objectType'] = opts[:'object_type'] if !opts[:'object_type'].nil?
-        query_params[:'eventType'] = opts[:'event_type'] if !opts[:'event_type'].nil?
         query_params[:'occurredAfter'] = opts[:'occurred_after'] if !opts[:'occurred_after'].nil?
         query_params[:'occurredBefore'] = opts[:'occurred_before'] if !opts[:'occurred_before'].nil?
+        query_params[:'objectType'] = opts[:'object_type'] if !opts[:'object_type'].nil?
         query_params[:'objectId'] = opts[:'object_id'] if !opts[:'object_id'].nil?
-        query_params[:'indexTableName'] = opts[:'index_table_name'] if !opts[:'index_table_name'].nil?
-        query_params[:'indexSpecificMetadata'] = opts[:'index_specific_metadata'] if !opts[:'index_specific_metadata'].nil?
+        query_params[:'eventType'] = opts[:'event_type'] if !opts[:'event_type'].nil?
         query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
         query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
         query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
         query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
-        query_params[:'objectProperty.{propname}'] = opts[:'object_property_propname'] if !opts[:'object_property_propname'].nil?
-        query_params[:'property.{propname}'] = opts[:'property_propname'] if !opts[:'property_propname'].nil?
-        query_params[:'id'] = @api_client.build_collection_param(opts[:'id'], :multi) if !opts[:'id'].nil?
 
         # header parameters
         header_params = opts[:header_params] || {}

@@ -1,5 +1,5 @@
 =begin
-#Events
+#HubSpot Events API
 
 #API for accessing CRM object events.
 
