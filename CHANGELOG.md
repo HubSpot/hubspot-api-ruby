@@ -68,7 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
 ### Changes in CRM Associations API (associations) v4
-- Methods `archive`, `create`, and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
+- Methods `archive`, `create` and `create_default` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
 - Method `getPage` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
 - Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
@@ -107,6 +107,26 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 ### Changes in CRM Timeline Model:
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
+### Changes in CRM Extensions Cards API:
+- Changed parameter order in `archive()` method from `(app_id, card_id)` to `(card_id, app_id)`.
+- Changed parameter order in `get_by_id()` method from `(app_id, card_id)` to `(card_id, app_id)` and method return `PublicCardResponse` instead `CardResponse`.
+- Changed parameter order in `update()` method from `(app_id, card_id, card_patch_request)` to `(card_id, app_id, card_patch_request)` and method return `PublicCardResponse` instead `CardResponse`.
+- Updated `create()` method to return `PublicCardResponse` instead `CardResponse`.
+- Updated `get_all()` method to return `PublicCardListResponse` instead `CardListResponse`.
+
+### Changes in CRM Extensions Card Models:
+- Added new params `serverless_function` and `card_type` to `CardFetchBody` and `CardFetchBodyPatch`.
+- Added new param `audit_history` to `PublicCardResponse`.
+- Added new allowable value `marketing_events` to `CardObjectTypeBody`.
+
+#### Changes in CRM Extensions Videoconferencing API:
+- Added `developer_hapikey`
+
+#### Changes in CRM Extensions Videoconferencing Model:
+- Added new param `fetch_accounts_uri` to `ExternalSettings`.
+
+## Added new Client API:
+- Added `crm.extensions.calling.recording_settings_api` Api.
 
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
