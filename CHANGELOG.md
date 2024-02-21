@@ -131,6 +131,13 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Events Model:
 - Added new param `prev` to `Paging`.
 
+#### Changes in Files Files API:
+- Added new method `get_metadata()`.
+
+#### Changes in Files Models:
+- Added new param  `expires_at` to `File` and `FileUpdateInput`.
+- Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
+
 ## Added new Client API:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 
