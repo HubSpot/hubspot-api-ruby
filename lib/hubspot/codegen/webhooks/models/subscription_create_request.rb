@@ -1,5 +1,5 @@
 =begin
-#Webhooks API
+#Webhooks Webhooks
 
 #Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
 
@@ -16,14 +16,14 @@ require 'time'
 module Hubspot
   module Webhooks
     class SubscriptionCreateRequest
-      # Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-      attr_accessor :event_type
-
       # The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
       attr_accessor :property_name
 
       # Determines if the subscription is active or paused. Defaults to false.
       attr_accessor :active
+
+      # Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
+      attr_accessor :event_type
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -50,9 +50,9 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'event_type' => :'eventType',
           :'property_name' => :'propertyName',
-          :'active' => :'active'
+          :'active' => :'active',
+          :'event_type' => :'eventType'
         }
       end
 
@@ -64,9 +64,9 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'event_type' => :'String',
           :'property_name' => :'String',
-          :'active' => :'Boolean'
+          :'active' => :'Boolean',
+          :'event_type' => :'String'
         }
       end
 
@@ -91,16 +91,16 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'event_type')
-          self.event_type = attributes[:'event_type']
-        end
-
         if attributes.key?(:'property_name')
           self.property_name = attributes[:'property_name']
         end
 
         if attributes.key?(:'active')
           self.active = attributes[:'active']
+        end
+
+        if attributes.key?(:'event_type')
+          self.event_type = attributes[:'event_type']
         end
       end
 
@@ -139,9 +139,9 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            event_type == o.event_type &&
             property_name == o.property_name &&
-            active == o.active
+            active == o.active &&
+            event_type == o.event_type
       end
 
       # @see the `==` method
@@ -153,7 +153,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [event_type, property_name, active].hash
+        [property_name, active, event_type].hash
       end
 
       # Builds the object from hash

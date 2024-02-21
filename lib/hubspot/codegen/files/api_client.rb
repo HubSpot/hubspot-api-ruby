@@ -1,7 +1,7 @@
 =begin
-#Webhooks Webhooks
+#Files Files
 
-#Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+#Upload and manage files.
 
 The version of the OpenAPI document: v3
 
@@ -18,7 +18,7 @@ require 'time'
 require 'typhoeus'
 
 module Hubspot
-  module Webhooks
+  module Files
     class ApiClient
       # The Configuration object holding settings to be used in the API client.
       attr_accessor :config
@@ -293,7 +293,7 @@ module Hubspot
           end
         else
           # models (e.g. Pet) or oneOf
-          klass = Hubspot::Webhooks.const_get(return_type)
+          klass = Hubspot::Files.const_get(return_type)
           klass.respond_to?(:openapi_one_of) ? klass.build(data) : klass.build_from_hash(data)
         end
       end

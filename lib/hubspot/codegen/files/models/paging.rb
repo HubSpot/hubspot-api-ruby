@@ -1,7 +1,7 @@
 =begin
-#Webhooks Webhooks
+#Files Files
 
-#Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+#Upload and manage files.
 
 The version of the OpenAPI document: v3
 
@@ -14,41 +14,17 @@ require 'date'
 require 'time'
 
 module Hubspot
-  module Webhooks
-    class ThrottlingSettings
-      # Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
-      attr_accessor :period
+  module Files
+    class Paging
+      attr_accessor :_next
 
-      # The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
-      attr_accessor :max_concurrent_requests
-
-      class EnumAttributeValidator
-        attr_reader :datatype
-        attr_reader :allowable_values
-
-        def initialize(datatype, allowable_values)
-          @allowable_values = allowable_values.map do |value|
-            case datatype.to_s
-            when /Integer/i
-              value.to_i
-            when /Float/i
-              value.to_f
-            else
-              value
-            end
-          end
-        end
-
-        def valid?(value)
-          !value || allowable_values.include?(value)
-        end
-      end
+      attr_accessor :prev
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'period' => :'period',
-          :'max_concurrent_requests' => :'maxConcurrentRequests'
+          :'_next' => :'next',
+          :'prev' => :'prev'
         }
       end
 
@@ -60,8 +36,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'period' => :'String',
-          :'max_concurrent_requests' => :'Integer'
+          :'_next' => :'NextPage',
+          :'prev' => :'PreviousPage'
         }
       end
 
@@ -75,23 +51,23 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Webhooks::ThrottlingSettings` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Files::Paging` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Webhooks::ThrottlingSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Files::Paging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'period')
-          self.period = attributes[:'period']
+        if attributes.key?(:'_next')
+          self._next = attributes[:'_next']
         end
 
-        if attributes.key?(:'max_concurrent_requests')
-          self.max_concurrent_requests = attributes[:'max_concurrent_requests']
+        if attributes.key?(:'prev')
+          self.prev = attributes[:'prev']
         end
       end
 
@@ -99,35 +75,13 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @period.nil?
-          invalid_properties.push('invalid value for "period", period cannot be nil.')
-        end
-
-        if @max_concurrent_requests.nil?
-          invalid_properties.push('invalid value for "max_concurrent_requests", max_concurrent_requests cannot be nil.')
-        end
-
         invalid_properties
       end
 
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @period.nil?
-        period_validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        return false unless period_validator.valid?(@period)
-        return false if @max_concurrent_requests.nil?
         true
-      end
-
-      # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] period Object to be assigned
-      def period=(period)
-        validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        unless validator.valid?(period)
-          fail ArgumentError, "invalid value for \"period\", must be one of #{validator.allowable_values}."
-        end
-        @period = period
       end
 
       # Checks equality by comparing each attribute.
@@ -135,8 +89,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            period == o.period &&
-            max_concurrent_requests == o.max_concurrent_requests
+            _next == o._next &&
+            prev == o.prev
       end
 
       # @see the `==` method
@@ -148,7 +102,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [period, max_concurrent_requests].hash
+        [_next, prev].hash
       end
 
       # Builds the object from hash
@@ -219,7 +173,7 @@ module Hubspot
           end
         else # model
           # models (e.g. Pet) or oneOf
-          klass = Hubspot::Webhooks.const_get(type)
+          klass = Hubspot::Files.const_get(type)
           klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
         end
       end

@@ -1,7 +1,7 @@
 =begin
-#Webhooks Webhooks
+#Files Files
 
-#Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+#Upload and manage files.
 
 The version of the OpenAPI document: v3
 
@@ -14,25 +14,63 @@ require 'date'
 require 'time'
 
 module Hubspot
-  module Webhooks
-    class SubscriptionResponse
-      # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
+  module Files
+    class File
+      # Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
+      attr_accessor :extension
+
+      # File access. Can be PUBLIC_INDEXABLE, PUBLIC_NOT_INDEXABLE, PRIVATE.
+      attr_accessor :access
+
+      # ID of the folder the file is in.
+      attr_accessor :parent_folder_id
+
+      # Encoding of the file.
+      attr_accessor :encoding
+
+      # Type of the file. Can be IMG, DOCUMENT, AUDIO, MOVIE, or OTHER.
+      attr_accessor :type
+
+      # Previously \"archied\". Indicates if the file should be used when creating new content like web pages.
+      attr_accessor :is_usable_in_content
+
+      # URL of the given file. This URL can change depending on the domain settings of the account. Will use the select file hosting domain.
+      attr_accessor :url
+
+      attr_accessor :expires_at
+
+      # Creation time of the file object.
       attr_accessor :created_at
 
-      # The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
-      attr_accessor :property_name
+      # Deletion time of the file object.
+      attr_accessor :archived_at
 
-      # Determines if the subscription is active or paused.
-      attr_accessor :active
+      # If the file is deleted.
+      attr_accessor :archived
 
-      # Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-      attr_accessor :event_type
+      # Path of the file in the file manager.
+      attr_accessor :path
 
-      # The unique ID of the subscription.
+      # Size of the file in bytes.
+      attr_accessor :size
+
+      # Name of the file.
+      attr_accessor :name
+
+      # For image and video files, the width of the content.
+      attr_accessor :width
+
+      # File ID.
       attr_accessor :id
 
-      # When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
+      # Default hosting URL of the file. This will use one of HubSpot's provided URLs to serve the file.
+      attr_accessor :default_hosting_url
+
+      # Timestamp of the latest update to the file.
       attr_accessor :updated_at
+
+      # For image and video files, the height of the content.
+      attr_accessor :height
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -59,12 +97,25 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
+          :'extension' => :'extension',
+          :'access' => :'access',
+          :'parent_folder_id' => :'parentFolderId',
+          :'encoding' => :'encoding',
+          :'type' => :'type',
+          :'is_usable_in_content' => :'isUsableInContent',
+          :'url' => :'url',
+          :'expires_at' => :'expiresAt',
           :'created_at' => :'createdAt',
-          :'property_name' => :'propertyName',
-          :'active' => :'active',
-          :'event_type' => :'eventType',
+          :'archived_at' => :'archivedAt',
+          :'archived' => :'archived',
+          :'path' => :'path',
+          :'size' => :'size',
+          :'name' => :'name',
+          :'width' => :'width',
           :'id' => :'id',
-          :'updated_at' => :'updatedAt'
+          :'default_hosting_url' => :'defaultHostingUrl',
+          :'updated_at' => :'updatedAt',
+          :'height' => :'height'
         }
       end
 
@@ -76,12 +127,25 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
+          :'extension' => :'String',
+          :'access' => :'String',
+          :'parent_folder_id' => :'String',
+          :'encoding' => :'String',
+          :'type' => :'String',
+          :'is_usable_in_content' => :'Boolean',
+          :'url' => :'String',
+          :'expires_at' => :'Integer',
           :'created_at' => :'Time',
-          :'property_name' => :'String',
-          :'active' => :'Boolean',
-          :'event_type' => :'String',
+          :'archived_at' => :'Time',
+          :'archived' => :'Boolean',
+          :'path' => :'String',
+          :'size' => :'Integer',
+          :'name' => :'String',
+          :'width' => :'Integer',
           :'id' => :'String',
-          :'updated_at' => :'Time'
+          :'default_hosting_url' => :'String',
+          :'updated_at' => :'Time',
+          :'height' => :'Integer'
         }
       end
 
@@ -95,39 +159,91 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Webhooks::SubscriptionResponse` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Files::File` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Webhooks::SubscriptionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Files::File`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
+
+        if attributes.key?(:'extension')
+          self.extension = attributes[:'extension']
+        end
+
+        if attributes.key?(:'access')
+          self.access = attributes[:'access']
+        end
+
+        if attributes.key?(:'parent_folder_id')
+          self.parent_folder_id = attributes[:'parent_folder_id']
+        end
+
+        if attributes.key?(:'encoding')
+          self.encoding = attributes[:'encoding']
+        end
+
+        if attributes.key?(:'type')
+          self.type = attributes[:'type']
+        end
+
+        if attributes.key?(:'is_usable_in_content')
+          self.is_usable_in_content = attributes[:'is_usable_in_content']
+        end
+
+        if attributes.key?(:'url')
+          self.url = attributes[:'url']
+        end
+
+        if attributes.key?(:'expires_at')
+          self.expires_at = attributes[:'expires_at']
+        end
 
         if attributes.key?(:'created_at')
           self.created_at = attributes[:'created_at']
         end
 
-        if attributes.key?(:'property_name')
-          self.property_name = attributes[:'property_name']
+        if attributes.key?(:'archived_at')
+          self.archived_at = attributes[:'archived_at']
         end
 
-        if attributes.key?(:'active')
-          self.active = attributes[:'active']
+        if attributes.key?(:'archived')
+          self.archived = attributes[:'archived']
         end
 
-        if attributes.key?(:'event_type')
-          self.event_type = attributes[:'event_type']
+        if attributes.key?(:'path')
+          self.path = attributes[:'path']
+        end
+
+        if attributes.key?(:'size')
+          self.size = attributes[:'size']
+        end
+
+        if attributes.key?(:'name')
+          self.name = attributes[:'name']
+        end
+
+        if attributes.key?(:'width')
+          self.width = attributes[:'width']
         end
 
         if attributes.key?(:'id')
           self.id = attributes[:'id']
         end
 
+        if attributes.key?(:'default_hosting_url')
+          self.default_hosting_url = attributes[:'default_hosting_url']
+        end
+
         if attributes.key?(:'updated_at')
           self.updated_at = attributes[:'updated_at']
+        end
+
+        if attributes.key?(:'height')
+          self.height = attributes[:'height']
         end
       end
 
@@ -135,20 +251,24 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
+        if @access.nil?
+          invalid_properties.push('invalid value for "access", access cannot be nil.')
+        end
+
         if @created_at.nil?
           invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
         end
 
-        if @active.nil?
-          invalid_properties.push('invalid value for "active", active cannot be nil.')
-        end
-
-        if @event_type.nil?
-          invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
+        if @archived.nil?
+          invalid_properties.push('invalid value for "archived", archived cannot be nil.')
         end
 
         if @id.nil?
           invalid_properties.push('invalid value for "id", id cannot be nil.')
+        end
+
+        if @updated_at.nil?
+          invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
         end
 
         invalid_properties
@@ -157,23 +277,24 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
+        return false if @access.nil?
+        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        return false unless access_validator.valid?(@access)
         return false if @created_at.nil?
-        return false if @active.nil?
-        return false if @event_type.nil?
-        event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange"])
-        return false unless event_type_validator.valid?(@event_type)
+        return false if @archived.nil?
         return false if @id.nil?
+        return false if @updated_at.nil?
         true
       end
 
       # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] event_type Object to be assigned
-      def event_type=(event_type)
-        validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange"])
-        unless validator.valid?(event_type)
-          fail ArgumentError, "invalid value for \"event_type\", must be one of #{validator.allowable_values}."
+      # @param [Object] access Object to be assigned
+      def access=(access)
+        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        unless validator.valid?(access)
+          fail ArgumentError, "invalid value for \"access\", must be one of #{validator.allowable_values}."
         end
-        @event_type = event_type
+        @access = access
       end
 
       # Checks equality by comparing each attribute.
@@ -181,12 +302,25 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
+            extension == o.extension &&
+            access == o.access &&
+            parent_folder_id == o.parent_folder_id &&
+            encoding == o.encoding &&
+            type == o.type &&
+            is_usable_in_content == o.is_usable_in_content &&
+            url == o.url &&
+            expires_at == o.expires_at &&
             created_at == o.created_at &&
-            property_name == o.property_name &&
-            active == o.active &&
-            event_type == o.event_type &&
+            archived_at == o.archived_at &&
+            archived == o.archived &&
+            path == o.path &&
+            size == o.size &&
+            name == o.name &&
+            width == o.width &&
             id == o.id &&
-            updated_at == o.updated_at
+            default_hosting_url == o.default_hosting_url &&
+            updated_at == o.updated_at &&
+            height == o.height
       end
 
       # @see the `==` method
@@ -198,7 +332,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [created_at, property_name, active, event_type, id, updated_at].hash
+        [extension, access, parent_folder_id, encoding, type, is_usable_in_content, url, expires_at, created_at, archived_at, archived, path, size, name, width, id, default_hosting_url, updated_at, height].hash
       end
 
       # Builds the object from hash
@@ -269,7 +403,7 @@ module Hubspot
           end
         else # model
           # models (e.g. Pet) or oneOf
-          klass = Hubspot::Webhooks.const_get(type)
+          klass = Hubspot::Files.const_get(type)
           klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
         end
       end
