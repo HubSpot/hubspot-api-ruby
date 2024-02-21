@@ -1,5 +1,5 @@
 =begin
-#Marketing Events Extension
+#Marketing Events
 
 #These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
 
@@ -17,29 +17,8 @@ module Hubspot
   module Marketing
     module Events
       class MarketingEventCreateRequestParams
-        # The name of the marketing event.
-        attr_accessor :event_name
-
-        # Describes what type of event this is.  For example: `WEBINAR`, `CONFERENCE`, `WORKSHOP`
-        attr_accessor :event_type
-
         # The start date and time of the marketing event.
         attr_accessor :start_date_time
-
-        # The end date and time of the marketing event.
-        attr_accessor :end_date_time
-
-        # The name of the organizer of the marketing event.
-        attr_accessor :event_organizer
-
-        # The description of the marketing event.
-        attr_accessor :event_description
-
-        # A URL in the external event application where the marketing event can be managed.
-        attr_accessor :event_url
-
-        # Indicates if the marketing event has been cancelled.  Defaults to `false`
-        attr_accessor :event_cancelled
 
         # A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set. In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts. 
         attr_accessor :custom_properties
@@ -47,23 +26,44 @@ module Hubspot
         # The accountId that is associated with this marketing event in the external event application.
         attr_accessor :external_account_id
 
+        # Indicates if the marketing event has been cancelled.  Defaults to `false`
+        attr_accessor :event_cancelled
+
+        # The name of the organizer of the marketing event.
+        attr_accessor :event_organizer
+
+        # A URL in the external event application where the marketing event can be managed.
+        attr_accessor :event_url
+
         # The id of the marketing event in the external event application.
         attr_accessor :external_event_id
+
+        # The description of the marketing event.
+        attr_accessor :event_description
+
+        # The name of the marketing event.
+        attr_accessor :event_name
+
+        # Describes what type of event this is.  For example: `WEBINAR`, `CONFERENCE`, `WORKSHOP`
+        attr_accessor :event_type
+
+        # The end date and time of the marketing event.
+        attr_accessor :end_date_time
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'event_name' => :'eventName',
-            :'event_type' => :'eventType',
             :'start_date_time' => :'startDateTime',
-            :'end_date_time' => :'endDateTime',
-            :'event_organizer' => :'eventOrganizer',
-            :'event_description' => :'eventDescription',
-            :'event_url' => :'eventUrl',
-            :'event_cancelled' => :'eventCancelled',
             :'custom_properties' => :'customProperties',
             :'external_account_id' => :'externalAccountId',
-            :'external_event_id' => :'externalEventId'
+            :'event_cancelled' => :'eventCancelled',
+            :'event_organizer' => :'eventOrganizer',
+            :'event_url' => :'eventUrl',
+            :'external_event_id' => :'externalEventId',
+            :'event_description' => :'eventDescription',
+            :'event_name' => :'eventName',
+            :'event_type' => :'eventType',
+            :'end_date_time' => :'endDateTime'
           }
         end
 
@@ -75,17 +75,17 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'event_name' => :'String',
-            :'event_type' => :'String',
             :'start_date_time' => :'Time',
-            :'end_date_time' => :'Time',
-            :'event_organizer' => :'String',
-            :'event_description' => :'String',
-            :'event_url' => :'String',
-            :'event_cancelled' => :'Boolean',
             :'custom_properties' => :'Array<PropertyValue>',
             :'external_account_id' => :'String',
-            :'external_event_id' => :'String'
+            :'event_cancelled' => :'Boolean',
+            :'event_organizer' => :'String',
+            :'event_url' => :'String',
+            :'external_event_id' => :'String',
+            :'event_description' => :'String',
+            :'event_name' => :'String',
+            :'event_type' => :'String',
+            :'end_date_time' => :'Time'
           }
         end
 
@@ -110,36 +110,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'event_name')
-            self.event_name = attributes[:'event_name']
-          end
-
-          if attributes.key?(:'event_type')
-            self.event_type = attributes[:'event_type']
-          end
-
           if attributes.key?(:'start_date_time')
             self.start_date_time = attributes[:'start_date_time']
-          end
-
-          if attributes.key?(:'end_date_time')
-            self.end_date_time = attributes[:'end_date_time']
-          end
-
-          if attributes.key?(:'event_organizer')
-            self.event_organizer = attributes[:'event_organizer']
-          end
-
-          if attributes.key?(:'event_description')
-            self.event_description = attributes[:'event_description']
-          end
-
-          if attributes.key?(:'event_url')
-            self.event_url = attributes[:'event_url']
-          end
-
-          if attributes.key?(:'event_cancelled')
-            self.event_cancelled = attributes[:'event_cancelled']
           end
 
           if attributes.key?(:'custom_properties')
@@ -152,8 +124,36 @@ module Hubspot
             self.external_account_id = attributes[:'external_account_id']
           end
 
+          if attributes.key?(:'event_cancelled')
+            self.event_cancelled = attributes[:'event_cancelled']
+          end
+
+          if attributes.key?(:'event_organizer')
+            self.event_organizer = attributes[:'event_organizer']
+          end
+
+          if attributes.key?(:'event_url')
+            self.event_url = attributes[:'event_url']
+          end
+
           if attributes.key?(:'external_event_id')
             self.external_event_id = attributes[:'external_event_id']
+          end
+
+          if attributes.key?(:'event_description')
+            self.event_description = attributes[:'event_description']
+          end
+
+          if attributes.key?(:'event_name')
+            self.event_name = attributes[:'event_name']
+          end
+
+          if attributes.key?(:'event_type')
+            self.event_type = attributes[:'event_type']
+          end
+
+          if attributes.key?(:'end_date_time')
+            self.end_date_time = attributes[:'end_date_time']
           end
         end
 
@@ -161,20 +161,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @event_name.nil?
-            invalid_properties.push('invalid value for "event_name", event_name cannot be nil.')
+          if @external_account_id.nil?
+            invalid_properties.push('invalid value for "external_account_id", external_account_id cannot be nil.')
           end
 
           if @event_organizer.nil?
             invalid_properties.push('invalid value for "event_organizer", event_organizer cannot be nil.')
           end
 
-          if @external_account_id.nil?
-            invalid_properties.push('invalid value for "external_account_id", external_account_id cannot be nil.')
-          end
-
           if @external_event_id.nil?
             invalid_properties.push('invalid value for "external_event_id", external_event_id cannot be nil.')
+          end
+
+          if @event_name.nil?
+            invalid_properties.push('invalid value for "event_name", event_name cannot be nil.')
           end
 
           invalid_properties
@@ -183,10 +183,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @event_name.nil?
-          return false if @event_organizer.nil?
           return false if @external_account_id.nil?
+          return false if @event_organizer.nil?
           return false if @external_event_id.nil?
+          return false if @event_name.nil?
           true
         end
 
@@ -195,17 +195,17 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              event_name == o.event_name &&
-              event_type == o.event_type &&
               start_date_time == o.start_date_time &&
-              end_date_time == o.end_date_time &&
-              event_organizer == o.event_organizer &&
-              event_description == o.event_description &&
-              event_url == o.event_url &&
-              event_cancelled == o.event_cancelled &&
               custom_properties == o.custom_properties &&
               external_account_id == o.external_account_id &&
-              external_event_id == o.external_event_id
+              event_cancelled == o.event_cancelled &&
+              event_organizer == o.event_organizer &&
+              event_url == o.event_url &&
+              external_event_id == o.external_event_id &&
+              event_description == o.event_description &&
+              event_name == o.event_name &&
+              event_type == o.event_type &&
+              end_date_time == o.end_date_time
         end
 
         # @see the `==` method
@@ -217,7 +217,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [event_name, event_type, start_date_time, end_date_time, event_organizer, event_description, event_url, event_cancelled, custom_properties, external_account_id, external_event_id].hash
+          [start_date_time, custom_properties, external_account_id, event_cancelled, event_organizer, event_url, external_event_id, event_description, event_name, event_type, end_date_time].hash
         end
 
         # Builds the object from hash

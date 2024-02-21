@@ -1,5 +1,5 @@
 =begin
-#Marketing Events Extension
+#Marketing Events
 
 #These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
 
@@ -15,14 +15,16 @@ require 'cgi'
 module Hubspot
   module Marketing
     module Events
-      class SettingsExternalApi
+      class SettingsApi
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # @param app_id [Integer] 
-        # @param event_detail_settings_url [EventDetailSettingsUrl] 
+        # Update the application settings
+        # Create or update the current settings for the application.
+        # @param app_id [Integer] The id of the application to update the settings for.
+        # @param event_detail_settings_url [EventDetailSettingsUrl] The new application settings
         # @param [Hash] opts the optional parameters
         # @return [EventDetailSettings]
         def create(app_id, event_detail_settings_url, opts = {})
@@ -30,21 +32,23 @@ module Hubspot
           data
         end
 
-        # @param app_id [Integer] 
-        # @param event_detail_settings_url [EventDetailSettingsUrl] 
+        # Update the application settings
+        # Create or update the current settings for the application.
+        # @param app_id [Integer] The id of the application to update the settings for.
+        # @param event_detail_settings_url [EventDetailSettingsUrl] The new application settings
         # @param [Hash] opts the optional parameters
         # @return [Array<(EventDetailSettings, Integer, Hash)>] EventDetailSettings data, response status code and response headers
         def create_with_http_info(app_id, event_detail_settings_url, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: SettingsExternalApi.create ...'
+            @api_client.config.logger.debug 'Calling API: SettingsApi.create ...'
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsExternalApi.create"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.create"
           end
           # verify the required parameter 'event_detail_settings_url' is set
           if @api_client.config.client_side_validation && event_detail_settings_url.nil?
-            fail ArgumentError, "Missing the required parameter 'event_detail_settings_url' when calling SettingsExternalApi.create"
+            fail ArgumentError, "Missing the required parameter 'event_detail_settings_url' when calling SettingsApi.create"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -72,10 +76,10 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'EventDetailSettings'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['developer_hapikey', 'hapikey']
+          auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
           new_options = opts.merge(
-            :operation => :"SettingsExternalApi.create",
+            :operation => :"SettingsApi.create",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -86,12 +90,14 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: SettingsExternalApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: SettingsApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
 
-        # @param app_id [Integer] 
+        # Retrieve the application settings
+        # Retrieve the current settings for the application.
+        # @param app_id [Integer] The id of the application to retrieve the settings for.
         # @param [Hash] opts the optional parameters
         # @return [EventDetailSettings]
         def get_all(app_id, opts = {})
@@ -99,16 +105,18 @@ module Hubspot
           data
         end
 
-        # @param app_id [Integer] 
+        # Retrieve the application settings
+        # Retrieve the current settings for the application.
+        # @param app_id [Integer] The id of the application to retrieve the settings for.
         # @param [Hash] opts the optional parameters
         # @return [Array<(EventDetailSettings, Integer, Hash)>] EventDetailSettings data, response status code and response headers
         def get_all_with_http_info(app_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: SettingsExternalApi.get_all ...'
+            @api_client.config.logger.debug 'Calling API: SettingsApi.get_all ...'
           end
           # verify the required parameter 'app_id' is set
           if @api_client.config.client_side_validation && app_id.nil?
-            fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsExternalApi.get_all"
+            fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.get_all"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
@@ -131,10 +139,10 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'EventDetailSettings'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['developer_hapikey', 'hapikey']
+          auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
           new_options = opts.merge(
-            :operation => :"SettingsExternalApi.get_all",
+            :operation => :"SettingsApi.get_all",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -145,7 +153,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: SettingsExternalApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: SettingsApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

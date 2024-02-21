@@ -1,5 +1,5 @@
 =begin
-#Marketing Events Extension
+#Marketing Events
 
 #These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
 
@@ -17,21 +17,21 @@ module Hubspot
   module Marketing
     module Events
       class MarketingEventExternalUniqueIdentifier
-        # The id of the application that created the marketing event in HubSpot.
-        attr_accessor :app_id
-
         # The accountId that is associated with this marketing event in the external event application.
         attr_accessor :external_account_id
 
         # The id of the marketing event in the external event application.
         attr_accessor :external_event_id
 
+        # The id of the application that created the marketing event in HubSpot.
+        attr_accessor :app_id
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'app_id' => :'appId',
             :'external_account_id' => :'externalAccountId',
-            :'external_event_id' => :'externalEventId'
+            :'external_event_id' => :'externalEventId',
+            :'app_id' => :'appId'
           }
         end
 
@@ -43,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'app_id' => :'Integer',
             :'external_account_id' => :'String',
-            :'external_event_id' => :'String'
+            :'external_event_id' => :'String',
+            :'app_id' => :'Integer'
           }
         end
 
@@ -70,10 +70,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'app_id')
-            self.app_id = attributes[:'app_id']
-          end
-
           if attributes.key?(:'external_account_id')
             self.external_account_id = attributes[:'external_account_id']
           end
@@ -81,16 +77,16 @@ module Hubspot
           if attributes.key?(:'external_event_id')
             self.external_event_id = attributes[:'external_event_id']
           end
+
+          if attributes.key?(:'app_id')
+            self.app_id = attributes[:'app_id']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @app_id.nil?
-            invalid_properties.push('invalid value for "app_id", app_id cannot be nil.')
-          end
-
           if @external_account_id.nil?
             invalid_properties.push('invalid value for "external_account_id", external_account_id cannot be nil.')
           end
@@ -99,15 +95,19 @@ module Hubspot
             invalid_properties.push('invalid value for "external_event_id", external_event_id cannot be nil.')
           end
 
+          if @app_id.nil?
+            invalid_properties.push('invalid value for "app_id", app_id cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @app_id.nil?
           return false if @external_account_id.nil?
           return false if @external_event_id.nil?
+          return false if @app_id.nil?
           true
         end
 
@@ -116,9 +116,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              app_id == o.app_id &&
               external_account_id == o.external_account_id &&
-              external_event_id == o.external_event_id
+              external_event_id == o.external_event_id &&
+              app_id == o.app_id
         end
 
         # @see the `==` method
@@ -130,7 +130,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [app_id, external_account_id, external_event_id].hash
+          [external_account_id, external_event_id, app_id].hash
         end
 
         # Builds the object from hash
