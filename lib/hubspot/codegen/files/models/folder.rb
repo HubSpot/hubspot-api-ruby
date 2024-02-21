@@ -1,7 +1,7 @@
 =begin
-#Webhooks Webhooks
+#Files Files
 
-#Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+#Upload and manage files.
 
 The version of the OpenAPI document: v3
 
@@ -14,41 +14,43 @@ require 'date'
 require 'time'
 
 module Hubspot
-  module Webhooks
-    class ThrottlingSettings
-      # Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
-      attr_accessor :period
+  module Files
+    class Folder
+      # Timestamp of folder creation.
+      attr_accessor :created_at
 
-      # The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
-      attr_accessor :max_concurrent_requests
+      # Timestamp of folder deletion.
+      attr_accessor :archived_at
 
-      class EnumAttributeValidator
-        attr_reader :datatype
-        attr_reader :allowable_values
+      # Marks whether the folder is deleted or not.
+      attr_accessor :archived
 
-        def initialize(datatype, allowable_values)
-          @allowable_values = allowable_values.map do |value|
-            case datatype.to_s
-            when /Integer/i
-              value.to_i
-            when /Float/i
-              value.to_f
-            else
-              value
-            end
-          end
-        end
+      # Path of the folder in the file manager.
+      attr_accessor :path
 
-        def valid?(value)
-          !value || allowable_values.include?(value)
-        end
-      end
+      # ID of the parent folder.
+      attr_accessor :parent_folder_id
+
+      # Name of the folder.
+      attr_accessor :name
+
+      # ID of the folder.
+      attr_accessor :id
+
+      # Timestamp of the latest update to the folder.
+      attr_accessor :updated_at
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'period' => :'period',
-          :'max_concurrent_requests' => :'maxConcurrentRequests'
+          :'created_at' => :'createdAt',
+          :'archived_at' => :'archivedAt',
+          :'archived' => :'archived',
+          :'path' => :'path',
+          :'parent_folder_id' => :'parentFolderId',
+          :'name' => :'name',
+          :'id' => :'id',
+          :'updated_at' => :'updatedAt'
         }
       end
 
@@ -60,8 +62,14 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'period' => :'String',
-          :'max_concurrent_requests' => :'Integer'
+          :'created_at' => :'Time',
+          :'archived_at' => :'Time',
+          :'archived' => :'Boolean',
+          :'path' => :'String',
+          :'parent_folder_id' => :'String',
+          :'name' => :'String',
+          :'id' => :'String',
+          :'updated_at' => :'Time'
         }
       end
 
@@ -75,23 +83,47 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Webhooks::ThrottlingSettings` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Files::Folder` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Webhooks::ThrottlingSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Files::Folder`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'period')
-          self.period = attributes[:'period']
+        if attributes.key?(:'created_at')
+          self.created_at = attributes[:'created_at']
         end
 
-        if attributes.key?(:'max_concurrent_requests')
-          self.max_concurrent_requests = attributes[:'max_concurrent_requests']
+        if attributes.key?(:'archived_at')
+          self.archived_at = attributes[:'archived_at']
+        end
+
+        if attributes.key?(:'archived')
+          self.archived = attributes[:'archived']
+        end
+
+        if attributes.key?(:'path')
+          self.path = attributes[:'path']
+        end
+
+        if attributes.key?(:'parent_folder_id')
+          self.parent_folder_id = attributes[:'parent_folder_id']
+        end
+
+        if attributes.key?(:'name')
+          self.name = attributes[:'name']
+        end
+
+        if attributes.key?(:'id')
+          self.id = attributes[:'id']
+        end
+
+        if attributes.key?(:'updated_at')
+          self.updated_at = attributes[:'updated_at']
         end
       end
 
@@ -99,12 +131,20 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @period.nil?
-          invalid_properties.push('invalid value for "period", period cannot be nil.')
+        if @created_at.nil?
+          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
         end
 
-        if @max_concurrent_requests.nil?
-          invalid_properties.push('invalid value for "max_concurrent_requests", max_concurrent_requests cannot be nil.')
+        if @archived.nil?
+          invalid_properties.push('invalid value for "archived", archived cannot be nil.')
+        end
+
+        if @id.nil?
+          invalid_properties.push('invalid value for "id", id cannot be nil.')
+        end
+
+        if @updated_at.nil?
+          invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
         end
 
         invalid_properties
@@ -113,21 +153,11 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @period.nil?
-        period_validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        return false unless period_validator.valid?(@period)
-        return false if @max_concurrent_requests.nil?
+        return false if @created_at.nil?
+        return false if @archived.nil?
+        return false if @id.nil?
+        return false if @updated_at.nil?
         true
-      end
-
-      # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] period Object to be assigned
-      def period=(period)
-        validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        unless validator.valid?(period)
-          fail ArgumentError, "invalid value for \"period\", must be one of #{validator.allowable_values}."
-        end
-        @period = period
       end
 
       # Checks equality by comparing each attribute.
@@ -135,8 +165,14 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            period == o.period &&
-            max_concurrent_requests == o.max_concurrent_requests
+            created_at == o.created_at &&
+            archived_at == o.archived_at &&
+            archived == o.archived &&
+            path == o.path &&
+            parent_folder_id == o.parent_folder_id &&
+            name == o.name &&
+            id == o.id &&
+            updated_at == o.updated_at
       end
 
       # @see the `==` method
@@ -148,7 +184,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [period, max_concurrent_requests].hash
+        [created_at, archived_at, archived, path, parent_folder_id, name, id, updated_at].hash
       end
 
       # Builds the object from hash
@@ -219,7 +255,7 @@ module Hubspot
           end
         else # model
           # models (e.g. Pet) or oneOf
-          klass = Hubspot::Webhooks.const_get(type)
+          klass = Hubspot::Files.const_get(type)
           klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
         end
       end

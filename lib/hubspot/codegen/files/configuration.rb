@@ -1,7 +1,7 @@
 =begin
-#Webhooks Webhooks
+#Files Files
 
-#Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+#Upload and manage files.
 
 The version of the OpenAPI document: v3
 
@@ -11,7 +11,7 @@ OpenAPI Generator version: 6.2.1
 =end
 
 module Hubspot
-  module Webhooks
+  module Files
     class Configuration
       # Defines url scheme
       attr_accessor :scheme
@@ -221,12 +221,12 @@ module Hubspot
       # Returns Auth Settings hash for api client.
       def auth_settings
         {
-          'developer_hapikey' =>
+          'oauth2' =>
             {
-              type: 'api_key',
-              in: 'query',
-              key: 'hapikey',
-              value: api_key_with_prefix('developer_hapikey')
+              type: 'oauth2',
+              in: 'header',
+              key: 'Authorization',
+              value: "Bearer #{access_token}"
             },
         }
       end

@@ -1,7 +1,7 @@
 =begin
-#Webhooks Webhooks
+#Files Files
 
-#Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+#Upload and manage files.
 
 The version of the OpenAPI document: v3
 
@@ -14,13 +14,33 @@ require 'date'
 require 'time'
 
 module Hubspot
-  module Webhooks
-    class ThrottlingSettings
-      # Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
-      attr_accessor :period
+  module Files
+    class FileActionResponse
+      attr_accessor :result
 
-      # The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
-      attr_accessor :max_concurrent_requests
+      # Time of completion of task.
+      attr_accessor :completed_at
+
+      # Number of errors resulting from the task.
+      attr_accessor :num_errors
+
+      # Timestamp of when the task was requested.
+      attr_accessor :requested_at
+
+      # Timestamp of when the task was started.
+      attr_accessor :started_at
+
+      # Link to check the status of the requested task.
+      attr_accessor :links
+
+      # Descriptive error messages.
+      attr_accessor :errors
+
+      # ID of the requested task.
+      attr_accessor :task_id
+
+      # Current status of the task.
+      attr_accessor :status
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -47,8 +67,15 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'period' => :'period',
-          :'max_concurrent_requests' => :'maxConcurrentRequests'
+          :'result' => :'result',
+          :'completed_at' => :'completedAt',
+          :'num_errors' => :'numErrors',
+          :'requested_at' => :'requestedAt',
+          :'started_at' => :'startedAt',
+          :'links' => :'links',
+          :'errors' => :'errors',
+          :'task_id' => :'taskId',
+          :'status' => :'status'
         }
       end
 
@@ -60,8 +87,15 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'period' => :'String',
-          :'max_concurrent_requests' => :'Integer'
+          :'result' => :'File',
+          :'completed_at' => :'Time',
+          :'num_errors' => :'Integer',
+          :'requested_at' => :'Time',
+          :'started_at' => :'Time',
+          :'links' => :'Hash<String, String>',
+          :'errors' => :'Array<StandardError>',
+          :'task_id' => :'String',
+          :'status' => :'String'
         }
       end
 
@@ -75,23 +109,55 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Webhooks::ThrottlingSettings` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Files::FileActionResponse` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Webhooks::ThrottlingSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Files::FileActionResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'period')
-          self.period = attributes[:'period']
+        if attributes.key?(:'result')
+          self.result = attributes[:'result']
         end
 
-        if attributes.key?(:'max_concurrent_requests')
-          self.max_concurrent_requests = attributes[:'max_concurrent_requests']
+        if attributes.key?(:'completed_at')
+          self.completed_at = attributes[:'completed_at']
+        end
+
+        if attributes.key?(:'num_errors')
+          self.num_errors = attributes[:'num_errors']
+        end
+
+        if attributes.key?(:'requested_at')
+          self.requested_at = attributes[:'requested_at']
+        end
+
+        if attributes.key?(:'started_at')
+          self.started_at = attributes[:'started_at']
+        end
+
+        if attributes.key?(:'links')
+          if (value = attributes[:'links']).is_a?(Hash)
+            self.links = value
+          end
+        end
+
+        if attributes.key?(:'errors')
+          if (value = attributes[:'errors']).is_a?(Array)
+            self.errors = value
+          end
+        end
+
+        if attributes.key?(:'task_id')
+          self.task_id = attributes[:'task_id']
+        end
+
+        if attributes.key?(:'status')
+          self.status = attributes[:'status']
         end
       end
 
@@ -99,12 +165,20 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @period.nil?
-          invalid_properties.push('invalid value for "period", period cannot be nil.')
+        if @completed_at.nil?
+          invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
         end
 
-        if @max_concurrent_requests.nil?
-          invalid_properties.push('invalid value for "max_concurrent_requests", max_concurrent_requests cannot be nil.')
+        if @started_at.nil?
+          invalid_properties.push('invalid value for "started_at", started_at cannot be nil.')
+        end
+
+        if @task_id.nil?
+          invalid_properties.push('invalid value for "task_id", task_id cannot be nil.')
+        end
+
+        if @status.nil?
+          invalid_properties.push('invalid value for "status", status cannot be nil.')
         end
 
         invalid_properties
@@ -113,21 +187,23 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @period.nil?
-        period_validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        return false unless period_validator.valid?(@period)
-        return false if @max_concurrent_requests.nil?
+        return false if @completed_at.nil?
+        return false if @started_at.nil?
+        return false if @task_id.nil?
+        return false if @status.nil?
+        status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+        return false unless status_validator.valid?(@status)
         true
       end
 
       # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] period Object to be assigned
-      def period=(period)
-        validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        unless validator.valid?(period)
-          fail ArgumentError, "invalid value for \"period\", must be one of #{validator.allowable_values}."
+      # @param [Object] status Object to be assigned
+      def status=(status)
+        validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+        unless validator.valid?(status)
+          fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
         end
-        @period = period
+        @status = status
       end
 
       # Checks equality by comparing each attribute.
@@ -135,8 +211,15 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            period == o.period &&
-            max_concurrent_requests == o.max_concurrent_requests
+            result == o.result &&
+            completed_at == o.completed_at &&
+            num_errors == o.num_errors &&
+            requested_at == o.requested_at &&
+            started_at == o.started_at &&
+            links == o.links &&
+            errors == o.errors &&
+            task_id == o.task_id &&
+            status == o.status
       end
 
       # @see the `==` method
@@ -148,7 +231,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [period, max_concurrent_requests].hash
+        [result, completed_at, num_errors, requested_at, started_at, links, errors, task_id, status].hash
       end
 
       # Builds the object from hash
@@ -219,7 +302,7 @@ module Hubspot
           end
         else # model
           # models (e.g. Pet) or oneOf
-          klass = Hubspot::Webhooks.const_get(type)
+          klass = Hubspot::Files.const_get(type)
           klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
         end
       end
