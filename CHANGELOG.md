@@ -138,6 +138,9 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added new param  `expires_at` to `File` and `FileUpdateInput`.
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
+#### Changes in Files client:
+- Moved client from `files.files` to `files`.
+
 ## Added new Client API:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 
