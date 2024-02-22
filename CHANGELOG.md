@@ -79,7 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added parameter `inverseLabel` to classes `PublicAssociationDefinitionCreateRequest` and `PublicAssociationDefinitionUpdateRequest`.
 
 ### Changes in Schema API Methods
-- Method `delete` renamed to `archive` in class `DefinitionsApi`.
+- Method `delete()` renamed to `archive()` in class `DefinitionsApi`.
 
 ### Changes in Oauth models
 - Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
@@ -141,8 +141,24 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Files client:
 - Moved client from `files.files` to `files`.
 
-## Added new Client API:
+#### Changes in Marketing Events Apis:
+- Moved methods `archive()`, `create()`, `do_cancel()`, `get_by_id()`, `replace()` and `update()` from `marketing.events.marketing_events_external_api` to `marketing.events.basic_api`.
+- Moved method `do_upsert()` from `marketing.events.marketing_events_external_api` to `marketing.events.batch_api`.
+- Moved and renamed method `archive_batch()` to `archive()` from `marketing.events.marketing_events_external_api.archive_batch` to `marketing.events.batch_api.archive`.
+- Moved methods `do_email_upsert_by_id()` and `do_upsert_by_id()`  from `marketing.events.marketing_events_external_api` to `marketing.events.subscriber_state_changes`.
+- Renamed Api `marketing.events.settings_external_api` to `marketing.events.settings_api`.
+
+#### Changes in Marketing Events Models:
+- Added new param `is_large_value` to `PropertyValue`.
+- Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
+
+#### Changes in Marketing Forms Models:
+- Added new param `lifecycle_stages` to `HubSpotFormConfiguration`.
+
+## Added new Client APIs:
 - Added `crm.extensions.calling.recording_settings_api` Api.
+- Added `marketing.events.basic_api` Api.
+- Added `marketing.events.batch_api` Api.
 
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.
