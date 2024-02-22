@@ -155,6 +155,9 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Marketing Forms Models:
 - Added new param `lifecycle_stages` to `HubSpotFormConfiguration`.
 
+#### Changes in Settings Users Model:
+- Added new params `role_ids`, `send_welcome_email` and `super_admin` to `PublicUser`.
+
 ## Added new Client APIs:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `marketing.events.basic_api` Api.
