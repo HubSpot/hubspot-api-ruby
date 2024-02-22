@@ -1,5 +1,5 @@
 =begin
-#Users
+#Settings User Provisioning
 
 #Add, manage, and remove users from your account
 
@@ -18,21 +18,21 @@ module Hubspot
     module Users
       # A role that can be assigned to a user
       class PublicPermissionSet
-        # The role's unique ID
-        attr_accessor :id
+        # Whether this role has a paid seat and requires the billing-write scope to assign/unassign to users
+        attr_accessor :requires_billing_write
 
         # The role's name
         attr_accessor :name
 
-        # Whether this role has a paid seat and requires the billing-write scope to assign/unassign to users
-        attr_accessor :requires_billing_write
+        # The role's unique ID
+        attr_accessor :id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
+            :'requires_billing_write' => :'requiresBillingWrite',
             :'name' => :'name',
-            :'requires_billing_write' => :'requiresBillingWrite'
+            :'id' => :'id'
           }
         end
 
@@ -44,9 +44,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
+            :'requires_billing_write' => :'Boolean',
             :'name' => :'String',
-            :'requires_billing_write' => :'Boolean'
+            :'id' => :'String'
           }
         end
 
@@ -71,16 +71,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'requires_billing_write')
+            self.requires_billing_write = attributes[:'requires_billing_write']
           end
 
           if attributes.key?(:'name')
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'requires_billing_write')
-            self.requires_billing_write = attributes[:'requires_billing_write']
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
         end
 
@@ -88,16 +88,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          if @requires_billing_write.nil?
+            invalid_properties.push('invalid value for "requires_billing_write", requires_billing_write cannot be nil.')
           end
 
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
-          if @requires_billing_write.nil?
-            invalid_properties.push('invalid value for "requires_billing_write", requires_billing_write cannot be nil.')
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           invalid_properties
@@ -106,9 +106,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
-          return false if @name.nil?
           return false if @requires_billing_write.nil?
+          return false if @name.nil?
+          return false if @id.nil?
           true
         end
 
@@ -117,9 +117,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
+              requires_billing_write == o.requires_billing_write &&
               name == o.name &&
-              requires_billing_write == o.requires_billing_write
+              id == o.id
         end
 
         # @see the `==` method
@@ -131,7 +131,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, requires_billing_write].hash
+          [requires_billing_write, name, id].hash
         end
 
         # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#Users
+#Settings User Provisioning
 
 #Add, manage, and remove users from your account
 
@@ -18,14 +18,14 @@ module Hubspot
     module Users
       # A team that can be assigned to a user
       class PublicTeam
-        # The team's unique ID
-        attr_accessor :id
+        # Primary members of this team
+        attr_accessor :user_ids
 
         # The team's name
         attr_accessor :name
 
-        # Primary members of this team
-        attr_accessor :user_ids
+        # The team's unique ID
+        attr_accessor :id
 
         # Secondary or additional members of this team
         attr_accessor :secondary_user_ids
@@ -33,9 +33,9 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'name' => :'name',
             :'user_ids' => :'userIds',
+            :'name' => :'name',
+            :'id' => :'id',
             :'secondary_user_ids' => :'secondaryUserIds'
           }
         end
@@ -48,9 +48,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'name' => :'String',
             :'user_ids' => :'Array<String>',
+            :'name' => :'String',
+            :'id' => :'String',
             :'secondary_user_ids' => :'Array<String>'
           }
         end
@@ -76,18 +76,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'user_ids')
+            if (value = attributes[:'user_ids']).is_a?(Array)
+              self.user_ids = value
+            end
           end
 
           if attributes.key?(:'name')
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'user_ids')
-            if (value = attributes[:'user_ids']).is_a?(Array)
-              self.user_ids = value
-            end
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
 
           if attributes.key?(:'secondary_user_ids')
@@ -101,16 +101,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          if @user_ids.nil?
+            invalid_properties.push('invalid value for "user_ids", user_ids cannot be nil.')
           end
 
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
-          if @user_ids.nil?
-            invalid_properties.push('invalid value for "user_ids", user_ids cannot be nil.')
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           if @secondary_user_ids.nil?
@@ -123,9 +123,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
-          return false if @name.nil?
           return false if @user_ids.nil?
+          return false if @name.nil?
+          return false if @id.nil?
           return false if @secondary_user_ids.nil?
           true
         end
@@ -135,9 +135,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              name == o.name &&
               user_ids == o.user_ids &&
+              name == o.name &&
+              id == o.id &&
               secondary_user_ids == o.secondary_user_ids
         end
 
@@ -150,7 +150,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, user_ids, secondary_user_ids].hash
+          [user_ids, name, id, secondary_user_ids].hash
         end
 
         # Builds the object from hash
