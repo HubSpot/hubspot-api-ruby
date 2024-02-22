@@ -1,5 +1,5 @@
 =begin
-#Marketing Events Extension
+#Marketing Events
 
 #These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
 
@@ -17,34 +17,46 @@ module Hubspot
   module Marketing
     module Events
       class PropertyValue
-        attr_accessor :name
-
-        attr_accessor :value
-
-        attr_accessor :timestamp
-
+        # 
         attr_accessor :source_id
 
-        attr_accessor :source_label
-
-        attr_accessor :source
-
+        # 
         attr_accessor :selected_by_user
 
-        attr_accessor :selected_by_user_timestamp
+        # 
+        attr_accessor :source_label
 
-        attr_accessor :source_vid
-
-        # Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`
-        attr_accessor :source_metadata
-
-        attr_accessor :request_id
+        # 
+        attr_accessor :source
 
         attr_accessor :updated_by_user_id
 
         attr_accessor :persistence_timestamp
 
+        # Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`
+        attr_accessor :source_metadata
+
+        # 
+        attr_accessor :source_vid
+
+        # 
+        attr_accessor :request_id
+
+        # 
+        attr_accessor :name
+
         attr_accessor :use_timestamp_as_persistence_timestamp
+
+        # 
+        attr_accessor :value
+
+        # 
+        attr_accessor :selected_by_user_timestamp
+
+        # 
+        attr_accessor :timestamp
+
+        attr_accessor :is_large_value
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -71,20 +83,21 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
-            :'value' => :'value',
-            :'timestamp' => :'timestamp',
             :'source_id' => :'sourceId',
+            :'selected_by_user' => :'selectedByUser',
             :'source_label' => :'sourceLabel',
             :'source' => :'source',
-            :'selected_by_user' => :'selectedByUser',
-            :'selected_by_user_timestamp' => :'selectedByUserTimestamp',
-            :'source_vid' => :'sourceVid',
-            :'source_metadata' => :'sourceMetadata',
-            :'request_id' => :'requestId',
             :'updated_by_user_id' => :'updatedByUserId',
             :'persistence_timestamp' => :'persistenceTimestamp',
-            :'use_timestamp_as_persistence_timestamp' => :'useTimestampAsPersistenceTimestamp'
+            :'source_metadata' => :'sourceMetadata',
+            :'source_vid' => :'sourceVid',
+            :'request_id' => :'requestId',
+            :'name' => :'name',
+            :'use_timestamp_as_persistence_timestamp' => :'useTimestampAsPersistenceTimestamp',
+            :'value' => :'value',
+            :'selected_by_user_timestamp' => :'selectedByUserTimestamp',
+            :'timestamp' => :'timestamp',
+            :'is_large_value' => :'isLargeValue'
           }
         end
 
@@ -96,20 +109,21 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
-            :'value' => :'String',
-            :'timestamp' => :'Integer',
             :'source_id' => :'String',
+            :'selected_by_user' => :'Boolean',
             :'source_label' => :'String',
             :'source' => :'String',
-            :'selected_by_user' => :'Boolean',
-            :'selected_by_user_timestamp' => :'Integer',
-            :'source_vid' => :'Array<Integer>',
-            :'source_metadata' => :'String',
-            :'request_id' => :'String',
             :'updated_by_user_id' => :'Integer',
             :'persistence_timestamp' => :'Integer',
-            :'use_timestamp_as_persistence_timestamp' => :'Boolean'
+            :'source_metadata' => :'String',
+            :'source_vid' => :'Array<Integer>',
+            :'request_id' => :'String',
+            :'name' => :'String',
+            :'use_timestamp_as_persistence_timestamp' => :'Boolean',
+            :'value' => :'String',
+            :'selected_by_user_timestamp' => :'Integer',
+            :'timestamp' => :'Integer',
+            :'is_large_value' => :'Boolean'
           }
         end
 
@@ -134,20 +148,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'value')
-            self.value = attributes[:'value']
-          end
-
-          if attributes.key?(:'timestamp')
-            self.timestamp = attributes[:'timestamp']
-          end
-
           if attributes.key?(:'source_id')
             self.source_id = attributes[:'source_id']
+          end
+
+          if attributes.key?(:'selected_by_user')
+            self.selected_by_user = attributes[:'selected_by_user']
           end
 
           if attributes.key?(:'source_label')
@@ -158,28 +164,6 @@ module Hubspot
             self.source = attributes[:'source']
           end
 
-          if attributes.key?(:'selected_by_user')
-            self.selected_by_user = attributes[:'selected_by_user']
-          end
-
-          if attributes.key?(:'selected_by_user_timestamp')
-            self.selected_by_user_timestamp = attributes[:'selected_by_user_timestamp']
-          end
-
-          if attributes.key?(:'source_vid')
-            if (value = attributes[:'source_vid']).is_a?(Array)
-              self.source_vid = value
-            end
-          end
-
-          if attributes.key?(:'source_metadata')
-            self.source_metadata = attributes[:'source_metadata']
-          end
-
-          if attributes.key?(:'request_id')
-            self.request_id = attributes[:'request_id']
-          end
-
           if attributes.key?(:'updated_by_user_id')
             self.updated_by_user_id = attributes[:'updated_by_user_id']
           end
@@ -188,8 +172,42 @@ module Hubspot
             self.persistence_timestamp = attributes[:'persistence_timestamp']
           end
 
+          if attributes.key?(:'source_metadata')
+            self.source_metadata = attributes[:'source_metadata']
+          end
+
+          if attributes.key?(:'source_vid')
+            if (value = attributes[:'source_vid']).is_a?(Array)
+              self.source_vid = value
+            end
+          end
+
+          if attributes.key?(:'request_id')
+            self.request_id = attributes[:'request_id']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
           if attributes.key?(:'use_timestamp_as_persistence_timestamp')
             self.use_timestamp_as_persistence_timestamp = attributes[:'use_timestamp_as_persistence_timestamp']
+          end
+
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
+          end
+
+          if attributes.key?(:'selected_by_user_timestamp')
+            self.selected_by_user_timestamp = attributes[:'selected_by_user_timestamp']
+          end
+
+          if attributes.key?(:'timestamp')
+            self.timestamp = attributes[:'timestamp']
+          end
+
+          if attributes.key?(:'is_large_value')
+            self.is_large_value = attributes[:'is_large_value']
           end
         end
 
@@ -197,20 +215,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
-          if @value.nil?
-            invalid_properties.push('invalid value for "value", value cannot be nil.')
-          end
-
-          if @timestamp.nil?
-            invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
-          end
-
           if @source_id.nil?
             invalid_properties.push('invalid value for "source_id", source_id cannot be nil.')
+          end
+
+          if @selected_by_user.nil?
+            invalid_properties.push('invalid value for "selected_by_user", selected_by_user cannot be nil.')
           end
 
           if @source_label.nil?
@@ -221,24 +231,32 @@ module Hubspot
             invalid_properties.push('invalid value for "source", source cannot be nil.')
           end
 
-          if @selected_by_user.nil?
-            invalid_properties.push('invalid value for "selected_by_user", selected_by_user cannot be nil.')
-          end
-
-          if @selected_by_user_timestamp.nil?
-            invalid_properties.push('invalid value for "selected_by_user_timestamp", selected_by_user_timestamp cannot be nil.')
+          if @source_metadata.nil?
+            invalid_properties.push('invalid value for "source_metadata", source_metadata cannot be nil.')
           end
 
           if @source_vid.nil?
             invalid_properties.push('invalid value for "source_vid", source_vid cannot be nil.')
           end
 
-          if @source_metadata.nil?
-            invalid_properties.push('invalid value for "source_metadata", source_metadata cannot be nil.')
-          end
-
           if @request_id.nil?
             invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
+          end
+
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @value.nil?
+            invalid_properties.push('invalid value for "value", value cannot be nil.')
+          end
+
+          if @selected_by_user_timestamp.nil?
+            invalid_properties.push('invalid value for "selected_by_user_timestamp", selected_by_user_timestamp cannot be nil.')
+          end
+
+          if @timestamp.nil?
+            invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
           end
 
           invalid_properties
@@ -247,19 +265,19 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @name.nil?
-          return false if @value.nil?
-          return false if @timestamp.nil?
           return false if @source_id.nil?
+          return false if @selected_by_user.nil?
           return false if @source_label.nil?
           return false if @source.nil?
           source_validator = EnumAttributeValidator.new('String', ["IMPORT", "API", "FORM", "ANALYTICS", "MIGRATION", "SALESFORCE", "INTEGRATION", "CONTACTS_WEB", "WAL_INCREMENTAL", "TASK", "EMAIL", "WORKFLOWS", "CALCULATED", "SOCIAL", "BATCH_UPDATE", "SIGNALS", "BIDEN", "DEFAULT", "COMPANIES", "DEALS", "ASSISTS", "PRESENTATIONS", "TALLY", "SIDEKICK", "CRM_UI", "MERGE_CONTACTS", "PORTAL_USER_ASSOCIATOR", "INTEGRATIONS_PLATFORM", "BCC_TO_CRM", "FORWARD_TO_CRM", "ENGAGEMENTS", "SALES", "HEISENBERG", "LEADIN", "GMAIL_INTEGRATION", "ACADEMY", "SALES_MESSAGES", "AVATARS_SERVICE", "MERGE_COMPANIES", "SEQUENCES", "COMPANY_FAMILIES", "MOBILE_IOS", "MOBILE_ANDROID", "CONTACTS", "ASSOCIATIONS", "EXTENSION", "SUCCESS", "BOT", "INTEGRATIONS_SYNC", "AUTOMATION_PLATFORM", "CONVERSATIONS", "EMAIL_INTEGRATION", "CONTENT_MEMBERSHIP", "QUOTES", "BET_ASSIGNMENT", "QUOTAS", "BET_CRM_CONNECTOR", "MEETINGS", "MERGE_OBJECTS", "RECYCLING_BIN", "ADS", "AI_GROUP", "COMMUNICATOR", "SETTINGS", "PROPERTY_SETTINGS", "PIPELINE_SETTINGS", "COMPANY_INSIGHTS", "BEHAVIORAL_EVENTS", "PAYMENTS", "GOALS", "PORTAL_OBJECT_SYNC", "APPROVALS", "FILE_MANAGER", "MARKETPLACE", "INTERNAL_PROCESSING", "FORECASTING", "SLACK_INTEGRATION", "CRM_UI_BULK_ACTION", "WORKFLOW_CONTACT_DELETE_ACTION"])
           return false unless source_validator.valid?(@source)
-          return false if @selected_by_user.nil?
-          return false if @selected_by_user_timestamp.nil?
-          return false if @source_vid.nil?
           return false if @source_metadata.nil?
+          return false if @source_vid.nil?
           return false if @request_id.nil?
+          return false if @name.nil?
+          return false if @value.nil?
+          return false if @selected_by_user_timestamp.nil?
+          return false if @timestamp.nil?
           true
         end
 
@@ -278,20 +296,21 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
-              value == o.value &&
-              timestamp == o.timestamp &&
               source_id == o.source_id &&
+              selected_by_user == o.selected_by_user &&
               source_label == o.source_label &&
               source == o.source &&
-              selected_by_user == o.selected_by_user &&
-              selected_by_user_timestamp == o.selected_by_user_timestamp &&
-              source_vid == o.source_vid &&
-              source_metadata == o.source_metadata &&
-              request_id == o.request_id &&
               updated_by_user_id == o.updated_by_user_id &&
               persistence_timestamp == o.persistence_timestamp &&
-              use_timestamp_as_persistence_timestamp == o.use_timestamp_as_persistence_timestamp
+              source_metadata == o.source_metadata &&
+              source_vid == o.source_vid &&
+              request_id == o.request_id &&
+              name == o.name &&
+              use_timestamp_as_persistence_timestamp == o.use_timestamp_as_persistence_timestamp &&
+              value == o.value &&
+              selected_by_user_timestamp == o.selected_by_user_timestamp &&
+              timestamp == o.timestamp &&
+              is_large_value == o.is_large_value
         end
 
         # @see the `==` method
@@ -303,7 +322,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, value, timestamp, source_id, source_label, source, selected_by_user, selected_by_user_timestamp, source_vid, source_metadata, request_id, updated_by_user_id, persistence_timestamp, use_timestamp_as_persistence_timestamp].hash
+          [source_id, selected_by_user, source_label, source, updated_by_user_id, persistence_timestamp, source_metadata, source_vid, request_id, name, use_timestamp_as_persistence_timestamp, value, selected_by_user_timestamp, timestamp, is_large_value].hash
         end
 
         # Builds the object from hash

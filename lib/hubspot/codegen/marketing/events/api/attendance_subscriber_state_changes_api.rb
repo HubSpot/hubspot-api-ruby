@@ -1,5 +1,5 @@
 =begin
-#Marketing Events Extension
+#Marketing Events
 
 #These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
 
@@ -105,7 +105,7 @@ module Hubspot
         end
 
         # Record
-        # Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created. If you set params 
+        # Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
         # @param external_event_id [String] The id of the marketing event
         # @param subscriber_state [String] The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
         # @param batch_input_marketing_event_email_subscriber [BatchInputMarketingEventEmailSubscriber] The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
@@ -118,7 +118,7 @@ module Hubspot
         end
 
         # Record
-        # Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created. If you set params 
+        # Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
         # @param external_event_id [String] The id of the marketing event
         # @param subscriber_state [String] The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
         # @param batch_input_marketing_event_email_subscriber [BatchInputMarketingEventEmailSubscriber] The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
