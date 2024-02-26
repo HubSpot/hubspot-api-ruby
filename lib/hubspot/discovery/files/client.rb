@@ -6,9 +6,10 @@ module Hubspot
       class Client
         include Hubspot::Discovery::BaseModuleClient
 
-        def api_modules
+        def api_classes
           %i[
             files
+            folders
           ].freeze
         end
       end
