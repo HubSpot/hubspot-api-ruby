@@ -5,6 +5,6 @@ describe 'Hubspot::Discovery::Cms::SourceCode::ContentApi' do
   
   it { is_expected.to respond_to(:archive) }
   it { is_expected.to respond_to(:create) }
-  it { is_expected.to respond_to(:get) }
-  it { is_expected.to respond_to(:replace) }
+  it { is_expected.to respond_to(:download) }
+  it { is_expected.to respond_to(:create_or_update) }
 end

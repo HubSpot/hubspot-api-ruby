@@ -162,6 +162,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `marketing.events.basic_api` Api.
 - Added `marketing.events.batch_api` Api.
+- Added `marketing.events.subscriber_state_changes_api` Api.
 
 ## Removed `hapikey` from
 - `cms.audit_logs` Api.

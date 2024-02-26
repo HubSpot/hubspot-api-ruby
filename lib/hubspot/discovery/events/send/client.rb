@@ -9,7 +9,7 @@ module Hubspot
 
           def api_classes
             %i[
-              behavioral_events_tracking
+              custom_event_data
             ].freeze
           end
         end
