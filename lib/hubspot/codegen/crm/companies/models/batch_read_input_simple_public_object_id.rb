@@ -17,21 +17,21 @@ module Hubspot
   module Crm
     module Companies
       class BatchReadInputSimplePublicObjectId
-        attr_accessor :properties
-
         attr_accessor :properties_with_history
 
         attr_accessor :id_property
 
         attr_accessor :inputs
 
+        attr_accessor :properties
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'properties' => :'properties',
             :'properties_with_history' => :'propertiesWithHistory',
             :'id_property' => :'idProperty',
-            :'inputs' => :'inputs'
+            :'inputs' => :'inputs',
+            :'properties' => :'properties'
           }
         end
 
@@ -43,10 +43,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'properties' => :'Array<String>',
             :'properties_with_history' => :'Array<String>',
             :'id_property' => :'String',
-            :'inputs' => :'Array<SimplePublicObjectId>'
+            :'inputs' => :'Array<SimplePublicObjectId>',
+            :'properties' => :'Array<String>'
           }
         end
 
@@ -71,12 +71,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'properties')
-            if (value = attributes[:'properties']).is_a?(Array)
-              self.properties = value
-            end
-          end
-
           if attributes.key?(:'properties_with_history')
             if (value = attributes[:'properties_with_history']).is_a?(Array)
               self.properties_with_history = value
@@ -92,16 +86,18 @@ module Hubspot
               self.inputs = value
             end
           end
+
+          if attributes.key?(:'properties')
+            if (value = attributes[:'properties']).is_a?(Array)
+              self.properties = value
+            end
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
-          end
-
           if @properties_with_history.nil?
             invalid_properties.push('invalid value for "properties_with_history", properties_with_history cannot be nil.')
           end
@@ -110,15 +106,19 @@ module Hubspot
             invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
           end
 
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @properties.nil?
           return false if @properties_with_history.nil?
           return false if @inputs.nil?
+          return false if @properties.nil?
           true
         end
 
@@ -127,10 +127,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              properties == o.properties &&
               properties_with_history == o.properties_with_history &&
               id_property == o.id_property &&
-              inputs == o.inputs
+              inputs == o.inputs &&
+              properties == o.properties
         end
 
         # @see the `==` method
@@ -142,7 +142,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [properties, properties_with_history, id_property, inputs].hash
+          [properties_with_history, id_property, inputs, properties].hash
         end
 
         # Builds the object from hash
