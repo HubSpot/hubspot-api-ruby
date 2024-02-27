@@ -1,5 +1,5 @@
 =begin
-#Associations
+#CRM Associations Schema
 
 #Associations define the relationships between objects in HubSpot. These endpoints allow you to create, read, and remove associations.
 
@@ -18,15 +18,15 @@ module Hubspot
     module Associations
       module Schema
         class PublicAssociationDefinition
-          attr_accessor :id
-
           attr_accessor :name
+
+          attr_accessor :id
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'name' => :'name'
+              :'name' => :'name',
+              :'id' => :'id'
             }
           end
 
@@ -38,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'name' => :'String'
+              :'name' => :'String',
+              :'id' => :'String'
             }
           end
 
@@ -64,12 +64,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
             if attributes.key?(:'name')
               self.name = attributes[:'name']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
           end
 
@@ -77,12 +77,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @id.nil?
-              invalid_properties.push('invalid value for "id", id cannot be nil.')
-            end
-
             if @name.nil?
               invalid_properties.push('invalid value for "name", name cannot be nil.')
+            end
+
+            if @id.nil?
+              invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
             invalid_properties
@@ -91,8 +91,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @id.nil?
             return false if @name.nil?
+            return false if @id.nil?
             true
           end
 
@@ -101,8 +101,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                name == o.name
+                name == o.name &&
+                id == o.id
           end
 
           # @see the `==` method
@@ -114,7 +114,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, name].hash
+            [name, id].hash
           end
 
           # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#Associations
+#CRM Associations
 
 #Associations define the relationships between objects in HubSpot. These endpoints allow you to create, read, and remove associations.
 
@@ -19,17 +19,17 @@ module Hubspot
       class PublicAssociationMulti
         attr_accessor :from
 
+        attr_accessor :paging
+
         # The IDs of objects that are associated with the object identified by the ID in 'from'.
         attr_accessor :to
-
-        attr_accessor :paging
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'from' => :'from',
-            :'to' => :'to',
-            :'paging' => :'paging'
+            :'paging' => :'paging',
+            :'to' => :'to'
           }
         end
 
@@ -42,8 +42,8 @@ module Hubspot
         def self.openapi_types
           {
             :'from' => :'PublicObjectId',
-            :'to' => :'Array<AssociatedId>',
-            :'paging' => :'Paging'
+            :'paging' => :'Paging',
+            :'to' => :'Array<AssociatedId>'
           }
         end
 
@@ -72,14 +72,14 @@ module Hubspot
             self.from = attributes[:'from']
           end
 
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
+          end
+
           if attributes.key?(:'to')
             if (value = attributes[:'to']).is_a?(Array)
               self.to = value
             end
-          end
-
-          if attributes.key?(:'paging')
-            self.paging = attributes[:'paging']
           end
         end
 
@@ -112,8 +112,8 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               from == o.from &&
-              to == o.to &&
-              paging == o.paging
+              paging == o.paging &&
+              to == o.to
         end
 
         # @see the `==` method
@@ -125,7 +125,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [from, to, paging].hash
+          [from, paging, to].hash
         end
 
         # Builds the object from hash
