@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [18.0.0] - 2024-02-14
 
-### Changes in Cms AuditLogs Api:
+### Changes in Cms AuditLogs API:
 - Added new param `prev` to `cms.audit_log.models.Paging`.
 - Added new param `meta` to `cms.audit_log.models.PublicAuditLog`.
 - Added `cms.audit_logs.models.PreviousPage`.
@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `get_by_id()` method to return `PublicActionRevision` instead of `ActionRevision`.
 - Updated `get_page()` method to return `CollectionResponsePublicActionRevisionForwardPaging` instead of `CollectionResponseActionRevisionForwardPaging`.
 
-### Changes in Automation Actions models:
+### Changes in Automation Actions Models:
 - Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`.
 - Added `automation.actions.models.OutputFieldDefinition`.
 - Added `automation.actions.models.PublicExecutionTranslationRule`.
@@ -58,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `attach_to_lang_group()`, `detach_from_lang_group()` and `update_langs()` methods to return `nil` instead of `Error`.
 - Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`.
 
-### Changes in Blog models:
+### Changes in Blog Models:
 - Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`.
 
 ### Changes in CMS Source Code API:
@@ -67,21 +67,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new param `hash` to `cms.source_code.models.AssetFileMetadata`.
 - Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
-### Changes in CRM Associations API (associations) v4
+### Changes in CRM Associations API (associations) v4:
 - Methods `archive()`, `create()` and `create_default()` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
 - Method `get_page()` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
 - Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
 - Changed the type of property `category` in class `ErrorCategory` to `string`.
 
-### Changes in AssociationsV4 Models
+### Changes in AssociationsV4 Models:
 - Changed the type of property `errors` in class `BatchResponsePublicDefaultAssociation` from `StandardError1[]` to `StandardError[]`.
 - Added parameter `inverseLabel` to classes `PublicAssociationDefinitionCreateRequest` and `PublicAssociationDefinitionUpdateRequest`.
 
-### Changes in Schema API Methods
+### Changes in AssociationsV3 Models:
+- Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
+
+### Changes in Schema API Methods:
 - Method `delete()` renamed to `archive()` in class `DefinitionsApi`.
 
-### Changes in Oauth models
+### Changes in Oauth Models:
 - Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
 
 ### Changes in CRM Imports Model:
@@ -138,7 +141,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added new param  `expires_at` to `File` and `FileUpdateInput`.
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
-#### Changes in Files client:
+#### Changes in Files Client:
 - Moved client from `files.files` to `files`.
 
 #### Changes in Marketing Events Apis:
