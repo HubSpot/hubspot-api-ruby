@@ -17,37 +17,37 @@ module Hubspot
   module Crm
     module Companies
       class Error
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
-
-        # A unique identifier for the request. Include this value with any error reports or support tickets
-        attr_accessor :correlation_id
-
-        # The error category
-        attr_accessor :category
-
         # A specific category that contains more specific detail about the error
         attr_accessor :sub_category
-
-        # further information about the error
-        attr_accessor :errors
 
         # Context about the error condition
         attr_accessor :context
 
+        # A unique identifier for the request. Include this value with any error reports or support tickets
+        attr_accessor :correlation_id
+
         # A map of link names to associated URIs containing documentation about the error or recommended remediation steps
         attr_accessor :links
+
+        # A human readable message describing the error along with remediation steps where appropriate
+        attr_accessor :message
+
+        # The error category
+        attr_accessor :category
+
+        # further information about the error
+        attr_accessor :errors
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'message' => :'message',
-            :'correlation_id' => :'correlationId',
-            :'category' => :'category',
             :'sub_category' => :'subCategory',
-            :'errors' => :'errors',
             :'context' => :'context',
-            :'links' => :'links'
+            :'correlation_id' => :'correlationId',
+            :'links' => :'links',
+            :'message' => :'message',
+            :'category' => :'category',
+            :'errors' => :'errors'
           }
         end
 
@@ -59,13 +59,13 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'message' => :'String',
-            :'correlation_id' => :'String',
-            :'category' => :'String',
             :'sub_category' => :'String',
-            :'errors' => :'Array<ErrorDetail>',
             :'context' => :'Hash<String, Array<String>>',
-            :'links' => :'Hash<String, String>'
+            :'correlation_id' => :'String',
+            :'links' => :'Hash<String, String>',
+            :'message' => :'String',
+            :'category' => :'String',
+            :'errors' => :'Array<ErrorDetail>'
           }
         end
 
@@ -90,26 +90,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
-          end
-
-          if attributes.key?(:'correlation_id')
-            self.correlation_id = attributes[:'correlation_id']
-          end
-
-          if attributes.key?(:'category')
-            self.category = attributes[:'category']
-          end
-
           if attributes.key?(:'sub_category')
             self.sub_category = attributes[:'sub_category']
-          end
-
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
           end
 
           if attributes.key?(:'context')
@@ -118,9 +100,27 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'correlation_id')
+            self.correlation_id = attributes[:'correlation_id']
+          end
+
           if attributes.key?(:'links')
             if (value = attributes[:'links']).is_a?(Hash)
               self.links = value
+            end
+          end
+
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
+          end
+
+          if attributes.key?(:'category')
+            self.category = attributes[:'category']
+          end
+
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
             end
           end
         end
@@ -129,12 +129,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
-          end
-
           if @correlation_id.nil?
             invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
+          end
+
+          if @message.nil?
+            invalid_properties.push('invalid value for "message", message cannot be nil.')
           end
 
           if @category.nil?
@@ -147,8 +147,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @message.nil?
           return false if @correlation_id.nil?
+          return false if @message.nil?
           return false if @category.nil?
           true
         end
@@ -158,13 +158,13 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              message == o.message &&
-              correlation_id == o.correlation_id &&
-              category == o.category &&
               sub_category == o.sub_category &&
-              errors == o.errors &&
               context == o.context &&
-              links == o.links
+              correlation_id == o.correlation_id &&
+              links == o.links &&
+              message == o.message &&
+              category == o.category &&
+              errors == o.errors
         end
 
         # @see the `==` method
@@ -176,7 +176,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [message, correlation_id, category, sub_category, errors, context, links].hash
+          [sub_category, context, correlation_id, links, message, category, errors].hash
         end
 
         # Builds the object from hash

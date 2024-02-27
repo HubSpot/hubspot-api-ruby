@@ -17,15 +17,15 @@ module Hubspot
   module Crm
     module Deals
       class PublicMergeInput
-        attr_accessor :primary_object_id
-
         attr_accessor :object_id_to_merge
+
+        attr_accessor :primary_object_id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'primary_object_id' => :'primaryObjectId',
-            :'object_id_to_merge' => :'objectIdToMerge'
+            :'object_id_to_merge' => :'objectIdToMerge',
+            :'primary_object_id' => :'primaryObjectId'
           }
         end
 
@@ -37,8 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'primary_object_id' => :'String',
-            :'object_id_to_merge' => :'String'
+            :'object_id_to_merge' => :'String',
+            :'primary_object_id' => :'String'
           }
         end
 
@@ -63,12 +63,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'primary_object_id')
-            self.primary_object_id = attributes[:'primary_object_id']
-          end
-
           if attributes.key?(:'object_id_to_merge')
             self.object_id_to_merge = attributes[:'object_id_to_merge']
+          end
+
+          if attributes.key?(:'primary_object_id')
+            self.primary_object_id = attributes[:'primary_object_id']
           end
         end
 
@@ -76,12 +76,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @primary_object_id.nil?
-            invalid_properties.push('invalid value for "primary_object_id", primary_object_id cannot be nil.')
-          end
-
           if @object_id_to_merge.nil?
             invalid_properties.push('invalid value for "object_id_to_merge", object_id_to_merge cannot be nil.')
+          end
+
+          if @primary_object_id.nil?
+            invalid_properties.push('invalid value for "primary_object_id", primary_object_id cannot be nil.')
           end
 
           invalid_properties
@@ -90,8 +90,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @primary_object_id.nil?
           return false if @object_id_to_merge.nil?
+          return false if @primary_object_id.nil?
           true
         end
 
@@ -100,8 +100,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              primary_object_id == o.primary_object_id &&
-              object_id_to_merge == o.object_id_to_merge
+              object_id_to_merge == o.object_id_to_merge &&
+              primary_object_id == o.primary_object_id
         end
 
         # @see the `==` method
@@ -113,7 +113,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [primary_object_id, object_id_to_merge].hash
+          [object_id_to_merge, primary_object_id].hash
         end
 
         # Builds the object from hash
