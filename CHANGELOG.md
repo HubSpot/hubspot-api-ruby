@@ -167,12 +167,17 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in All Models SimplePublicObjectBatchInput:
 - Added new param `id_property`.
 
+#### Changes in Crm Objects:
+- Removed `crm.objects.associations_api`.
+
 ## Added new Client APIs:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `crm.objects.line_items.gdpr_api` Api.
 - Added `crm.objects.products.gdpr_api` Api.
 - Added `crm.objects.quotes.gdpr_api` Api.
 - Added `crm.objects.tickets.gdpr_api` Api.
+- Added `crm.objects.calls.gdpr_api` Api.
+- Added `crm.objects.communications.gdpr_api` Api.
 - Added `marketing.events.basic_api` Api.
 - Added `marketing.events.batch_api` Api.
 - Added `marketing.events.subscriber_state_changes_api` Api.
