@@ -164,13 +164,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in All Models PublicObjectSearchRequest:
 - Changed the type of parameter `after` from `int` to `string`
 
-#### Changes in Crm Companies Model:
-- Added new param `id_property` to `SimplePublicObjectBatchInput`
-
-#### Changes in Crm Contacts Model:
-- Added new param `id_property` to `SimplePublicObjectBatchInput`
-
-#### Changes in Crm Deals Model:
+#### Changes in Crm Companies, Contacts and Deals Models:
 - Added new param `id_property` to `SimplePublicObjectBatchInput`
 
 ## Added new Client APIs:
