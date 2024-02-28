@@ -26,8 +26,8 @@ module Hubspot
         # @param public_gdpr_delete_input [PublicGdprDeleteInput] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def post_crm_v3_objects_quotes_gdpr_delete(public_gdpr_delete_input, opts = {})
-          post_crm_v3_objects_quotes_gdpr_delete_with_http_info(public_gdpr_delete_input, opts)
+        def purge(public_gdpr_delete_input, opts = {})
+          purge_with_http_info(public_gdpr_delete_input, opts)
           nil
         end
 
@@ -36,13 +36,13 @@ module Hubspot
         # @param public_gdpr_delete_input [PublicGdprDeleteInput] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def post_crm_v3_objects_quotes_gdpr_delete_with_http_info(public_gdpr_delete_input, opts = {})
+        def purge_with_http_info(public_gdpr_delete_input, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: GDPRApi.post_crm_v3_objects_quotes_gdpr_delete ...'
+            @api_client.config.logger.debug 'Calling API: GDPRApi.purge ...'
           end
           # verify the required parameter 'public_gdpr_delete_input' is set
           if @api_client.config.client_side_validation && public_gdpr_delete_input.nil?
-            fail ArgumentError, "Missing the required parameter 'public_gdpr_delete_input' when calling GDPRApi.post_crm_v3_objects_quotes_gdpr_delete"
+            fail ArgumentError, "Missing the required parameter 'public_gdpr_delete_input' when calling GDPRApi.purge"
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/gdpr-delete'
@@ -73,7 +73,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"GDPRApi.post_crm_v3_objects_quotes_gdpr_delete",
+            :operation => :"GDPRApi.purge",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -84,7 +84,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: GDPRApi#post_crm_v3_objects_quotes_gdpr_delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: GDPRApi#purge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

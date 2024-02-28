@@ -24,21 +24,21 @@ module Hubspot
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponseWithTotalSimplePublicObjectForwardPaging]
-        def post_crm_v3_objects_quotes_search(public_object_search_request, opts = {})
-          data, _status_code, _headers = post_crm_v3_objects_quotes_search_with_http_info(public_object_search_request, opts)
+        def do_search(public_object_search_request, opts = {})
+          data, _status_code, _headers = do_search_with_http_info(public_object_search_request, opts)
           data
         end
 
         # @param public_object_search_request [PublicObjectSearchRequest] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponseWithTotalSimplePublicObjectForwardPaging, Integer, Hash)>] CollectionResponseWithTotalSimplePublicObjectForwardPaging data, response status code and response headers
-        def post_crm_v3_objects_quotes_search_with_http_info(public_object_search_request, opts = {})
+        def do_search_with_http_info(public_object_search_request, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: SearchApi.post_crm_v3_objects_quotes_search ...'
+            @api_client.config.logger.debug 'Calling API: SearchApi.do_search ...'
           end
           # verify the required parameter 'public_object_search_request' is set
           if @api_client.config.client_side_validation && public_object_search_request.nil?
-            fail ArgumentError, "Missing the required parameter 'public_object_search_request' when calling SearchApi.post_crm_v3_objects_quotes_search"
+            fail ArgumentError, "Missing the required parameter 'public_object_search_request' when calling SearchApi.do_search"
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/search'
@@ -69,7 +69,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"SearchApi.post_crm_v3_objects_quotes_search",
+            :operation => :"SearchApi.do_search",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -80,7 +80,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: SearchApi#post_crm_v3_objects_quotes_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: SearchApi#do_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

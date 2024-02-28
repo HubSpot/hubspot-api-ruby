@@ -25,8 +25,8 @@ module Hubspot
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
-        def post_crm_v3_objects_quotes_batch_archive(batch_input_simple_public_object_id, opts = {})
-          post_crm_v3_objects_quotes_batch_archive_with_http_info(batch_input_simple_public_object_id, opts)
+        def archive(batch_input_simple_public_object_id, opts = {})
+          archive_with_http_info(batch_input_simple_public_object_id, opts)
           nil
         end
 
@@ -34,13 +34,13 @@ module Hubspot
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-        def post_crm_v3_objects_quotes_batch_archive_with_http_info(batch_input_simple_public_object_id, opts = {})
+        def archive_with_http_info(batch_input_simple_public_object_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_objects_quotes_batch_archive ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.archive ...'
           end
           # verify the required parameter 'batch_input_simple_public_object_id' is set
           if @api_client.config.client_side_validation && batch_input_simple_public_object_id.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_id' when calling BatchApi.post_crm_v3_objects_quotes_batch_archive"
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_id' when calling BatchApi.archive"
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/archive'
@@ -71,7 +71,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"BatchApi.post_crm_v3_objects_quotes_batch_archive",
+            :operation => :"BatchApi.archive",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -82,7 +82,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_objects_quotes_batch_archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -91,8 +91,8 @@ module Hubspot
         # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
-        def post_crm_v3_objects_quotes_batch_create(batch_input_simple_public_object_input_for_create, opts = {})
-          data, _status_code, _headers = post_crm_v3_objects_quotes_batch_create_with_http_info(batch_input_simple_public_object_input_for_create, opts)
+        def create(batch_input_simple_public_object_input_for_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input_for_create, opts)
           data
         end
 
@@ -100,13 +100,13 @@ module Hubspot
         # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def post_crm_v3_objects_quotes_batch_create_with_http_info(batch_input_simple_public_object_input_for_create, opts = {})
+        def create_with_http_info(batch_input_simple_public_object_input_for_create, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_objects_quotes_batch_create ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
           # verify the required parameter 'batch_input_simple_public_object_input_for_create' is set
           if @api_client.config.client_side_validation && batch_input_simple_public_object_input_for_create.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.post_crm_v3_objects_quotes_batch_create"
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/create'
@@ -137,7 +137,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"BatchApi.post_crm_v3_objects_quotes_batch_create",
+            :operation => :"BatchApi.create",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -148,7 +148,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_objects_quotes_batch_create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -158,8 +158,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [BatchResponseSimplePublicObject]
-        def post_crm_v3_objects_quotes_batch_read(batch_read_input_simple_public_object_id, opts = {})
-          data, _status_code, _headers = post_crm_v3_objects_quotes_batch_read_with_http_info(batch_read_input_simple_public_object_id, opts)
+        def read(batch_read_input_simple_public_object_id, opts = {})
+          data, _status_code, _headers = read_with_http_info(batch_read_input_simple_public_object_id, opts)
           data
         end
 
@@ -168,13 +168,13 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def post_crm_v3_objects_quotes_batch_read_with_http_info(batch_read_input_simple_public_object_id, opts = {})
+        def read_with_http_info(batch_read_input_simple_public_object_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_objects_quotes_batch_read ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.read ...'
           end
           # verify the required parameter 'batch_read_input_simple_public_object_id' is set
           if @api_client.config.client_side_validation && batch_read_input_simple_public_object_id.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_read_input_simple_public_object_id' when calling BatchApi.post_crm_v3_objects_quotes_batch_read"
+            fail ArgumentError, "Missing the required parameter 'batch_read_input_simple_public_object_id' when calling BatchApi.read"
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/read'
@@ -206,7 +206,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"BatchApi.post_crm_v3_objects_quotes_batch_read",
+            :operation => :"BatchApi.read",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -217,7 +217,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_objects_quotes_batch_read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#read\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -226,8 +226,8 @@ module Hubspot
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
-        def post_crm_v3_objects_quotes_batch_update(batch_input_simple_public_object_batch_input, opts = {})
-          data, _status_code, _headers = post_crm_v3_objects_quotes_batch_update_with_http_info(batch_input_simple_public_object_batch_input, opts)
+        def update(batch_input_simple_public_object_batch_input, opts = {})
+          data, _status_code, _headers = update_with_http_info(batch_input_simple_public_object_batch_input, opts)
           data
         end
 
@@ -235,13 +235,13 @@ module Hubspot
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def post_crm_v3_objects_quotes_batch_update_with_http_info(batch_input_simple_public_object_batch_input, opts = {})
+        def update_with_http_info(batch_input_simple_public_object_batch_input, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BatchApi.post_crm_v3_objects_quotes_batch_update ...'
+            @api_client.config.logger.debug 'Calling API: BatchApi.update ...'
           end
           # verify the required parameter 'batch_input_simple_public_object_batch_input' is set
           if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input' when calling BatchApi.post_crm_v3_objects_quotes_batch_update"
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input' when calling BatchApi.update"
           end
           # resource path
           local_var_path = '/crm/v3/objects/quotes/batch/update'
@@ -272,7 +272,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"BatchApi.post_crm_v3_objects_quotes_batch_update",
+            :operation => :"BatchApi.update",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -283,7 +283,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BatchApi#post_crm_v3_objects_quotes_batch_update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BatchApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
