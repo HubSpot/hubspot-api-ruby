@@ -2,8 +2,11 @@ module Hubspot
   module Helpers
     class CamelCase
       def format(string)
-        if string == 'oauth'
+        case string
+        when 'oauth'
           'OAuth'
+        when 'gdpr_api'
+          'GDPRApi'
         else
           string.split('_').collect(&:capitalize).join
         end
