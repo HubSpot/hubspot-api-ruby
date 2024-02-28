@@ -25,30 +25,30 @@ module Hubspot
             @api_client = api_client
           end
           # Archive
-          # Move an Object identified by `{postalMail}` to the recycling bin.
-          # @param postal_mail [String] 
+          # Move an Object identified by `{postalMailId}` to the recycling bin.
+          # @param postal_mail_id [String] 
           # @param [Hash] opts the optional parameters
           # @return [nil]
-          def archive(postal_mail, opts = {})
-            archive_with_http_info(postal_mail, opts)
+          def archive(postal_mail_id, opts = {})
+            archive_with_http_info(postal_mail_id, opts)
             nil
           end
 
           # Archive
-          # Move an Object identified by &#x60;{postalMail}&#x60; to the recycling bin.
-          # @param postal_mail [String] 
+          # Move an Object identified by &#x60;{postalMailId}&#x60; to the recycling bin.
+          # @param postal_mail_id [String] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def archive_with_http_info(postal_mail, opts = {})
+          def archive_with_http_info(postal_mail_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BasicApi.archive ...'
             end
-            # verify the required parameter 'postal_mail' is set
-            if @api_client.config.client_side_validation && postal_mail.nil?
-              fail ArgumentError, "Missing the required parameter 'postal_mail' when calling BasicApi.archive"
+            # verify the required parameter 'postal_mail_id' is set
+            if @api_client.config.client_side_validation && postal_mail_id.nil?
+              fail ArgumentError, "Missing the required parameter 'postal_mail_id' when calling BasicApi.archive"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/postal_mail/{postalMail}'.sub('{' + 'postalMail' + '}', CGI.escape(postal_mail.to_s))
+            local_var_path = '/crm/v3/objects/postal_mail/{postalMailId}'.sub('{' + 'postalMailId' + '}', CGI.escape(postal_mail_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -156,8 +156,8 @@ module Hubspot
           end
 
           # Read
-          # Read an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-          # @param postal_mail [String] 
+          # Read an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+          # @param postal_mail_id [String] 
           # @param [Hash] opts the optional parameters
           # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
           # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -165,14 +165,14 @@ module Hubspot
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
           # @return [SimplePublicObjectWithAssociations]
-          def get_by_id(postal_mail, opts = {})
-            data, _status_code, _headers = get_by_id_with_http_info(postal_mail, opts)
+          def get_by_id(postal_mail_id, opts = {})
+            data, _status_code, _headers = get_by_id_with_http_info(postal_mail_id, opts)
             data
           end
 
           # Read
-          # Read an Object identified by &#x60;{postalMail}&#x60;. &#x60;{postalMail}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param.  Control what is returned via the &#x60;properties&#x60; query param.
-          # @param postal_mail [String] 
+          # Read an Object identified by &#x60;{postalMailId}&#x60;. &#x60;{postalMailId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param.  Control what is returned via the &#x60;properties&#x60; query param.
+          # @param postal_mail_id [String] 
           # @param [Hash] opts the optional parameters
           # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
           # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -180,16 +180,16 @@ module Hubspot
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
           # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
-          def get_by_id_with_http_info(postal_mail, opts = {})
+          def get_by_id_with_http_info(postal_mail_id, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BasicApi.get_by_id ...'
             end
-            # verify the required parameter 'postal_mail' is set
-            if @api_client.config.client_side_validation && postal_mail.nil?
-              fail ArgumentError, "Missing the required parameter 'postal_mail' when calling BasicApi.get_by_id"
+            # verify the required parameter 'postal_mail_id' is set
+            if @api_client.config.client_side_validation && postal_mail_id.nil?
+              fail ArgumentError, "Missing the required parameter 'postal_mail_id' when calling BasicApi.get_by_id"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/postal_mail/{postalMail}'.sub('{' + 'postalMail' + '}', CGI.escape(postal_mail.to_s))
+            local_var_path = '/crm/v3/objects/postal_mail/{postalMailId}'.sub('{' + 'postalMailId' + '}', CGI.escape(postal_mail_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -309,38 +309,38 @@ module Hubspot
           end
 
           # Update
-          # Perform a partial update of an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
-          # @param postal_mail [String] 
+          # Perform a partial update of an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+          # @param postal_mail_id [String] 
           # @param simple_public_object_input [SimplePublicObjectInput] 
           # @param [Hash] opts the optional parameters
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
           # @return [SimplePublicObject]
-          def update(postal_mail, simple_public_object_input, opts = {})
-            data, _status_code, _headers = update_with_http_info(postal_mail, simple_public_object_input, opts)
+          def update(postal_mail_id, simple_public_object_input, opts = {})
+            data, _status_code, _headers = update_with_http_info(postal_mail_id, simple_public_object_input, opts)
             data
           end
 
           # Update
-          # Perform a partial update of an Object identified by &#x60;{postalMail}&#x60;. &#x60;{postalMail}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
-          # @param postal_mail [String] 
+          # Perform a partial update of an Object identified by &#x60;{postalMailId}&#x60;. &#x60;{postalMailId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+          # @param postal_mail_id [String] 
           # @param simple_public_object_input [SimplePublicObjectInput] 
           # @param [Hash] opts the optional parameters
           # @option opts [String] :id_property The name of a property whose values are unique for this object type
           # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
-          def update_with_http_info(postal_mail, simple_public_object_input, opts = {})
+          def update_with_http_info(postal_mail_id, simple_public_object_input, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BasicApi.update ...'
             end
-            # verify the required parameter 'postal_mail' is set
-            if @api_client.config.client_side_validation && postal_mail.nil?
-              fail ArgumentError, "Missing the required parameter 'postal_mail' when calling BasicApi.update"
+            # verify the required parameter 'postal_mail_id' is set
+            if @api_client.config.client_side_validation && postal_mail_id.nil?
+              fail ArgumentError, "Missing the required parameter 'postal_mail_id' when calling BasicApi.update"
             end
             # verify the required parameter 'simple_public_object_input' is set
             if @api_client.config.client_side_validation && simple_public_object_input.nil?
               fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.update"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/postal_mail/{postalMail}'.sub('{' + 'postalMail' + '}', CGI.escape(postal_mail.to_s))
+            local_var_path = '/crm/v3/objects/postal_mail/{postalMailId}'.sub('{' + 'postalMailId' + '}', CGI.escape(postal_mail_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}

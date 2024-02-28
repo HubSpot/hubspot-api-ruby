@@ -18,27 +18,27 @@ module Hubspot
     module Objects
       module Notes
         class ValueWithTimestamp
-          attr_accessor :value
-
-          attr_accessor :timestamp
+          attr_accessor :source_id
 
           attr_accessor :source_type
-
-          attr_accessor :source_id
 
           attr_accessor :source_label
 
           attr_accessor :updated_by_user_id
 
+          attr_accessor :value
+
+          attr_accessor :timestamp
+
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'value' => :'value',
-              :'timestamp' => :'timestamp',
-              :'source_type' => :'sourceType',
               :'source_id' => :'sourceId',
+              :'source_type' => :'sourceType',
               :'source_label' => :'sourceLabel',
-              :'updated_by_user_id' => :'updatedByUserId'
+              :'updated_by_user_id' => :'updatedByUserId',
+              :'value' => :'value',
+              :'timestamp' => :'timestamp'
             }
           end
 
@@ -50,12 +50,12 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'value' => :'String',
-              :'timestamp' => :'Time',
-              :'source_type' => :'String',
               :'source_id' => :'String',
+              :'source_type' => :'String',
               :'source_label' => :'String',
-              :'updated_by_user_id' => :'Integer'
+              :'updated_by_user_id' => :'Integer',
+              :'value' => :'String',
+              :'timestamp' => :'Time'
             }
           end
 
@@ -80,20 +80,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'value')
-              self.value = attributes[:'value']
-            end
-
-            if attributes.key?(:'timestamp')
-              self.timestamp = attributes[:'timestamp']
+            if attributes.key?(:'source_id')
+              self.source_id = attributes[:'source_id']
             end
 
             if attributes.key?(:'source_type')
               self.source_type = attributes[:'source_type']
-            end
-
-            if attributes.key?(:'source_id')
-              self.source_id = attributes[:'source_id']
             end
 
             if attributes.key?(:'source_label')
@@ -103,12 +95,24 @@ module Hubspot
             if attributes.key?(:'updated_by_user_id')
               self.updated_by_user_id = attributes[:'updated_by_user_id']
             end
+
+            if attributes.key?(:'value')
+              self.value = attributes[:'value']
+            end
+
+            if attributes.key?(:'timestamp')
+              self.timestamp = attributes[:'timestamp']
+            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @source_type.nil?
+              invalid_properties.push('invalid value for "source_type", source_type cannot be nil.')
+            end
+
             if @value.nil?
               invalid_properties.push('invalid value for "value", value cannot be nil.')
             end
@@ -117,19 +121,15 @@ module Hubspot
               invalid_properties.push('invalid value for "timestamp", timestamp cannot be nil.')
             end
 
-            if @source_type.nil?
-              invalid_properties.push('invalid value for "source_type", source_type cannot be nil.')
-            end
-
             invalid_properties
           end
 
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @source_type.nil?
             return false if @value.nil?
             return false if @timestamp.nil?
-            return false if @source_type.nil?
             true
           end
 
@@ -138,12 +138,12 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                value == o.value &&
-                timestamp == o.timestamp &&
-                source_type == o.source_type &&
                 source_id == o.source_id &&
+                source_type == o.source_type &&
                 source_label == o.source_label &&
-                updated_by_user_id == o.updated_by_user_id
+                updated_by_user_id == o.updated_by_user_id &&
+                value == o.value &&
+                timestamp == o.timestamp
           end
 
           # @see the `==` method
@@ -155,7 +155,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [value, timestamp, source_type, source_id, source_label, updated_by_user_id].hash
+            [source_id, source_type, source_label, updated_by_user_id, value, timestamp].hash
           end
 
           # Builds the object from hash
