@@ -22,7 +22,7 @@ module Hubspot
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
-          # Merge two Communications with same type
+          # Merge two communications with same type
           # @param public_merge_input [PublicMergeInput] 
           # @param [Hash] opts the optional parameters
           # @return [SimplePublicObject]
@@ -31,7 +31,7 @@ module Hubspot
             data
           end
 
-          # Merge two Communications with same type
+          # Merge two communications with same type
           # @param public_merge_input [PublicMergeInput] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
@@ -44,7 +44,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling PublicObjectApi.merge"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/merge'
+            local_var_path = '/crm/v3/objects/communications/merge'
 
             # query parameters
             query_params = opts[:query_params] || {}
