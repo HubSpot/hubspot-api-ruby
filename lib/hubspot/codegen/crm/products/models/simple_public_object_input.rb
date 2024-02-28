@@ -17,6 +17,7 @@ module Hubspot
   module Crm
     module Products
       class SimplePublicObjectInput
+        # 
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
@@ -70,17 +71,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @properties.nil?
           true
         end
 
