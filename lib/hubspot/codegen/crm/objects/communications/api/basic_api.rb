@@ -48,7 +48,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'communication_id' when calling BasicApi.archive"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/{communicationId}'.sub('{' + 'communicationId' + '}', CGI.escape(communication_id.to_s))
+            local_var_path = '/crm/v3/objects/communications/{communicationId}'.sub('{' + 'communicationId' + '}', CGI.escape(communication_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -88,7 +88,7 @@ module Hubspot
           end
 
           # Create
-          # Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard Communications is provided.
+          # Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard communications is provided.
           # @param simple_public_object_input_for_create [SimplePublicObjectInputForCreate] 
           # @param [Hash] opts the optional parameters
           # @return [SimplePublicObject]
@@ -98,7 +98,7 @@ module Hubspot
           end
 
           # Create
-          # Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard Communications is provided.
+          # Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard communications is provided.
           # @param simple_public_object_input_for_create [SimplePublicObjectInputForCreate] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
@@ -111,7 +111,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'simple_public_object_input_for_create' when calling BasicApi.create"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications'
+            local_var_path = '/crm/v3/objects/communications'
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -189,7 +189,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'communication_id' when calling BasicApi.get_by_id"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/{communicationId}'.sub('{' + 'communicationId' + '}', CGI.escape(communication_id.to_s))
+            local_var_path = '/crm/v3/objects/communications/{communicationId}'.sub('{' + 'communicationId' + '}', CGI.escape(communication_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -234,7 +234,7 @@ module Hubspot
           end
 
           # List
-          # Read a page of Communications. Control what is returned via the `properties` query param.
+          # Read a page of communications. Control what is returned via the `properties` query param.
           # @param [Hash] opts the optional parameters
           # @option opts [Integer] :limit The maximum number of results to display per page. (default to 10)
           # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -249,7 +249,7 @@ module Hubspot
           end
 
           # List
-          # Read a page of Communications. Control what is returned via the &#x60;properties&#x60; query param.
+          # Read a page of communications. Control what is returned via the &#x60;properties&#x60; query param.
           # @param [Hash] opts the optional parameters
           # @option opts [Integer] :limit The maximum number of results to display per page. (default to 10)
           # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -263,7 +263,7 @@ module Hubspot
               @api_client.config.logger.debug 'Calling API: BasicApi.get_page ...'
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications'
+            local_var_path = '/crm/v3/objects/communications'
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -340,7 +340,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'simple_public_object_input' when calling BasicApi.update"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/{communicationId}'.sub('{' + 'communicationId' + '}', CGI.escape(communication_id.to_s))
+            local_var_path = '/crm/v3/objects/communications/{communicationId}'.sub('{' + 'communicationId' + '}', CGI.escape(communication_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}

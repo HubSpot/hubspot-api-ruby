@@ -22,7 +22,7 @@ module Hubspot
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
-          # Archive a batch of Communications by ID
+          # Archive a batch of communications by ID
           # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -31,7 +31,7 @@ module Hubspot
             nil
           end
 
-          # Archive a batch of Communications by ID
+          # Archive a batch of communications by ID
           # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -44,7 +44,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_id' when calling BatchApi.archive"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/batch/archive'
+            local_var_path = '/crm/v3/objects/communications/batch/archive'
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -88,7 +88,7 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Create a batch of Communications
+          # Create a batch of communications
           # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
           # @param [Hash] opts the optional parameters
           # @return [BatchResponseSimplePublicObject]
@@ -97,7 +97,7 @@ module Hubspot
             data
           end
 
-          # Create a batch of Communications
+          # Create a batch of communications
           # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
@@ -110,7 +110,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.create"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/batch/create'
+            local_var_path = '/crm/v3/objects/communications/batch/create'
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -154,7 +154,7 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Read a batch of Communications by internal ID, or unique property values
+          # Read a batch of communications by internal ID, or unique property values
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -164,7 +164,7 @@ module Hubspot
             data
           end
 
-          # Read a batch of Communications by internal ID, or unique property values
+          # Read a batch of communications by internal ID, or unique property values
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -178,7 +178,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'batch_read_input_simple_public_object_id' when calling BatchApi.read"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/batch/read'
+            local_var_path = '/crm/v3/objects/communications/batch/read'
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -223,7 +223,7 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Update a batch of Communications
+          # Update a batch of communications
           # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
           # @param [Hash] opts the optional parameters
           # @return [BatchResponseSimplePublicObject]
@@ -232,7 +232,7 @@ module Hubspot
             data
           end
 
-          # Update a batch of Communications
+          # Update a batch of communications
           # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
@@ -245,7 +245,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input' when calling BatchApi.update"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/batch/update'
+            local_var_path = '/crm/v3/objects/communications/batch/update'
 
             # query parameters
             query_params = opts[:query_params] || {}

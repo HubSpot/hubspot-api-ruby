@@ -240,7 +240,7 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Update a batch of objects
+        # Update a batch of objects by internal ID, or unique property values
         # @param object_type [String] 
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
@@ -250,7 +250,7 @@ module Hubspot
           data
         end
 
-        # Update a batch of objects
+        # Update a batch of objects by internal ID, or unique property values
         # @param object_type [String] 
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters

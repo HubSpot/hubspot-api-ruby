@@ -18,33 +18,33 @@ module Hubspot
     module Objects
       module Communications
         class SimplePublicObjectWithAssociations
-          attr_accessor :id
-
-          attr_accessor :properties
-
-          attr_accessor :properties_with_history
+          attr_accessor :associations
 
           attr_accessor :created_at
-
-          attr_accessor :updated_at
 
           attr_accessor :archived
 
           attr_accessor :archived_at
 
-          attr_accessor :associations
+          attr_accessor :properties_with_history
+
+          attr_accessor :id
+
+          attr_accessor :properties
+
+          attr_accessor :updated_at
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'properties' => :'properties',
-              :'properties_with_history' => :'propertiesWithHistory',
+              :'associations' => :'associations',
               :'created_at' => :'createdAt',
-              :'updated_at' => :'updatedAt',
               :'archived' => :'archived',
               :'archived_at' => :'archivedAt',
-              :'associations' => :'associations'
+              :'properties_with_history' => :'propertiesWithHistory',
+              :'id' => :'id',
+              :'properties' => :'properties',
+              :'updated_at' => :'updatedAt'
             }
           end
 
@@ -56,14 +56,14 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'properties' => :'Hash<String, String>',
-              :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
+              :'associations' => :'Hash<String, CollectionResponseAssociatedId>',
               :'created_at' => :'Time',
-              :'updated_at' => :'Time',
               :'archived' => :'Boolean',
               :'archived_at' => :'Time',
-              :'associations' => :'Hash<String, CollectionResponseAssociatedId>'
+              :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
+              :'id' => :'String',
+              :'properties' => :'Hash<String, String>',
+              :'updated_at' => :'Time'
             }
           end
 
@@ -88,28 +88,14 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
-            if attributes.key?(:'properties')
-              if (value = attributes[:'properties']).is_a?(Hash)
-                self.properties = value
-              end
-            end
-
-            if attributes.key?(:'properties_with_history')
-              if (value = attributes[:'properties_with_history']).is_a?(Hash)
-                self.properties_with_history = value
+            if attributes.key?(:'associations')
+              if (value = attributes[:'associations']).is_a?(Hash)
+                self.associations = value
               end
             end
 
             if attributes.key?(:'created_at')
               self.created_at = attributes[:'created_at']
-            end
-
-            if attributes.key?(:'updated_at')
-              self.updated_at = attributes[:'updated_at']
             end
 
             if attributes.key?(:'archived')
@@ -120,10 +106,24 @@ module Hubspot
               self.archived_at = attributes[:'archived_at']
             end
 
-            if attributes.key?(:'associations')
-              if (value = attributes[:'associations']).is_a?(Hash)
-                self.associations = value
+            if attributes.key?(:'properties_with_history')
+              if (value = attributes[:'properties_with_history']).is_a?(Hash)
+                self.properties_with_history = value
               end
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
+            end
+
+            if attributes.key?(:'properties')
+              if (value = attributes[:'properties']).is_a?(Hash)
+                self.properties = value
+              end
+            end
+
+            if attributes.key?(:'updated_at')
+              self.updated_at = attributes[:'updated_at']
             end
           end
 
@@ -131,16 +131,16 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @created_at.nil?
+              invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+            end
+
             if @id.nil?
               invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
             if @properties.nil?
               invalid_properties.push('invalid value for "properties", properties cannot be nil.')
-            end
-
-            if @created_at.nil?
-              invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
             end
 
             if @updated_at.nil?
@@ -153,9 +153,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @created_at.nil?
             return false if @id.nil?
             return false if @properties.nil?
-            return false if @created_at.nil?
             return false if @updated_at.nil?
             true
           end
@@ -165,14 +165,14 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                properties == o.properties &&
-                properties_with_history == o.properties_with_history &&
+                associations == o.associations &&
                 created_at == o.created_at &&
-                updated_at == o.updated_at &&
                 archived == o.archived &&
                 archived_at == o.archived_at &&
-                associations == o.associations
+                properties_with_history == o.properties_with_history &&
+                id == o.id &&
+                properties == o.properties &&
+                updated_at == o.updated_at
           end
 
           # @see the `==` method
@@ -184,7 +184,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, properties, properties_with_history, created_at, updated_at, archived, archived_at, associations].hash
+            [associations, created_at, archived, archived_at, properties_with_history, id, properties, updated_at].hash
           end
 
           # Builds the object from hash
