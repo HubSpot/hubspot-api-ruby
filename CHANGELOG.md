@@ -161,6 +161,12 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Settings Users Model:
 - Added new params `role_ids`, `send_welcome_email` and `super_admin` to `PublicUser`.
 
+#### Changes in All Models PublicObjectSearchRequest:
+- Changed the type of parameter `after` from `int` to `string`.
+
+#### Changes in All Models SimplePublicObjectBatchInput:
+- Added new param `id_property`.
+
 ## Added new Client APIs:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `marketing.events.basic_api` Api.
