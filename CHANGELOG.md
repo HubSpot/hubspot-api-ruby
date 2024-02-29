@@ -144,7 +144,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Files Client:
 - Moved client from `files.files` to `files`.
 
-#### Changes in Marketing Events Apis:
+#### Changes in Marketing Events APIs:
 - Moved methods `archive()`, `create()`, `do_cancel()`, `get_by_id()`, `replace()` and `update()` from `marketing.events.marketing_events_external_api` to `marketing.events.basic_api`.
 - Moved method `do_upsert()` from `marketing.events.marketing_events_external_api` to `marketing.events.batch_api`.
 - Moved and renamed method `archive_batch()` to `archive()` from `marketing.events.marketing_events_external_api.archive_batch` to `marketing.events.batch_api.archive`.
@@ -170,7 +170,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Crm Objects:
 - Removed `crm.objects.associations_api`.
 
-#### Changes in Crm Objects Postal Mail:
+#### Changes in Crm Objects Postal Mail API:
 - Renamed param `postal_mail` to `postal_mail_id`
 
 ## Added new Client APIs:
