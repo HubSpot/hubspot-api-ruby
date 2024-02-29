@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v18..0...HEAD)
 
-## [18.0.0] - 2024-02-14
+## [18.0.0] - 2024-02-29
 
 ### Changes in Cms AuditLogs API:
 - Added new param `prev` to `cms.audit_log.models.Paging`.
@@ -144,7 +144,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Files Client:
 - Moved client from `files.files` to `files`.
 
-#### Changes in Marketing Events Apis:
+#### Changes in Marketing Events APIs:
 - Moved methods `archive()`, `create()`, `do_cancel()`, `get_by_id()`, `replace()` and `update()` from `marketing.events.marketing_events_external_api` to `marketing.events.basic_api`.
 - Moved method `do_upsert()` from `marketing.events.marketing_events_external_api` to `marketing.events.batch_api`.
 - Moved and renamed method `archive_batch()` to `archive()` from `marketing.events.marketing_events_external_api.archive_batch` to `marketing.events.batch_api.archive`.
@@ -170,6 +170,9 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Crm Objects:
 - Removed `crm.objects.associations_api`.
 
+#### Changes in Crm Objects Postal Mail BasicAPI:
+- Renamed param `postal_mail` to `postal_mail_id`
+
 ## Added new Client APIs:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `crm.objects.line_items.gdpr_api` Api.
@@ -177,6 +180,12 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added `crm.objects.quotes.gdpr_api` Api.
 - Added `crm.objects.tickets.gdpr_api` Api.
 - Added `crm.objects.calls.gdpr_api` Api.
+- Added `crm.objects.emails.gdpr_api` Api.
+- Added `crm.objects.meetings.gdpr_api` Api.
+- Added `crm.objects.notes.gdpr_api` Api.
+- Added `crm.objects.postal_mail.gdpr_api` Api.
+- Added `crm.objects.tasks.gdpr_api` Api.
+- Added `crm.objects.feedback_submissions.gdpr_api` Api.
 - Added `crm.objects.communications.gdpr_api` Api.
 - Added `marketing.events.basic_api` Api.
 - Added `marketing.events.batch_api` Api.
