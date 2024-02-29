@@ -18,15 +18,15 @@ module Hubspot
     module Objects
       module Emails
         class PublicAssociationsForObject
-          attr_accessor :to
-
           attr_accessor :types
+
+          attr_accessor :to
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'to' => :'to',
-              :'types' => :'types'
+              :'types' => :'types',
+              :'to' => :'to'
             }
           end
 
@@ -38,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'to' => :'PublicObjectId',
-              :'types' => :'Array<AssociationSpec>'
+              :'types' => :'Array<AssociationSpec>',
+              :'to' => :'PublicObjectId'
             }
           end
 
@@ -64,14 +64,14 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'to')
-              self.to = attributes[:'to']
-            end
-
             if attributes.key?(:'types')
               if (value = attributes[:'types']).is_a?(Array)
                 self.types = value
               end
+            end
+
+            if attributes.key?(:'to')
+              self.to = attributes[:'to']
             end
           end
 
@@ -79,12 +79,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @to.nil?
-              invalid_properties.push('invalid value for "to", to cannot be nil.')
-            end
-
             if @types.nil?
               invalid_properties.push('invalid value for "types", types cannot be nil.')
+            end
+
+            if @to.nil?
+              invalid_properties.push('invalid value for "to", to cannot be nil.')
             end
 
             invalid_properties
@@ -93,8 +93,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @to.nil?
             return false if @types.nil?
+            return false if @to.nil?
             true
           end
 
@@ -103,8 +103,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                to == o.to &&
-                types == o.types
+                types == o.types &&
+                to == o.to
           end
 
           # @see the `==` method
@@ -116,7 +116,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [to, types].hash
+            [types, to].hash
           end
 
           # Builds the object from hash
