@@ -13,7 +13,7 @@ See the [Hubspot API](https://developers.hubspot.com/docs/api/overview) docs.
 
 ```ruby
 
-gem 'hubspot-api-client'
+gem install 'hubspot-api-client'
 
 ```
 
