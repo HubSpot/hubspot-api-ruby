@@ -1,5 +1,5 @@
 =begin
-#Users
+#Settings User Provisioning
 
 #Add, manage, and remove users from your account
 
@@ -18,11 +18,11 @@ module Hubspot
     module Users
       # A user to update
       class PublicUserUpdate
-        # The user's role
-        attr_accessor :role_id
-
         # The user's primary team
         attr_accessor :primary_team_id
+
+        # The user's role
+        attr_accessor :role_id
 
         # The user's additional teams
         attr_accessor :secondary_team_ids
@@ -30,8 +30,8 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'role_id' => :'roleId',
             :'primary_team_id' => :'primaryTeamId',
+            :'role_id' => :'roleId',
             :'secondary_team_ids' => :'secondaryTeamIds'
           }
         end
@@ -44,8 +44,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'role_id' => :'String',
             :'primary_team_id' => :'String',
+            :'role_id' => :'String',
             :'secondary_team_ids' => :'Array<String>'
           }
         end
@@ -71,12 +71,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'role_id')
-            self.role_id = attributes[:'role_id']
-          end
-
           if attributes.key?(:'primary_team_id')
             self.primary_team_id = attributes[:'primary_team_id']
+          end
+
+          if attributes.key?(:'role_id')
+            self.role_id = attributes[:'role_id']
           end
 
           if attributes.key?(:'secondary_team_ids')
@@ -104,8 +104,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              role_id == o.role_id &&
               primary_team_id == o.primary_team_id &&
+              role_id == o.role_id &&
               secondary_team_ids == o.secondary_team_ids
         end
 
@@ -118,7 +118,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [role_id, primary_team_id, secondary_team_ids].hash
+          [primary_team_id, role_id, secondary_team_ids].hash
         end
 
         # Builds the object from hash

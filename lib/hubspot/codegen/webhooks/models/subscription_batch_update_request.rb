@@ -1,5 +1,5 @@
 =begin
-#Webhooks API
+#Webhooks Webhooks
 
 #Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
 
@@ -16,15 +16,15 @@ require 'time'
 module Hubspot
   module Webhooks
     class SubscriptionBatchUpdateRequest
-      attr_accessor :id
-
       attr_accessor :active
+
+      attr_accessor :id
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'id' => :'id',
-          :'active' => :'active'
+          :'active' => :'active',
+          :'id' => :'id'
         }
       end
 
@@ -36,8 +36,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'id' => :'Integer',
-          :'active' => :'Boolean'
+          :'active' => :'Boolean',
+          :'id' => :'Integer'
         }
       end
 
@@ -62,12 +62,12 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'id')
-          self.id = attributes[:'id']
-        end
-
         if attributes.key?(:'active')
           self.active = attributes[:'active']
+        end
+
+        if attributes.key?(:'id')
+          self.id = attributes[:'id']
         end
       end
 
@@ -75,12 +75,12 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @id.nil?
-          invalid_properties.push('invalid value for "id", id cannot be nil.')
-        end
-
         if @active.nil?
           invalid_properties.push('invalid value for "active", active cannot be nil.')
+        end
+
+        if @id.nil?
+          invalid_properties.push('invalid value for "id", id cannot be nil.')
         end
 
         invalid_properties
@@ -89,8 +89,8 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @id.nil?
         return false if @active.nil?
+        return false if @id.nil?
         true
       end
 
@@ -99,8 +99,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            id == o.id &&
-            active == o.active
+            active == o.active &&
+            id == o.id
       end
 
       # @see the `==` method
@@ -112,7 +112,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [id, active].hash
+        [active, id].hash
       end
 
       # Builds the object from hash

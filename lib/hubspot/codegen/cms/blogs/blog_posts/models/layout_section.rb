@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,11 +18,7 @@ module Hubspot
     module Blogs
       module BlogPosts
         class LayoutSection
-          attr_accessor :x
-
-          attr_accessor :w
-
-          attr_accessor :name
+          attr_accessor :css_style
 
           attr_accessor :label
 
@@ -39,18 +35,20 @@ module Hubspot
 
           attr_accessor :css_class
 
-          attr_accessor :css_style
+          attr_accessor :w
 
           attr_accessor :css_id
+
+          attr_accessor :x
+
+          attr_accessor :name
 
           attr_accessor :styles
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'x' => :'x',
-              :'w' => :'w',
-              :'name' => :'name',
+              :'css_style' => :'cssStyle',
               :'label' => :'label',
               :'type' => :'type',
               :'params' => :'params',
@@ -58,8 +56,10 @@ module Hubspot
               :'row_meta_data' => :'rowMetaData',
               :'cells' => :'cells',
               :'css_class' => :'cssClass',
-              :'css_style' => :'cssStyle',
+              :'w' => :'w',
               :'css_id' => :'cssId',
+              :'x' => :'x',
+              :'name' => :'name',
               :'styles' => :'styles'
             }
           end
@@ -72,9 +72,7 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'x' => :'Integer',
-              :'w' => :'Integer',
-              :'name' => :'String',
+              :'css_style' => :'String',
               :'label' => :'String',
               :'type' => :'String',
               :'params' => :'Hash<String, Object>',
@@ -82,8 +80,10 @@ module Hubspot
               :'row_meta_data' => :'Array<RowMetaData>',
               :'cells' => :'Array<LayoutSection>',
               :'css_class' => :'String',
-              :'css_style' => :'String',
+              :'w' => :'Integer',
               :'css_id' => :'String',
+              :'x' => :'Integer',
+              :'name' => :'String',
               :'styles' => :'Styles'
             }
           end
@@ -109,16 +109,8 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'x')
-              self.x = attributes[:'x']
-            end
-
-            if attributes.key?(:'w')
-              self.w = attributes[:'w']
-            end
-
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
+            if attributes.key?(:'css_style')
+              self.css_style = attributes[:'css_style']
             end
 
             if attributes.key?(:'label')
@@ -157,12 +149,20 @@ module Hubspot
               self.css_class = attributes[:'css_class']
             end
 
-            if attributes.key?(:'css_style')
-              self.css_style = attributes[:'css_style']
+            if attributes.key?(:'w')
+              self.w = attributes[:'w']
             end
 
             if attributes.key?(:'css_id')
               self.css_id = attributes[:'css_id']
+            end
+
+            if attributes.key?(:'x')
+              self.x = attributes[:'x']
+            end
+
+            if attributes.key?(:'name')
+              self.name = attributes[:'name']
             end
 
             if attributes.key?(:'styles')
@@ -174,16 +174,8 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @x.nil?
-              invalid_properties.push('invalid value for "x", x cannot be nil.')
-            end
-
-            if @w.nil?
-              invalid_properties.push('invalid value for "w", w cannot be nil.')
-            end
-
-            if @name.nil?
-              invalid_properties.push('invalid value for "name", name cannot be nil.')
+            if @css_style.nil?
+              invalid_properties.push('invalid value for "css_style", css_style cannot be nil.')
             end
 
             if @label.nil?
@@ -214,12 +206,20 @@ module Hubspot
               invalid_properties.push('invalid value for "css_class", css_class cannot be nil.')
             end
 
-            if @css_style.nil?
-              invalid_properties.push('invalid value for "css_style", css_style cannot be nil.')
+            if @w.nil?
+              invalid_properties.push('invalid value for "w", w cannot be nil.')
             end
 
             if @css_id.nil?
               invalid_properties.push('invalid value for "css_id", css_id cannot be nil.')
+            end
+
+            if @x.nil?
+              invalid_properties.push('invalid value for "x", x cannot be nil.')
+            end
+
+            if @name.nil?
+              invalid_properties.push('invalid value for "name", name cannot be nil.')
             end
 
             if @styles.nil?
@@ -232,9 +232,7 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @x.nil?
-            return false if @w.nil?
-            return false if @name.nil?
+            return false if @css_style.nil?
             return false if @label.nil?
             return false if @type.nil?
             return false if @params.nil?
@@ -242,8 +240,10 @@ module Hubspot
             return false if @row_meta_data.nil?
             return false if @cells.nil?
             return false if @css_class.nil?
-            return false if @css_style.nil?
+            return false if @w.nil?
             return false if @css_id.nil?
+            return false if @x.nil?
+            return false if @name.nil?
             return false if @styles.nil?
             true
           end
@@ -253,9 +253,7 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                x == o.x &&
-                w == o.w &&
-                name == o.name &&
+                css_style == o.css_style &&
                 label == o.label &&
                 type == o.type &&
                 params == o.params &&
@@ -263,8 +261,10 @@ module Hubspot
                 row_meta_data == o.row_meta_data &&
                 cells == o.cells &&
                 css_class == o.css_class &&
-                css_style == o.css_style &&
+                w == o.w &&
                 css_id == o.css_id &&
+                x == o.x &&
+                name == o.name &&
                 styles == o.styles
           end
 
@@ -277,7 +277,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [x, w, name, label, type, params, rows, row_meta_data, cells, css_class, css_style, css_id, styles].hash
+            [css_style, label, type, params, rows, row_meta_data, cells, css_class, w, css_id, x, name, styles].hash
           end
 
           # Builds the object from hash

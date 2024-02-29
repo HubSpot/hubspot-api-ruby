@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,171 +19,182 @@ module Hubspot
       module BlogPosts
         # Model definition for a Blog Post.
         class BlogPost
+          # The date (ISO8601 format) the blog post is to be published at.
+          attr_accessor :publish_date
+
+          # The explicitly defined ISO 639 language code of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
+          attr_accessor :language
+
+          # Boolean to determine whether or not the styles from the template should be applied.
+          attr_accessor :enable_layout_stylesheets
+
+          # A description that goes in <meta> tag on the page.
+          attr_accessor :meta_description
+
+          # List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
+          attr_accessor :attached_stylesheets
+
+          # Set this to create a password protected page. Entering the password will be required to view the page.
+          attr_accessor :password
+
+          # The html title of this Blog Post.
+          attr_accessor :html_title
+
+          # Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
+          attr_accessor :publish_immediately
+
+          attr_accessor :translations
+
           # The unique ID of the Blog Post.
           attr_accessor :id
-
-          # The path of the this blog post. This field is appended to the domain to construct the url of this post.
-          attr_accessor :slug
-
-          # The ID of the parent Blog this Blog Post is associated with.
-          attr_accessor :content_group_id
-
-          # The GUID of the marketing campaign this Blog Post is a part of.
-          attr_accessor :campaign
-
-          # ID of the type of object this is. Should always .
-          attr_accessor :category_id
 
           # An ENUM descibing the current state of this Blog Post.
           attr_accessor :state
 
-          # The internal name of the Blog Post.
-          attr_accessor :name
-
-          attr_accessor :mab_experiment_id
-
-          attr_accessor :archived
-
-          # The name of the user that updated this Blog Post.
-          attr_accessor :author_name
-
-          attr_accessor :ab_test_id
+          # The path of the this blog post. This field is appended to the domain to construct the url of this post.
+          attr_accessor :slug
 
           # The ID of the user that created this Blog Post.
           attr_accessor :created_by_id
 
+          # The contents of the RSS body for this Blog Post.
+          attr_accessor :rss_body
+
+          attr_accessor :currently_published
+
+          # If True, the post will not show up in your dashboard, although the post could still be live.
+          attr_accessor :archived_in_dashboard
+
+          attr_accessor :created
+
+          # An ENUM descibing the type of this object. Should always be BLOG_POST.
+          attr_accessor :content_type_category
+
+          # 
+          attr_accessor :mab_experiment_id
+
           # The ID of the user that updated this Blog Post.
           attr_accessor :updated_by_id
 
-          # The domain this Blog Post will resolve to. If null, the Blog Post will default to the domain of the ParentBlog.
-          attr_accessor :domain
+          # ID of the primary blog post this object was translated from.
+          attr_accessor :translated_from_id
 
-          attr_accessor :ab_status
-
+          # 
           attr_accessor :folder_id
 
           # A data structure containing the data for all the modules inside the containers for this post. This will only be populated if the page has widget containers.
           attr_accessor :widget_containers
 
-          # A data structure containing the data for all the modules for this page.
-          attr_accessor :widgets
-
-          # The explicitly defined ISO 639 language code of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
-          attr_accessor :language
-
-          # ID of the primary blog post this object was translated from.
-          attr_accessor :translated_from_id
-
-          attr_accessor :translations
-
-          attr_accessor :dynamic_page_data_source_type
-
-          attr_accessor :dynamic_page_data_source_id
-
-          # The ID of the Blog Author associated with this Blog Post.
-          attr_accessor :blog_author_id
-
-          # List of IDs for the tags associated with this Blog Post.
-          attr_accessor :tag_ids
-
-          # The html title of this Blog Post.
-          attr_accessor :html_title
-
-          # Boolean to allow overriding the AMP settings for the blog.
-          attr_accessor :enable_google_amp_output_override
-
-          # Boolean to determine if this post should use a featuredImage.
-          attr_accessor :use_featured_image
-
-          # The HTML of the main post body.
-          attr_accessor :_post_body
-
-          # The summary of the blog post that will appear on the main listing page.
-          attr_accessor :post_summary
-
-          # The contents of the RSS body for this Blog Post.
-          attr_accessor :rss_body
-
-          # The contents of the RSS summary for this Blog Post.
-          attr_accessor :rss_summary
-
-          attr_accessor :currently_published
-
-          attr_accessor :page_expiry_enabled
-
+          # 
           attr_accessor :page_expiry_redirect_id
 
-          attr_accessor :page_expiry_redirect_url
-
-          attr_accessor :page_expiry_date
-
-          # Boolean to determine whether or not the Primary CSS Files should be applied.
-          attr_accessor :include_default_custom_css
-
-          # Boolean to determine whether or not the styles from the template should be applied.
-          attr_accessor :enable_layout_stylesheets
-
-          # Boolean to determine whether or not the styles from the template should be applied.
-          attr_accessor :enable_domain_stylesheets
-
-          # Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
-          attr_accessor :publish_immediately
+          attr_accessor :dynamic_page_data_source_type
 
           # The featuredImage of this Blog Post.
           attr_accessor :featured_image
 
-          # Alt Text of the featuredImage.
-          attr_accessor :featured_image_alt_text
+          # The name of the user that updated this Blog Post.
+          attr_accessor :author_name
 
-          # Optional override to set the URL to be used in the rel=canonical link tag on the page.
-          attr_accessor :link_rel_canonical_url
+          # The domain this Blog Post will resolve to. If null, the Blog Post will default to the domain of the ParentBlog.
+          attr_accessor :domain
 
-          # An ENUM descibing the type of this object. Should always be BLOG_POST.
-          attr_accessor :content_type_category
+          # The internal name of the Blog Post.
+          attr_accessor :name
 
-          # List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
-          attr_accessor :attached_stylesheets
+          # The ID of the HubDB table this Blog Post references, if applicable
+          attr_accessor :dynamic_page_hub_db_table_id
 
-          # A description that goes in <meta> tag on the page.
-          attr_accessor :meta_description
+          # The GUID of the marketing campaign this Blog Post is a part of.
+          attr_accessor :campaign
 
-          # Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
-          attr_accessor :head_html
+          attr_accessor :dynamic_page_data_source_id
+
+          # Boolean to determine whether or not the styles from the template should be applied.
+          attr_accessor :enable_domain_stylesheets
+
+          # Boolean to determine whether or not the Primary CSS Files should be applied.
+          attr_accessor :include_default_custom_css
+
+          # 
+          attr_accessor :layout_sections
+
+          attr_accessor :updated
 
           # Custom HTML for embed codes, javascript that should be placed before the </body> tag of the page.
           attr_accessor :footer_html
 
-          # If True, the post will not show up in your dashboard, although the post could still be live.
-          attr_accessor :archived_in_dashboard
+          # List of IDs for the tags associated with this Blog Post.
+          attr_accessor :tag_ids
 
-          # Boolean to determine whether or not to respect publicAccessRules.
-          attr_accessor :public_access_rules_enabled
+          # A data structure containing the data for all the modules for this page.
+          attr_accessor :widgets
 
-          # Rules for require member registration to access private content.
-          attr_accessor :public_access_rules
+          # The summary of the blog post that will appear on the main listing page.
+          attr_accessor :post_summary
 
-          attr_accessor :layout_sections
+          # Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
+          attr_accessor :head_html
 
-          attr_accessor :theme_settings_values
+          # 
+          attr_accessor :page_expiry_redirect_url
+
+          # 
+          attr_accessor :ab_status
+
+          # Boolean to determine if this post should use a featuredImage.
+          attr_accessor :use_featured_image
+
+          # 
+          attr_accessor :ab_test_id
+
+          # Alt Text of the featuredImage.
+          attr_accessor :featured_image_alt_text
+
+          # The ID of the Blog Author associated with this Blog Post.
+          attr_accessor :blog_author_id
+
+          # The ID of the parent Blog this Blog Post is associated with.
+          attr_accessor :content_group_id
+
+          # The contents of the RSS summary for this Blog Post.
+          attr_accessor :rss_summary
+
+          # 
+          attr_accessor :page_expiry_enabled
 
           # A generated field representing the URL of this blog post.
           attr_accessor :url
 
-          # Set this to create a password protected page. Entering the password will be required to view the page.
-          attr_accessor :password
+          # Rules for require member registration to access private content.
+          attr_accessor :public_access_rules
+
+          # Boolean to allow overriding the AMP settings for the blog.
+          attr_accessor :enable_google_amp_output_override
+
+          # The timestamp (ISO8601 format) when this Blog Post was deleted.
+          attr_accessor :archived_at
+
+          # The HTML of the main post body.
+          attr_accessor :_post_body
+
+          # 
+          attr_accessor :theme_settings_values
+
+          # 
+          attr_accessor :page_expiry_date
+
+          # Boolean to determine whether or not to respect publicAccessRules.
+          attr_accessor :public_access_rules_enabled
 
           # A generated ENUM descibing the current state of this Blog Post. Should always match state.
           attr_accessor :current_state
 
-          # The date (ISO8601 format) the blog post is to be published at.
-          attr_accessor :publish_date
+          # ID of the type of object this is. Should always .
+          attr_accessor :category_id
 
-          attr_accessor :created
-
-          attr_accessor :updated
-
-          # The timestamp (ISO8601 format) when this Blog Post was deleted.
-          attr_accessor :deleted_at
+          # Optional override to set the URL to be used in the rel=canonical link tag on the page.
+          attr_accessor :link_rel_canonical_url
 
           class EnumAttributeValidator
             attr_reader :datatype
@@ -210,67 +221,67 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'publish_date' => :'publishDate',
+              :'language' => :'language',
+              :'enable_layout_stylesheets' => :'enableLayoutStylesheets',
+              :'meta_description' => :'metaDescription',
+              :'attached_stylesheets' => :'attachedStylesheets',
+              :'password' => :'password',
+              :'html_title' => :'htmlTitle',
+              :'publish_immediately' => :'publishImmediately',
+              :'translations' => :'translations',
               :'id' => :'id',
-              :'slug' => :'slug',
-              :'content_group_id' => :'contentGroupId',
-              :'campaign' => :'campaign',
-              :'category_id' => :'categoryId',
               :'state' => :'state',
-              :'name' => :'name',
-              :'mab_experiment_id' => :'mabExperimentId',
-              :'archived' => :'archived',
-              :'author_name' => :'authorName',
-              :'ab_test_id' => :'abTestId',
+              :'slug' => :'slug',
               :'created_by_id' => :'createdById',
+              :'rss_body' => :'rssBody',
+              :'currently_published' => :'currentlyPublished',
+              :'archived_in_dashboard' => :'archivedInDashboard',
+              :'created' => :'created',
+              :'content_type_category' => :'contentTypeCategory',
+              :'mab_experiment_id' => :'mabExperimentId',
               :'updated_by_id' => :'updatedById',
-              :'domain' => :'domain',
-              :'ab_status' => :'abStatus',
+              :'translated_from_id' => :'translatedFromId',
               :'folder_id' => :'folderId',
               :'widget_containers' => :'widgetContainers',
-              :'widgets' => :'widgets',
-              :'language' => :'language',
-              :'translated_from_id' => :'translatedFromId',
-              :'translations' => :'translations',
-              :'dynamic_page_data_source_type' => :'dynamicPageDataSourceType',
-              :'dynamic_page_data_source_id' => :'dynamicPageDataSourceId',
-              :'blog_author_id' => :'blogAuthorId',
-              :'tag_ids' => :'tagIds',
-              :'html_title' => :'htmlTitle',
-              :'enable_google_amp_output_override' => :'enableGoogleAmpOutputOverride',
-              :'use_featured_image' => :'useFeaturedImage',
-              :'_post_body' => :'postBody',
-              :'post_summary' => :'postSummary',
-              :'rss_body' => :'rssBody',
-              :'rss_summary' => :'rssSummary',
-              :'currently_published' => :'currentlyPublished',
-              :'page_expiry_enabled' => :'pageExpiryEnabled',
               :'page_expiry_redirect_id' => :'pageExpiryRedirectId',
-              :'page_expiry_redirect_url' => :'pageExpiryRedirectUrl',
-              :'page_expiry_date' => :'pageExpiryDate',
-              :'include_default_custom_css' => :'includeDefaultCustomCss',
-              :'enable_layout_stylesheets' => :'enableLayoutStylesheets',
-              :'enable_domain_stylesheets' => :'enableDomainStylesheets',
-              :'publish_immediately' => :'publishImmediately',
+              :'dynamic_page_data_source_type' => :'dynamicPageDataSourceType',
               :'featured_image' => :'featuredImage',
-              :'featured_image_alt_text' => :'featuredImageAltText',
-              :'link_rel_canonical_url' => :'linkRelCanonicalUrl',
-              :'content_type_category' => :'contentTypeCategory',
-              :'attached_stylesheets' => :'attachedStylesheets',
-              :'meta_description' => :'metaDescription',
-              :'head_html' => :'headHtml',
-              :'footer_html' => :'footerHtml',
-              :'archived_in_dashboard' => :'archivedInDashboard',
-              :'public_access_rules_enabled' => :'publicAccessRulesEnabled',
-              :'public_access_rules' => :'publicAccessRules',
+              :'author_name' => :'authorName',
+              :'domain' => :'domain',
+              :'name' => :'name',
+              :'dynamic_page_hub_db_table_id' => :'dynamicPageHubDbTableId',
+              :'campaign' => :'campaign',
+              :'dynamic_page_data_source_id' => :'dynamicPageDataSourceId',
+              :'enable_domain_stylesheets' => :'enableDomainStylesheets',
+              :'include_default_custom_css' => :'includeDefaultCustomCss',
               :'layout_sections' => :'layoutSections',
-              :'theme_settings_values' => :'themeSettingsValues',
-              :'url' => :'url',
-              :'password' => :'password',
-              :'current_state' => :'currentState',
-              :'publish_date' => :'publishDate',
-              :'created' => :'created',
               :'updated' => :'updated',
-              :'deleted_at' => :'deletedAt'
+              :'footer_html' => :'footerHtml',
+              :'tag_ids' => :'tagIds',
+              :'widgets' => :'widgets',
+              :'post_summary' => :'postSummary',
+              :'head_html' => :'headHtml',
+              :'page_expiry_redirect_url' => :'pageExpiryRedirectUrl',
+              :'ab_status' => :'abStatus',
+              :'use_featured_image' => :'useFeaturedImage',
+              :'ab_test_id' => :'abTestId',
+              :'featured_image_alt_text' => :'featuredImageAltText',
+              :'blog_author_id' => :'blogAuthorId',
+              :'content_group_id' => :'contentGroupId',
+              :'rss_summary' => :'rssSummary',
+              :'page_expiry_enabled' => :'pageExpiryEnabled',
+              :'url' => :'url',
+              :'public_access_rules' => :'publicAccessRules',
+              :'enable_google_amp_output_override' => :'enableGoogleAmpOutputOverride',
+              :'archived_at' => :'archivedAt',
+              :'_post_body' => :'postBody',
+              :'theme_settings_values' => :'themeSettingsValues',
+              :'page_expiry_date' => :'pageExpiryDate',
+              :'public_access_rules_enabled' => :'publicAccessRulesEnabled',
+              :'current_state' => :'currentState',
+              :'category_id' => :'categoryId',
+              :'link_rel_canonical_url' => :'linkRelCanonicalUrl'
             }
           end
 
@@ -282,67 +293,67 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'publish_date' => :'Time',
+              :'language' => :'String',
+              :'enable_layout_stylesheets' => :'Boolean',
+              :'meta_description' => :'String',
+              :'attached_stylesheets' => :'Array<Hash<String, Object>>',
+              :'password' => :'String',
+              :'html_title' => :'String',
+              :'publish_immediately' => :'Boolean',
+              :'translations' => :'Hash<String, ContentLanguageVariation>',
               :'id' => :'String',
-              :'slug' => :'String',
-              :'content_group_id' => :'String',
-              :'campaign' => :'String',
-              :'category_id' => :'Integer',
               :'state' => :'String',
-              :'name' => :'String',
-              :'mab_experiment_id' => :'String',
-              :'archived' => :'Boolean',
-              :'author_name' => :'String',
-              :'ab_test_id' => :'String',
+              :'slug' => :'String',
               :'created_by_id' => :'String',
+              :'rss_body' => :'String',
+              :'currently_published' => :'Boolean',
+              :'archived_in_dashboard' => :'Boolean',
+              :'created' => :'Time',
+              :'content_type_category' => :'String',
+              :'mab_experiment_id' => :'String',
               :'updated_by_id' => :'String',
-              :'domain' => :'String',
-              :'ab_status' => :'String',
+              :'translated_from_id' => :'String',
               :'folder_id' => :'String',
               :'widget_containers' => :'Hash<String, Object>',
-              :'widgets' => :'Hash<String, Object>',
-              :'language' => :'String',
-              :'translated_from_id' => :'String',
-              :'translations' => :'Hash<String, ContentLanguageVariation>',
-              :'dynamic_page_data_source_type' => :'Integer',
-              :'dynamic_page_data_source_id' => :'String',
-              :'blog_author_id' => :'String',
-              :'tag_ids' => :'Array<Integer>',
-              :'html_title' => :'String',
-              :'enable_google_amp_output_override' => :'Boolean',
-              :'use_featured_image' => :'Boolean',
-              :'_post_body' => :'String',
-              :'post_summary' => :'String',
-              :'rss_body' => :'String',
-              :'rss_summary' => :'String',
-              :'currently_published' => :'Boolean',
-              :'page_expiry_enabled' => :'Boolean',
               :'page_expiry_redirect_id' => :'Integer',
-              :'page_expiry_redirect_url' => :'String',
-              :'page_expiry_date' => :'Integer',
-              :'include_default_custom_css' => :'Boolean',
-              :'enable_layout_stylesheets' => :'Boolean',
-              :'enable_domain_stylesheets' => :'Boolean',
-              :'publish_immediately' => :'Boolean',
+              :'dynamic_page_data_source_type' => :'Integer',
               :'featured_image' => :'String',
-              :'featured_image_alt_text' => :'String',
-              :'link_rel_canonical_url' => :'String',
-              :'content_type_category' => :'String',
-              :'attached_stylesheets' => :'Array<Hash<String, Object>>',
-              :'meta_description' => :'String',
-              :'head_html' => :'String',
-              :'footer_html' => :'String',
-              :'archived_in_dashboard' => :'Boolean',
-              :'public_access_rules_enabled' => :'Boolean',
-              :'public_access_rules' => :'Array<Object>',
+              :'author_name' => :'String',
+              :'domain' => :'String',
+              :'name' => :'String',
+              :'dynamic_page_hub_db_table_id' => :'String',
+              :'campaign' => :'String',
+              :'dynamic_page_data_source_id' => :'String',
+              :'enable_domain_stylesheets' => :'Boolean',
+              :'include_default_custom_css' => :'Boolean',
               :'layout_sections' => :'Hash<String, LayoutSection>',
-              :'theme_settings_values' => :'Hash<String, Object>',
-              :'url' => :'String',
-              :'password' => :'String',
-              :'current_state' => :'String',
-              :'publish_date' => :'Time',
-              :'created' => :'Time',
               :'updated' => :'Time',
-              :'deleted_at' => :'Time'
+              :'footer_html' => :'String',
+              :'tag_ids' => :'Array<Integer>',
+              :'widgets' => :'Hash<String, Object>',
+              :'post_summary' => :'String',
+              :'head_html' => :'String',
+              :'page_expiry_redirect_url' => :'String',
+              :'ab_status' => :'String',
+              :'use_featured_image' => :'Boolean',
+              :'ab_test_id' => :'String',
+              :'featured_image_alt_text' => :'String',
+              :'blog_author_id' => :'String',
+              :'content_group_id' => :'String',
+              :'rss_summary' => :'String',
+              :'page_expiry_enabled' => :'Boolean',
+              :'url' => :'String',
+              :'public_access_rules' => :'Array<Object>',
+              :'enable_google_amp_output_override' => :'Boolean',
+              :'archived_at' => :'Integer',
+              :'_post_body' => :'String',
+              :'theme_settings_values' => :'Hash<String, Object>',
+              :'page_expiry_date' => :'Integer',
+              :'public_access_rules_enabled' => :'Boolean',
+              :'current_state' => :'String',
+              :'category_id' => :'Integer',
+              :'link_rel_canonical_url' => :'String'
             }
           end
 
@@ -367,64 +378,92 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'publish_date')
+              self.publish_date = attributes[:'publish_date']
+            end
+
+            if attributes.key?(:'language')
+              self.language = attributes[:'language']
+            end
+
+            if attributes.key?(:'enable_layout_stylesheets')
+              self.enable_layout_stylesheets = attributes[:'enable_layout_stylesheets']
+            end
+
+            if attributes.key?(:'meta_description')
+              self.meta_description = attributes[:'meta_description']
+            end
+
+            if attributes.key?(:'attached_stylesheets')
+              if (value = attributes[:'attached_stylesheets']).is_a?(Array)
+                self.attached_stylesheets = value
+              end
+            end
+
+            if attributes.key?(:'password')
+              self.password = attributes[:'password']
+            end
+
+            if attributes.key?(:'html_title')
+              self.html_title = attributes[:'html_title']
+            end
+
+            if attributes.key?(:'publish_immediately')
+              self.publish_immediately = attributes[:'publish_immediately']
+            end
+
+            if attributes.key?(:'translations')
+              if (value = attributes[:'translations']).is_a?(Hash)
+                self.translations = value
+              end
+            end
+
             if attributes.key?(:'id')
               self.id = attributes[:'id']
-            end
-
-            if attributes.key?(:'slug')
-              self.slug = attributes[:'slug']
-            end
-
-            if attributes.key?(:'content_group_id')
-              self.content_group_id = attributes[:'content_group_id']
-            end
-
-            if attributes.key?(:'campaign')
-              self.campaign = attributes[:'campaign']
-            end
-
-            if attributes.key?(:'category_id')
-              self.category_id = attributes[:'category_id']
             end
 
             if attributes.key?(:'state')
               self.state = attributes[:'state']
             end
 
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
-            end
-
-            if attributes.key?(:'mab_experiment_id')
-              self.mab_experiment_id = attributes[:'mab_experiment_id']
-            end
-
-            if attributes.key?(:'archived')
-              self.archived = attributes[:'archived']
-            end
-
-            if attributes.key?(:'author_name')
-              self.author_name = attributes[:'author_name']
-            end
-
-            if attributes.key?(:'ab_test_id')
-              self.ab_test_id = attributes[:'ab_test_id']
+            if attributes.key?(:'slug')
+              self.slug = attributes[:'slug']
             end
 
             if attributes.key?(:'created_by_id')
               self.created_by_id = attributes[:'created_by_id']
             end
 
+            if attributes.key?(:'rss_body')
+              self.rss_body = attributes[:'rss_body']
+            end
+
+            if attributes.key?(:'currently_published')
+              self.currently_published = attributes[:'currently_published']
+            end
+
+            if attributes.key?(:'archived_in_dashboard')
+              self.archived_in_dashboard = attributes[:'archived_in_dashboard']
+            end
+
+            if attributes.key?(:'created')
+              self.created = attributes[:'created']
+            end
+
+            if attributes.key?(:'content_type_category')
+              self.content_type_category = attributes[:'content_type_category']
+            end
+
+            if attributes.key?(:'mab_experiment_id')
+              self.mab_experiment_id = attributes[:'mab_experiment_id']
+            end
+
             if attributes.key?(:'updated_by_id')
               self.updated_by_id = attributes[:'updated_by_id']
             end
 
-            if attributes.key?(:'domain')
-              self.domain = attributes[:'domain']
-            end
-
-            if attributes.key?(:'ab_status')
-              self.ab_status = attributes[:'ab_status']
+            if attributes.key?(:'translated_from_id')
+              self.translated_from_id = attributes[:'translated_from_id']
             end
 
             if attributes.key?(:'folder_id')
@@ -437,154 +476,48 @@ module Hubspot
               end
             end
 
-            if attributes.key?(:'widgets')
-              if (value = attributes[:'widgets']).is_a?(Hash)
-                self.widgets = value
-              end
-            end
-
-            if attributes.key?(:'language')
-              self.language = attributes[:'language']
-            end
-
-            if attributes.key?(:'translated_from_id')
-              self.translated_from_id = attributes[:'translated_from_id']
-            end
-
-            if attributes.key?(:'translations')
-              if (value = attributes[:'translations']).is_a?(Hash)
-                self.translations = value
-              end
+            if attributes.key?(:'page_expiry_redirect_id')
+              self.page_expiry_redirect_id = attributes[:'page_expiry_redirect_id']
             end
 
             if attributes.key?(:'dynamic_page_data_source_type')
               self.dynamic_page_data_source_type = attributes[:'dynamic_page_data_source_type']
             end
 
+            if attributes.key?(:'featured_image')
+              self.featured_image = attributes[:'featured_image']
+            end
+
+            if attributes.key?(:'author_name')
+              self.author_name = attributes[:'author_name']
+            end
+
+            if attributes.key?(:'domain')
+              self.domain = attributes[:'domain']
+            end
+
+            if attributes.key?(:'name')
+              self.name = attributes[:'name']
+            end
+
+            if attributes.key?(:'dynamic_page_hub_db_table_id')
+              self.dynamic_page_hub_db_table_id = attributes[:'dynamic_page_hub_db_table_id']
+            end
+
+            if attributes.key?(:'campaign')
+              self.campaign = attributes[:'campaign']
+            end
+
             if attributes.key?(:'dynamic_page_data_source_id')
               self.dynamic_page_data_source_id = attributes[:'dynamic_page_data_source_id']
-            end
-
-            if attributes.key?(:'blog_author_id')
-              self.blog_author_id = attributes[:'blog_author_id']
-            end
-
-            if attributes.key?(:'tag_ids')
-              if (value = attributes[:'tag_ids']).is_a?(Array)
-                self.tag_ids = value
-              end
-            end
-
-            if attributes.key?(:'html_title')
-              self.html_title = attributes[:'html_title']
-            end
-
-            if attributes.key?(:'enable_google_amp_output_override')
-              self.enable_google_amp_output_override = attributes[:'enable_google_amp_output_override']
-            end
-
-            if attributes.key?(:'use_featured_image')
-              self.use_featured_image = attributes[:'use_featured_image']
-            end
-
-            if attributes.key?(:'_post_body')
-              self._post_body = attributes[:'_post_body']
-            end
-
-            if attributes.key?(:'post_summary')
-              self.post_summary = attributes[:'post_summary']
-            end
-
-            if attributes.key?(:'rss_body')
-              self.rss_body = attributes[:'rss_body']
-            end
-
-            if attributes.key?(:'rss_summary')
-              self.rss_summary = attributes[:'rss_summary']
-            end
-
-            if attributes.key?(:'currently_published')
-              self.currently_published = attributes[:'currently_published']
-            end
-
-            if attributes.key?(:'page_expiry_enabled')
-              self.page_expiry_enabled = attributes[:'page_expiry_enabled']
-            end
-
-            if attributes.key?(:'page_expiry_redirect_id')
-              self.page_expiry_redirect_id = attributes[:'page_expiry_redirect_id']
-            end
-
-            if attributes.key?(:'page_expiry_redirect_url')
-              self.page_expiry_redirect_url = attributes[:'page_expiry_redirect_url']
-            end
-
-            if attributes.key?(:'page_expiry_date')
-              self.page_expiry_date = attributes[:'page_expiry_date']
-            end
-
-            if attributes.key?(:'include_default_custom_css')
-              self.include_default_custom_css = attributes[:'include_default_custom_css']
-            end
-
-            if attributes.key?(:'enable_layout_stylesheets')
-              self.enable_layout_stylesheets = attributes[:'enable_layout_stylesheets']
             end
 
             if attributes.key?(:'enable_domain_stylesheets')
               self.enable_domain_stylesheets = attributes[:'enable_domain_stylesheets']
             end
 
-            if attributes.key?(:'publish_immediately')
-              self.publish_immediately = attributes[:'publish_immediately']
-            end
-
-            if attributes.key?(:'featured_image')
-              self.featured_image = attributes[:'featured_image']
-            end
-
-            if attributes.key?(:'featured_image_alt_text')
-              self.featured_image_alt_text = attributes[:'featured_image_alt_text']
-            end
-
-            if attributes.key?(:'link_rel_canonical_url')
-              self.link_rel_canonical_url = attributes[:'link_rel_canonical_url']
-            end
-
-            if attributes.key?(:'content_type_category')
-              self.content_type_category = attributes[:'content_type_category']
-            end
-
-            if attributes.key?(:'attached_stylesheets')
-              if (value = attributes[:'attached_stylesheets']).is_a?(Array)
-                self.attached_stylesheets = value
-              end
-            end
-
-            if attributes.key?(:'meta_description')
-              self.meta_description = attributes[:'meta_description']
-            end
-
-            if attributes.key?(:'head_html')
-              self.head_html = attributes[:'head_html']
-            end
-
-            if attributes.key?(:'footer_html')
-              self.footer_html = attributes[:'footer_html']
-            end
-
-            if attributes.key?(:'archived_in_dashboard')
-              self.archived_in_dashboard = attributes[:'archived_in_dashboard']
-            end
-
-            if attributes.key?(:'public_access_rules_enabled')
-              self.public_access_rules_enabled = attributes[:'public_access_rules_enabled']
-            end
-
-            if attributes.key?(:'public_access_rules')
-              if (value = attributes[:'public_access_rules']).is_a?(Array)
-                self.public_access_rules = value
-              end
+            if attributes.key?(:'include_default_custom_css')
+              self.include_default_custom_css = attributes[:'include_default_custom_css']
             end
 
             if attributes.key?(:'layout_sections')
@@ -593,38 +526,116 @@ module Hubspot
               end
             end
 
-            if attributes.key?(:'theme_settings_values')
-              if (value = attributes[:'theme_settings_values']).is_a?(Hash)
-                self.theme_settings_values = value
+            if attributes.key?(:'updated')
+              self.updated = attributes[:'updated']
+            end
+
+            if attributes.key?(:'footer_html')
+              self.footer_html = attributes[:'footer_html']
+            end
+
+            if attributes.key?(:'tag_ids')
+              if (value = attributes[:'tag_ids']).is_a?(Array)
+                self.tag_ids = value
               end
+            end
+
+            if attributes.key?(:'widgets')
+              if (value = attributes[:'widgets']).is_a?(Hash)
+                self.widgets = value
+              end
+            end
+
+            if attributes.key?(:'post_summary')
+              self.post_summary = attributes[:'post_summary']
+            end
+
+            if attributes.key?(:'head_html')
+              self.head_html = attributes[:'head_html']
+            end
+
+            if attributes.key?(:'page_expiry_redirect_url')
+              self.page_expiry_redirect_url = attributes[:'page_expiry_redirect_url']
+            end
+
+            if attributes.key?(:'ab_status')
+              self.ab_status = attributes[:'ab_status']
+            end
+
+            if attributes.key?(:'use_featured_image')
+              self.use_featured_image = attributes[:'use_featured_image']
+            end
+
+            if attributes.key?(:'ab_test_id')
+              self.ab_test_id = attributes[:'ab_test_id']
+            end
+
+            if attributes.key?(:'featured_image_alt_text')
+              self.featured_image_alt_text = attributes[:'featured_image_alt_text']
+            end
+
+            if attributes.key?(:'blog_author_id')
+              self.blog_author_id = attributes[:'blog_author_id']
+            end
+
+            if attributes.key?(:'content_group_id')
+              self.content_group_id = attributes[:'content_group_id']
+            end
+
+            if attributes.key?(:'rss_summary')
+              self.rss_summary = attributes[:'rss_summary']
+            end
+
+            if attributes.key?(:'page_expiry_enabled')
+              self.page_expiry_enabled = attributes[:'page_expiry_enabled']
             end
 
             if attributes.key?(:'url')
               self.url = attributes[:'url']
             end
 
-            if attributes.key?(:'password')
-              self.password = attributes[:'password']
+            if attributes.key?(:'public_access_rules')
+              if (value = attributes[:'public_access_rules']).is_a?(Array)
+                self.public_access_rules = value
+              end
+            end
+
+            if attributes.key?(:'enable_google_amp_output_override')
+              self.enable_google_amp_output_override = attributes[:'enable_google_amp_output_override']
+            end
+
+            if attributes.key?(:'archived_at')
+              self.archived_at = attributes[:'archived_at']
+            end
+
+            if attributes.key?(:'_post_body')
+              self._post_body = attributes[:'_post_body']
+            end
+
+            if attributes.key?(:'theme_settings_values')
+              if (value = attributes[:'theme_settings_values']).is_a?(Hash)
+                self.theme_settings_values = value
+              end
+            end
+
+            if attributes.key?(:'page_expiry_date')
+              self.page_expiry_date = attributes[:'page_expiry_date']
+            end
+
+            if attributes.key?(:'public_access_rules_enabled')
+              self.public_access_rules_enabled = attributes[:'public_access_rules_enabled']
             end
 
             if attributes.key?(:'current_state')
               self.current_state = attributes[:'current_state']
             end
 
-            if attributes.key?(:'publish_date')
-              self.publish_date = attributes[:'publish_date']
+            if attributes.key?(:'category_id')
+              self.category_id = attributes[:'category_id']
             end
 
-            if attributes.key?(:'created')
-              self.created = attributes[:'created']
-            end
-
-            if attributes.key?(:'updated')
-              self.updated = attributes[:'updated']
-            end
-
-            if attributes.key?(:'deleted_at')
-              self.deleted_at = attributes[:'deleted_at']
+            if attributes.key?(:'link_rel_canonical_url')
+              self.link_rel_canonical_url = attributes[:'link_rel_canonical_url']
             end
           end
 
@@ -632,24 +643,44 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @publish_date.nil?
+              invalid_properties.push('invalid value for "publish_date", publish_date cannot be nil.')
+            end
+
+            if @language.nil?
+              invalid_properties.push('invalid value for "language", language cannot be nil.')
+            end
+
+            if @enable_layout_stylesheets.nil?
+              invalid_properties.push('invalid value for "enable_layout_stylesheets", enable_layout_stylesheets cannot be nil.')
+            end
+
+            if @meta_description.nil?
+              invalid_properties.push('invalid value for "meta_description", meta_description cannot be nil.')
+            end
+
+            if @attached_stylesheets.nil?
+              invalid_properties.push('invalid value for "attached_stylesheets", attached_stylesheets cannot be nil.')
+            end
+
+            if @password.nil?
+              invalid_properties.push('invalid value for "password", password cannot be nil.')
+            end
+
+            if @html_title.nil?
+              invalid_properties.push('invalid value for "html_title", html_title cannot be nil.')
+            end
+
+            if @publish_immediately.nil?
+              invalid_properties.push('invalid value for "publish_immediately", publish_immediately cannot be nil.')
+            end
+
+            if @translations.nil?
+              invalid_properties.push('invalid value for "translations", translations cannot be nil.')
+            end
+
             if @id.nil?
               invalid_properties.push('invalid value for "id", id cannot be nil.')
-            end
-
-            if @slug.nil?
-              invalid_properties.push('invalid value for "slug", slug cannot be nil.')
-            end
-
-            if @content_group_id.nil?
-              invalid_properties.push('invalid value for "content_group_id", content_group_id cannot be nil.')
-            end
-
-            if @campaign.nil?
-              invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
-            end
-
-            if @category_id.nil?
-              invalid_properties.push('invalid value for "category_id", category_id cannot be nil.')
             end
 
             if @state.nil?
@@ -660,40 +691,44 @@ module Hubspot
               invalid_properties.push('invalid value for "state", the character length must be smaller than or equal to 25.')
             end
 
-            if @name.nil?
-              invalid_properties.push('invalid value for "name", name cannot be nil.')
-            end
-
-            if @mab_experiment_id.nil?
-              invalid_properties.push('invalid value for "mab_experiment_id", mab_experiment_id cannot be nil.')
-            end
-
-            if @archived.nil?
-              invalid_properties.push('invalid value for "archived", archived cannot be nil.')
-            end
-
-            if @author_name.nil?
-              invalid_properties.push('invalid value for "author_name", author_name cannot be nil.')
-            end
-
-            if @ab_test_id.nil?
-              invalid_properties.push('invalid value for "ab_test_id", ab_test_id cannot be nil.')
+            if @slug.nil?
+              invalid_properties.push('invalid value for "slug", slug cannot be nil.')
             end
 
             if @created_by_id.nil?
               invalid_properties.push('invalid value for "created_by_id", created_by_id cannot be nil.')
             end
 
+            if @rss_body.nil?
+              invalid_properties.push('invalid value for "rss_body", rss_body cannot be nil.')
+            end
+
+            if @currently_published.nil?
+              invalid_properties.push('invalid value for "currently_published", currently_published cannot be nil.')
+            end
+
+            if @archived_in_dashboard.nil?
+              invalid_properties.push('invalid value for "archived_in_dashboard", archived_in_dashboard cannot be nil.')
+            end
+
+            if @created.nil?
+              invalid_properties.push('invalid value for "created", created cannot be nil.')
+            end
+
+            if @content_type_category.nil?
+              invalid_properties.push('invalid value for "content_type_category", content_type_category cannot be nil.')
+            end
+
+            if @mab_experiment_id.nil?
+              invalid_properties.push('invalid value for "mab_experiment_id", mab_experiment_id cannot be nil.')
+            end
+
             if @updated_by_id.nil?
               invalid_properties.push('invalid value for "updated_by_id", updated_by_id cannot be nil.')
             end
 
-            if @domain.nil?
-              invalid_properties.push('invalid value for "domain", domain cannot be nil.')
-            end
-
-            if @ab_status.nil?
-              invalid_properties.push('invalid value for "ab_status", ab_status cannot be nil.')
+            if @translated_from_id.nil?
+              invalid_properties.push('invalid value for "translated_from_id", translated_from_id cannot be nil.')
             end
 
             if @folder_id.nil?
@@ -704,180 +739,156 @@ module Hubspot
               invalid_properties.push('invalid value for "widget_containers", widget_containers cannot be nil.')
             end
 
-            if @widgets.nil?
-              invalid_properties.push('invalid value for "widgets", widgets cannot be nil.')
-            end
-
-            if @language.nil?
-              invalid_properties.push('invalid value for "language", language cannot be nil.')
-            end
-
-            if @translated_from_id.nil?
-              invalid_properties.push('invalid value for "translated_from_id", translated_from_id cannot be nil.')
-            end
-
-            if @translations.nil?
-              invalid_properties.push('invalid value for "translations", translations cannot be nil.')
+            if @page_expiry_redirect_id.nil?
+              invalid_properties.push('invalid value for "page_expiry_redirect_id", page_expiry_redirect_id cannot be nil.')
             end
 
             if @dynamic_page_data_source_type.nil?
               invalid_properties.push('invalid value for "dynamic_page_data_source_type", dynamic_page_data_source_type cannot be nil.')
             end
 
+            if @featured_image.nil?
+              invalid_properties.push('invalid value for "featured_image", featured_image cannot be nil.')
+            end
+
+            if @author_name.nil?
+              invalid_properties.push('invalid value for "author_name", author_name cannot be nil.')
+            end
+
+            if @domain.nil?
+              invalid_properties.push('invalid value for "domain", domain cannot be nil.')
+            end
+
+            if @name.nil?
+              invalid_properties.push('invalid value for "name", name cannot be nil.')
+            end
+
+            if @dynamic_page_hub_db_table_id.nil?
+              invalid_properties.push('invalid value for "dynamic_page_hub_db_table_id", dynamic_page_hub_db_table_id cannot be nil.')
+            end
+
+            if @campaign.nil?
+              invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
+            end
+
             if @dynamic_page_data_source_id.nil?
               invalid_properties.push('invalid value for "dynamic_page_data_source_id", dynamic_page_data_source_id cannot be nil.')
-            end
-
-            if @blog_author_id.nil?
-              invalid_properties.push('invalid value for "blog_author_id", blog_author_id cannot be nil.')
-            end
-
-            if @tag_ids.nil?
-              invalid_properties.push('invalid value for "tag_ids", tag_ids cannot be nil.')
-            end
-
-            if @html_title.nil?
-              invalid_properties.push('invalid value for "html_title", html_title cannot be nil.')
-            end
-
-            if @enable_google_amp_output_override.nil?
-              invalid_properties.push('invalid value for "enable_google_amp_output_override", enable_google_amp_output_override cannot be nil.')
-            end
-
-            if @use_featured_image.nil?
-              invalid_properties.push('invalid value for "use_featured_image", use_featured_image cannot be nil.')
-            end
-
-            if @_post_body.nil?
-              invalid_properties.push('invalid value for "_post_body", _post_body cannot be nil.')
-            end
-
-            if @post_summary.nil?
-              invalid_properties.push('invalid value for "post_summary", post_summary cannot be nil.')
-            end
-
-            if @rss_body.nil?
-              invalid_properties.push('invalid value for "rss_body", rss_body cannot be nil.')
-            end
-
-            if @rss_summary.nil?
-              invalid_properties.push('invalid value for "rss_summary", rss_summary cannot be nil.')
-            end
-
-            if @currently_published.nil?
-              invalid_properties.push('invalid value for "currently_published", currently_published cannot be nil.')
-            end
-
-            if @page_expiry_enabled.nil?
-              invalid_properties.push('invalid value for "page_expiry_enabled", page_expiry_enabled cannot be nil.')
-            end
-
-            if @page_expiry_redirect_id.nil?
-              invalid_properties.push('invalid value for "page_expiry_redirect_id", page_expiry_redirect_id cannot be nil.')
-            end
-
-            if @page_expiry_redirect_url.nil?
-              invalid_properties.push('invalid value for "page_expiry_redirect_url", page_expiry_redirect_url cannot be nil.')
-            end
-
-            if @page_expiry_date.nil?
-              invalid_properties.push('invalid value for "page_expiry_date", page_expiry_date cannot be nil.')
-            end
-
-            if @include_default_custom_css.nil?
-              invalid_properties.push('invalid value for "include_default_custom_css", include_default_custom_css cannot be nil.')
-            end
-
-            if @enable_layout_stylesheets.nil?
-              invalid_properties.push('invalid value for "enable_layout_stylesheets", enable_layout_stylesheets cannot be nil.')
             end
 
             if @enable_domain_stylesheets.nil?
               invalid_properties.push('invalid value for "enable_domain_stylesheets", enable_domain_stylesheets cannot be nil.')
             end
 
-            if @publish_immediately.nil?
-              invalid_properties.push('invalid value for "publish_immediately", publish_immediately cannot be nil.')
-            end
-
-            if @featured_image.nil?
-              invalid_properties.push('invalid value for "featured_image", featured_image cannot be nil.')
-            end
-
-            if @featured_image_alt_text.nil?
-              invalid_properties.push('invalid value for "featured_image_alt_text", featured_image_alt_text cannot be nil.')
-            end
-
-            if @link_rel_canonical_url.nil?
-              invalid_properties.push('invalid value for "link_rel_canonical_url", link_rel_canonical_url cannot be nil.')
-            end
-
-            if @content_type_category.nil?
-              invalid_properties.push('invalid value for "content_type_category", content_type_category cannot be nil.')
-            end
-
-            if @attached_stylesheets.nil?
-              invalid_properties.push('invalid value for "attached_stylesheets", attached_stylesheets cannot be nil.')
-            end
-
-            if @meta_description.nil?
-              invalid_properties.push('invalid value for "meta_description", meta_description cannot be nil.')
-            end
-
-            if @head_html.nil?
-              invalid_properties.push('invalid value for "head_html", head_html cannot be nil.')
-            end
-
-            if @footer_html.nil?
-              invalid_properties.push('invalid value for "footer_html", footer_html cannot be nil.')
-            end
-
-            if @archived_in_dashboard.nil?
-              invalid_properties.push('invalid value for "archived_in_dashboard", archived_in_dashboard cannot be nil.')
-            end
-
-            if @public_access_rules_enabled.nil?
-              invalid_properties.push('invalid value for "public_access_rules_enabled", public_access_rules_enabled cannot be nil.')
-            end
-
-            if @public_access_rules.nil?
-              invalid_properties.push('invalid value for "public_access_rules", public_access_rules cannot be nil.')
+            if @include_default_custom_css.nil?
+              invalid_properties.push('invalid value for "include_default_custom_css", include_default_custom_css cannot be nil.')
             end
 
             if @layout_sections.nil?
               invalid_properties.push('invalid value for "layout_sections", layout_sections cannot be nil.')
             end
 
-            if @theme_settings_values.nil?
-              invalid_properties.push('invalid value for "theme_settings_values", theme_settings_values cannot be nil.')
+            if @updated.nil?
+              invalid_properties.push('invalid value for "updated", updated cannot be nil.')
+            end
+
+            if @footer_html.nil?
+              invalid_properties.push('invalid value for "footer_html", footer_html cannot be nil.')
+            end
+
+            if @tag_ids.nil?
+              invalid_properties.push('invalid value for "tag_ids", tag_ids cannot be nil.')
+            end
+
+            if @widgets.nil?
+              invalid_properties.push('invalid value for "widgets", widgets cannot be nil.')
+            end
+
+            if @post_summary.nil?
+              invalid_properties.push('invalid value for "post_summary", post_summary cannot be nil.')
+            end
+
+            if @head_html.nil?
+              invalid_properties.push('invalid value for "head_html", head_html cannot be nil.')
+            end
+
+            if @page_expiry_redirect_url.nil?
+              invalid_properties.push('invalid value for "page_expiry_redirect_url", page_expiry_redirect_url cannot be nil.')
+            end
+
+            if @ab_status.nil?
+              invalid_properties.push('invalid value for "ab_status", ab_status cannot be nil.')
+            end
+
+            if @use_featured_image.nil?
+              invalid_properties.push('invalid value for "use_featured_image", use_featured_image cannot be nil.')
+            end
+
+            if @ab_test_id.nil?
+              invalid_properties.push('invalid value for "ab_test_id", ab_test_id cannot be nil.')
+            end
+
+            if @featured_image_alt_text.nil?
+              invalid_properties.push('invalid value for "featured_image_alt_text", featured_image_alt_text cannot be nil.')
+            end
+
+            if @blog_author_id.nil?
+              invalid_properties.push('invalid value for "blog_author_id", blog_author_id cannot be nil.')
+            end
+
+            if @content_group_id.nil?
+              invalid_properties.push('invalid value for "content_group_id", content_group_id cannot be nil.')
+            end
+
+            if @rss_summary.nil?
+              invalid_properties.push('invalid value for "rss_summary", rss_summary cannot be nil.')
+            end
+
+            if @page_expiry_enabled.nil?
+              invalid_properties.push('invalid value for "page_expiry_enabled", page_expiry_enabled cannot be nil.')
             end
 
             if @url.nil?
               invalid_properties.push('invalid value for "url", url cannot be nil.')
             end
 
-            if @password.nil?
-              invalid_properties.push('invalid value for "password", password cannot be nil.')
+            if @public_access_rules.nil?
+              invalid_properties.push('invalid value for "public_access_rules", public_access_rules cannot be nil.')
+            end
+
+            if @enable_google_amp_output_override.nil?
+              invalid_properties.push('invalid value for "enable_google_amp_output_override", enable_google_amp_output_override cannot be nil.')
+            end
+
+            if @archived_at.nil?
+              invalid_properties.push('invalid value for "archived_at", archived_at cannot be nil.')
+            end
+
+            if @_post_body.nil?
+              invalid_properties.push('invalid value for "_post_body", _post_body cannot be nil.')
+            end
+
+            if @theme_settings_values.nil?
+              invalid_properties.push('invalid value for "theme_settings_values", theme_settings_values cannot be nil.')
+            end
+
+            if @page_expiry_date.nil?
+              invalid_properties.push('invalid value for "page_expiry_date", page_expiry_date cannot be nil.')
+            end
+
+            if @public_access_rules_enabled.nil?
+              invalid_properties.push('invalid value for "public_access_rules_enabled", public_access_rules_enabled cannot be nil.')
             end
 
             if @current_state.nil?
               invalid_properties.push('invalid value for "current_state", current_state cannot be nil.')
             end
 
-            if @publish_date.nil?
-              invalid_properties.push('invalid value for "publish_date", publish_date cannot be nil.')
+            if @category_id.nil?
+              invalid_properties.push('invalid value for "category_id", category_id cannot be nil.')
             end
 
-            if @created.nil?
-              invalid_properties.push('invalid value for "created", created cannot be nil.')
-            end
-
-            if @updated.nil?
-              invalid_properties.push('invalid value for "updated", updated cannot be nil.')
-            end
-
-            if @deleted_at.nil?
-              invalid_properties.push('invalid value for "deleted_at", deleted_at cannot be nil.')
+            if @link_rel_canonical_url.nil?
+              invalid_properties.push('invalid value for "link_rel_canonical_url", link_rel_canonical_url cannot be nil.')
             end
 
             invalid_properties
@@ -886,77 +897,87 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @publish_date.nil?
+            return false if @language.nil?
+            language_validator = EnumAttributeValidator.new('String', ["af", "af-na", "af-za", "agq", "agq-cm", "ak", "ak-gh", "am", "am-et", "ar", "ar-001", "ar-ae", "ar-bh", "ar-dj", "ar-dz", "ar-eg", "ar-eh", "ar-er", "ar-il", "ar-iq", "ar-jo", "ar-km", "ar-kw", "ar-lb", "ar-ly", "ar-ma", "ar-mr", "ar-om", "ar-ps", "ar-qa", "ar-sa", "ar-sd", "ar-so", "ar-ss", "ar-sy", "ar-td", "ar-tn", "ar-ye", "as", "as-in", "asa", "asa-tz", "ast", "ast-es", "az", "az-az", "bas", "bas-cm", "be", "be-by", "bem", "bem-zm", "bez", "bez-tz", "bg", "bg-bg", "bm", "bm-ml", "bn", "bn-bd", "bn-in", "bo", "bo-cn", "bo-in", "br", "br-fr", "brx", "brx-in", "bs", "bs-ba", "ca", "ca-ad", "ca-es", "ca-fr", "ca-it", "ccp", "ccp-bd", "ccp-in", "ce", "ce-ru", "ceb", "ceb-ph", "cgg", "cgg-ug", "chr", "chr-us", "ckb", "ckb-iq", "ckb-ir", "cs", "cs-cz", "cu", "cu-ru", "cy", "cy-gb", "da", "da-dk", "da-gl", "dav", "dav-ke", "de", "de-at", "de-be", "de-ch", "de-de", "de-gr", "de-it", "de-li", "de-lu", "dje", "dje-ne", "doi", "doi-in", "dsb", "dsb-de", "dua", "dua-cm", "dyo", "dyo-sn", "dz", "dz-bt", "ebu", "ebu-ke", "ee", "ee-gh", "ee-tg", "el", "el-cy", "el-gr", "en", "en-001", "en-150", "en-ae", "en-ag", "en-ai", "en-as", "en-at", "en-au", "en-bb", "en-be", "en-bi", "en-bm", "en-bs", "en-bw", "en-bz", "en-ca", "en-cc", "en-ch", "en-ck", "en-cm", "en-cn", "en-cx", "en-cy", "en-de", "en-dg", "en-dk", "en-dm", "en-er", "en-fi", "en-fj", "en-fk", "en-fm", "en-gb", "en-gd", "en-gg", "en-gh", "en-gi", "en-gm", "en-gu", "en-gy", "en-hk", "en-ie", "en-il", "en-im", "en-in", "en-io", "en-je", "en-jm", "en-ke", "en-ki", "en-kn", "en-ky", "en-lc", "en-lr", "en-ls", "en-lu", "en-mg", "en-mh", "en-mo", "en-mp", "en-ms", "en-mt", "en-mu", "en-mw", "en-mx", "en-my", "en-na", "en-nf", "en-ng", "en-nl", "en-nr", "en-nu", "en-nz", "en-pg", "en-ph", "en-pk", "en-pn", "en-pr", "en-pw", "en-rw", "en-sb", "en-sc", "en-sd", "en-se", "en-sg", "en-sh", "en-si", "en-sl", "en-ss", "en-sx", "en-sz", "en-tc", "en-tk", "en-to", "en-tt", "en-tv", "en-tz", "en-ug", "en-um", "en-us", "en-vc", "en-vg", "en-vi", "en-vu", "en-ws", "en-za", "en-zm", "en-zw", "eo", "eo-001", "es", "es-419", "es-ar", "es-bo", "es-br", "es-bz", "es-cl", "es-co", "es-cr", "es-cu", "es-do", "es-ea", "es-ec", "es-es", "es-gq", "es-gt", "es-hn", "es-ic", "es-mx", "es-ni", "es-pa", "es-pe", "es-ph", "es-pr", "es-py", "es-sv", "es-us", "es-uy", "es-ve", "et", "et-ee", "eu", "eu-es", "ewo", "ewo-cm", "fa", "fa-af", "fa-ir", "ff", "ff-bf", "ff-cm", "ff-gh", "ff-gm", "ff-gn", "ff-gw", "ff-lr", "ff-mr", "ff-ne", "ff-ng", "ff-sl", "ff-sn", "fi", "fi-fi", "fil", "fil-ph", "fo", "fo-dk", "fo-fo", "fr", "fr-be", "fr-bf", "fr-bi", "fr-bj", "fr-bl", "fr-ca", "fr-cd", "fr-cf", "fr-cg", "fr-ch", "fr-ci", "fr-cm", "fr-dj", "fr-dz", "fr-fr", "fr-ga", "fr-gf", "fr-gn", "fr-gp", "fr-gq", "fr-ht", "fr-km", "fr-lu", "fr-ma", "fr-mc", "fr-mf", "fr-mg", "fr-ml", "fr-mq", "fr-mr", "fr-mu", "fr-nc", "fr-ne", "fr-pf", "fr-pm", "fr-re", "fr-rw", "fr-sc", "fr-sn", "fr-sy", "fr-td", "fr-tg", "fr-tn", "fr-vu", "fr-wf", "fr-yt", "fur", "fur-it", "fy", "fy-nl", "ga", "ga-gb", "ga-ie", "gd", "gd-gb", "gl", "gl-es", "gsw", "gsw-ch", "gsw-fr", "gsw-li", "gu", "gu-in", "guz", "guz-ke", "gv", "gv-im", "ha", "ha-gh", "ha-ne", "ha-ng", "haw", "haw-us", "he", "hi", "hi-in", "hr", "hr-ba", "hr-hr", "hsb", "hsb-de", "hu", "hu-hu", "hy", "hy-am", "ia", "ia-001", "id", "ig", "ig-ng", "ii", "ii-cn", "id-id", "is", "is-is", "it", "it-ch", "it-it", "it-sm", "it-va", "he-il", "ja", "ja-jp", "jgo", "jgo-cm", "yi", "yi-001", "jmc", "jmc-tz", "jv", "jv-id", "ka", "ka-ge", "kab", "kab-dz", "kam", "kam-ke", "kde", "kde-tz", "kea", "kea-cv", "khq", "khq-ml", "ki", "ki-ke", "kk", "kk-kz", "kkj", "kkj-cm", "kl", "kl-gl", "kln", "kln-ke", "km", "km-kh", "kn", "kn-in", "ko", "ko-kp", "ko-kr", "kok", "kok-in", "ks", "ks-in", "ksb", "ksb-tz", "ksf", "ksf-cm", "ksh", "ksh-de", "kw", "kw-gb", "ku", "ku-tr", "ky", "ky-kg", "lag", "lag-tz", "lb", "lb-lu", "lg", "lg-ug", "lkt", "lkt-us", "ln", "ln-ao", "ln-cd", "ln-cf", "ln-cg", "lo", "lo-la", "lrc", "lrc-iq", "lrc-ir", "lt", "lt-lt", "lu", "lu-cd", "luo", "luo-ke", "luy", "luy-ke", "lv", "lv-lv", "mai", "mai-in", "mas", "mas-ke", "mas-tz", "mer", "mer-ke", "mfe", "mfe-mu", "mg", "mg-mg", "mgh", "mgh-mz", "mgo", "mgo-cm", "mi", "mi-nz", "mk", "mk-mk", "ml", "ml-in", "mn", "mn-mn", "mni", "mni-in", "mr", "mr-in", "ms", "ms-bn", "ms-id", "ms-my", "ms-sg", "mt", "mt-mt", "mua", "mua-cm", "my", "my-mm", "mzn", "mzn-ir", "naq", "naq-na", "nb", "nb-no", "nb-sj", "nd", "nd-zw", "nds", "nds-de", "nds-nl", "ne", "ne-in", "ne-np", "nl", "nl-aw", "nl-be", "nl-ch", "nl-bq", "nl-cw", "nl-lu", "nl-nl", "nl-sr", "nl-sx", "nmg", "nmg-cm", "nn", "nn-no", "nnh", "nnh-cm", "no", "no-no", "nus", "nus-ss", "nyn", "nyn-ug", "om", "om-et", "om-ke", "or", "or-in", "os", "os-ge", "os-ru", "pa", "pa-in", "pa-pk", "pcm", "pcm-ng", "pl", "pl-pl", "prg", "prg-001", "ps", "ps-af", "ps-pk", "pt", "pt-ao", "pt-br", "pt-ch", "pt-cv", "pt-gq", "pt-gw", "pt-lu", "pt-mo", "pt-mz", "pt-pt", "pt-st", "pt-tl", "qu", "qu-bo", "qu-ec", "qu-pe", "rm", "rm-ch", "rn", "rn-bi", "ro", "ro-md", "ro-ro", "rof", "rof-tz", "ru", "ru-by", "ru-kg", "ru-kz", "ru-md", "ru-ru", "ru-ua", "rw", "rw-rw", "rwk", "rwk-tz", "sa", "sa-in", "sah", "sah-ru", "saq", "saq-ke", "sat", "sat-in", "sbp", "sbp-tz", "sd", "sd-in", "sd-pk", "se", "se-fi", "se-no", "se-se", "seh", "seh-mz", "ses", "ses-ml", "sg", "sg-cf", "shi", "shi-ma", "si", "si-lk", "sk", "sk-sk", "sl", "sl-si", "smn", "smn-fi", "sn", "sn-zw", "so", "so-dj", "so-et", "so-ke", "so-so", "sq", "sq-al", "sq-mk", "sq-xk", "sr", "sr-ba", "sr-cs", "sr-me", "sr-rs", "sr-xk", "su", "su-id", "sv", "sv-ax", "sv-fi", "sv-se", "sw", "sw-cd", "sw-ke", "sw-tz", "sw-ug", "sy", "ta", "ta-in", "ta-lk", "ta-my", "ta-sg", "te", "te-in", "teo", "teo-ke", "teo-ug", "tg", "tg-tj", "th", "th-th", "ti", "ti-er", "ti-et", "tk", "tk-tm", "tl", "to", "to-to", "tr", "tr-cy", "tr-tr", "tt", "tt-ru", "twq", "twq-ne", "tzm", "tzm-ma", "ug", "ug-cn", "uk", "uk-ua", "ur", "ur-in", "ur-pk", "uz", "uz-af", "uz-uz", "vai", "vai-lr", "vi", "vi-vn", "vo", "vo-001", "vun", "vun-tz", "wae", "wae-ch", "wo", "wo-sn", "xh", "xh-za", "xog", "xog-ug", "yav", "yav-cm", "yo", "yo-bj", "yo-ng", "yue", "yue-cn", "yue-hk", "zgh", "zgh-ma", "zh", "zh-cn", "zh-hk", "zh-mo", "zh-sg", "zh-tw", "zh-hans", "zh-hant", "zu", "zu-za"])
+            return false unless language_validator.valid?(@language)
+            return false if @enable_layout_stylesheets.nil?
+            return false if @meta_description.nil?
+            return false if @attached_stylesheets.nil?
+            return false if @password.nil?
+            return false if @html_title.nil?
+            return false if @publish_immediately.nil?
+            return false if @translations.nil?
             return false if @id.nil?
-            return false if @slug.nil?
-            return false if @content_group_id.nil?
-            return false if @campaign.nil?
-            return false if @category_id.nil?
             return false if @state.nil?
             return false if @state.to_s.length > 25
-            return false if @name.nil?
-            return false if @mab_experiment_id.nil?
-            return false if @archived.nil?
-            return false if @author_name.nil?
-            return false if @ab_test_id.nil?
+            return false if @slug.nil?
             return false if @created_by_id.nil?
+            return false if @rss_body.nil?
+            return false if @currently_published.nil?
+            return false if @archived_in_dashboard.nil?
+            return false if @created.nil?
+            return false if @content_type_category.nil?
+            content_type_category_validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"])
+            return false unless content_type_category_validator.valid?(@content_type_category)
+            return false if @mab_experiment_id.nil?
             return false if @updated_by_id.nil?
+            return false if @translated_from_id.nil?
+            return false if @folder_id.nil?
+            return false if @widget_containers.nil?
+            return false if @page_expiry_redirect_id.nil?
+            return false if @dynamic_page_data_source_type.nil?
+            return false if @featured_image.nil?
+            return false if @author_name.nil?
             return false if @domain.nil?
+            return false if @name.nil?
+            return false if @dynamic_page_hub_db_table_id.nil?
+            return false if @campaign.nil?
+            return false if @dynamic_page_data_source_id.nil?
+            return false if @enable_domain_stylesheets.nil?
+            return false if @include_default_custom_css.nil?
+            return false if @layout_sections.nil?
+            return false if @updated.nil?
+            return false if @footer_html.nil?
+            return false if @tag_ids.nil?
+            return false if @widgets.nil?
+            return false if @post_summary.nil?
+            return false if @head_html.nil?
+            return false if @page_expiry_redirect_url.nil?
             return false if @ab_status.nil?
             ab_status_validator = EnumAttributeValidator.new('String', ["master", "variant", "loser_variant", "mab_master", "mab_variant", "automated_master", "automated_variant", "automated_loser_variant"])
             return false unless ab_status_validator.valid?(@ab_status)
-            return false if @folder_id.nil?
-            return false if @widget_containers.nil?
-            return false if @widgets.nil?
-            return false if @language.nil?
-            language_validator = EnumAttributeValidator.new('String', ["af", "af-na", "af-za", "agq", "agq-cm", "ak", "ak-gh", "am", "am-et", "ar", "ar-001", "ar-ae", "ar-bh", "ar-dj", "ar-dz", "ar-eg", "ar-eh", "ar-er", "ar-il", "ar-iq", "ar-jo", "ar-km", "ar-kw", "ar-lb", "ar-ly", "ar-ma", "ar-mr", "ar-om", "ar-ps", "ar-qa", "ar-sa", "ar-sd", "ar-so", "ar-ss", "ar-sy", "ar-td", "ar-tn", "ar-ye", "as", "as-in", "asa", "asa-tz", "ast", "ast-es", "az", "az-az", "bas", "bas-cm", "be", "be-by", "bem", "bem-zm", "bez", "bez-tz", "bg", "bg-bg", "bm", "bm-ml", "bn", "bn-bd", "bn-in", "bo", "bo-cn", "bo-in", "br", "br-fr", "brx", "brx-in", "bs", "bs-ba", "ca", "ca-ad", "ca-es", "ca-fr", "ca-it", "ccp", "ccp-bd", "ccp-in", "ce", "ce-ru", "cgg", "cgg-ug", "chr", "chr-us", "ckb", "ckb-iq", "ckb-ir", "cs", "cs-cz", "cu", "cu-ru", "cy", "cy-gb", "da", "da-dk", "da-gl", "dav", "dav-ke", "de", "de-at", "de-be", "de-ch", "de-de", "de-gr", "de-it", "de-li", "de-lu", "dje", "dje-ne", "dsb", "dsb-de", "dua", "dua-cm", "dyo", "dyo-sn", "dz", "dz-bt", "ebu", "ebu-ke", "ee", "ee-gh", "ee-tg", "el", "el-cy", "el-gr", "en", "en-001", "en-150", "en-ae", "en-ag", "en-ai", "en-as", "en-at", "en-au", "en-bb", "en-be", "en-bi", "en-bm", "en-bs", "en-bw", "en-bz", "en-ca", "en-cc", "en-ch", "en-ck", "en-cm", "en-cx", "en-cy", "en-de", "en-dg", "en-dk", "en-dm", "en-er", "en-fi", "en-fj", "en-fk", "en-fm", "en-gb", "en-gd", "en-gg", "en-gh", "en-gi", "en-gm", "en-gu", "en-gy", "en-hk", "en-ie", "en-il", "en-im", "en-in", "en-io", "en-je", "en-jm", "en-ke", "en-ki", "en-kn", "en-ky", "en-lc", "en-lr", "en-ls", "en-lu", "en-mg", "en-mh", "en-mo", "en-mp", "en-ms", "en-mt", "en-mu", "en-mw", "en-my", "en-na", "en-nf", "en-ng", "en-nl", "en-nr", "en-nu", "en-nz", "en-pg", "en-ph", "en-pk", "en-pn", "en-pr", "en-pw", "en-rw", "en-sb", "en-sc", "en-sd", "en-se", "en-sg", "en-sh", "en-si", "en-sl", "en-ss", "en-sx", "en-sz", "en-tc", "en-tk", "en-to", "en-tt", "en-tv", "en-tz", "en-ug", "en-um", "en-us", "en-vc", "en-vg", "en-vi", "en-vu", "en-ws", "en-za", "en-zm", "en-zw", "eo", "eo-001", "es", "es-419", "es-ar", "es-bo", "es-br", "es-bz", "es-cl", "es-co", "es-cr", "es-cu", "es-do", "es-ea", "es-ec", "es-es", "es-gq", "es-gt", "es-hn", "es-ic", "es-mx", "es-ni", "es-pa", "es-pe", "es-ph", "es-pr", "es-py", "es-sv", "es-us", "es-uy", "es-ve", "et", "et-ee", "eu", "eu-es", "ewo", "ewo-cm", "fa", "fa-af", "fa-ir", "ff", "ff-cm", "ff-gn", "ff-mr", "ff-sn", "fi", "fi-fi", "fil", "fil-ph", "fo", "fo-dk", "fo-fo", "fr", "fr-be", "fr-bf", "fr-bi", "fr-bj", "fr-bl", "fr-ca", "fr-cd", "fr-cf", "fr-cg", "fr-ch", "fr-ci", "fr-cm", "fr-dj", "fr-dz", "fr-fr", "fr-ga", "fr-gf", "fr-gn", "fr-gp", "fr-gq", "fr-ht", "fr-km", "fr-lu", "fr-ma", "fr-mc", "fr-mf", "fr-mg", "fr-ml", "fr-mq", "fr-mr", "fr-mu", "fr-nc", "fr-ne", "fr-pf", "fr-pm", "fr-re", "fr-rw", "fr-sc", "fr-sn", "fr-sy", "fr-td", "fr-tg", "fr-tn", "fr-vu", "fr-wf", "fr-yt", "fur", "fur-it", "fy", "fy-nl", "ga", "ga-ie", "gd", "gd-gb", "gl", "gl-es", "gsw", "gsw-ch", "gsw-fr", "gsw-li", "gu", "gu-in", "guz", "guz-ke", "gv", "gv-im", "ha", "ha-gh", "ha-ne", "ha-ng", "haw", "haw-us", "he", "hi", "hi-in", "hr", "hr-ba", "hr-hr", "hsb", "hsb-de", "hu", "hu-hu", "hy", "hy-am", "id", "ig", "ig-ng", "ii", "ii-cn", "id-id", "is", "is-is", "it", "it-ch", "it-it", "it-sm", "it-va", "he-il", "ja", "ja-jp", "jgo", "jgo-cm", "yi", "yi-001", "jmc", "jmc-tz", "ka", "ka-ge", "kab", "kab-dz", "kam", "kam-ke", "kde", "kde-tz", "kea", "kea-cv", "khq", "khq-ml", "ki", "ki-ke", "kk", "kk-kz", "kkj", "kkj-cm", "kl", "kl-gl", "kln", "kln-ke", "km", "km-kh", "kn", "kn-in", "ko", "ko-kp", "ko-kr", "kok", "kok-in", "ks", "ks-in", "ksb", "ksb-tz", "ksf", "ksf-cm", "ksh", "ksh-de", "kw", "kw-gb", "ky", "ky-kg", "lag", "lag-tz", "lb", "lb-lu", "lg", "lg-ug", "lkt", "lkt-us", "ln", "ln-ao", "ln-cd", "ln-cf", "ln-cg", "lo", "lo-la", "lrc", "lrc-iq", "lrc-ir", "lt", "lt-lt", "lu", "lu-cd", "luo", "luo-ke", "luy", "luy-ke", "lv", "lv-lv", "mas", "mas-ke", "mas-tz", "mer", "mer-ke", "mfe", "mfe-mu", "mg", "mg-mg", "mgh", "mgh-mz", "mgo", "mgo-cm", "mk", "mk-mk", "ml", "ml-in", "mn", "mn-mn", "mr", "mr-in", "ms", "ms-bn", "ms-my", "ms-sg", "mt", "mt-mt", "mua", "mua-cm", "my", "my-mm", "mzn", "mzn-ir", "naq", "naq-na", "nb", "nb-no", "nb-sj", "nd", "nd-zw", "nds", "nds-de", "nds-nl", "ne", "ne-in", "ne-np", "nl", "nl-aw", "nl-be", "nl-ch", "nl-bq", "nl-cw", "nl-lu", "nl-nl", "nl-sr", "nl-sx", "nmg", "nmg-cm", "nn", "nn-no", "nnh", "nnh-cm", "no", "no-no", "nus", "nus-ss", "nyn", "nyn-ug", "om", "om-et", "om-ke", "or", "or-in", "os", "os-ge", "os-ru", "pa", "pa-in", "pa-pk", "pl", "pl-pl", "prg", "prg-001", "ps", "ps-af", "pt", "pt-ao", "pt-br", "pt-ch", "pt-cv", "pt-gq", "pt-gw", "pt-lu", "pt-mo", "pt-mz", "pt-pt", "pt-st", "pt-tl", "qu", "qu-bo", "qu-ec", "qu-pe", "rm", "rm-ch", "rn", "rn-bi", "ro", "ro-md", "ro-ro", "rof", "rof-tz", "ru", "ru-by", "ru-kg", "ru-kz", "ru-md", "ru-ru", "ru-ua", "rw", "rw-rw", "rwk", "rwk-tz", "sa", "sah", "sah-ru", "saq", "saq-ke", "sbp", "sbp-tz", "sd", "sd-pk", "se", "se-fi", "se-no", "se-se", "seh", "seh-mz", "ses", "ses-ml", "sg", "sg-cf", "shi", "shi-ma", "si", "si-lk", "sk", "sk-sk", "sl", "sl-si", "smn", "smn-fi", "sn", "sn-zw", "so", "so-dj", "so-et", "so-ke", "so-so", "sq", "sq-al", "sq-mk", "sq-xk", "sr", "sr-ba", "sr-cs", "sr-me", "sr-rs", "sr-xk", "sv", "sv-ax", "sv-fi", "sv-se", "sw", "sw-cd", "sw-ke", "sw-tz", "sw-ug", "sy", "ta", "ta-in", "ta-lk", "ta-my", "ta-sg", "te", "te-in", "teo", "teo-ke", "teo-ug", "tg", "tg-tj", "th", "th-th", "ti", "ti-er", "ti-et", "tk", "tk-tm", "to", "to-to", "tr", "tr-cy", "tr-tr", "tt", "tt-ru", "twq", "twq-ne", "tzm", "tzm-ma", "ug", "ug-cn", "uk", "uk-ua", "ur", "ur-in", "ur-pk", "uz", "uz-af", "uz-uz", "vai", "vai-lr", "vi", "vi-vn", "vo", "vo-001", "vun", "vun-tz", "wae", "wae-ch", "wo", "wo-sn", "xog", "xog-ug", "yav", "yav-cm", "yo", "yo-bj", "yo-ng", "yue", "yue-cn", "yue-hk", "zgh", "zgh-ma", "zh", "zh-cn", "zh-hk", "zh-mo", "zh-sg", "zh-tw", "zh-hans", "zh-hant", "zu", "zu-za"])
-            return false unless language_validator.valid?(@language)
-            return false if @translated_from_id.nil?
-            return false if @translations.nil?
-            return false if @dynamic_page_data_source_type.nil?
-            return false if @dynamic_page_data_source_id.nil?
-            return false if @blog_author_id.nil?
-            return false if @tag_ids.nil?
-            return false if @html_title.nil?
-            return false if @enable_google_amp_output_override.nil?
             return false if @use_featured_image.nil?
-            return false if @_post_body.nil?
-            return false if @post_summary.nil?
-            return false if @rss_body.nil?
-            return false if @rss_summary.nil?
-            return false if @currently_published.nil?
-            return false if @page_expiry_enabled.nil?
-            return false if @page_expiry_redirect_id.nil?
-            return false if @page_expiry_redirect_url.nil?
-            return false if @page_expiry_date.nil?
-            return false if @include_default_custom_css.nil?
-            return false if @enable_layout_stylesheets.nil?
-            return false if @enable_domain_stylesheets.nil?
-            return false if @publish_immediately.nil?
-            return false if @featured_image.nil?
+            return false if @ab_test_id.nil?
             return false if @featured_image_alt_text.nil?
-            return false if @link_rel_canonical_url.nil?
-            return false if @content_type_category.nil?
-            content_type_category_validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-            return false unless content_type_category_validator.valid?(@content_type_category)
-            return false if @attached_stylesheets.nil?
-            return false if @meta_description.nil?
-            return false if @head_html.nil?
-            return false if @footer_html.nil?
-            return false if @archived_in_dashboard.nil?
-            return false if @public_access_rules_enabled.nil?
-            return false if @public_access_rules.nil?
-            return false if @layout_sections.nil?
-            return false if @theme_settings_values.nil?
+            return false if @blog_author_id.nil?
+            return false if @content_group_id.nil?
+            return false if @rss_summary.nil?
+            return false if @page_expiry_enabled.nil?
             return false if @url.nil?
-            return false if @password.nil?
+            return false if @public_access_rules.nil?
+            return false if @enable_google_amp_output_override.nil?
+            return false if @archived_at.nil?
+            return false if @_post_body.nil?
+            return false if @theme_settings_values.nil?
+            return false if @page_expiry_date.nil?
+            return false if @public_access_rules_enabled.nil?
             return false if @current_state.nil?
             current_state_validator = EnumAttributeValidator.new('String', ["AUTOMATED", "AUTOMATED_DRAFT", "AUTOMATED_SENDING", "AUTOMATED_FOR_FORM", "AUTOMATED_FOR_FORM_BUFFER", "AUTOMATED_FOR_FORM_DRAFT", "AUTOMATED_FOR_FORM_LEGACY", "BLOG_EMAIL_DRAFT", "BLOG_EMAIL_PUBLISHED", "DRAFT", "DRAFT_AB", "DRAFT_AB_VARIANT", "ERROR", "LOSER_AB_VARIANT", "PAGE_STUB", "PRE_PROCESSING", "PROCESSING", "PUBLISHED", "PUBLISHED_AB", "PUBLISHED_AB_VARIANT", "PUBLISHED_OR_SCHEDULED", "RSS_TO_EMAIL_DRAFT", "RSS_TO_EMAIL_PUBLISHED", "SCHEDULED", "SCHEDULED_AB", "SCHEDULED_OR_PUBLISHED", "AUTOMATED_AB", "AUTOMATED_AB_VARIANT", "AUTOMATED_DRAFT_AB", "AUTOMATED_DRAFT_ABVARIANT", "AUTOMATED_LOSER_ABVARIANT"])
             return false unless current_state_validator.valid?(@current_state)
-            return false if @publish_date.nil?
-            return false if @created.nil?
-            return false if @updated.nil?
-            return false if @deleted_at.nil?
+            return false if @category_id.nil?
+            return false if @link_rel_canonical_url.nil?
             true
+          end
+
+          # Custom attribute writer method checking allowed values (enum).
+          # @param [Object] language Object to be assigned
+          def language=(language)
+            validator = EnumAttributeValidator.new('String', ["af", "af-na", "af-za", "agq", "agq-cm", "ak", "ak-gh", "am", "am-et", "ar", "ar-001", "ar-ae", "ar-bh", "ar-dj", "ar-dz", "ar-eg", "ar-eh", "ar-er", "ar-il", "ar-iq", "ar-jo", "ar-km", "ar-kw", "ar-lb", "ar-ly", "ar-ma", "ar-mr", "ar-om", "ar-ps", "ar-qa", "ar-sa", "ar-sd", "ar-so", "ar-ss", "ar-sy", "ar-td", "ar-tn", "ar-ye", "as", "as-in", "asa", "asa-tz", "ast", "ast-es", "az", "az-az", "bas", "bas-cm", "be", "be-by", "bem", "bem-zm", "bez", "bez-tz", "bg", "bg-bg", "bm", "bm-ml", "bn", "bn-bd", "bn-in", "bo", "bo-cn", "bo-in", "br", "br-fr", "brx", "brx-in", "bs", "bs-ba", "ca", "ca-ad", "ca-es", "ca-fr", "ca-it", "ccp", "ccp-bd", "ccp-in", "ce", "ce-ru", "ceb", "ceb-ph", "cgg", "cgg-ug", "chr", "chr-us", "ckb", "ckb-iq", "ckb-ir", "cs", "cs-cz", "cu", "cu-ru", "cy", "cy-gb", "da", "da-dk", "da-gl", "dav", "dav-ke", "de", "de-at", "de-be", "de-ch", "de-de", "de-gr", "de-it", "de-li", "de-lu", "dje", "dje-ne", "doi", "doi-in", "dsb", "dsb-de", "dua", "dua-cm", "dyo", "dyo-sn", "dz", "dz-bt", "ebu", "ebu-ke", "ee", "ee-gh", "ee-tg", "el", "el-cy", "el-gr", "en", "en-001", "en-150", "en-ae", "en-ag", "en-ai", "en-as", "en-at", "en-au", "en-bb", "en-be", "en-bi", "en-bm", "en-bs", "en-bw", "en-bz", "en-ca", "en-cc", "en-ch", "en-ck", "en-cm", "en-cn", "en-cx", "en-cy", "en-de", "en-dg", "en-dk", "en-dm", "en-er", "en-fi", "en-fj", "en-fk", "en-fm", "en-gb", "en-gd", "en-gg", "en-gh", "en-gi", "en-gm", "en-gu", "en-gy", "en-hk", "en-ie", "en-il", "en-im", "en-in", "en-io", "en-je", "en-jm", "en-ke", "en-ki", "en-kn", "en-ky", "en-lc", "en-lr", "en-ls", "en-lu", "en-mg", "en-mh", "en-mo", "en-mp", "en-ms", "en-mt", "en-mu", "en-mw", "en-mx", "en-my", "en-na", "en-nf", "en-ng", "en-nl", "en-nr", "en-nu", "en-nz", "en-pg", "en-ph", "en-pk", "en-pn", "en-pr", "en-pw", "en-rw", "en-sb", "en-sc", "en-sd", "en-se", "en-sg", "en-sh", "en-si", "en-sl", "en-ss", "en-sx", "en-sz", "en-tc", "en-tk", "en-to", "en-tt", "en-tv", "en-tz", "en-ug", "en-um", "en-us", "en-vc", "en-vg", "en-vi", "en-vu", "en-ws", "en-za", "en-zm", "en-zw", "eo", "eo-001", "es", "es-419", "es-ar", "es-bo", "es-br", "es-bz", "es-cl", "es-co", "es-cr", "es-cu", "es-do", "es-ea", "es-ec", "es-es", "es-gq", "es-gt", "es-hn", "es-ic", "es-mx", "es-ni", "es-pa", "es-pe", "es-ph", "es-pr", "es-py", "es-sv", "es-us", "es-uy", "es-ve", "et", "et-ee", "eu", "eu-es", "ewo", "ewo-cm", "fa", "fa-af", "fa-ir", "ff", "ff-bf", "ff-cm", "ff-gh", "ff-gm", "ff-gn", "ff-gw", "ff-lr", "ff-mr", "ff-ne", "ff-ng", "ff-sl", "ff-sn", "fi", "fi-fi", "fil", "fil-ph", "fo", "fo-dk", "fo-fo", "fr", "fr-be", "fr-bf", "fr-bi", "fr-bj", "fr-bl", "fr-ca", "fr-cd", "fr-cf", "fr-cg", "fr-ch", "fr-ci", "fr-cm", "fr-dj", "fr-dz", "fr-fr", "fr-ga", "fr-gf", "fr-gn", "fr-gp", "fr-gq", "fr-ht", "fr-km", "fr-lu", "fr-ma", "fr-mc", "fr-mf", "fr-mg", "fr-ml", "fr-mq", "fr-mr", "fr-mu", "fr-nc", "fr-ne", "fr-pf", "fr-pm", "fr-re", "fr-rw", "fr-sc", "fr-sn", "fr-sy", "fr-td", "fr-tg", "fr-tn", "fr-vu", "fr-wf", "fr-yt", "fur", "fur-it", "fy", "fy-nl", "ga", "ga-gb", "ga-ie", "gd", "gd-gb", "gl", "gl-es", "gsw", "gsw-ch", "gsw-fr", "gsw-li", "gu", "gu-in", "guz", "guz-ke", "gv", "gv-im", "ha", "ha-gh", "ha-ne", "ha-ng", "haw", "haw-us", "he", "hi", "hi-in", "hr", "hr-ba", "hr-hr", "hsb", "hsb-de", "hu", "hu-hu", "hy", "hy-am", "ia", "ia-001", "id", "ig", "ig-ng", "ii", "ii-cn", "id-id", "is", "is-is", "it", "it-ch", "it-it", "it-sm", "it-va", "he-il", "ja", "ja-jp", "jgo", "jgo-cm", "yi", "yi-001", "jmc", "jmc-tz", "jv", "jv-id", "ka", "ka-ge", "kab", "kab-dz", "kam", "kam-ke", "kde", "kde-tz", "kea", "kea-cv", "khq", "khq-ml", "ki", "ki-ke", "kk", "kk-kz", "kkj", "kkj-cm", "kl", "kl-gl", "kln", "kln-ke", "km", "km-kh", "kn", "kn-in", "ko", "ko-kp", "ko-kr", "kok", "kok-in", "ks", "ks-in", "ksb", "ksb-tz", "ksf", "ksf-cm", "ksh", "ksh-de", "kw", "kw-gb", "ku", "ku-tr", "ky", "ky-kg", "lag", "lag-tz", "lb", "lb-lu", "lg", "lg-ug", "lkt", "lkt-us", "ln", "ln-ao", "ln-cd", "ln-cf", "ln-cg", "lo", "lo-la", "lrc", "lrc-iq", "lrc-ir", "lt", "lt-lt", "lu", "lu-cd", "luo", "luo-ke", "luy", "luy-ke", "lv", "lv-lv", "mai", "mai-in", "mas", "mas-ke", "mas-tz", "mer", "mer-ke", "mfe", "mfe-mu", "mg", "mg-mg", "mgh", "mgh-mz", "mgo", "mgo-cm", "mi", "mi-nz", "mk", "mk-mk", "ml", "ml-in", "mn", "mn-mn", "mni", "mni-in", "mr", "mr-in", "ms", "ms-bn", "ms-id", "ms-my", "ms-sg", "mt", "mt-mt", "mua", "mua-cm", "my", "my-mm", "mzn", "mzn-ir", "naq", "naq-na", "nb", "nb-no", "nb-sj", "nd", "nd-zw", "nds", "nds-de", "nds-nl", "ne", "ne-in", "ne-np", "nl", "nl-aw", "nl-be", "nl-ch", "nl-bq", "nl-cw", "nl-lu", "nl-nl", "nl-sr", "nl-sx", "nmg", "nmg-cm", "nn", "nn-no", "nnh", "nnh-cm", "no", "no-no", "nus", "nus-ss", "nyn", "nyn-ug", "om", "om-et", "om-ke", "or", "or-in", "os", "os-ge", "os-ru", "pa", "pa-in", "pa-pk", "pcm", "pcm-ng", "pl", "pl-pl", "prg", "prg-001", "ps", "ps-af", "ps-pk", "pt", "pt-ao", "pt-br", "pt-ch", "pt-cv", "pt-gq", "pt-gw", "pt-lu", "pt-mo", "pt-mz", "pt-pt", "pt-st", "pt-tl", "qu", "qu-bo", "qu-ec", "qu-pe", "rm", "rm-ch", "rn", "rn-bi", "ro", "ro-md", "ro-ro", "rof", "rof-tz", "ru", "ru-by", "ru-kg", "ru-kz", "ru-md", "ru-ru", "ru-ua", "rw", "rw-rw", "rwk", "rwk-tz", "sa", "sa-in", "sah", "sah-ru", "saq", "saq-ke", "sat", "sat-in", "sbp", "sbp-tz", "sd", "sd-in", "sd-pk", "se", "se-fi", "se-no", "se-se", "seh", "seh-mz", "ses", "ses-ml", "sg", "sg-cf", "shi", "shi-ma", "si", "si-lk", "sk", "sk-sk", "sl", "sl-si", "smn", "smn-fi", "sn", "sn-zw", "so", "so-dj", "so-et", "so-ke", "so-so", "sq", "sq-al", "sq-mk", "sq-xk", "sr", "sr-ba", "sr-cs", "sr-me", "sr-rs", "sr-xk", "su", "su-id", "sv", "sv-ax", "sv-fi", "sv-se", "sw", "sw-cd", "sw-ke", "sw-tz", "sw-ug", "sy", "ta", "ta-in", "ta-lk", "ta-my", "ta-sg", "te", "te-in", "teo", "teo-ke", "teo-ug", "tg", "tg-tj", "th", "th-th", "ti", "ti-er", "ti-et", "tk", "tk-tm", "tl", "to", "to-to", "tr", "tr-cy", "tr-tr", "tt", "tt-ru", "twq", "twq-ne", "tzm", "tzm-ma", "ug", "ug-cn", "uk", "uk-ua", "ur", "ur-in", "ur-pk", "uz", "uz-af", "uz-uz", "vai", "vai-lr", "vi", "vi-vn", "vo", "vo-001", "vun", "vun-tz", "wae", "wae-ch", "wo", "wo-sn", "xh", "xh-za", "xog", "xog-ug", "yav", "yav-cm", "yo", "yo-bj", "yo-ng", "yue", "yue-cn", "yue-hk", "zgh", "zgh-ma", "zh", "zh-cn", "zh-hk", "zh-mo", "zh-sg", "zh-tw", "zh-hans", "zh-hant", "zu", "zu-za"])
+            unless validator.valid?(language)
+              fail ArgumentError, "invalid value for \"language\", must be one of #{validator.allowable_values}."
+            end
+            @language = language
           end
 
           # Custom attribute writer method with validation
@@ -974,6 +995,16 @@ module Hubspot
           end
 
           # Custom attribute writer method checking allowed values (enum).
+          # @param [Object] content_type_category Object to be assigned
+          def content_type_category=(content_type_category)
+            validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"])
+            unless validator.valid?(content_type_category)
+              fail ArgumentError, "invalid value for \"content_type_category\", must be one of #{validator.allowable_values}."
+            end
+            @content_type_category = content_type_category
+          end
+
+          # Custom attribute writer method checking allowed values (enum).
           # @param [Object] ab_status Object to be assigned
           def ab_status=(ab_status)
             validator = EnumAttributeValidator.new('String', ["master", "variant", "loser_variant", "mab_master", "mab_variant", "automated_master", "automated_variant", "automated_loser_variant"])
@@ -981,26 +1012,6 @@ module Hubspot
               fail ArgumentError, "invalid value for \"ab_status\", must be one of #{validator.allowable_values}."
             end
             @ab_status = ab_status
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] language Object to be assigned
-          def language=(language)
-            validator = EnumAttributeValidator.new('String', ["af", "af-na", "af-za", "agq", "agq-cm", "ak", "ak-gh", "am", "am-et", "ar", "ar-001", "ar-ae", "ar-bh", "ar-dj", "ar-dz", "ar-eg", "ar-eh", "ar-er", "ar-il", "ar-iq", "ar-jo", "ar-km", "ar-kw", "ar-lb", "ar-ly", "ar-ma", "ar-mr", "ar-om", "ar-ps", "ar-qa", "ar-sa", "ar-sd", "ar-so", "ar-ss", "ar-sy", "ar-td", "ar-tn", "ar-ye", "as", "as-in", "asa", "asa-tz", "ast", "ast-es", "az", "az-az", "bas", "bas-cm", "be", "be-by", "bem", "bem-zm", "bez", "bez-tz", "bg", "bg-bg", "bm", "bm-ml", "bn", "bn-bd", "bn-in", "bo", "bo-cn", "bo-in", "br", "br-fr", "brx", "brx-in", "bs", "bs-ba", "ca", "ca-ad", "ca-es", "ca-fr", "ca-it", "ccp", "ccp-bd", "ccp-in", "ce", "ce-ru", "cgg", "cgg-ug", "chr", "chr-us", "ckb", "ckb-iq", "ckb-ir", "cs", "cs-cz", "cu", "cu-ru", "cy", "cy-gb", "da", "da-dk", "da-gl", "dav", "dav-ke", "de", "de-at", "de-be", "de-ch", "de-de", "de-gr", "de-it", "de-li", "de-lu", "dje", "dje-ne", "dsb", "dsb-de", "dua", "dua-cm", "dyo", "dyo-sn", "dz", "dz-bt", "ebu", "ebu-ke", "ee", "ee-gh", "ee-tg", "el", "el-cy", "el-gr", "en", "en-001", "en-150", "en-ae", "en-ag", "en-ai", "en-as", "en-at", "en-au", "en-bb", "en-be", "en-bi", "en-bm", "en-bs", "en-bw", "en-bz", "en-ca", "en-cc", "en-ch", "en-ck", "en-cm", "en-cx", "en-cy", "en-de", "en-dg", "en-dk", "en-dm", "en-er", "en-fi", "en-fj", "en-fk", "en-fm", "en-gb", "en-gd", "en-gg", "en-gh", "en-gi", "en-gm", "en-gu", "en-gy", "en-hk", "en-ie", "en-il", "en-im", "en-in", "en-io", "en-je", "en-jm", "en-ke", "en-ki", "en-kn", "en-ky", "en-lc", "en-lr", "en-ls", "en-lu", "en-mg", "en-mh", "en-mo", "en-mp", "en-ms", "en-mt", "en-mu", "en-mw", "en-my", "en-na", "en-nf", "en-ng", "en-nl", "en-nr", "en-nu", "en-nz", "en-pg", "en-ph", "en-pk", "en-pn", "en-pr", "en-pw", "en-rw", "en-sb", "en-sc", "en-sd", "en-se", "en-sg", "en-sh", "en-si", "en-sl", "en-ss", "en-sx", "en-sz", "en-tc", "en-tk", "en-to", "en-tt", "en-tv", "en-tz", "en-ug", "en-um", "en-us", "en-vc", "en-vg", "en-vi", "en-vu", "en-ws", "en-za", "en-zm", "en-zw", "eo", "eo-001", "es", "es-419", "es-ar", "es-bo", "es-br", "es-bz", "es-cl", "es-co", "es-cr", "es-cu", "es-do", "es-ea", "es-ec", "es-es", "es-gq", "es-gt", "es-hn", "es-ic", "es-mx", "es-ni", "es-pa", "es-pe", "es-ph", "es-pr", "es-py", "es-sv", "es-us", "es-uy", "es-ve", "et", "et-ee", "eu", "eu-es", "ewo", "ewo-cm", "fa", "fa-af", "fa-ir", "ff", "ff-cm", "ff-gn", "ff-mr", "ff-sn", "fi", "fi-fi", "fil", "fil-ph", "fo", "fo-dk", "fo-fo", "fr", "fr-be", "fr-bf", "fr-bi", "fr-bj", "fr-bl", "fr-ca", "fr-cd", "fr-cf", "fr-cg", "fr-ch", "fr-ci", "fr-cm", "fr-dj", "fr-dz", "fr-fr", "fr-ga", "fr-gf", "fr-gn", "fr-gp", "fr-gq", "fr-ht", "fr-km", "fr-lu", "fr-ma", "fr-mc", "fr-mf", "fr-mg", "fr-ml", "fr-mq", "fr-mr", "fr-mu", "fr-nc", "fr-ne", "fr-pf", "fr-pm", "fr-re", "fr-rw", "fr-sc", "fr-sn", "fr-sy", "fr-td", "fr-tg", "fr-tn", "fr-vu", "fr-wf", "fr-yt", "fur", "fur-it", "fy", "fy-nl", "ga", "ga-ie", "gd", "gd-gb", "gl", "gl-es", "gsw", "gsw-ch", "gsw-fr", "gsw-li", "gu", "gu-in", "guz", "guz-ke", "gv", "gv-im", "ha", "ha-gh", "ha-ne", "ha-ng", "haw", "haw-us", "he", "hi", "hi-in", "hr", "hr-ba", "hr-hr", "hsb", "hsb-de", "hu", "hu-hu", "hy", "hy-am", "id", "ig", "ig-ng", "ii", "ii-cn", "id-id", "is", "is-is", "it", "it-ch", "it-it", "it-sm", "it-va", "he-il", "ja", "ja-jp", "jgo", "jgo-cm", "yi", "yi-001", "jmc", "jmc-tz", "ka", "ka-ge", "kab", "kab-dz", "kam", "kam-ke", "kde", "kde-tz", "kea", "kea-cv", "khq", "khq-ml", "ki", "ki-ke", "kk", "kk-kz", "kkj", "kkj-cm", "kl", "kl-gl", "kln", "kln-ke", "km", "km-kh", "kn", "kn-in", "ko", "ko-kp", "ko-kr", "kok", "kok-in", "ks", "ks-in", "ksb", "ksb-tz", "ksf", "ksf-cm", "ksh", "ksh-de", "kw", "kw-gb", "ky", "ky-kg", "lag", "lag-tz", "lb", "lb-lu", "lg", "lg-ug", "lkt", "lkt-us", "ln", "ln-ao", "ln-cd", "ln-cf", "ln-cg", "lo", "lo-la", "lrc", "lrc-iq", "lrc-ir", "lt", "lt-lt", "lu", "lu-cd", "luo", "luo-ke", "luy", "luy-ke", "lv", "lv-lv", "mas", "mas-ke", "mas-tz", "mer", "mer-ke", "mfe", "mfe-mu", "mg", "mg-mg", "mgh", "mgh-mz", "mgo", "mgo-cm", "mk", "mk-mk", "ml", "ml-in", "mn", "mn-mn", "mr", "mr-in", "ms", "ms-bn", "ms-my", "ms-sg", "mt", "mt-mt", "mua", "mua-cm", "my", "my-mm", "mzn", "mzn-ir", "naq", "naq-na", "nb", "nb-no", "nb-sj", "nd", "nd-zw", "nds", "nds-de", "nds-nl", "ne", "ne-in", "ne-np", "nl", "nl-aw", "nl-be", "nl-ch", "nl-bq", "nl-cw", "nl-lu", "nl-nl", "nl-sr", "nl-sx", "nmg", "nmg-cm", "nn", "nn-no", "nnh", "nnh-cm", "no", "no-no", "nus", "nus-ss", "nyn", "nyn-ug", "om", "om-et", "om-ke", "or", "or-in", "os", "os-ge", "os-ru", "pa", "pa-in", "pa-pk", "pl", "pl-pl", "prg", "prg-001", "ps", "ps-af", "pt", "pt-ao", "pt-br", "pt-ch", "pt-cv", "pt-gq", "pt-gw", "pt-lu", "pt-mo", "pt-mz", "pt-pt", "pt-st", "pt-tl", "qu", "qu-bo", "qu-ec", "qu-pe", "rm", "rm-ch", "rn", "rn-bi", "ro", "ro-md", "ro-ro", "rof", "rof-tz", "ru", "ru-by", "ru-kg", "ru-kz", "ru-md", "ru-ru", "ru-ua", "rw", "rw-rw", "rwk", "rwk-tz", "sa", "sah", "sah-ru", "saq", "saq-ke", "sbp", "sbp-tz", "sd", "sd-pk", "se", "se-fi", "se-no", "se-se", "seh", "seh-mz", "ses", "ses-ml", "sg", "sg-cf", "shi", "shi-ma", "si", "si-lk", "sk", "sk-sk", "sl", "sl-si", "smn", "smn-fi", "sn", "sn-zw", "so", "so-dj", "so-et", "so-ke", "so-so", "sq", "sq-al", "sq-mk", "sq-xk", "sr", "sr-ba", "sr-cs", "sr-me", "sr-rs", "sr-xk", "sv", "sv-ax", "sv-fi", "sv-se", "sw", "sw-cd", "sw-ke", "sw-tz", "sw-ug", "sy", "ta", "ta-in", "ta-lk", "ta-my", "ta-sg", "te", "te-in", "teo", "teo-ke", "teo-ug", "tg", "tg-tj", "th", "th-th", "ti", "ti-er", "ti-et", "tk", "tk-tm", "to", "to-to", "tr", "tr-cy", "tr-tr", "tt", "tt-ru", "twq", "twq-ne", "tzm", "tzm-ma", "ug", "ug-cn", "uk", "uk-ua", "ur", "ur-in", "ur-pk", "uz", "uz-af", "uz-uz", "vai", "vai-lr", "vi", "vi-vn", "vo", "vo-001", "vun", "vun-tz", "wae", "wae-ch", "wo", "wo-sn", "xog", "xog-ug", "yav", "yav-cm", "yo", "yo-bj", "yo-ng", "yue", "yue-cn", "yue-hk", "zgh", "zgh-ma", "zh", "zh-cn", "zh-hk", "zh-mo", "zh-sg", "zh-tw", "zh-hans", "zh-hant", "zu", "zu-za"])
-            unless validator.valid?(language)
-              fail ArgumentError, "invalid value for \"language\", must be one of #{validator.allowable_values}."
-            end
-            @language = language
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] content_type_category Object to be assigned
-          def content_type_category=(content_type_category)
-            validator = EnumAttributeValidator.new('String', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-            unless validator.valid?(content_type_category)
-              fail ArgumentError, "invalid value for \"content_type_category\", must be one of #{validator.allowable_values}."
-            end
-            @content_type_category = content_type_category
           end
 
           # Custom attribute writer method checking allowed values (enum).
@@ -1018,67 +1029,67 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                publish_date == o.publish_date &&
+                language == o.language &&
+                enable_layout_stylesheets == o.enable_layout_stylesheets &&
+                meta_description == o.meta_description &&
+                attached_stylesheets == o.attached_stylesheets &&
+                password == o.password &&
+                html_title == o.html_title &&
+                publish_immediately == o.publish_immediately &&
+                translations == o.translations &&
                 id == o.id &&
-                slug == o.slug &&
-                content_group_id == o.content_group_id &&
-                campaign == o.campaign &&
-                category_id == o.category_id &&
                 state == o.state &&
-                name == o.name &&
-                mab_experiment_id == o.mab_experiment_id &&
-                archived == o.archived &&
-                author_name == o.author_name &&
-                ab_test_id == o.ab_test_id &&
+                slug == o.slug &&
                 created_by_id == o.created_by_id &&
+                rss_body == o.rss_body &&
+                currently_published == o.currently_published &&
+                archived_in_dashboard == o.archived_in_dashboard &&
+                created == o.created &&
+                content_type_category == o.content_type_category &&
+                mab_experiment_id == o.mab_experiment_id &&
                 updated_by_id == o.updated_by_id &&
-                domain == o.domain &&
-                ab_status == o.ab_status &&
+                translated_from_id == o.translated_from_id &&
                 folder_id == o.folder_id &&
                 widget_containers == o.widget_containers &&
-                widgets == o.widgets &&
-                language == o.language &&
-                translated_from_id == o.translated_from_id &&
-                translations == o.translations &&
-                dynamic_page_data_source_type == o.dynamic_page_data_source_type &&
-                dynamic_page_data_source_id == o.dynamic_page_data_source_id &&
-                blog_author_id == o.blog_author_id &&
-                tag_ids == o.tag_ids &&
-                html_title == o.html_title &&
-                enable_google_amp_output_override == o.enable_google_amp_output_override &&
-                use_featured_image == o.use_featured_image &&
-                _post_body == o._post_body &&
-                post_summary == o.post_summary &&
-                rss_body == o.rss_body &&
-                rss_summary == o.rss_summary &&
-                currently_published == o.currently_published &&
-                page_expiry_enabled == o.page_expiry_enabled &&
                 page_expiry_redirect_id == o.page_expiry_redirect_id &&
-                page_expiry_redirect_url == o.page_expiry_redirect_url &&
-                page_expiry_date == o.page_expiry_date &&
-                include_default_custom_css == o.include_default_custom_css &&
-                enable_layout_stylesheets == o.enable_layout_stylesheets &&
-                enable_domain_stylesheets == o.enable_domain_stylesheets &&
-                publish_immediately == o.publish_immediately &&
+                dynamic_page_data_source_type == o.dynamic_page_data_source_type &&
                 featured_image == o.featured_image &&
-                featured_image_alt_text == o.featured_image_alt_text &&
-                link_rel_canonical_url == o.link_rel_canonical_url &&
-                content_type_category == o.content_type_category &&
-                attached_stylesheets == o.attached_stylesheets &&
-                meta_description == o.meta_description &&
-                head_html == o.head_html &&
-                footer_html == o.footer_html &&
-                archived_in_dashboard == o.archived_in_dashboard &&
-                public_access_rules_enabled == o.public_access_rules_enabled &&
-                public_access_rules == o.public_access_rules &&
+                author_name == o.author_name &&
+                domain == o.domain &&
+                name == o.name &&
+                dynamic_page_hub_db_table_id == o.dynamic_page_hub_db_table_id &&
+                campaign == o.campaign &&
+                dynamic_page_data_source_id == o.dynamic_page_data_source_id &&
+                enable_domain_stylesheets == o.enable_domain_stylesheets &&
+                include_default_custom_css == o.include_default_custom_css &&
                 layout_sections == o.layout_sections &&
-                theme_settings_values == o.theme_settings_values &&
-                url == o.url &&
-                password == o.password &&
-                current_state == o.current_state &&
-                publish_date == o.publish_date &&
-                created == o.created &&
                 updated == o.updated &&
-                deleted_at == o.deleted_at
+                footer_html == o.footer_html &&
+                tag_ids == o.tag_ids &&
+                widgets == o.widgets &&
+                post_summary == o.post_summary &&
+                head_html == o.head_html &&
+                page_expiry_redirect_url == o.page_expiry_redirect_url &&
+                ab_status == o.ab_status &&
+                use_featured_image == o.use_featured_image &&
+                ab_test_id == o.ab_test_id &&
+                featured_image_alt_text == o.featured_image_alt_text &&
+                blog_author_id == o.blog_author_id &&
+                content_group_id == o.content_group_id &&
+                rss_summary == o.rss_summary &&
+                page_expiry_enabled == o.page_expiry_enabled &&
+                url == o.url &&
+                public_access_rules == o.public_access_rules &&
+                enable_google_amp_output_override == o.enable_google_amp_output_override &&
+                archived_at == o.archived_at &&
+                _post_body == o._post_body &&
+                theme_settings_values == o.theme_settings_values &&
+                page_expiry_date == o.page_expiry_date &&
+                public_access_rules_enabled == o.public_access_rules_enabled &&
+                current_state == o.current_state &&
+                category_id == o.category_id &&
+                link_rel_canonical_url == o.link_rel_canonical_url
           end
 
           # @see the `==` method
@@ -1090,7 +1101,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, slug, content_group_id, campaign, category_id, state, name, mab_experiment_id, archived, author_name, ab_test_id, created_by_id, updated_by_id, domain, ab_status, folder_id, widget_containers, widgets, language, translated_from_id, translations, dynamic_page_data_source_type, dynamic_page_data_source_id, blog_author_id, tag_ids, html_title, enable_google_amp_output_override, use_featured_image, _post_body, post_summary, rss_body, rss_summary, currently_published, page_expiry_enabled, page_expiry_redirect_id, page_expiry_redirect_url, page_expiry_date, include_default_custom_css, enable_layout_stylesheets, enable_domain_stylesheets, publish_immediately, featured_image, featured_image_alt_text, link_rel_canonical_url, content_type_category, attached_stylesheets, meta_description, head_html, footer_html, archived_in_dashboard, public_access_rules_enabled, public_access_rules, layout_sections, theme_settings_values, url, password, current_state, publish_date, created, updated, deleted_at].hash
+            [publish_date, language, enable_layout_stylesheets, meta_description, attached_stylesheets, password, html_title, publish_immediately, translations, id, state, slug, created_by_id, rss_body, currently_published, archived_in_dashboard, created, content_type_category, mab_experiment_id, updated_by_id, translated_from_id, folder_id, widget_containers, page_expiry_redirect_id, dynamic_page_data_source_type, featured_image, author_name, domain, name, dynamic_page_hub_db_table_id, campaign, dynamic_page_data_source_id, enable_domain_stylesheets, include_default_custom_css, layout_sections, updated, footer_html, tag_ids, widgets, post_summary, head_html, page_expiry_redirect_url, ab_status, use_featured_image, ab_test_id, featured_image_alt_text, blog_author_id, content_group_id, rss_summary, page_expiry_enabled, url, public_access_rules, enable_google_amp_output_override, archived_at, _post_body, theme_settings_values, page_expiry_date, public_access_rules_enabled, current_state, category_id, link_rel_canonical_url].hash
           end
 
           # Builds the object from hash

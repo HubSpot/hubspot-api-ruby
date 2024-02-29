@@ -1,5 +1,5 @@
 =begin
-#Marketing Events Extension
+#Marketing Events
 
 #These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
 
@@ -17,19 +17,19 @@ module Hubspot
   module Marketing
     module Events
       class MarketingEventSubscriber
-        # The date and time at which the contact subscribed to the event.
-        attr_accessor :interaction_date_time
+        attr_accessor :vid
 
         attr_accessor :properties
 
-        attr_accessor :vid
+        # The date and time at which the contact subscribed to the event.
+        attr_accessor :interaction_date_time
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'interaction_date_time' => :'interactionDateTime',
+            :'vid' => :'vid',
             :'properties' => :'properties',
-            :'vid' => :'vid'
+            :'interaction_date_time' => :'interactionDateTime'
           }
         end
 
@@ -41,9 +41,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'interaction_date_time' => :'Integer',
+            :'vid' => :'Integer',
             :'properties' => :'Hash<String, String>',
-            :'vid' => :'Integer'
+            :'interaction_date_time' => :'Integer'
           }
         end
 
@@ -68,8 +68,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'interaction_date_time')
-            self.interaction_date_time = attributes[:'interaction_date_time']
+          if attributes.key?(:'vid')
+            self.vid = attributes[:'vid']
           end
 
           if attributes.key?(:'properties')
@@ -78,8 +78,8 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'vid')
-            self.vid = attributes[:'vid']
+          if attributes.key?(:'interaction_date_time')
+            self.interaction_date_time = attributes[:'interaction_date_time']
           end
         end
 
@@ -106,9 +106,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              interaction_date_time == o.interaction_date_time &&
+              vid == o.vid &&
               properties == o.properties &&
-              vid == o.vid
+              interaction_date_time == o.interaction_date_time
         end
 
         # @see the `==` method
@@ -120,7 +120,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [interaction_date_time, properties, vid].hash
+          [vid, properties, interaction_date_time].hash
         end
 
         # Builds the object from hash

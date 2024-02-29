@@ -1,5 +1,5 @@
 =begin
-#Webhooks API
+#Webhooks Webhooks
 
 #Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
 
@@ -16,16 +16,16 @@ require 'time'
 module Hubspot
   module Webhooks
     class SettingsChangeRequest
-      # A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
-      attr_accessor :target_url
-
       attr_accessor :throttling
+
+      # A publicly available URL for HubSpot to call where event payloads will be delivered.
+      attr_accessor :target_url
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'target_url' => :'targetUrl',
-          :'throttling' => :'throttling'
+          :'throttling' => :'throttling',
+          :'target_url' => :'targetUrl'
         }
       end
 
@@ -37,8 +37,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'target_url' => :'String',
-          :'throttling' => :'ThrottlingSettings'
+          :'throttling' => :'ThrottlingSettings',
+          :'target_url' => :'String'
         }
       end
 
@@ -63,12 +63,12 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'target_url')
-          self.target_url = attributes[:'target_url']
-        end
-
         if attributes.key?(:'throttling')
           self.throttling = attributes[:'throttling']
+        end
+
+        if attributes.key?(:'target_url')
+          self.target_url = attributes[:'target_url']
         end
       end
 
@@ -76,12 +76,12 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @target_url.nil?
-          invalid_properties.push('invalid value for "target_url", target_url cannot be nil.')
-        end
-
         if @throttling.nil?
           invalid_properties.push('invalid value for "throttling", throttling cannot be nil.')
+        end
+
+        if @target_url.nil?
+          invalid_properties.push('invalid value for "target_url", target_url cannot be nil.')
         end
 
         invalid_properties
@@ -90,8 +90,8 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @target_url.nil?
         return false if @throttling.nil?
+        return false if @target_url.nil?
         true
       end
 
@@ -100,8 +100,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            target_url == o.target_url &&
-            throttling == o.throttling
+            throttling == o.throttling &&
+            target_url == o.target_url
       end
 
       # @see the `==` method
@@ -113,7 +113,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [target_url, throttling].hash
+        [throttling, target_url].hash
       end
 
       # Builds the object from hash

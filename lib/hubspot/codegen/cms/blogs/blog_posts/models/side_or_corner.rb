@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,37 +18,15 @@ module Hubspot
     module Blogs
       module BlogPosts
         class SideOrCorner
-          attr_accessor :vertical_side
-
           attr_accessor :horizontal_side
 
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
-
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
-
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
+          attr_accessor :vertical_side
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'vertical_side' => :'verticalSide',
-              :'horizontal_side' => :'horizontalSide'
+              :'horizontal_side' => :'horizontalSide',
+              :'vertical_side' => :'verticalSide'
             }
           end
 
@@ -60,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'vertical_side' => :'String',
-              :'horizontal_side' => :'String'
+              :'horizontal_side' => :'String',
+              :'vertical_side' => :'String'
             }
           end
 
@@ -86,12 +64,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'vertical_side')
-              self.vertical_side = attributes[:'vertical_side']
-            end
-
             if attributes.key?(:'horizontal_side')
               self.horizontal_side = attributes[:'horizontal_side']
+            end
+
+            if attributes.key?(:'vertical_side')
+              self.vertical_side = attributes[:'vertical_side']
             end
           end
 
@@ -99,12 +77,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @vertical_side.nil?
-              invalid_properties.push('invalid value for "vertical_side", vertical_side cannot be nil.')
-            end
-
             if @horizontal_side.nil?
               invalid_properties.push('invalid value for "horizontal_side", horizontal_side cannot be nil.')
+            end
+
+            if @vertical_side.nil?
+              invalid_properties.push('invalid value for "vertical_side", vertical_side cannot be nil.')
             end
 
             invalid_properties
@@ -113,33 +91,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @vertical_side.nil?
-            vertical_side_validator = EnumAttributeValidator.new('String', ["TOP", "MIDDLE", "BOTTOM"])
-            return false unless vertical_side_validator.valid?(@vertical_side)
             return false if @horizontal_side.nil?
-            horizontal_side_validator = EnumAttributeValidator.new('String', ["LEFT", "CENTER", "RIGHT"])
-            return false unless horizontal_side_validator.valid?(@horizontal_side)
+            return false if @vertical_side.nil?
             true
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] vertical_side Object to be assigned
-          def vertical_side=(vertical_side)
-            validator = EnumAttributeValidator.new('String', ["TOP", "MIDDLE", "BOTTOM"])
-            unless validator.valid?(vertical_side)
-              fail ArgumentError, "invalid value for \"vertical_side\", must be one of #{validator.allowable_values}."
-            end
-            @vertical_side = vertical_side
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] horizontal_side Object to be assigned
-          def horizontal_side=(horizontal_side)
-            validator = EnumAttributeValidator.new('String', ["LEFT", "CENTER", "RIGHT"])
-            unless validator.valid?(horizontal_side)
-              fail ArgumentError, "invalid value for \"horizontal_side\", must be one of #{validator.allowable_values}."
-            end
-            @horizontal_side = horizontal_side
           end
 
           # Checks equality by comparing each attribute.
@@ -147,8 +101,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                vertical_side == o.vertical_side &&
-                horizontal_side == o.horizontal_side
+                horizontal_side == o.horizontal_side &&
+                vertical_side == o.vertical_side
           end
 
           # @see the `==` method
@@ -160,7 +114,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [vertical_side, horizontal_side].hash
+            [horizontal_side, vertical_side].hash
           end
 
           # Builds the object from hash

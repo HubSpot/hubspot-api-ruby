@@ -1,5 +1,5 @@
 =begin
-#CRM Owners
+#Crm Owners
 
 #HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team(s) an owner can access, as well as which team is the owner's primary team.
 
@@ -17,36 +17,36 @@ module Hubspot
   module Crm
     module Owners
       class PublicOwner
-        attr_accessor :id
-
-        attr_accessor :email
-
         attr_accessor :first_name
 
         attr_accessor :last_name
 
-        attr_accessor :user_id
-
         attr_accessor :created_at
-
-        attr_accessor :updated_at
 
         attr_accessor :archived
 
         attr_accessor :teams
 
+        attr_accessor :id
+
+        attr_accessor :user_id
+
+        attr_accessor :email
+
+        attr_accessor :updated_at
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'email' => :'email',
             :'first_name' => :'firstName',
             :'last_name' => :'lastName',
-            :'user_id' => :'userId',
             :'created_at' => :'createdAt',
-            :'updated_at' => :'updatedAt',
             :'archived' => :'archived',
-            :'teams' => :'teams'
+            :'teams' => :'teams',
+            :'id' => :'id',
+            :'user_id' => :'userId',
+            :'email' => :'email',
+            :'updated_at' => :'updatedAt'
           }
         end
 
@@ -58,15 +58,15 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'email' => :'String',
             :'first_name' => :'String',
             :'last_name' => :'String',
-            :'user_id' => :'Integer',
             :'created_at' => :'Time',
-            :'updated_at' => :'Time',
             :'archived' => :'Boolean',
-            :'teams' => :'Array<PublicTeam>'
+            :'teams' => :'Array<PublicTeam>',
+            :'id' => :'String',
+            :'user_id' => :'Integer',
+            :'email' => :'String',
+            :'updated_at' => :'Time'
           }
         end
 
@@ -91,14 +91,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
-          if attributes.key?(:'email')
-            self.email = attributes[:'email']
-          end
-
           if attributes.key?(:'first_name')
             self.first_name = attributes[:'first_name']
           end
@@ -107,16 +99,8 @@ module Hubspot
             self.last_name = attributes[:'last_name']
           end
 
-          if attributes.key?(:'user_id')
-            self.user_id = attributes[:'user_id']
-          end
-
           if attributes.key?(:'created_at')
             self.created_at = attributes[:'created_at']
-          end
-
-          if attributes.key?(:'updated_at')
-            self.updated_at = attributes[:'updated_at']
           end
 
           if attributes.key?(:'archived')
@@ -128,26 +112,42 @@ module Hubspot
               self.teams = value
             end
           end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'user_id')
+            self.user_id = attributes[:'user_id']
+          end
+
+          if attributes.key?(:'email')
+            self.email = attributes[:'email']
+          end
+
+          if attributes.key?(:'updated_at')
+            self.updated_at = attributes[:'updated_at']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           if @created_at.nil?
             invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
           end
 
-          if @updated_at.nil?
-            invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
-          end
-
           if @archived.nil?
             invalid_properties.push('invalid value for "archived", archived cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          end
+
+          if @updated_at.nil?
+            invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
           end
 
           invalid_properties
@@ -156,10 +156,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
           return false if @created_at.nil?
-          return false if @updated_at.nil?
           return false if @archived.nil?
+          return false if @id.nil?
+          return false if @updated_at.nil?
           true
         end
 
@@ -168,15 +168,15 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              email == o.email &&
               first_name == o.first_name &&
               last_name == o.last_name &&
-              user_id == o.user_id &&
               created_at == o.created_at &&
-              updated_at == o.updated_at &&
               archived == o.archived &&
-              teams == o.teams
+              teams == o.teams &&
+              id == o.id &&
+              user_id == o.user_id &&
+              email == o.email &&
+              updated_at == o.updated_at
         end
 
         # @see the `==` method
@@ -188,7 +188,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, email, first_name, last_name, user_id, created_at, updated_at, archived, teams].hash
+          [first_name, last_name, created_at, archived, teams, id, user_id, email, updated_at].hash
         end
 
         # Builds the object from hash

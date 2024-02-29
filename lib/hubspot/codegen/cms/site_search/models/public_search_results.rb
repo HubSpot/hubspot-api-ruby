@@ -19,25 +19,25 @@ module Hubspot
       class PublicSearchResults
         attr_accessor :total
 
+        attr_accessor :search_term
+
         attr_accessor :offset
 
         attr_accessor :limit
 
-        attr_accessor :results
-
-        attr_accessor :search_term
-
         attr_accessor :page
+
+        attr_accessor :results
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'total' => :'total',
+            :'search_term' => :'searchTerm',
             :'offset' => :'offset',
             :'limit' => :'limit',
-            :'results' => :'results',
-            :'search_term' => :'searchTerm',
-            :'page' => :'page'
+            :'page' => :'page',
+            :'results' => :'results'
           }
         end
 
@@ -50,11 +50,11 @@ module Hubspot
         def self.openapi_types
           {
             :'total' => :'Integer',
+            :'search_term' => :'String',
             :'offset' => :'Integer',
             :'limit' => :'Integer',
-            :'results' => :'Array<ContentSearchResult>',
-            :'search_term' => :'String',
-            :'page' => :'Integer'
+            :'page' => :'Integer',
+            :'results' => :'Array<ContentSearchResult>'
           }
         end
 
@@ -83,6 +83,10 @@ module Hubspot
             self.total = attributes[:'total']
           end
 
+          if attributes.key?(:'search_term')
+            self.search_term = attributes[:'search_term']
+          end
+
           if attributes.key?(:'offset')
             self.offset = attributes[:'offset']
           end
@@ -91,18 +95,14 @@ module Hubspot
             self.limit = attributes[:'limit']
           end
 
+          if attributes.key?(:'page')
+            self.page = attributes[:'page']
+          end
+
           if attributes.key?(:'results')
             if (value = attributes[:'results']).is_a?(Array)
               self.results = value
             end
-          end
-
-          if attributes.key?(:'search_term')
-            self.search_term = attributes[:'search_term']
-          end
-
-          if attributes.key?(:'page')
-            self.page = attributes[:'page']
           end
         end
 
@@ -122,12 +122,12 @@ module Hubspot
             invalid_properties.push('invalid value for "limit", limit cannot be nil.')
           end
 
-          if @results.nil?
-            invalid_properties.push('invalid value for "results", results cannot be nil.')
-          end
-
           if @page.nil?
             invalid_properties.push('invalid value for "page", page cannot be nil.')
+          end
+
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
           invalid_properties
@@ -139,8 +139,8 @@ module Hubspot
           return false if @total.nil?
           return false if @offset.nil?
           return false if @limit.nil?
-          return false if @results.nil?
           return false if @page.nil?
+          return false if @results.nil?
           true
         end
 
@@ -150,11 +150,11 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               total == o.total &&
+              search_term == o.search_term &&
               offset == o.offset &&
               limit == o.limit &&
-              results == o.results &&
-              search_term == o.search_term &&
-              page == o.page
+              page == o.page &&
+              results == o.results
         end
 
         # @see the `==` method
@@ -166,7 +166,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [total, offset, limit, results, search_term, page].hash
+          [total, search_term, offset, limit, page, results].hash
         end
 
         # Builds the object from hash

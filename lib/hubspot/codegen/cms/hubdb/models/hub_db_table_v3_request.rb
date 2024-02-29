@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,41 +17,41 @@ module Hubspot
   module Cms
     module Hubdb
       class HubDbTableV3Request
-        # Name of the table
-        attr_accessor :name
-
-        # Label of the table
-        attr_accessor :label
-
-        # Specifies whether the table can be used for creation of dynamic pages
-        attr_accessor :use_for_pages
+        # Specifies the key value pairs of the metadata fields with the associated column ids
+        attr_accessor :dynamic_meta_tags
 
         # Specifies whether the table can be read by public without authorization
         attr_accessor :allow_public_api_access
 
-        # Specifies whether child tables can be created
-        attr_accessor :allow_child_tables
-
-        # Specifies creation of multi-level dynamic pages using child tables
-        attr_accessor :enable_child_table_pages
+        # Specifies whether the table can be used for creation of dynamic pages
+        attr_accessor :use_for_pages
 
         # List of columns in the table
         attr_accessor :columns
 
-        # Specifies the key value pairs of the metadata fields with the associated column ids
-        attr_accessor :dynamic_meta_tags
+        # Name of the table
+        attr_accessor :name
+
+        # Specifies creation of multi-level dynamic pages using child tables
+        attr_accessor :enable_child_table_pages
+
+        # Label of the table
+        attr_accessor :label
+
+        # Specifies whether child tables can be created
+        attr_accessor :allow_child_tables
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
-            :'label' => :'label',
-            :'use_for_pages' => :'useForPages',
+            :'dynamic_meta_tags' => :'dynamicMetaTags',
             :'allow_public_api_access' => :'allowPublicApiAccess',
-            :'allow_child_tables' => :'allowChildTables',
-            :'enable_child_table_pages' => :'enableChildTablePages',
+            :'use_for_pages' => :'useForPages',
             :'columns' => :'columns',
-            :'dynamic_meta_tags' => :'dynamicMetaTags'
+            :'name' => :'name',
+            :'enable_child_table_pages' => :'enableChildTablePages',
+            :'label' => :'label',
+            :'allow_child_tables' => :'allowChildTables'
           }
         end
 
@@ -63,14 +63,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
-            :'label' => :'String',
-            :'use_for_pages' => :'Boolean',
+            :'dynamic_meta_tags' => :'Hash<String, Integer>',
             :'allow_public_api_access' => :'Boolean',
-            :'allow_child_tables' => :'Boolean',
-            :'enable_child_table_pages' => :'Boolean',
+            :'use_for_pages' => :'Boolean',
             :'columns' => :'Array<ColumnRequest>',
-            :'dynamic_meta_tags' => :'Hash<String, Integer>'
+            :'name' => :'String',
+            :'enable_child_table_pages' => :'Boolean',
+            :'label' => :'String',
+            :'allow_child_tables' => :'Boolean'
           }
         end
 
@@ -95,28 +95,18 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'use_for_pages')
-            self.use_for_pages = attributes[:'use_for_pages']
+          if attributes.key?(:'dynamic_meta_tags')
+            if (value = attributes[:'dynamic_meta_tags']).is_a?(Hash)
+              self.dynamic_meta_tags = value
+            end
           end
 
           if attributes.key?(:'allow_public_api_access')
             self.allow_public_api_access = attributes[:'allow_public_api_access']
           end
 
-          if attributes.key?(:'allow_child_tables')
-            self.allow_child_tables = attributes[:'allow_child_tables']
-          end
-
-          if attributes.key?(:'enable_child_table_pages')
-            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
+          if attributes.key?(:'use_for_pages')
+            self.use_for_pages = attributes[:'use_for_pages']
           end
 
           if attributes.key?(:'columns')
@@ -125,10 +115,20 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'dynamic_meta_tags')
-            if (value = attributes[:'dynamic_meta_tags']).is_a?(Hash)
-              self.dynamic_meta_tags = value
-            end
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'enable_child_table_pages')
+            self.enable_child_table_pages = attributes[:'enable_child_table_pages']
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
+          end
+
+          if attributes.key?(:'allow_child_tables')
+            self.allow_child_tables = attributes[:'allow_child_tables']
           end
         end
 
@@ -160,14 +160,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
-              label == o.label &&
-              use_for_pages == o.use_for_pages &&
+              dynamic_meta_tags == o.dynamic_meta_tags &&
               allow_public_api_access == o.allow_public_api_access &&
-              allow_child_tables == o.allow_child_tables &&
-              enable_child_table_pages == o.enable_child_table_pages &&
+              use_for_pages == o.use_for_pages &&
               columns == o.columns &&
-              dynamic_meta_tags == o.dynamic_meta_tags
+              name == o.name &&
+              enable_child_table_pages == o.enable_child_table_pages &&
+              label == o.label &&
+              allow_child_tables == o.allow_child_tables
         end
 
         # @see the `==` method
@@ -179,7 +179,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, use_for_pages, allow_public_api_access, allow_child_tables, enable_child_table_pages, columns, dynamic_meta_tags].hash
+          [dynamic_meta_tags, allow_public_api_access, use_for_pages, columns, name, enable_child_table_pages, label, allow_child_tables].hash
         end
 
         # Builds the object from hash

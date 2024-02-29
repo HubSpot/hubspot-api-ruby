@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,15 +18,15 @@ module Hubspot
     module Blogs
       module BlogPosts
         class RowMetaData
-          attr_accessor :styles
-
           attr_accessor :css_class
+
+          attr_accessor :styles
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'styles' => :'styles',
-              :'css_class' => :'cssClass'
+              :'css_class' => :'cssClass',
+              :'styles' => :'styles'
             }
           end
 
@@ -38,8 +38,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'styles' => :'Styles',
-              :'css_class' => :'String'
+              :'css_class' => :'String',
+              :'styles' => :'Styles'
             }
           end
 
@@ -64,12 +64,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'styles')
-              self.styles = attributes[:'styles']
-            end
-
             if attributes.key?(:'css_class')
               self.css_class = attributes[:'css_class']
+            end
+
+            if attributes.key?(:'styles')
+              self.styles = attributes[:'styles']
             end
           end
 
@@ -77,12 +77,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @styles.nil?
-              invalid_properties.push('invalid value for "styles", styles cannot be nil.')
-            end
-
             if @css_class.nil?
               invalid_properties.push('invalid value for "css_class", css_class cannot be nil.')
+            end
+
+            if @styles.nil?
+              invalid_properties.push('invalid value for "styles", styles cannot be nil.')
             end
 
             invalid_properties
@@ -91,8 +91,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @styles.nil?
             return false if @css_class.nil?
+            return false if @styles.nil?
             true
           end
 
@@ -101,8 +101,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                styles == o.styles &&
-                css_class == o.css_class
+                css_class == o.css_class &&
+                styles == o.styles
           end
 
           # @see the `==` method
@@ -114,7 +114,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [styles, css_class].hash
+            [css_class, styles].hash
           end
 
           # Builds the object from hash

@@ -19,11 +19,11 @@ module Hubspot
       # Contact's email address.
       attr_accessor :email_address
 
-      # ID of the subscription being updated for the contact.
-      attr_accessor :subscription_id
-
       # Legal basis for updating the contact's status (required for GDPR enabled portals).
       attr_accessor :legal_basis
+
+      # ID of the subscription being updated for the contact.
+      attr_accessor :subscription_id
 
       # A more detailed explanation to go with the legal basis (required for GDPR enabled portals).
       attr_accessor :legal_basis_explanation
@@ -54,8 +54,8 @@ module Hubspot
       def self.attribute_map
         {
           :'email_address' => :'emailAddress',
-          :'subscription_id' => :'subscriptionId',
           :'legal_basis' => :'legalBasis',
+          :'subscription_id' => :'subscriptionId',
           :'legal_basis_explanation' => :'legalBasisExplanation'
         }
       end
@@ -69,8 +69,8 @@ module Hubspot
       def self.openapi_types
         {
           :'email_address' => :'String',
-          :'subscription_id' => :'String',
           :'legal_basis' => :'String',
+          :'subscription_id' => :'String',
           :'legal_basis_explanation' => :'String'
         }
       end
@@ -100,12 +100,12 @@ module Hubspot
           self.email_address = attributes[:'email_address']
         end
 
-        if attributes.key?(:'subscription_id')
-          self.subscription_id = attributes[:'subscription_id']
-        end
-
         if attributes.key?(:'legal_basis')
           self.legal_basis = attributes[:'legal_basis']
+        end
+
+        if attributes.key?(:'subscription_id')
+          self.subscription_id = attributes[:'subscription_id']
         end
 
         if attributes.key?(:'legal_basis_explanation')
@@ -132,9 +132,9 @@ module Hubspot
       # @return true if the model is valid
       def valid?
         return false if @email_address.nil?
-        return false if @subscription_id.nil?
         legal_basis_validator = EnumAttributeValidator.new('String', ["LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER"])
         return false unless legal_basis_validator.valid?(@legal_basis)
+        return false if @subscription_id.nil?
         true
       end
 
@@ -154,8 +154,8 @@ module Hubspot
         return true if self.equal?(o)
         self.class == o.class &&
             email_address == o.email_address &&
-            subscription_id == o.subscription_id &&
             legal_basis == o.legal_basis &&
+            subscription_id == o.subscription_id &&
             legal_basis_explanation == o.legal_basis_explanation
       end
 
@@ -168,7 +168,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [email_address, subscription_id, legal_basis, legal_basis_explanation].hash
+        [email_address, legal_basis, subscription_id, legal_basis_explanation].hash
       end
 
       # Builds the object from hash

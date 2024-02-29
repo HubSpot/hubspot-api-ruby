@@ -1,5 +1,5 @@
 =begin
-#Video Conference Extension
+#Video Conferencing Extension
 
 #These APIs allow you to specify URLs that can be used to interact with a video conferencing application, to allow HubSpot to add video conference links to meeting requests with contacts.
 
@@ -223,6 +223,13 @@ module Hubspot
           # Returns Auth Settings hash for api client.
           def auth_settings
             {
+              'developer_hapikey' =>
+                {
+                  type: 'api_key',
+                  in: 'query',
+                  key: 'hapikey',
+                  value: api_key_with_prefix('developer_hapikey')
+                },
             }
           end
 

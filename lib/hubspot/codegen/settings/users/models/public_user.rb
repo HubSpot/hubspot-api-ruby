@@ -1,5 +1,5 @@
 =begin
-#Users
+#Settings User Provisioning
 
 #Add, manage, and remove users from your account
 
@@ -18,29 +18,38 @@ module Hubspot
     module Users
       # A user
       class PublicUser
-        # The user's unique ID
-        attr_accessor :id
+        # The user's primary team
+        attr_accessor :primary_team_id
 
-        # The user's email
-        attr_accessor :email
+        attr_accessor :role_ids
+
+        attr_accessor :send_welcome_email
 
         # The user's role
         attr_accessor :role_id
 
-        # The user's primary team
-        attr_accessor :primary_team_id
-
         # The user's additional teams
         attr_accessor :secondary_team_ids
+
+        # The user's unique ID
+        attr_accessor :id
+
+        attr_accessor :super_admin
+
+        # The user's email
+        attr_accessor :email
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'email' => :'email',
-            :'role_id' => :'roleId',
             :'primary_team_id' => :'primaryTeamId',
-            :'secondary_team_ids' => :'secondaryTeamIds'
+            :'role_ids' => :'roleIds',
+            :'send_welcome_email' => :'sendWelcomeEmail',
+            :'role_id' => :'roleId',
+            :'secondary_team_ids' => :'secondaryTeamIds',
+            :'id' => :'id',
+            :'super_admin' => :'superAdmin',
+            :'email' => :'email'
           }
         end
 
@@ -52,11 +61,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'email' => :'String',
-            :'role_id' => :'String',
             :'primary_team_id' => :'String',
-            :'secondary_team_ids' => :'Array<String>'
+            :'role_ids' => :'Array<String>',
+            :'send_welcome_email' => :'Boolean',
+            :'role_id' => :'String',
+            :'secondary_team_ids' => :'Array<String>',
+            :'id' => :'String',
+            :'super_admin' => :'Boolean',
+            :'email' => :'String'
           }
         end
 
@@ -81,26 +93,40 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'primary_team_id')
+            self.primary_team_id = attributes[:'primary_team_id']
           end
 
-          if attributes.key?(:'email')
-            self.email = attributes[:'email']
+          if attributes.key?(:'role_ids')
+            if (value = attributes[:'role_ids']).is_a?(Array)
+              self.role_ids = value
+            end
+          end
+
+          if attributes.key?(:'send_welcome_email')
+            self.send_welcome_email = attributes[:'send_welcome_email']
           end
 
           if attributes.key?(:'role_id')
             self.role_id = attributes[:'role_id']
           end
 
-          if attributes.key?(:'primary_team_id')
-            self.primary_team_id = attributes[:'primary_team_id']
-          end
-
           if attributes.key?(:'secondary_team_ids')
             if (value = attributes[:'secondary_team_ids']).is_a?(Array)
               self.secondary_team_ids = value
             end
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'super_admin')
+            self.super_admin = attributes[:'super_admin']
+          end
+
+          if attributes.key?(:'email')
+            self.email = attributes[:'email']
           end
         end
 
@@ -132,11 +158,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              email == o.email &&
-              role_id == o.role_id &&
               primary_team_id == o.primary_team_id &&
-              secondary_team_ids == o.secondary_team_ids
+              role_ids == o.role_ids &&
+              send_welcome_email == o.send_welcome_email &&
+              role_id == o.role_id &&
+              secondary_team_ids == o.secondary_team_ids &&
+              id == o.id &&
+              super_admin == o.super_admin &&
+              email == o.email
         end
 
         # @see the `==` method
@@ -148,7 +177,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, email, role_id, primary_team_id, secondary_team_ids].hash
+          [primary_team_id, role_ids, send_welcome_email, role_id, secondary_team_ids, id, super_admin, email].hash
         end
 
         # Builds the object from hash

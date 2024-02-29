@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,52 +18,30 @@ module Hubspot
     module Blogs
       module BlogPosts
         class Styles
-          attr_accessor :vertical_alignment
-
           attr_accessor :background_color
-
-          attr_accessor :background_image
-
-          attr_accessor :background_gradient
-
-          attr_accessor :max_width_section_centering
-
-          attr_accessor :force_full_width_section
 
           attr_accessor :flexbox_positioning
 
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
+          attr_accessor :background_image
 
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
+          attr_accessor :force_full_width_section
 
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
+          attr_accessor :vertical_alignment
+
+          attr_accessor :max_width_section_centering
+
+          attr_accessor :background_gradient
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'vertical_alignment' => :'verticalAlignment',
               :'background_color' => :'backgroundColor',
+              :'flexbox_positioning' => :'flexboxPositioning',
               :'background_image' => :'backgroundImage',
-              :'background_gradient' => :'backgroundGradient',
-              :'max_width_section_centering' => :'maxWidthSectionCentering',
               :'force_full_width_section' => :'forceFullWidthSection',
-              :'flexbox_positioning' => :'flexboxPositioning'
+              :'vertical_alignment' => :'verticalAlignment',
+              :'max_width_section_centering' => :'maxWidthSectionCentering',
+              :'background_gradient' => :'backgroundGradient'
             }
           end
 
@@ -75,13 +53,13 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'vertical_alignment' => :'String',
               :'background_color' => :'RGBAColor',
+              :'flexbox_positioning' => :'String',
               :'background_image' => :'BackgroundImage',
-              :'background_gradient' => :'Gradient',
-              :'max_width_section_centering' => :'Integer',
               :'force_full_width_section' => :'Boolean',
-              :'flexbox_positioning' => :'String'
+              :'vertical_alignment' => :'String',
+              :'max_width_section_centering' => :'Integer',
+              :'background_gradient' => :'Gradient'
             }
           end
 
@@ -106,32 +84,32 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'vertical_alignment')
-              self.vertical_alignment = attributes[:'vertical_alignment']
-            end
-
             if attributes.key?(:'background_color')
               self.background_color = attributes[:'background_color']
+            end
+
+            if attributes.key?(:'flexbox_positioning')
+              self.flexbox_positioning = attributes[:'flexbox_positioning']
             end
 
             if attributes.key?(:'background_image')
               self.background_image = attributes[:'background_image']
             end
 
-            if attributes.key?(:'background_gradient')
-              self.background_gradient = attributes[:'background_gradient']
+            if attributes.key?(:'force_full_width_section')
+              self.force_full_width_section = attributes[:'force_full_width_section']
+            end
+
+            if attributes.key?(:'vertical_alignment')
+              self.vertical_alignment = attributes[:'vertical_alignment']
             end
 
             if attributes.key?(:'max_width_section_centering')
               self.max_width_section_centering = attributes[:'max_width_section_centering']
             end
 
-            if attributes.key?(:'force_full_width_section')
-              self.force_full_width_section = attributes[:'force_full_width_section']
-            end
-
-            if attributes.key?(:'flexbox_positioning')
-              self.flexbox_positioning = attributes[:'flexbox_positioning']
+            if attributes.key?(:'background_gradient')
+              self.background_gradient = attributes[:'background_gradient']
             end
           end
 
@@ -139,32 +117,32 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @vertical_alignment.nil?
-              invalid_properties.push('invalid value for "vertical_alignment", vertical_alignment cannot be nil.')
-            end
-
             if @background_color.nil?
               invalid_properties.push('invalid value for "background_color", background_color cannot be nil.')
+            end
+
+            if @flexbox_positioning.nil?
+              invalid_properties.push('invalid value for "flexbox_positioning", flexbox_positioning cannot be nil.')
             end
 
             if @background_image.nil?
               invalid_properties.push('invalid value for "background_image", background_image cannot be nil.')
             end
 
-            if @background_gradient.nil?
-              invalid_properties.push('invalid value for "background_gradient", background_gradient cannot be nil.')
+            if @force_full_width_section.nil?
+              invalid_properties.push('invalid value for "force_full_width_section", force_full_width_section cannot be nil.')
+            end
+
+            if @vertical_alignment.nil?
+              invalid_properties.push('invalid value for "vertical_alignment", vertical_alignment cannot be nil.')
             end
 
             if @max_width_section_centering.nil?
               invalid_properties.push('invalid value for "max_width_section_centering", max_width_section_centering cannot be nil.')
             end
 
-            if @force_full_width_section.nil?
-              invalid_properties.push('invalid value for "force_full_width_section", force_full_width_section cannot be nil.')
-            end
-
-            if @flexbox_positioning.nil?
-              invalid_properties.push('invalid value for "flexbox_positioning", flexbox_positioning cannot be nil.')
+            if @background_gradient.nil?
+              invalid_properties.push('invalid value for "background_gradient", background_gradient cannot be nil.')
             end
 
             invalid_properties
@@ -173,38 +151,14 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @vertical_alignment.nil?
-            vertical_alignment_validator = EnumAttributeValidator.new('String', ["TOP", "MIDDLE", "BOTTOM"])
-            return false unless vertical_alignment_validator.valid?(@vertical_alignment)
             return false if @background_color.nil?
-            return false if @background_image.nil?
-            return false if @background_gradient.nil?
-            return false if @max_width_section_centering.nil?
-            return false if @force_full_width_section.nil?
             return false if @flexbox_positioning.nil?
-            flexbox_positioning_validator = EnumAttributeValidator.new('String', ["TOP_LEFT", "TOP_CENTER", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"])
-            return false unless flexbox_positioning_validator.valid?(@flexbox_positioning)
+            return false if @background_image.nil?
+            return false if @force_full_width_section.nil?
+            return false if @vertical_alignment.nil?
+            return false if @max_width_section_centering.nil?
+            return false if @background_gradient.nil?
             true
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] vertical_alignment Object to be assigned
-          def vertical_alignment=(vertical_alignment)
-            validator = EnumAttributeValidator.new('String', ["TOP", "MIDDLE", "BOTTOM"])
-            unless validator.valid?(vertical_alignment)
-              fail ArgumentError, "invalid value for \"vertical_alignment\", must be one of #{validator.allowable_values}."
-            end
-            @vertical_alignment = vertical_alignment
-          end
-
-          # Custom attribute writer method checking allowed values (enum).
-          # @param [Object] flexbox_positioning Object to be assigned
-          def flexbox_positioning=(flexbox_positioning)
-            validator = EnumAttributeValidator.new('String', ["TOP_LEFT", "TOP_CENTER", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"])
-            unless validator.valid?(flexbox_positioning)
-              fail ArgumentError, "invalid value for \"flexbox_positioning\", must be one of #{validator.allowable_values}."
-            end
-            @flexbox_positioning = flexbox_positioning
           end
 
           # Checks equality by comparing each attribute.
@@ -212,13 +166,13 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                vertical_alignment == o.vertical_alignment &&
                 background_color == o.background_color &&
+                flexbox_positioning == o.flexbox_positioning &&
                 background_image == o.background_image &&
-                background_gradient == o.background_gradient &&
-                max_width_section_centering == o.max_width_section_centering &&
                 force_full_width_section == o.force_full_width_section &&
-                flexbox_positioning == o.flexbox_positioning
+                vertical_alignment == o.vertical_alignment &&
+                max_width_section_centering == o.max_width_section_centering &&
+                background_gradient == o.background_gradient
           end
 
           # @see the `==` method
@@ -230,7 +184,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [vertical_alignment, background_color, background_image, background_gradient, max_width_section_centering, force_full_width_section, flexbox_positioning].hash
+            [background_color, flexbox_positioning, background_image, force_full_width_section, vertical_alignment, max_width_section_centering, background_gradient].hash
           end
 
           # Builds the object from hash

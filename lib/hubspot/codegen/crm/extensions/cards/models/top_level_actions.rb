@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -18,18 +18,18 @@ module Hubspot
     module Extensions
       module Cards
         class TopLevelActions
+          attr_accessor :secondary
+
           attr_accessor :settings
 
           attr_accessor :primary
 
-          attr_accessor :secondary
-
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'secondary' => :'secondary',
               :'settings' => :'settings',
-              :'primary' => :'primary',
-              :'secondary' => :'secondary'
+              :'primary' => :'primary'
             }
           end
 
@@ -41,9 +41,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'secondary' => :'Array<IntegratorObjectResultActionsInner>',
               :'settings' => :'IFrameActionBody',
-              :'primary' => :'IntegratorObjectResultActionsInner',
-              :'secondary' => :'Array<IntegratorObjectResultActionsInner>'
+              :'primary' => :'IntegratorObjectResultActionsInner'
             }
           end
 
@@ -68,18 +68,18 @@ module Hubspot
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'secondary')
+              if (value = attributes[:'secondary']).is_a?(Array)
+                self.secondary = value
+              end
+            end
+
             if attributes.key?(:'settings')
               self.settings = attributes[:'settings']
             end
 
             if attributes.key?(:'primary')
               self.primary = attributes[:'primary']
-            end
-
-            if attributes.key?(:'secondary')
-              if (value = attributes[:'secondary']).is_a?(Array)
-                self.secondary = value
-              end
             end
           end
 
@@ -106,9 +106,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                secondary == o.secondary &&
                 settings == o.settings &&
-                primary == o.primary &&
-                secondary == o.secondary
+                primary == o.primary
           end
 
           # @see the `==` method
@@ -120,7 +120,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [settings, primary, secondary].hash
+            [secondary, settings, primary].hash
           end
 
           # Builds the object from hash

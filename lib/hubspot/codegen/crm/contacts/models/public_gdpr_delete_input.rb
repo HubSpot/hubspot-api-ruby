@@ -17,15 +17,15 @@ module Hubspot
   module Crm
     module Contacts
       class PublicGdprDeleteInput
-        attr_accessor :object_id
-
         attr_accessor :id_property
+
+        attr_accessor :object_id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'object_id' => :'objectId',
-            :'id_property' => :'idProperty'
+            :'id_property' => :'idProperty',
+            :'object_id' => :'objectId'
           }
         end
 
@@ -37,8 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'object_id' => :'String',
-            :'id_property' => :'String'
+            :'id_property' => :'String',
+            :'object_id' => :'String'
           }
         end
 
@@ -63,12 +63,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'object_id')
-            self.object_id = attributes[:'object_id']
-          end
-
           if attributes.key?(:'id_property')
             self.id_property = attributes[:'id_property']
+          end
+
+          if attributes.key?(:'object_id')
+            self.object_id = attributes[:'object_id']
           end
         end
 
@@ -95,8 +95,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              object_id == o.object_id &&
-              id_property == o.id_property
+              id_property == o.id_property &&
+              object_id == o.object_id
         end
 
         # @see the `==` method
@@ -108,7 +108,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [object_id, id_property].hash
+          [id_property, object_id].hash
         end
 
         # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#Timeline events
+#CRM Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -17,14 +17,14 @@ module Hubspot
   module Crm
     module Timeline
       class TimelineEventTemplate
-        # The template name.
-        attr_accessor :name
-
-        # This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
-        attr_accessor :header_template
+        # The date and time that the Event Template was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
+        attr_accessor :created_at
 
         # This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline when you expand the details.
         attr_accessor :detail_template
+
+        # The template name.
+        attr_accessor :name
 
         # A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
         attr_accessor :tokens
@@ -32,11 +32,11 @@ module Hubspot
         # The template ID.
         attr_accessor :id
 
+        # This uses Markdown syntax with Handlebars and event-specific data to render HTML on a timeline as a header.
+        attr_accessor :header_template
+
         # The type of CRM object this template is for. [Contacts, companies, tickets, and deals] are supported.
         attr_accessor :object_type
-
-        # The date and time that the Event Template was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
-        attr_accessor :created_at
 
         # The date and time that the Event Template was last updated, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
         attr_accessor :updated_at
@@ -44,13 +44,13 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'name' => :'name',
-            :'header_template' => :'headerTemplate',
+            :'created_at' => :'createdAt',
             :'detail_template' => :'detailTemplate',
+            :'name' => :'name',
             :'tokens' => :'tokens',
             :'id' => :'id',
+            :'header_template' => :'headerTemplate',
             :'object_type' => :'objectType',
-            :'created_at' => :'createdAt',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -63,13 +63,13 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'name' => :'String',
-            :'header_template' => :'String',
+            :'created_at' => :'Time',
             :'detail_template' => :'String',
+            :'name' => :'String',
             :'tokens' => :'Array<TimelineEventTemplateToken>',
             :'id' => :'String',
+            :'header_template' => :'String',
             :'object_type' => :'String',
-            :'created_at' => :'Time',
             :'updated_at' => :'Time'
           }
         end
@@ -95,16 +95,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'header_template')
-            self.header_template = attributes[:'header_template']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
           if attributes.key?(:'detail_template')
             self.detail_template = attributes[:'detail_template']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
           if attributes.key?(:'tokens')
@@ -117,12 +117,12 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
-          if attributes.key?(:'object_type')
-            self.object_type = attributes[:'object_type']
+          if attributes.key?(:'header_template')
+            self.header_template = attributes[:'header_template']
           end
 
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
+          if attributes.key?(:'object_type')
+            self.object_type = attributes[:'object_type']
           end
 
           if attributes.key?(:'updated_at')
@@ -168,13 +168,13 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              name == o.name &&
-              header_template == o.header_template &&
+              created_at == o.created_at &&
               detail_template == o.detail_template &&
+              name == o.name &&
               tokens == o.tokens &&
               id == o.id &&
+              header_template == o.header_template &&
               object_type == o.object_type &&
-              created_at == o.created_at &&
               updated_at == o.updated_at
         end
 
@@ -187,7 +187,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, header_template, detail_template, tokens, id, object_type, created_at, updated_at].hash
+          [created_at, detail_template, name, tokens, id, header_template, object_type, updated_at].hash
         end
 
         # Builds the object from hash

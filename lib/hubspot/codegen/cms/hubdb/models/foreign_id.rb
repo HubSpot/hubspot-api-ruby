@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,17 +17,20 @@ module Hubspot
   module Cms
     module Hubdb
       class ForeignId
-        attr_accessor :id
-
+        # 
         attr_accessor :name
 
+        # 
+        attr_accessor :id
+
+        # 
         attr_accessor :type
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
             :'name' => :'name',
+            :'id' => :'id',
             :'type' => :'type'
           }
         end
@@ -40,8 +43,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
             :'name' => :'String',
+            :'id' => :'String',
             :'type' => :'String'
           }
         end
@@ -67,12 +70,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
           if attributes.key?(:'name')
             self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
 
           if attributes.key?(:'type')
@@ -84,12 +87,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
           if @name.nil?
             invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           if @type.nil?
@@ -102,8 +105,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
           return false if @name.nil?
+          return false if @id.nil?
           return false if @type.nil?
           true
         end
@@ -113,8 +116,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
               name == o.name &&
+              id == o.id &&
               type == o.type
         end
 
@@ -127,7 +130,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, type].hash
+          [name, id, type].hash
         end
 
         # Builds the object from hash

@@ -17,11 +17,11 @@ module Hubspot
   module Cms
     module SourceCode
       class AssetFileMetadata
-        # The path of the file in the CMS Developer File System.
-        attr_accessor :id
+        # Timestamp of when the object was first created.
+        attr_accessor :created_at
 
-        # The name of the file.
-        attr_accessor :name
+        # Timestamp of when the object was archived (deleted).
+        attr_accessor :archived_at
 
         # Determines whether or not this path points to a folder.
         attr_accessor :folder
@@ -29,25 +29,28 @@ module Hubspot
         # If the object is a folder, contains the filenames of the files within the folder.
         attr_accessor :children
 
+        # The name of the file.
+        attr_accessor :name
+
+        # The path of the file in the CMS Developer File System.
+        attr_accessor :id
+
+        attr_accessor :hash
+
         # Timestamp of when the object was last updated.
         attr_accessor :updated_at
-
-        # Timestamp of when the object was first created.
-        attr_accessor :created_at
-
-        # Timestamp of when the object was archived (deleted).
-        attr_accessor :archived_at
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id' => :'id',
-            :'name' => :'name',
+            :'created_at' => :'createdAt',
+            :'archived_at' => :'archivedAt',
             :'folder' => :'folder',
             :'children' => :'children',
-            :'updated_at' => :'updatedAt',
-            :'created_at' => :'createdAt',
-            :'archived_at' => :'archivedAt'
+            :'name' => :'name',
+            :'id' => :'id',
+            :'hash' => :'hash',
+            :'updated_at' => :'updatedAt'
           }
         end
 
@@ -59,13 +62,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id' => :'String',
-            :'name' => :'String',
+            :'created_at' => :'Integer',
+            :'archived_at' => :'Integer',
             :'folder' => :'Boolean',
             :'children' => :'Array<String>',
-            :'updated_at' => :'Integer',
-            :'created_at' => :'Integer',
-            :'archived_at' => :'Integer'
+            :'name' => :'String',
+            :'id' => :'String',
+            :'hash' => :'String',
+            :'updated_at' => :'Integer'
           }
         end
 
@@ -90,12 +94,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
+          if attributes.key?(:'archived_at')
+            self.archived_at = attributes[:'archived_at']
           end
 
           if attributes.key?(:'folder')
@@ -108,16 +112,20 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'hash')
+            self.hash = attributes[:'hash']
+          end
+
           if attributes.key?(:'updated_at')
             self.updated_at = attributes[:'updated_at']
-          end
-
-          if attributes.key?(:'created_at')
-            self.created_at = attributes[:'created_at']
-          end
-
-          if attributes.key?(:'archived_at')
-            self.archived_at = attributes[:'archived_at']
           end
         end
 
@@ -125,24 +133,24 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          if @created_at.nil?
+            invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
           end
 
           if @folder.nil?
             invalid_properties.push('invalid value for "folder", folder cannot be nil.')
           end
 
-          if @updated_at.nil?
-            invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
-          if @created_at.nil?
-            invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          end
+
+          if @updated_at.nil?
+            invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
           end
 
           invalid_properties
@@ -151,11 +159,11 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
-          return false if @name.nil?
-          return false if @folder.nil?
-          return false if @updated_at.nil?
           return false if @created_at.nil?
+          return false if @folder.nil?
+          return false if @name.nil?
+          return false if @id.nil?
+          return false if @updated_at.nil?
           true
         end
 
@@ -164,13 +172,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id == o.id &&
-              name == o.name &&
+              created_at == o.created_at &&
+              archived_at == o.archived_at &&
               folder == o.folder &&
               children == o.children &&
-              updated_at == o.updated_at &&
-              created_at == o.created_at &&
-              archived_at == o.archived_at
+              name == o.name &&
+              id == o.id &&
+              hash == o.hash &&
+              updated_at == o.updated_at
         end
 
         # @see the `==` method
@@ -182,7 +191,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id, name, folder, children, updated_at, created_at, archived_at].hash
+          [created_at, archived_at, folder, children, name, id, hash, updated_at].hash
         end
 
         # Builds the object from hash

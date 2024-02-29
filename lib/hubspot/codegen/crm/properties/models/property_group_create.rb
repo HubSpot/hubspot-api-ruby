@@ -20,18 +20,18 @@ module Hubspot
         # The internal property group name, which must be used when referencing the property group via the API.
         attr_accessor :name
 
-        # A human-readable label that will be shown in HubSpot.
-        attr_accessor :label
-
         # Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
         attr_accessor :display_order
+
+        # A human-readable label that will be shown in HubSpot.
+        attr_accessor :label
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'name' => :'name',
-            :'label' => :'label',
-            :'display_order' => :'displayOrder'
+            :'display_order' => :'displayOrder',
+            :'label' => :'label'
           }
         end
 
@@ -44,8 +44,8 @@ module Hubspot
         def self.openapi_types
           {
             :'name' => :'String',
-            :'label' => :'String',
-            :'display_order' => :'Integer'
+            :'display_order' => :'Integer',
+            :'label' => :'String'
           }
         end
 
@@ -74,12 +74,12 @@ module Hubspot
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
           if attributes.key?(:'display_order')
             self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
           end
         end
 
@@ -112,8 +112,8 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               name == o.name &&
-              label == o.label &&
-              display_order == o.display_order
+              display_order == o.display_order &&
+              label == o.label
         end
 
         # @see the `==` method
@@ -125,7 +125,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [name, label, display_order].hash
+          [name, display_order, label].hash
         end
 
         # Builds the object from hash

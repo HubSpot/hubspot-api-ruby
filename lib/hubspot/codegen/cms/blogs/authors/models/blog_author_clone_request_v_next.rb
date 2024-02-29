@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Authors
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,11 +19,11 @@ module Hubspot
       module Authors
         # Request body object for cloning blog authors.
         class BlogAuthorCloneRequestVNext
-          # ID of the object to be cloned.
-          attr_accessor :id
-
           # Language of newly cloned object.
           attr_accessor :language
+
+          # ID of the object to be cloned.
+          attr_accessor :id
 
           # Primary language in multi-language group.
           attr_accessor :primary_language
@@ -33,8 +33,8 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
               :'language' => :'language',
+              :'id' => :'id',
               :'primary_language' => :'primaryLanguage',
               :'blog_author' => :'blogAuthor'
             }
@@ -48,8 +48,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
               :'language' => :'String',
+              :'id' => :'String',
               :'primary_language' => :'String',
               :'blog_author' => :'BlogAuthor'
             }
@@ -76,12 +76,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
             if attributes.key?(:'language')
               self.language = attributes[:'language']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
 
             if attributes.key?(:'primary_language')
@@ -121,8 +121,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
                 language == o.language &&
+                id == o.id &&
                 primary_language == o.primary_language &&
                 blog_author == o.blog_author
           end
@@ -136,7 +136,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, language, primary_language, blog_author].hash
+            [language, id, primary_language, blog_author].hash
           end
 
           # Builds the object from hash

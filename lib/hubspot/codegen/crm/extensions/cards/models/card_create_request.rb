@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -19,21 +19,21 @@ module Hubspot
       module Cards
         # State of card definition to be created
         class CardCreateRequest
-          # The top-level title for this card. Displayed to users in the CRM UI.
-          attr_accessor :title
-
           attr_accessor :fetch
 
           attr_accessor :display
+
+          # The top-level title for this card. Displayed to users in the CRM UI.
+          attr_accessor :title
 
           attr_accessor :actions
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'title' => :'title',
               :'fetch' => :'fetch',
               :'display' => :'display',
+              :'title' => :'title',
               :'actions' => :'actions'
             }
           end
@@ -46,9 +46,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'title' => :'String',
               :'fetch' => :'CardFetchBody',
               :'display' => :'CardDisplayBody',
+              :'title' => :'String',
               :'actions' => :'CardActions'
             }
           end
@@ -74,16 +74,16 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'title')
-              self.title = attributes[:'title']
-            end
-
             if attributes.key?(:'fetch')
               self.fetch = attributes[:'fetch']
             end
 
             if attributes.key?(:'display')
               self.display = attributes[:'display']
+            end
+
+            if attributes.key?(:'title')
+              self.title = attributes[:'title']
             end
 
             if attributes.key?(:'actions')
@@ -95,16 +95,16 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @title.nil?
-              invalid_properties.push('invalid value for "title", title cannot be nil.')
-            end
-
             if @fetch.nil?
               invalid_properties.push('invalid value for "fetch", fetch cannot be nil.')
             end
 
             if @display.nil?
               invalid_properties.push('invalid value for "display", display cannot be nil.')
+            end
+
+            if @title.nil?
+              invalid_properties.push('invalid value for "title", title cannot be nil.')
             end
 
             if @actions.nil?
@@ -117,9 +117,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @title.nil?
             return false if @fetch.nil?
             return false if @display.nil?
+            return false if @title.nil?
             return false if @actions.nil?
             true
           end
@@ -129,9 +129,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                title == o.title &&
                 fetch == o.fetch &&
                 display == o.display &&
+                title == o.title &&
                 actions == o.actions
           end
 
@@ -144,7 +144,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [title, fetch, display, actions].hash
+            [fetch, display, title, actions].hash
           end
 
           # Builds the object from hash

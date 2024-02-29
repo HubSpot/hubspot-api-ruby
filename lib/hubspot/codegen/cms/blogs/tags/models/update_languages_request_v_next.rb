@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Tags
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,39 +19,17 @@ module Hubspot
       module Tags
         # Request object for updating languages within a multi-language group.
         class UpdateLanguagesRequestVNext
-          # ID of the primary object in the multi-language group.
-          attr_accessor :primary_id
-
           # Map of object IDs to associated languages of object in the multi-language group.
           attr_accessor :languages
 
-          class EnumAttributeValidator
-            attr_reader :datatype
-            attr_reader :allowable_values
-
-            def initialize(datatype, allowable_values)
-              @allowable_values = allowable_values.map do |value|
-                case datatype.to_s
-                when /Integer/i
-                  value.to_i
-                when /Float/i
-                  value.to_f
-                else
-                  value
-                end
-              end
-            end
-
-            def valid?(value)
-              !value || allowable_values.include?(value)
-            end
-          end
+          # ID of the primary object in the multi-language group.
+          attr_accessor :primary_id
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'primary_id' => :'primaryId',
-              :'languages' => :'languages'
+              :'languages' => :'languages',
+              :'primary_id' => :'primaryId'
             }
           end
 
@@ -63,8 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'primary_id' => :'String',
-              :'languages' => :'Hash<String, String>'
+              :'languages' => :'Hash<String, String>',
+              :'primary_id' => :'String'
             }
           end
 
@@ -89,14 +67,14 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'primary_id')
-              self.primary_id = attributes[:'primary_id']
-            end
-
             if attributes.key?(:'languages')
               if (value = attributes[:'languages']).is_a?(Hash)
                 self.languages = value
               end
+            end
+
+            if attributes.key?(:'primary_id')
+              self.primary_id = attributes[:'primary_id']
             end
           end
 
@@ -104,12 +82,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @primary_id.nil?
-              invalid_properties.push('invalid value for "primary_id", primary_id cannot be nil.')
-            end
-
             if @languages.nil?
               invalid_properties.push('invalid value for "languages", languages cannot be nil.')
+            end
+
+            if @primary_id.nil?
+              invalid_properties.push('invalid value for "primary_id", primary_id cannot be nil.')
             end
 
             invalid_properties
@@ -118,8 +96,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @primary_id.nil?
             return false if @languages.nil?
+            return false if @primary_id.nil?
             true
           end
 
@@ -128,8 +106,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                primary_id == o.primary_id &&
-                languages == o.languages
+                languages == o.languages &&
+                primary_id == o.primary_id
           end
 
           # @see the `==` method
@@ -141,7 +119,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [primary_id, languages].hash
+            [languages, primary_id].hash
           end
 
           # Builds the object from hash

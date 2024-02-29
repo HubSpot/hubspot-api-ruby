@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -18,17 +18,17 @@ module Hubspot
     module Extensions
       module Cards
         class IFrameActionBody
-          attr_accessor :type
+          attr_accessor :property_names_included
 
           attr_accessor :width
 
-          attr_accessor :height
+          attr_accessor :label
+
+          attr_accessor :type
 
           attr_accessor :url
 
-          attr_accessor :label
-
-          attr_accessor :property_names_included
+          attr_accessor :height
 
           class EnumAttributeValidator
             attr_reader :datatype
@@ -55,12 +55,12 @@ module Hubspot
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'type' => :'type',
+              :'property_names_included' => :'propertyNamesIncluded',
               :'width' => :'width',
-              :'height' => :'height',
-              :'url' => :'url',
               :'label' => :'label',
-              :'property_names_included' => :'propertyNamesIncluded'
+              :'type' => :'type',
+              :'url' => :'url',
+              :'height' => :'height'
             }
           end
 
@@ -72,12 +72,12 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'type' => :'String',
+              :'property_names_included' => :'Array<String>',
               :'width' => :'Integer',
-              :'height' => :'Integer',
-              :'url' => :'String',
               :'label' => :'String',
-              :'property_names_included' => :'Array<String>'
+              :'type' => :'String',
+              :'url' => :'String',
+              :'height' => :'Integer'
             }
           end
 
@@ -102,32 +102,32 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'type')
-              self.type = attributes[:'type']
-            else
-              self.type = 'IFRAME'
+            if attributes.key?(:'property_names_included')
+              if (value = attributes[:'property_names_included']).is_a?(Array)
+                self.property_names_included = value
+              end
             end
 
             if attributes.key?(:'width')
               self.width = attributes[:'width']
             end
 
-            if attributes.key?(:'height')
-              self.height = attributes[:'height']
+            if attributes.key?(:'label')
+              self.label = attributes[:'label']
+            end
+
+            if attributes.key?(:'type')
+              self.type = attributes[:'type']
+            else
+              self.type = 'IFRAME'
             end
 
             if attributes.key?(:'url')
               self.url = attributes[:'url']
             end
 
-            if attributes.key?(:'label')
-              self.label = attributes[:'label']
-            end
-
-            if attributes.key?(:'property_names_included')
-              if (value = attributes[:'property_names_included']).is_a?(Array)
-                self.property_names_included = value
-              end
+            if attributes.key?(:'height')
+              self.height = attributes[:'height']
             end
           end
 
@@ -135,24 +135,24 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @type.nil?
-              invalid_properties.push('invalid value for "type", type cannot be nil.')
+            if @property_names_included.nil?
+              invalid_properties.push('invalid value for "property_names_included", property_names_included cannot be nil.')
             end
 
             if @width.nil?
               invalid_properties.push('invalid value for "width", width cannot be nil.')
             end
 
-            if @height.nil?
-              invalid_properties.push('invalid value for "height", height cannot be nil.')
+            if @type.nil?
+              invalid_properties.push('invalid value for "type", type cannot be nil.')
             end
 
             if @url.nil?
               invalid_properties.push('invalid value for "url", url cannot be nil.')
             end
 
-            if @property_names_included.nil?
-              invalid_properties.push('invalid value for "property_names_included", property_names_included cannot be nil.')
+            if @height.nil?
+              invalid_properties.push('invalid value for "height", height cannot be nil.')
             end
 
             invalid_properties
@@ -161,13 +161,13 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @property_names_included.nil?
+            return false if @width.nil?
             return false if @type.nil?
             type_validator = EnumAttributeValidator.new('String', ["IFRAME"])
             return false unless type_validator.valid?(@type)
-            return false if @width.nil?
-            return false if @height.nil?
             return false if @url.nil?
-            return false if @property_names_included.nil?
+            return false if @height.nil?
             true
           end
 
@@ -186,12 +186,12 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                type == o.type &&
+                property_names_included == o.property_names_included &&
                 width == o.width &&
-                height == o.height &&
-                url == o.url &&
                 label == o.label &&
-                property_names_included == o.property_names_included
+                type == o.type &&
+                url == o.url &&
+                height == o.height
           end
 
           # @see the `==` method
@@ -203,7 +203,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [type, width, height, url, label, property_names_included].hash
+            [property_names_included, width, label, type, url, height].hash
           end
 
           # Builds the object from hash

@@ -17,21 +17,21 @@ module Hubspot
   module Crm
     module Properties
       class PropertyModificationMetadata
-        attr_accessor :archivable
-
-        attr_accessor :read_only_definition
-
         attr_accessor :read_only_options
 
         attr_accessor :read_only_value
 
+        attr_accessor :read_only_definition
+
+        attr_accessor :archivable
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'archivable' => :'archivable',
-            :'read_only_definition' => :'readOnlyDefinition',
             :'read_only_options' => :'readOnlyOptions',
-            :'read_only_value' => :'readOnlyValue'
+            :'read_only_value' => :'readOnlyValue',
+            :'read_only_definition' => :'readOnlyDefinition',
+            :'archivable' => :'archivable'
           }
         end
 
@@ -43,10 +43,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'archivable' => :'Boolean',
-            :'read_only_definition' => :'Boolean',
             :'read_only_options' => :'Boolean',
-            :'read_only_value' => :'Boolean'
+            :'read_only_value' => :'Boolean',
+            :'read_only_definition' => :'Boolean',
+            :'archivable' => :'Boolean'
           }
         end
 
@@ -71,14 +71,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'archivable')
-            self.archivable = attributes[:'archivable']
-          end
-
-          if attributes.key?(:'read_only_definition')
-            self.read_only_definition = attributes[:'read_only_definition']
-          end
-
           if attributes.key?(:'read_only_options')
             self.read_only_options = attributes[:'read_only_options']
           end
@@ -86,22 +78,30 @@ module Hubspot
           if attributes.key?(:'read_only_value')
             self.read_only_value = attributes[:'read_only_value']
           end
+
+          if attributes.key?(:'read_only_definition')
+            self.read_only_definition = attributes[:'read_only_definition']
+          end
+
+          if attributes.key?(:'archivable')
+            self.archivable = attributes[:'archivable']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @archivable.nil?
-            invalid_properties.push('invalid value for "archivable", archivable cannot be nil.')
+          if @read_only_value.nil?
+            invalid_properties.push('invalid value for "read_only_value", read_only_value cannot be nil.')
           end
 
           if @read_only_definition.nil?
             invalid_properties.push('invalid value for "read_only_definition", read_only_definition cannot be nil.')
           end
 
-          if @read_only_value.nil?
-            invalid_properties.push('invalid value for "read_only_value", read_only_value cannot be nil.')
+          if @archivable.nil?
+            invalid_properties.push('invalid value for "archivable", archivable cannot be nil.')
           end
 
           invalid_properties
@@ -110,9 +110,9 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @archivable.nil?
-          return false if @read_only_definition.nil?
           return false if @read_only_value.nil?
+          return false if @read_only_definition.nil?
+          return false if @archivable.nil?
           true
         end
 
@@ -121,10 +121,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              archivable == o.archivable &&
-              read_only_definition == o.read_only_definition &&
               read_only_options == o.read_only_options &&
-              read_only_value == o.read_only_value
+              read_only_value == o.read_only_value &&
+              read_only_definition == o.read_only_definition &&
+              archivable == o.archivable
         end
 
         # @see the `==` method
@@ -136,7 +136,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [archivable, read_only_definition, read_only_options, read_only_value].hash
+          [read_only_options, read_only_value, read_only_definition, archivable].hash
         end
 
         # Builds the object from hash

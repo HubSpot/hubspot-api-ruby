@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,17 +19,17 @@ module Hubspot
       module BlogPosts
         # Request body object for creating new blog post language variant.
         class BlogPostLanguageCloneRequestVNext
-          # ID of blog post to clone.
-          attr_accessor :id
-
           # Target language of new variant.
           attr_accessor :language
+
+          # ID of blog post to clone.
+          attr_accessor :id
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'language' => :'language'
+              :'language' => :'language',
+              :'id' => :'id'
             }
           end
 
@@ -41,8 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'language' => :'String'
+              :'language' => :'String',
+              :'id' => :'String'
             }
           end
 
@@ -67,12 +67,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
             if attributes.key?(:'language')
               self.language = attributes[:'language']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
           end
 
@@ -99,8 +99,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                language == o.language
+                language == o.language &&
+                id == o.id
           end
 
           # @see the `==` method
@@ -112,7 +112,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, language].hash
+            [language, id].hash
           end
 
           # Builds the object from hash

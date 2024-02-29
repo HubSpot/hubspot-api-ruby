@@ -49,7 +49,12 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          content_type = @api_client.select_header_content_type(['application/json'])
+          if !content_type.nil?
+              header_params['Content-Type'] = content_type
+          end
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -61,7 +66,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'TaskLocator'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"SourceCodeExtractApi.do_async",
@@ -108,7 +113,7 @@ module Hubspot
           # header parameters
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -120,7 +125,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'ActionResponse'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"SourceCodeExtractApi.get_async_status",

@@ -12,6 +12,7 @@ module Hubspot
               associations
               basic
               batch
+              gdpr
               search
               public_object
             ].freeze

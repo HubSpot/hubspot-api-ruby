@@ -1,5 +1,5 @@
 =begin
-#HubDB endpoints
+#Hubdb
 
 #HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
 
@@ -17,18 +17,20 @@ module Hubspot
   module Cms
     module Hubdb
       class CollectionResponseWithTotalHubDbTableV3ForwardPaging
+        # 
         attr_accessor :total
 
-        attr_accessor :results
-
         attr_accessor :paging
+
+        # 
+        attr_accessor :results
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'total' => :'total',
-            :'results' => :'results',
-            :'paging' => :'paging'
+            :'paging' => :'paging',
+            :'results' => :'results'
           }
         end
 
@@ -41,8 +43,8 @@ module Hubspot
         def self.openapi_types
           {
             :'total' => :'Integer',
-            :'results' => :'Array<HubDbTableV3>',
-            :'paging' => :'ForwardPaging'
+            :'paging' => :'ForwardPaging',
+            :'results' => :'Array<HubDbTableV3>'
           }
         end
 
@@ -71,14 +73,14 @@ module Hubspot
             self.total = attributes[:'total']
           end
 
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
+          end
+
           if attributes.key?(:'results')
             if (value = attributes[:'results']).is_a?(Array)
               self.results = value
             end
-          end
-
-          if attributes.key?(:'paging')
-            self.paging = attributes[:'paging']
           end
         end
 
@@ -111,8 +113,8 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               total == o.total &&
-              results == o.results &&
-              paging == o.paging
+              paging == o.paging &&
+              results == o.results
         end
 
         # @see the `==` method
@@ -124,7 +126,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [total, results, paging].hash
+          [total, paging, results].hash
         end
 
         # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#CRM Pipelines
+#Pipelines
 
 #Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
 
@@ -17,30 +17,30 @@ module Hubspot
   module Crm
     module Pipelines
       class PublicAuditInfo
-        attr_accessor :portal_id
-
         attr_accessor :identifier
-
-        attr_accessor :action
-
-        attr_accessor :timestamp
-
-        attr_accessor :message
 
         attr_accessor :raw_object
 
         attr_accessor :from_user_id
 
+        attr_accessor :portal_id
+
+        attr_accessor :action
+
+        attr_accessor :message
+
+        attr_accessor :timestamp
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'portal_id' => :'portalId',
             :'identifier' => :'identifier',
-            :'action' => :'action',
-            :'timestamp' => :'timestamp',
-            :'message' => :'message',
             :'raw_object' => :'rawObject',
-            :'from_user_id' => :'fromUserId'
+            :'from_user_id' => :'fromUserId',
+            :'portal_id' => :'portalId',
+            :'action' => :'action',
+            :'message' => :'message',
+            :'timestamp' => :'timestamp'
           }
         end
 
@@ -52,13 +52,13 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'portal_id' => :'Integer',
             :'identifier' => :'String',
-            :'action' => :'String',
-            :'timestamp' => :'Time',
-            :'message' => :'String',
             :'raw_object' => :'Object',
-            :'from_user_id' => :'Integer'
+            :'from_user_id' => :'Integer',
+            :'portal_id' => :'Integer',
+            :'action' => :'String',
+            :'message' => :'String',
+            :'timestamp' => :'Time'
           }
         end
 
@@ -83,24 +83,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'portal_id')
-            self.portal_id = attributes[:'portal_id']
-          end
-
           if attributes.key?(:'identifier')
             self.identifier = attributes[:'identifier']
-          end
-
-          if attributes.key?(:'action')
-            self.action = attributes[:'action']
-          end
-
-          if attributes.key?(:'timestamp')
-            self.timestamp = attributes[:'timestamp']
-          end
-
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
           end
 
           if attributes.key?(:'raw_object')
@@ -110,18 +94,34 @@ module Hubspot
           if attributes.key?(:'from_user_id')
             self.from_user_id = attributes[:'from_user_id']
           end
+
+          if attributes.key?(:'portal_id')
+            self.portal_id = attributes[:'portal_id']
+          end
+
+          if attributes.key?(:'action')
+            self.action = attributes[:'action']
+          end
+
+          if attributes.key?(:'message')
+            self.message = attributes[:'message']
+          end
+
+          if attributes.key?(:'timestamp')
+            self.timestamp = attributes[:'timestamp']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @portal_id.nil?
-            invalid_properties.push('invalid value for "portal_id", portal_id cannot be nil.')
-          end
-
           if @identifier.nil?
             invalid_properties.push('invalid value for "identifier", identifier cannot be nil.')
+          end
+
+          if @portal_id.nil?
+            invalid_properties.push('invalid value for "portal_id", portal_id cannot be nil.')
           end
 
           if @action.nil?
@@ -134,8 +134,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @portal_id.nil?
           return false if @identifier.nil?
+          return false if @portal_id.nil?
           return false if @action.nil?
           true
         end
@@ -145,13 +145,13 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              portal_id == o.portal_id &&
               identifier == o.identifier &&
-              action == o.action &&
-              timestamp == o.timestamp &&
-              message == o.message &&
               raw_object == o.raw_object &&
-              from_user_id == o.from_user_id
+              from_user_id == o.from_user_id &&
+              portal_id == o.portal_id &&
+              action == o.action &&
+              message == o.message &&
+              timestamp == o.timestamp
         end
 
         # @see the `==` method
@@ -163,7 +163,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [portal_id, identifier, action, timestamp, message, raw_object, from_user_id].hash
+          [identifier, raw_object, from_user_id, portal_id, action, message, timestamp].hash
         end
 
         # Builds the object from hash

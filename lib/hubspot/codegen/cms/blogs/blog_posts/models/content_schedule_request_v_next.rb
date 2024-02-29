@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -19,17 +19,17 @@ module Hubspot
       module BlogPosts
         # Request body object for scheduling the publish of content
         class ContentScheduleRequestVNext
-          # The ID of the object to be scheduled.
-          attr_accessor :id
-
           # The date the object should transition from scheduled to published.
           attr_accessor :publish_date
+
+          # The ID of the object to be scheduled.
+          attr_accessor :id
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'publish_date' => :'publishDate'
+              :'publish_date' => :'publishDate',
+              :'id' => :'id'
             }
           end
 
@@ -41,8 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'String',
-              :'publish_date' => :'Time'
+              :'publish_date' => :'Time',
+              :'id' => :'String'
             }
           end
 
@@ -67,12 +67,12 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
             if attributes.key?(:'publish_date')
               self.publish_date = attributes[:'publish_date']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
           end
 
@@ -80,12 +80,12 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @id.nil?
-              invalid_properties.push('invalid value for "id", id cannot be nil.')
-            end
-
             if @publish_date.nil?
               invalid_properties.push('invalid value for "publish_date", publish_date cannot be nil.')
+            end
+
+            if @id.nil?
+              invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
             invalid_properties
@@ -94,8 +94,8 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @id.nil?
             return false if @publish_date.nil?
+            return false if @id.nil?
             true
           end
 
@@ -104,8 +104,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                publish_date == o.publish_date
+                publish_date == o.publish_date &&
+                id == o.id
           end
 
           # @see the `==` method
@@ -117,7 +117,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, publish_date].hash
+            [publish_date, id].hash
           end
 
           # Builds the object from hash

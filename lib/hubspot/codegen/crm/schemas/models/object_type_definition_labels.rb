@@ -17,17 +17,17 @@ module Hubspot
   module Crm
     module Schemas
       class ObjectTypeDefinitionLabels
-        # The word for one object. (There’s no way to change this later.)
-        attr_accessor :singular
-
         # The word for multiple objects. (There’s no way to change this later.)
         attr_accessor :plural
+
+        # The word for one object. (There’s no way to change this later.)
+        attr_accessor :singular
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'singular' => :'singular',
-            :'plural' => :'plural'
+            :'plural' => :'plural',
+            :'singular' => :'singular'
           }
         end
 
@@ -39,8 +39,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'singular' => :'String',
-            :'plural' => :'String'
+            :'plural' => :'String',
+            :'singular' => :'String'
           }
         end
 
@@ -65,12 +65,12 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'singular')
-            self.singular = attributes[:'singular']
-          end
-
           if attributes.key?(:'plural')
             self.plural = attributes[:'plural']
+          end
+
+          if attributes.key?(:'singular')
+            self.singular = attributes[:'singular']
           end
         end
 
@@ -92,8 +92,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              singular == o.singular &&
-              plural == o.plural
+              plural == o.plural &&
+              singular == o.singular
         end
 
         # @see the `==` method
@@ -105,7 +105,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [singular, plural].hash
+          [plural, singular].hash
         end
 
         # Builds the object from hash

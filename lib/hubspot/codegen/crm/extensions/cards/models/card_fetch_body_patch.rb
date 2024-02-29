@@ -1,5 +1,5 @@
 =begin
-#CRM cards
+#Public App Crm Cards
 
 #Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
 
@@ -19,17 +19,45 @@ module Hubspot
       module Cards
         # Variant of CardFetchBody with fields as optional for patches
         class CardFetchBodyPatch
-          # URL to a service endpoint that will respond with details for this card. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
-          attr_accessor :target_url
+          attr_accessor :serverless_function
+
+          attr_accessor :card_type
 
           # An array of CRM object types where this card should be displayed. HubSpot will call your target URL whenever a user visits a record page of the types defined here.
           attr_accessor :object_types
 
+          # URL to a service endpoint that will respond with details for this card. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
+          attr_accessor :target_url
+
+          class EnumAttributeValidator
+            attr_reader :datatype
+            attr_reader :allowable_values
+
+            def initialize(datatype, allowable_values)
+              @allowable_values = allowable_values.map do |value|
+                case datatype.to_s
+                when /Integer/i
+                  value.to_i
+                when /Float/i
+                  value.to_f
+                else
+                  value
+                end
+              end
+            end
+
+            def valid?(value)
+              !value || allowable_values.include?(value)
+            end
+          end
+
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'target_url' => :'targetUrl',
-              :'object_types' => :'objectTypes'
+              :'serverless_function' => :'serverlessFunction',
+              :'card_type' => :'cardType',
+              :'object_types' => :'objectTypes',
+              :'target_url' => :'targetUrl'
             }
           end
 
@@ -41,8 +69,10 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'target_url' => :'String',
-              :'object_types' => :'Array<CardObjectTypeBody>'
+              :'serverless_function' => :'String',
+              :'card_type' => :'String',
+              :'object_types' => :'Array<CardObjectTypeBody>',
+              :'target_url' => :'String'
             }
           end
 
@@ -67,14 +97,22 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'target_url')
-              self.target_url = attributes[:'target_url']
+            if attributes.key?(:'serverless_function')
+              self.serverless_function = attributes[:'serverless_function']
+            end
+
+            if attributes.key?(:'card_type')
+              self.card_type = attributes[:'card_type']
             end
 
             if attributes.key?(:'object_types')
               if (value = attributes[:'object_types']).is_a?(Array)
                 self.object_types = value
               end
+            end
+
+            if attributes.key?(:'target_url')
+              self.target_url = attributes[:'target_url']
             end
           end
 
@@ -92,8 +130,20 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            card_type_validator = EnumAttributeValidator.new('String', ["EXTERNAL", "SERVERLESS"])
+            return false unless card_type_validator.valid?(@card_type)
             return false if @object_types.nil?
             true
+          end
+
+          # Custom attribute writer method checking allowed values (enum).
+          # @param [Object] card_type Object to be assigned
+          def card_type=(card_type)
+            validator = EnumAttributeValidator.new('String', ["EXTERNAL", "SERVERLESS"])
+            unless validator.valid?(card_type)
+              fail ArgumentError, "invalid value for \"card_type\", must be one of #{validator.allowable_values}."
+            end
+            @card_type = card_type
           end
 
           # Checks equality by comparing each attribute.
@@ -101,8 +151,10 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                target_url == o.target_url &&
-                object_types == o.object_types
+                serverless_function == o.serverless_function &&
+                card_type == o.card_type &&
+                object_types == o.object_types &&
+                target_url == o.target_url
           end
 
           # @see the `==` method
@@ -114,7 +166,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [target_url, object_types].hash
+            [serverless_function, card_type, object_types, target_url].hash
           end
 
           # Builds the object from hash

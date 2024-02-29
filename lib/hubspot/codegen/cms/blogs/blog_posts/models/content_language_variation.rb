@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Posts
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -18,51 +18,51 @@ module Hubspot
     module Blogs
       module BlogPosts
         class ContentLanguageVariation
-          attr_accessor :id
-
-          attr_accessor :name
-
-          attr_accessor :slug
-
-          attr_accessor :state
-
-          attr_accessor :author_name
-
-          attr_accessor :password
-
-          attr_accessor :public_access_rules_enabled
-
-          attr_accessor :public_access_rules
-
-          attr_accessor :campaign
-
-          attr_accessor :tag_ids
-
           attr_accessor :archived_in_dashboard
 
           attr_accessor :created
 
-          attr_accessor :updated
+          attr_accessor :tag_ids
 
           attr_accessor :publish_date
+
+          attr_accessor :public_access_rules
+
+          attr_accessor :password
+
+          attr_accessor :author_name
+
+          attr_accessor :public_access_rules_enabled
+
+          attr_accessor :name
+
+          attr_accessor :campaign
+
+          attr_accessor :id
+
+          attr_accessor :state
+
+          attr_accessor :updated
+
+          attr_accessor :slug
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'id' => :'id',
-              :'name' => :'name',
-              :'slug' => :'slug',
-              :'state' => :'state',
-              :'author_name' => :'authorName',
-              :'password' => :'password',
-              :'public_access_rules_enabled' => :'publicAccessRulesEnabled',
-              :'public_access_rules' => :'publicAccessRules',
-              :'campaign' => :'campaign',
-              :'tag_ids' => :'tagIds',
               :'archived_in_dashboard' => :'archivedInDashboard',
               :'created' => :'created',
+              :'tag_ids' => :'tagIds',
+              :'publish_date' => :'publishDate',
+              :'public_access_rules' => :'publicAccessRules',
+              :'password' => :'password',
+              :'author_name' => :'authorName',
+              :'public_access_rules_enabled' => :'publicAccessRulesEnabled',
+              :'name' => :'name',
+              :'campaign' => :'campaign',
+              :'id' => :'id',
+              :'state' => :'state',
               :'updated' => :'updated',
-              :'publish_date' => :'publishDate'
+              :'slug' => :'slug'
             }
           end
 
@@ -74,20 +74,20 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'id' => :'Integer',
-              :'name' => :'String',
-              :'slug' => :'String',
-              :'state' => :'String',
-              :'author_name' => :'String',
-              :'password' => :'String',
-              :'public_access_rules_enabled' => :'Boolean',
-              :'public_access_rules' => :'Array<Object>',
-              :'campaign' => :'String',
-              :'tag_ids' => :'Array<Integer>',
               :'archived_in_dashboard' => :'Boolean',
               :'created' => :'Time',
+              :'tag_ids' => :'Array<Integer>',
+              :'publish_date' => :'Time',
+              :'public_access_rules' => :'Array<Object>',
+              :'password' => :'String',
+              :'author_name' => :'String',
+              :'public_access_rules_enabled' => :'Boolean',
+              :'name' => :'String',
+              :'campaign' => :'String',
+              :'id' => :'Integer',
+              :'state' => :'String',
               :'updated' => :'Time',
-              :'publish_date' => :'Time'
+              :'slug' => :'String'
             }
           end
 
@@ -112,50 +112,6 @@ module Hubspot
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'id')
-              self.id = attributes[:'id']
-            end
-
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
-            end
-
-            if attributes.key?(:'slug')
-              self.slug = attributes[:'slug']
-            end
-
-            if attributes.key?(:'state')
-              self.state = attributes[:'state']
-            end
-
-            if attributes.key?(:'author_name')
-              self.author_name = attributes[:'author_name']
-            end
-
-            if attributes.key?(:'password')
-              self.password = attributes[:'password']
-            end
-
-            if attributes.key?(:'public_access_rules_enabled')
-              self.public_access_rules_enabled = attributes[:'public_access_rules_enabled']
-            end
-
-            if attributes.key?(:'public_access_rules')
-              if (value = attributes[:'public_access_rules']).is_a?(Array)
-                self.public_access_rules = value
-              end
-            end
-
-            if attributes.key?(:'campaign')
-              self.campaign = attributes[:'campaign']
-            end
-
-            if attributes.key?(:'tag_ids')
-              if (value = attributes[:'tag_ids']).is_a?(Array)
-                self.tag_ids = value
-              end
-            end
-
             if attributes.key?(:'archived_in_dashboard')
               self.archived_in_dashboard = attributes[:'archived_in_dashboard']
             end
@@ -164,12 +120,56 @@ module Hubspot
               self.created = attributes[:'created']
             end
 
-            if attributes.key?(:'updated')
-              self.updated = attributes[:'updated']
+            if attributes.key?(:'tag_ids')
+              if (value = attributes[:'tag_ids']).is_a?(Array)
+                self.tag_ids = value
+              end
             end
 
             if attributes.key?(:'publish_date')
               self.publish_date = attributes[:'publish_date']
+            end
+
+            if attributes.key?(:'public_access_rules')
+              if (value = attributes[:'public_access_rules']).is_a?(Array)
+                self.public_access_rules = value
+              end
+            end
+
+            if attributes.key?(:'password')
+              self.password = attributes[:'password']
+            end
+
+            if attributes.key?(:'author_name')
+              self.author_name = attributes[:'author_name']
+            end
+
+            if attributes.key?(:'public_access_rules_enabled')
+              self.public_access_rules_enabled = attributes[:'public_access_rules_enabled']
+            end
+
+            if attributes.key?(:'name')
+              self.name = attributes[:'name']
+            end
+
+            if attributes.key?(:'campaign')
+              self.campaign = attributes[:'campaign']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
+            end
+
+            if attributes.key?(:'state')
+              self.state = attributes[:'state']
+            end
+
+            if attributes.key?(:'updated')
+              self.updated = attributes[:'updated']
+            end
+
+            if attributes.key?(:'slug')
+              self.slug = attributes[:'slug']
             end
           end
 
@@ -177,42 +177,6 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @id.nil?
-              invalid_properties.push('invalid value for "id", id cannot be nil.')
-            end
-
-            if @name.nil?
-              invalid_properties.push('invalid value for "name", name cannot be nil.')
-            end
-
-            if @slug.nil?
-              invalid_properties.push('invalid value for "slug", slug cannot be nil.')
-            end
-
-            if @state.nil?
-              invalid_properties.push('invalid value for "state", state cannot be nil.')
-            end
-
-            if @author_name.nil?
-              invalid_properties.push('invalid value for "author_name", author_name cannot be nil.')
-            end
-
-            if @password.nil?
-              invalid_properties.push('invalid value for "password", password cannot be nil.')
-            end
-
-            if @public_access_rules_enabled.nil?
-              invalid_properties.push('invalid value for "public_access_rules_enabled", public_access_rules_enabled cannot be nil.')
-            end
-
-            if @public_access_rules.nil?
-              invalid_properties.push('invalid value for "public_access_rules", public_access_rules cannot be nil.')
-            end
-
-            if @campaign.nil?
-              invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
-            end
-
             if @archived_in_dashboard.nil?
               invalid_properties.push('invalid value for "archived_in_dashboard", archived_in_dashboard cannot be nil.')
             end
@@ -221,12 +185,48 @@ module Hubspot
               invalid_properties.push('invalid value for "created", created cannot be nil.')
             end
 
+            if @publish_date.nil?
+              invalid_properties.push('invalid value for "publish_date", publish_date cannot be nil.')
+            end
+
+            if @public_access_rules.nil?
+              invalid_properties.push('invalid value for "public_access_rules", public_access_rules cannot be nil.')
+            end
+
+            if @password.nil?
+              invalid_properties.push('invalid value for "password", password cannot be nil.')
+            end
+
+            if @author_name.nil?
+              invalid_properties.push('invalid value for "author_name", author_name cannot be nil.')
+            end
+
+            if @public_access_rules_enabled.nil?
+              invalid_properties.push('invalid value for "public_access_rules_enabled", public_access_rules_enabled cannot be nil.')
+            end
+
+            if @name.nil?
+              invalid_properties.push('invalid value for "name", name cannot be nil.')
+            end
+
+            if @campaign.nil?
+              invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
+            end
+
+            if @id.nil?
+              invalid_properties.push('invalid value for "id", id cannot be nil.')
+            end
+
+            if @state.nil?
+              invalid_properties.push('invalid value for "state", state cannot be nil.')
+            end
+
             if @updated.nil?
               invalid_properties.push('invalid value for "updated", updated cannot be nil.')
             end
 
-            if @publish_date.nil?
-              invalid_properties.push('invalid value for "publish_date", publish_date cannot be nil.')
+            if @slug.nil?
+              invalid_properties.push('invalid value for "slug", slug cannot be nil.')
             end
 
             invalid_properties
@@ -235,19 +235,19 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @id.nil?
-            return false if @name.nil?
-            return false if @slug.nil?
-            return false if @state.nil?
-            return false if @author_name.nil?
-            return false if @password.nil?
-            return false if @public_access_rules_enabled.nil?
-            return false if @public_access_rules.nil?
-            return false if @campaign.nil?
             return false if @archived_in_dashboard.nil?
             return false if @created.nil?
-            return false if @updated.nil?
             return false if @publish_date.nil?
+            return false if @public_access_rules.nil?
+            return false if @password.nil?
+            return false if @author_name.nil?
+            return false if @public_access_rules_enabled.nil?
+            return false if @name.nil?
+            return false if @campaign.nil?
+            return false if @id.nil?
+            return false if @state.nil?
+            return false if @updated.nil?
+            return false if @slug.nil?
             true
           end
 
@@ -256,20 +256,20 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                id == o.id &&
-                name == o.name &&
-                slug == o.slug &&
-                state == o.state &&
-                author_name == o.author_name &&
-                password == o.password &&
-                public_access_rules_enabled == o.public_access_rules_enabled &&
-                public_access_rules == o.public_access_rules &&
-                campaign == o.campaign &&
-                tag_ids == o.tag_ids &&
                 archived_in_dashboard == o.archived_in_dashboard &&
                 created == o.created &&
+                tag_ids == o.tag_ids &&
+                publish_date == o.publish_date &&
+                public_access_rules == o.public_access_rules &&
+                password == o.password &&
+                author_name == o.author_name &&
+                public_access_rules_enabled == o.public_access_rules_enabled &&
+                name == o.name &&
+                campaign == o.campaign &&
+                id == o.id &&
+                state == o.state &&
                 updated == o.updated &&
-                publish_date == o.publish_date
+                slug == o.slug
           end
 
           # @see the `==` method
@@ -281,7 +281,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [id, name, slug, state, author_name, password, public_access_rules_enabled, public_access_rules, campaign, tag_ids, archived_in_dashboard, created, updated, publish_date].hash
+            [archived_in_dashboard, created, tag_ids, publish_date, public_access_rules, password, author_name, public_access_rules_enabled, name, campaign, id, state, updated, slug].hash
           end
 
           # Builds the object from hash

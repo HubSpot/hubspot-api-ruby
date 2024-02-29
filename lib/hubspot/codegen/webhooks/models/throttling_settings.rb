@@ -1,5 +1,5 @@
 =begin
-#Webhooks API
+#Webhooks Webhooks
 
 #Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
 
@@ -16,11 +16,11 @@ require 'time'
 module Hubspot
   module Webhooks
     class ThrottlingSettings
-      # The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
-      attr_accessor :max_concurrent_requests
-
       # Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
       attr_accessor :period
+
+      # The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
+      attr_accessor :max_concurrent_requests
 
       class EnumAttributeValidator
         attr_reader :datatype
@@ -47,8 +47,8 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'max_concurrent_requests' => :'maxConcurrentRequests',
-          :'period' => :'period'
+          :'period' => :'period',
+          :'max_concurrent_requests' => :'maxConcurrentRequests'
         }
       end
 
@@ -60,8 +60,8 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'max_concurrent_requests' => :'Integer',
-          :'period' => :'String'
+          :'period' => :'String',
+          :'max_concurrent_requests' => :'Integer'
         }
       end
 
@@ -86,12 +86,12 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'max_concurrent_requests')
-          self.max_concurrent_requests = attributes[:'max_concurrent_requests']
-        end
-
         if attributes.key?(:'period')
           self.period = attributes[:'period']
+        end
+
+        if attributes.key?(:'max_concurrent_requests')
+          self.max_concurrent_requests = attributes[:'max_concurrent_requests']
         end
       end
 
@@ -99,12 +99,12 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @max_concurrent_requests.nil?
-          invalid_properties.push('invalid value for "max_concurrent_requests", max_concurrent_requests cannot be nil.')
-        end
-
         if @period.nil?
           invalid_properties.push('invalid value for "period", period cannot be nil.')
+        end
+
+        if @max_concurrent_requests.nil?
+          invalid_properties.push('invalid value for "max_concurrent_requests", max_concurrent_requests cannot be nil.')
         end
 
         invalid_properties
@@ -113,10 +113,10 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @max_concurrent_requests.nil?
         return false if @period.nil?
         period_validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
         return false unless period_validator.valid?(@period)
+        return false if @max_concurrent_requests.nil?
         true
       end
 
@@ -135,8 +135,8 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            max_concurrent_requests == o.max_concurrent_requests &&
-            period == o.period
+            period == o.period &&
+            max_concurrent_requests == o.max_concurrent_requests
       end
 
       # @see the `==` method
@@ -148,7 +148,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [max_concurrent_requests, period].hash
+        [period, max_concurrent_requests].hash
       end
 
       # Builds the object from hash

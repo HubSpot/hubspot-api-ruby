@@ -1,5 +1,5 @@
 =begin
-#Webhooks API
+#Webhooks Webhooks
 
 #Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
 
@@ -16,8 +16,8 @@ require 'time'
 module Hubspot
   module Webhooks
     class SubscriptionResponse
-      # Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-      attr_accessor :event_type
+      # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
+      attr_accessor :created_at
 
       # The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
       attr_accessor :property_name
@@ -25,11 +25,11 @@ module Hubspot
       # Determines if the subscription is active or paused.
       attr_accessor :active
 
+      # Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
+      attr_accessor :event_type
+
       # The unique ID of the subscription.
       attr_accessor :id
-
-      # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
-      attr_accessor :created_at
 
       # When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
       attr_accessor :updated_at
@@ -59,11 +59,11 @@ module Hubspot
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'event_type' => :'eventType',
+          :'created_at' => :'createdAt',
           :'property_name' => :'propertyName',
           :'active' => :'active',
+          :'event_type' => :'eventType',
           :'id' => :'id',
-          :'created_at' => :'createdAt',
           :'updated_at' => :'updatedAt'
         }
       end
@@ -76,11 +76,11 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'event_type' => :'String',
+          :'created_at' => :'Time',
           :'property_name' => :'String',
           :'active' => :'Boolean',
+          :'event_type' => :'String',
           :'id' => :'String',
-          :'created_at' => :'Time',
           :'updated_at' => :'Time'
         }
       end
@@ -106,8 +106,8 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'event_type')
-          self.event_type = attributes[:'event_type']
+        if attributes.key?(:'created_at')
+          self.created_at = attributes[:'created_at']
         end
 
         if attributes.key?(:'property_name')
@@ -118,12 +118,12 @@ module Hubspot
           self.active = attributes[:'active']
         end
 
-        if attributes.key?(:'id')
-          self.id = attributes[:'id']
+        if attributes.key?(:'event_type')
+          self.event_type = attributes[:'event_type']
         end
 
-        if attributes.key?(:'created_at')
-          self.created_at = attributes[:'created_at']
+        if attributes.key?(:'id')
+          self.id = attributes[:'id']
         end
 
         if attributes.key?(:'updated_at')
@@ -135,20 +135,20 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @event_type.nil?
-          invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
+        if @created_at.nil?
+          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
         end
 
         if @active.nil?
           invalid_properties.push('invalid value for "active", active cannot be nil.')
         end
 
-        if @id.nil?
-          invalid_properties.push('invalid value for "id", id cannot be nil.')
+        if @event_type.nil?
+          invalid_properties.push('invalid value for "event_type", event_type cannot be nil.')
         end
 
-        if @created_at.nil?
-          invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+        if @id.nil?
+          invalid_properties.push('invalid value for "id", id cannot be nil.')
         end
 
         invalid_properties
@@ -157,12 +157,12 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
+        return false if @created_at.nil?
+        return false if @active.nil?
         return false if @event_type.nil?
         event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange"])
         return false unless event_type_validator.valid?(@event_type)
-        return false if @active.nil?
         return false if @id.nil?
-        return false if @created_at.nil?
         true
       end
 
@@ -181,11 +181,11 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            event_type == o.event_type &&
+            created_at == o.created_at &&
             property_name == o.property_name &&
             active == o.active &&
+            event_type == o.event_type &&
             id == o.id &&
-            created_at == o.created_at &&
             updated_at == o.updated_at
       end
 
@@ -198,7 +198,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [event_type, property_name, active, id, created_at, updated_at].hash
+        [created_at, property_name, active, event_type, id, updated_at].hash
       end
 
       # Builds the object from hash

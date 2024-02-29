@@ -42,7 +42,7 @@ module Hubspot
               fail ArgumentError, "Missing the required parameter 'public_object_search_request' when calling SearchApi.do_search"
             end
             # resource path
-            local_var_path = '/crm/v3/objects/Communications/search'
+            local_var_path = '/crm/v3/objects/communications/search'
 
             # query parameters
             query_params = opts[:query_params] || {}

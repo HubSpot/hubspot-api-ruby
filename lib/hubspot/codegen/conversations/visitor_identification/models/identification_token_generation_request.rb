@@ -18,21 +18,21 @@ module Hubspot
     module VisitorIdentification
       # Information used to generate a token
       class IdentificationTokenGenerationRequest
-        # The email of the visitor that you wish to identify
-        attr_accessor :email
-
         # The first name of the visitor that you wish to identify. This value will only be set in HubSpot for new contacts and existing contacts where first name is unknown. Optional.
         attr_accessor :first_name
 
         # The last name of the visitor that you wish to identify. This value will only be set in HubSpot for new contacts and existing contacts where last name is unknown. Optional.
         attr_accessor :last_name
 
+        # The email of the visitor that you wish to identify
+        attr_accessor :email
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'email' => :'email',
             :'first_name' => :'firstName',
-            :'last_name' => :'lastName'
+            :'last_name' => :'lastName',
+            :'email' => :'email'
           }
         end
 
@@ -44,9 +44,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'email' => :'String',
             :'first_name' => :'String',
-            :'last_name' => :'String'
+            :'last_name' => :'String',
+            :'email' => :'String'
           }
         end
 
@@ -71,16 +71,16 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'email')
-            self.email = attributes[:'email']
-          end
-
           if attributes.key?(:'first_name')
             self.first_name = attributes[:'first_name']
           end
 
           if attributes.key?(:'last_name')
             self.last_name = attributes[:'last_name']
+          end
+
+          if attributes.key?(:'email')
+            self.email = attributes[:'email']
           end
         end
 
@@ -107,9 +107,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              email == o.email &&
               first_name == o.first_name &&
-              last_name == o.last_name
+              last_name == o.last_name &&
+              email == o.email
         end
 
         # @see the `==` method
@@ -121,7 +121,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [email, first_name, last_name].hash
+          [first_name, last_name, email].hash
         end
 
         # Builds the object from hash

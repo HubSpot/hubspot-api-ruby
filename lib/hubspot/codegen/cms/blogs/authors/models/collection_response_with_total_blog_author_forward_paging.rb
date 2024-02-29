@@ -1,5 +1,5 @@
 =begin
-#Blog Post endpoints
+#Authors
 
 #Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
 
@@ -22,17 +22,17 @@ module Hubspot
           # Total number of blog authors.
           attr_accessor :total
 
+          attr_accessor :paging
+
           # Collection of blog authors.
           attr_accessor :results
-
-          attr_accessor :paging
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
               :'total' => :'total',
-              :'results' => :'results',
-              :'paging' => :'paging'
+              :'paging' => :'paging',
+              :'results' => :'results'
             }
           end
 
@@ -45,8 +45,8 @@ module Hubspot
           def self.openapi_types
             {
               :'total' => :'Integer',
-              :'results' => :'Array<BlogAuthor>',
-              :'paging' => :'ForwardPaging'
+              :'paging' => :'ForwardPaging',
+              :'results' => :'Array<BlogAuthor>'
             }
           end
 
@@ -75,14 +75,14 @@ module Hubspot
               self.total = attributes[:'total']
             end
 
+            if attributes.key?(:'paging')
+              self.paging = attributes[:'paging']
+            end
+
             if attributes.key?(:'results')
               if (value = attributes[:'results']).is_a?(Array)
                 self.results = value
               end
-            end
-
-            if attributes.key?(:'paging')
-              self.paging = attributes[:'paging']
             end
           end
 
@@ -115,8 +115,8 @@ module Hubspot
             return true if self.equal?(o)
             self.class == o.class &&
                 total == o.total &&
-                results == o.results &&
-                paging == o.paging
+                paging == o.paging &&
+                results == o.results
           end
 
           # @see the `==` method
@@ -128,7 +128,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [total, results, paging].hash
+            [total, paging, results].hash
           end
 
           # Builds the object from hash

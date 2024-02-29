@@ -1,5 +1,5 @@
 =begin
-#URL redirects
+#CMS Url Redirects
 
 #URL redirect operations
 
@@ -65,7 +65,7 @@ module Hubspot
           return_type = opts[:debug_return_type]
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RedirectsApi.archive",
@@ -133,7 +133,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'UrlMapping'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RedirectsApi.create",
@@ -196,7 +196,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'UrlMapping'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RedirectsApi.get_by_id",
@@ -283,7 +283,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'CollectionResponseWithTotalUrlMappingForwardPaging'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RedirectsApi.get_page",
@@ -357,7 +357,7 @@ module Hubspot
           return_type = opts[:debug_return_type] || 'UrlMapping'
 
           # auth_names
-          auth_names = opts[:debug_auth_names] || ['hapikey', 'oauth2']
+          auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
             :operation => :"RedirectsApi.update",
