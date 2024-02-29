@@ -170,7 +170,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Crm Objects:
 - Removed `crm.objects.associations_api`.
 
-#### Changes in Crm Objects Postal Mail API:
+#### Changes in Crm Objects Postal Mail BasicAPI:
 - Renamed param `postal_mail` to `postal_mail_id`
 
 ## Added new Client APIs:
