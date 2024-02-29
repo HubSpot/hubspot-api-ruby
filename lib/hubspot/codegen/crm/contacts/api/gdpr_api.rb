@@ -15,14 +15,14 @@ require 'cgi'
 module Hubspot
   module Crm
     module Contacts
-      class GdprApi
+      class GDPRApi
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Gdpr DELETE
-        # Permanently delete a contact and all associated content to follow Gdpr. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+        # GDPR DELETE
+        # Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
         # @param public_gdpr_delete_input [PublicGdprDeleteInput] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -31,18 +31,18 @@ module Hubspot
           nil
         end
 
-        # Gdpr DELETE
-        # Permanently delete a contact and all associated content to follow Gdpr. Use optional property &#39;idProperty&#39; set to &#39;email&#39; to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+        # GDPR DELETE
+        # Permanently delete a contact and all associated content to follow GDPR. Use optional property &#39;idProperty&#39; set to &#39;email&#39; to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
         # @param public_gdpr_delete_input [PublicGdprDeleteInput] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def purge_with_http_info(public_gdpr_delete_input, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: GdprApi.purge ...'
+            @api_client.config.logger.debug 'Calling API: GDPRApi.purge ...'
           end
           # verify the required parameter 'public_gdpr_delete_input' is set
           if @api_client.config.client_side_validation && public_gdpr_delete_input.nil?
-            fail ArgumentError, "Missing the required parameter 'public_gdpr_delete_input' when calling GdprApi.purge"
+            fail ArgumentError, "Missing the required parameter 'public_gdpr_delete_input' when calling GDPRApi.purge"
           end
           # resource path
           local_var_path = '/crm/v3/objects/contacts/gdpr-delete'
@@ -73,7 +73,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"GdprApi.purge",
+            :operation => :"GDPRApi.purge",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -84,7 +84,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: GdprApi#purge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: GDPRApi#purge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
