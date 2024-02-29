@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v18..0...HEAD)
 
-## [18.0.0] - 2024-02-14
+## [18.0.0] - 2024-02-29
 
 ### Changes in Cms AuditLogs API:
 - Added new param `prev` to `cms.audit_log.models.Paging`.
@@ -170,6 +170,9 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 #### Changes in Crm Objects:
 - Removed `crm.objects.associations_api`.
 
+#### Changes in Crm Objects Postal Mail:
+- Renamed param `postal_mail` to `postal_mail_id`
+
 ## Added new Client APIs:
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `crm.objects.line_items.gdpr_api` Api.
@@ -177,6 +180,12 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added `crm.objects.quotes.gdpr_api` Api.
 - Added `crm.objects.tickets.gdpr_api` Api.
 - Added `crm.objects.calls.gdpr_api` Api.
+- Added `crm.objects.emails.gdpr_api` Api.
+- Added `crm.objects.meetings.gdpr_api` Api.
+- Added `crm.objects.notes.gdpr_api` Api.
+- Added `crm.objects.postal_mail.gdpr_api` Api.
+- Added `crm.objects.tasks.gdpr_api` Api.
+- Added `crm.objects.feedback_submissions.gdpr_api` Api.
 - Added `crm.objects.communications.gdpr_api` Api.
 - Added `marketing.events.basic_api` Api.
 - Added `marketing.events.batch_api` Api.
