@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Crm
       module Objects
-        module Taxes
+        module Meetings
           class GDPRApi
             include Hubspot::Discovery::BaseApiClient
           end
