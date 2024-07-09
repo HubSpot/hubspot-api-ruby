@@ -39,7 +39,7 @@ module Hubspot
         def self.openapi_types
           {
             :'paging' => :'Paging',
-            :'results' => :'Array<Integer>'
+            :'results' => :'Array<Hash<String, String>>',
           }
         end
 
