@@ -50,7 +50,7 @@ module Hubspot
         def self.openapi_types
           {
             :'filter_groups' => :'Array<FilterGroup>',
-            :'sorts' => :'Array<String>',
+            :'sorts' => :'Array<Object>',
             :'query' => :'String',
             :'properties' => :'Array<String>',
             :'limit' => :'Integer',
