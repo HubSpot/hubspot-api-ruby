@@ -19,9 +19,9 @@ module Hubspot
       class PublicSingleFieldDependency
         attr_accessor :dependency_type
 
-        attr_accessor :dependent_field_names
-
         attr_accessor :controlling_field_name
+
+        attr_accessor :dependent_field_names
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -49,8 +49,8 @@ module Hubspot
         def self.attribute_map
           {
             :'dependency_type' => :'dependencyType',
-            :'dependent_field_names' => :'dependentFieldNames',
-            :'controlling_field_name' => :'controllingFieldName'
+            :'controlling_field_name' => :'controllingFieldName',
+            :'dependent_field_names' => :'dependentFieldNames'
           }
         end
 
@@ -63,8 +63,8 @@ module Hubspot
         def self.openapi_types
           {
             :'dependency_type' => :'String',
-            :'dependent_field_names' => :'Array<String>',
-            :'controlling_field_name' => :'String'
+            :'controlling_field_name' => :'String',
+            :'dependent_field_names' => :'Array<String>'
           }
         end
 
@@ -95,14 +95,14 @@ module Hubspot
             self.dependency_type = 'SINGLE_FIELD'
           end
 
+          if attributes.key?(:'controlling_field_name')
+            self.controlling_field_name = attributes[:'controlling_field_name']
+          end
+
           if attributes.key?(:'dependent_field_names')
             if (value = attributes[:'dependent_field_names']).is_a?(Array)
               self.dependent_field_names = value
             end
-          end
-
-          if attributes.key?(:'controlling_field_name')
-            self.controlling_field_name = attributes[:'controlling_field_name']
           end
         end
 
@@ -114,12 +114,12 @@ module Hubspot
             invalid_properties.push('invalid value for "dependency_type", dependency_type cannot be nil.')
           end
 
-          if @dependent_field_names.nil?
-            invalid_properties.push('invalid value for "dependent_field_names", dependent_field_names cannot be nil.')
-          end
-
           if @controlling_field_name.nil?
             invalid_properties.push('invalid value for "controlling_field_name", controlling_field_name cannot be nil.')
+          end
+
+          if @dependent_field_names.nil?
+            invalid_properties.push('invalid value for "dependent_field_names", dependent_field_names cannot be nil.')
           end
 
           invalid_properties
@@ -131,8 +131,8 @@ module Hubspot
           return false if @dependency_type.nil?
           dependency_type_validator = EnumAttributeValidator.new('String', ["SINGLE_FIELD"])
           return false unless dependency_type_validator.valid?(@dependency_type)
-          return false if @dependent_field_names.nil?
           return false if @controlling_field_name.nil?
+          return false if @dependent_field_names.nil?
           true
         end
 
@@ -152,8 +152,8 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               dependency_type == o.dependency_type &&
-              dependent_field_names == o.dependent_field_names &&
-              controlling_field_name == o.controlling_field_name
+              controlling_field_name == o.controlling_field_name &&
+              dependent_field_names == o.dependent_field_names
         end
 
         # @see the `==` method
@@ -165,7 +165,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [dependency_type, dependent_field_names, controlling_field_name].hash
+          [dependency_type, controlling_field_name, dependent_field_names].hash
         end
 
         # Builds the object from hash
