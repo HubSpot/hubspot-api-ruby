@@ -45,7 +45,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'identification_token_generation_request' when calling GenerateApi.generate_token"
           end
           # resource path
-          local_var_path = '/conversations/v3/visitor-identification/tokens/create'
+          local_var_path = '/visitor-identification/v3/tokens/create'
 
           # query parameters
           query_params = opts[:query_params] || {}
