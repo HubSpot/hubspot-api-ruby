@@ -1,5 +1,5 @@
 =begin
-#Settings User Provisioning
+#User Provisioning
 
 #Add, manage, and remove users from your account
 
@@ -18,6 +18,10 @@ module Hubspot
     module Users
       # A user creation request
       class UserProvisionRequest
+        attr_accessor :first_name
+
+        attr_accessor :last_name
+
         # The user's primary team
         attr_accessor :primary_team_id
 
@@ -36,6 +40,8 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'first_name' => :'firstName',
+            :'last_name' => :'lastName',
             :'primary_team_id' => :'primaryTeamId',
             :'send_welcome_email' => :'sendWelcomeEmail',
             :'role_id' => :'roleId',
@@ -52,6 +58,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'first_name' => :'String',
+            :'last_name' => :'String',
             :'primary_team_id' => :'String',
             :'send_welcome_email' => :'Boolean',
             :'role_id' => :'String',
@@ -80,6 +88,14 @@ module Hubspot
             end
             h[k.to_sym] = v
           }
+
+          if attributes.key?(:'first_name')
+            self.first_name = attributes[:'first_name']
+          end
+
+          if attributes.key?(:'last_name')
+            self.last_name = attributes[:'last_name']
+          end
 
           if attributes.key?(:'primary_team_id')
             self.primary_team_id = attributes[:'primary_team_id']
@@ -127,6 +143,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              first_name == o.first_name &&
+              last_name == o.last_name &&
               primary_team_id == o.primary_team_id &&
               send_welcome_email == o.send_welcome_email &&
               role_id == o.role_id &&
@@ -143,7 +161,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [primary_team_id, send_welcome_email, role_id, secondary_team_ids, email].hash
+          [first_name, last_name, primary_team_id, send_welcome_email, role_id, secondary_team_ids, email].hash
         end
 
         # Builds the object from hash
