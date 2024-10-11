@@ -16,38 +16,49 @@ require 'time'
 module Hubspot
   module Marketing
     module Events
-      class Error
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
+      class PublicList
+        attr_accessor :processing_type
 
-        # Context about the error condition
-        attr_accessor :context
+        attr_accessor :object_type_id
 
-        # A unique identifier for the request. Include this value with any error reports or support tickets
-        attr_accessor :correlation_id
+        attr_accessor :updated_by_id
 
-        # A map of link names to associated URIs containing documentation about the error or recommended remediation steps
-        attr_accessor :links
+        attr_accessor :filters_updated_at
 
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
+        attr_accessor :list_id
 
-        # The error category
-        attr_accessor :category
+        attr_accessor :created_at
 
-        # further information about the error
-        attr_accessor :errors
+        attr_accessor :processing_status
+
+        attr_accessor :deleted_at
+
+        attr_accessor :list_version
+
+        attr_accessor :size
+
+        attr_accessor :name
+
+        attr_accessor :created_by_id
+
+        attr_accessor :updated_at
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'sub_category' => :'subCategory',
-            :'context' => :'context',
-            :'correlation_id' => :'correlationId',
-            :'links' => :'links',
-            :'message' => :'message',
-            :'category' => :'category',
-            :'errors' => :'errors'
+            :'processing_type' => :'processingType',
+            :'object_type_id' => :'objectTypeId',
+            :'updated_by_id' => :'updatedById',
+            :'filters_updated_at' => :'filtersUpdatedAt',
+            :'list_id' => :'listId',
+            :'created_at' => :'createdAt',
+            :'processing_status' => :'processingStatus',
+            :'deleted_at' => :'deletedAt',
+            :'list_version' => :'listVersion',
+            :'size' => :'size',
+            :'name' => :'name',
+            :'created_by_id' => :'createdById',
+            :'updated_at' => :'updatedAt'
           }
         end
 
@@ -59,13 +70,19 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'sub_category' => :'String',
-            :'context' => :'Hash<String, Array<String>>',
-            :'correlation_id' => :'String',
-            :'links' => :'Hash<String, String>',
-            :'message' => :'String',
-            :'category' => :'String',
-            :'errors' => :'Array<ErrorDetail>'
+            :'processing_type' => :'String',
+            :'object_type_id' => :'String',
+            :'updated_by_id' => :'String',
+            :'filters_updated_at' => :'Time',
+            :'list_id' => :'String',
+            :'created_at' => :'Time',
+            :'processing_status' => :'String',
+            :'deleted_at' => :'Time',
+            :'list_version' => :'Integer',
+            :'size' => :'Integer',
+            :'name' => :'String',
+            :'created_by_id' => :'String',
+            :'updated_at' => :'Time'
           }
         end
 
@@ -79,49 +96,67 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::Error` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::PublicList` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::Error`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::PublicList`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
+          if attributes.key?(:'processing_type')
+            self.processing_type = attributes[:'processing_type']
           end
 
-          if attributes.key?(:'context')
-            if (value = attributes[:'context']).is_a?(Hash)
-              self.context = value
-            end
+          if attributes.key?(:'object_type_id')
+            self.object_type_id = attributes[:'object_type_id']
           end
 
-          if attributes.key?(:'correlation_id')
-            self.correlation_id = attributes[:'correlation_id']
+          if attributes.key?(:'updated_by_id')
+            self.updated_by_id = attributes[:'updated_by_id']
           end
 
-          if attributes.key?(:'links')
-            if (value = attributes[:'links']).is_a?(Hash)
-              self.links = value
-            end
+          if attributes.key?(:'filters_updated_at')
+            self.filters_updated_at = attributes[:'filters_updated_at']
           end
 
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
+          if attributes.key?(:'list_id')
+            self.list_id = attributes[:'list_id']
           end
 
-          if attributes.key?(:'category')
-            self.category = attributes[:'category']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
+          if attributes.key?(:'processing_status')
+            self.processing_status = attributes[:'processing_status']
+          end
+
+          if attributes.key?(:'deleted_at')
+            self.deleted_at = attributes[:'deleted_at']
+          end
+
+          if attributes.key?(:'list_version')
+            self.list_version = attributes[:'list_version']
+          end
+
+          if attributes.key?(:'size')
+            self.size = attributes[:'size']
+          end
+
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'created_by_id')
+            self.created_by_id = attributes[:'created_by_id']
+          end
+
+          if attributes.key?(:'updated_at')
+            self.updated_at = attributes[:'updated_at']
           end
         end
 
@@ -129,16 +164,28 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @correlation_id.nil?
-            invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
+          if @processing_type.nil?
+            invalid_properties.push('invalid value for "processing_type", processing_type cannot be nil.')
           end
 
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          if @object_type_id.nil?
+            invalid_properties.push('invalid value for "object_type_id", object_type_id cannot be nil.')
           end
 
-          if @category.nil?
-            invalid_properties.push('invalid value for "category", category cannot be nil.')
+          if @list_id.nil?
+            invalid_properties.push('invalid value for "list_id", list_id cannot be nil.')
+          end
+
+          if @processing_status.nil?
+            invalid_properties.push('invalid value for "processing_status", processing_status cannot be nil.')
+          end
+
+          if @list_version.nil?
+            invalid_properties.push('invalid value for "list_version", list_version cannot be nil.')
+          end
+
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
           invalid_properties
@@ -147,9 +194,12 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @correlation_id.nil?
-          return false if @message.nil?
-          return false if @category.nil?
+          return false if @processing_type.nil?
+          return false if @object_type_id.nil?
+          return false if @list_id.nil?
+          return false if @processing_status.nil?
+          return false if @list_version.nil?
+          return false if @name.nil?
           true
         end
 
@@ -158,13 +208,19 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              sub_category == o.sub_category &&
-              context == o.context &&
-              correlation_id == o.correlation_id &&
-              links == o.links &&
-              message == o.message &&
-              category == o.category &&
-              errors == o.errors
+              processing_type == o.processing_type &&
+              object_type_id == o.object_type_id &&
+              updated_by_id == o.updated_by_id &&
+              filters_updated_at == o.filters_updated_at &&
+              list_id == o.list_id &&
+              created_at == o.created_at &&
+              processing_status == o.processing_status &&
+              deleted_at == o.deleted_at &&
+              list_version == o.list_version &&
+              size == o.size &&
+              name == o.name &&
+              created_by_id == o.created_by_id &&
+              updated_at == o.updated_at
         end
 
         # @see the `==` method
@@ -176,7 +232,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [sub_category, context, correlation_id, links, message, category, errors].hash
+          [processing_type, object_type_id, updated_by_id, filters_updated_at, list_id, created_at, processing_status, deleted_at, list_version, size, name, created_by_id, updated_at].hash
         end
 
         # Builds the object from hash

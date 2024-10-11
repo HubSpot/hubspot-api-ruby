@@ -18,8 +18,10 @@ module Hubspot
     module Forms
       # Describes how a phone number should be validated.
       class PhoneFieldValidation
+        # 
         attr_accessor :min_allowed_digits
 
+        # 
         attr_accessor :max_allowed_digits
 
         # Attribute mapping from ruby-style variable name to JSON key.

@@ -18,8 +18,10 @@ module Hubspot
     module Forms
       # Describes how a numeric value should be validated.
       class NumberFieldValidation
+        # 
         attr_accessor :min_allowed_digits
 
+        # 
         attr_accessor :max_allowed_digits
 
         # Attribute mapping from ruby-style variable name to JSON key.

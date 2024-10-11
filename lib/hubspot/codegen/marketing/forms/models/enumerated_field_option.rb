@@ -17,24 +17,25 @@ module Hubspot
   module Marketing
     module Forms
       class EnumeratedFieldOption
+        # The order the choices will be displayed in.
+        attr_accessor :display_order
+
+        # 
+        attr_accessor :description
+
         # The visible label for this choice.
         attr_accessor :label
 
         # The value which will be submitted if this choice is selected.
         attr_accessor :value
 
-        attr_accessor :description
-
-        # The order the choices will be displayed in.
-        attr_accessor :display_order
-
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'label' => :'label',
-            :'value' => :'value',
+            :'display_order' => :'displayOrder',
             :'description' => :'description',
-            :'display_order' => :'displayOrder'
+            :'label' => :'label',
+            :'value' => :'value'
           }
         end
 
@@ -46,10 +47,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'label' => :'String',
-            :'value' => :'String',
+            :'display_order' => :'Integer',
             :'description' => :'String',
-            :'display_order' => :'Integer'
+            :'label' => :'String',
+            :'value' => :'String'
           }
         end
 
@@ -74,6 +75,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'display_order')
+            self.display_order = attributes[:'display_order']
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
+          end
+
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
@@ -81,20 +90,16 @@ module Hubspot
           if attributes.key?(:'value')
             self.value = attributes[:'value']
           end
-
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
-          end
-
-          if attributes.key?(:'display_order')
-            self.display_order = attributes[:'display_order']
-          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @display_order.nil?
+            invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
+          end
+
           if @label.nil?
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
@@ -103,19 +108,15 @@ module Hubspot
             invalid_properties.push('invalid value for "value", value cannot be nil.')
           end
 
-          if @display_order.nil?
-            invalid_properties.push('invalid value for "display_order", display_order cannot be nil.')
-          end
-
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @display_order.nil?
           return false if @label.nil?
           return false if @value.nil?
-          return false if @display_order.nil?
           true
         end
 
@@ -124,10 +125,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              label == o.label &&
-              value == o.value &&
+              display_order == o.display_order &&
               description == o.description &&
-              display_order == o.display_order
+              label == o.label &&
+              value == o.value
         end
 
         # @see the `==` method
@@ -139,7 +140,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [label, value, description, display_order].hash
+          [display_order, description, label, value].hash
         end
 
         # Builds the object from hash

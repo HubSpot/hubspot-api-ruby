@@ -17,6 +17,7 @@ module Hubspot
   module Marketing
     module Forms
       class LegalConsentOptionsNone
+        # 
         attr_accessor :type
 
         class EnumAttributeValidator

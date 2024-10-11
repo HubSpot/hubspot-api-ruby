@@ -17,12 +17,16 @@ module Hubspot
   module Marketing
     module Forms
       class LegalConsentOptionsLegitimateInterest
-        attr_accessor :type
-
+        # 
         attr_accessor :subscription_type_ids
 
+        # 
         attr_accessor :lawful_basis
 
+        # 
+        attr_accessor :type
+
+        # 
         attr_accessor :privacy_text
 
         class EnumAttributeValidator
@@ -50,9 +54,9 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'type' => :'type',
             :'subscription_type_ids' => :'subscriptionTypeIds',
             :'lawful_basis' => :'lawfulBasis',
+            :'type' => :'type',
             :'privacy_text' => :'privacyText'
           }
         end
@@ -65,9 +69,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'type' => :'String',
             :'subscription_type_ids' => :'Array<Integer>',
             :'lawful_basis' => :'String',
+            :'type' => :'String',
             :'privacy_text' => :'String'
           }
         end
@@ -93,12 +97,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
-          else
-            self.type = 'legitimate_interest'
-          end
-
           if attributes.key?(:'subscription_type_ids')
             if (value = attributes[:'subscription_type_ids']).is_a?(Array)
               self.subscription_type_ids = value
@@ -107,6 +105,12 @@ module Hubspot
 
           if attributes.key?(:'lawful_basis')
             self.lawful_basis = attributes[:'lawful_basis']
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          else
+            self.type = 'legitimate_interest'
           end
 
           if attributes.key?(:'privacy_text')
@@ -118,16 +122,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @type.nil?
-            invalid_properties.push('invalid value for "type", type cannot be nil.')
-          end
-
           if @subscription_type_ids.nil?
             invalid_properties.push('invalid value for "subscription_type_ids", subscription_type_ids cannot be nil.')
           end
 
           if @lawful_basis.nil?
             invalid_properties.push('invalid value for "lawful_basis", lawful_basis cannot be nil.')
+          end
+
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
           if @privacy_text.nil?
@@ -140,25 +144,15 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @type.nil?
-          type_validator = EnumAttributeValidator.new('String', ["legitimate_interest"])
-          return false unless type_validator.valid?(@type)
           return false if @subscription_type_ids.nil?
           return false if @lawful_basis.nil?
           lawful_basis_validator = EnumAttributeValidator.new('String', ["lead", "client", "other"])
           return false unless lawful_basis_validator.valid?(@lawful_basis)
+          return false if @type.nil?
+          type_validator = EnumAttributeValidator.new('String', ["legitimate_interest"])
+          return false unless type_validator.valid?(@type)
           return false if @privacy_text.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] type Object to be assigned
-        def type=(type)
-          validator = EnumAttributeValidator.new('String', ["legitimate_interest"])
-          unless validator.valid?(type)
-            fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-          end
-          @type = type
         end
 
         # Custom attribute writer method checking allowed values (enum).
@@ -171,14 +165,24 @@ module Hubspot
           @lawful_basis = lawful_basis
         end
 
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] type Object to be assigned
+        def type=(type)
+          validator = EnumAttributeValidator.new('String', ["legitimate_interest"])
+          unless validator.valid?(type)
+            fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+          end
+          @type = type
+        end
+
         # Checks equality by comparing each attribute.
         # @param [Object] Object to be compared
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              type == o.type &&
               subscription_type_ids == o.subscription_type_ids &&
               lawful_basis == o.lawful_basis &&
+              type == o.type &&
               privacy_text == o.privacy_text
         end
 
@@ -191,7 +195,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [type, subscription_type_ids, lawful_basis, privacy_text].hash
+          [subscription_type_ids, lawful_basis, type, privacy_text].hash
         end
 
         # Builds the object from hash
