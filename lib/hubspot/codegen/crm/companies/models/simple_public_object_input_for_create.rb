@@ -19,12 +19,15 @@ module Hubspot
       class SimplePublicObjectInputForCreate
         attr_accessor :associations
 
+        attr_accessor :object_write_trace_id
+
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'associations' => :'associations',
+            :'object_write_trace_id' => :'objectWriteTraceId',
             :'properties' => :'properties'
           }
         end
@@ -38,6 +41,7 @@ module Hubspot
         def self.openapi_types
           {
             :'associations' => :'Array<PublicAssociationsForObject>',
+            :'object_write_trace_id' => :'String',
             :'properties' => :'Hash<String, String>'
           }
         end
@@ -69,6 +73,10 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'object_write_trace_id')
+            self.object_write_trace_id = attributes[:'object_write_trace_id']
+          end
+
           if attributes.key?(:'properties')
             if (value = attributes[:'properties']).is_a?(Hash)
               self.properties = value
@@ -80,10 +88,6 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @associations.nil?
-            invalid_properties.push('invalid value for "associations", associations cannot be nil.')
-          end
-
           if @properties.nil?
             invalid_properties.push('invalid value for "properties", properties cannot be nil.')
           end
@@ -94,7 +98,6 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @associations.nil?
           return false if @properties.nil?
           true
         end
@@ -105,6 +108,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               associations == o.associations &&
+              object_write_trace_id == o.object_write_trace_id &&
               properties == o.properties
         end
 
@@ -117,7 +121,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [associations, properties].hash
+          [associations, object_write_trace_id, properties].hash
         end
 
         # Builds the object from hash

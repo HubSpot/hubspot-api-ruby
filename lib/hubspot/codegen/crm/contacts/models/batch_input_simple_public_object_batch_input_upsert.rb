@@ -16,16 +16,13 @@ require 'time'
 module Hubspot
   module Crm
     module Contacts
-      class PublicAssociationsForObject
-        attr_accessor :types
-
-        attr_accessor :to
+      class BatchInputSimplePublicObjectBatchInputUpsert
+        attr_accessor :inputs
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'types' => :'types',
-            :'to' => :'to'
+            :'inputs' => :'inputs'
           }
         end
 
@@ -37,8 +34,7 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'types' => :'Array<AssociationSpec>',
-            :'to' => :'PublicObjectId'
+            :'inputs' => :'Array<SimplePublicObjectBatchInputUpsert>'
           }
         end
 
@@ -52,25 +48,21 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Contacts::PublicAssociationsForObject` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Contacts::BatchInputSimplePublicObjectBatchInputUpsert` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Contacts::PublicAssociationsForObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Contacts::BatchInputSimplePublicObjectBatchInputUpsert`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'types')
-            if (value = attributes[:'types']).is_a?(Array)
-              self.types = value
+          if attributes.key?(:'inputs')
+            if (value = attributes[:'inputs']).is_a?(Array)
+              self.inputs = value
             end
-          end
-
-          if attributes.key?(:'to')
-            self.to = attributes[:'to']
           end
         end
 
@@ -78,12 +70,17 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @inputs.nil?
+            invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @inputs.nil?
           true
         end
 
@@ -92,8 +89,7 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              types == o.types &&
-              to == o.to
+              inputs == o.inputs
         end
 
         # @see the `==` method
@@ -105,7 +101,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [types, to].hash
+          [inputs].hash
         end
 
         # Builds the object from hash
