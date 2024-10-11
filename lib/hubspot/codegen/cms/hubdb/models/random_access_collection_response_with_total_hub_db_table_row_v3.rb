@@ -16,30 +16,44 @@ require 'time'
 module Hubspot
   module Cms
     module Hubdb
-      class ErrorDetail
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
+      class RandomAccessCollectionResponseWithTotalHubDbTableRowV3
+        attr_accessor :total
 
-        # The status code associated with the error detail
-        attr_accessor :code
+        attr_accessor :paging
 
-        # The name of the field or parameter in which the error was found.
-        attr_accessor :_in
+        attr_accessor :type
 
-        # Context about the error condition
-        attr_accessor :context
+        attr_accessor :results
 
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
+        class EnumAttributeValidator
+          attr_reader :datatype
+          attr_reader :allowable_values
+
+          def initialize(datatype, allowable_values)
+            @allowable_values = allowable_values.map do |value|
+              case datatype.to_s
+              when /Integer/i
+                value.to_i
+              when /Float/i
+                value.to_f
+              else
+                value
+              end
+            end
+          end
+
+          def valid?(value)
+            !value || allowable_values.include?(value)
+          end
+        end
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'sub_category' => :'subCategory',
-            :'code' => :'code',
-            :'_in' => :'in',
-            :'context' => :'context',
-            :'message' => :'message'
+            :'total' => :'total',
+            :'paging' => :'paging',
+            :'type' => :'type',
+            :'results' => :'results'
           }
         end
 
@@ -51,11 +65,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'sub_category' => :'String',
-            :'code' => :'String',
-            :'_in' => :'String',
-            :'context' => :'Hash<String, Array<String>>',
-            :'message' => :'String'
+            :'total' => :'Integer',
+            :'paging' => :'BoundedPaging',
+            :'type' => :'String',
+            :'results' => :'Array<HubDbTableRowV3>'
           }
         end
 
@@ -69,37 +82,35 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Hubdb::ErrorDetail` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Hubdb::RandomAccessCollectionResponseWithTotalHubDbTableRowV3` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Hubdb::ErrorDetail`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Hubdb::RandomAccessCollectionResponseWithTotalHubDbTableRowV3`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
+          if attributes.key?(:'total')
+            self.total = attributes[:'total']
           end
 
-          if attributes.key?(:'code')
-            self.code = attributes[:'code']
+          if attributes.key?(:'paging')
+            self.paging = attributes[:'paging']
           end
 
-          if attributes.key?(:'_in')
-            self._in = attributes[:'_in']
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          else
+            self.type = 'RANDOM_ACCESS'
           end
 
-          if attributes.key?(:'context')
-            if (value = attributes[:'context']).is_a?(Hash)
-              self.context = value
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
             end
-          end
-
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
           end
         end
 
@@ -107,8 +118,16 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          if @total.nil?
+            invalid_properties.push('invalid value for "total", total cannot be nil.')
+          end
+
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
+          end
+
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
 
           invalid_properties
@@ -117,8 +136,22 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @message.nil?
+          return false if @total.nil?
+          return false if @type.nil?
+          type_validator = EnumAttributeValidator.new('String', ["RANDOM_ACCESS"])
+          return false unless type_validator.valid?(@type)
+          return false if @results.nil?
           true
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] type Object to be assigned
+        def type=(type)
+          validator = EnumAttributeValidator.new('String', ["RANDOM_ACCESS"])
+          unless validator.valid?(type)
+            fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+          end
+          @type = type
         end
 
         # Checks equality by comparing each attribute.
@@ -126,11 +159,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              sub_category == o.sub_category &&
-              code == o.code &&
-              _in == o._in &&
-              context == o.context &&
-              message == o.message
+              total == o.total &&
+              paging == o.paging &&
+              type == o.type &&
+              results == o.results
         end
 
         # @see the `==` method
@@ -142,7 +174,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [sub_category, code, _in, context, message].hash
+          [total, paging, type, results].hash
         end
 
         # Builds the object from hash
