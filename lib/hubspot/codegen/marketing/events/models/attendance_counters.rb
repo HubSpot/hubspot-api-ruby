@@ -16,38 +16,22 @@ require 'time'
 module Hubspot
   module Marketing
     module Events
-      class Error
-        # A specific category that contains more specific detail about the error
-        attr_accessor :sub_category
+      class AttendanceCounters
+        attr_accessor :attended
 
-        # Context about the error condition
-        attr_accessor :context
+        attr_accessor :registered
 
-        # A unique identifier for the request. Include this value with any error reports or support tickets
-        attr_accessor :correlation_id
+        attr_accessor :cancelled
 
-        # A map of link names to associated URIs containing documentation about the error or recommended remediation steps
-        attr_accessor :links
-
-        # A human readable message describing the error along with remediation steps where appropriate
-        attr_accessor :message
-
-        # The error category
-        attr_accessor :category
-
-        # further information about the error
-        attr_accessor :errors
+        attr_accessor :no_shows
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'sub_category' => :'subCategory',
-            :'context' => :'context',
-            :'correlation_id' => :'correlationId',
-            :'links' => :'links',
-            :'message' => :'message',
-            :'category' => :'category',
-            :'errors' => :'errors'
+            :'attended' => :'attended',
+            :'registered' => :'registered',
+            :'cancelled' => :'cancelled',
+            :'no_shows' => :'noShows'
           }
         end
 
@@ -59,13 +43,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'sub_category' => :'String',
-            :'context' => :'Hash<String, Array<String>>',
-            :'correlation_id' => :'String',
-            :'links' => :'Hash<String, String>',
-            :'message' => :'String',
-            :'category' => :'String',
-            :'errors' => :'Array<ErrorDetail>'
+            :'attended' => :'Integer',
+            :'registered' => :'Integer',
+            :'cancelled' => :'Integer',
+            :'no_shows' => :'Integer'
           }
         end
 
@@ -79,49 +60,31 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::Error` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::AttendanceCounters` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::Error`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::AttendanceCounters`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'sub_category')
-            self.sub_category = attributes[:'sub_category']
+          if attributes.key?(:'attended')
+            self.attended = attributes[:'attended']
           end
 
-          if attributes.key?(:'context')
-            if (value = attributes[:'context']).is_a?(Hash)
-              self.context = value
-            end
+          if attributes.key?(:'registered')
+            self.registered = attributes[:'registered']
           end
 
-          if attributes.key?(:'correlation_id')
-            self.correlation_id = attributes[:'correlation_id']
+          if attributes.key?(:'cancelled')
+            self.cancelled = attributes[:'cancelled']
           end
 
-          if attributes.key?(:'links')
-            if (value = attributes[:'links']).is_a?(Hash)
-              self.links = value
-            end
-          end
-
-          if attributes.key?(:'message')
-            self.message = attributes[:'message']
-          end
-
-          if attributes.key?(:'category')
-            self.category = attributes[:'category']
-          end
-
-          if attributes.key?(:'errors')
-            if (value = attributes[:'errors']).is_a?(Array)
-              self.errors = value
-            end
+          if attributes.key?(:'no_shows')
+            self.no_shows = attributes[:'no_shows']
           end
         end
 
@@ -129,16 +92,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @correlation_id.nil?
-            invalid_properties.push('invalid value for "correlation_id", correlation_id cannot be nil.')
+          if @attended.nil?
+            invalid_properties.push('invalid value for "attended", attended cannot be nil.')
           end
 
-          if @message.nil?
-            invalid_properties.push('invalid value for "message", message cannot be nil.')
+          if @registered.nil?
+            invalid_properties.push('invalid value for "registered", registered cannot be nil.')
           end
 
-          if @category.nil?
-            invalid_properties.push('invalid value for "category", category cannot be nil.')
+          if @cancelled.nil?
+            invalid_properties.push('invalid value for "cancelled", cancelled cannot be nil.')
+          end
+
+          if @no_shows.nil?
+            invalid_properties.push('invalid value for "no_shows", no_shows cannot be nil.')
           end
 
           invalid_properties
@@ -147,9 +114,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @correlation_id.nil?
-          return false if @message.nil?
-          return false if @category.nil?
+          return false if @attended.nil?
+          return false if @registered.nil?
+          return false if @cancelled.nil?
+          return false if @no_shows.nil?
           true
         end
 
@@ -158,13 +126,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              sub_category == o.sub_category &&
-              context == o.context &&
-              correlation_id == o.correlation_id &&
-              links == o.links &&
-              message == o.message &&
-              category == o.category &&
-              errors == o.errors
+              attended == o.attended &&
+              registered == o.registered &&
+              cancelled == o.cancelled &&
+              no_shows == o.no_shows
         end
 
         # @see the `==` method
@@ -176,7 +141,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [sub_category, context, correlation_id, links, message, category, errors].hash
+          [attended, registered, cancelled, no_shows].hash
         end
 
         # Builds the object from hash

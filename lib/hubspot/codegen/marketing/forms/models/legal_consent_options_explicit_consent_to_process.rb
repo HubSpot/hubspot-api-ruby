@@ -17,19 +17,26 @@ module Hubspot
   module Marketing
     module Forms
       class LegalConsentOptionsExplicitConsentToProcess
-        attr_accessor :type
-
-        attr_accessor :communication_consent_text
-
+        # 
         attr_accessor :communications_checkboxes
 
-        attr_accessor :consent_to_process_text
+        # 
+        attr_accessor :communication_consent_text
 
+        # 
         attr_accessor :consent_to_process_checkbox_label
 
+        # 
         attr_accessor :consent_to_process_footer_text
 
+        # 
+        attr_accessor :type
+
+        # 
         attr_accessor :privacy_text
+
+        # 
+        attr_accessor :consent_to_process_text
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -56,13 +63,13 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'type' => :'type',
-            :'communication_consent_text' => :'communicationConsentText',
             :'communications_checkboxes' => :'communicationsCheckboxes',
-            :'consent_to_process_text' => :'consentToProcessText',
+            :'communication_consent_text' => :'communicationConsentText',
             :'consent_to_process_checkbox_label' => :'consentToProcessCheckboxLabel',
             :'consent_to_process_footer_text' => :'consentToProcessFooterText',
-            :'privacy_text' => :'privacyText'
+            :'type' => :'type',
+            :'privacy_text' => :'privacyText',
+            :'consent_to_process_text' => :'consentToProcessText'
           }
         end
 
@@ -74,13 +81,13 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'type' => :'String',
-            :'communication_consent_text' => :'String',
             :'communications_checkboxes' => :'Array<LegalConsentCheckbox>',
-            :'consent_to_process_text' => :'String',
+            :'communication_consent_text' => :'String',
             :'consent_to_process_checkbox_label' => :'String',
             :'consent_to_process_footer_text' => :'String',
-            :'privacy_text' => :'String'
+            :'type' => :'String',
+            :'privacy_text' => :'String',
+            :'consent_to_process_text' => :'String'
           }
         end
 
@@ -105,24 +112,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'type')
-            self.type = attributes[:'type']
-          else
-            self.type = 'explicit_consent_to_process'
-          end
-
-          if attributes.key?(:'communication_consent_text')
-            self.communication_consent_text = attributes[:'communication_consent_text']
-          end
-
           if attributes.key?(:'communications_checkboxes')
             if (value = attributes[:'communications_checkboxes']).is_a?(Array)
               self.communications_checkboxes = value
             end
           end
 
-          if attributes.key?(:'consent_to_process_text')
-            self.consent_to_process_text = attributes[:'consent_to_process_text']
+          if attributes.key?(:'communication_consent_text')
+            self.communication_consent_text = attributes[:'communication_consent_text']
           end
 
           if attributes.key?(:'consent_to_process_checkbox_label')
@@ -133,8 +130,18 @@ module Hubspot
             self.consent_to_process_footer_text = attributes[:'consent_to_process_footer_text']
           end
 
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          else
+            self.type = 'explicit_consent_to_process'
+          end
+
           if attributes.key?(:'privacy_text')
             self.privacy_text = attributes[:'privacy_text']
+          end
+
+          if attributes.key?(:'consent_to_process_text')
+            self.consent_to_process_text = attributes[:'consent_to_process_text']
           end
         end
 
@@ -142,12 +149,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @type.nil?
-            invalid_properties.push('invalid value for "type", type cannot be nil.')
-          end
-
           if @communications_checkboxes.nil?
             invalid_properties.push('invalid value for "communications_checkboxes", communications_checkboxes cannot be nil.')
+          end
+
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
           end
 
           if @privacy_text.nil?
@@ -160,10 +167,10 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @communications_checkboxes.nil?
           return false if @type.nil?
           type_validator = EnumAttributeValidator.new('String', ["explicit_consent_to_process"])
           return false unless type_validator.valid?(@type)
-          return false if @communications_checkboxes.nil?
           return false if @privacy_text.nil?
           true
         end
@@ -183,13 +190,13 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              type == o.type &&
-              communication_consent_text == o.communication_consent_text &&
               communications_checkboxes == o.communications_checkboxes &&
-              consent_to_process_text == o.consent_to_process_text &&
+              communication_consent_text == o.communication_consent_text &&
               consent_to_process_checkbox_label == o.consent_to_process_checkbox_label &&
               consent_to_process_footer_text == o.consent_to_process_footer_text &&
-              privacy_text == o.privacy_text
+              type == o.type &&
+              privacy_text == o.privacy_text &&
+              consent_to_process_text == o.consent_to_process_text
         end
 
         # @see the `==` method
@@ -201,7 +208,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [type, communication_consent_text, communications_checkboxes, consent_to_process_text, consent_to_process_checkbox_label, consent_to_process_footer_text, privacy_text].hash
+          [communications_checkboxes, communication_consent_text, consent_to_process_checkbox_label, consent_to_process_footer_text, type, privacy_text, consent_to_process_text].hash
         end
 
         # Builds the object from hash

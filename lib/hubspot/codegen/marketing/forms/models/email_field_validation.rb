@@ -18,17 +18,17 @@ module Hubspot
     module Forms
       # Describes how an email address should be validated.
       class EmailFieldValidation
-        # A list of email domains to block.
-        attr_accessor :blocked_email_domains
-
         # Whether to block the free email providers.
         attr_accessor :use_default_block_list
+
+        # A list of email domains to block.
+        attr_accessor :blocked_email_domains
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'blocked_email_domains' => :'blockedEmailDomains',
-            :'use_default_block_list' => :'useDefaultBlockList'
+            :'use_default_block_list' => :'useDefaultBlockList',
+            :'blocked_email_domains' => :'blockedEmailDomains'
           }
         end
 
@@ -40,8 +40,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'blocked_email_domains' => :'Array<String>',
-            :'use_default_block_list' => :'Boolean'
+            :'use_default_block_list' => :'Boolean',
+            :'blocked_email_domains' => :'Array<String>'
           }
         end
 
@@ -66,14 +66,14 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'use_default_block_list')
+            self.use_default_block_list = attributes[:'use_default_block_list']
+          end
+
           if attributes.key?(:'blocked_email_domains')
             if (value = attributes[:'blocked_email_domains']).is_a?(Array)
               self.blocked_email_domains = value
             end
-          end
-
-          if attributes.key?(:'use_default_block_list')
-            self.use_default_block_list = attributes[:'use_default_block_list']
           end
         end
 
@@ -81,12 +81,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @blocked_email_domains.nil?
-            invalid_properties.push('invalid value for "blocked_email_domains", blocked_email_domains cannot be nil.')
-          end
-
           if @use_default_block_list.nil?
             invalid_properties.push('invalid value for "use_default_block_list", use_default_block_list cannot be nil.')
+          end
+
+          if @blocked_email_domains.nil?
+            invalid_properties.push('invalid value for "blocked_email_domains", blocked_email_domains cannot be nil.')
           end
 
           invalid_properties
@@ -95,8 +95,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @blocked_email_domains.nil?
           return false if @use_default_block_list.nil?
+          return false if @blocked_email_domains.nil?
           true
         end
 
@@ -105,8 +105,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              blocked_email_domains == o.blocked_email_domains &&
-              use_default_block_list == o.use_default_block_list
+              use_default_block_list == o.use_default_block_list &&
+              blocked_email_domains == o.blocked_email_domains
         end
 
         # @see the `==` method
@@ -118,7 +118,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [blocked_email_domains, use_default_block_list].hash
+          [use_default_block_list, blocked_email_domains].hash
         end
 
         # Builds the object from hash
