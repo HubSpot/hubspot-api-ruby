@@ -1331,7 +1331,7 @@ module Hubspot
           end
 
           # Set a new primary language
-          # Set a Blog Post as the primary language of a multi-language group.
+          # Set the primary language of a multi-language group to the language of the provided post (specified as an id in the request body)
           # @param set_new_language_primary_request_v_next [SetNewLanguagePrimaryRequestVNext] The JSON representation of the SetNewLanguagePrimaryRequest object.
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -1341,7 +1341,7 @@ module Hubspot
           end
 
           # Set a new primary language
-          # Set a Blog Post as the primary language of a multi-language group.
+          # Set the primary language of a multi-language group to the language of the provided post (specified as an id in the request body)
           # @param set_new_language_primary_request_v_next [SetNewLanguagePrimaryRequestVNext] The JSON representation of the SetNewLanguagePrimaryRequest object.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

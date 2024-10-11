@@ -17,34 +17,19 @@ module Hubspot
   module Cms
     module Blogs
       module BlogPosts
-        class Styles
-          attr_accessor :background_color
+        class BreakpointStyles
+          attr_accessor :padding
 
-          attr_accessor :flexbox_positioning
+          attr_accessor :margin
 
-          attr_accessor :background_image
-
-          attr_accessor :force_full_width_section
-
-          attr_accessor :breakpoint_styles
-
-          attr_accessor :vertical_alignment
-
-          attr_accessor :max_width_section_centering
-
-          attr_accessor :background_gradient
+          attr_accessor :hidden
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'background_color' => :'backgroundColor',
-              :'flexbox_positioning' => :'flexboxPositioning',
-              :'background_image' => :'backgroundImage',
-              :'force_full_width_section' => :'forceFullWidthSection',
-              :'breakpoint_styles' => :'breakpointStyles',
-              :'vertical_alignment' => :'verticalAlignment',
-              :'max_width_section_centering' => :'maxWidthSectionCentering',
-              :'background_gradient' => :'backgroundGradient'
+              :'padding' => :'padding',
+              :'margin' => :'margin',
+              :'hidden' => :'hidden'
             }
           end
 
@@ -56,14 +41,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'background_color' => :'RGBAColor',
-              :'flexbox_positioning' => :'String',
-              :'background_image' => :'BackgroundImage',
-              :'force_full_width_section' => :'Boolean',
-              :'breakpoint_styles' => :'Hash<String, BreakpointStyles>',
-              :'vertical_alignment' => :'String',
-              :'max_width_section_centering' => :'Integer',
-              :'background_gradient' => :'Gradient'
+              :'padding' => :'Object',
+              :'margin' => :'Object',
+              :'hidden' => :'Boolean'
             }
           end
 
@@ -77,49 +57,27 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Blogs::BlogPosts::Styles` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Cms::Blogs::BlogPosts::BreakpointStyles` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Blogs::BlogPosts::Styles`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Cms::Blogs::BlogPosts::BreakpointStyles`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'background_color')
-              self.background_color = attributes[:'background_color']
+            if attributes.key?(:'padding')
+              self.padding = attributes[:'padding']
             end
 
-            if attributes.key?(:'flexbox_positioning')
-              self.flexbox_positioning = attributes[:'flexbox_positioning']
+            if attributes.key?(:'margin')
+              self.margin = attributes[:'margin']
             end
 
-            if attributes.key?(:'background_image')
-              self.background_image = attributes[:'background_image']
-            end
-
-            if attributes.key?(:'force_full_width_section')
-              self.force_full_width_section = attributes[:'force_full_width_section']
-            end
-
-            if attributes.key?(:'breakpoint_styles')
-              if (value = attributes[:'breakpoint_styles']).is_a?(Hash)
-                self.breakpoint_styles = value
-              end
-            end
-
-            if attributes.key?(:'vertical_alignment')
-              self.vertical_alignment = attributes[:'vertical_alignment']
-            end
-
-            if attributes.key?(:'max_width_section_centering')
-              self.max_width_section_centering = attributes[:'max_width_section_centering']
-            end
-
-            if attributes.key?(:'background_gradient')
-              self.background_gradient = attributes[:'background_gradient']
+            if attributes.key?(:'hidden')
+              self.hidden = attributes[:'hidden']
             end
           end
 
@@ -127,32 +85,16 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @background_color.nil?
-              invalid_properties.push('invalid value for "background_color", background_color cannot be nil.')
+            if @padding.nil?
+              invalid_properties.push('invalid value for "padding", padding cannot be nil.')
             end
 
-            if @flexbox_positioning.nil?
-              invalid_properties.push('invalid value for "flexbox_positioning", flexbox_positioning cannot be nil.')
+            if @margin.nil?
+              invalid_properties.push('invalid value for "margin", margin cannot be nil.')
             end
 
-            if @background_image.nil?
-              invalid_properties.push('invalid value for "background_image", background_image cannot be nil.')
-            end
-
-            if @force_full_width_section.nil?
-              invalid_properties.push('invalid value for "force_full_width_section", force_full_width_section cannot be nil.')
-            end
-
-            if @vertical_alignment.nil?
-              invalid_properties.push('invalid value for "vertical_alignment", vertical_alignment cannot be nil.')
-            end
-
-            if @max_width_section_centering.nil?
-              invalid_properties.push('invalid value for "max_width_section_centering", max_width_section_centering cannot be nil.')
-            end
-
-            if @background_gradient.nil?
-              invalid_properties.push('invalid value for "background_gradient", background_gradient cannot be nil.')
+            if @hidden.nil?
+              invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
             end
 
             invalid_properties
@@ -161,13 +103,9 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @background_color.nil?
-            return false if @flexbox_positioning.nil?
-            return false if @background_image.nil?
-            return false if @force_full_width_section.nil?
-            return false if @vertical_alignment.nil?
-            return false if @max_width_section_centering.nil?
-            return false if @background_gradient.nil?
+            return false if @padding.nil?
+            return false if @margin.nil?
+            return false if @hidden.nil?
             true
           end
 
@@ -176,14 +114,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                background_color == o.background_color &&
-                flexbox_positioning == o.flexbox_positioning &&
-                background_image == o.background_image &&
-                force_full_width_section == o.force_full_width_section &&
-                breakpoint_styles == o.breakpoint_styles &&
-                vertical_alignment == o.vertical_alignment &&
-                max_width_section_centering == o.max_width_section_centering &&
-                background_gradient == o.background_gradient
+                padding == o.padding &&
+                margin == o.margin &&
+                hidden == o.hidden
           end
 
           # @see the `==` method
@@ -195,7 +128,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [background_color, flexbox_positioning, background_image, force_full_width_section, breakpoint_styles, vertical_alignment, max_width_section_centering, background_gradient].hash
+            [padding, margin, hidden].hash
           end
 
           # Builds the object from hash
