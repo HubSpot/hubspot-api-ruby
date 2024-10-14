@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Crm
       module Tickets
-        class AssociationsApi
+        class MergeApi
           include Hubspot::Discovery::BaseApiClient
         end
       end

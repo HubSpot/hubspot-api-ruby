@@ -9,7 +9,6 @@ module Hubspot
 
           def api_modules
             %i[
-              accounting
               calling
               cards
               videoconferencing

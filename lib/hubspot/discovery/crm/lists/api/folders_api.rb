@@ -3,8 +3,8 @@ require_relative '../../../base_api_client'
 module Hubspot
   module Discovery
     module Crm
-      module LineItems
-        class GDPRApi
+      module Lists
+        class FoldersApi
           include Hubspot::Discovery::BaseApiClient
         end
       end
