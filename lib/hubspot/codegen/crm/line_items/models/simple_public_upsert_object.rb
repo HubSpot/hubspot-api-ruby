@@ -16,16 +16,34 @@ require 'time'
 module Hubspot
   module Crm
     module LineItems
-      class PublicMergeInput
-        attr_accessor :object_id_to_merge
+      class SimplePublicUpsertObject
+        attr_accessor :created_at
 
-        attr_accessor :primary_object_id
+        attr_accessor :archived
+
+        attr_accessor :archived_at
+
+        attr_accessor :new
+
+        attr_accessor :properties_with_history
+
+        attr_accessor :id
+
+        attr_accessor :properties
+
+        attr_accessor :updated_at
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'object_id_to_merge' => :'objectIdToMerge',
-            :'primary_object_id' => :'primaryObjectId'
+            :'created_at' => :'createdAt',
+            :'archived' => :'archived',
+            :'archived_at' => :'archivedAt',
+            :'new' => :'new',
+            :'properties_with_history' => :'propertiesWithHistory',
+            :'id' => :'id',
+            :'properties' => :'properties',
+            :'updated_at' => :'updatedAt'
           }
         end
 
@@ -37,8 +55,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'object_id_to_merge' => :'String',
-            :'primary_object_id' => :'String'
+            :'created_at' => :'Time',
+            :'archived' => :'Boolean',
+            :'archived_at' => :'Time',
+            :'new' => :'Boolean',
+            :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
+            :'id' => :'String',
+            :'properties' => :'Hash<String, String>',
+            :'updated_at' => :'Time'
           }
         end
 
@@ -52,23 +76,51 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::LineItems::PublicMergeInput` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::LineItems::SimplePublicUpsertObject` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::LineItems::PublicMergeInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::LineItems::SimplePublicUpsertObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'object_id_to_merge')
-            self.object_id_to_merge = attributes[:'object_id_to_merge']
+          if attributes.key?(:'created_at')
+            self.created_at = attributes[:'created_at']
           end
 
-          if attributes.key?(:'primary_object_id')
-            self.primary_object_id = attributes[:'primary_object_id']
+          if attributes.key?(:'archived')
+            self.archived = attributes[:'archived']
+          end
+
+          if attributes.key?(:'archived_at')
+            self.archived_at = attributes[:'archived_at']
+          end
+
+          if attributes.key?(:'new')
+            self.new = attributes[:'new']
+          end
+
+          if attributes.key?(:'properties_with_history')
+            if (value = attributes[:'properties_with_history']).is_a?(Hash)
+              self.properties_with_history = value
+            end
+          end
+
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'properties')
+            if (value = attributes[:'properties']).is_a?(Hash)
+              self.properties = value
+            end
+          end
+
+          if attributes.key?(:'updated_at')
+            self.updated_at = attributes[:'updated_at']
           end
         end
 
@@ -76,12 +128,24 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @object_id_to_merge.nil?
-            invalid_properties.push('invalid value for "object_id_to_merge", object_id_to_merge cannot be nil.')
+          if @created_at.nil?
+            invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
           end
 
-          if @primary_object_id.nil?
-            invalid_properties.push('invalid value for "primary_object_id", primary_object_id cannot be nil.')
+          if @new.nil?
+            invalid_properties.push('invalid value for "new", new cannot be nil.')
+          end
+
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          end
+
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
+          if @updated_at.nil?
+            invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
           end
 
           invalid_properties
@@ -90,8 +154,11 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @object_id_to_merge.nil?
-          return false if @primary_object_id.nil?
+          return false if @created_at.nil?
+          return false if @new.nil?
+          return false if @id.nil?
+          return false if @properties.nil?
+          return false if @updated_at.nil?
           true
         end
 
@@ -100,8 +167,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              object_id_to_merge == o.object_id_to_merge &&
-              primary_object_id == o.primary_object_id
+              created_at == o.created_at &&
+              archived == o.archived &&
+              archived_at == o.archived_at &&
+              new == o.new &&
+              properties_with_history == o.properties_with_history &&
+              id == o.id &&
+              properties == o.properties &&
+              updated_at == o.updated_at
         end
 
         # @see the `==` method
@@ -113,7 +186,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [object_id_to_merge, primary_object_id].hash
+          [created_at, archived, archived_at, new, properties_with_history, id, properties, updated_at].hash
         end
 
         # Builds the object from hash
