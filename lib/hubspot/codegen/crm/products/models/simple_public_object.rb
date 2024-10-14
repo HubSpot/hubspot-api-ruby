@@ -128,6 +128,10 @@ module Hubspot
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
           if @updated_at.nil?
             invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
           end
@@ -140,6 +144,7 @@ module Hubspot
         def valid?
           return false if @created_at.nil?
           return false if @id.nil?
+          return false if @properties.nil?
           return false if @updated_at.nil?
           true
         end

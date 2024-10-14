@@ -16,16 +16,56 @@ require 'time'
 module Hubspot
   module Crm
     module Products
-      class PublicMergeInput
-        attr_accessor :object_id_to_merge
+      class BatchResponseSimplePublicUpsertObjectWithErrors
+        attr_accessor :completed_at
 
-        attr_accessor :primary_object_id
+        attr_accessor :num_errors
+
+        attr_accessor :requested_at
+
+        attr_accessor :started_at
+
+        attr_accessor :links
+
+        attr_accessor :results
+
+        attr_accessor :errors
+
+        attr_accessor :status
+
+        class EnumAttributeValidator
+          attr_reader :datatype
+          attr_reader :allowable_values
+
+          def initialize(datatype, allowable_values)
+            @allowable_values = allowable_values.map do |value|
+              case datatype.to_s
+              when /Integer/i
+                value.to_i
+              when /Float/i
+                value.to_f
+              else
+                value
+              end
+            end
+          end
+
+          def valid?(value)
+            !value || allowable_values.include?(value)
+          end
+        end
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'object_id_to_merge' => :'objectIdToMerge',
-            :'primary_object_id' => :'primaryObjectId'
+            :'completed_at' => :'completedAt',
+            :'num_errors' => :'numErrors',
+            :'requested_at' => :'requestedAt',
+            :'started_at' => :'startedAt',
+            :'links' => :'links',
+            :'results' => :'results',
+            :'errors' => :'errors',
+            :'status' => :'status'
           }
         end
 
@@ -37,8 +77,14 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'object_id_to_merge' => :'String',
-            :'primary_object_id' => :'String'
+            :'completed_at' => :'Time',
+            :'num_errors' => :'Integer',
+            :'requested_at' => :'Time',
+            :'started_at' => :'Time',
+            :'links' => :'Hash<String, String>',
+            :'results' => :'Array<SimplePublicUpsertObject>',
+            :'errors' => :'Array<StandardError>',
+            :'status' => :'String'
           }
         end
 
@@ -52,23 +98,53 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Products::PublicMergeInput` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Products::BatchResponseSimplePublicUpsertObjectWithErrors` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Products::PublicMergeInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Products::BatchResponseSimplePublicUpsertObjectWithErrors`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'object_id_to_merge')
-            self.object_id_to_merge = attributes[:'object_id_to_merge']
+          if attributes.key?(:'completed_at')
+            self.completed_at = attributes[:'completed_at']
           end
 
-          if attributes.key?(:'primary_object_id')
-            self.primary_object_id = attributes[:'primary_object_id']
+          if attributes.key?(:'num_errors')
+            self.num_errors = attributes[:'num_errors']
+          end
+
+          if attributes.key?(:'requested_at')
+            self.requested_at = attributes[:'requested_at']
+          end
+
+          if attributes.key?(:'started_at')
+            self.started_at = attributes[:'started_at']
+          end
+
+          if attributes.key?(:'links')
+            if (value = attributes[:'links']).is_a?(Hash)
+              self.links = value
+            end
+          end
+
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
+            end
+          end
+
+          if attributes.key?(:'errors')
+            if (value = attributes[:'errors']).is_a?(Array)
+              self.errors = value
+            end
+          end
+
+          if attributes.key?(:'status')
+            self.status = attributes[:'status']
           end
         end
 
@@ -76,12 +152,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @object_id_to_merge.nil?
-            invalid_properties.push('invalid value for "object_id_to_merge", object_id_to_merge cannot be nil.')
+          if @completed_at.nil?
+            invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
           end
 
-          if @primary_object_id.nil?
-            invalid_properties.push('invalid value for "primary_object_id", primary_object_id cannot be nil.')
+          if @started_at.nil?
+            invalid_properties.push('invalid value for "started_at", started_at cannot be nil.')
+          end
+
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
+          end
+
+          if @status.nil?
+            invalid_properties.push('invalid value for "status", status cannot be nil.')
           end
 
           invalid_properties
@@ -90,9 +174,23 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @object_id_to_merge.nil?
-          return false if @primary_object_id.nil?
+          return false if @completed_at.nil?
+          return false if @started_at.nil?
+          return false if @results.nil?
+          return false if @status.nil?
+          status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+          return false unless status_validator.valid?(@status)
           true
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] status Object to be assigned
+        def status=(status)
+          validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+          unless validator.valid?(status)
+            fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+          end
+          @status = status
         end
 
         # Checks equality by comparing each attribute.
@@ -100,8 +198,14 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              object_id_to_merge == o.object_id_to_merge &&
-              primary_object_id == o.primary_object_id
+              completed_at == o.completed_at &&
+              num_errors == o.num_errors &&
+              requested_at == o.requested_at &&
+              started_at == o.started_at &&
+              links == o.links &&
+              results == o.results &&
+              errors == o.errors &&
+              status == o.status
         end
 
         # @see the `==` method
@@ -113,7 +217,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [object_id_to_merge, primary_object_id].hash
+          [completed_at, num_errors, requested_at, started_at, links, results, errors, status].hash
         end
 
         # Builds the object from hash
