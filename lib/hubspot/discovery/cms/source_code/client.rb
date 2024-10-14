@@ -12,7 +12,6 @@ module Hubspot
               content
               extract
               metadata
-              source_code_extract
               validation
             ].freeze
           end
