@@ -16,22 +16,50 @@ require 'time'
 module Hubspot
   module Crm
     module Quotes
-      class SimplePublicObjectBatchInput
-        attr_accessor :id_property
+      class BatchResponseSimplePublicUpsertObject
+        attr_accessor :completed_at
 
-        attr_accessor :object_write_trace_id
+        attr_accessor :requested_at
 
-        attr_accessor :id
+        attr_accessor :started_at
 
-        attr_accessor :properties
+        attr_accessor :links
+
+        attr_accessor :results
+
+        attr_accessor :status
+
+        class EnumAttributeValidator
+          attr_reader :datatype
+          attr_reader :allowable_values
+
+          def initialize(datatype, allowable_values)
+            @allowable_values = allowable_values.map do |value|
+              case datatype.to_s
+              when /Integer/i
+                value.to_i
+              when /Float/i
+                value.to_f
+              else
+                value
+              end
+            end
+          end
+
+          def valid?(value)
+            !value || allowable_values.include?(value)
+          end
+        end
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id_property' => :'idProperty',
-            :'object_write_trace_id' => :'objectWriteTraceId',
-            :'id' => :'id',
-            :'properties' => :'properties'
+            :'completed_at' => :'completedAt',
+            :'requested_at' => :'requestedAt',
+            :'started_at' => :'startedAt',
+            :'links' => :'links',
+            :'results' => :'results',
+            :'status' => :'status'
           }
         end
 
@@ -43,10 +71,12 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id_property' => :'String',
-            :'object_write_trace_id' => :'String',
-            :'id' => :'String',
-            :'properties' => :'Hash<String, String>'
+            :'completed_at' => :'Time',
+            :'requested_at' => :'Time',
+            :'started_at' => :'Time',
+            :'links' => :'Hash<String, String>',
+            :'results' => :'Array<SimplePublicUpsertObject>',
+            :'status' => :'String'
           }
         end
 
@@ -60,33 +90,43 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Quotes::SimplePublicObjectBatchInput` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Quotes::BatchResponseSimplePublicUpsertObject` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Quotes::SimplePublicObjectBatchInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Quotes::BatchResponseSimplePublicUpsertObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id_property')
-            self.id_property = attributes[:'id_property']
+          if attributes.key?(:'completed_at')
+            self.completed_at = attributes[:'completed_at']
           end
 
-          if attributes.key?(:'object_write_trace_id')
-            self.object_write_trace_id = attributes[:'object_write_trace_id']
+          if attributes.key?(:'requested_at')
+            self.requested_at = attributes[:'requested_at']
           end
 
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
+          if attributes.key?(:'started_at')
+            self.started_at = attributes[:'started_at']
           end
 
-          if attributes.key?(:'properties')
-            if (value = attributes[:'properties']).is_a?(Hash)
-              self.properties = value
+          if attributes.key?(:'links')
+            if (value = attributes[:'links']).is_a?(Hash)
+              self.links = value
             end
+          end
+
+          if attributes.key?(:'results')
+            if (value = attributes[:'results']).is_a?(Array)
+              self.results = value
+            end
+          end
+
+          if attributes.key?(:'status')
+            self.status = attributes[:'status']
           end
         end
 
@@ -94,12 +134,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
+          if @completed_at.nil?
+            invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
           end
 
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          if @started_at.nil?
+            invalid_properties.push('invalid value for "started_at", started_at cannot be nil.')
+          end
+
+          if @results.nil?
+            invalid_properties.push('invalid value for "results", results cannot be nil.')
+          end
+
+          if @status.nil?
+            invalid_properties.push('invalid value for "status", status cannot be nil.')
           end
 
           invalid_properties
@@ -108,9 +156,23 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
-          return false if @properties.nil?
+          return false if @completed_at.nil?
+          return false if @started_at.nil?
+          return false if @results.nil?
+          return false if @status.nil?
+          status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+          return false unless status_validator.valid?(@status)
           true
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] status Object to be assigned
+        def status=(status)
+          validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "CANCELED", "COMPLETE"])
+          unless validator.valid?(status)
+            fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+          end
+          @status = status
         end
 
         # Checks equality by comparing each attribute.
@@ -118,10 +180,12 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id_property == o.id_property &&
-              object_write_trace_id == o.object_write_trace_id &&
-              id == o.id &&
-              properties == o.properties
+              completed_at == o.completed_at &&
+              requested_at == o.requested_at &&
+              started_at == o.started_at &&
+              links == o.links &&
+              results == o.results &&
+              status == o.status
         end
 
         # @see the `==` method
@@ -133,7 +197,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id_property, object_write_trace_id, id, properties].hash
+          [completed_at, requested_at, started_at, links, results, status].hash
         end
 
         # Builds the object from hash

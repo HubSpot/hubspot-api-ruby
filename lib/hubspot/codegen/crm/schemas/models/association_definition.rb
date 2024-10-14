@@ -29,7 +29,7 @@ module Hubspot
         # A unique ID for this association.
         attr_accessor :id
 
-        # ID of the target object type ID to link to.
+        # ID of the target object type to link to.
         attr_accessor :to_object_type_id
 
         # When the association was last updated.

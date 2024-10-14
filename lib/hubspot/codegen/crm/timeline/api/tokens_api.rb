@@ -1,5 +1,5 @@
 =begin
-#CRM Timeline
+#Timeline
 
 #This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
 
@@ -57,7 +57,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'app_id' when calling TokensApi.archive"
           end
           # resource path
-          local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'tokenName' + '}', CGI.escape(token_name.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+          local_var_path = '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'tokenName' + '}', CGI.escape(token_name.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -132,7 +132,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'timeline_event_template_token' when calling TokensApi.create"
           end
           # resource path
-          local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+          local_var_path = '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -218,7 +218,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'timeline_event_template_token_update_request' when calling TokensApi.update"
           end
           # resource path
-          local_var_path = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'tokenName' + '}', CGI.escape(token_name.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+          local_var_path = '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'.sub('{' + 'eventTemplateId' + '}', CGI.escape(event_template_id.to_s)).sub('{' + 'tokenName' + '}', CGI.escape(token_name.to_s)).sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}

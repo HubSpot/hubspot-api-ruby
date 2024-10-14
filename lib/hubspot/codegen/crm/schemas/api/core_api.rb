@@ -47,7 +47,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'object_type' when calling CoreApi.archive"
           end
           # resource path
-          local_var_path = '/crm/v3/schemas/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+          local_var_path = '/crm-object-schemas/v3/schemas/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -117,7 +117,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'association_identifier' when calling CoreApi.archive_association"
           end
           # resource path
-          local_var_path = '/crm/v3/schemas/{objectType}/associations/{associationIdentifier}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'associationIdentifier' + '}', CGI.escape(association_identifier.to_s))
+          local_var_path = '/crm-object-schemas/v3/schemas/{objectType}/associations/{associationIdentifier}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s)).sub('{' + 'associationIdentifier' + '}', CGI.escape(association_identifier.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -180,7 +180,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'object_schema_egg' when calling CoreApi.create"
           end
           # resource path
-          local_var_path = '/crm/v3/schemas'
+          local_var_path = '/crm-object-schemas/v3/schemas'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -254,7 +254,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'association_definition_egg' when calling CoreApi.create_association"
           end
           # resource path
-          local_var_path = '/crm/v3/schemas/{objectType}/associations'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+          local_var_path = '/crm-object-schemas/v3/schemas/{objectType}/associations'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -318,7 +318,7 @@ module Hubspot
             @api_client.config.logger.debug 'Calling API: CoreApi.get_all ...'
           end
           # resource path
-          local_var_path = '/crm/v3/schemas'
+          local_var_path = '/crm-object-schemas/v3/schemas'
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -382,7 +382,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'object_type' when calling CoreApi.get_by_id"
           end
           # resource path
-          local_var_path = '/crm/v3/schemas/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+          local_var_path = '/crm-object-schemas/v3/schemas/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -451,7 +451,7 @@ module Hubspot
             fail ArgumentError, "Missing the required parameter 'object_type_definition_patch' when calling CoreApi.update"
           end
           # resource path
-          local_var_path = '/crm/v3/schemas/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+          local_var_path = '/crm-object-schemas/v3/schemas/{objectType}'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
