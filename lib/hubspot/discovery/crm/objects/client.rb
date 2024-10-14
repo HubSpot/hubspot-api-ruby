@@ -14,6 +14,7 @@ module Hubspot
               emails
               feedback_submissions
               goals
+              leads
               meetings
               notes
               postal_mail

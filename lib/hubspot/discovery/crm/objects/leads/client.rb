@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Crm
       module Objects
-        module Meetings
+        module Leads
           class Client
             include Hubspot::Discovery::BaseModuleClient
 

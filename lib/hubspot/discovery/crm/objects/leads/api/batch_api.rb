@@ -4,8 +4,8 @@ module Hubspot
   module Discovery
     module Crm
       module Objects
-        module Notes
-          class PublicObjectApi
+        module Leads
+          class BatchApi
             include Hubspot::Discovery::BaseApiClient
           end
         end

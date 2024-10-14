@@ -12,8 +12,6 @@ module Hubspot
               %i[
                 basic
                 batch
-                gdpr
-                public_object
                 search
               ].freeze
             end

@@ -4,8 +4,8 @@ module Hubspot
   module Discovery
     module Crm
       module Objects
-        module Calls
-          class GDPRApi
+        module Leads
+          class SearchApi
             include Hubspot::Discovery::BaseApiClient
           end
         end
