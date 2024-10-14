@@ -1,5 +1,5 @@
 =begin
-#CRM Objects
+#Objects
 
 #CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are standard objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
 
@@ -175,7 +175,7 @@ module Hubspot
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @option opts [String] :id_property The name of a property whose values are unique for this object type
+        # @option opts [String] :id_property The name of a property whose values are unique for this object
         # @return [SimplePublicObjectWithAssociations]
         def get_by_id(object_type, object_id, opts = {})
           data, _status_code, _headers = get_by_id_with_http_info(object_type, object_id, opts)
@@ -191,7 +191,7 @@ module Hubspot
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-        # @option opts [String] :id_property The name of a property whose values are unique for this object type
+        # @option opts [String] :id_property The name of a property whose values are unique for this object
         # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
         def get_by_id_with_http_info(object_type, object_id, opts = {})
           if @api_client.config.debugging
@@ -332,12 +332,12 @@ module Hubspot
         end
 
         # Update
-        # Perform a partial update of an Object identified by `{objectId}`. `{objectId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+        # Perform a partial update of an Object identified by `{objectId}`or optionally a unique property value as specified by the `idProperty` query param. `{objectId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
         # @param object_type [String] 
         # @param object_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :id_property The name of a property whose values are unique for this object type
+        # @option opts [String] :id_property The name of a property whose values are unique for this object
         # @return [SimplePublicObject]
         def update(object_type, object_id, simple_public_object_input, opts = {})
           data, _status_code, _headers = update_with_http_info(object_type, object_id, simple_public_object_input, opts)
@@ -345,12 +345,12 @@ module Hubspot
         end
 
         # Update
-        # Perform a partial update of an Object identified by &#x60;{objectId}&#x60;. &#x60;{objectId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+        # Perform a partial update of an Object identified by &#x60;{objectId}&#x60;or optionally a unique property value as specified by the &#x60;idProperty&#x60; query param. &#x60;{objectId}&#x60; refers to the internal object ID by default, and the &#x60;idProperty&#x60; query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
         # @param object_type [String] 
         # @param object_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
-        # @option opts [String] :id_property The name of a property whose values are unique for this object type
+        # @option opts [String] :id_property The name of a property whose values are unique for this object
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
         def update_with_http_info(object_type, object_id, simple_public_object_input, opts = {})
           if @api_client.config.debugging
