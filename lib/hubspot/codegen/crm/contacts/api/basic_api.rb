@@ -308,7 +308,7 @@ module Hubspot
         end
 
         # Update
-        # Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+        # Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties result in an error. Properties values can be cleared by passing an empty string.
         # @param contact_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
@@ -320,7 +320,7 @@ module Hubspot
         end
 
         # Update
-        # Perform a partial update of an Object identified by &#x60;{contactId}&#x60;. &#x60;{contactId}&#x60; refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+        # Perform a partial update of an Object identified by &#x60;{contactId}&#x60;. &#x60;{contactId}&#x60; refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties result in an error. Properties values can be cleared by passing an empty string.
         # @param contact_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
