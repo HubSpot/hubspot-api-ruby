@@ -17,19 +17,34 @@ module Hubspot
   module Crm
     module Objects
       module Meetings
-        class SimplePublicObjectInputForCreate
-          attr_accessor :associations
+        class SimplePublicUpsertObject
+          attr_accessor :created_at
 
-          attr_accessor :object_write_trace_id
+          attr_accessor :archived
+
+          attr_accessor :archived_at
+
+          attr_accessor :new
+
+          attr_accessor :properties_with_history
+
+          attr_accessor :id
 
           attr_accessor :properties
+
+          attr_accessor :updated_at
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'associations' => :'associations',
-              :'object_write_trace_id' => :'objectWriteTraceId',
-              :'properties' => :'properties'
+              :'created_at' => :'createdAt',
+              :'archived' => :'archived',
+              :'archived_at' => :'archivedAt',
+              :'new' => :'new',
+              :'properties_with_history' => :'propertiesWithHistory',
+              :'id' => :'id',
+              :'properties' => :'properties',
+              :'updated_at' => :'updatedAt'
             }
           end
 
@@ -41,9 +56,14 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'associations' => :'Array<PublicAssociationsForObject>',
-              :'object_write_trace_id' => :'String',
-              :'properties' => :'Hash<String, String>'
+              :'created_at' => :'Time',
+              :'archived' => :'Boolean',
+              :'archived_at' => :'Time',
+              :'new' => :'Boolean',
+              :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
+              :'id' => :'String',
+              :'properties' => :'Hash<String, String>',
+              :'updated_at' => :'Time'
             }
           end
 
@@ -57,25 +77,41 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::Meetings::SimplePublicObjectInputForCreate` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::Meetings::SimplePublicUpsertObject` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::Meetings::SimplePublicObjectInputForCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::Meetings::SimplePublicUpsertObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'associations')
-              if (value = attributes[:'associations']).is_a?(Array)
-                self.associations = value
+            if attributes.key?(:'created_at')
+              self.created_at = attributes[:'created_at']
+            end
+
+            if attributes.key?(:'archived')
+              self.archived = attributes[:'archived']
+            end
+
+            if attributes.key?(:'archived_at')
+              self.archived_at = attributes[:'archived_at']
+            end
+
+            if attributes.key?(:'new')
+              self.new = attributes[:'new']
+            end
+
+            if attributes.key?(:'properties_with_history')
+              if (value = attributes[:'properties_with_history']).is_a?(Hash)
+                self.properties_with_history = value
               end
             end
 
-            if attributes.key?(:'object_write_trace_id')
-              self.object_write_trace_id = attributes[:'object_write_trace_id']
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
 
             if attributes.key?(:'properties')
@@ -83,18 +119,34 @@ module Hubspot
                 self.properties = value
               end
             end
+
+            if attributes.key?(:'updated_at')
+              self.updated_at = attributes[:'updated_at']
+            end
           end
 
           # Show invalid properties with the reasons. Usually used together with valid?
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @associations.nil?
-              invalid_properties.push('invalid value for "associations", associations cannot be nil.')
+            if @created_at.nil?
+              invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+            end
+
+            if @new.nil?
+              invalid_properties.push('invalid value for "new", new cannot be nil.')
+            end
+
+            if @id.nil?
+              invalid_properties.push('invalid value for "id", id cannot be nil.')
             end
 
             if @properties.nil?
               invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+            end
+
+            if @updated_at.nil?
+              invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
             end
 
             invalid_properties
@@ -103,8 +155,11 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @associations.nil?
+            return false if @created_at.nil?
+            return false if @new.nil?
+            return false if @id.nil?
             return false if @properties.nil?
+            return false if @updated_at.nil?
             true
           end
 
@@ -113,9 +168,14 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                associations == o.associations &&
-                object_write_trace_id == o.object_write_trace_id &&
-                properties == o.properties
+                created_at == o.created_at &&
+                archived == o.archived &&
+                archived_at == o.archived_at &&
+                new == o.new &&
+                properties_with_history == o.properties_with_history &&
+                id == o.id &&
+                properties == o.properties &&
+                updated_at == o.updated_at
           end
 
           # @see the `==` method
@@ -127,7 +187,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [associations, object_write_trace_id, properties].hash
+            [created_at, archived, archived_at, new, properties_with_history, id, properties, updated_at].hash
           end
 
           # Builds the object from hash
