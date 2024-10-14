@@ -17,16 +17,13 @@ module Hubspot
   module Crm
     module Objects
       module PostalMail
-        class SimplePublicObjectInput
-          attr_accessor :object_write_trace_id
-
-          attr_accessor :properties
+        class BatchInputSimplePublicObjectBatchInputUpsert
+          attr_accessor :inputs
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'object_write_trace_id' => :'objectWriteTraceId',
-              :'properties' => :'properties'
+              :'inputs' => :'inputs'
             }
           end
 
@@ -38,8 +35,7 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'object_write_trace_id' => :'String',
-              :'properties' => :'Hash<String, String>'
+              :'inputs' => :'Array<SimplePublicObjectBatchInputUpsert>'
             }
           end
 
@@ -53,24 +49,20 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::PostalMail::SimplePublicObjectInput` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::PostalMail::BatchInputSimplePublicObjectBatchInputUpsert` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::PostalMail::SimplePublicObjectInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::PostalMail::BatchInputSimplePublicObjectBatchInputUpsert`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'object_write_trace_id')
-              self.object_write_trace_id = attributes[:'object_write_trace_id']
-            end
-
-            if attributes.key?(:'properties')
-              if (value = attributes[:'properties']).is_a?(Hash)
-                self.properties = value
+            if attributes.key?(:'inputs')
+              if (value = attributes[:'inputs']).is_a?(Array)
+                self.inputs = value
               end
             end
           end
@@ -79,8 +71,8 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
-            if @properties.nil?
-              invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+            if @inputs.nil?
+              invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
             end
 
             invalid_properties
@@ -89,7 +81,7 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
-            return false if @properties.nil?
+            return false if @inputs.nil?
             true
           end
 
@@ -98,8 +90,7 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                object_write_trace_id == o.object_write_trace_id &&
-                properties == o.properties
+                inputs == o.inputs
           end
 
           # @see the `==` method
@@ -111,7 +102,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [object_write_trace_id, properties].hash
+            [inputs].hash
           end
 
           # Builds the object from hash

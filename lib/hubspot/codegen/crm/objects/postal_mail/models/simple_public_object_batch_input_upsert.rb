@@ -17,15 +17,21 @@ module Hubspot
   module Crm
     module Objects
       module PostalMail
-        class SimplePublicObjectInput
+        class SimplePublicObjectBatchInputUpsert
+          attr_accessor :id_property
+
           attr_accessor :object_write_trace_id
+
+          attr_accessor :id
 
           attr_accessor :properties
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'id_property' => :'idProperty',
               :'object_write_trace_id' => :'objectWriteTraceId',
+              :'id' => :'id',
               :'properties' => :'properties'
             }
           end
@@ -38,7 +44,9 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'id_property' => :'String',
               :'object_write_trace_id' => :'String',
+              :'id' => :'String',
               :'properties' => :'Hash<String, String>'
             }
           end
@@ -53,19 +61,27 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::PostalMail::SimplePublicObjectInput` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::PostalMail::SimplePublicObjectBatchInputUpsert` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::PostalMail::SimplePublicObjectInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::PostalMail::SimplePublicObjectBatchInputUpsert`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
+            if attributes.key?(:'id_property')
+              self.id_property = attributes[:'id_property']
+            end
+
             if attributes.key?(:'object_write_trace_id')
               self.object_write_trace_id = attributes[:'object_write_trace_id']
+            end
+
+            if attributes.key?(:'id')
+              self.id = attributes[:'id']
             end
 
             if attributes.key?(:'properties')
@@ -79,6 +95,10 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @id.nil?
+              invalid_properties.push('invalid value for "id", id cannot be nil.')
+            end
+
             if @properties.nil?
               invalid_properties.push('invalid value for "properties", properties cannot be nil.')
             end
@@ -89,6 +109,7 @@ module Hubspot
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @id.nil?
             return false if @properties.nil?
             true
           end
@@ -98,7 +119,9 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                id_property == o.id_property &&
                 object_write_trace_id == o.object_write_trace_id &&
+                id == o.id &&
                 properties == o.properties
           end
 
@@ -111,7 +134,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [object_write_trace_id, properties].hash
+            [id_property, object_write_trace_id, id, properties].hash
           end
 
           # Builds the object from hash
