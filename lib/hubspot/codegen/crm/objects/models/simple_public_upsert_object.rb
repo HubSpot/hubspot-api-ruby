@@ -16,12 +16,14 @@ require 'time'
 module Hubspot
   module Crm
     module Objects
-      class SimplePublicObject
+      class SimplePublicUpsertObject
         attr_accessor :created_at
 
         attr_accessor :archived
 
         attr_accessor :archived_at
+
+        attr_accessor :new
 
         attr_accessor :properties_with_history
 
@@ -37,6 +39,7 @@ module Hubspot
             :'created_at' => :'createdAt',
             :'archived' => :'archived',
             :'archived_at' => :'archivedAt',
+            :'new' => :'new',
             :'properties_with_history' => :'propertiesWithHistory',
             :'id' => :'id',
             :'properties' => :'properties',
@@ -55,6 +58,7 @@ module Hubspot
             :'created_at' => :'Time',
             :'archived' => :'Boolean',
             :'archived_at' => :'Time',
+            :'new' => :'Boolean',
             :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
             :'id' => :'String',
             :'properties' => :'Hash<String, String>',
@@ -72,13 +76,13 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::SimplePublicObject` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::SimplePublicUpsertObject` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::SimplePublicObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::SimplePublicUpsertObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
@@ -93,6 +97,10 @@ module Hubspot
 
           if attributes.key?(:'archived_at')
             self.archived_at = attributes[:'archived_at']
+          end
+
+          if attributes.key?(:'new')
+            self.new = attributes[:'new']
           end
 
           if attributes.key?(:'properties_with_history')
@@ -124,6 +132,10 @@ module Hubspot
             invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
           end
 
+          if @new.nil?
+            invalid_properties.push('invalid value for "new", new cannot be nil.')
+          end
+
           if @id.nil?
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
@@ -143,6 +155,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @created_at.nil?
+          return false if @new.nil?
           return false if @id.nil?
           return false if @properties.nil?
           return false if @updated_at.nil?
@@ -157,6 +170,7 @@ module Hubspot
               created_at == o.created_at &&
               archived == o.archived &&
               archived_at == o.archived_at &&
+              new == o.new &&
               properties_with_history == o.properties_with_history &&
               id == o.id &&
               properties == o.properties &&
@@ -172,7 +186,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [created_at, archived, archived_at, properties_with_history, id, properties, updated_at].hash
+          [created_at, archived, archived_at, new, properties_with_history, id, properties, updated_at].hash
         end
 
         # Builds the object from hash
