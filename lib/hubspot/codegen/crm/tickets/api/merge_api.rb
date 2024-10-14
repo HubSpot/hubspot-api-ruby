@@ -15,7 +15,7 @@ require 'cgi'
 module Hubspot
   module Crm
     module Tickets
-      class PublicObjectApi
+      class MergeApi
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
@@ -36,11 +36,11 @@ module Hubspot
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
         def merge_with_http_info(public_merge_input, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: PublicObjectApi.merge ...'
+            @api_client.config.logger.debug 'Calling API: MergeApi.merge ...'
           end
           # verify the required parameter 'public_merge_input' is set
           if @api_client.config.client_side_validation && public_merge_input.nil?
-            fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling PublicObjectApi.merge"
+            fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling MergeApi.merge"
           end
           # resource path
           local_var_path = '/crm/v3/objects/tickets/merge'
@@ -71,7 +71,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"PublicObjectApi.merge",
+            :operation => :"MergeApi.merge",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -82,7 +82,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: PublicObjectApi#merge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: MergeApi#merge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

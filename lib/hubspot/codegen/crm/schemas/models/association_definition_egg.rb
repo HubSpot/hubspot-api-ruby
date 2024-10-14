@@ -23,7 +23,7 @@ module Hubspot
         # A unique name for this association.
         attr_accessor :name
 
-        # ID of the target object type ID to link to.
+        # ID of the target object type to link to.
         attr_accessor :to_object_type_id
 
         # Attribute mapping from ruby-style variable name to JSON key.
