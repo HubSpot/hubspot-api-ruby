@@ -7,6 +7,8 @@ module Hubspot
           'OAuth'
         when 'gdpr_api'
           'GDPRApi'
+        when 'public_smtp_tokens_api'
+          'PublicSMTPTokensApi'
         else
           string.split('_').collect(&:capitalize).join
         end
