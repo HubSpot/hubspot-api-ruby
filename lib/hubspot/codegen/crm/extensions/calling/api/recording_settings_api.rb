@@ -90,8 +90,8 @@ module Hubspot
           # @param mark_recording_as_ready_request [MarkRecordingAsReadyRequest] 
           # @param [Hash] opts the optional parameters
           # @return [nil]
-          def post_crm_v3_extensions_calling_recordings_ready(mark_recording_as_ready_request, opts = {})
-            post_crm_v3_extensions_calling_recordings_ready_with_http_info(mark_recording_as_ready_request, opts)
+          def mark_as_ready(mark_recording_as_ready_request, opts = {})
+            mark_as_ready_with_http_info(mark_recording_as_ready_request, opts)
             nil
           end
 
@@ -100,13 +100,13 @@ module Hubspot
           # @param mark_recording_as_ready_request [MarkRecordingAsReadyRequest] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-          def post_crm_v3_extensions_calling_recordings_ready_with_http_info(mark_recording_as_ready_request, opts = {})
+          def mark_as_ready_with_http_info(mark_recording_as_ready_request, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: RecordingSettingsApi.post_crm_v3_extensions_calling_recordings_ready ...'
+              @api_client.config.logger.debug 'Calling API: RecordingSettingsApi.mark_as_ready ...'
             end
             # verify the required parameter 'mark_recording_as_ready_request' is set
             if @api_client.config.client_side_validation && mark_recording_as_ready_request.nil?
-              fail ArgumentError, "Missing the required parameter 'mark_recording_as_ready_request' when calling RecordingSettingsApi.post_crm_v3_extensions_calling_recordings_ready"
+              fail ArgumentError, "Missing the required parameter 'mark_recording_as_ready_request' when calling RecordingSettingsApi.mark_as_ready"
             end
             # resource path
             local_var_path = '/crm/v3/extensions/calling/recordings/ready'
@@ -137,7 +137,7 @@ module Hubspot
             auth_names = opts[:debug_auth_names] || ['oauth2']
 
             new_options = opts.merge(
-              :operation => :"RecordingSettingsApi.post_crm_v3_extensions_calling_recordings_ready",
+              :operation => :"RecordingSettingsApi.mark_as_ready",
               :header_params => header_params,
               :query_params => query_params,
               :form_params => form_params,
@@ -148,7 +148,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: RecordingSettingsApi#post_crm_v3_extensions_calling_recordings_ready\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: RecordingSettingsApi#mark_as_ready\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
