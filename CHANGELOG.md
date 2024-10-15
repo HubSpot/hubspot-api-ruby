@@ -9,18 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [18.0.0] - 2024-02-29
 
-### Changes in Cms AuditLogs API:
+### Changes in Cms AuditLogs API
+
 - Added new param `prev` to `cms.audit_log.models.Paging`.
 - Added new param `meta` to `cms.audit_log.models.PublicAuditLog`.
 - Added `cms.audit_logs.models.PreviousPage`.
 
-### Changes in Automation Actions Definitions API:
+### Changes in Automation Actions Definitions API
+
 - Updated `create()` method to accept `public_action_definition_egg` instead of `extension_action_definition_input` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 - Updated `get_by_id()` method to return `PublicActionDefinition` instead of `ExtensionActionDefinition`.
 - Updated `get_page()` method to return `CollectionResponsePublicActionDefinitionForwardPaging` instead of `CollectionResponseExtensionActionDefinitionForwardPaging`.
 - Updated `update()` method to accept `public_action_definition_patch` instead of `extension_action_definition_patch` and returned `PublicActionDefinition` instead `ExtensionActionDefinition`.
 
-### Changes in Automation Actions Functions API:
+### Changes in Automation Actions Functions API
+
 - Added new function type `POST_ACTION_EXECUTION` to all methods.
 - Updated `create_or_replace()` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
 - Updated `create_or_replace_by_function_type()` method to return `PublicActionFunctionIdentifier` instead of `ActionFunctionIdentifier`.
@@ -28,11 +31,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `get_by_id()` method to return `PublicActionFunction` instead of `ActionFunction`.
 - Updated `get_page()` method to return `CollectionResponsePublicActionFunctionIdentifierNoPaging` instead of `CollectionResponseActionFunctionIdentifierNoPaging`.
 
-### Changes in Automation Actions Revisions API:
+### Changes in Automation Actions Revisions API
+
 - Updated `get_by_id()` method to return `PublicActionRevision` instead of `ActionRevision`.
 - Updated `get_page()` method to return `CollectionResponsePublicActionRevisionForwardPaging` instead of `CollectionResponseActionRevisionForwardPaging`.
 
-### Changes in Automation Actions Models:
+### Changes in Automation Actions Models
+
 - Added new param `automation_field_type` to `automation.actions.models.InputFieldDefinition`.
 - Added `automation.actions.models.OutputFieldDefinition`.
 - Added `automation.actions.models.PublicExecutionTranslationRule`.
@@ -54,126 +59,159 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   }
 ```
 
-### Changes in CMS Blog APIs:
+### Changes in CMS Blog APIs
+
 - Updated `attach_to_lang_group()`, `detach_from_lang_group()` and `update_langs()` methods to return `nil` instead of `Error`.
 - Added new param `property` to `cms.blogs.authors.blog_authors_api.get_by_id()` and `cms.blogs.authors.blog_authors_api.get_page()`.
 
-### Changes in Blog Models:
+### Changes in Blog Models
+
 - Removed `EnumAttributeValidator` from a few models `blogs: authors, blog_posts, tags`.
 
-### Changes in CMS Source Code API:
+### Changes in CMS Source Code API
+
 - Renamed method from `cms.source_code.content_api.get()` to `cms.source_code.content_api.download()`.
 - Renamed method from `cms.source_code.content_api.replace()` to `cms.source_code.content_api.create_or_update()`.
 - Added new param `hash` to `cms.source_code.models.AssetFileMetadata`.
 - Added new param `properties` to `cms.source_code.metadata_api.get()`.
 
-### Changes in CRM Associations API (associations) v4:
+### Changes in CRM Associations API (associations) v4
+
 - Methods `archive()`, `create()` and `create_default()` of class `BasicApi` now accept parameters `object_id` and `to_object_id` of type `string` instead of `int`.
 - Method `get_page()` of class `BasicApi` now accepts parameter `object_id` of type `string` instead of `int`.
 - Changed the type of parameters `to_object_id` and `from_object_id` in class `LabelsBetweenObjectPair` to `string`.
 - Changed the type of parameter `to_object_id` in class `MultiAssociatedObjectWithLabel` to `string`.
 - Changed the type of property `category` in class `ErrorCategory` to `string`.
 
-### Changes in AssociationsV4 Models:
+### Changes in AssociationsV4 Models
+
 - Changed the type of property `errors` in class `BatchResponsePublicDefaultAssociation` from `StandardError1[]` to `StandardError[]`.
 - Added parameter `inverseLabel` to classes `PublicAssociationDefinitionCreateRequest` and `PublicAssociationDefinitionUpdateRequest`.
 
-### Changes in AssociationsV3 Models:
+### Changes in AssociationsV3 Models
+
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
-### Changes in Schema API Methods:
+### Changes in Schema API Methods
+
 - Method `delete()` renamed to `archive()` in class `DefinitionsApi`.
 
-### Changes in Oauth Models:
+### Changes in Oauth Models
+
 - Removed params `scope_to_scope_group_pks, trial_scopes, trial_scope_to_scope_group_pks` from `AccessTokenInfoResponse`.
 
-### Changes in CRM Imports Model:
+### Changes in CRM Imports Model
+
 - Added `import_template` and `import_source` params to class `PublicImportResponse`.
 
-### Changes in CRM Lists Memberships API:
+### Changes in CRM Lists Memberships API
+
 - Renamed method `add_remove()` to `add_and_remove()`.
 
-### Changes in CRM Pipelines Pipelines API :
+### Changes in CRM Pipelines Pipelines API
+
 - Added param `validate_deal_stage_usages_before_delete` to `archive()`, `replace()` and `update()` methods.
 
-### Changes in CRM Pipelines Model:
+### Changes in CRM Pipelines Model
+
 - Added `write_permissions` param to class `PipelineStage`.
 
-### Changes in CRM Schemas Models:
+### Changes in CRM Schemas Models
+
 - Added `description` param to class `ObjectTypeDefinitionPatch`.
 - Added new params: `option_sort_strategy`, `show_currency_symbol`, `form_field`, `referenced_object_type`, `text_display_hint`, `searchable_in_global_search`
 and `number_display_hint` to class `ObjectTypePropertyCreate`.
 
-### Changes in CRM Timeline Events API:
+### Changes in CRM Timeline Events API
+
 - Updated `create_batch()` method to return `nil` insted `BatchResponseTimelineEventResponse`.
 
-### Changes in CRM Timeline Model:
+### Changes in CRM Timeline Model
+
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
-### Changes in CRM Extensions Cards API:
+### Changes in CRM Extensions Cards API
+
 - Changed parameter order in `archive()` method from `(app_id, card_id)` to `(card_id, app_id)`.
 - Changed parameter order in `get_by_id()` method from `(app_id, card_id)` to `(card_id, app_id)` and method return `PublicCardResponse` instead `CardResponse`.
 - Changed parameter order in `update()` method from `(app_id, card_id, card_patch_request)` to `(card_id, app_id, card_patch_request)` and method return `PublicCardResponse` instead `CardResponse`.
 - Updated `create()` method to return `PublicCardResponse` instead `CardResponse`.
 - Updated `get_all()` method to return `PublicCardListResponse` instead `CardListResponse`.
 
-### Changes in CRM Extensions Card Models:
+### Changes in CRM Extensions Card Models
+
 - Added new params `serverless_function` and `card_type` to `CardFetchBody` and `CardFetchBodyPatch`.
 - Added new param `audit_history` to `PublicCardResponse`.
 - Added new allowable value `marketing_events` to `CardObjectTypeBody`.
 
-#### Changes in CRM Extensions Videoconferencing API:
+#### Changes in CRM Extensions Videoconferencing API
+
 - Added `developer_hapikey`
 
-#### Changes in CRM Extensions Videoconferencing Model:
+#### Changes in CRM Extensions Videoconferencing Model
+
 - Added new param `fetch_accounts_uri` to `ExternalSettings`.
 
-#### Changes in Events Send API:
+#### Changes in Events Send API
+
 - Renamed `behavioral_events_tracking_api` to `custom_event_data_api`.
 
-#### Changes in Events Model:
+#### Changes in Events Model
+
 - Added new param `prev` to `Paging`.
 
-#### Changes in Files Files API:
+#### Changes in Files Files API
+
 - Added new method `get_metadata()`.
 
-#### Changes in Files Models:
+#### Changes in Files Models
+
 - Added new param  `expires_at` to `File` and `FileUpdateInput`.
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
-#### Changes in Files Client:
+#### Changes in Files Client
+
 - Moved client from `files.files` to `files`.
 
-#### Changes in Marketing Events APIs:
+#### Changes in Marketing Events APIs
+
 - Moved methods `archive()`, `create()`, `do_cancel()`, `get_by_id()`, `replace()` and `update()` from `marketing.events.marketing_events_external_api` to `marketing.events.basic_api`.
 - Moved method `do_upsert()` from `marketing.events.marketing_events_external_api` to `marketing.events.batch_api`.
 - Moved and renamed method `archive_batch()` to `archive()` from `marketing.events.marketing_events_external_api.archive_batch` to `marketing.events.batch_api.archive`.
 - Moved methods `do_email_upsert_by_id()` and `do_upsert_by_id()`  from `marketing.events.marketing_events_external_api` to `marketing.events.subscriber_state_changes`.
 - Renamed Api `marketing.events.settings_external_api` to `marketing.events.settings_api`.
 
-#### Changes in Marketing Events Models:
+#### Changes in Marketing Events Models
+
 - Added new param `is_large_value` to `PropertyValue`.
 - Changed the type of parameter `category` from `ErrorCategory` to `string` in class `StandardError`.
 
-#### Changes in Marketing Forms Models:
+#### Changes in Marketing Forms Models
+
 - Added new param `lifecycle_stages` to `HubSpotFormConfiguration`.
 
-#### Changes in Settings Users Model:
+#### Changes in Settings Users Model
+
 - Added new params `role_ids`, `send_welcome_email` and `super_admin` to `PublicUser`.
 
-#### Changes in All Models PublicObjectSearchRequest:
+#### Changes in All Models PublicObjectSearchRequest
+
 - Changed the type of parameter `after` from `int` to `string`.
 
-#### Changes in All Models SimplePublicObjectBatchInput:
+#### Changes in All Models SimplePublicObjectBatchInput
+
 - Added new param `id_property`.
 
-#### Changes in Crm Objects:
+#### Changes in Crm Objects
+
 - Removed `crm.objects.associations_api`.
 
-#### Changes in Crm Objects Postal Mail BasicAPI:
+#### Changes in Crm Objects Postal Mail BasicAPI
+
 - Renamed param `postal_mail` to `postal_mail_id`
 
-## Added new Client APIs:
+## Added new Client APIs
+
 - Added `crm.extensions.calling.recording_settings_api` Api.
 - Added `crm.objects.line_items.gdpr_api` Api.
 - Added `crm.objects.products.gdpr_api` Api.
@@ -192,6 +230,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added `marketing.events.subscriber_state_changes_api` Api.
 
 ## Removed `hapikey` from
+
 - `cms.audit_logs` Api.
 - `cms.site_search` Api.
 - `cms.url_redirects` Api.
@@ -199,7 +238,6 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - `cms.blogs.blog_posts` Api.
 - `communication_preferences` Apis.
 - `conversations.visitor_identification` Api.
-
 
 ## [17.2.0] - 2023-12-19
 
@@ -217,7 +255,6 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 ## Fixed
 
 - fix initializing `developer_hapikey`
-
 
 ## [17.1.0] - 2023-08-07
 
@@ -257,8 +294,8 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Cnange type from `ErrorCategory` to `string` in `webhooks/models/StandardError::category`.
 
 ## Fixed
-- `Hubspot::Helpers::Path.require_with_codegen_mapping()` 
 
+- `Hubspot::Helpers::Path.require_with_codegen_mapping()`.
 
 ## [17.0.0] - 2023-06-14
 
@@ -286,16 +323,17 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 
 ### Updated
 
-  - `crm.associations.types_api` => `crm.associations.schema.types_api`.
-  - `crm.associations.v4.definitions_api` => `crm.associations.v4.schema.definitions_api`.
+- `crm.associations.types_api` => `crm.associations.schema.types_api`.
+- `crm.associations.v4.definitions_api` => `crm.associations.v4.schema.definitions_api`.
 
 ## [17.0.0-beta.2] - 2023-04-28
+
 ### Updated
 
 -Add new event types to webhooks.
 
-
 ## [17.0.0-beta.1] - 2023-04-11
+
 ### Updated
 
 - Rename `cms.hubdb.rows_batch_api.batch_clone_draft_table_rows` => `cms.hubdb.rows_batch_api.clone_draft_table_rows`.
@@ -365,11 +403,13 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - Added `high_value` param to all Filters.
 
 ## [16.4.0] - 2023-03-02
+
 ### Added
 
 - Update models for `crm.properties` API client
 
 ## [16.3.0] - 2023-02-21
+
 ### Added
 
 - `crm.associations.v4` API client
@@ -378,14 +418,14 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 
 - Fix `auth.oauth.refresh_tokens_api.archive_refresh_token` method
 
-
 ## [16.2.1] - 2023-01-24
+
 ### Fixed
 
 - Added missing modules
 
-
 ## [16.2.0] - 2023-01-09
+
 ### Added
 
 - Signature's util 'HubSpot.utils.signature'
@@ -395,61 +435,71 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - webhook's util 'HubSpot.utils.webhooks'
 
 ## [16.1.1] - 2022-12-23
+
 ### Fixed
 
 - Added pipelineAuditsApi and pipelineStageAuditsApi to crm.pipelines discovery
 
 ## [16.1.0] - 2022-12-22
+
 ### Added
 
 - crm.objects.postal_mail API client
 
 ## [16.0.4] - 2022-12-08
+
 ### Changed
 
 - Added Private App access token to (
-    - cms.domains
-    - crm.imports
-    - crm.objects.emails
-    - marketing.events
-    )
+- cms.domains
+- crm.imports
+- crm.objects.emails
+- marketing.events
+)
 
 ### Fixed
 
 - Fix all association APIs
 
 ## [16.0.3] - 2022-11-23
+
 ### Changed
 
 - auth_names => debug_auth_names
 
 ## [16.0.2] - 2022-11-22
+
 ### Fixed
 
 - added missing public_object_api classes
 
 ## [16.0.1] - 2022-11-16
+
 ### Fixed
 
 - remove passing params with snake case
 
 ## [16.0.0] - 2022-11-10
+
 ### Changed
 
 - update generated code
 - marketing.events (breaking changes)
 
 ## [15.0.2] - 2022-11-04
+
 ### Fixed
 
 - pass params with snake case
 
 ## [15.0.1] - 2022-10-17
+
 ### Fixed
 
 - codegen path mapping for requiring models
 
 ## [15.0.0] - 2022-10-12
+
 ### Changed
 
 - requiring only codegen files that is using to optimize memory usage
@@ -459,46 +509,55 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - old client syntax support
 
 ## [14.5.2] - 2022-10-05
+
 ### Fixed
 
 - passing params with existing model
 
 ## [14.5.1] - 2022-09-30
+
 ### Changed
 
 - with_http methods were added to the discovery classes
 
 ## [14.5.0] - 2022-09-30
+
 ### Changed
 
 - handling ApiError with retries
 
 ## [14.4.0] - 2022-09-27
+
 ### Changed
 
 - handling ApiError by passing a block
 
 ## [14.3.0] - 2022-08-31
+
 ### Changed
 
 - using hash instead of model object for Hubspot::Client with body param
 
 ## [14.2.0] - 2022-08-25
+
 ### Changed
 
 - using new separate configurations for Hubspot::Client
 
 ## [14.1.0] - 2022-08-23
+
 ### Changed
 
 - using default ruby StandardError
 
 ## [14.0.0] - 2022-08-11
+
 ### Changed
 
 - required ruby version was increased to 2.7
 
 ## [13.2.0] - 2022-08-09
+
 ### Changed
 
 - models updates
@@ -508,6 +567,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - query properties param
 
 ## [13.0.0] - 2022-06-29
+
 ### Changed (Breaking changes)
 
 - crm.objects.feedback_submissions API
@@ -517,6 +577,7 @@ and `number_display_hint` to class `ObjectTypePropertyCreate`.
 - crm.contacts.basic_api id_property
 
 ## [12.0.0] - 2022-06-09
+
 ### Added
 
 - cms.source_code API client
