@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v19..0...HEAD)
 
-## [19.0.0] - 2024-10-??
+## [19.0.0] - 2024-10-16
 
 ## CMS
 
