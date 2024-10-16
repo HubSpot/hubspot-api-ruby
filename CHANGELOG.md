@@ -80,6 +80,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed Api client from `crm.lists.list_app_membership_api` to `crm.lists.memberships_api`.
 - Renamed Api client from `crm.lists.list_app_api` to `crm.lists.lists_api`.
 
+## Marketing
+
+- Added `marketing.events.participant_state_api` Api.
+- Added `marketing.events.list_associations_api` Api.
+- Added new methods `batch_archive`, `batch_upsert`, `cancel` and `complete` to `marketing.events.basic_api`.
+- Added parameter `event_completed` to `marketing.events.models.marketing_event_public_default_response`,`marketing.events.models.marketing_event_create_request_params`, `marketing.events.models.marketing_event_default_response`, `marketing.events.models.marketing_event_public_read_response`.
+- Added parameters `attendance_state_calculation_timestamp`, `event_completed` and `import_status` to `marketing.events.models.marketing_event_update_request_params`.
+- Added parameters `data_sensitivity`, `unit` and `is_encrypted` to `marketing.events.models.property_value`.
+- Updated `source` validation: Expanded `allowed_values` for validation for `marketing.events.models.property_value`.
+- Renamed method `create` to `record_by_contact_id` in `marketing.events.attendance_subscriber_state_changes_api`.
+- Renamed method `create_by_email` to `record_by_contact_email` in `marketing.events.attendance_subscriber_state_changes_api`.
+- Renamed method `get_by_id` to `get_details` in `marketing.events.basic_api`.
+- Renamed method `replace` to `upsert` in `marketing.events.basic_api`.
+- Renamed method `create` to `update` in `marketing.events.settings_api`.
+- Renamed method `do_email_upsert_by_id` to `upsert_by_contact_email` in `marketing.events.subscriber_state_changes_api`.
+- Renamed method `do_upsert_by_id` to `upsert_by_contact_id` in `marketing.events.subscriber_state_changes_api`.
+- Moved method `do_search` from `marketing.events.search_api` to `marketing.events.basic_api`.
+- Removed `marketing.events.batch_api`.
+- Removed `marketing.events.marketing_events_external_api`.
+- Removed `marketing.events.search_api`.
+
 ## [18.0.0] - 2024-02-29
 
 ### Changes in Cms AuditLogs API
