@@ -23,9 +23,13 @@ module Hubspot
         # The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
         attr_accessor :secondary_display_properties
 
+        attr_accessor :created_by_user_id
+
         attr_accessor :object_type_id
 
         attr_accessor :description
+
+        attr_accessor :updated_by_user_id
 
         # An assigned unique ID for the object, including portal ID and object name.
         attr_accessor :fully_qualified_name
@@ -63,8 +67,10 @@ module Hubspot
           {
             :'associations' => :'associations',
             :'secondary_display_properties' => :'secondaryDisplayProperties',
+            :'created_by_user_id' => :'createdByUserId',
             :'object_type_id' => :'objectTypeId',
             :'description' => :'description',
+            :'updated_by_user_id' => :'updatedByUserId',
             :'fully_qualified_name' => :'fullyQualifiedName',
             :'labels' => :'labels',
             :'archived' => :'archived',
@@ -89,8 +95,10 @@ module Hubspot
           {
             :'associations' => :'Array<AssociationDefinition>',
             :'secondary_display_properties' => :'Array<String>',
+            :'created_by_user_id' => :'Integer',
             :'object_type_id' => :'String',
             :'description' => :'String',
+            :'updated_by_user_id' => :'Integer',
             :'fully_qualified_name' => :'String',
             :'labels' => :'ObjectTypeDefinitionLabels',
             :'archived' => :'Boolean',
@@ -138,12 +146,20 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'created_by_user_id')
+            self.created_by_user_id = attributes[:'created_by_user_id']
+          end
+
           if attributes.key?(:'object_type_id')
             self.object_type_id = attributes[:'object_type_id']
           end
 
           if attributes.key?(:'description')
             self.description = attributes[:'description']
+          end
+
+          if attributes.key?(:'updated_by_user_id')
+            self.updated_by_user_id = attributes[:'updated_by_user_id']
           end
 
           if attributes.key?(:'fully_qualified_name')
@@ -247,8 +263,10 @@ module Hubspot
           self.class == o.class &&
               associations == o.associations &&
               secondary_display_properties == o.secondary_display_properties &&
+              created_by_user_id == o.created_by_user_id &&
               object_type_id == o.object_type_id &&
               description == o.description &&
+              updated_by_user_id == o.updated_by_user_id &&
               fully_qualified_name == o.fully_qualified_name &&
               labels == o.labels &&
               archived == o.archived &&
@@ -271,7 +289,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [associations, secondary_display_properties, object_type_id, description, fully_qualified_name, labels, archived, created_at, required_properties, searchable_properties, primary_display_property, name, id, properties, updated_at].hash
+          [associations, secondary_display_properties, created_by_user_id, object_type_id, description, updated_by_user_id, fully_qualified_name, labels, archived, created_at, required_properties, searchable_properties, primary_display_property, name, id, properties, updated_at].hash
         end
 
         # Builds the object from hash

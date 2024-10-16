@@ -19,6 +19,7 @@ module Hubspot
       class BatchReadInputSimplePublicObjectId
         attr_accessor :properties_with_history
 
+        # The name of a property whose values are unique for this object.
         attr_accessor :id_property
 
         attr_accessor :inputs

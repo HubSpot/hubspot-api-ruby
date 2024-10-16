@@ -26,6 +26,8 @@ module Hubspot
         # Names of properties that will be indexed for this object type in by HubSpot's product search.
         attr_accessor :searchable_properties
 
+        attr_accessor :clear_description
+
         # The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
         attr_accessor :primary_display_property
 
@@ -41,6 +43,7 @@ module Hubspot
             :'secondary_display_properties' => :'secondaryDisplayProperties',
             :'required_properties' => :'requiredProperties',
             :'searchable_properties' => :'searchableProperties',
+            :'clear_description' => :'clearDescription',
             :'primary_display_property' => :'primaryDisplayProperty',
             :'description' => :'description',
             :'restorable' => :'restorable',
@@ -59,6 +62,7 @@ module Hubspot
             :'secondary_display_properties' => :'Array<String>',
             :'required_properties' => :'Array<String>',
             :'searchable_properties' => :'Array<String>',
+            :'clear_description' => :'Boolean',
             :'primary_display_property' => :'String',
             :'description' => :'String',
             :'restorable' => :'Boolean',
@@ -105,6 +109,10 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'clear_description')
+            self.clear_description = attributes[:'clear_description']
+          end
+
           if attributes.key?(:'primary_display_property')
             self.primary_display_property = attributes[:'primary_display_property']
           end
@@ -143,6 +151,7 @@ module Hubspot
               secondary_display_properties == o.secondary_display_properties &&
               required_properties == o.required_properties &&
               searchable_properties == o.searchable_properties &&
+              clear_description == o.clear_description &&
               primary_display_property == o.primary_display_property &&
               description == o.description &&
               restorable == o.restorable &&
@@ -158,7 +167,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [secondary_display_properties, required_properties, searchable_properties, primary_display_property, description, restorable, labels].hash
+          [secondary_display_properties, required_properties, searchable_properties, clear_description, primary_display_property, description, restorable, labels].hash
         end
 
         # Builds the object from hash

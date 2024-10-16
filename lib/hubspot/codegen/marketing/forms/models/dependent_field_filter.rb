@@ -18,14 +18,19 @@ module Hubspot
     module Forms
       # A condition based on customer input
       class DependentFieldFilter
-        attr_accessor :operator
-
-        attr_accessor :value
-
-        attr_accessor :values
-
+        # 
         attr_accessor :range_start
 
+        # 
+        attr_accessor :values
+
+        # 
+        attr_accessor :value
+
+        # 
+        attr_accessor :operator
+
+        # 
         attr_accessor :range_end
 
         class EnumAttributeValidator
@@ -53,10 +58,10 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'operator' => :'operator',
-            :'value' => :'value',
-            :'values' => :'values',
             :'range_start' => :'rangeStart',
+            :'values' => :'values',
+            :'value' => :'value',
+            :'operator' => :'operator',
             :'range_end' => :'rangeEnd'
           }
         end
@@ -69,10 +74,10 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'operator' => :'String',
-            :'value' => :'String',
-            :'values' => :'Array<String>',
             :'range_start' => :'String',
+            :'values' => :'Array<String>',
+            :'value' => :'String',
+            :'operator' => :'String',
             :'range_end' => :'String'
           }
         end
@@ -98,12 +103,8 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'operator')
-            self.operator = attributes[:'operator']
-          end
-
-          if attributes.key?(:'value')
-            self.value = attributes[:'value']
+          if attributes.key?(:'range_start')
+            self.range_start = attributes[:'range_start']
           end
 
           if attributes.key?(:'values')
@@ -112,8 +113,12 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'range_start')
-            self.range_start = attributes[:'range_start']
+          if attributes.key?(:'value')
+            self.value = attributes[:'value']
+          end
+
+          if attributes.key?(:'operator')
+            self.operator = attributes[:'operator']
           end
 
           if attributes.key?(:'range_end')
@@ -125,20 +130,20 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @operator.nil?
-            invalid_properties.push('invalid value for "operator", operator cannot be nil.')
-          end
-
-          if @value.nil?
-            invalid_properties.push('invalid value for "value", value cannot be nil.')
+          if @range_start.nil?
+            invalid_properties.push('invalid value for "range_start", range_start cannot be nil.')
           end
 
           if @values.nil?
             invalid_properties.push('invalid value for "values", values cannot be nil.')
           end
 
-          if @range_start.nil?
-            invalid_properties.push('invalid value for "range_start", range_start cannot be nil.')
+          if @value.nil?
+            invalid_properties.push('invalid value for "value", value cannot be nil.')
+          end
+
+          if @operator.nil?
+            invalid_properties.push('invalid value for "operator", operator cannot be nil.')
           end
 
           if @range_end.nil?
@@ -151,12 +156,12 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @range_start.nil?
+          return false if @values.nil?
+          return false if @value.nil?
           return false if @operator.nil?
           operator_validator = EnumAttributeValidator.new('String', ["eq", "neq", "contains", "doesnt_contain", "str_starts_with", "str_ends_with", "lt", "lte", "gt", "gte", "between", "not_between", "within_time_reverse", "within_time", "set_any", "set_not_any", "set_all", "set_not_all", "set_eq", "set_neq", "is_not_empty"])
           return false unless operator_validator.valid?(@operator)
-          return false if @value.nil?
-          return false if @values.nil?
-          return false if @range_start.nil?
           return false if @range_end.nil?
           true
         end
@@ -176,10 +181,10 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              operator == o.operator &&
-              value == o.value &&
-              values == o.values &&
               range_start == o.range_start &&
+              values == o.values &&
+              value == o.value &&
+              operator == o.operator &&
               range_end == o.range_end
         end
 
@@ -192,7 +197,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [operator, value, values, range_start, range_end].hash
+          [range_start, values, value, operator, range_end].hash
         end
 
         # Builds the object from hash

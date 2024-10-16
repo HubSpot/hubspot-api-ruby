@@ -42,6 +42,8 @@ module Hubspot
 
           attr_accessor :state
 
+          attr_accessor :campaign_name
+
           attr_accessor :updated
 
           attr_accessor :slug
@@ -61,6 +63,7 @@ module Hubspot
               :'campaign' => :'campaign',
               :'id' => :'id',
               :'state' => :'state',
+              :'campaign_name' => :'campaignName',
               :'updated' => :'updated',
               :'slug' => :'slug'
             }
@@ -86,6 +89,7 @@ module Hubspot
               :'campaign' => :'String',
               :'id' => :'Integer',
               :'state' => :'String',
+              :'campaign_name' => :'String',
               :'updated' => :'Time',
               :'slug' => :'String'
             }
@@ -164,6 +168,10 @@ module Hubspot
               self.state = attributes[:'state']
             end
 
+            if attributes.key?(:'campaign_name')
+              self.campaign_name = attributes[:'campaign_name']
+            end
+
             if attributes.key?(:'updated')
               self.updated = attributes[:'updated']
             end
@@ -221,6 +229,10 @@ module Hubspot
               invalid_properties.push('invalid value for "state", state cannot be nil.')
             end
 
+            if @campaign_name.nil?
+              invalid_properties.push('invalid value for "campaign_name", campaign_name cannot be nil.')
+            end
+
             if @updated.nil?
               invalid_properties.push('invalid value for "updated", updated cannot be nil.')
             end
@@ -246,6 +258,7 @@ module Hubspot
             return false if @campaign.nil?
             return false if @id.nil?
             return false if @state.nil?
+            return false if @campaign_name.nil?
             return false if @updated.nil?
             return false if @slug.nil?
             true
@@ -268,6 +281,7 @@ module Hubspot
                 campaign == o.campaign &&
                 id == o.id &&
                 state == o.state &&
+                campaign_name == o.campaign_name &&
                 updated == o.updated &&
                 slug == o.slug
           end
@@ -281,7 +295,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [archived_in_dashboard, created, tag_ids, publish_date, public_access_rules, password, author_name, public_access_rules_enabled, name, campaign, id, state, updated, slug].hash
+            [archived_in_dashboard, created, tag_ids, publish_date, public_access_rules, password, author_name, public_access_rules_enabled, name, campaign, id, state, campaign_name, updated, slug].hash
           end
 
           # Builds the object from hash

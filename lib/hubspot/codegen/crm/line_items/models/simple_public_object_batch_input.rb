@@ -19,6 +19,8 @@ module Hubspot
       class SimplePublicObjectBatchInput
         attr_accessor :id_property
 
+        attr_accessor :object_write_trace_id
+
         attr_accessor :id
 
         attr_accessor :properties
@@ -27,6 +29,7 @@ module Hubspot
         def self.attribute_map
           {
             :'id_property' => :'idProperty',
+            :'object_write_trace_id' => :'objectWriteTraceId',
             :'id' => :'id',
             :'properties' => :'properties'
           }
@@ -41,6 +44,7 @@ module Hubspot
         def self.openapi_types
           {
             :'id_property' => :'String',
+            :'object_write_trace_id' => :'String',
             :'id' => :'String',
             :'properties' => :'Hash<String, String>'
           }
@@ -71,6 +75,10 @@ module Hubspot
             self.id_property = attributes[:'id_property']
           end
 
+          if attributes.key?(:'object_write_trace_id')
+            self.object_write_trace_id = attributes[:'object_write_trace_id']
+          end
+
           if attributes.key?(:'id')
             self.id = attributes[:'id']
           end
@@ -90,6 +98,10 @@ module Hubspot
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
           invalid_properties
         end
 
@@ -97,6 +109,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @id.nil?
+          return false if @properties.nil?
           true
         end
 
@@ -106,6 +119,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               id_property == o.id_property &&
+              object_write_trace_id == o.object_write_trace_id &&
               id == o.id &&
               properties == o.properties
         end
@@ -119,7 +133,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id_property, id, properties].hash
+          [id_property, object_write_trace_id, id, properties].hash
         end
 
         # Builds the object from hash

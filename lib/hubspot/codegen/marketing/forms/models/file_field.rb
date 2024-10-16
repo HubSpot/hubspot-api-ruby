@@ -18,38 +18,38 @@ module Hubspot
     module Forms
       # A form field used for uploading one or more files.
       class FileField
-        # Determines how the field will be displayed and validated.
-        attr_accessor :field_type
-
         # A unique ID for this field's CRM object type. For example a CONTACT field will have the object type ID 0-1.
         attr_accessor :object_type_id
 
-        # The identifier of the field. In combination with the object type ID, it must be unique.
-        attr_accessor :name
-
-        # The main label for the form field.
-        attr_accessor :label
-
-        # Additional text helping the customer to complete the field.
-        attr_accessor :description
-
-        # Whether a value for this field is required when submitting the form.
-        attr_accessor :required
+        # Whether to allow the upload of multiple files.
+        attr_accessor :allow_multiple_files
 
         # Whether a field should be hidden or not. Hidden fields won't appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
         attr_accessor :hidden
 
+        # The value filled in by default. This value will be submitted unless the customer modifies it.
+        attr_accessor :default_value
+
+        # The identifier of the field. In combination with the object type ID, it must be unique.
+        attr_accessor :name
+
+        # Additional text helping the customer to complete the field.
+        attr_accessor :description
+
         # A list of other fields to make visible based on the value filled in for this field.
         attr_accessor :dependent_fields
+
+        # The main label for the form field.
+        attr_accessor :label
 
         # The prompt text showing when the field isn't filled in.
         attr_accessor :placeholder
 
-        # The value filled in by default. This value will be submitted unless the customer modifies it.
-        attr_accessor :default_value
+        # Determines how the field will be displayed and validated.
+        attr_accessor :field_type
 
-        # Whether to allow the upload of multiple files.
-        attr_accessor :allow_multiple_files
+        # Whether a value for this field is required when submitting the form.
+        attr_accessor :required
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -76,17 +76,17 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'field_type' => :'fieldType',
             :'object_type_id' => :'objectTypeId',
-            :'name' => :'name',
-            :'label' => :'label',
-            :'description' => :'description',
-            :'required' => :'required',
+            :'allow_multiple_files' => :'allowMultipleFiles',
             :'hidden' => :'hidden',
-            :'dependent_fields' => :'dependentFields',
-            :'placeholder' => :'placeholder',
             :'default_value' => :'defaultValue',
-            :'allow_multiple_files' => :'allowMultipleFiles'
+            :'name' => :'name',
+            :'description' => :'description',
+            :'dependent_fields' => :'dependentFields',
+            :'label' => :'label',
+            :'placeholder' => :'placeholder',
+            :'field_type' => :'fieldType',
+            :'required' => :'required'
           }
         end
 
@@ -98,17 +98,17 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'field_type' => :'String',
             :'object_type_id' => :'String',
-            :'name' => :'String',
-            :'label' => :'String',
-            :'description' => :'String',
-            :'required' => :'Boolean',
+            :'allow_multiple_files' => :'Boolean',
             :'hidden' => :'Boolean',
-            :'dependent_fields' => :'Array<DependentField>',
-            :'placeholder' => :'String',
             :'default_value' => :'String',
-            :'allow_multiple_files' => :'Boolean'
+            :'name' => :'String',
+            :'description' => :'String',
+            :'dependent_fields' => :'Array<DependentField>',
+            :'label' => :'String',
+            :'placeholder' => :'String',
+            :'field_type' => :'String',
+            :'required' => :'Boolean'
           }
         end
 
@@ -133,34 +133,28 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'field_type')
-            self.field_type = attributes[:'field_type']
-          else
-            self.field_type = 'file'
-          end
-
           if attributes.key?(:'object_type_id')
             self.object_type_id = attributes[:'object_type_id']
+          end
+
+          if attributes.key?(:'allow_multiple_files')
+            self.allow_multiple_files = attributes[:'allow_multiple_files']
+          end
+
+          if attributes.key?(:'hidden')
+            self.hidden = attributes[:'hidden']
+          end
+
+          if attributes.key?(:'default_value')
+            self.default_value = attributes[:'default_value']
           end
 
           if attributes.key?(:'name')
             self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
           if attributes.key?(:'description')
             self.description = attributes[:'description']
-          end
-
-          if attributes.key?(:'required')
-            self.required = attributes[:'required']
-          end
-
-          if attributes.key?(:'hidden')
-            self.hidden = attributes[:'hidden']
           end
 
           if attributes.key?(:'dependent_fields')
@@ -169,16 +163,22 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
+          end
+
           if attributes.key?(:'placeholder')
             self.placeholder = attributes[:'placeholder']
           end
 
-          if attributes.key?(:'default_value')
-            self.default_value = attributes[:'default_value']
+          if attributes.key?(:'field_type')
+            self.field_type = attributes[:'field_type']
+          else
+            self.field_type = 'file'
           end
 
-          if attributes.key?(:'allow_multiple_files')
-            self.allow_multiple_files = attributes[:'allow_multiple_files']
+          if attributes.key?(:'required')
+            self.required = attributes[:'required']
           end
         end
 
@@ -186,36 +186,36 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @field_type.nil?
-            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
-          end
-
           if @object_type_id.nil?
             invalid_properties.push('invalid value for "object_type_id", object_type_id cannot be nil.')
           end
 
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
-          end
-
-          if @required.nil?
-            invalid_properties.push('invalid value for "required", required cannot be nil.')
+          if @allow_multiple_files.nil?
+            invalid_properties.push('invalid value for "allow_multiple_files", allow_multiple_files cannot be nil.')
           end
 
           if @hidden.nil?
             invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
           end
 
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
           if @dependent_fields.nil?
             invalid_properties.push('invalid value for "dependent_fields", dependent_fields cannot be nil.')
           end
 
-          if @allow_multiple_files.nil?
-            invalid_properties.push('invalid value for "allow_multiple_files", allow_multiple_files cannot be nil.')
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          end
+
+          if @field_type.nil?
+            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
+          end
+
+          if @required.nil?
+            invalid_properties.push('invalid value for "required", required cannot be nil.')
           end
 
           invalid_properties
@@ -224,16 +224,16 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @object_type_id.nil?
+          return false if @allow_multiple_files.nil?
+          return false if @hidden.nil?
+          return false if @name.nil?
+          return false if @dependent_fields.nil?
+          return false if @label.nil?
           return false if @field_type.nil?
           field_type_validator = EnumAttributeValidator.new('String', ["file"])
           return false unless field_type_validator.valid?(@field_type)
-          return false if @object_type_id.nil?
-          return false if @name.nil?
-          return false if @label.nil?
           return false if @required.nil?
-          return false if @hidden.nil?
-          return false if @dependent_fields.nil?
-          return false if @allow_multiple_files.nil?
           true
         end
 
@@ -252,17 +252,17 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              field_type == o.field_type &&
               object_type_id == o.object_type_id &&
-              name == o.name &&
-              label == o.label &&
-              description == o.description &&
-              required == o.required &&
+              allow_multiple_files == o.allow_multiple_files &&
               hidden == o.hidden &&
-              dependent_fields == o.dependent_fields &&
-              placeholder == o.placeholder &&
               default_value == o.default_value &&
-              allow_multiple_files == o.allow_multiple_files
+              name == o.name &&
+              description == o.description &&
+              dependent_fields == o.dependent_fields &&
+              label == o.label &&
+              placeholder == o.placeholder &&
+              field_type == o.field_type &&
+              required == o.required
         end
 
         # @see the `==` method
@@ -274,7 +274,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [field_type, object_type_id, name, label, description, required, hidden, dependent_fields, placeholder, default_value, allow_multiple_files].hash
+          [object_type_id, allow_multiple_files, hidden, default_value, name, description, dependent_fields, label, placeholder, field_type, required].hash
         end
 
         # Builds the object from hash

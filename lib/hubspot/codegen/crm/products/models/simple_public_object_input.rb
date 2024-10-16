@@ -17,12 +17,14 @@ module Hubspot
   module Crm
     module Products
       class SimplePublicObjectInput
-        # 
+        attr_accessor :object_write_trace_id
+
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'object_write_trace_id' => :'objectWriteTraceId',
             :'properties' => :'properties'
           }
         end
@@ -35,6 +37,7 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
+            :'object_write_trace_id' => :'String',
             :'properties' => :'Hash<String, String>'
           }
         end
@@ -60,6 +63,10 @@ module Hubspot
             h[k.to_sym] = v
           }
 
+          if attributes.key?(:'object_write_trace_id')
+            self.object_write_trace_id = attributes[:'object_write_trace_id']
+          end
+
           if attributes.key?(:'properties')
             if (value = attributes[:'properties']).is_a?(Hash)
               self.properties = value
@@ -71,12 +78,17 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @properties.nil?
           true
         end
 
@@ -85,6 +97,7 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              object_write_trace_id == o.object_write_trace_id &&
               properties == o.properties
         end
 
@@ -97,7 +110,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [properties].hash
+          [object_write_trace_id, properties].hash
         end
 
         # Builds the object from hash

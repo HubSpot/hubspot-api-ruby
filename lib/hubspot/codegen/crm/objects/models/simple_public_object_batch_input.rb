@@ -1,5 +1,5 @@
 =begin
-#CRM Objects
+#Objects
 
 #CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are standard objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
 
@@ -17,8 +17,10 @@ module Hubspot
   module Crm
     module Objects
       class SimplePublicObjectBatchInput
-        # The name of the unique property
+        # The name of a property whose values are unique for this object
         attr_accessor :id_property
+
+        attr_accessor :object_write_trace_id
 
         # The id to be updated. This can be the object id, or the unique property value of the idProperty property
         attr_accessor :id
@@ -29,6 +31,7 @@ module Hubspot
         def self.attribute_map
           {
             :'id_property' => :'idProperty',
+            :'object_write_trace_id' => :'objectWriteTraceId',
             :'id' => :'id',
             :'properties' => :'properties'
           }
@@ -43,6 +46,7 @@ module Hubspot
         def self.openapi_types
           {
             :'id_property' => :'String',
+            :'object_write_trace_id' => :'String',
             :'id' => :'String',
             :'properties' => :'Hash<String, String>'
           }
@@ -71,6 +75,10 @@ module Hubspot
 
           if attributes.key?(:'id_property')
             self.id_property = attributes[:'id_property']
+          end
+
+          if attributes.key?(:'object_write_trace_id')
+            self.object_write_trace_id = attributes[:'object_write_trace_id']
           end
 
           if attributes.key?(:'id')
@@ -113,6 +121,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               id_property == o.id_property &&
+              object_write_trace_id == o.object_write_trace_id &&
               id == o.id &&
               properties == o.properties
         end
@@ -126,7 +135,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id_property, id, properties].hash
+          [id_property, object_write_trace_id, id, properties].hash
         end
 
         # Builds the object from hash

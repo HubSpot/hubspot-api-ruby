@@ -17,20 +17,21 @@ module Hubspot
   module Marketing
     module Forms
       class LegalConsentCheckbox
-        # Whether this checkbox is required when submitting the form.
-        attr_accessor :required
-
+        # 
         attr_accessor :subscription_type_id
 
         # The main label for the form field.
         attr_accessor :label
 
+        # Whether this checkbox is required when submitting the form.
+        attr_accessor :required
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'required' => :'required',
             :'subscription_type_id' => :'subscriptionTypeId',
-            :'label' => :'label'
+            :'label' => :'label',
+            :'required' => :'required'
           }
         end
 
@@ -42,9 +43,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'required' => :'Boolean',
             :'subscription_type_id' => :'Integer',
-            :'label' => :'String'
+            :'label' => :'String',
+            :'required' => :'Boolean'
           }
         end
 
@@ -69,10 +70,6 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'required')
-            self.required = attributes[:'required']
-          end
-
           if attributes.key?(:'subscription_type_id')
             self.subscription_type_id = attributes[:'subscription_type_id']
           end
@@ -80,16 +77,16 @@ module Hubspot
           if attributes.key?(:'label')
             self.label = attributes[:'label']
           end
+
+          if attributes.key?(:'required')
+            self.required = attributes[:'required']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @required.nil?
-            invalid_properties.push('invalid value for "required", required cannot be nil.')
-          end
-
           if @subscription_type_id.nil?
             invalid_properties.push('invalid value for "subscription_type_id", subscription_type_id cannot be nil.')
           end
@@ -98,15 +95,19 @@ module Hubspot
             invalid_properties.push('invalid value for "label", label cannot be nil.')
           end
 
+          if @required.nil?
+            invalid_properties.push('invalid value for "required", required cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @required.nil?
           return false if @subscription_type_id.nil?
           return false if @label.nil?
+          return false if @required.nil?
           true
         end
 
@@ -115,9 +116,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              required == o.required &&
               subscription_type_id == o.subscription_type_id &&
-              label == o.label
+              label == o.label &&
+              required == o.required
         end
 
         # @see the `==` method
@@ -129,7 +130,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [required, subscription_type_id, label].hash
+          [subscription_type_id, label, required].hash
         end
 
         # Builds the object from hash

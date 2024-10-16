@@ -1,5 +1,5 @@
 =begin
-#CRM Objects
+#Objects
 
 #CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are standard objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
 
@@ -308,6 +308,80 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: BatchApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Create or update a batch of objects by unique property values
+        # Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+        # @param object_type [String] 
+        # @param batch_input_simple_public_object_batch_input_upsert [BatchInputSimplePublicObjectBatchInputUpsert] 
+        # @param [Hash] opts the optional parameters
+        # @return [BatchResponseSimplePublicUpsertObject]
+        def upsert(object_type, batch_input_simple_public_object_batch_input_upsert, opts = {})
+          data, _status_code, _headers = upsert_with_http_info(object_type, batch_input_simple_public_object_batch_input_upsert, opts)
+          data
+        end
+
+        # Create or update a batch of objects by unique property values
+        # Create or update records identified by a unique property value as specified by the &#x60;idProperty&#x60; query param. &#x60;idProperty&#x60; query param refers to a property whose values are unique for the object.
+        # @param object_type [String] 
+        # @param batch_input_simple_public_object_batch_input_upsert [BatchInputSimplePublicObjectBatchInputUpsert] 
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(BatchResponseSimplePublicUpsertObject, Integer, Hash)>] BatchResponseSimplePublicUpsertObject data, response status code and response headers
+        def upsert_with_http_info(object_type, batch_input_simple_public_object_batch_input_upsert, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BatchApi.upsert ...'
+          end
+          # verify the required parameter 'object_type' is set
+          if @api_client.config.client_side_validation && object_type.nil?
+            fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.upsert"
+          end
+          # verify the required parameter 'batch_input_simple_public_object_batch_input_upsert' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input_upsert.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input_upsert' when calling BatchApi.upsert"
+          end
+          # resource path
+          local_var_path = '/crm/v3/objects/{objectType}/batch/upsert'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          content_type = @api_client.select_header_content_type(['application/json'])
+          if !content_type.nil?
+              header_params['Content-Type'] = content_type
+          end
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_batch_input_upsert)
+
+          # return_type
+          return_type = opts[:debug_return_type] || 'BatchResponseSimplePublicUpsertObject'
+
+          # auth_names
+          auth_names = opts[:debug_auth_names] || ['oauth2']
+
+          new_options = opts.merge(
+            :operation => :"BatchApi.upsert",
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BatchApi#upsert\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

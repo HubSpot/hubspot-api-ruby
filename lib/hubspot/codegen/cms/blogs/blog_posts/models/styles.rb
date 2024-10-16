@@ -26,6 +26,8 @@ module Hubspot
 
           attr_accessor :force_full_width_section
 
+          attr_accessor :breakpoint_styles
+
           attr_accessor :vertical_alignment
 
           attr_accessor :max_width_section_centering
@@ -39,6 +41,7 @@ module Hubspot
               :'flexbox_positioning' => :'flexboxPositioning',
               :'background_image' => :'backgroundImage',
               :'force_full_width_section' => :'forceFullWidthSection',
+              :'breakpoint_styles' => :'breakpointStyles',
               :'vertical_alignment' => :'verticalAlignment',
               :'max_width_section_centering' => :'maxWidthSectionCentering',
               :'background_gradient' => :'backgroundGradient'
@@ -57,6 +60,7 @@ module Hubspot
               :'flexbox_positioning' => :'String',
               :'background_image' => :'BackgroundImage',
               :'force_full_width_section' => :'Boolean',
+              :'breakpoint_styles' => :'Hash<String, BreakpointStyles>',
               :'vertical_alignment' => :'String',
               :'max_width_section_centering' => :'Integer',
               :'background_gradient' => :'Gradient'
@@ -98,6 +102,12 @@ module Hubspot
 
             if attributes.key?(:'force_full_width_section')
               self.force_full_width_section = attributes[:'force_full_width_section']
+            end
+
+            if attributes.key?(:'breakpoint_styles')
+              if (value = attributes[:'breakpoint_styles']).is_a?(Hash)
+                self.breakpoint_styles = value
+              end
             end
 
             if attributes.key?(:'vertical_alignment')
@@ -170,6 +180,7 @@ module Hubspot
                 flexbox_positioning == o.flexbox_positioning &&
                 background_image == o.background_image &&
                 force_full_width_section == o.force_full_width_section &&
+                breakpoint_styles == o.breakpoint_styles &&
                 vertical_alignment == o.vertical_alignment &&
                 max_width_section_centering == o.max_width_section_centering &&
                 background_gradient == o.background_gradient
@@ -184,7 +195,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [background_color, flexbox_positioning, background_image, force_full_width_section, vertical_alignment, max_width_section_centering, background_gradient].hash
+            [background_color, flexbox_positioning, background_image, force_full_width_section, breakpoint_styles, vertical_alignment, max_width_section_centering, background_gradient].hash
           end
 
           # Builds the object from hash

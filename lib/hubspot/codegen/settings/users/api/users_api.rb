@@ -1,5 +1,5 @@
 =begin
-#Settings User Provisioning
+#User Provisioning
 
 #Add, manage, and remove users from your account
 
@@ -45,6 +45,10 @@ module Hubspot
           # verify the required parameter 'user_id' is set
           if @api_client.config.client_side_validation && user_id.nil?
             fail ArgumentError, "Missing the required parameter 'user_id' when calling UsersApi.archive"
+          end
+          allowable_values = ["USER_ID", "EMAIL"]
+          if @api_client.config.client_side_validation && opts[:'id_property'] && !allowable_values.include?(opts[:'id_property'])
+            fail ArgumentError, "invalid value for \"id_property\", must be one of #{allowable_values}"
           end
           # resource path
           local_var_path = '/settings/v3/users/{userId}'.sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
@@ -180,6 +184,10 @@ module Hubspot
           if @api_client.config.client_side_validation && user_id.nil?
             fail ArgumentError, "Missing the required parameter 'user_id' when calling UsersApi.get_by_id"
           end
+          allowable_values = ["USER_ID", "EMAIL"]
+          if @api_client.config.client_side_validation && opts[:'id_property'] && !allowable_values.include?(opts[:'id_property'])
+            fail ArgumentError, "invalid value for \"id_property\", must be one of #{allowable_values}"
+          end
           # resource path
           local_var_path = '/settings/v3/users/{userId}'.sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
 
@@ -314,6 +322,10 @@ module Hubspot
           # verify the required parameter 'public_user_update' is set
           if @api_client.config.client_side_validation && public_user_update.nil?
             fail ArgumentError, "Missing the required parameter 'public_user_update' when calling UsersApi.replace"
+          end
+          allowable_values = ["USER_ID", "EMAIL"]
+          if @api_client.config.client_side_validation && opts[:'id_property'] && !allowable_values.include?(opts[:'id_property'])
+            fail ArgumentError, "invalid value for \"id_property\", must be one of #{allowable_values}"
           end
           # resource path
           local_var_path = '/settings/v3/users/{userId}'.sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))

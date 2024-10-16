@@ -12,8 +12,8 @@ module Hubspot
               basic
               batch
               gdpr
+              merge
               search
-              public_object
             ].freeze
           end
         end

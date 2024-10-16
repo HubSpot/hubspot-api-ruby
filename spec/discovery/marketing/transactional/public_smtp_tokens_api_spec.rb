@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Hubspot::Discovery::Marketing::Transactional::PublicSmtpTokensApi' do
+describe 'Hubspot::Discovery::Marketing::Transactional::PublicSMTPTokensApi' do
   subject(:api) { Hubspot::Client.new(access_token: 'test').marketing.transactional.public_smtp_tokens_api }
   
   it { is_expected.to respond_to(:archive_token) }

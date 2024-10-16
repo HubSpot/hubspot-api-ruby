@@ -18,35 +18,35 @@ module Hubspot
     module Forms
       # A form field consisting of a set of checkboxes allowing multiple choices to be selected at one time.
       class MultipleCheckboxesField
-        # Determines how the field will be displayed and validated.
-        attr_accessor :field_type
-
         # A unique ID for this field's CRM object type. For example a CONTACT field will have the object type ID 0-1.
         attr_accessor :object_type_id
-
-        # The identifier of the field. In combination with the object type ID, it must be unique.
-        attr_accessor :name
-
-        # The main label for the form field.
-        attr_accessor :label
-
-        # Additional text helping the customer to complete the field.
-        attr_accessor :description
-
-        # Whether a value for this field is required when submitting the form.
-        attr_accessor :required
 
         # Whether a field should be hidden or not. Hidden fields won't appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
         attr_accessor :hidden
 
-        # A list of other fields to make visible based on the value filled in for this field.
-        attr_accessor :dependent_fields
+        # The identifier of the field. In combination with the object type ID, it must be unique.
+        attr_accessor :name
+
+        # The list of available choices for this field.
+        attr_accessor :options
+
+        # Additional text helping the customer to complete the field.
+        attr_accessor :description
 
         # The values selected by default. Those values will be submitted unless the customer modifies them.
         attr_accessor :default_values
 
-        # The list of available choices for this field.
-        attr_accessor :options
+        # A list of other fields to make visible based on the value filled in for this field.
+        attr_accessor :dependent_fields
+
+        # The main label for the form field.
+        attr_accessor :label
+
+        # Determines how the field will be displayed and validated.
+        attr_accessor :field_type
+
+        # Whether a value for this field is required when submitting the form.
+        attr_accessor :required
 
         class EnumAttributeValidator
           attr_reader :datatype
@@ -73,16 +73,16 @@ module Hubspot
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'field_type' => :'fieldType',
             :'object_type_id' => :'objectTypeId',
-            :'name' => :'name',
-            :'label' => :'label',
-            :'description' => :'description',
-            :'required' => :'required',
             :'hidden' => :'hidden',
-            :'dependent_fields' => :'dependentFields',
+            :'name' => :'name',
+            :'options' => :'options',
+            :'description' => :'description',
             :'default_values' => :'defaultValues',
-            :'options' => :'options'
+            :'dependent_fields' => :'dependentFields',
+            :'label' => :'label',
+            :'field_type' => :'fieldType',
+            :'required' => :'required'
           }
         end
 
@@ -94,16 +94,16 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'field_type' => :'String',
             :'object_type_id' => :'String',
-            :'name' => :'String',
-            :'label' => :'String',
-            :'description' => :'String',
-            :'required' => :'Boolean',
             :'hidden' => :'Boolean',
-            :'dependent_fields' => :'Array<DependentField>',
+            :'name' => :'String',
+            :'options' => :'Array<EnumeratedFieldOption>',
+            :'description' => :'String',
             :'default_values' => :'Array<String>',
-            :'options' => :'Array<EnumeratedFieldOption>'
+            :'dependent_fields' => :'Array<DependentField>',
+            :'label' => :'String',
+            :'field_type' => :'String',
+            :'required' => :'Boolean'
           }
         end
 
@@ -128,40 +128,26 @@ module Hubspot
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'field_type')
-            self.field_type = attributes[:'field_type']
-          else
-            self.field_type = 'multiple_checkboxes'
-          end
-
           if attributes.key?(:'object_type_id')
             self.object_type_id = attributes[:'object_type_id']
-          end
-
-          if attributes.key?(:'name')
-            self.name = attributes[:'name']
-          end
-
-          if attributes.key?(:'label')
-            self.label = attributes[:'label']
-          end
-
-          if attributes.key?(:'description')
-            self.description = attributes[:'description']
-          end
-
-          if attributes.key?(:'required')
-            self.required = attributes[:'required']
           end
 
           if attributes.key?(:'hidden')
             self.hidden = attributes[:'hidden']
           end
 
-          if attributes.key?(:'dependent_fields')
-            if (value = attributes[:'dependent_fields']).is_a?(Array)
-              self.dependent_fields = value
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
+          end
+
+          if attributes.key?(:'options')
+            if (value = attributes[:'options']).is_a?(Array)
+              self.options = value
             end
+          end
+
+          if attributes.key?(:'description')
+            self.description = attributes[:'description']
           end
 
           if attributes.key?(:'default_values')
@@ -170,10 +156,24 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'options')
-            if (value = attributes[:'options']).is_a?(Array)
-              self.options = value
+          if attributes.key?(:'dependent_fields')
+            if (value = attributes[:'dependent_fields']).is_a?(Array)
+              self.dependent_fields = value
             end
+          end
+
+          if attributes.key?(:'label')
+            self.label = attributes[:'label']
+          end
+
+          if attributes.key?(:'field_type')
+            self.field_type = attributes[:'field_type']
+          else
+            self.field_type = 'multiple_checkboxes'
+          end
+
+          if attributes.key?(:'required')
+            self.required = attributes[:'required']
           end
         end
 
@@ -181,40 +181,40 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @field_type.nil?
-            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
-          end
-
           if @object_type_id.nil?
             invalid_properties.push('invalid value for "object_type_id", object_type_id cannot be nil.')
-          end
-
-          if @name.nil?
-            invalid_properties.push('invalid value for "name", name cannot be nil.')
-          end
-
-          if @label.nil?
-            invalid_properties.push('invalid value for "label", label cannot be nil.')
-          end
-
-          if @required.nil?
-            invalid_properties.push('invalid value for "required", required cannot be nil.')
           end
 
           if @hidden.nil?
             invalid_properties.push('invalid value for "hidden", hidden cannot be nil.')
           end
 
-          if @dependent_fields.nil?
-            invalid_properties.push('invalid value for "dependent_fields", dependent_fields cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
+          end
+
+          if @options.nil?
+            invalid_properties.push('invalid value for "options", options cannot be nil.')
           end
 
           if @default_values.nil?
             invalid_properties.push('invalid value for "default_values", default_values cannot be nil.')
           end
 
-          if @options.nil?
-            invalid_properties.push('invalid value for "options", options cannot be nil.')
+          if @dependent_fields.nil?
+            invalid_properties.push('invalid value for "dependent_fields", dependent_fields cannot be nil.')
+          end
+
+          if @label.nil?
+            invalid_properties.push('invalid value for "label", label cannot be nil.')
+          end
+
+          if @field_type.nil?
+            invalid_properties.push('invalid value for "field_type", field_type cannot be nil.')
+          end
+
+          if @required.nil?
+            invalid_properties.push('invalid value for "required", required cannot be nil.')
           end
 
           invalid_properties
@@ -223,17 +223,17 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @object_type_id.nil?
+          return false if @hidden.nil?
+          return false if @name.nil?
+          return false if @options.nil?
+          return false if @default_values.nil?
+          return false if @dependent_fields.nil?
+          return false if @label.nil?
           return false if @field_type.nil?
           field_type_validator = EnumAttributeValidator.new('String', ["multiple_checkboxes"])
           return false unless field_type_validator.valid?(@field_type)
-          return false if @object_type_id.nil?
-          return false if @name.nil?
-          return false if @label.nil?
           return false if @required.nil?
-          return false if @hidden.nil?
-          return false if @dependent_fields.nil?
-          return false if @default_values.nil?
-          return false if @options.nil?
           true
         end
 
@@ -252,16 +252,16 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              field_type == o.field_type &&
               object_type_id == o.object_type_id &&
-              name == o.name &&
-              label == o.label &&
-              description == o.description &&
-              required == o.required &&
               hidden == o.hidden &&
-              dependent_fields == o.dependent_fields &&
+              name == o.name &&
+              options == o.options &&
+              description == o.description &&
               default_values == o.default_values &&
-              options == o.options
+              dependent_fields == o.dependent_fields &&
+              label == o.label &&
+              field_type == o.field_type &&
+              required == o.required
         end
 
         # @see the `==` method
@@ -273,7 +273,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [field_type, object_type_id, name, label, description, required, hidden, dependent_fields, default_values, options].hash
+          [object_type_id, hidden, name, options, description, default_values, dependent_fields, label, field_type, required].hash
         end
 
         # Builds the object from hash
