@@ -29,6 +29,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `cms.source_code.extract_api.extract_by_path()` method.
 - Removed `cms.source_code.source_code_extract_api`.
 
+## CRM
+
+- Added `crm.objects.leads` Api client.
+- Added method `upsert` to `crm.companies.batch_api`, `crm.contacts.batch_api`, `crm.deals.batch_api`, `crm.line_items.batch_api`, `crm.objects.batch_api`, `crm.objects.calls.batch_api`, `crm.objects.communications.batch_api`, `crm.objects.emails.batch_api`, `crm.objects.meetings.batch_api`, `crm.objects.notes.batch_api`, `crm.objects.postal_mail.batch_api`, `crm.objects.tasks.batch_api`, `crm.objects.taxes.batch_api`, `crm.products.batch_api`, `crm.quotes.batch_api`, `crm.tickets.batch_api`.
+- Added parameter `object_write_trace_id` to models: `simple_public_object_input`, `simple_public_object_batch_input`, `simple_public_object_input_for_create` for `crm.companies`, `crm.contacts`, `crm.deals`, `crm.line_items`, `crm.objects`, `crm.objects.calls`, `crm.objects.communications`, `crm.objects.emails`, `crm.objects.meetings`, `crm.objects.notes`, `crm.objects.postal_mail`, `crm.objects.tasks`, `crm.objects.taxes`, `crm.products`, `crm.quotes`, `crm.tickets`.
+- Added method `mark_as_ready()` to `crm.extensions.calling.recording_settings_api`.
+- Added parameters `created_by_user_id` and `updated_by_user_id` to `crm.schemas.models.object_schema`.
+- Added parameter `clear_description` to `crm.schemas.models.object_type_definition_patch`.
+- Added parameter `supports_inbound_calling` to `crm.extensions.calling.models.settings_patch_request`, `crm.extensions.calling.models.settings_request` and `crm.extensions.calling.models.settings_response`.
+- Changed `association_category` and `association_type_id` parameters can be `nil` in `crm.companies.models.association_spec`, `crm.contacts.models.association_spec`, `crm.deals.models.association_spec`, `crm.tickets.models.association_spec`.
+- Changed `types` and `to` parameters can be `nil` in `crm.companies.models.public_associations_for_object`, `crm.contacts.models.public_associations_for_object`, `crm.deals.models.public_associations_for_object`, and `crm.tickets.models.public_associations_for_object`.
+- Changed `id` parameters can be `nil` in `crm.companies.models.public_object_id`, `crm.contacts.models.public_object_id`, `crm.deals.models.public_object_id`, and `crm.tickets.models.public_object_id`.
+- Changed `limit`, `after`, `sorts`, `properties`, and `filter_groups` parameters can be `nil` in `crm.companies.models.public_object_search_request`, `crm.contacts.models.public_object_search_request`, `crm.deals.models.public_object_search_request`, `crm.objects.models.public_object_search_request`, `crm.objects.calls.models.public_object_search_request`, `crm.objects.communications.models.public_object_search_request`, `crm.objects.emails.models.public_object_search_request`, `crm.objects.goals.models.public_object_search_request`, `crm.objects.postal_mail.models.public_object_search_request`, `crm.objects.tasks.models.public_object_search_request`, `crm.objects.taxes.models.public_object_search_request`, `crm.products.models.public_object_search_request`, `crm.quotes.models.public_object_search_request`, and `crm.tickets.models.public_object_search_request`.
+- Changed `associations` parameters can be `nil` in `crm.companies.models.simple_public_object_input_for_create`, `crm.contacts.models.simple_public_object_input_for_create`, `crm.deals.models.simple_public_object_input_for_create`, and `crm.tickets.models.simple_public_object_input_for_create`.
+- Changed `metadata` parameters can be `nil` in `crm.pipelines.models.pipeline_stage`, `crm.pipelines.models.pipeline_stage_input` and `crm.pipelines.models.pipeline_stage_patch_input`.
+- Renamed `public_object_api` to `merge_api` in `crm.companies`, `crm.contacts`, `crm.deals` and `crm.tickets`.
+- Removed `archive`, `create` and `update` methods from `crm.objects.goals.basic_api` and `crm.objects.goals.batch_api`.
+- Removed GDPRApi:
+`crm.companies.gdpr_api`, `crm.deals.gdpr_api`, `crm.line_items.gdpr_api`, `crm.objects.gdpr_api`, `crm.objects.calls.gdpr_api`, `crm.objects.communications.gdpr_api`, `crm.objects.emails.gdpr_api`, `crm.objects.goals.gdpr_api`, `crm.objects.meetings.gdpr_api`, `crm.objects.notes.gdpr_api`, `crm.objects.postal_mail.gdpr_api`, `crm.objects.tasks.gdpr_api`, `crm.objects.taxes.gdpr_api`, `crm.products.gdpr_api`, `crm.quotes.gdpr_api`, `crm.tickets.gdpr_api`.
+- Removed PublicObjectApi:
+`crm.line_items.public_object_api`, `crm.objects.public_object_api`, `crm.objects.calls.public_object_api`, `crm.objects.communications.public_object_api`, `crm.objects.emails.public_object_api`, `crm.objects.goals.public_object_api`, `crm.objects.meetings.public_object_api`, `crm.objects.notes.public_object_api`, `crm.objects.postal_mail.public_object_api`, `crm.objects.tasks.public_object_api`, `crm.objects.taxes.public_object_api`, `crm.products.public_object_api`, `crm.quotes.public_object_api`.
+- Removed `crm.schemas.public_object_schemas_api`.
+- Removed `crm.extensions.accounting` API client.
+
+## CRM Lists
+
+- Added `crm.objects.lists.folders_api` Api.
+- Added `crm.lists.mapping_api` Api.
+- Added `crm.lists.memberships_api.get_lists()` and `crm.lists.memberships_api.get_page_ordered_by_added_to_list_date()`.
+- Added parameter `custom_properties` to `crm.lists.models.list_create_request`.
+- Added parameter `size` to `crm.lists.models.public_object_list`.
+- Added parameter `coalescing_refine_by` to `crm.lists.models.public_unified_events_filter_branch`.
+- Added parameters `list_ids`, `processing_types` and `sort` to `crm.lists.models.list_search_request`.
+- Changed `list_ids` type from `Array<integer>` to `Array<string>` in `crm.lists.lists_api.getAll()`.
+- Changed `list_id` type from `integer` to `string` in `crm.lists.lists_api.remove()`, `crm.lists.lists_api.restore()`,`crm.lists.lists_api.update_list_filters()`, `crm.lists.lists_api.get_by_id()` and `crm.lists.lists_api.update_name()`.
+- Changed `list_id` type from `integer` to `string` and `request_body` type from `Array<integer>` to `Array<string>` in `crm.lists.memberships_api.add()` and `crm.lists.memberships_api.remove()`.
+- Changed `list_id` type from `integer` to `string` and `source_list_id` type from `Array<integer>` to `Array<string>` in `crm.lists.memberships_api.add_all_from_list()`.
+- Changed `list_id` type from `integer` to `string` in `crm.lists.memberships_api.get_page()`, `crm.lists.memberships_api.add_and_remove()` and `crm.lists.memberships_api.remove_all()`.
+- Changed `list_id` type from `integer` to `string` in `crm.lists.models.public_in_list_filter`, `crm.lists.models.public_object_list_search_result`.
+- Changed `list_id`, `updated_by_id` and `updated_by_id` type from `integer` to `string` in `crm.lists.models.public_object_list`
+- Changed response object type `CollectionResponseLong` to `ApiCollectionResponseJoinTimeAndRecordId` of `crm.lists.memberships_api.get_page()`.
+- Changed `record_ids_removed`, `records_ids_added` and `record_ids_missing` type from `Array<integer>` to `Array<string>` in `crm.lists.models.memberships_update_response`.
+- Changed `record_ids_to_remove` and `record_ids_to_add` type from `Array<integer>` to `Array<string>` in `crm.lists.models.membership_change_request`.
+- Changed `business_unit_id` type from `integer` to `string` and `subscription_ids` from `Array<integer>` to `Array<string>` in `crm.lists.models.public_communication_subscription_filter` and `crm.lists.models.public_property_association_filter_branch_filters_inner`.
+- Rename model from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy`.
+- Changed `subscription_ids` type from `Array<integer>` to `Array<string>` in `crm.lists.models.public_email_subscription_filter`.
+- Changed `offset` and `additional_properties` parameters can be `nil` in `crm.lists.models.list_search_request`.
+- Rename model from `PublicPropertyFilterOperation` to `PublicSurveyMonkeyValueFilterValueComparison`.
+- Renamed Api client from `crm.lists.list_app_membership_api` to `crm.lists.memberships_api`.
+- Renamed Api client from `crm.lists.list_app_api` to `crm.lists.lists_api`.
+
 ## [18.0.0] - 2024-02-29
 
 ### Changes in Cms AuditLogs API
