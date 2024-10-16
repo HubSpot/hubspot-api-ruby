@@ -106,6 +106,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new method `get_types` to `marketing.events.basic_api`.
 - Removed params `index_table_name` and `index_specific_metadata` in`events.events_api.get_page()`.
 
+## Settings Users
+
+- Updated `id_property` validation: Added `allowable_values = ["USER_ID", "EMAIL"]` for `settings.users.users_api.archive()`, `settings.users.users_api.get_by_id()` and `settings.users.users_api.replace()`.
+- Added parameters `first_fame` and `last_name` to `settings.users.models.public_user`, `settings.users.models.public_user_update` and `settings.users.models.user_provision_request`.
+
 ## [18.0.0] - 2024-02-29
 
 ### Changes in Cms AuditLogs API
