@@ -10,7 +10,6 @@ module Hubspot
           def api_classes
             %i[
               core
-              public_object_schemas
             ].freeze
           end
         end

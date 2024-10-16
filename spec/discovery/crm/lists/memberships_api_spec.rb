@@ -9,4 +9,5 @@ describe 'Hubspot::Discovery::Crm::Lists::MembershipsApi' do
   it { is_expected.to respond_to(:get_page) }
   it { is_expected.to respond_to(:remove) }
   it { is_expected.to respond_to(:remove_all) }
+  it { is_expected.to respond_to(:get_lists) }
 end
