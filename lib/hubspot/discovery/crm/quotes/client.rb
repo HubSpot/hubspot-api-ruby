@@ -9,12 +9,9 @@ module Hubspot
 
           def api_classes
             %i[
-              associations
               basic
               batch
-              gdpr
               search
-              public_object
             ].freeze
           end
         end

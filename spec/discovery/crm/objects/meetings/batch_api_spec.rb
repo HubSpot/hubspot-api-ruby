@@ -7,4 +7,5 @@ describe 'Hubspot::Discovery::Crm::Objects::Meetings::BatchApi' do
   it { is_expected.to respond_to(:create) }
   it { is_expected.to respond_to(:read) }
   it { is_expected.to respond_to(:update) }
+  it { is_expected.to respond_to(:upsert) }
 end

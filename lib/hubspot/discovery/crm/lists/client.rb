@@ -9,7 +9,9 @@ module Hubspot
 
           def api_classes
             %i[
+              folders
               lists
+              mapping
               memberships
             ].freeze
           end

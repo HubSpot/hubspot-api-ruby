@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Marketing
       module Transactional
-        class PublicSmtpTokensApi
+        class PublicSMTPTokensApi
           include Hubspot::Discovery::BaseApiClient
         end
       end
