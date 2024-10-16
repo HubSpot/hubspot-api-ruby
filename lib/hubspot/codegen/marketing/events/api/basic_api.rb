@@ -16,7 +16,6 @@ module Hubspot
   module Marketing
     module Events
       class BasicApi
-        include Hubspot::Helpers::GetAllHelper
 
         attr_accessor :api_client
 
