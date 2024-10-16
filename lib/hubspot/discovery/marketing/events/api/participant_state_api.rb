@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Marketing
       module Events
-        class SearchApi
+        class ParticipantStateApi
           include Hubspot::Discovery::BaseApiClient
         end
       end

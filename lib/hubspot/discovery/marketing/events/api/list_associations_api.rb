@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Marketing
       module Events
-        class MarketingEventsExternalApi
+        class ListAssociationsApi
           include Hubspot::Discovery::BaseApiClient
         end
       end
