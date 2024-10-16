@@ -101,6 +101,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `marketing.events.marketing_events_external_api`.
 - Removed `marketing.events.search_api`.
 
+## Events
+
+- Added new method `get_types` to `marketing.events.basic_api`.
+- Removed params `index_table_name` and `index_specific_metadata` in`events.events_api.get_page()`.
+
 ## [18.0.0] - 2024-02-29
 
 ### Changes in Cms AuditLogs API
