@@ -52,7 +52,7 @@ module Hubspot
             :'query' => :'String',
             :'limit' => :'Integer',
             :'after' => :'String',
-            :'sorts' => :'Array<String>',
+            :'sorts' => :'Array<Object>',
             :'properties' => :'Array<String>',
             :'filter_groups' => :'Array<FilterGroup>'
           }
