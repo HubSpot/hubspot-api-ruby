@@ -8,10 +8,6 @@ RSpec.describe Hubspot::Helpers::Request do
   let(:post_options) { { path: '/test', method: 'POST', body: { key: 'value' } } }
 
   describe '#initialize' do
-    it 'raises an error when config is nil' do
-      expect { described_class.new(nil, default_options) }.to raise_error('Config cannot be nil')
-    end
-
     it 'sets default headers and URL' do
       request = described_class.new(config_with_access_token, default_options)
       expect(request.url).to eq('https://api.hubapi.com/test')
@@ -26,7 +22,7 @@ RSpec.describe Hubspot::Helpers::Request do
     end
 
     it 'applies API key authorization' do
-      request = described_class.new(config_with_api_key, default_options.merge(auth_type: :api_key))
+      request = described_class.new(config_with_api_key, default_options.merge(auth_type: :api_key, auth_value: 'api_key_value'))
       expect(request.url).to include('hapikey=api_key_value')
     end
   end

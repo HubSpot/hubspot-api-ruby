@@ -11,15 +11,13 @@ module Hubspot
       attr_reader :url, :method, :headers, :body
 
       def initialize(config, options = {})
-        raise "Config cannot be nil" if config.nil?
-
+        @config = config || {}
+        @options = options || {}
         @base_url = config.fetch("base_url", "https://api.hubapi.com")
         @headers = {}
         @body = nil
         @default_json = options.fetch("default_json", true)
-        @options = options
         @method = (@options[:method] || "GET").upcase
-        @config = config
 
         init_headers
         apply_auth
