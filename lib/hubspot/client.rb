@@ -25,6 +25,13 @@ module Hubspot
       ].freeze
     end
 
+    def api_request(options)
+      require_relative 'helpers/requests/http_request_builder'
+
+      request = Hubspot::Helpers::Request.new(@params, options)
+      request.send
+    end
+
     def base_module
       'Hubspot::Discovery'
     end
