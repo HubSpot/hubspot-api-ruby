@@ -72,6 +72,20 @@ client.api_request({
 })
 ```
 
+## api_request options
+
+```ruby
+- "method": string, # Http method (e.g.: GET, POST, etc). Default value GET
+  "path": string, # URL path (e.g.: '/crm/v3/objects/contacts'). Optional
+  "headers": array, # Http headers. Optional.
+  "body": mixed, # Request body (if defaultJson set body will be transforted to json string).Optional.
+  "auth_type": (access_token, hapikey, developer_api_key), # Auth type. if it isn't set it will use access_token or hapikey. Default value is non empty auth_type.
+  "auth_value": string, # The corresponding value for the auth_type.
+  "base_url": string, # Base URL. Default value 'https://api.hubapi.com'.
+  "qs": array, # Query parameters. Optional.
+  "default_json": bool, # Default Json. if it is set to true it add to headers [ 'Content-Type' => 'application/json', 'Accept' => 'application/json, */*;q=0.8',]
+```
+
 ### {Example} for `GET` request
 
 ```ruby
