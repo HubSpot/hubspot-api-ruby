@@ -7,10 +7,10 @@ TEST_DATA = {
   :request_body=> "{'example_field':'example_value'}",
   :url=> "https://www.example.com/webhook_uri",
   :http_method=> "POST",
-  :timestamp=> 15000000,
+  :timestamp=> 1_700_000_300_000,
   :v1_hash=> "69fc6631a867edd4f9e9e627fc5c1148e3fbdd8b21837b6d2b8901c1fa57f750",
   :v2_hash=> "4fe4e3a7d3cf09db53be39d0a58130e2aaba074ec123a9e355b876a689a1c383",
-  :v3_hash=> "HPW73RUtKmcYoEDADG0s6MmGFWUzWJKAW07r8RDgcQw=",
+  :v3_hash=> "RnbPH7+UMKVkbV32P8bz450N4M56aPmcru1+D3kSDtw=",
 }
 
 
@@ -77,12 +77,12 @@ describe "Hubspot::Helpers::Signature.is_valid" do
     expect(result).to be true
   end
   it "should return true for v3 signature version" do
-    test_timestamp = DateTime.now.strftime("%s")
+    test_timestamp_microseconds = (Time.now.to_f * 1000).to_i
     test_signature = signature.get_signature(
       client_secret: TEST_DATA[:client_secret],
       request_body: TEST_DATA[:request_body],
       http_uri: TEST_DATA[:http_uri],
-      timestamp: test_timestamp,
+      timestamp: test_timestamp_microseconds,
       signature_version: "v3"
     )
 
@@ -91,7 +91,7 @@ describe "Hubspot::Helpers::Signature.is_valid" do
       client_secret: TEST_DATA[:client_secret],
       request_body: TEST_DATA[:request_body],
       http_uri: TEST_DATA[:http_uri],
-      timestamp: test_timestamp,
+      timestamp: test_timestamp_microseconds,
       signature_version: "v3"
     )
     expect(result).to be true
@@ -102,6 +102,16 @@ describe "Hubspot::Helpers::Signature.is_valid" do
       client_secret: TEST_DATA[:client_secret],
       request_body: TEST_DATA[:request_body],
       http_uri: TEST_DATA[:http_uri],
+      signature_version: "v3"
+    ) }.to raise_error(Hubspot::InvalidSignatureTimestampError)
+  end
+  it "should raise exception if :signature_version=>v3 and :timestamp=>expired" do
+    expect {  signature.is_valid(
+      signature: TEST_DATA[:v3_hash],
+      client_secret: TEST_DATA[:client_secret],
+      request_body: TEST_DATA[:request_body],
+      http_uri: TEST_DATA[:http_uri],
+      timestamp: 1_700_000_000_000,
       signature_version: "v3"
     ) }.to raise_error(Hubspot::InvalidSignatureTimestampError)
   end
