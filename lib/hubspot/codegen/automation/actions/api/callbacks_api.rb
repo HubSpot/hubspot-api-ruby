@@ -21,8 +21,9 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Completes a single callback
-        # @param callback_id [String] 
+        # Completes a callback
+        # Complete a specific blocked action execution by ID.
+        # @param callback_id [String] The ID of the action execution.
         # @param callback_completion_request [CallbackCompletionRequest] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -31,8 +32,9 @@ module Hubspot
           nil
         end
 
-        # Completes a single callback
-        # @param callback_id [String] 
+        # Completes a callback
+        # Complete a specific blocked action execution by ID.
+        # @param callback_id [String] The ID of the action execution.
         # @param callback_completion_request [CallbackCompletionRequest] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -93,7 +95,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Completes a batch of callbacks
+        # Complete a batch of callbacks
+        # Complete a batch of blocked action executions.
         # @param batch_input_callback_completion_batch_request [BatchInputCallbackCompletionBatchRequest] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -102,7 +105,8 @@ module Hubspot
           nil
         end
 
-        # Completes a batch of callbacks
+        # Complete a batch of callbacks
+        # Complete a batch of blocked action executions.
         # @param batch_input_callback_completion_batch_request [BatchInputCallbackCompletionBatchRequest] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

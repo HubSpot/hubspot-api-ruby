@@ -21,9 +21,10 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive an extension definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Delete an action definition
+        # Delete an action definition by ID.
+        # @param definition_id [String] The ID of the custom action definition.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [nil]
         def archive(definition_id, app_id, opts = {})
@@ -31,9 +32,10 @@ module Hubspot
           nil
         end
 
-        # Archive an extension definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Delete an action definition
+        # Delete an action definition by ID.
+        # @param definition_id [String] The ID of the custom action definition.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_with_http_info(definition_id, app_id, opts = {})
@@ -88,8 +90,9 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Create a new extension definition
-        # @param app_id [Integer] 
+        # Create a new custom action definition
+        # Create a new custom workflow action.
+        # @param app_id [Integer] The ID of the app.
         # @param public_action_definition_egg [PublicActionDefinitionEgg] 
         # @param [Hash] opts the optional parameters
         # @return [PublicActionDefinition]
@@ -98,8 +101,9 @@ module Hubspot
           data
         end
 
-        # Create a new extension definition
-        # @param app_id [Integer] 
+        # Create a new custom action definition
+        # Create a new custom workflow action.
+        # @param app_id [Integer] The ID of the app.
         # @param public_action_definition_egg [PublicActionDefinitionEgg] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionDefinition, Integer, Hash)>] PublicActionDefinition data, response status code and response headers
@@ -160,9 +164,10 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get extension definition by Id
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve a custom action definition
+        # Retrieve a custom workflow action definition by ID.
+        # @param definition_id [String] The ID of the custom action.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [PublicActionDefinition]
@@ -171,9 +176,10 @@ module Hubspot
           data
         end
 
-        # Get extension definition by Id
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve a custom action definition
+        # Retrieve a custom workflow action definition by ID.
+        # @param definition_id [String] The ID of the custom action.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
         # @return [Array<(PublicActionDefinition, Integer, Hash)>] PublicActionDefinition data, response status code and response headers
@@ -230,8 +236,9 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get paged extension definitions
-        # @param app_id [Integer] 
+        # Retrieve custom action definitions
+        # Retrieve custom workflow action definitions by app ID.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @option opts [Integer] :limit The maximum number of results to display per page.
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -242,8 +249,9 @@ module Hubspot
           data
         end
 
-        # Get paged extension definitions
-        # @param app_id [Integer] 
+        # Retrieve custom action definitions
+        # Retrieve custom workflow action definitions by app ID.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @option opts [Integer] :limit The maximum number of results to display per page.
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -300,9 +308,10 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Patch an existing extension definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Update an existing action definition
+        # Update an existing action definition by ID.
+        # @param definition_id [String] The ID of the custom action definition.
+        # @param app_id [Integer] The ID of the app.
         # @param public_action_definition_patch [PublicActionDefinitionPatch] 
         # @param [Hash] opts the optional parameters
         # @return [PublicActionDefinition]
@@ -311,9 +320,10 @@ module Hubspot
           data
         end
 
-        # Patch an existing extension definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Update an existing action definition
+        # Update an existing action definition by ID.
+        # @param definition_id [String] The ID of the custom action definition.
+        # @param app_id [Integer] The ID of the app.
         # @param public_action_definition_patch [PublicActionDefinitionPatch] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionDefinition, Integer, Hash)>] PublicActionDefinition data, response status code and response headers

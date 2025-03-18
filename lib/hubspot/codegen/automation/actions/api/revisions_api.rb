@@ -21,10 +21,11 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Gets a revision for a given definition by revision id
-        # @param definition_id [String] 
-        # @param revision_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve a specific revision of a definition
+        # Retrieve a specific revision of a definition by revision ID.
+        # @param definition_id [String] The ID of the definition.
+        # @param revision_id [String] The ID of the revision.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [PublicActionRevision]
         def get_by_id(definition_id, revision_id, app_id, opts = {})
@@ -32,10 +33,11 @@ module Hubspot
           data
         end
 
-        # Gets a revision for a given definition by revision id
-        # @param definition_id [String] 
-        # @param revision_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve a specific revision of a definition
+        # Retrieve a specific revision of a definition by revision ID.
+        # @param definition_id [String] The ID of the definition.
+        # @param revision_id [String] The ID of the revision.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionRevision, Integer, Hash)>] PublicActionRevision data, response status code and response headers
         def get_by_id_with_http_info(definition_id, revision_id, app_id, opts = {})
@@ -94,9 +96,10 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get all revisions for a given definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve revisions for a given definition
+        # Retrieve the versions of a definition by ID.
+        # @param definition_id [String] The ID of the definition.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @option opts [Integer] :limit The maximum number of results to display per page.
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -106,9 +109,10 @@ module Hubspot
           data
         end
 
-        # Get all revisions for a given definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve revisions for a given definition
+        # Retrieve the versions of a definition by ID.
+        # @param definition_id [String] The ID of the definition.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @option opts [Integer] :limit The maximum number of results to display per page.
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.

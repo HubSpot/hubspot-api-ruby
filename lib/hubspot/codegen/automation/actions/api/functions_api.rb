@@ -106,9 +106,10 @@ module Hubspot
         end
 
         # Delete a function for a definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param app_id [Integer] 
+        # Delete a function within a given definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [nil]
         def archive_by_function_type(definition_id, function_type, app_id, opts = {})
@@ -117,9 +118,10 @@ module Hubspot
         end
 
         # Delete a function for a definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param app_id [Integer] 
+        # Delete a function within a given definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_by_function_type_with_http_info(definition_id, function_type, app_id, opts = {})
@@ -183,11 +185,12 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Insert a function for a definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param function_id [String] 
-        # @param app_id [Integer] 
+        # Update a function for a definition
+        # Update a function for a given definition by ID.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param function_id [String] The ID of the function.
+        # @param app_id [Integer] The ID of the app.
         # @param body [String] 
         # @param [Hash] opts the optional parameters
         # @return [PublicActionFunctionIdentifier]
@@ -196,11 +199,12 @@ module Hubspot
           data
         end
 
-        # Insert a function for a definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param function_id [String] 
-        # @param app_id [Integer] 
+        # Update a function for a definition
+        # Update a function for a given definition by ID.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param function_id [String] The ID of the function.
+        # @param app_id [Integer] The ID of the app.
         # @param body [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionFunctionIdentifier, Integer, Hash)>] PublicActionFunctionIdentifier data, response status code and response headers
@@ -279,9 +283,10 @@ module Hubspot
         end
 
         # Insert a function for a definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param app_id [Integer] 
+        # Add a function for a given definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param app_id [Integer] The ID of the app.
         # @param body [String] 
         # @param [Hash] opts the optional parameters
         # @return [PublicActionFunctionIdentifier]
@@ -291,9 +296,10 @@ module Hubspot
         end
 
         # Insert a function for a definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param app_id [Integer] 
+        # Add a function for a given definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param app_id [Integer] The ID of the app.
         # @param body [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionFunctionIdentifier, Integer, Hash)>] PublicActionFunctionIdentifier data, response status code and response headers
@@ -367,10 +373,10 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get all functions by a type for a given definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param app_id [Integer] 
+        # Retrieve functions by a type for a given definition
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [PublicActionFunction]
         def get_by_function_type(definition_id, function_type, app_id, opts = {})
@@ -378,10 +384,10 @@ module Hubspot
           data
         end
 
-        # Get all functions by a type for a given definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param app_id [Integer] 
+        # Retrieve functions by a type for a given definition
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionFunction, Integer, Hash)>] PublicActionFunction data, response status code and response headers
         def get_by_function_type_with_http_info(definition_id, function_type, app_id, opts = {})
@@ -445,11 +451,12 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get a function for a given definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param function_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve a function from a given definition
+        # Retrieve a specific function from a given definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param function_id [String] The ID of the function.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [PublicActionFunction]
         def get_by_id(definition_id, function_type, function_id, app_id, opts = {})
@@ -457,11 +464,12 @@ module Hubspot
           data
         end
 
-        # Get a function for a given definition
-        # @param definition_id [String] 
-        # @param function_type [String] 
-        # @param function_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve a function from a given definition
+        # Retrieve a specific function from a given definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param function_type [String] The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+        # @param function_id [String] The ID of the function.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(PublicActionFunction, Integer, Hash)>] PublicActionFunction data, response status code and response headers
         def get_by_id_with_http_info(definition_id, function_type, function_id, app_id, opts = {})
@@ -529,9 +537,10 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Get all functions for a given definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve functions for a given definition
+        # Retrieve all functions included in a definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponsePublicActionFunctionIdentifierNoPaging]
         def get_page(definition_id, app_id, opts = {})
@@ -539,9 +548,10 @@ module Hubspot
           data
         end
 
-        # Get all functions for a given definition
-        # @param definition_id [String] 
-        # @param app_id [Integer] 
+        # Retrieve functions for a given definition
+        # Retrieve all functions included in a definition.
+        # @param definition_id [String] The ID of the definition.
+        # @param app_id [Integer] The ID of the app.
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponsePublicActionFunctionIdentifierNoPaging, Integer, Hash)>] CollectionResponsePublicActionFunctionIdentifierNoPaging data, response status code and response headers
         def get_page_with_http_info(definition_id, app_id, opts = {})
