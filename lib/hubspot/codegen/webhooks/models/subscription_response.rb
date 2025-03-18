@@ -15,9 +15,12 @@ require 'time'
 
 module Hubspot
   module Webhooks
+    # Complete details for an event subscription.
     class SubscriptionResponse
       # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
       attr_accessor :created_at
+
+      attr_accessor :object_type_id
 
       # The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
       attr_accessor :property_name
@@ -60,6 +63,7 @@ module Hubspot
       def self.attribute_map
         {
           :'created_at' => :'createdAt',
+          :'object_type_id' => :'objectTypeId',
           :'property_name' => :'propertyName',
           :'active' => :'active',
           :'event_type' => :'eventType',
@@ -77,6 +81,7 @@ module Hubspot
       def self.openapi_types
         {
           :'created_at' => :'Time',
+          :'object_type_id' => :'String',
           :'property_name' => :'String',
           :'active' => :'Boolean',
           :'event_type' => :'String',
@@ -108,6 +113,10 @@ module Hubspot
 
         if attributes.key?(:'created_at')
           self.created_at = attributes[:'created_at']
+        end
+
+        if attributes.key?(:'object_type_id')
+          self.object_type_id = attributes[:'object_type_id']
         end
 
         if attributes.key?(:'property_name')
@@ -160,7 +169,7 @@ module Hubspot
         return false if @created_at.nil?
         return false if @active.nil?
         return false if @event_type.nil?
-        event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange"])
+        event_type_validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange", "object.propertyChange", "object.creation", "object.deletion", "object.merge", "object.restore", "object.associationChange"])
         return false unless event_type_validator.valid?(@event_type)
         return false if @id.nil?
         true
@@ -169,7 +178,7 @@ module Hubspot
       # Custom attribute writer method checking allowed values (enum).
       # @param [Object] event_type Object to be assigned
       def event_type=(event_type)
-        validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange"])
+        validator = EnumAttributeValidator.new('String', ["contact.propertyChange", "company.propertyChange", "deal.propertyChange", "ticket.propertyChange", "product.propertyChange", "line_item.propertyChange", "contact.creation", "contact.deletion", "contact.privacyDeletion", "company.creation", "company.deletion", "deal.creation", "deal.deletion", "ticket.creation", "ticket.deletion", "product.creation", "product.deletion", "line_item.creation", "line_item.deletion", "conversation.creation", "conversation.deletion", "conversation.newMessage", "conversation.privacyDeletion", "conversation.propertyChange", "contact.merge", "company.merge", "deal.merge", "ticket.merge", "product.merge", "line_item.merge", "contact.restore", "company.restore", "deal.restore", "ticket.restore", "product.restore", "line_item.restore", "contact.associationChange", "company.associationChange", "deal.associationChange", "ticket.associationChange", "line_item.associationChange", "object.propertyChange", "object.creation", "object.deletion", "object.merge", "object.restore", "object.associationChange"])
         unless validator.valid?(event_type)
           fail ArgumentError, "invalid value for \"event_type\", must be one of #{validator.allowable_values}."
         end
@@ -182,6 +191,7 @@ module Hubspot
         return true if self.equal?(o)
         self.class == o.class &&
             created_at == o.created_at &&
+            object_type_id == o.object_type_id &&
             property_name == o.property_name &&
             active == o.active &&
             event_type == o.event_type &&
@@ -198,7 +208,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [created_at, property_name, active, event_type, id, updated_at].hash
+        [created_at, object_type_id, property_name, active, event_type, id, updated_at].hash
       end
 
       # Builds the object from hash

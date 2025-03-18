@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Webhooks
+    # Updated details for the subscription.
     class SubscriptionPatchRequest
       # Determines if the subscription is active or paused.
       attr_accessor :active

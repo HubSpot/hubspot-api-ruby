@@ -20,8 +20,10 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # @param subscription_id [Integer] 
-      # @param app_id [Integer] 
+      # Delete event subscription
+      # Delete an existing event subscription by ID.
+      # @param subscription_id [Integer] The ID of the event subscription.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [nil]
       def archive(subscription_id, app_id, opts = {})
@@ -29,8 +31,10 @@ module Hubspot
         nil
       end
 
-      # @param subscription_id [Integer] 
-      # @param app_id [Integer] 
+      # Delete event subscription
+      # Delete an existing event subscription by ID.
+      # @param subscription_id [Integer] The ID of the event subscription.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def archive_with_http_info(subscription_id, app_id, opts = {})
@@ -85,7 +89,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param app_id [Integer] 
+      # Create an event subscription
+      # Create new event subscription for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param subscription_create_request [SubscriptionCreateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
@@ -94,7 +100,9 @@ module Hubspot
         data
       end
 
-      # @param app_id [Integer] 
+      # Create an event subscription
+      # Create new event subscription for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param subscription_create_request [SubscriptionCreateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
@@ -155,7 +163,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param app_id [Integer] 
+      # Read event subscriptions
+      # Retrieve event subscriptions for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionListResponse]
       def get_all(app_id, opts = {})
@@ -163,7 +173,9 @@ module Hubspot
         data
       end
 
-      # @param app_id [Integer] 
+      # Read event subscriptions
+      # Retrieve event subscriptions for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionListResponse, Integer, Hash)>] SubscriptionListResponse data, response status code and response headers
       def get_all_with_http_info(app_id, opts = {})
@@ -214,8 +226,10 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param subscription_id [Integer] 
-      # @param app_id [Integer] 
+      # Read an event subscription
+      # Retrieve a specific event subscription by ID.
+      # @param subscription_id [Integer] The ID of the event subscription.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
       def get_by_id(subscription_id, app_id, opts = {})
@@ -223,8 +237,10 @@ module Hubspot
         data
       end
 
-      # @param subscription_id [Integer] 
-      # @param app_id [Integer] 
+      # Read an event subscription
+      # Retrieve a specific event subscription by ID.
+      # @param subscription_id [Integer] The ID of the event subscription.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
       def get_by_id_with_http_info(subscription_id, app_id, opts = {})
@@ -279,8 +295,10 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param subscription_id [Integer] 
-      # @param app_id [Integer] 
+      # Update an event subscription
+      # Update an existing event subscription by ID.
+      # @param subscription_id [Integer] The ID of the event subscription.
+      # @param app_id [Integer] The ID of the app.
       # @param subscription_patch_request [SubscriptionPatchRequest] 
       # @param [Hash] opts the optional parameters
       # @return [SubscriptionResponse]
@@ -289,8 +307,10 @@ module Hubspot
         data
       end
 
-      # @param subscription_id [Integer] 
-      # @param app_id [Integer] 
+      # Update an event subscription
+      # Update an existing event subscription by ID.
+      # @param subscription_id [Integer] The ID of the event subscription.
+      # @param app_id [Integer] The ID of the app.
       # @param subscription_patch_request [SubscriptionPatchRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SubscriptionResponse, Integer, Hash)>] SubscriptionResponse data, response status code and response headers
@@ -355,7 +375,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param app_id [Integer] 
+      # Batch create event subscriptions
+      # Batch create event subscriptions for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [BatchResponseSubscriptionResponse]
@@ -364,7 +386,9 @@ module Hubspot
         data
       end
 
-      # @param app_id [Integer] 
+      # Batch create event subscriptions
+      # Batch create event subscriptions for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param batch_input_subscription_batch_update_request [BatchInputSubscriptionBatchUpdateRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(BatchResponseSubscriptionResponse, Integer, Hash)>] BatchResponseSubscriptionResponse data, response status code and response headers

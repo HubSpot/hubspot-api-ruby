@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Webhooks
+    # New or updated webhook settings for an app.
     class SettingsChangeRequest
       attr_accessor :throttling
 
