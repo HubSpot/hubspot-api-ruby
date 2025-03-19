@@ -97,7 +97,8 @@ module Hubspot
           "GET" => Net::HTTP::Get,
           "POST" => Net::HTTP::Post,
           "PUT" => Net::HTTP::Put,
-          "DELETE" => Net::HTTP::Delete
+          "DELETE" => Net::HTTP::Delete,
+          "PATCH" => Net::HTTP::Patch
         }
 
         request_class = http_methods[@method]
