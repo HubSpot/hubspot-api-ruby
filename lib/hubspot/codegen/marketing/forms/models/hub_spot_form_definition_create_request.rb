@@ -11,7 +11,6 @@ OpenAPI Generator version: 6.2.1
 =end
 
 require 'date'
-require_relative 'hub_spot_form_definition_create_request_all_of'
 require 'time'
 
 module Hubspot
