@@ -21,7 +21,8 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive a batch of companies by ID
+        # Archive a batch of companies
+        # Delete a batch of companies by ID. Deleted companies can be restored within 90 days of deletion. Learn more about [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -30,7 +31,8 @@ module Hubspot
           nil
         end
 
-        # Archive a batch of companies by ID
+        # Archive a batch of companies
+        # Delete a batch of companies by ID. Deleted companies can be restored within 90 days of deletion. Learn more about [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -88,6 +90,7 @@ module Hubspot
         end
 
         # Create a batch of companies
+        # Create a batch of companies. The `inputs` array can contain a `properties` object to define property values for each company, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
         # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
@@ -97,6 +100,7 @@ module Hubspot
         end
 
         # Create a batch of companies
+        # Create a batch of companies. The &#x60;inputs&#x60; array can contain a &#x60;properties&#x60; object to define property values for each company, along with an &#x60;associations&#x60; array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
         # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
@@ -153,7 +157,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Read a batch of companies by internal ID, or unique property values
+        # Retrieve a batch of companies
+        # Retrieve a batch of companies by ID (`companyId`) or by a unique property (`idProperty`). You can specify what is returned using the `properties` query parameter.
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -163,7 +168,8 @@ module Hubspot
           data
         end
 
-        # Read a batch of companies by internal ID, or unique property values
+        # Retrieve a batch of companies
+        # Retrieve a batch of companies by ID (&#x60;companyId&#x60;) or by a unique property (&#x60;idProperty&#x60;). You can specify what is returned using the &#x60;properties&#x60; query parameter.
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -222,7 +228,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Update a batch of companies by internal ID, or unique property values
+        # Update a batch of companies
+        # Update a batch of companies by ID.
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
@@ -231,7 +238,8 @@ module Hubspot
           data
         end
 
-        # Update a batch of companies by internal ID, or unique property values
+        # Update a batch of companies
+        # Update a batch of companies by ID.
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
@@ -289,7 +297,7 @@ module Hubspot
         end
 
         # Create or update a batch of companies by unique property values
-        # Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+        # Create or update companies identified by a unique property value as specified by the `idProperty` query parameter. `idProperty` query param refers to a property whose values are unique for the object.
         # @param batch_input_simple_public_object_batch_input_upsert [BatchInputSimplePublicObjectBatchInputUpsert] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicUpsertObject]
@@ -299,7 +307,7 @@ module Hubspot
         end
 
         # Create or update a batch of companies by unique property values
-        # Create or update records identified by a unique property value as specified by the &#x60;idProperty&#x60; query param. &#x60;idProperty&#x60; query param refers to a property whose values are unique for the object.
+        # Create or update companies identified by a unique property value as specified by the &#x60;idProperty&#x60; query parameter. &#x60;idProperty&#x60; query param refers to a property whose values are unique for the object.
         # @param batch_input_simple_public_object_batch_input_upsert [BatchInputSimplePublicObjectBatchInputUpsert] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicUpsertObject, Integer, Hash)>] BatchResponseSimplePublicUpsertObject data, response status code and response headers

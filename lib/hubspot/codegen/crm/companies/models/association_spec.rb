@@ -17,8 +17,10 @@ module Hubspot
   module Crm
     module Companies
       class AssociationSpec
+        # For [labeled associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#associate-records-with-a-label), the category of the association.
         attr_accessor :association_category
 
+        # The [association type ID](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values) (e.g., `4` for contact-to-company associations).
         attr_accessor :association_type_id
 
         class EnumAttributeValidator
@@ -98,14 +100,24 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @association_category.nil?
+            invalid_properties.push('invalid value for "association_category", association_category cannot be nil.')
+          end
+
+          if @association_type_id.nil?
+            invalid_properties.push('invalid value for "association_type_id", association_type_id cannot be nil.')
+          end
+
           invalid_properties
         end
 
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @association_category.nil?
           association_category_validator = EnumAttributeValidator.new('String', ["HUBSPOT_DEFINED", "USER_DEFINED", "INTEGRATOR_DEFINED"])
           return false unless association_category_validator.valid?(@association_category)
+          return false if @association_type_id.nil?
           true
         end
 

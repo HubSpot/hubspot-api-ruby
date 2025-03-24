@@ -19,8 +19,10 @@ module Hubspot
       class SimplePublicObjectInputForCreate
         attr_accessor :associations
 
+        # Set this field to a unique ID value to enable more granular debugging with [multi-status errors](https://developers.hubspot.com/docs/reference/api/other-resources/error-handling#multi-status-errors).
         attr_accessor :object_write_trace_id
 
+        # The company property values to set.
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
@@ -88,6 +90,10 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @associations.nil?
+            invalid_properties.push('invalid value for "associations", associations cannot be nil.')
+          end
+
           if @properties.nil?
             invalid_properties.push('invalid value for "properties", properties cannot be nil.')
           end
@@ -98,6 +104,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @associations.nil?
           return false if @properties.nil?
           true
         end

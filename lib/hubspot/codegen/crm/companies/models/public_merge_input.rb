@@ -17,8 +17,10 @@ module Hubspot
   module Crm
     module Companies
       class PublicMergeInput
+        # The ID of the company to merge into the primary.
         attr_accessor :object_id_to_merge
 
+        # The ID of the primary company, which the other will merge into.
         attr_accessor :primary_object_id
 
         # Attribute mapping from ruby-style variable name to JSON key.

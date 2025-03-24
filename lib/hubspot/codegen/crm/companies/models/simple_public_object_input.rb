@@ -17,8 +17,10 @@ module Hubspot
   module Crm
     module Companies
       class SimplePublicObjectInput
+        # Set this field to a unique ID value to enable more granular debugging with [multi-status errors](https://developers.hubspot.com/docs/reference/api/other-resources/error-handling#multi-status-errors).
         attr_accessor :object_write_trace_id
 
+        # The company property values to set.
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
