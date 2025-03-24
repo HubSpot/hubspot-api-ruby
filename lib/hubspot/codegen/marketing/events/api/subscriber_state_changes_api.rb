@@ -23,9 +23,9 @@ module Hubspot
         end
         # Record a subscriber state by contact email
         # Record a subscriber state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created. The contactProperties field is used only when creating a new contact. These properties will not update existing contacts. 
-        # @param external_event_id [String] The ID of the marketing event
+        # @param external_event_id [String] The id of the marketing event in the external event application
         # @param subscriber_state [String] The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
-        # @param external_account_id [String] The account ID associated with the marketing event
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param batch_input_marketing_event_email_subscriber [BatchInputMarketingEventEmailSubscriber] 
         # @param [Hash] opts the optional parameters
         # @return [Error]
@@ -36,9 +36,9 @@ module Hubspot
 
         # Record a subscriber state by contact email
         # Record a subscriber state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created. The contactProperties field is used only when creating a new contact. These properties will not update existing contacts. 
-        # @param external_event_id [String] The ID of the marketing event
+        # @param external_event_id [String] The id of the marketing event in the external event application
         # @param subscriber_state [String] The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
-        # @param external_account_id [String] The account ID associated with the marketing event
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param batch_input_marketing_event_email_subscriber [BatchInputMarketingEventEmailSubscriber] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
@@ -110,9 +110,9 @@ module Hubspot
 
         # Record a subscriber state by contact ID
         # Record a subscriber state between multiple HubSpot contacts and a marketing event, using HubSpot contact IDs. Note that the contact must already exist in HubSpot; a contact will not be created.
-        # @param external_event_id [String] The ID of the marketing event
+        # @param external_event_id [String] The id of the marketing event in the external event application
         # @param subscriber_state [String] The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
-        # @param external_account_id [String] The account ID associated with the marketing event
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param batch_input_marketing_event_subscriber [BatchInputMarketingEventSubscriber] 
         # @param [Hash] opts the optional parameters
         # @return [Error]
@@ -123,9 +123,9 @@ module Hubspot
 
         # Record a subscriber state by contact ID
         # Record a subscriber state between multiple HubSpot contacts and a marketing event, using HubSpot contact IDs. Note that the contact must already exist in HubSpot; a contact will not be created.
-        # @param external_event_id [String] The ID of the marketing event
+        # @param external_event_id [String] The id of the marketing event in the external event application
         # @param subscriber_state [String] The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
-        # @param external_account_id [String] The account ID associated with the marketing event
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param batch_input_marketing_event_subscriber [BatchInputMarketingEventSubscriber] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers

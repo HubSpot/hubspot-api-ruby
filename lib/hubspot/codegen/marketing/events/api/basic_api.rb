@@ -16,16 +16,17 @@ module Hubspot
   module Marketing
     module Events
       class BasicApi
+        include Hubspot::Helpers::GetAllHelper
 
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Delete a marketing event
-        # Deletes an existing Marketing Event with the specified id, if one exists.
-        # @param external_event_id [String] The id of the marketing event to delete
-        # @param external_account_id [String] The account id associated with the marketing event
+        # Delete Marketing Event by External Ids
+        # Deletes the existing Marketing Event with the specified externalAccountId, externalEventId, if it exists.  Only Marketing Events created by the same app can be deleted.
+        # @param external_event_id [String] The id of the marketing event in the external event application
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param [Hash] opts the optional parameters
         # @return [nil]
         def archive(external_event_id, external_account_id, opts = {})
@@ -33,10 +34,10 @@ module Hubspot
           nil
         end
 
-        # Delete a marketing event
-        # Deletes an existing Marketing Event with the specified id, if one exists.
-        # @param external_event_id [String] The id of the marketing event to delete
-        # @param external_account_id [String] The account id associated with the marketing event
+        # Delete Marketing Event by External Ids
+        # Deletes the existing Marketing Event with the specified externalAccountId, externalEventId, if it exists.  Only Marketing Events created by the same app can be deleted.
+        # @param external_event_id [String] The id of the marketing event in the external event application
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_with_http_info(external_event_id, external_account_id, opts = {})
@@ -92,31 +93,31 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Delete multiple marketing events
-        # Bulk delete a number of marketing events in HubSpot
-        # @param batch_input_marketing_event_external_unique_identifier [BatchInputMarketingEventExternalUniqueIdentifier] 
+        # Delete Marketing Event by objectId
+        # Deletes the existing Marketing Event with the specified objectId, if it exists.
+        # @param object_id [String] The internal ID of the marketing event in HubSpot
         # @param [Hash] opts the optional parameters
-        # @return [Error]
-        def batch_archive(batch_input_marketing_event_external_unique_identifier, opts = {})
-          data, _status_code, _headers = batch_archive_with_http_info(batch_input_marketing_event_external_unique_identifier, opts)
-          data
+        # @return [nil]
+        def archive_by_object_id(object_id, opts = {})
+          archive_by_object_id_with_http_info(object_id, opts)
+          nil
         end
 
-        # Delete multiple marketing events
-        # Bulk delete a number of marketing events in HubSpot
-        # @param batch_input_marketing_event_external_unique_identifier [BatchInputMarketingEventExternalUniqueIdentifier] 
+        # Delete Marketing Event by objectId
+        # Deletes the existing Marketing Event with the specified objectId, if it exists.
+        # @param object_id [String] The internal ID of the marketing event in HubSpot
         # @param [Hash] opts the optional parameters
-        # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
-        def batch_archive_with_http_info(batch_input_marketing_event_external_unique_identifier, opts = {})
+        # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+        def archive_by_object_id_with_http_info(object_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.batch_archive ...'
+            @api_client.config.logger.debug 'Calling API: BasicApi.archive_by_object_id ...'
           end
-          # verify the required parameter 'batch_input_marketing_event_external_unique_identifier' is set
-          if @api_client.config.client_side_validation && batch_input_marketing_event_external_unique_identifier.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_marketing_event_external_unique_identifier' when calling BasicApi.batch_archive"
+          # verify the required parameter 'object_id' is set
+          if @api_client.config.client_side_validation && object_id.nil?
+            fail ArgumentError, "Missing the required parameter 'object_id' when calling BasicApi.archive_by_object_id"
           end
           # resource path
-          local_var_path = '/marketing/v3/marketing-events/events/delete'
+          local_var_path = '/marketing/v3/marketing-events/{objectId}'.sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
 
           # query parameters
           query_params = opts[:query_params] || {}
@@ -125,149 +126,6 @@ module Hubspot
           header_params = opts[:header_params] || {}
           # HTTP header 'Accept' (if needed)
           header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-          # HTTP header 'Content-Type'
-          content_type = @api_client.select_header_content_type(['application/json'])
-          if !content_type.nil?
-              header_params['Content-Type'] = content_type
-          end
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_marketing_event_external_unique_identifier)
-
-          # return_type
-          return_type = opts[:debug_return_type] || 'Error'
-
-          # auth_names
-          auth_names = opts[:debug_auth_names] || ['oauth2']
-
-          new_options = opts.merge(
-            :operation => :"BasicApi.batch_archive",
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#batch_archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Create or update multiple marketing events
-        # Upsert multiple marketing events. If there is an existing Marketing event with the specified ID, it will be updated; otherwise a new event will be created.
-        # @param batch_input_marketing_event_create_request_params [BatchInputMarketingEventCreateRequestParams] 
-        # @param [Hash] opts the optional parameters
-        # @return [BatchResponseMarketingEventPublicDefaultResponse]
-        def batch_upsert(batch_input_marketing_event_create_request_params, opts = {})
-          data, _status_code, _headers = batch_upsert_with_http_info(batch_input_marketing_event_create_request_params, opts)
-          data
-        end
-
-        # Create or update multiple marketing events
-        # Upsert multiple marketing events. If there is an existing Marketing event with the specified ID, it will be updated; otherwise a new event will be created.
-        # @param batch_input_marketing_event_create_request_params [BatchInputMarketingEventCreateRequestParams] 
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(BatchResponseMarketingEventPublicDefaultResponse, Integer, Hash)>] BatchResponseMarketingEventPublicDefaultResponse data, response status code and response headers
-        def batch_upsert_with_http_info(batch_input_marketing_event_create_request_params, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.batch_upsert ...'
-          end
-          # verify the required parameter 'batch_input_marketing_event_create_request_params' is set
-          if @api_client.config.client_side_validation && batch_input_marketing_event_create_request_params.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_marketing_event_create_request_params' when calling BasicApi.batch_upsert"
-          end
-          # resource path
-          local_var_path = '/marketing/v3/marketing-events/events/upsert'
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-          # HTTP header 'Content-Type'
-          content_type = @api_client.select_header_content_type(['application/json'])
-          if !content_type.nil?
-              header_params['Content-Type'] = content_type
-          end
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_marketing_event_create_request_params)
-
-          # return_type
-          return_type = opts[:debug_return_type] || 'BatchResponseMarketingEventPublicDefaultResponse'
-
-          # auth_names
-          auth_names = opts[:debug_auth_names] || ['oauth2']
-
-          new_options = opts.merge(
-            :operation => :"BasicApi.batch_upsert",
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#batch_upsert\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Mark a marketing event as cancelled
-        # Mark a marketing event as cancelled.
-        # @param external_event_id [String] The id of the marketing event to mark as cancelled
-        # @param external_account_id [String] The account id associated with the marketing event
-        # @param [Hash] opts the optional parameters
-        # @return [MarketingEventDefaultResponse]
-        def cancel(external_event_id, external_account_id, opts = {})
-          data, _status_code, _headers = cancel_with_http_info(external_event_id, external_account_id, opts)
-          data
-        end
-
-        # Mark a marketing event as cancelled
-        # Mark a marketing event as cancelled.
-        # @param external_event_id [String] The id of the marketing event to mark as cancelled
-        # @param external_account_id [String] The account id associated with the marketing event
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(MarketingEventDefaultResponse, Integer, Hash)>] MarketingEventDefaultResponse data, response status code and response headers
-        def cancel_with_http_info(external_event_id, external_account_id, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.cancel ...'
-          end
-          # verify the required parameter 'external_event_id' is set
-          if @api_client.config.client_side_validation && external_event_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_event_id' when calling BasicApi.cancel"
-          end
-          # verify the required parameter 'external_account_id' is set
-          if @api_client.config.client_side_validation && external_account_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_account_id' when calling BasicApi.cancel"
-          end
-          # resource path
-          local_var_path = '/marketing/v3/marketing-events/events/{externalEventId}/cancel'.sub('{' + 'externalEventId' + '}', CGI.escape(external_event_id.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'externalAccountId'] = external_account_id
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
 
           # form parameters
           form_params = opts[:form_params] || {}
@@ -276,13 +134,13 @@ module Hubspot
           post_body = opts[:debug_body]
 
           # return_type
-          return_type = opts[:debug_return_type] || 'MarketingEventDefaultResponse'
+          return_type = opts[:debug_return_type]
 
           # auth_names
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"BasicApi.cancel",
+            :operation => :"BasicApi.archive_by_object_id",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -291,90 +149,9 @@ module Hubspot
             :return_type => return_type
           )
 
-          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#cancel\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-          end
-          return data, status_code, headers
-        end
-
-        # Mark a marketing event as completed
-        # Mark a marketing event as completed
-        # @param external_event_id [String] The id of the marketing event in the external event application.
-        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application.
-        # @param marketing_event_complete_request_params [MarketingEventCompleteRequestParams] 
-        # @param [Hash] opts the optional parameters
-        # @return [MarketingEventDefaultResponse]
-        def complete(external_event_id, external_account_id, marketing_event_complete_request_params, opts = {})
-          data, _status_code, _headers = complete_with_http_info(external_event_id, external_account_id, marketing_event_complete_request_params, opts)
-          data
-        end
-
-        # Mark a marketing event as completed
-        # Mark a marketing event as completed
-        # @param external_event_id [String] The id of the marketing event in the external event application.
-        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application.
-        # @param marketing_event_complete_request_params [MarketingEventCompleteRequestParams] 
-        # @param [Hash] opts the optional parameters
-        # @return [Array<(MarketingEventDefaultResponse, Integer, Hash)>] MarketingEventDefaultResponse data, response status code and response headers
-        def complete_with_http_info(external_event_id, external_account_id, marketing_event_complete_request_params, opts = {})
-          if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.complete ...'
-          end
-          # verify the required parameter 'external_event_id' is set
-          if @api_client.config.client_side_validation && external_event_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_event_id' when calling BasicApi.complete"
-          end
-          # verify the required parameter 'external_account_id' is set
-          if @api_client.config.client_side_validation && external_account_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_account_id' when calling BasicApi.complete"
-          end
-          # verify the required parameter 'marketing_event_complete_request_params' is set
-          if @api_client.config.client_side_validation && marketing_event_complete_request_params.nil?
-            fail ArgumentError, "Missing the required parameter 'marketing_event_complete_request_params' when calling BasicApi.complete"
-          end
-          # resource path
-          local_var_path = '/marketing/v3/marketing-events/events/{externalEventId}/complete'.sub('{' + 'externalEventId' + '}', CGI.escape(external_event_id.to_s))
-
-          # query parameters
-          query_params = opts[:query_params] || {}
-          query_params[:'externalAccountId'] = external_account_id
-
-          # header parameters
-          header_params = opts[:header_params] || {}
-          # HTTP header 'Accept' (if needed)
-          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
-          # HTTP header 'Content-Type'
-          content_type = @api_client.select_header_content_type(['application/json'])
-          if !content_type.nil?
-              header_params['Content-Type'] = content_type
-          end
-
-          # form parameters
-          form_params = opts[:form_params] || {}
-
-          # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(marketing_event_complete_request_params)
-
-          # return_type
-          return_type = opts[:debug_return_type] || 'MarketingEventDefaultResponse'
-
-          # auth_names
-          auth_names = opts[:debug_auth_names] || ['oauth2']
-
-          new_options = opts.merge(
-            :operation => :"BasicApi.complete",
-            :header_params => header_params,
-            :query_params => query_params,
-            :form_params => form_params,
-            :body => post_body,
-            :auth_names => auth_names,
-            :return_type => return_type
-          )
-
-          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-          if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#complete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BasicApi#archive_by_object_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -447,35 +224,34 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Search for marketing events
-        # Search for marketing events that have an event id that starts with the query string
-        # @param q [String] The id of the marketing event in the external event application
+        # Get all marketing event
+        # Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
         # @param [Hash] opts the optional parameters
-        # @return [CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging]
-        def do_search(q, opts = {})
-          data, _status_code, _headers = do_search_with_http_info(q, opts)
+        # @option opts [String] :after The cursor indicating the position of the last retrieved item.
+        # @option opts [Integer] :limit The limit for response size. The default value is 10, the max number is 100 (default to 10)
+        # @return [CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging]
+        def get_all(opts = {})
+          data, _status_code, _headers = get_all_with_http_info(opts)
           data
         end
 
-        # Search for marketing events
-        # Search for marketing events that have an event id that starts with the query string
-        # @param q [String] The id of the marketing event in the external event application
+        # Get all marketing event
+        # Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
         # @param [Hash] opts the optional parameters
-        # @return [Array<(CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging, Integer, Hash)>] CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging data, response status code and response headers
-        def do_search_with_http_info(q, opts = {})
+        # @option opts [String] :after The cursor indicating the position of the last retrieved item.
+        # @option opts [Integer] :limit The limit for response size. The default value is 10, the max number is 100 (default to 10)
+        # @return [Array<(CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging, Integer, Hash)>] CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging data, response status code and response headers
+        def get_all_with_http_info(opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: BasicApi.do_search ...'
-          end
-          # verify the required parameter 'q' is set
-          if @api_client.config.client_side_validation && q.nil?
-            fail ArgumentError, "Missing the required parameter 'q' when calling BasicApi.do_search"
+            @api_client.config.logger.debug 'Calling API: BasicApi.get_all ...'
           end
           # resource path
-          local_var_path = '/marketing/v3/marketing-events/events/search'
+          local_var_path = '/marketing/v3/marketing-events/'
 
           # query parameters
           query_params = opts[:query_params] || {}
-          query_params[:'q'] = q
+          query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
+          query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
@@ -489,13 +265,13 @@ module Hubspot
           post_body = opts[:debug_body]
 
           # return_type
-          return_type = opts[:debug_return_type] || 'CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging'
+          return_type = opts[:debug_return_type] || 'CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging'
 
           # auth_names
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"BasicApi.do_search",
+            :operation => :"BasicApi.get_all",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -506,15 +282,78 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: BasicApi#do_search\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: BasicApi#get_all\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
 
-        # Get a marketing event
-        # Returns the details of the Marketing Event with the specified id, if one exists.
-        # @param external_event_id [String] The id of the marketing event to return
-        # @param external_account_id [String] The account id associated with the marketing event
+        # Get Marketing Event by objectId
+        # Returns the details of a Marketing Event with the specified objectId, if it exists.
+        # @param object_id [String] The internal ID of the marketing event in HubSpot
+        # @param [Hash] opts the optional parameters
+        # @return [MarketingEventPublicReadResponseV2]
+        def get_by_object_id(object_id, opts = {})
+          data, _status_code, _headers = get_by_object_id_with_http_info(object_id, opts)
+          data
+        end
+
+        # Get Marketing Event by objectId
+        # Returns the details of a Marketing Event with the specified objectId, if it exists.
+        # @param object_id [String] The internal ID of the marketing event in HubSpot
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(MarketingEventPublicReadResponseV2, Integer, Hash)>] MarketingEventPublicReadResponseV2 data, response status code and response headers
+        def get_by_object_id_with_http_info(object_id, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BasicApi.get_by_object_id ...'
+          end
+          # verify the required parameter 'object_id' is set
+          if @api_client.config.client_side_validation && object_id.nil?
+            fail ArgumentError, "Missing the required parameter 'object_id' when calling BasicApi.get_by_object_id"
+          end
+          # resource path
+          local_var_path = '/marketing/v3/marketing-events/{objectId}'.sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:debug_body]
+
+          # return_type
+          return_type = opts[:debug_return_type] || 'MarketingEventPublicReadResponseV2'
+
+          # auth_names
+          auth_names = opts[:debug_auth_names] || ['oauth2']
+
+          new_options = opts.merge(
+            :operation => :"BasicApi.get_by_object_id",
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BasicApi#get_by_object_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Get Marketing Event by External IDs
+        # Returns the details of a Marketing Event with the specified externalAccountId, externalEventId, if it exists.  Only Marketing Events created by the same app making the request can be retrieved.
+        # @param external_event_id [String] The id of the marketing event in the external event application
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param [Hash] opts the optional parameters
         # @return [MarketingEventPublicReadResponse]
         def get_details(external_event_id, external_account_id, opts = {})
@@ -522,10 +361,10 @@ module Hubspot
           data
         end
 
-        # Get a marketing event
-        # Returns the details of the Marketing Event with the specified id, if one exists.
-        # @param external_event_id [String] The id of the marketing event to return
-        # @param external_account_id [String] The account id associated with the marketing event
+        # Get Marketing Event by External IDs
+        # Returns the details of a Marketing Event with the specified externalAccountId, externalEventId, if it exists.  Only Marketing Events created by the same app making the request can be retrieved.
+        # @param external_event_id [String] The id of the marketing event in the external event application
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param [Hash] opts the optional parameters
         # @return [Array<(MarketingEventPublicReadResponse, Integer, Hash)>] MarketingEventPublicReadResponse data, response status code and response headers
         def get_details_with_http_info(external_event_id, external_account_id, opts = {})
@@ -581,10 +420,10 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Update a marketing event
-        # Updates an existing Marketing Event with the specified id, if one exists.
-        # @param external_event_id [String] The id of the marketing event to update
-        # @param external_account_id [String] The account id associated with the marketing event
+        # Update Marketing Event by External IDs
+        # Updates the details of an existing Marketing Event identified by its externalAccountId, externalEventId if it exists.  Only Marketing Events created by the same app can be updated.
+        # @param external_event_id [String] The id of the marketing event in the external event application
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param marketing_event_update_request_params [MarketingEventUpdateRequestParams] 
         # @param [Hash] opts the optional parameters
         # @return [MarketingEventPublicDefaultResponse]
@@ -593,10 +432,10 @@ module Hubspot
           data
         end
 
-        # Update a marketing event
-        # Updates an existing Marketing Event with the specified id, if one exists.
-        # @param external_event_id [String] The id of the marketing event to update
-        # @param external_account_id [String] The account id associated with the marketing event
+        # Update Marketing Event by External IDs
+        # Updates the details of an existing Marketing Event identified by its externalAccountId, externalEventId if it exists.  Only Marketing Events created by the same app can be updated.
+        # @param external_event_id [String] The id of the marketing event in the external event application
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param marketing_event_update_request_params [MarketingEventUpdateRequestParams] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(MarketingEventPublicDefaultResponse, Integer, Hash)>] MarketingEventPublicDefaultResponse data, response status code and response headers
@@ -662,9 +501,83 @@ module Hubspot
           return data, status_code, headers
         end
 
+        # Update Marketing Event by objectId
+        # Updates the details of an existing Marketing Event identified by its objectId, if it exists.
+        # @param object_id [String] The internal ID of the marketing event in HubSpot
+        # @param marketing_event_public_update_request_v2 [MarketingEventPublicUpdateRequestV2] 
+        # @param [Hash] opts the optional parameters
+        # @return [MarketingEventPublicDefaultResponseV2]
+        def update_by_object_id(object_id, marketing_event_public_update_request_v2, opts = {})
+          data, _status_code, _headers = update_by_object_id_with_http_info(object_id, marketing_event_public_update_request_v2, opts)
+          data
+        end
+
+        # Update Marketing Event by objectId
+        # Updates the details of an existing Marketing Event identified by its objectId, if it exists.
+        # @param object_id [String] The internal ID of the marketing event in HubSpot
+        # @param marketing_event_public_update_request_v2 [MarketingEventPublicUpdateRequestV2] 
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(MarketingEventPublicDefaultResponseV2, Integer, Hash)>] MarketingEventPublicDefaultResponseV2 data, response status code and response headers
+        def update_by_object_id_with_http_info(object_id, marketing_event_public_update_request_v2, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BasicApi.update_by_object_id ...'
+          end
+          # verify the required parameter 'object_id' is set
+          if @api_client.config.client_side_validation && object_id.nil?
+            fail ArgumentError, "Missing the required parameter 'object_id' when calling BasicApi.update_by_object_id"
+          end
+          # verify the required parameter 'marketing_event_public_update_request_v2' is set
+          if @api_client.config.client_side_validation && marketing_event_public_update_request_v2.nil?
+            fail ArgumentError, "Missing the required parameter 'marketing_event_public_update_request_v2' when calling BasicApi.update_by_object_id"
+          end
+          # resource path
+          local_var_path = '/marketing/v3/marketing-events/{objectId}'.sub('{' + 'objectId' + '}', CGI.escape(object_id.to_s))
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          content_type = @api_client.select_header_content_type(['application/json'])
+          if !content_type.nil?
+              header_params['Content-Type'] = content_type
+          end
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(marketing_event_public_update_request_v2)
+
+          # return_type
+          return_type = opts[:debug_return_type] || 'MarketingEventPublicDefaultResponseV2'
+
+          # auth_names
+          auth_names = opts[:debug_auth_names] || ['oauth2']
+
+          new_options = opts.merge(
+            :operation => :"BasicApi.update_by_object_id",
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BasicApi#update_by_object_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
         # Create or update a marketing event
         # Upserts a marketing event If there is an existing marketing event with the specified ID, it will be updated; otherwise a new event will be created.
-        # @param external_event_id [String] The ID of the marketing event to upsert
+        # @param external_event_id [String] The id of the marketing event in the external event application
         # @param marketing_event_create_request_params [MarketingEventCreateRequestParams] 
         # @param [Hash] opts the optional parameters
         # @return [MarketingEventPublicDefaultResponse]
@@ -675,7 +588,7 @@ module Hubspot
 
         # Create or update a marketing event
         # Upserts a marketing event If there is an existing marketing event with the specified ID, it will be updated; otherwise a new event will be created.
-        # @param external_event_id [String] The ID of the marketing event to upsert
+        # @param external_event_id [String] The id of the marketing event in the external event application
         # @param marketing_event_create_request_params [MarketingEventCreateRequestParams] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(MarketingEventPublicDefaultResponse, Integer, Hash)>] MarketingEventPublicDefaultResponse data, response status code and response headers

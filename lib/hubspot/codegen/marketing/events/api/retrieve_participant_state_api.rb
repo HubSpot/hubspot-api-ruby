@@ -15,7 +15,7 @@ require 'cgi'
 module Hubspot
   module Marketing
     module Events
-      class ParticipantStateApi
+      class RetrieveParticipantStateApi
         attr_accessor :api_client
 
         def initialize(api_client = ApiClient.default)
@@ -44,11 +44,11 @@ module Hubspot
         # @return [Array<(CollectionResponseWithTotalParticipationBreakdownForwardPaging, Integer, Hash)>] CollectionResponseWithTotalParticipationBreakdownForwardPaging data, response status code and response headers
         def get_participations_breakdown_by_contact_id_with_http_info(contact_identifier, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ParticipantStateApi.get_participations_breakdown_by_contact_id ...'
+            @api_client.config.logger.debug 'Calling API: RetrieveParticipantStateApi.get_participations_breakdown_by_contact_id ...'
           end
           # verify the required parameter 'contact_identifier' is set
           if @api_client.config.client_side_validation && contact_identifier.nil?
-            fail ArgumentError, "Missing the required parameter 'contact_identifier' when calling ParticipantStateApi.get_participations_breakdown_by_contact_id"
+            fail ArgumentError, "Missing the required parameter 'contact_identifier' when calling RetrieveParticipantStateApi.get_participations_breakdown_by_contact_id"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/participations/contacts/{contactIdentifier}/breakdown'.sub('{' + 'contactIdentifier' + '}', CGI.escape(contact_identifier.to_s))
@@ -77,7 +77,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"ParticipantStateApi.get_participations_breakdown_by_contact_id",
+            :operation => :"RetrieveParticipantStateApi.get_participations_breakdown_by_contact_id",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -88,7 +88,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ParticipantStateApi#get_participations_breakdown_by_contact_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RetrieveParticipantStateApi#get_participations_breakdown_by_contact_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -120,15 +120,15 @@ module Hubspot
         # @return [Array<(CollectionResponseWithTotalParticipationBreakdownForwardPaging, Integer, Hash)>] CollectionResponseWithTotalParticipationBreakdownForwardPaging data, response status code and response headers
         def get_participations_breakdown_by_external_event_id_with_http_info(external_account_id, external_event_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ParticipantStateApi.get_participations_breakdown_by_external_event_id ...'
+            @api_client.config.logger.debug 'Calling API: RetrieveParticipantStateApi.get_participations_breakdown_by_external_event_id ...'
           end
           # verify the required parameter 'external_account_id' is set
           if @api_client.config.client_side_validation && external_account_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_account_id' when calling ParticipantStateApi.get_participations_breakdown_by_external_event_id"
+            fail ArgumentError, "Missing the required parameter 'external_account_id' when calling RetrieveParticipantStateApi.get_participations_breakdown_by_external_event_id"
           end
           # verify the required parameter 'external_event_id' is set
           if @api_client.config.client_side_validation && external_event_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_event_id' when calling ParticipantStateApi.get_participations_breakdown_by_external_event_id"
+            fail ArgumentError, "Missing the required parameter 'external_event_id' when calling RetrieveParticipantStateApi.get_participations_breakdown_by_external_event_id"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}/breakdown'.sub('{' + 'externalAccountId' + '}', CGI.escape(external_account_id.to_s)).sub('{' + 'externalEventId' + '}', CGI.escape(external_event_id.to_s))
@@ -158,7 +158,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"ParticipantStateApi.get_participations_breakdown_by_external_event_id",
+            :operation => :"RetrieveParticipantStateApi.get_participations_breakdown_by_external_event_id",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -169,7 +169,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ParticipantStateApi#get_participations_breakdown_by_external_event_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RetrieveParticipantStateApi#get_participations_breakdown_by_external_event_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -199,11 +199,11 @@ module Hubspot
         # @return [Array<(CollectionResponseWithTotalParticipationBreakdownForwardPaging, Integer, Hash)>] CollectionResponseWithTotalParticipationBreakdownForwardPaging data, response status code and response headers
         def get_participations_breakdown_by_marketing_event_id_with_http_info(marketing_event_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ParticipantStateApi.get_participations_breakdown_by_marketing_event_id ...'
+            @api_client.config.logger.debug 'Calling API: RetrieveParticipantStateApi.get_participations_breakdown_by_marketing_event_id ...'
           end
           # verify the required parameter 'marketing_event_id' is set
           if @api_client.config.client_side_validation && marketing_event_id.nil?
-            fail ArgumentError, "Missing the required parameter 'marketing_event_id' when calling ParticipantStateApi.get_participations_breakdown_by_marketing_event_id"
+            fail ArgumentError, "Missing the required parameter 'marketing_event_id' when calling RetrieveParticipantStateApi.get_participations_breakdown_by_marketing_event_id"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/participations/{marketingEventId}/breakdown'.sub('{' + 'marketingEventId' + '}', CGI.escape(marketing_event_id.to_s))
@@ -233,7 +233,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"ParticipantStateApi.get_participations_breakdown_by_marketing_event_id",
+            :operation => :"RetrieveParticipantStateApi.get_participations_breakdown_by_marketing_event_id",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -244,7 +244,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ParticipantStateApi#get_participations_breakdown_by_marketing_event_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RetrieveParticipantStateApi#get_participations_breakdown_by_marketing_event_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -268,15 +268,15 @@ module Hubspot
         # @return [Array<(AttendanceCounters, Integer, Hash)>] AttendanceCounters data, response status code and response headers
         def get_participations_counters_by_event_external_id_with_http_info(external_account_id, external_event_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ParticipantStateApi.get_participations_counters_by_event_external_id ...'
+            @api_client.config.logger.debug 'Calling API: RetrieveParticipantStateApi.get_participations_counters_by_event_external_id ...'
           end
           # verify the required parameter 'external_account_id' is set
           if @api_client.config.client_side_validation && external_account_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_account_id' when calling ParticipantStateApi.get_participations_counters_by_event_external_id"
+            fail ArgumentError, "Missing the required parameter 'external_account_id' when calling RetrieveParticipantStateApi.get_participations_counters_by_event_external_id"
           end
           # verify the required parameter 'external_event_id' is set
           if @api_client.config.client_side_validation && external_event_id.nil?
-            fail ArgumentError, "Missing the required parameter 'external_event_id' when calling ParticipantStateApi.get_participations_counters_by_event_external_id"
+            fail ArgumentError, "Missing the required parameter 'external_event_id' when calling RetrieveParticipantStateApi.get_participations_counters_by_event_external_id"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}'.sub('{' + 'externalAccountId' + '}', CGI.escape(external_account_id.to_s)).sub('{' + 'externalEventId' + '}', CGI.escape(external_event_id.to_s))
@@ -302,7 +302,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"ParticipantStateApi.get_participations_counters_by_event_external_id",
+            :operation => :"RetrieveParticipantStateApi.get_participations_counters_by_event_external_id",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -313,7 +313,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ParticipantStateApi#get_participations_counters_by_event_external_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RetrieveParticipantStateApi#get_participations_counters_by_event_external_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
@@ -335,11 +335,11 @@ module Hubspot
         # @return [Array<(AttendanceCounters, Integer, Hash)>] AttendanceCounters data, response status code and response headers
         def get_participations_counters_by_marketing_event_id_with_http_info(marketing_event_id, opts = {})
           if @api_client.config.debugging
-            @api_client.config.logger.debug 'Calling API: ParticipantStateApi.get_participations_counters_by_marketing_event_id ...'
+            @api_client.config.logger.debug 'Calling API: RetrieveParticipantStateApi.get_participations_counters_by_marketing_event_id ...'
           end
           # verify the required parameter 'marketing_event_id' is set
           if @api_client.config.client_side_validation && marketing_event_id.nil?
-            fail ArgumentError, "Missing the required parameter 'marketing_event_id' when calling ParticipantStateApi.get_participations_counters_by_marketing_event_id"
+            fail ArgumentError, "Missing the required parameter 'marketing_event_id' when calling RetrieveParticipantStateApi.get_participations_counters_by_marketing_event_id"
           end
           # resource path
           local_var_path = '/marketing/v3/marketing-events/participations/{marketingEventId}'.sub('{' + 'marketingEventId' + '}', CGI.escape(marketing_event_id.to_s))
@@ -365,7 +365,7 @@ module Hubspot
           auth_names = opts[:debug_auth_names] || ['oauth2']
 
           new_options = opts.merge(
-            :operation => :"ParticipantStateApi.get_participations_counters_by_marketing_event_id",
+            :operation => :"RetrieveParticipantStateApi.get_participations_counters_by_marketing_event_id",
             :header_params => header_params,
             :query_params => query_params,
             :form_params => form_params,
@@ -376,7 +376,7 @@ module Hubspot
 
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
-            @api_client.config.logger.debug "API called: ParticipantStateApi#get_participations_counters_by_marketing_event_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+            @api_client.config.logger.debug "API called: RetrieveParticipantStateApi#get_participations_counters_by_marketing_event_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end
