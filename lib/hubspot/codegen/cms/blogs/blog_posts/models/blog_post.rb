@@ -22,7 +22,7 @@ module Hubspot
           # The date (ISO8601 format) the blog post is to be published at.
           attr_accessor :publish_date
 
-          # The explicitly defined ISO 639 language code of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
+          # The explicitly defined ISO 639 language code of the post. If null, the post will default to the language of the parent blog.
           attr_accessor :language
 
           # Boolean to determine whether or not the styles from the template should be applied.
@@ -37,7 +37,7 @@ module Hubspot
           # Set this to create a password protected page. Entering the password will be required to view the page.
           attr_accessor :password
 
-          # The html title of this Blog Post.
+          # The HTML title of the post.
           attr_accessor :html_title
 
           # Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
@@ -45,16 +45,16 @@ module Hubspot
 
           attr_accessor :translations
 
-          # The unique ID of the Blog Post.
+          # The unique ID of the blog post.
           attr_accessor :id
 
-          # An ENUM descibing the current state of this Blog Post.
+          # An enumeration describing the current publish state of the post.
           attr_accessor :state
 
-          # The path of the this blog post. This field is appended to the domain to construct the url of this post.
+          # The URL slug of the blog post. This field is appended to the domain to construct the url of this post.
           attr_accessor :slug
 
-          # The ID of the user that created this Blog Post.
+          # The ID of the user that created the post.
           attr_accessor :created_by_id
 
           # The contents of the RSS body for this Blog Post.
@@ -73,10 +73,10 @@ module Hubspot
           # 
           attr_accessor :mab_experiment_id
 
-          # The ID of the user that updated this Blog Post.
+          # The ID of the user that updated the post.
           attr_accessor :updated_by_id
 
-          # ID of the primary blog post this object was translated from.
+          # ID of the primary blog post that this post was translated from.
           attr_accessor :translated_from_id
 
           # 
@@ -93,19 +93,19 @@ module Hubspot
           # The featuredImage of this Blog Post.
           attr_accessor :featured_image
 
-          # The name of the user that updated this Blog Post.
+          # The name of the blog author associated with the post.
           attr_accessor :author_name
 
-          # The domain this Blog Post will resolve to. If null, the Blog Post will default to the domain of the ParentBlog.
+          # The domain that the post lives on. If null, the post will default to the domain of the parent blog.
           attr_accessor :domain
 
-          # The internal name of the Blog Post.
+          # The internal name of the post.
           attr_accessor :name
 
-          # The ID of the HubDB table this Blog Post references, if applicable
+          # For dynamic HubDB pages,  the ID of the HubDB table this post references.
           attr_accessor :dynamic_page_hub_db_table_id
 
-          # The GUID of the marketing campaign this Blog Post is a part of.
+          # The GUID of the marketing campaign the post is associated with.
           attr_accessor :campaign
 
           attr_accessor :dynamic_page_data_source_id
@@ -124,7 +124,7 @@ module Hubspot
           # Custom HTML for embed codes, javascript that should be placed before the </body> tag of the page.
           attr_accessor :footer_html
 
-          # List of IDs for the tags associated with this Blog Post.
+          # The IDs of the tags associated with this post.
           attr_accessor :tag_ids
 
           # A data structure containing the data for all the modules for this page.
@@ -142,7 +142,7 @@ module Hubspot
           # 
           attr_accessor :ab_status
 
-          # Boolean to determine if this post should use a featuredImage.
+          # Boolean to determine if this post should use a featured image.
           attr_accessor :use_featured_image
 
           # 
@@ -151,10 +151,10 @@ module Hubspot
           # Alt Text of the featuredImage.
           attr_accessor :featured_image_alt_text
 
-          # The ID of the Blog Author associated with this Blog Post.
+          # The ID of the blog author associated with this post.
           attr_accessor :blog_author_id
 
-          # The ID of the parent Blog this Blog Post is associated with.
+          # The ID of the post's parent blog.
           attr_accessor :content_group_id
 
           # The contents of the RSS summary for this Blog Post.
@@ -190,7 +190,7 @@ module Hubspot
           # A generated ENUM descibing the current state of this Blog Post. Should always match state.
           attr_accessor :current_state
 
-          # ID of the type of object this is. 
+          # ID of the object type.
           attr_accessor :category_id
 
           # Optional override to set the URL to be used in the rel=canonical link tag on the page.
