@@ -17,28 +17,28 @@ module Hubspot
   module Cms
     module Hubdb
       class StandardError
-        # 
+        # Identifies the subcategory of the error, providing more specific context within the main category.
         attr_accessor :sub_category
 
-        # 
+        # An object containing context-specific information pertinent to the error.
         attr_accessor :context
 
-        # 
+        # An object containing links related to the error, such as documentation URLs or support contact pages.
         attr_accessor :links
 
-        # 
+        # The unique ID of the error instance.
         attr_accessor :id
 
-        # 
+        # Specifies the main category of the error, determining the broad area of issue.
         attr_accessor :category
 
-        # 
+        # A detailed message describing the error. 
         attr_accessor :message
 
         # 
         attr_accessor :errors
 
-        # 
+        # The HTTP status code associated with the error. 
         attr_accessor :status
 
         # Attribute mapping from ruby-style variable name to JSON key.
