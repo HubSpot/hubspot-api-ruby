@@ -15,39 +15,14 @@ require 'time'
 
 module Hubspot
   module Webhooks
+    # Configuration details for webhook throttling.
     class ThrottlingSettings
-      # Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
-      attr_accessor :period
-
       # The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
       attr_accessor :max_concurrent_requests
-
-      class EnumAttributeValidator
-        attr_reader :datatype
-        attr_reader :allowable_values
-
-        def initialize(datatype, allowable_values)
-          @allowable_values = allowable_values.map do |value|
-            case datatype.to_s
-            when /Integer/i
-              value.to_i
-            when /Float/i
-              value.to_f
-            else
-              value
-            end
-          end
-        end
-
-        def valid?(value)
-          !value || allowable_values.include?(value)
-        end
-      end
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'period' => :'period',
           :'max_concurrent_requests' => :'maxConcurrentRequests'
         }
       end
@@ -60,7 +35,6 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'period' => :'String',
           :'max_concurrent_requests' => :'Integer'
         }
       end
@@ -86,10 +60,6 @@ module Hubspot
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'period')
-          self.period = attributes[:'period']
-        end
-
         if attributes.key?(:'max_concurrent_requests')
           self.max_concurrent_requests = attributes[:'max_concurrent_requests']
         end
@@ -99,10 +69,6 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @period.nil?
-          invalid_properties.push('invalid value for "period", period cannot be nil.')
-        end
-
         if @max_concurrent_requests.nil?
           invalid_properties.push('invalid value for "max_concurrent_requests", max_concurrent_requests cannot be nil.')
         end
@@ -113,21 +79,8 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @period.nil?
-        period_validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        return false unless period_validator.valid?(@period)
         return false if @max_concurrent_requests.nil?
         true
-      end
-
-      # Custom attribute writer method checking allowed values (enum).
-      # @param [Object] period Object to be assigned
-      def period=(period)
-        validator = EnumAttributeValidator.new('String', ["SECONDLY", "ROLLING_MINUTE"])
-        unless validator.valid?(period)
-          fail ArgumentError, "invalid value for \"period\", must be one of #{validator.allowable_values}."
-        end
-        @period = period
       end
 
       # Checks equality by comparing each attribute.
@@ -135,7 +88,6 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            period == o.period &&
             max_concurrent_requests == o.max_concurrent_requests
       end
 
@@ -148,7 +100,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [period, max_concurrent_requests].hash
+        [max_concurrent_requests].hash
       end
 
       # Builds the object from hash

@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Webhooks
+    # Webhook settings for an app.
     class SettingsResponse
       # When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
       attr_accessor :created_at
