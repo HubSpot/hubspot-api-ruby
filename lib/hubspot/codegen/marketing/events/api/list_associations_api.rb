@@ -311,7 +311,7 @@ module Hubspot
 
         # Get lists associated with a marketing event
         # Gets lists associated with a marketing event by external account id and external event id
-        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application.
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param external_event_id [String] The id of the marketing event in the external event application.
         # @param [Hash] opts the optional parameters
         # @return [CollectionResponseWithTotalPublicListNoPaging]
@@ -322,7 +322,7 @@ module Hubspot
 
         # Get lists associated with a marketing event
         # Gets lists associated with a marketing event by external account id and external event id
-        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application.
+        # @param external_account_id [String] The accountId that is associated with this marketing event in the external event application
         # @param external_event_id [String] The id of the marketing event in the external event application.
         # @param [Hash] opts the optional parameters
         # @return [Array<(CollectionResponseWithTotalPublicListNoPaging, Integer, Hash)>] CollectionResponseWithTotalPublicListNoPaging data, response status code and response headers

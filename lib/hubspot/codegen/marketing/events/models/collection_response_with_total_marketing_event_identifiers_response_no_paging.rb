@@ -16,12 +16,15 @@ require 'time'
 module Hubspot
   module Marketing
     module Events
-      class CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging
+      class CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging
+        attr_accessor :total
+
         attr_accessor :results
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
+            :'total' => :'total',
             :'results' => :'results'
           }
         end
@@ -34,7 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'results' => :'Array<MarketingEventExternalUniqueIdentifier>'
+            :'total' => :'Integer',
+            :'results' => :'Array<MarketingEventIdentifiersResponse>'
           }
         end
 
@@ -48,16 +52,20 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
+
+          if attributes.key?(:'total')
+            self.total = attributes[:'total']
+          end
 
           if attributes.key?(:'results')
             if (value = attributes[:'results']).is_a?(Array)
@@ -70,6 +78,10 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
+          if @total.nil?
+            invalid_properties.push('invalid value for "total", total cannot be nil.')
+          end
+
           if @results.nil?
             invalid_properties.push('invalid value for "results", results cannot be nil.')
           end
@@ -80,6 +92,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
+          return false if @total.nil?
           return false if @results.nil?
           true
         end
@@ -89,6 +102,7 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
+              total == o.total &&
               results == o.results
         end
 
@@ -101,7 +115,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [results].hash
+          [total, results].hash
         end
 
         # Builds the object from hash

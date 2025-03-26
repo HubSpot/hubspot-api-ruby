@@ -21,7 +21,7 @@ module Hubspot
 
         attr_accessor :properties
 
-        # The date and time at which the contact subscribed to the event.
+        # Timestamp in milliseconds at which the contact subscribed to the event.
         attr_accessor :interaction_date_time
 
         # Attribute mapping from ruby-style variable name to JSON key.

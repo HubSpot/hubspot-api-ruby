@@ -16,52 +16,16 @@ require 'time'
 module Hubspot
   module Marketing
     module Events
-      class MarketingEventDefaultResponse
-        # The start date and time of the marketing event.
-        attr_accessor :start_date_time
+      class AppInfo
+        attr_accessor :name
 
-        # A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set. In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts. 
-        attr_accessor :custom_properties
-
-        # Indicates if the marketing event has been cancelled.
-        attr_accessor :event_cancelled
-
-        # The name of the organizer of the marketing event.
-        attr_accessor :event_organizer
-
-        # The URL in the external event application where the marketing event can be managed.
-        attr_accessor :event_url
-
-        # The description of the marketing event.
-        attr_accessor :event_description
-
-        # The name of the marketing event.
-        attr_accessor :event_name
-
-        # The type of the marketing event.
-        attr_accessor :event_type
-
-        attr_accessor :event_completed
-
-        # The end date and time of the marketing event.
-        attr_accessor :end_date_time
-
-        attr_accessor :object_id
+        attr_accessor :id
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'start_date_time' => :'startDateTime',
-            :'custom_properties' => :'customProperties',
-            :'event_cancelled' => :'eventCancelled',
-            :'event_organizer' => :'eventOrganizer',
-            :'event_url' => :'eventUrl',
-            :'event_description' => :'eventDescription',
-            :'event_name' => :'eventName',
-            :'event_type' => :'eventType',
-            :'event_completed' => :'eventCompleted',
-            :'end_date_time' => :'endDateTime',
-            :'object_id' => :'objectId'
+            :'name' => :'name',
+            :'id' => :'id'
           }
         end
 
@@ -73,17 +37,8 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'start_date_time' => :'Time',
-            :'custom_properties' => :'Array<PropertyValue>',
-            :'event_cancelled' => :'Boolean',
-            :'event_organizer' => :'String',
-            :'event_url' => :'String',
-            :'event_description' => :'String',
-            :'event_name' => :'String',
-            :'event_type' => :'String',
-            :'event_completed' => :'Boolean',
-            :'end_date_time' => :'Time',
-            :'object_id' => :'String'
+            :'name' => :'String',
+            :'id' => :'String'
           }
         end
 
@@ -97,61 +52,23 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::MarketingEventDefaultResponse` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Marketing::Events::AppInfo` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::MarketingEventDefaultResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Marketing::Events::AppInfo`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'start_date_time')
-            self.start_date_time = attributes[:'start_date_time']
+          if attributes.key?(:'name')
+            self.name = attributes[:'name']
           end
 
-          if attributes.key?(:'custom_properties')
-            if (value = attributes[:'custom_properties']).is_a?(Array)
-              self.custom_properties = value
-            end
-          end
-
-          if attributes.key?(:'event_cancelled')
-            self.event_cancelled = attributes[:'event_cancelled']
-          end
-
-          if attributes.key?(:'event_organizer')
-            self.event_organizer = attributes[:'event_organizer']
-          end
-
-          if attributes.key?(:'event_url')
-            self.event_url = attributes[:'event_url']
-          end
-
-          if attributes.key?(:'event_description')
-            self.event_description = attributes[:'event_description']
-          end
-
-          if attributes.key?(:'event_name')
-            self.event_name = attributes[:'event_name']
-          end
-
-          if attributes.key?(:'event_type')
-            self.event_type = attributes[:'event_type']
-          end
-
-          if attributes.key?(:'event_completed')
-            self.event_completed = attributes[:'event_completed']
-          end
-
-          if attributes.key?(:'end_date_time')
-            self.end_date_time = attributes[:'end_date_time']
-          end
-
-          if attributes.key?(:'object_id')
-            self.object_id = attributes[:'object_id']
+          if attributes.key?(:'id')
+            self.id = attributes[:'id']
           end
         end
 
@@ -159,12 +76,12 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @event_organizer.nil?
-            invalid_properties.push('invalid value for "event_organizer", event_organizer cannot be nil.')
+          if @name.nil?
+            invalid_properties.push('invalid value for "name", name cannot be nil.')
           end
 
-          if @event_name.nil?
-            invalid_properties.push('invalid value for "event_name", event_name cannot be nil.')
+          if @id.nil?
+            invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
           invalid_properties
@@ -173,8 +90,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @event_organizer.nil?
-          return false if @event_name.nil?
+          return false if @name.nil?
+          return false if @id.nil?
           true
         end
 
@@ -183,17 +100,8 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              start_date_time == o.start_date_time &&
-              custom_properties == o.custom_properties &&
-              event_cancelled == o.event_cancelled &&
-              event_organizer == o.event_organizer &&
-              event_url == o.event_url &&
-              event_description == o.event_description &&
-              event_name == o.event_name &&
-              event_type == o.event_type &&
-              event_completed == o.event_completed &&
-              end_date_time == o.end_date_time &&
-              object_id == o.object_id
+              name == o.name &&
+              id == o.id
         end
 
         # @see the `==` method
@@ -205,7 +113,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [start_date_time, custom_properties, event_cancelled, event_organizer, event_url, event_description, event_name, event_type, event_completed, end_date_time, object_id].hash
+          [name, id].hash
         end
 
         # Builds the object from hash
