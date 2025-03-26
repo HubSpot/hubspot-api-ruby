@@ -19,6 +19,8 @@ module Hubspot
       class ImportRowCore
         attr_accessor :row_data
 
+        attr_accessor :contains_encrypted_properties
+
         attr_accessor :line_number
 
         attr_accessor :page_name
@@ -29,6 +31,7 @@ module Hubspot
         def self.attribute_map
           {
             :'row_data' => :'rowData',
+            :'contains_encrypted_properties' => :'containsEncryptedProperties',
             :'line_number' => :'lineNumber',
             :'page_name' => :'pageName',
             :'file_id' => :'fileId'
@@ -44,6 +47,7 @@ module Hubspot
         def self.openapi_types
           {
             :'row_data' => :'Array<String>',
+            :'contains_encrypted_properties' => :'Boolean',
             :'line_number' => :'Integer',
             :'page_name' => :'String',
             :'file_id' => :'Integer'
@@ -77,6 +81,10 @@ module Hubspot
             end
           end
 
+          if attributes.key?(:'contains_encrypted_properties')
+            self.contains_encrypted_properties = attributes[:'contains_encrypted_properties']
+          end
+
           if attributes.key?(:'line_number')
             self.line_number = attributes[:'line_number']
           end
@@ -98,6 +106,10 @@ module Hubspot
             invalid_properties.push('invalid value for "row_data", row_data cannot be nil.')
           end
 
+          if @contains_encrypted_properties.nil?
+            invalid_properties.push('invalid value for "contains_encrypted_properties", contains_encrypted_properties cannot be nil.')
+          end
+
           if @line_number.nil?
             invalid_properties.push('invalid value for "line_number", line_number cannot be nil.')
           end
@@ -113,6 +125,7 @@ module Hubspot
         # @return true if the model is valid
         def valid?
           return false if @row_data.nil?
+          return false if @contains_encrypted_properties.nil?
           return false if @line_number.nil?
           return false if @file_id.nil?
           true
@@ -124,6 +137,7 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               row_data == o.row_data &&
+              contains_encrypted_properties == o.contains_encrypted_properties &&
               line_number == o.line_number &&
               page_name == o.page_name &&
               file_id == o.file_id
@@ -138,7 +152,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [row_data, line_number, page_name, file_id].hash
+          [row_data, contains_encrypted_properties, line_number, page_name, file_id].hash
         end
 
         # Builds the object from hash
