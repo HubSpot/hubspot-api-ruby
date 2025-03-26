@@ -29,11 +29,37 @@ module Hubspot
 
         attr_accessor :id
 
+        attr_accessor :user_id_including_inactive
+
+        attr_accessor :type
+
         attr_accessor :user_id
 
         attr_accessor :email
 
         attr_accessor :updated_at
+
+        class EnumAttributeValidator
+          attr_reader :datatype
+          attr_reader :allowable_values
+
+          def initialize(datatype, allowable_values)
+            @allowable_values = allowable_values.map do |value|
+              case datatype.to_s
+              when /Integer/i
+                value.to_i
+              when /Float/i
+                value.to_f
+              else
+                value
+              end
+            end
+          end
+
+          def valid?(value)
+            !value || allowable_values.include?(value)
+          end
+        end
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
@@ -44,6 +70,8 @@ module Hubspot
             :'archived' => :'archived',
             :'teams' => :'teams',
             :'id' => :'id',
+            :'user_id_including_inactive' => :'userIdIncludingInactive',
+            :'type' => :'type',
             :'user_id' => :'userId',
             :'email' => :'email',
             :'updated_at' => :'updatedAt'
@@ -64,6 +92,8 @@ module Hubspot
             :'archived' => :'Boolean',
             :'teams' => :'Array<PublicTeam>',
             :'id' => :'String',
+            :'user_id_including_inactive' => :'Integer',
+            :'type' => :'String',
             :'user_id' => :'Integer',
             :'email' => :'String',
             :'updated_at' => :'Time'
@@ -117,6 +147,14 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
+          if attributes.key?(:'user_id_including_inactive')
+            self.user_id_including_inactive = attributes[:'user_id_including_inactive']
+          end
+
+          if attributes.key?(:'type')
+            self.type = attributes[:'type']
+          end
+
           if attributes.key?(:'user_id')
             self.user_id = attributes[:'user_id']
           end
@@ -146,6 +184,10 @@ module Hubspot
             invalid_properties.push('invalid value for "id", id cannot be nil.')
           end
 
+          if @type.nil?
+            invalid_properties.push('invalid value for "type", type cannot be nil.')
+          end
+
           if @updated_at.nil?
             invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
           end
@@ -159,8 +201,21 @@ module Hubspot
           return false if @created_at.nil?
           return false if @archived.nil?
           return false if @id.nil?
+          return false if @type.nil?
+          type_validator = EnumAttributeValidator.new('String', ["PERSON", "QUEUE"])
+          return false unless type_validator.valid?(@type)
           return false if @updated_at.nil?
           true
+        end
+
+        # Custom attribute writer method checking allowed values (enum).
+        # @param [Object] type Object to be assigned
+        def type=(type)
+          validator = EnumAttributeValidator.new('String', ["PERSON", "QUEUE"])
+          unless validator.valid?(type)
+            fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+          end
+          @type = type
         end
 
         # Checks equality by comparing each attribute.
@@ -174,6 +229,8 @@ module Hubspot
               archived == o.archived &&
               teams == o.teams &&
               id == o.id &&
+              user_id_including_inactive == o.user_id_including_inactive &&
+              type == o.type &&
               user_id == o.user_id &&
               email == o.email &&
               updated_at == o.updated_at
@@ -188,7 +245,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [first_name, last_name, created_at, archived, teams, id, user_id, email, updated_at].hash
+          [first_name, last_name, created_at, archived, teams, id, user_id_including_inactive, type, user_id, email, updated_at].hash
         end
 
         # Builds the object from hash
