@@ -16,14 +16,14 @@ module Hubspot
   module Crm
     module Extensions
       module Calling
-        class SettingsApi
+        class ChannelConnectionSettingsApi
           attr_accessor :api_client
 
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
-          # Delete calling settings
-          # Delete a calling extension. This will remove your service as an option for all connected accounts.
+          # Delete channel connection settings
+          # Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -32,21 +32,21 @@ module Hubspot
             nil
           end
 
-          # Delete calling settings
-          # Delete a calling extension. This will remove your service as an option for all connected accounts.
+          # Delete channel connection settings
+          # Delete the [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#delete-existing-channel-connection-settings) for the app.
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
           def archive_with_http_info(app_id, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: SettingsApi.archive ...'
+              @api_client.config.logger.debug 'Calling API: ChannelConnectionSettingsApi.archive ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.archive"
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling ChannelConnectionSettingsApi.archive"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/calling/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+            local_var_path = '/crm/v3/extensions/calling/{appId}/settings/channel-connection'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -69,7 +69,7 @@ module Hubspot
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
-              :operation => :"SettingsApi.archive",
+              :operation => :"ChannelConnectionSettingsApi.archive",
               :header_params => header_params,
               :query_params => query_params,
               :form_params => form_params,
@@ -80,42 +80,42 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: SettingsApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: ChannelConnectionSettingsApi#archive\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
 
-          # Configure a calling extension
-          # Set the menu label, target iframe URL, and dimensions for your calling extension.
+          # Configure channel connection settings
+          # Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
           # @param app_id [Integer] The ID of the app.
-          # @param settings_request [SettingsRequest] 
+          # @param channel_connection_settings_request [ChannelConnectionSettingsRequest] 
           # @param [Hash] opts the optional parameters
-          # @return [SettingsResponse]
-          def create(app_id, settings_request, opts = {})
-            data, _status_code, _headers = create_with_http_info(app_id, settings_request, opts)
+          # @return [ChannelConnectionSettingsResponse]
+          def create(app_id, channel_connection_settings_request, opts = {})
+            data, _status_code, _headers = create_with_http_info(app_id, channel_connection_settings_request, opts)
             data
           end
 
-          # Configure a calling extension
-          # Set the menu label, target iframe URL, and dimensions for your calling extension.
+          # Configure channel connection settings
+          # Configure [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#create-channel-connection-settings) for the app. 
           # @param app_id [Integer] The ID of the app.
-          # @param settings_request [SettingsRequest] 
+          # @param channel_connection_settings_request [ChannelConnectionSettingsRequest] 
           # @param [Hash] opts the optional parameters
-          # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
-          def create_with_http_info(app_id, settings_request, opts = {})
+          # @return [Array<(ChannelConnectionSettingsResponse, Integer, Hash)>] ChannelConnectionSettingsResponse data, response status code and response headers
+          def create_with_http_info(app_id, channel_connection_settings_request, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: SettingsApi.create ...'
+              @api_client.config.logger.debug 'Calling API: ChannelConnectionSettingsApi.create ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.create"
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling ChannelConnectionSettingsApi.create"
             end
-            # verify the required parameter 'settings_request' is set
-            if @api_client.config.client_side_validation && settings_request.nil?
-              fail ArgumentError, "Missing the required parameter 'settings_request' when calling SettingsApi.create"
+            # verify the required parameter 'channel_connection_settings_request' is set
+            if @api_client.config.client_side_validation && channel_connection_settings_request.nil?
+              fail ArgumentError, "Missing the required parameter 'channel_connection_settings_request' when calling ChannelConnectionSettingsApi.create"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/calling/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+            local_var_path = '/crm/v3/extensions/calling/{appId}/settings/channel-connection'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -134,16 +134,16 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:debug_body] || @api_client.object_to_http_body(settings_request)
+            post_body = opts[:debug_body] || @api_client.object_to_http_body(channel_connection_settings_request)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'SettingsResponse'
+            return_type = opts[:debug_return_type] || 'ChannelConnectionSettingsResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
-              :operation => :"SettingsApi.create",
+              :operation => :"ChannelConnectionSettingsApi.create",
               :header_params => header_params,
               :query_params => query_params,
               :form_params => form_params,
@@ -154,36 +154,36 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: SettingsApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: ChannelConnectionSettingsApi#create\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
 
-          # Retrieve settings
-          # Retrieve the settings configured for the app.
+          # Retrieve channel connection settings
+          # Retrieve the settings related to the app's [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
-          # @return [SettingsResponse]
+          # @return [ChannelConnectionSettingsResponse]
           def get_by_id(app_id, opts = {})
             data, _status_code, _headers = get_by_id_with_http_info(app_id, opts)
             data
           end
 
-          # Retrieve settings
-          # Retrieve the settings configured for the app.
+          # Retrieve channel connection settings
+          # Retrieve the settings related to the app&#39;s [channel connection](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#fetch-existing-channel-connection-settings).
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
-          # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
+          # @return [Array<(ChannelConnectionSettingsResponse, Integer, Hash)>] ChannelConnectionSettingsResponse data, response status code and response headers
           def get_by_id_with_http_info(app_id, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: SettingsApi.get_by_id ...'
+              @api_client.config.logger.debug 'Calling API: ChannelConnectionSettingsApi.get_by_id ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.get_by_id"
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling ChannelConnectionSettingsApi.get_by_id"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/calling/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+            local_var_path = '/crm/v3/extensions/calling/{appId}/settings/channel-connection'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -200,13 +200,13 @@ module Hubspot
             post_body = opts[:debug_body]
 
             # return_type
-            return_type = opts[:debug_return_type] || 'SettingsResponse'
+            return_type = opts[:debug_return_type] || 'ChannelConnectionSettingsResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
-              :operation => :"SettingsApi.get_by_id",
+              :operation => :"ChannelConnectionSettingsApi.get_by_id",
               :header_params => header_params,
               :query_params => query_params,
               :form_params => form_params,
@@ -217,42 +217,42 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: SettingsApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: ChannelConnectionSettingsApi#get_by_id\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
 
-          # Update settings
-          # Update existing calling extension settings.
+          # Update channel connection settings
+          # Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
           # @param app_id [Integer] The ID of the app.
-          # @param settings_patch_request [SettingsPatchRequest] 
+          # @param channel_connection_settings_patch_request [ChannelConnectionSettingsPatchRequest] 
           # @param [Hash] opts the optional parameters
-          # @return [SettingsResponse]
-          def update(app_id, settings_patch_request, opts = {})
-            data, _status_code, _headers = update_with_http_info(app_id, settings_patch_request, opts)
+          # @return [ChannelConnectionSettingsResponse]
+          def update(app_id, channel_connection_settings_patch_request, opts = {})
+            data, _status_code, _headers = update_with_http_info(app_id, channel_connection_settings_patch_request, opts)
             data
           end
 
-          # Update settings
-          # Update existing calling extension settings.
+          # Update channel connection settings
+          # Update existing [channel connection settings](https://developers.hubspot.com/docs/guides/api/crm/extensions/third-party-calling#manage-the-webhook-settings-for-channel-connection) for your app.
           # @param app_id [Integer] The ID of the app.
-          # @param settings_patch_request [SettingsPatchRequest] 
+          # @param channel_connection_settings_patch_request [ChannelConnectionSettingsPatchRequest] 
           # @param [Hash] opts the optional parameters
-          # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
-          def update_with_http_info(app_id, settings_patch_request, opts = {})
+          # @return [Array<(ChannelConnectionSettingsResponse, Integer, Hash)>] ChannelConnectionSettingsResponse data, response status code and response headers
+          def update_with_http_info(app_id, channel_connection_settings_patch_request, opts = {})
             if @api_client.config.debugging
-              @api_client.config.logger.debug 'Calling API: SettingsApi.update ...'
+              @api_client.config.logger.debug 'Calling API: ChannelConnectionSettingsApi.update ...'
             end
             # verify the required parameter 'app_id' is set
             if @api_client.config.client_side_validation && app_id.nil?
-              fail ArgumentError, "Missing the required parameter 'app_id' when calling SettingsApi.update"
+              fail ArgumentError, "Missing the required parameter 'app_id' when calling ChannelConnectionSettingsApi.update"
             end
-            # verify the required parameter 'settings_patch_request' is set
-            if @api_client.config.client_side_validation && settings_patch_request.nil?
-              fail ArgumentError, "Missing the required parameter 'settings_patch_request' when calling SettingsApi.update"
+            # verify the required parameter 'channel_connection_settings_patch_request' is set
+            if @api_client.config.client_side_validation && channel_connection_settings_patch_request.nil?
+              fail ArgumentError, "Missing the required parameter 'channel_connection_settings_patch_request' when calling ChannelConnectionSettingsApi.update"
             end
             # resource path
-            local_var_path = '/crm/v3/extensions/calling/{appId}/settings'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
+            local_var_path = '/crm/v3/extensions/calling/{appId}/settings/channel-connection'.sub('{' + 'appId' + '}', CGI.escape(app_id.to_s))
 
             # query parameters
             query_params = opts[:query_params] || {}
@@ -271,16 +271,16 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:debug_body] || @api_client.object_to_http_body(settings_patch_request)
+            post_body = opts[:debug_body] || @api_client.object_to_http_body(channel_connection_settings_patch_request)
 
             # return_type
-            return_type = opts[:debug_return_type] || 'SettingsResponse'
+            return_type = opts[:debug_return_type] || 'ChannelConnectionSettingsResponse'
 
             # auth_names
             auth_names = opts[:debug_auth_names] || ['developer_hapikey']
 
             new_options = opts.merge(
-              :operation => :"SettingsApi.update",
+              :operation => :"ChannelConnectionSettingsApi.update",
               :header_params => header_params,
               :query_params => query_params,
               :form_params => form_params,
@@ -291,7 +291,7 @@ module Hubspot
 
             data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
             if @api_client.config.debugging
-              @api_client.config.logger.debug "API called: SettingsApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+              @api_client.config.logger.debug "API called: ChannelConnectionSettingsApi#update\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
             end
             return data, status_code, headers
           end
