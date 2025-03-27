@@ -17,46 +17,26 @@ module Hubspot
   module Crm
     module Extensions
       module Calling
-        class SettingsPatchRequest
-          # When true, users will be able to click to dial from custom objects.
-          attr_accessor :supports_custom_objects
+        class ChannelConnectionSettingsResponse
+          # The timestamp this setting was created
+          attr_accessor :created_at
 
-          # When false, this indicates that your calling app does not use the anchored calling remote within the HubSpot app. 
-          attr_accessor :uses_remote
-
-          # When true, this indicates that your calling app is ready for production. Users will be able to select your calling app as their provider and can then click to dial within HubSpot.
+          # If true, this app will be considered to support channel connection
           attr_accessor :is_ready
 
-          # The name of your calling service to display to users.
-          attr_accessor :name
-
-          # The target width of the iframe that will contain your phone/calling UI.
-          attr_accessor :width
-
-          # When false, this indicates that your calling app does not require the use of the separate calling window to hold the call connection. 
-          attr_accessor :uses_calling_window
-
-          # When true, this indicates that your calling app supports inbound calling within HubSpot.
-          attr_accessor :supports_inbound_calling
-
-          # The URL to your phone/calling UI, built with the [Calling SDK](#).
+          # The URL to fetch phone numbers available for channel connection
           attr_accessor :url
 
-          # The target height of the iframe that will contain your phone/calling UI.
-          attr_accessor :height
+          # The timestamp this setting was last updated
+          attr_accessor :updated_at
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
-              :'supports_custom_objects' => :'supportsCustomObjects',
-              :'uses_remote' => :'usesRemote',
+              :'created_at' => :'createdAt',
               :'is_ready' => :'isReady',
-              :'name' => :'name',
-              :'width' => :'width',
-              :'uses_calling_window' => :'usesCallingWindow',
-              :'supports_inbound_calling' => :'supportsInboundCalling',
               :'url' => :'url',
-              :'height' => :'height'
+              :'updated_at' => :'updatedAt'
             }
           end
 
@@ -68,15 +48,10 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
-              :'supports_custom_objects' => :'Boolean',
-              :'uses_remote' => :'Boolean',
+              :'created_at' => :'Time',
               :'is_ready' => :'Boolean',
-              :'name' => :'String',
-              :'width' => :'Integer',
-              :'uses_calling_window' => :'Boolean',
-              :'supports_inbound_calling' => :'Boolean',
               :'url' => :'String',
-              :'height' => :'Integer'
+              :'updated_at' => :'Time'
             }
           end
 
@@ -90,51 +65,31 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Calling::SettingsPatchRequest` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Extensions::Calling::ChannelConnectionSettingsResponse` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Calling::SettingsPatchRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Extensions::Calling::ChannelConnectionSettingsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
 
-            if attributes.key?(:'supports_custom_objects')
-              self.supports_custom_objects = attributes[:'supports_custom_objects']
-            end
-
-            if attributes.key?(:'uses_remote')
-              self.uses_remote = attributes[:'uses_remote']
+            if attributes.key?(:'created_at')
+              self.created_at = attributes[:'created_at']
             end
 
             if attributes.key?(:'is_ready')
               self.is_ready = attributes[:'is_ready']
             end
 
-            if attributes.key?(:'name')
-              self.name = attributes[:'name']
-            end
-
-            if attributes.key?(:'width')
-              self.width = attributes[:'width']
-            end
-
-            if attributes.key?(:'uses_calling_window')
-              self.uses_calling_window = attributes[:'uses_calling_window']
-            end
-
-            if attributes.key?(:'supports_inbound_calling')
-              self.supports_inbound_calling = attributes[:'supports_inbound_calling']
-            end
-
             if attributes.key?(:'url')
               self.url = attributes[:'url']
             end
 
-            if attributes.key?(:'height')
-              self.height = attributes[:'height']
+            if attributes.key?(:'updated_at')
+              self.updated_at = attributes[:'updated_at']
             end
           end
 
@@ -142,12 +97,32 @@ module Hubspot
           # @return Array for valid properties with the reasons
           def list_invalid_properties
             invalid_properties = Array.new
+            if @created_at.nil?
+              invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+            end
+
+            if @is_ready.nil?
+              invalid_properties.push('invalid value for "is_ready", is_ready cannot be nil.')
+            end
+
+            if @url.nil?
+              invalid_properties.push('invalid value for "url", url cannot be nil.')
+            end
+
+            if @updated_at.nil?
+              invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
+            end
+
             invalid_properties
           end
 
           # Check to see if the all the properties in the model are valid
           # @return true if the model is valid
           def valid?
+            return false if @created_at.nil?
+            return false if @is_ready.nil?
+            return false if @url.nil?
+            return false if @updated_at.nil?
             true
           end
 
@@ -156,15 +131,10 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
-                supports_custom_objects == o.supports_custom_objects &&
-                uses_remote == o.uses_remote &&
+                created_at == o.created_at &&
                 is_ready == o.is_ready &&
-                name == o.name &&
-                width == o.width &&
-                uses_calling_window == o.uses_calling_window &&
-                supports_inbound_calling == o.supports_inbound_calling &&
                 url == o.url &&
-                height == o.height
+                updated_at == o.updated_at
           end
 
           # @see the `==` method
@@ -176,7 +146,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [supports_custom_objects, uses_remote, is_ready, name, width, uses_calling_window, supports_inbound_calling, url, height].hash
+            [created_at, is_ready, url, updated_at].hash
           end
 
           # Builds the object from hash

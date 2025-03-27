@@ -18,6 +18,7 @@ module Hubspot
     module Extensions
       module Calling
         class RecordingSettingsResponse
+          # 
           attr_accessor :url_to_retrieve_authed_recording
 
           # Attribute mapping from ruby-style variable name to JSON key.

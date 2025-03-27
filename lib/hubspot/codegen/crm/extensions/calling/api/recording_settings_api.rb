@@ -22,8 +22,8 @@ module Hubspot
           def initialize(api_client = ApiClient.default)
             @api_client = api_client
           end
-          # Read calling app recording settings
-          # Retrieve the recording endpoint configured for a calling extension app.
+          # Retrieve recording settings
+          # Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [RecordingSettingsResponse]
@@ -32,8 +32,8 @@ module Hubspot
             data
           end
 
-          # Read calling app recording settings
-          # Retrieve the recording endpoint configured for a calling extension app.
+          # Retrieve recording settings
+          # Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(RecordingSettingsResponse, Integer, Hash)>] RecordingSettingsResponse data, response status code and response headers
@@ -153,8 +153,8 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Register calling app for recording
-          # Configure a calling extension app with an external URL that HubSpot will use to retrieve call recordings.
+          # Enable the app for call recording
+          # Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
           # @param app_id [Integer] The ID of the app.
           # @param recording_settings_request [RecordingSettingsRequest] 
           # @param [Hash] opts the optional parameters
@@ -164,8 +164,8 @@ module Hubspot
             data
           end
 
-          # Register calling app for recording
-          # Configure a calling extension app with an external URL that HubSpot will use to retrieve call recordings.
+          # Enable the app for call recording
+          # Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
           # @param app_id [Integer] The ID of the app.
           # @param recording_settings_request [RecordingSettingsRequest] 
           # @param [Hash] opts the optional parameters
@@ -227,8 +227,8 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Update calling app's recording settings
-          # Update the URL that HubSpot will use to retrieve call recordings for a calling extension app.
+          # Update recording settings
+          # Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
           # @param app_id [Integer] The ID of the app.
           # @param recording_settings_patch_request [RecordingSettingsPatchRequest] 
           # @param [Hash] opts the optional parameters
@@ -238,8 +238,8 @@ module Hubspot
             data
           end
 
-          # Update calling app&#39;s recording settings
-          # Update the URL that HubSpot will use to retrieve call recordings for a calling extension app.
+          # Update recording settings
+          # Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
           # @param app_id [Integer] The ID of the app.
           # @param recording_settings_patch_request [RecordingSettingsPatchRequest] 
           # @param [Hash] opts the optional parameters

@@ -21,6 +21,9 @@ module Hubspot
           # When true, users will be able to click to dial from custom objects.
           attr_accessor :supports_custom_objects
 
+          # When false, this indicates that your calling app does not use the anchored calling remote within the HubSpot app. 
+          attr_accessor :uses_remote
+
           # When true, this indicates that your calling app is ready for production. Users will be able to select your calling app as their provider and can then click to dial within HubSpot.
           attr_accessor :is_ready
 
@@ -29,6 +32,9 @@ module Hubspot
 
           # The target width of the iframe that will contain your phone/calling UI.
           attr_accessor :width
+
+          # When false, this indicates that your calling app does not require the use of the separate calling window to hold the call connection. 
+          attr_accessor :uses_calling_window
 
           # When true, this indicates that your calling app supports inbound calling within HubSpot.
           attr_accessor :supports_inbound_calling
@@ -43,9 +49,11 @@ module Hubspot
           def self.attribute_map
             {
               :'supports_custom_objects' => :'supportsCustomObjects',
+              :'uses_remote' => :'usesRemote',
               :'is_ready' => :'isReady',
               :'name' => :'name',
               :'width' => :'width',
+              :'uses_calling_window' => :'usesCallingWindow',
               :'supports_inbound_calling' => :'supportsInboundCalling',
               :'url' => :'url',
               :'height' => :'height'
@@ -61,9 +69,11 @@ module Hubspot
           def self.openapi_types
             {
               :'supports_custom_objects' => :'Boolean',
+              :'uses_remote' => :'Boolean',
               :'is_ready' => :'Boolean',
               :'name' => :'String',
               :'width' => :'Integer',
+              :'uses_calling_window' => :'Boolean',
               :'supports_inbound_calling' => :'Boolean',
               :'url' => :'String',
               :'height' => :'Integer'
@@ -95,6 +105,10 @@ module Hubspot
               self.supports_custom_objects = attributes[:'supports_custom_objects']
             end
 
+            if attributes.key?(:'uses_remote')
+              self.uses_remote = attributes[:'uses_remote']
+            end
+
             if attributes.key?(:'is_ready')
               self.is_ready = attributes[:'is_ready']
             end
@@ -105,6 +119,10 @@ module Hubspot
 
             if attributes.key?(:'width')
               self.width = attributes[:'width']
+            end
+
+            if attributes.key?(:'uses_calling_window')
+              self.uses_calling_window = attributes[:'uses_calling_window']
             end
 
             if attributes.key?(:'supports_inbound_calling')
@@ -149,9 +167,11 @@ module Hubspot
             return true if self.equal?(o)
             self.class == o.class &&
                 supports_custom_objects == o.supports_custom_objects &&
+                uses_remote == o.uses_remote &&
                 is_ready == o.is_ready &&
                 name == o.name &&
                 width == o.width &&
+                uses_calling_window == o.uses_calling_window &&
                 supports_inbound_calling == o.supports_inbound_calling &&
                 url == o.url &&
                 height == o.height
@@ -166,7 +186,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [supports_custom_objects, is_ready, name, width, supports_inbound_calling, url, height].hash
+            [supports_custom_objects, uses_remote, is_ready, name, width, uses_calling_window, supports_inbound_calling, url, height].hash
           end
 
           # Builds the object from hash
