@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'Hubspot::Discovery::Marketing::Events::ParticipantStateApi' do
-  subject(:api) { Hubspot::Client.new(access_token: 'test').marketing.events.participant_state_api }
+describe 'Hubspot::Discovery::Marketing::Events::RetrieveParticipantStateApi' do
+  subject(:RetrieveParticipantStateApi) { Hubspot::Client.new(access_token: 'test').marketing.events.retrieve_participant_state_api }
   
   it { is_expected.to respond_to(:get_participations_breakdown_by_contact_id) }
   it { is_expected.to respond_to(:get_participations_breakdown_by_external_event_id) }
