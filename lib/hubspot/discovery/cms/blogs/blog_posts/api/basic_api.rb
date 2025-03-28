@@ -5,7 +5,7 @@ module Hubspot
     module Cms
       module Blogs
         module BlogPosts
-          class BlogPostsApi
+          class BasicApi
             include Hubspot::Discovery::BaseApiClient
           end
         end
