@@ -10,6 +10,7 @@ module Hubspot
         def api_modules
           %i[
             associations
+            commerce
             companies
             contacts
             deals
