@@ -10,7 +10,9 @@ module Hubspot
 
             def api_classes
               %i[
-                blog_posts
+                basic
+                batch
+                multi_language
               ].freeze
             end
           end
