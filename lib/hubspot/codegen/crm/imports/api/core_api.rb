@@ -87,8 +87,8 @@ module Hubspot
         # Start a new import
         # Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
         # @param [Hash] opts the optional parameters
-        # @option opts [File] :files A list of files containing the data to import
-        # @option opts [String] :import_request JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See the overview tab for more on the required format.
+        # @option opts [File] :files 
+        # @option opts [String] :import_request 
         # @return [PublicImportResponse]
         def create(opts = {})
           data, _status_code, _headers = create_with_http_info(opts)
@@ -98,8 +98,8 @@ module Hubspot
         # Start a new import
         # Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
         # @param [Hash] opts the optional parameters
-        # @option opts [File] :files A list of files containing the data to import
-        # @option opts [String] :import_request JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See the overview tab for more on the required format.
+        # @option opts [File] :files 
+        # @option opts [String] :import_request 
         # @return [Array<(PublicImportResponse, Integer, Hash)>] PublicImportResponse data, response status code and response headers
         def create_with_http_info(opts = {})
           if @api_client.config.debugging

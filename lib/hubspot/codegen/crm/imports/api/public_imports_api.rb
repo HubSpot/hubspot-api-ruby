@@ -25,6 +25,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page.
+        # @option opts [Boolean] :include_error_message Set to True to receive a message explaining the error.
+        # @option opts [Boolean] :include_row_data Set to True to receive the data values for the errored row.
         # @return [CollectionResponsePublicImportErrorForwardPaging]
         def get_errors(import_id, opts = {})
           data, _status_code, _headers = get_errors_with_http_info(import_id, opts)
@@ -35,6 +37,8 @@ module Hubspot
         # @param [Hash] opts the optional parameters
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
         # @option opts [Integer] :limit The maximum number of results to display per page.
+        # @option opts [Boolean] :include_error_message Set to True to receive a message explaining the error.
+        # @option opts [Boolean] :include_row_data Set to True to receive the data values for the errored row.
         # @return [Array<(CollectionResponsePublicImportErrorForwardPaging, Integer, Hash)>] CollectionResponsePublicImportErrorForwardPaging data, response status code and response headers
         def get_errors_with_http_info(import_id, opts = {})
           if @api_client.config.debugging
@@ -51,6 +55,8 @@ module Hubspot
           query_params = opts[:query_params] || {}
           query_params[:'after'] = opts[:'after'] if !opts[:'after'].nil?
           query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+          query_params[:'includeErrorMessage'] = opts[:'include_error_message'] if !opts[:'include_error_message'].nil?
+          query_params[:'includeRowData'] = opts[:'include_row_data'] if !opts[:'include_row_data'].nil?
 
           # header parameters
           header_params = opts[:header_params] || {}
