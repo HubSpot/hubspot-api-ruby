@@ -11,6 +11,7 @@ module Hubspot
             %i[
               calls
               communications
+              deal_splits
               emails
               feedback_submissions
               goals
