@@ -8,6 +8,7 @@ module Hubspot
 
         def api_modules
           %i[
+            emails
             events
             forms
             transactional
