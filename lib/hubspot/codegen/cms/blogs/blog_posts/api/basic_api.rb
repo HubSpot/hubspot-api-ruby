@@ -17,6 +17,7 @@ module Hubspot
     module Blogs
       module BlogPosts
         class BasicApi
+          require 'hubspot/helpers/get_all_helper'
           include Hubspot::Helpers::GetAllHelper
 
           attr_accessor :api_client
