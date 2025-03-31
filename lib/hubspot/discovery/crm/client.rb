@@ -14,6 +14,7 @@ module Hubspot
             companies
             contacts
             deals
+            exports
             extensions
             imports
             line_items
