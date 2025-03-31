@@ -10,6 +10,7 @@ module Hubspot
               include Hubspot::Discovery::BaseModuleClient
               def api_classes
                 %i[
+                  definition_configurations
                   definitions
                 ].freeze
               end

@@ -16,6 +16,7 @@ module Hubspot
               %i[
                 basic
                 batch
+                report
               ].freeze
             end
           end
