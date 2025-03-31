@@ -5,6 +5,6 @@ describe 'Hubspot::Discovery::Crm::Associations::V4::Schema::DefinitionsApi' do
   
   it { is_expected.to respond_to(:create) }
   it { is_expected.to respond_to(:get_all) }
-  it { is_expected.to respond_to(:archive) }
+  it { is_expected.to respond_to(:remove) }
   it { is_expected.to respond_to(:update) }
 end
