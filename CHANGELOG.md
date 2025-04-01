@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Marketing Events
 
 - Added parameter `object_id` to `marketing.events.models.marketing_event_default_response`, `marketing.events.models.marketing_event_default_response` and `marketing.events.models.marketing_event_public_read_response`.
-- Added methods `archive_by_object_id()`, `get_all()`, `get_by_object_id()` and `update_by_object_id()` to `basic_api`.
+- Added methods `archive_by_object_id()`, `get_all()`, `get_by_object_id()` and `update_by_object_id()` to `marketing.events.basic_api`.
 - Renamed from `marketing.events.participant_state_api` to `marketing.events.retrieve_participant_state_api`.
 - Renamed from `CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging` to `CollectionResponseSearchPublicResponseWrapperNoPaging`.
 - Moved and renamed methods from `basic_api.batch_archive()` and `basic_api.batch_upsert()` to `batch_api.archive()` and `batch_api.upsert()`.
