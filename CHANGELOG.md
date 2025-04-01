@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20..0...HEAD)
 
-## [20.0.0] - 2025-04-00
+## [20.0.0] - 2025-04-01
+
+## CRM Objects
+
+- Added methods `archive()`, `create()` and `update()` to `crm.objects.goals.basic_api`.
+- Added methods `archive()`, `create()`, `update()` and `upsert` to `crm.objects.goals.batch_api`.
+- Removed methods `archive()`, `create()` and `update()` from `crm.objects.feedback_submissions.basic_api`.
+- Removed methods `archive()`, `create()` and `update()` from `crm.objects.feedback_submissions.batch_api`.
+- Added parameters `uses_remote` and `uses_calling_window` to `crm.extensions.calling.models.settings_patch_request`, `crm.extensions.calling.models.settings_request` and `crm.extensions.calling.models.settings_response`.
+
+## CRM Imports and Owners
+
+- Added parameter `contains_encrypted_properties` to `crm.imports.models.import_row_core`.
+- Added parameter `mapped_object_type_ids` to `crm.imports.models.public_import_response`.
+- Added parameter `user_id_including_inactive` and `type` to `crm.owners.models.public_owner`.
 
 ## Marketing Events
 
