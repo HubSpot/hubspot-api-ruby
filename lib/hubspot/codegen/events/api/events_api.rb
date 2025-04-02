@@ -20,42 +20,42 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # Event Instance Query
-      # This endpoint allows you to query for event instances using filter criteria. 
+      # Retrieve event data
+      # Retrieve instances of event completion data. For example, retrieve all event completions associated with a specific contact.
       # @param [Hash] opts the optional parameters
-      # @option opts [String] :object_type The CRM Object type name to filter event instances on. Optionally, you can also provide an objectId in another param to filter to a specific CRM Object instance.
-      # @option opts [String] :event_type The event type name. A list of available event type names can be obtained from another API call.
+      # @option opts [String] :object_type The type of CRM object to filter event instances on (e.g., &#x60;contact&#x60;). To retrieve event data for a specific CRM record, include the additional &#x60;objectId&#x60; query parameter (below). 
+      # @option opts [String] :event_type The event type name. You can retrieve available event types using the [event types endpoint](#get-%2Fevents%2Fv3%2Fevents%2Fevent-types).
       # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
       # @option opts [String] :before 
       # @option opts [Integer] :limit The maximum number of results to display per page.
-      # @option opts [Array<String>] :sort Sort direction based on the timestamp of the event instance, ASCENDING or DESCENDING.
-      # @option opts [Time] :occurred_after 
-      # @option opts [Time] :occurred_before 
-      # @option opts [Integer] :object_id The ID of the CRM Object to filter event instances on. If filtering on objectId, you must also provide an objectType.
-      # @option opts [Object] :object_property_propname 
-      # @option opts [Object] :property_propname 
-      # @option opts [Array<String>] :id ID of an event instance. IDs are 1:1 with event instances. If you. provide this filter and additional filters, the other filters must match the values on the event instance to yield results.
+      # @option opts [Array<String>] :sort Sort direction based on the timestamp of the event instance, &#x60;ASCENDING&#x60; or &#x60;DESCENDING&#x60;.
+      # @option opts [Time] :occurred_after Filter for event data that occurred after a specific datetime.
+      # @option opts [Time] :occurred_before Filter for event data that occurred before a specific datetime.
+      # @option opts [Integer] :object_id The ID of the CRM Object to filter event instances on. When including this parameter, you must also include the &#x60;objectType&#x60; parameter.
+      # @option opts [Object] :object_property_propname Instead of retrieving event data for a specific object by its ID, you can specify a unique identifier property. For contacts, you can use the &#x60;email&#x60; property. (e.g., &#x60;objectProperty.email&#x3D;name@domain.com&#x60;).
+      # @option opts [Object] :property_propname Filter for event completions that contain a specific value for an event property (e.g., &#x60;property.hs_city&#x3D;portland&#x60;). For properties values with spaces, replaces spaces with &#x60;%20&#x60; or &#x60;+&#x60; (e.g., &#x60;property.hs_city&#x3D;new+york&#x60;).
+      # @option opts [Array<String>] :id ID of an event instance. IDs are 1:1 with event instances. If you provide this filter and additional filters, the other filters must match the values on the event instance to yield results.
       # @return [CollectionResponseExternalUnifiedEvent]
       def get_page(opts = {})
         data, _status_code, _headers = get_page_with_http_info(opts)
         data
       end
 
-      # Event Instance Query
-      # This endpoint allows you to query for event instances using filter criteria. 
+      # Retrieve event data
+      # Retrieve instances of event completion data. For example, retrieve all event completions associated with a specific contact.
       # @param [Hash] opts the optional parameters
-      # @option opts [String] :object_type The CRM Object type name to filter event instances on. Optionally, you can also provide an objectId in another param to filter to a specific CRM Object instance.
-      # @option opts [String] :event_type The event type name. A list of available event type names can be obtained from another API call.
+      # @option opts [String] :object_type The type of CRM object to filter event instances on (e.g., &#x60;contact&#x60;). To retrieve event data for a specific CRM record, include the additional &#x60;objectId&#x60; query parameter (below). 
+      # @option opts [String] :event_type The event type name. You can retrieve available event types using the [event types endpoint](#get-%2Fevents%2Fv3%2Fevents%2Fevent-types).
       # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
       # @option opts [String] :before 
       # @option opts [Integer] :limit The maximum number of results to display per page.
-      # @option opts [Array<String>] :sort Sort direction based on the timestamp of the event instance, ASCENDING or DESCENDING.
-      # @option opts [Time] :occurred_after 
-      # @option opts [Time] :occurred_before 
-      # @option opts [Integer] :object_id The ID of the CRM Object to filter event instances on. If filtering on objectId, you must also provide an objectType.
-      # @option opts [Object] :object_property_propname 
-      # @option opts [Object] :property_propname 
-      # @option opts [Array<String>] :id ID of an event instance. IDs are 1:1 with event instances. If you. provide this filter and additional filters, the other filters must match the values on the event instance to yield results.
+      # @option opts [Array<String>] :sort Sort direction based on the timestamp of the event instance, &#x60;ASCENDING&#x60; or &#x60;DESCENDING&#x60;.
+      # @option opts [Time] :occurred_after Filter for event data that occurred after a specific datetime.
+      # @option opts [Time] :occurred_before Filter for event data that occurred before a specific datetime.
+      # @option opts [Integer] :object_id The ID of the CRM Object to filter event instances on. When including this parameter, you must also include the &#x60;objectType&#x60; parameter.
+      # @option opts [Object] :object_property_propname Instead of retrieving event data for a specific object by its ID, you can specify a unique identifier property. For contacts, you can use the &#x60;email&#x60; property. (e.g., &#x60;objectProperty.email&#x3D;name@domain.com&#x60;).
+      # @option opts [Object] :property_propname Filter for event completions that contain a specific value for an event property (e.g., &#x60;property.hs_city&#x3D;portland&#x60;). For properties values with spaces, replaces spaces with &#x60;%20&#x60; or &#x60;+&#x60; (e.g., &#x60;property.hs_city&#x3D;new+york&#x60;).
+      # @option opts [Array<String>] :id ID of an event instance. IDs are 1:1 with event instances. If you provide this filter and additional filters, the other filters must match the values on the event instance to yield results.
       # @return [Array<(CollectionResponseExternalUnifiedEvent, Integer, Hash)>] CollectionResponseExternalUnifiedEvent data, response status code and response headers
       def get_page_with_http_info(opts = {})
         if @api_client.config.debugging
