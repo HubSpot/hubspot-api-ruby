@@ -9,7 +9,8 @@ module Hubspot
 
           def api_classes
             %i[
-              custom_event_data
+              basic
+              batch
             ].freeze
           end
         end
