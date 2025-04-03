@@ -4,7 +4,7 @@ module Hubspot
   module Discovery
     module Events
       module Send
-        class CustomEventDataApi
+        class BatchApi
           include Hubspot::Discovery::BaseApiClient
         end
       end
