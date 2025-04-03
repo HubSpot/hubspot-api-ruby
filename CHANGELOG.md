@@ -51,13 +51,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `cms.blogs.blog_posts.basic_api` Api.
 - `cms.blogs.blog_posts.batch_api` Api.
 - `cms.blogs.blog_posts.multi_language_api` Api.
+- `events.send.basic_api` Api.
+- `events.send.batch_api` Api.
 
 ## Removed Client APIs
 
 - `cms.blogs.blog_posts.blog_posts_api` Api.
 - `marketing.events.attendance_subscriber_state_changes_api` Api.
-- `crm.objects.feedback_submissions.gdpr_api.rb` Api.
-- `crm.objects.feedback_submissions.public_object_api.rb` Api.
+- `crm.objects.feedback_submissions.gdpr_api` Api.
+- `crm.objects.feedback_submissions.public_object_api` Api.
+- `events.send.custom_event_data` Api.
 
 ## Added new Clients
 
