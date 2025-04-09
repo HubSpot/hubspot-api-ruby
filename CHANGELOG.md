@@ -5,7 +5,76 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v19..0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.0.0-beta.1...HEAD)
+
+## [20.0.0-beta.1] - 2025-04-09
+
+## CRM Objects
+
+- Added methods `archive()`, `create()` and `update()` to `crm.objects.goals.basic_api`.
+- Added methods `archive()`, `create()`, `update()` and `upsert` to `crm.objects.goals.batch_api`.
+- Removed methods `archive()`, `create()` and `update()` from `crm.objects.feedback_submissions.basic_api`.
+- Removed methods `archive()`, `create()` and `update()` from `crm.objects.feedback_submissions.batch_api`.
+- Added parameters `uses_remote` and `uses_calling_window` to `crm.extensions.calling.models.settings_patch_request`, `crm.extensions.calling.models.settings_request` and `crm.extensions.calling.models.settings_response`.
+- Added parameter `object_write_trace_id` to models: `simple_public_object`, `simple_public_object_with_associations`, `simple_public_upsert_object` for `crm.objects`, `crm.objects.taxes`, `crm.objects.tasks`, `crm.objects.postal_mail`, `crm.objects.notes`, `crm.objects.meetings`, `crm.objects.leads`, `crm.objects.emails`, `crm.objects.communications`, `crm.objects.calls`, `crm.quotes`, `crm.line_items`.
+- Removed parameter `object_write_trace_id` from models: `simple_public_object_input`, `simple_public_object_input_for_create` for `crm.objects`, `crm.objects.taxes`, `crm.objects.tasks`, `crm.objects.postal_mail`, `crm.objects.notes`, `crm.objects.meetings`, `crm.objects.leads`, `crm.objects.emails`, `crm.objects.communications`, `crm.objects.calls`, `crm.quotes`, `crm.line_items`.
+
+## CRM Imports and Owners
+
+- Added parameter `contains_encrypted_properties` to `crm.imports.models.import_row_core`.
+- Added parameter `mapped_object_type_ids` to `crm.imports.models.public_import_response`.
+- Added parameter `user_id_including_inactive` and `type` to `crm.owners.models.public_owner`.
+
+## Marketing Events
+
+- Added parameter `object_id` to `marketing.events.models.marketing_event_default_response`, `marketing.events.models.marketing_event_default_response` and `marketing.events.models.marketing_event_public_read_response`.
+- Added methods `archive_by_object_id()`, `get_all()`, `get_by_object_id()` and `update_by_object_id()` to `marketing.events.basic_api`.
+- Renamed from `marketing.events.participant_state_api` to `marketing.events.retrieve_participant_state_api`.
+- Renamed from `CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging` to `CollectionResponseSearchPublicResponseWrapperNoPaging`.
+- Moved and renamed methods from `basic_api.batch_archive()` and `basic_api.batch_upsert()` to `batch_api.archive()` and `batch_api.upsert()`.
+- Moved methods from `basic_api.compelte()` and `basic_api.cancel()` to `change_property_api.compelte()` and `change_property_api.cancel()`.
+- Moved method from `basic_api.do_search()` to `identifiers_api.do_search()`.
+
+## Webhooks
+
+- Added parameter `object_type_id` to `webhooks.models.subscription_create_request` and `webhooks.models.subscription_response`.
+- Removed parameter `period` from `webhooks.models.throttling_settings`.
+
+## Added new Client APIs
+
+- `api_request` - Use not wrapped endpoint(s).
+- `crm.associations.v4.report_api` Api.
+- `crm.associations.v4.schema.definition_configurations_api` Api.
+- `crm.extensions.calling.channel_connection_settings_api` Api.
+- `marketing.events.add_event_attendees_api` Api.
+- `marketing.events.batch_api` Api.
+- `marketing.events.change_property_api` Api.
+- `marketing.events.identifiers_api` Api.
+- `cms.blogs.blog_posts.basic_api` Api.
+- `cms.blogs.blog_posts.batch_api` Api.
+- `cms.blogs.blog_posts.multi_language_api` Api.
+- `events.send.basic_api` Api.
+- `events.send.batch_api` Api.
+
+## Removed Client APIs
+
+- `cms.blogs.blog_posts.blog_posts_api` Api.
+- `marketing.events.attendance_subscriber_state_changes_api` Api.
+- `crm.objects.feedback_submissions.gdpr_api` Api.
+- `crm.objects.feedback_submissions.public_object_api` Api.
+- `events.send.custom_event_data` Api.
+
+## Added new Clients
+
+- `Marketing Emails` client.
+- `Invoices` client.
+- `Exports` client.
+- `Deal Splits` client.
+
+## Fixed
+
+- Singature.
+- Module names `cms.hubdb` and `crm.lists`.
 
 ## [19.0.0] - 2024-10-16
 
