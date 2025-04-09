@@ -5,9 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20..0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.0.0-beta.1...HEAD)
 
-## [20.0.0] - 2025-04-01
+## [20.0.0-beta.1] - 2025-04-09
 
 ## CRM Objects
 
@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed methods `archive()`, `create()` and `update()` from `crm.objects.feedback_submissions.basic_api`.
 - Removed methods `archive()`, `create()` and `update()` from `crm.objects.feedback_submissions.batch_api`.
 - Added parameters `uses_remote` and `uses_calling_window` to `crm.extensions.calling.models.settings_patch_request`, `crm.extensions.calling.models.settings_request` and `crm.extensions.calling.models.settings_response`.
+- Added parameter `object_write_trace_id` to models: `simple_public_object`, `simple_public_object_with_associations`, `simple_public_upsert_object` for `crm.objects`, `crm.objects.taxes`, `crm.objects.tasks`, `crm.objects.postal_mail`, `crm.objects.notes`, `crm.objects.meetings`, `crm.objects.leads`, `crm.objects.emails`, `crm.objects.communications`, `crm.objects.calls`, `crm.quotes`, `crm.line_items`.
+- Removed parameter `object_write_trace_id` from models: `simple_public_object_input`, `simple_public_object_input_for_create` for `crm.objects`, `crm.objects.taxes`, `crm.objects.tasks`, `crm.objects.postal_mail`, `crm.objects.notes`, `crm.objects.meetings`, `crm.objects.leads`, `crm.objects.emails`, `crm.objects.communications`, `crm.objects.calls`, `crm.quotes`, `crm.line_items`.
 
 ## CRM Imports and Owners
 
