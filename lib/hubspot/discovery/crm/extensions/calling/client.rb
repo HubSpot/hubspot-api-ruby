@@ -10,6 +10,7 @@ module Hubspot
 
             def api_classes
               %i[
+                channel_connection_settings
                 recording_settings
                 settings
               ].freeze

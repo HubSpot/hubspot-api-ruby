@@ -11,6 +11,7 @@ module Hubspot
             %i[
               calls
               communications
+              deal_splits
               emails
               feedback_submissions
               goals
@@ -25,12 +26,9 @@ module Hubspot
 
           def api_classes
             %i[
-              associations
               basic
               batch
-              gdpr
               search
-              public_object
             ].freeze
           end
         end

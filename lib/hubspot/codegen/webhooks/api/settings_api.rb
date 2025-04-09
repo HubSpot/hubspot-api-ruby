@@ -20,7 +20,9 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # @param app_id [Integer] 
+      # Delete webhook settings
+      # Delete the webhook settings for the specified app. Event subscriptions will not be deleted, but will be paused until another webhook is created.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [nil]
       def clear(app_id, opts = {})
@@ -28,7 +30,9 @@ module Hubspot
         nil
       end
 
-      # @param app_id [Integer] 
+      # Delete webhook settings
+      # Delete the webhook settings for the specified app. Event subscriptions will not be deleted, but will be paused until another webhook is created.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def clear_with_http_info(app_id, opts = {})
@@ -79,7 +83,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param app_id [Integer] 
+      # Update webhook settings
+      # Update webhook settings for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param settings_change_request [SettingsChangeRequest] 
       # @param [Hash] opts the optional parameters
       # @return [SettingsResponse]
@@ -88,7 +94,9 @@ module Hubspot
         data
       end
 
-      # @param app_id [Integer] 
+      # Update webhook settings
+      # Update webhook settings for the specified app.
+      # @param app_id [Integer] The ID of the app.
       # @param settings_change_request [SettingsChangeRequest] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
@@ -149,7 +157,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param app_id [Integer] 
+      # Read webhook settings
+      # Retrieve the webhook settings for the specified app, including the webhook’s target URL, throttle configuration, and create/update date.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [SettingsResponse]
       def get_all(app_id, opts = {})
@@ -157,7 +167,9 @@ module Hubspot
         data
       end
 
-      # @param app_id [Integer] 
+      # Read webhook settings
+      # Retrieve the webhook settings for the specified app, including the webhook’s target URL, throttle configuration, and create/update date.
+      # @param app_id [Integer] The ID of the app.
       # @param [Hash] opts the optional parameters
       # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
       def get_all_with_http_info(app_id, opts = {})

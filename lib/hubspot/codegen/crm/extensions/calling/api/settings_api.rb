@@ -23,7 +23,7 @@ module Hubspot
             @api_client = api_client
           end
           # Delete calling settings
-          # Deletes this calling extension. This will remove your service as an option for all connected accounts.
+          # Delete a calling extension. This will remove your service as an option for all connected accounts.
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -33,7 +33,7 @@ module Hubspot
           end
 
           # Delete calling settings
-          # Deletes this calling extension. This will remove your service as an option for all connected accounts.
+          # Delete a calling extension. This will remove your service as an option for all connected accounts.
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -86,7 +86,7 @@ module Hubspot
           end
 
           # Configure a calling extension
-          # Used to set the menu label, target iframe URL, and dimensions for your calling extension.
+          # Set the menu label, target iframe URL, and dimensions for your calling extension.
           # @param app_id [Integer] The ID of the app.
           # @param settings_request [SettingsRequest] 
           # @param [Hash] opts the optional parameters
@@ -97,7 +97,7 @@ module Hubspot
           end
 
           # Configure a calling extension
-          # Used to set the menu label, target iframe URL, and dimensions for your calling extension.
+          # Set the menu label, target iframe URL, and dimensions for your calling extension.
           # @param app_id [Integer] The ID of the app.
           # @param settings_request [SettingsRequest] 
           # @param [Hash] opts the optional parameters
@@ -159,8 +159,8 @@ module Hubspot
             return data, status_code, headers
           end
 
-          # Get calling settings
-          # Returns the calling extension settings configured for your app.
+          # Retrieve settings
+          # Retrieve the settings configured for the app.
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [SettingsResponse]
@@ -169,8 +169,8 @@ module Hubspot
             data
           end
 
-          # Get calling settings
-          # Returns the calling extension settings configured for your app.
+          # Retrieve settings
+          # Retrieve the settings configured for the app.
           # @param app_id [Integer] The ID of the app.
           # @param [Hash] opts the optional parameters
           # @return [Array<(SettingsResponse, Integer, Hash)>] SettingsResponse data, response status code and response headers
@@ -223,7 +223,7 @@ module Hubspot
           end
 
           # Update settings
-          # Updates existing calling extension settings.
+          # Update existing calling extension settings.
           # @param app_id [Integer] The ID of the app.
           # @param settings_patch_request [SettingsPatchRequest] 
           # @param [Hash] opts the optional parameters
@@ -234,7 +234,7 @@ module Hubspot
           end
 
           # Update settings
-          # Updates existing calling extension settings.
+          # Update existing calling extension settings.
           # @param app_id [Integer] The ID of the app.
           # @param settings_patch_request [SettingsPatchRequest] 
           # @param [Hash] opts the optional parameters

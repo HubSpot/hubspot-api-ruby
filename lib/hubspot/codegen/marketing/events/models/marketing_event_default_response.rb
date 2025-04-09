@@ -46,6 +46,8 @@ module Hubspot
         # The end date and time of the marketing event.
         attr_accessor :end_date_time
 
+        attr_accessor :object_id
+
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
@@ -58,7 +60,8 @@ module Hubspot
             :'event_name' => :'eventName',
             :'event_type' => :'eventType',
             :'event_completed' => :'eventCompleted',
-            :'end_date_time' => :'endDateTime'
+            :'end_date_time' => :'endDateTime',
+            :'object_id' => :'objectId'
           }
         end
 
@@ -79,7 +82,8 @@ module Hubspot
             :'event_name' => :'String',
             :'event_type' => :'String',
             :'event_completed' => :'Boolean',
-            :'end_date_time' => :'Time'
+            :'end_date_time' => :'Time',
+            :'object_id' => :'String'
           }
         end
 
@@ -145,6 +149,10 @@ module Hubspot
           if attributes.key?(:'end_date_time')
             self.end_date_time = attributes[:'end_date_time']
           end
+
+          if attributes.key?(:'object_id')
+            self.object_id = attributes[:'object_id']
+          end
         end
 
         # Show invalid properties with the reasons. Usually used together with valid?
@@ -184,7 +192,8 @@ module Hubspot
               event_name == o.event_name &&
               event_type == o.event_type &&
               event_completed == o.event_completed &&
-              end_date_time == o.end_date_time
+              end_date_time == o.end_date_time &&
+              object_id == o.object_id
         end
 
         # @see the `==` method
@@ -196,7 +205,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [start_date_time, custom_properties, event_cancelled, event_organizer, event_url, event_description, event_name, event_type, event_completed, end_date_time].hash
+          [start_date_time, custom_properties, event_cancelled, event_organizer, event_url, event_description, event_name, event_type, event_completed, end_date_time, object_id].hash
         end
 
         # Builds the object from hash

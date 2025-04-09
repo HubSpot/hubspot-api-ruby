@@ -18,10 +18,12 @@ module Hubspot
     module Objects
       module Tasks
         class SimplePublicObjectBatchInput
+          # The name of a property whose values are unique for this object
           attr_accessor :id_property
 
           attr_accessor :object_write_trace_id
 
+          # The id to be updated. This can be the object id, or the unique property value of the idProperty property
           attr_accessor :id
 
           attr_accessor :properties

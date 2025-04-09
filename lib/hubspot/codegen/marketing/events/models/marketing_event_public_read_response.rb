@@ -67,6 +67,8 @@ module Hubspot
         # 
         attr_accessor :id
 
+        attr_accessor :object_id
+
         # 
         attr_accessor :updated_at
 
@@ -90,6 +92,7 @@ module Hubspot
             :'event_description' => :'eventDescription',
             :'event_name' => :'eventName',
             :'id' => :'id',
+            :'object_id' => :'objectId',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -119,6 +122,7 @@ module Hubspot
             :'event_description' => :'String',
             :'event_name' => :'String',
             :'id' => :'String',
+            :'object_id' => :'String',
             :'updated_at' => :'Time'
           }
         end
@@ -214,6 +218,10 @@ module Hubspot
             self.id = attributes[:'id']
           end
 
+          if attributes.key?(:'object_id')
+            self.object_id = attributes[:'object_id']
+          end
+
           if attributes.key?(:'updated_at')
             self.updated_at = attributes[:'updated_at']
           end
@@ -304,6 +312,7 @@ module Hubspot
               event_description == o.event_description &&
               event_name == o.event_name &&
               id == o.id &&
+              object_id == o.object_id &&
               updated_at == o.updated_at
         end
 
@@ -316,7 +325,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [registrants, event_organizer, event_url, attendees, event_type, event_completed, end_date_time, no_shows, cancellations, created_at, start_date_time, custom_properties, event_cancelled, external_event_id, event_description, event_name, id, updated_at].hash
+          [registrants, event_organizer, event_url, attendees, event_type, event_completed, end_date_time, no_shows, cancellations, created_at, start_date_time, custom_properties, event_cancelled, external_event_id, event_description, event_name, id, object_id, updated_at].hash
         end
 
         # Builds the object from hash

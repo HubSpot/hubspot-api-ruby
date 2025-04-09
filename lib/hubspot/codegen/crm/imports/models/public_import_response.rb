@@ -37,6 +37,8 @@ module Hubspot
         # Whether or not the import is a list of people disqualified from receiving emails.
         attr_accessor :opt_out_import
 
+        attr_accessor :mapped_object_type_ids
+
         attr_accessor :updated_at
 
         class EnumAttributeValidator
@@ -73,6 +75,7 @@ module Hubspot
             :'state' => :'state',
             :'id' => :'id',
             :'opt_out_import' => :'optOutImport',
+            :'mapped_object_type_ids' => :'mappedObjectTypeIds',
             :'updated_at' => :'updatedAt'
           }
         end
@@ -94,6 +97,7 @@ module Hubspot
             :'state' => :'String',
             :'id' => :'String',
             :'opt_out_import' => :'Boolean',
+            :'mapped_object_type_ids' => :'Array<String>',
             :'updated_at' => :'Time'
           }
         end
@@ -155,6 +159,12 @@ module Hubspot
             self.opt_out_import = attributes[:'opt_out_import']
           end
 
+          if attributes.key?(:'mapped_object_type_ids')
+            if (value = attributes[:'mapped_object_type_ids']).is_a?(Array)
+              self.mapped_object_type_ids = value
+            end
+          end
+
           if attributes.key?(:'updated_at')
             self.updated_at = attributes[:'updated_at']
           end
@@ -184,6 +194,10 @@ module Hubspot
             invalid_properties.push('invalid value for "opt_out_import", opt_out_import cannot be nil.')
           end
 
+          if @mapped_object_type_ids.nil?
+            invalid_properties.push('invalid value for "mapped_object_type_ids", mapped_object_type_ids cannot be nil.')
+          end
+
           if @updated_at.nil?
             invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
           end
@@ -203,6 +217,7 @@ module Hubspot
           return false unless state_validator.valid?(@state)
           return false if @id.nil?
           return false if @opt_out_import.nil?
+          return false if @mapped_object_type_ids.nil?
           return false if @updated_at.nil?
           true
         end
@@ -241,6 +256,7 @@ module Hubspot
               state == o.state &&
               id == o.id &&
               opt_out_import == o.opt_out_import &&
+              mapped_object_type_ids == o.mapped_object_type_ids &&
               updated_at == o.updated_at
         end
 
@@ -253,7 +269,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [import_template, created_at, metadata, import_request_json, import_source, import_name, state, id, opt_out_import, updated_at].hash
+          [import_template, created_at, metadata, import_request_json, import_source, import_name, state, id, opt_out_import, mapped_object_type_ids, updated_at].hash
         end
 
         # Builds the object from hash
