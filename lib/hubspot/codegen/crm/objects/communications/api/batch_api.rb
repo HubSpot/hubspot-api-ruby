@@ -23,6 +23,7 @@ module Hubspot
             @api_client = api_client
           end
           # Archive a batch of communications by ID
+          # Delete a batch of messages by ID. A deleted message can be restored within 90 days of being deleted. Learn more about [restoring activity records](https://knowledge.hubspot.com/records/restore-deleted-activity-in-a-record).
           # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @return [nil]
@@ -32,6 +33,7 @@ module Hubspot
           end
 
           # Archive a batch of communications by ID
+          # Delete a batch of messages by ID. A deleted message can be restored within 90 days of being deleted. Learn more about [restoring activity records](https://knowledge.hubspot.com/records/restore-deleted-activity-in-a-record).
           # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -89,25 +91,27 @@ module Hubspot
           end
 
           # Create a batch of communications
-          # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
+          # Create a batch of messages. The `inputs` array can contain a `properties` object to define property values for each message, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
+          # @param batch_input_simple_public_object_batch_input_for_create [BatchInputSimplePublicObjectBatchInputForCreate] 
           # @param [Hash] opts the optional parameters
           # @return [BatchResponseSimplePublicObject]
-          def create(batch_input_simple_public_object_input_for_create, opts = {})
-            data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input_for_create, opts)
+          def create(batch_input_simple_public_object_batch_input_for_create, opts = {})
+            data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_batch_input_for_create, opts)
             data
           end
 
           # Create a batch of communications
-          # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
+          # Create a batch of messages. The &#x60;inputs&#x60; array can contain a &#x60;properties&#x60; object to define property values for each message, along with an &#x60;associations&#x60; array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
+          # @param batch_input_simple_public_object_batch_input_for_create [BatchInputSimplePublicObjectBatchInputForCreate] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-          def create_with_http_info(batch_input_simple_public_object_input_for_create, opts = {})
+          def create_with_http_info(batch_input_simple_public_object_batch_input_for_create, opts = {})
             if @api_client.config.debugging
               @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
             end
-            # verify the required parameter 'batch_input_simple_public_object_input_for_create' is set
-            if @api_client.config.client_side_validation && batch_input_simple_public_object_input_for_create.nil?
-              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.create"
+            # verify the required parameter 'batch_input_simple_public_object_batch_input_for_create' is set
+            if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input_for_create.nil?
+              fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input_for_create' when calling BatchApi.create"
             end
             # resource path
             local_var_path = '/crm/v3/objects/communications/batch/create'
@@ -129,7 +133,7 @@ module Hubspot
             form_params = opts[:form_params] || {}
 
             # http body (model)
-            post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_input_for_create)
+            post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_batch_input_for_create)
 
             # return_type
             return_type = opts[:debug_return_type] || 'BatchResponseSimplePublicObject'
@@ -155,6 +159,7 @@ module Hubspot
           end
 
           # Read a batch of communications by internal ID, or unique property values
+          # Retrieve a batch of messages by ID (`communicationId`) or unique property value (`idProperty`). 
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -165,6 +170,7 @@ module Hubspot
           end
 
           # Read a batch of communications by internal ID, or unique property values
+          # Retrieve a batch of messages by ID (&#x60;communicationId&#x60;) or unique property value (&#x60;idProperty&#x60;). 
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -224,6 +230,7 @@ module Hubspot
           end
 
           # Update a batch of communications by internal ID, or unique property values
+          # Update a batch of messages by ID (`communicationId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
           # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
           # @param [Hash] opts the optional parameters
           # @return [BatchResponseSimplePublicObject]
@@ -233,6 +240,7 @@ module Hubspot
           end
 
           # Update a batch of communications by internal ID, or unique property values
+          # Update a batch of messages by ID (&#x60;communicationId&#x60;) or unique property value (&#x60;idProperty&#x60;). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
           # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
           # @param [Hash] opts the optional parameters
           # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
