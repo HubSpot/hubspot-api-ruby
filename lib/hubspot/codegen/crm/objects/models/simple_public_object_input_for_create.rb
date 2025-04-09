@@ -1,5 +1,5 @@
 =begin
-#Objects
+#CRM Objects
 
 #CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are standard objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
 
@@ -19,15 +19,12 @@ module Hubspot
       class SimplePublicObjectInputForCreate
         attr_accessor :associations
 
-        attr_accessor :object_write_trace_id
-
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'associations' => :'associations',
-            :'object_write_trace_id' => :'objectWriteTraceId',
             :'properties' => :'properties'
           }
         end
@@ -41,7 +38,6 @@ module Hubspot
         def self.openapi_types
           {
             :'associations' => :'Array<PublicAssociationsForObject>',
-            :'object_write_trace_id' => :'String',
             :'properties' => :'Hash<String, String>'
           }
         end
@@ -73,10 +69,6 @@ module Hubspot
             end
           end
 
-          if attributes.key?(:'object_write_trace_id')
-            self.object_write_trace_id = attributes[:'object_write_trace_id']
-          end
-
           if attributes.key?(:'properties')
             if (value = attributes[:'properties']).is_a?(Hash)
               self.properties = value
@@ -88,10 +80,6 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @associations.nil?
-            invalid_properties.push('invalid value for "associations", associations cannot be nil.')
-          end
-
           if @properties.nil?
             invalid_properties.push('invalid value for "properties", properties cannot be nil.')
           end
@@ -102,7 +90,6 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @associations.nil?
           return false if @properties.nil?
           true
         end
@@ -113,7 +100,6 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               associations == o.associations &&
-              object_write_trace_id == o.object_write_trace_id &&
               properties == o.properties
         end
 
@@ -126,7 +112,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [associations, object_write_trace_id, properties].hash
+          [associations, properties].hash
         end
 
         # Builds the object from hash

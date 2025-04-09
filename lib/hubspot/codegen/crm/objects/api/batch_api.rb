@@ -1,5 +1,5 @@
 =begin
-#Objects
+#CRM Objects
 
 #CRM objects such as companies, contacts, deals, line items, products, tickets, and quotes are standard objects in HubSpot’s CRM. These core building blocks support custom properties, store critical information, and play a central role in the HubSpot application.  ## Supported Object Types  This API provides access to collections of CRM objects, which return a map of property names to values. Each object type has its own set of default properties, which can be found by exploring the [CRM Object Properties API](https://developers.hubspot.com/docs/methods/crm-properties/crm-properties-overview).  |Object Type |Properties returned by default | |--|--| | `companies` | `name`, `domain` | | `contacts` | `firstname`, `lastname`, `email` | | `deals` | `dealname`, `amount`, `closedate`, `pipeline`, `dealstage` | | `products` | `name`, `description`, `price` | | `tickets` | `content`, `hs_pipeline`, `hs_pipeline_stage`, `hs_ticket_category`, `hs_ticket_priority`, `subject` |  Find a list of all properties for an object type using the [CRM Object Properties](https://developers.hubspot.com/docs/methods/crm-properties/get-properties) API. e.g. `GET https://api.hubapi.com/properties/v2/companies/properties`. Change the properties returned in the response using the `properties` array in the request body.
 
@@ -95,20 +95,20 @@ module Hubspot
 
         # Create a batch of objects
         # @param object_type [String] 
-        # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
+        # @param batch_input_simple_public_object_batch_input_for_create [BatchInputSimplePublicObjectBatchInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
-        def create(object_type, batch_input_simple_public_object_input_for_create, opts = {})
-          data, _status_code, _headers = create_with_http_info(object_type, batch_input_simple_public_object_input_for_create, opts)
+        def create(object_type, batch_input_simple_public_object_batch_input_for_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(object_type, batch_input_simple_public_object_batch_input_for_create, opts)
           data
         end
 
         # Create a batch of objects
         # @param object_type [String] 
-        # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
+        # @param batch_input_simple_public_object_batch_input_for_create [BatchInputSimplePublicObjectBatchInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def create_with_http_info(object_type, batch_input_simple_public_object_input_for_create, opts = {})
+        def create_with_http_info(object_type, batch_input_simple_public_object_batch_input_for_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
@@ -116,9 +116,9 @@ module Hubspot
           if @api_client.config.client_side_validation && object_type.nil?
             fail ArgumentError, "Missing the required parameter 'object_type' when calling BatchApi.create"
           end
-          # verify the required parameter 'batch_input_simple_public_object_input_for_create' is set
-          if @api_client.config.client_side_validation && batch_input_simple_public_object_input_for_create.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.create"
+          # verify the required parameter 'batch_input_simple_public_object_batch_input_for_create' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input_for_create.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input_for_create' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/{objectType}/batch/create'.sub('{' + 'objectType' + '}', CGI.escape(object_type.to_s))
@@ -140,7 +140,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_input_for_create)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_batch_input_for_create)
 
           # return_type
           return_type = opts[:debug_return_type] || 'BatchResponseSimplePublicObject'
@@ -166,6 +166,7 @@ module Hubspot
         end
 
         # Read a batch of objects by internal ID, or unique property values
+        # Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
         # @param object_type [String] 
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
@@ -177,6 +178,7 @@ module Hubspot
         end
 
         # Read a batch of objects by internal ID, or unique property values
+        # Retrieve records by record ID or include the &#x60;idProperty&#x60; parameter to retrieve records by a custom unique value property. 
         # @param object_type [String] 
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters

@@ -18,6 +18,7 @@ module Hubspot
     module Objects
       module Tasks
         class SimplePublicObjectBatchInputUpsert
+          # The name of a property whose values are unique for this object
           attr_accessor :id_property
 
           attr_accessor :object_write_trace_id
