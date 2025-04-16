@@ -21,14 +21,19 @@ module Hubspot
 
         attr_accessor :created_at
 
+        # 
         attr_accessor :archived
 
+        # 
         attr_accessor :archived_at
 
         attr_accessor :properties_with_history
 
         attr_accessor :id
 
+        attr_accessor :object_write_trace_id
+
+        # 
         attr_accessor :properties
 
         attr_accessor :updated_at
@@ -42,6 +47,7 @@ module Hubspot
             :'archived_at' => :'archivedAt',
             :'properties_with_history' => :'propertiesWithHistory',
             :'id' => :'id',
+            :'object_write_trace_id' => :'objectWriteTraceId',
             :'properties' => :'properties',
             :'updated_at' => :'updatedAt'
           }
@@ -61,6 +67,7 @@ module Hubspot
             :'archived_at' => :'Time',
             :'properties_with_history' => :'Hash<String, Array<ValueWithTimestamp>>',
             :'id' => :'String',
+            :'object_write_trace_id' => :'String',
             :'properties' => :'Hash<String, String>',
             :'updated_at' => :'Time'
           }
@@ -113,6 +120,10 @@ module Hubspot
 
           if attributes.key?(:'id')
             self.id = attributes[:'id']
+          end
+
+          if attributes.key?(:'object_write_trace_id')
+            self.object_write_trace_id = attributes[:'object_write_trace_id']
           end
 
           if attributes.key?(:'properties')
@@ -170,6 +181,7 @@ module Hubspot
               archived_at == o.archived_at &&
               properties_with_history == o.properties_with_history &&
               id == o.id &&
+              object_write_trace_id == o.object_write_trace_id &&
               properties == o.properties &&
               updated_at == o.updated_at
         end
@@ -183,7 +195,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [associations, created_at, archived, archived_at, properties_with_history, id, properties, updated_at].hash
+          [associations, created_at, archived, archived_at, properties_with_history, id, object_write_trace_id, properties, updated_at].hash
         end
 
         # Builds the object from hash

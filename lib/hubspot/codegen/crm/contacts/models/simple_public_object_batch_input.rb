@@ -17,10 +17,12 @@ module Hubspot
   module Crm
     module Contacts
       class SimplePublicObjectBatchInput
+        # The name of a unique property, when identifying records by property. 
         attr_accessor :id_property
 
         attr_accessor :object_write_trace_id
 
+        # The ID of the contact to update. This can be the object ID, or the unique property value of the `idProperty` property.
         attr_accessor :id
 
         attr_accessor :properties
