@@ -16,6 +16,7 @@ module Hubspot
   module Crm
     module Companies
       class BasicApi
+        require 'hubspot/helpers/get_all_helper'
         include Hubspot::Helpers::GetAllHelper
 
         attr_accessor :api_client
@@ -23,8 +24,8 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive
-        # Move an Object identified by `{companyId}` to the recycling bin.
+        # Archive a company
+        # Delete a company by ID. Deleted companies can be restored within 90 days of deletion. Learn more about [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
         # @param company_id [String] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -33,8 +34,8 @@ module Hubspot
           nil
         end
 
-        # Archive
-        # Move an Object identified by &#x60;{companyId}&#x60; to the recycling bin.
+        # Archive a company
+        # Delete a company by ID. Deleted companies can be restored within 90 days of deletion. Learn more about [restoring records](https://knowledge.hubspot.com/records/restore-deleted-records).
         # @param company_id [String] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -86,8 +87,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Create
-        # Create a company with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard companies is provided.
+        # Create a company
+        # Create a single company. Include a `properties` object to define [property values](https://developers.hubspot.com/docs/guides/api/crm/properties) for the company, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
         # @param simple_public_object_input_for_create [SimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [SimplePublicObject]
@@ -96,8 +97,8 @@ module Hubspot
           data
         end
 
-        # Create
-        # Create a company with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard companies is provided.
+        # Create a company
+        # Create a single company. Include a &#x60;properties&#x60; object to define [property values](https://developers.hubspot.com/docs/guides/api/crm/properties) for the company, along with an &#x60;associations&#x60; array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
         # @param simple_public_object_input_for_create [SimplePublicObjectInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
@@ -154,9 +155,9 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Read
-        # Read an Object identified by `{companyId}`. `{companyId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-        # @param company_id [String] 
+        # Retrieve a company
+        # Retrieve a company by its ID (`companyId`) or by a unique property (`idProperty`). You can specify what is returned using the `properties` query parameter.
+        # @param company_id [String] The ID of the company
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -169,9 +170,9 @@ module Hubspot
           data
         end
 
-        # Read
-        # Read an Object identified by &#x60;{companyId}&#x60;. &#x60;{companyId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param.  Control what is returned via the &#x60;properties&#x60; query param.
-        # @param company_id [String] 
+        # Retrieve a company
+        # Retrieve a company by its ID (&#x60;companyId&#x60;) or by a unique property (&#x60;idProperty&#x60;). You can specify what is returned using the &#x60;properties&#x60; query parameter.
+        # @param company_id [String] The ID of the company
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -232,8 +233,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # List
-        # Read a page of companies. Control what is returned via the `properties` query param.
+        # Retrieve companies
+        # Retrieve all companies, using query parameters to control the information that gets returned.
         # @param [Hash] opts the optional parameters
         # @option opts [Integer] :limit The maximum number of results to display per page. (default to 10)
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -247,8 +248,8 @@ module Hubspot
           data
         end
 
-        # List
-        # Read a page of companies. Control what is returned via the &#x60;properties&#x60; query param.
+        # Retrieve companies
+        # Retrieve all companies, using query parameters to control the information that gets returned.
         # @param [Hash] opts the optional parameters
         # @option opts [Integer] :limit The maximum number of results to display per page. (default to 10)
         # @option opts [String] :after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -307,8 +308,76 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Update
-        # Perform a partial update of an Object identified by `{companyId}`or optionally a unique property value as specified by the `idProperty` query param. `{companyId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+        # Merge two companies
+        # Merge two company records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records).
+        # @param public_merge_input [PublicMergeInput] 
+        # @param [Hash] opts the optional parameters
+        # @return [SimplePublicObject]
+        def merge(public_merge_input, opts = {})
+          data, _status_code, _headers = merge_with_http_info(public_merge_input, opts)
+          data
+        end
+
+        # Merge two companies
+        # Merge two company records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records).
+        # @param public_merge_input [PublicMergeInput] 
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+        def merge_with_http_info(public_merge_input, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BasicApi.merge ...'
+          end
+          # verify the required parameter 'public_merge_input' is set
+          if @api_client.config.client_side_validation && public_merge_input.nil?
+            fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling BasicApi.merge"
+          end
+          # resource path
+          local_var_path = '/crm/v3/objects/companies/merge'
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          content_type = @api_client.select_header_content_type(['application/json'])
+          if !content_type.nil?
+              header_params['Content-Type'] = content_type
+          end
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(public_merge_input)
+
+          # return_type
+          return_type = opts[:debug_return_type] || 'SimplePublicObject'
+
+          # auth_names
+          auth_names = opts[:debug_auth_names] || ['oauth2']
+
+          new_options = opts.merge(
+            :operation => :"BasicApi.merge",
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BasicApi#merge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Update a company
+        # Update a company by ID (`companyId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
         # @param company_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters
@@ -319,8 +388,8 @@ module Hubspot
           data
         end
 
-        # Update
-        # Perform a partial update of an Object identified by &#x60;{companyId}&#x60;or optionally a unique property value as specified by the &#x60;idProperty&#x60; query param. &#x60;{companyId}&#x60; refers to the internal object ID by default, and the &#x60;idProperty&#x60; query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+        # Update a company
+        # Update a company by ID (&#x60;companyId&#x60;) or unique property value (&#x60;idProperty&#x60;). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
         # @param company_id [String] 
         # @param simple_public_object_input [SimplePublicObjectInput] 
         # @param [Hash] opts the optional parameters

@@ -19,15 +19,13 @@ module Hubspot
       class SimplePublicObjectInputForCreate
         attr_accessor :associations
 
-        attr_accessor :object_write_trace_id
-
+        # The company property values to set.
         attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
             :'associations' => :'associations',
-            :'object_write_trace_id' => :'objectWriteTraceId',
             :'properties' => :'properties'
           }
         end
@@ -41,7 +39,6 @@ module Hubspot
         def self.openapi_types
           {
             :'associations' => :'Array<PublicAssociationsForObject>',
-            :'object_write_trace_id' => :'String',
             :'properties' => :'Hash<String, String>'
           }
         end
@@ -71,10 +68,6 @@ module Hubspot
             if (value = attributes[:'associations']).is_a?(Array)
               self.associations = value
             end
-          end
-
-          if attributes.key?(:'object_write_trace_id')
-            self.object_write_trace_id = attributes[:'object_write_trace_id']
           end
 
           if attributes.key?(:'properties')
@@ -108,7 +101,6 @@ module Hubspot
           return true if self.equal?(o)
           self.class == o.class &&
               associations == o.associations &&
-              object_write_trace_id == o.object_write_trace_id &&
               properties == o.properties
         end
 
@@ -121,7 +113,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [associations, object_write_trace_id, properties].hash
+          [associations, properties].hash
         end
 
         # Builds the object from hash
