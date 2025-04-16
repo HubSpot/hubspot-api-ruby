@@ -2,7 +2,7 @@ require_relative '../../base_api_client'
 
 module Hubspot
   module Discovery
-    module OAuth
+    module Oauth
       class RefreshTokensApi
         include Hubspot::Discovery::BaseApiClient
       end

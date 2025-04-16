@@ -2,7 +2,7 @@ require_relative '../base_module_client'
 
 module Hubspot
   module Discovery
-    module OAuth
+    module Oauth
       class Client
         include Hubspot::Discovery::BaseModuleClient
 
