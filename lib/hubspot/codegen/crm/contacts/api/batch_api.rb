@@ -21,7 +21,8 @@ module Hubspot
         def initialize(api_client = ApiClient.default)
           @api_client = api_client
         end
-        # Archive a batch of contacts by ID
+        # Archive a batch of contacts
+        # Archive a batch of contacts by ID. Archived contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @return [nil]
@@ -30,7 +31,8 @@ module Hubspot
           nil
         end
 
-        # Archive a batch of contacts by ID
+        # Archive a batch of contacts
+        # Archive a batch of contacts by ID. Archived contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
         # @param batch_input_simple_public_object_id [BatchInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -88,25 +90,27 @@ module Hubspot
         end
 
         # Create a batch of contacts
-        # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
+        # Create a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
+        # @param batch_input_simple_public_object_batch_input_for_create [BatchInputSimplePublicObjectBatchInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
-        def create(batch_input_simple_public_object_input_for_create, opts = {})
-          data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_input_for_create, opts)
+        def create(batch_input_simple_public_object_batch_input_for_create, opts = {})
+          data, _status_code, _headers = create_with_http_info(batch_input_simple_public_object_batch_input_for_create, opts)
           data
         end
 
         # Create a batch of contacts
-        # @param batch_input_simple_public_object_input_for_create [BatchInputSimplePublicObjectInputForCreate] 
+        # Create a batch of contacts. The &#x60;inputs&#x60; array can contain a &#x60;properties&#x60; object to define property values for each record, along with an &#x60;associations&#x60; array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
+        # @param batch_input_simple_public_object_batch_input_for_create [BatchInputSimplePublicObjectBatchInputForCreate] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
-        def create_with_http_info(batch_input_simple_public_object_input_for_create, opts = {})
+        def create_with_http_info(batch_input_simple_public_object_batch_input_for_create, opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: BatchApi.create ...'
           end
-          # verify the required parameter 'batch_input_simple_public_object_input_for_create' is set
-          if @api_client.config.client_side_validation && batch_input_simple_public_object_input_for_create.nil?
-            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_input_for_create' when calling BatchApi.create"
+          # verify the required parameter 'batch_input_simple_public_object_batch_input_for_create' is set
+          if @api_client.config.client_side_validation && batch_input_simple_public_object_batch_input_for_create.nil?
+            fail ArgumentError, "Missing the required parameter 'batch_input_simple_public_object_batch_input_for_create' when calling BatchApi.create"
           end
           # resource path
           local_var_path = '/crm/v3/objects/contacts/batch/create'
@@ -128,7 +132,7 @@ module Hubspot
           form_params = opts[:form_params] || {}
 
           # http body (model)
-          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_input_for_create)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(batch_input_simple_public_object_batch_input_for_create)
 
           # return_type
           return_type = opts[:debug_return_type] || 'BatchResponseSimplePublicObject'
@@ -153,7 +157,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Read a batch of contacts by internal ID, or unique property values
+        # Retrieve a batch of contacts
+        # Retrieve a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). 
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -163,7 +168,8 @@ module Hubspot
           data
         end
 
-        # Read a batch of contacts by internal ID, or unique property values
+        # Retrieve a batch of contacts
+        # Retrieve a batch of contacts by ID (&#x60;contactId&#x60;) or unique property value (&#x60;idProperty&#x60;). 
         # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
         # @param [Hash] opts the optional parameters
         # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -222,7 +228,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Update a batch of contacts by internal ID, or unique property values
+        # Update a batch of contacts
+        # Update a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicObject]
@@ -231,7 +238,8 @@ module Hubspot
           data
         end
 
-        # Update a batch of contacts by internal ID, or unique property values
+        # Update a batch of contacts
+        # Update a batch of contacts by ID (&#x60;contactId&#x60;) or unique property value (&#x60;idProperty&#x60;). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
         # @param batch_input_simple_public_object_batch_input [BatchInputSimplePublicObjectBatchInput] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicObject, Integer, Hash)>] BatchResponseSimplePublicObject data, response status code and response headers
@@ -288,8 +296,8 @@ module Hubspot
           return data, status_code, headers
         end
 
-        # Create or update a batch of contacts by unique property values
-        # Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+        # Create or update a batch of contacts
+        # Upsert a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record.
         # @param batch_input_simple_public_object_batch_input_upsert [BatchInputSimplePublicObjectBatchInputUpsert] 
         # @param [Hash] opts the optional parameters
         # @return [BatchResponseSimplePublicUpsertObject]
@@ -298,8 +306,8 @@ module Hubspot
           data
         end
 
-        # Create or update a batch of contacts by unique property values
-        # Create or update records identified by a unique property value as specified by the &#x60;idProperty&#x60; query param. &#x60;idProperty&#x60; query param refers to a property whose values are unique for the object.
+        # Create or update a batch of contacts
+        # Upsert a batch of contacts. The &#x60;inputs&#x60; array can contain a &#x60;properties&#x60; object to define property values for each record.
         # @param batch_input_simple_public_object_batch_input_upsert [BatchInputSimplePublicObjectBatchInputUpsert] 
         # @param [Hash] opts the optional parameters
         # @return [Array<(BatchResponseSimplePublicUpsertObject, Integer, Hash)>] BatchResponseSimplePublicUpsertObject data, response status code and response headers
