@@ -16,40 +16,19 @@ require 'time'
 module Hubspot
   module Crm
     module Companies
-      class AssociationSpec
-        # For [labeled associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#associate-records-with-a-label), the category of the association.
-        attr_accessor :association_category
+      class SimplePublicObjectBatchInputForCreate
+        attr_accessor :associations
 
-        # The [association type ID](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values) (e.g., `4` for contact-to-company associations).
-        attr_accessor :association_type_id
+        attr_accessor :object_write_trace_id
 
-        class EnumAttributeValidator
-          attr_reader :datatype
-          attr_reader :allowable_values
-
-          def initialize(datatype, allowable_values)
-            @allowable_values = allowable_values.map do |value|
-              case datatype.to_s
-              when /Integer/i
-                value.to_i
-              when /Float/i
-                value.to_f
-              else
-                value
-              end
-            end
-          end
-
-          def valid?(value)
-            !value || allowable_values.include?(value)
-          end
-        end
+        attr_accessor :properties
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'association_category' => :'associationCategory',
-            :'association_type_id' => :'associationTypeId'
+            :'associations' => :'associations',
+            :'object_write_trace_id' => :'objectWriteTraceId',
+            :'properties' => :'properties'
           }
         end
 
@@ -61,8 +40,9 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'association_category' => :'String',
-            :'association_type_id' => :'Integer'
+            :'associations' => :'Array<PublicAssociationsForObject>',
+            :'object_write_trace_id' => :'String',
+            :'properties' => :'Hash<String, String>'
           }
         end
 
@@ -76,23 +56,31 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Companies::AssociationSpec` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Companies::SimplePublicObjectBatchInputForCreate` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Companies::AssociationSpec`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Companies::SimplePublicObjectBatchInputForCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'association_category')
-            self.association_category = attributes[:'association_category']
+          if attributes.key?(:'associations')
+            if (value = attributes[:'associations']).is_a?(Array)
+              self.associations = value
+            end
           end
 
-          if attributes.key?(:'association_type_id')
-            self.association_type_id = attributes[:'association_type_id']
+          if attributes.key?(:'object_write_trace_id')
+            self.object_write_trace_id = attributes[:'object_write_trace_id']
+          end
+
+          if attributes.key?(:'properties')
+            if (value = attributes[:'properties']).is_a?(Hash)
+              self.properties = value
+            end
           end
         end
 
@@ -100,12 +88,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @association_category.nil?
-            invalid_properties.push('invalid value for "association_category", association_category cannot be nil.')
-          end
-
-          if @association_type_id.nil?
-            invalid_properties.push('invalid value for "association_type_id", association_type_id cannot be nil.')
+          if @properties.nil?
+            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
           end
 
           invalid_properties
@@ -114,21 +98,8 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @association_category.nil?
-          association_category_validator = EnumAttributeValidator.new('String', ["HUBSPOT_DEFINED", "USER_DEFINED", "INTEGRATOR_DEFINED"])
-          return false unless association_category_validator.valid?(@association_category)
-          return false if @association_type_id.nil?
+          return false if @properties.nil?
           true
-        end
-
-        # Custom attribute writer method checking allowed values (enum).
-        # @param [Object] association_category Object to be assigned
-        def association_category=(association_category)
-          validator = EnumAttributeValidator.new('String', ["HUBSPOT_DEFINED", "USER_DEFINED", "INTEGRATOR_DEFINED"])
-          unless validator.valid?(association_category)
-            fail ArgumentError, "invalid value for \"association_category\", must be one of #{validator.allowable_values}."
-          end
-          @association_category = association_category
         end
 
         # Checks equality by comparing each attribute.
@@ -136,8 +107,9 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              association_category == o.association_category &&
-              association_type_id == o.association_type_id
+              associations == o.associations &&
+              object_write_trace_id == o.object_write_trace_id &&
+              properties == o.properties
         end
 
         # @see the `==` method
@@ -149,7 +121,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [association_category, association_type_id].hash
+          [associations, object_write_trace_id, properties].hash
         end
 
         # Builds the object from hash
