@@ -17,6 +17,7 @@ module Hubspot
     module Objects
       module FeedbackSubmissions
         class BasicApi
+          require 'hubspot/helpers/get_all_helper'
           include Hubspot::Helpers::GetAllHelper
 
           attr_accessor :api_client
@@ -32,7 +33,7 @@ module Hubspot
           # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
           # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-          # @option opts [String] :id_property The name of a property whose values are unique for this object type
+          # @option opts [String] :id_property The name of a property whose values are unique for this object
           # @return [SimplePublicObjectWithAssociations]
           def get_by_id(feedback_submission_id, opts = {})
             data, _status_code, _headers = get_by_id_with_http_info(feedback_submission_id, opts)
@@ -47,7 +48,7 @@ module Hubspot
           # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
           # @option opts [Array<String>] :associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
-          # @option opts [String] :id_property The name of a property whose values are unique for this object type
+          # @option opts [String] :id_property The name of a property whose values are unique for this object
           # @return [Array<(SimplePublicObjectWithAssociations, Integer, Hash)>] SimplePublicObjectWithAssociations data, response status code and response headers
           def get_by_id_with_http_info(feedback_submission_id, opts = {})
             if @api_client.config.debugging
