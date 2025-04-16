@@ -13,14 +13,16 @@ OpenAPI Generator version: 6.2.1
 require 'cgi'
 
 module Hubspot
-  module OAuth
+  module Oauth
     class RefreshTokensApi
       attr_accessor :api_client
 
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # @param token [String] 
+      # Delete a refresh token
+      # Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
+      # @param token [String] The refresh token to delete.
       # @param [Hash] opts the optional parameters
       # @return [nil]
       def archive(token, opts = {})
@@ -28,7 +30,9 @@ module Hubspot
         nil
       end
 
-      # @param token [String] 
+      # Delete a refresh token
+      # Delete a refresh token, typically after a user uninstalls your app. Access tokens generated with the refresh token will not be affected.  This will not uninstall the application from HubSpot or inhibit data syncing between an account and the app.
+      # @param token [String] The refresh token to delete.
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def archive_with_http_info(token, opts = {})
@@ -79,7 +83,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param token [String] 
+      # Retrieve refresh token metadata
+      # Retrieve a refresh token's metadata, including the email address of the user that the token was created for and the ID of the account it's associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
+      # @param token [String] The refresh token to retrieve information about.
       # @param [Hash] opts the optional parameters
       # @return [RefreshTokenInfoResponse]
       def get(token, opts = {})
@@ -87,7 +93,9 @@ module Hubspot
         data
       end
 
-      # @param token [String] 
+      # Retrieve refresh token metadata
+      # Retrieve a refresh token&#39;s metadata, including the email address of the user that the token was created for and the ID of the account it&#39;s associated with. Learn more about [refresh tokens](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#generate-initial-access-and-refresh-tokens).
+      # @param token [String] The refresh token to retrieve information about.
       # @param [Hash] opts the optional parameters
       # @return [Array<(RefreshTokenInfoResponse, Integer, Hash)>] RefreshTokenInfoResponse data, response status code and response headers
       def get_with_http_info(token, opts = {})

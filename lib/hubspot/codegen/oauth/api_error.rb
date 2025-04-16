@@ -11,7 +11,7 @@ OpenAPI Generator version: 6.2.1
 =end
 
 module Hubspot
-  module OAuth
+  module Oauth
     class ApiError < ::StandardError
       attr_reader :code, :response_headers, :response_body
 

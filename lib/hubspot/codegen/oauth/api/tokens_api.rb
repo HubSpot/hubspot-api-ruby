@@ -13,13 +13,15 @@ OpenAPI Generator version: 6.2.1
 require 'cgi'
 
 module Hubspot
-  module OAuth
+  module Oauth
     class TokensApi
       attr_accessor :api_client
 
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
+      # Refresh an access token
+      # Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that's encoded in them changes over time. It's recommended to allow for tokens to be up to 300 characters to account for any potential changes.
       # @param [Hash] opts the optional parameters
       # @option opts [String] :grant_type 
       # @option opts [String] :code 
@@ -33,6 +35,8 @@ module Hubspot
         data
       end
 
+      # Refresh an access token
+      # Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the &#x60;expires_in&#x60; parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that&#39;s encoded in them changes over time. It&#39;s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
       # @param [Hash] opts the optional parameters
       # @option opts [String] :grant_type 
       # @option opts [String] :code 
