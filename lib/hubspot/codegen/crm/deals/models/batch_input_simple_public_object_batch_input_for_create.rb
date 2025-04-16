@@ -16,24 +16,13 @@ require 'time'
 module Hubspot
   module Crm
     module Deals
-      class SimplePublicObjectBatchInput
-        # The name of a property whose values are unique for this object
-        attr_accessor :id_property
-
-        attr_accessor :object_write_trace_id
-
-        # The id to be updated. This can be the object id, or the unique property value of the idProperty property
-        attr_accessor :id
-
-        attr_accessor :properties
+      class BatchInputSimplePublicObjectBatchInputForCreate
+        attr_accessor :inputs
 
         # Attribute mapping from ruby-style variable name to JSON key.
         def self.attribute_map
           {
-            :'id_property' => :'idProperty',
-            :'object_write_trace_id' => :'objectWriteTraceId',
-            :'id' => :'id',
-            :'properties' => :'properties'
+            :'inputs' => :'inputs'
           }
         end
 
@@ -45,10 +34,7 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'id_property' => :'String',
-            :'object_write_trace_id' => :'String',
-            :'id' => :'String',
-            :'properties' => :'Hash<String, String>'
+            :'inputs' => :'Array<SimplePublicObjectBatchInputForCreate>'
           }
         end
 
@@ -62,32 +48,20 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Deals::SimplePublicObjectBatchInput` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Deals::BatchInputSimplePublicObjectBatchInputForCreate` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Deals::SimplePublicObjectBatchInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Deals::BatchInputSimplePublicObjectBatchInputForCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
 
-          if attributes.key?(:'id_property')
-            self.id_property = attributes[:'id_property']
-          end
-
-          if attributes.key?(:'object_write_trace_id')
-            self.object_write_trace_id = attributes[:'object_write_trace_id']
-          end
-
-          if attributes.key?(:'id')
-            self.id = attributes[:'id']
-          end
-
-          if attributes.key?(:'properties')
-            if (value = attributes[:'properties']).is_a?(Hash)
-              self.properties = value
+          if attributes.key?(:'inputs')
+            if (value = attributes[:'inputs']).is_a?(Array)
+              self.inputs = value
             end
           end
         end
@@ -96,12 +70,8 @@ module Hubspot
         # @return Array for valid properties with the reasons
         def list_invalid_properties
           invalid_properties = Array.new
-          if @id.nil?
-            invalid_properties.push('invalid value for "id", id cannot be nil.')
-          end
-
-          if @properties.nil?
-            invalid_properties.push('invalid value for "properties", properties cannot be nil.')
+          if @inputs.nil?
+            invalid_properties.push('invalid value for "inputs", inputs cannot be nil.')
           end
 
           invalid_properties
@@ -110,8 +80,7 @@ module Hubspot
         # Check to see if the all the properties in the model are valid
         # @return true if the model is valid
         def valid?
-          return false if @id.nil?
-          return false if @properties.nil?
+          return false if @inputs.nil?
           true
         end
 
@@ -120,10 +89,7 @@ module Hubspot
         def ==(o)
           return true if self.equal?(o)
           self.class == o.class &&
-              id_property == o.id_property &&
-              object_write_trace_id == o.object_write_trace_id &&
-              id == o.id &&
-              properties == o.properties
+              inputs == o.inputs
         end
 
         # @see the `==` method
@@ -135,7 +101,7 @@ module Hubspot
         # Calculates hash code according to all attributes.
         # @return [Integer] Hash code
         def hash
-          [id_property, object_write_trace_id, id, properties].hash
+          [inputs].hash
         end
 
         # Builds the object from hash
