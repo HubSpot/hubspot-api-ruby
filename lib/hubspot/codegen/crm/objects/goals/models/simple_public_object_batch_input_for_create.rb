@@ -17,12 +17,18 @@ module Hubspot
   module Crm
     module Objects
       module Goals
-        class SimplePublicObjectInput
+        class SimplePublicObjectBatchInputForCreate
+          attr_accessor :associations
+
+          attr_accessor :object_write_trace_id
+
           attr_accessor :properties
 
           # Attribute mapping from ruby-style variable name to JSON key.
           def self.attribute_map
             {
+              :'associations' => :'associations',
+              :'object_write_trace_id' => :'objectWriteTraceId',
               :'properties' => :'properties'
             }
           end
@@ -35,6 +41,8 @@ module Hubspot
           # Attribute type mapping.
           def self.openapi_types
             {
+              :'associations' => :'Array<PublicAssociationsForObject>',
+              :'object_write_trace_id' => :'String',
               :'properties' => :'Hash<String, String>'
             }
           end
@@ -49,16 +57,26 @@ module Hubspot
           # @param [Hash] attributes Model attributes in the form of hash
           def initialize(attributes = {})
             if (!attributes.is_a?(Hash))
-              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::Goals::SimplePublicObjectInput` initialize method"
+              fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Objects::Goals::SimplePublicObjectBatchInputForCreate` initialize method"
             end
 
             # check to see if the attribute exists and convert string to symbol for hash key
             attributes = attributes.each_with_object({}) { |(k, v), h|
               if (!self.class.attribute_map.key?(k.to_sym))
-                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::Goals::SimplePublicObjectInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+                fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Objects::Goals::SimplePublicObjectBatchInputForCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
               end
               h[k.to_sym] = v
             }
+
+            if attributes.key?(:'associations')
+              if (value = attributes[:'associations']).is_a?(Array)
+                self.associations = value
+              end
+            end
+
+            if attributes.key?(:'object_write_trace_id')
+              self.object_write_trace_id = attributes[:'object_write_trace_id']
+            end
 
             if attributes.key?(:'properties')
               if (value = attributes[:'properties']).is_a?(Hash)
@@ -90,6 +108,8 @@ module Hubspot
           def ==(o)
             return true if self.equal?(o)
             self.class == o.class &&
+                associations == o.associations &&
+                object_write_trace_id == o.object_write_trace_id &&
                 properties == o.properties
           end
 
@@ -102,7 +122,7 @@ module Hubspot
           # Calculates hash code according to all attributes.
           # @return [Integer] Hash code
           def hash
-            [properties].hash
+            [associations, object_write_trace_id, properties].hash
           end
 
           # Builds the object from hash
