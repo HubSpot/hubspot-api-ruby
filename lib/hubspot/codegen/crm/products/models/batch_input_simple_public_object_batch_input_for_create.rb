@@ -16,7 +16,7 @@ require 'time'
 module Hubspot
   module Crm
     module Products
-      class BatchInputSimplePublicObjectInputForCreate
+      class BatchInputSimplePublicObjectBatchInputForCreate
         attr_accessor :inputs
 
         # Attribute mapping from ruby-style variable name to JSON key.
@@ -34,7 +34,7 @@ module Hubspot
         # Attribute type mapping.
         def self.openapi_types
           {
-            :'inputs' => :'Array<SimplePublicObjectInputForCreate>'
+            :'inputs' => :'Array<SimplePublicObjectBatchInputForCreate>'
           }
         end
 
@@ -48,13 +48,13 @@ module Hubspot
         # @param [Hash] attributes Model attributes in the form of hash
         def initialize(attributes = {})
           if (!attributes.is_a?(Hash))
-            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Products::BatchInputSimplePublicObjectInputForCreate` initialize method"
+            fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Crm::Products::BatchInputSimplePublicObjectBatchInputForCreate` initialize method"
           end
 
           # check to see if the attribute exists and convert string to symbol for hash key
           attributes = attributes.each_with_object({}) { |(k, v), h|
             if (!self.class.attribute_map.key?(k.to_sym))
-              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Products::BatchInputSimplePublicObjectInputForCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+              fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Crm::Products::BatchInputSimplePublicObjectBatchInputForCreate`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
             end
             h[k.to_sym] = v
           }
