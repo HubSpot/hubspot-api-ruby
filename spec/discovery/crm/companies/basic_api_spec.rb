@@ -7,5 +7,6 @@ describe 'Hubspot::Discovery::Crm::Companies::BasicApi' do
   it { is_expected.to respond_to(:create) }
   it { is_expected.to respond_to(:get_by_id) }
   it { is_expected.to respond_to(:get_page) }
+  it { is_expected.to respond_to(:merge) }
   it { is_expected.to respond_to(:update) }
 end
