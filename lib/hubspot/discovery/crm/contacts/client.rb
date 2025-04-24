@@ -11,8 +11,6 @@ module Hubspot
             %i[
               basic
               batch
-              gdpr
-              merge
               search
             ].freeze
           end
