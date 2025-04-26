@@ -7,7 +7,8 @@ module Hubspot
         class Client
           include Hubspot::Discovery::BaseModuleClient
 
-          def api_classes 
+          def api_classes
+            warn "[DEPRECATION] `public_performance` is deprecated."
             %i[
               public_performance
             ].freeze
