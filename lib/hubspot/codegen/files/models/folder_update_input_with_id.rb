@@ -15,43 +15,19 @@ require 'time'
 
 module Hubspot
   module Files
-    # Signed Url object with optional ancillary metadata of requested file
-    class SignedUrl
-      # Extension of the requested file.
-      attr_accessor :extension
+    class FolderUpdateInputWithId
+      attr_accessor :parent_folder_id
 
-      # Size in bytes of the requested file.
-      attr_accessor :size
-
-      # Name of the requested file.
       attr_accessor :name
 
-      # For image and video files. The width of the file.
-      attr_accessor :width
-
-      # Type of the file. Can be IMG, DOCUMENT, AUDIO, MOVIE, or OTHER.
-      attr_accessor :type
-
-      # Signed URL with access to the specified file. Anyone with this URL will be able to access the file until it expires.
-      attr_accessor :url
-
-      # Timestamp of when the URL will no longer grant access to the file.
-      attr_accessor :expires_at
-
-      # For image and video files. The height of the file.
-      attr_accessor :height
+      attr_accessor :id
 
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
-          :'extension' => :'extension',
-          :'size' => :'size',
+          :'parent_folder_id' => :'parentFolderId',
           :'name' => :'name',
-          :'width' => :'width',
-          :'type' => :'type',
-          :'url' => :'url',
-          :'expires_at' => :'expiresAt',
-          :'height' => :'height'
+          :'id' => :'id'
         }
       end
 
@@ -63,14 +39,9 @@ module Hubspot
       # Attribute type mapping.
       def self.openapi_types
         {
-          :'extension' => :'String',
-          :'size' => :'Integer',
+          :'parent_folder_id' => :'Integer',
           :'name' => :'String',
-          :'width' => :'Integer',
-          :'type' => :'String',
-          :'url' => :'String',
-          :'expires_at' => :'Time',
-          :'height' => :'Integer'
+          :'id' => :'String'
         }
       end
 
@@ -84,47 +55,27 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Files::SignedUrl` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Files::FolderUpdateInputWithId` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Files::SignedUrl`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Files::FolderUpdateInputWithId`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
 
-        if attributes.key?(:'extension')
-          self.extension = attributes[:'extension']
-        end
-
-        if attributes.key?(:'size')
-          self.size = attributes[:'size']
+        if attributes.key?(:'parent_folder_id')
+          self.parent_folder_id = attributes[:'parent_folder_id']
         end
 
         if attributes.key?(:'name')
           self.name = attributes[:'name']
         end
 
-        if attributes.key?(:'width')
-          self.width = attributes[:'width']
-        end
-
-        if attributes.key?(:'type')
-          self.type = attributes[:'type']
-        end
-
-        if attributes.key?(:'url')
-          self.url = attributes[:'url']
-        end
-
-        if attributes.key?(:'expires_at')
-          self.expires_at = attributes[:'expires_at']
-        end
-
-        if attributes.key?(:'height')
-          self.height = attributes[:'height']
+        if attributes.key?(:'id')
+          self.id = attributes[:'id']
         end
       end
 
@@ -132,28 +83,8 @@ module Hubspot
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @extension.nil?
-          invalid_properties.push('invalid value for "extension", extension cannot be nil.')
-        end
-
-        if @size.nil?
-          invalid_properties.push('invalid value for "size", size cannot be nil.')
-        end
-
-        if @name.nil?
-          invalid_properties.push('invalid value for "name", name cannot be nil.')
-        end
-
-        if @type.nil?
-          invalid_properties.push('invalid value for "type", type cannot be nil.')
-        end
-
-        if @url.nil?
-          invalid_properties.push('invalid value for "url", url cannot be nil.')
-        end
-
-        if @expires_at.nil?
-          invalid_properties.push('invalid value for "expires_at", expires_at cannot be nil.')
+        if @id.nil?
+          invalid_properties.push('invalid value for "id", id cannot be nil.')
         end
 
         invalid_properties
@@ -162,12 +93,7 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @extension.nil?
-        return false if @size.nil?
-        return false if @name.nil?
-        return false if @type.nil?
-        return false if @url.nil?
-        return false if @expires_at.nil?
+        return false if @id.nil?
         true
       end
 
@@ -176,14 +102,9 @@ module Hubspot
       def ==(o)
         return true if self.equal?(o)
         self.class == o.class &&
-            extension == o.extension &&
-            size == o.size &&
+            parent_folder_id == o.parent_folder_id &&
             name == o.name &&
-            width == o.width &&
-            type == o.type &&
-            url == o.url &&
-            expires_at == o.expires_at &&
-            height == o.height
+            id == o.id
       end
 
       # @see the `==` method
@@ -195,7 +116,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [extension, size, name, width, type, url, expires_at, height].hash
+        [parent_folder_id, name, id].hash
       end
 
       # Builds the object from hash

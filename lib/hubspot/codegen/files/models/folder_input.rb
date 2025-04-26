@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Files
+    # Object for creating a folder.
     class FolderInput
       # FolderId of the parent of the created folder. If not specified, the folder will be created at the root level. parentFolderId and parentFolderPath cannot be set at the same time.
       attr_accessor :parent_folder_id

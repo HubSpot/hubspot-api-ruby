@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Files
+    # Object for updating files.
     class FileUpdateInput
       # NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
       attr_accessor :access
@@ -27,6 +28,8 @@ module Hubspot
 
       # Folder path where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
       attr_accessor :parent_folder_path
+
+      attr_accessor :clear_expires
 
       # Mark whether the file should be used in new content or not.
       attr_accessor :is_usable_in_content
@@ -62,6 +65,7 @@ module Hubspot
           :'parent_folder_id' => :'parentFolderId',
           :'name' => :'name',
           :'parent_folder_path' => :'parentFolderPath',
+          :'clear_expires' => :'clearExpires',
           :'is_usable_in_content' => :'isUsableInContent',
           :'expires_at' => :'expiresAt'
         }
@@ -79,8 +83,9 @@ module Hubspot
           :'parent_folder_id' => :'String',
           :'name' => :'String',
           :'parent_folder_path' => :'String',
+          :'clear_expires' => :'Boolean',
           :'is_usable_in_content' => :'Boolean',
-          :'expires_at' => :'Integer'
+          :'expires_at' => :'Time'
         }
       end
 
@@ -121,6 +126,10 @@ module Hubspot
           self.parent_folder_path = attributes[:'parent_folder_path']
         end
 
+        if attributes.key?(:'clear_expires')
+          self.clear_expires = attributes[:'clear_expires']
+        end
+
         if attributes.key?(:'is_usable_in_content')
           self.is_usable_in_content = attributes[:'is_usable_in_content']
         end
@@ -140,7 +149,7 @@ module Hubspot
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE", "HIDDEN_SENSITIVE", "SENSITIVE"])
         return false unless access_validator.valid?(@access)
         true
       end
@@ -148,7 +157,7 @@ module Hubspot
       # Custom attribute writer method checking allowed values (enum).
       # @param [Object] access Object to be assigned
       def access=(access)
-        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE", "HIDDEN_SENSITIVE", "SENSITIVE"])
         unless validator.valid?(access)
           fail ArgumentError, "invalid value for \"access\", must be one of #{validator.allowable_values}."
         end
@@ -164,6 +173,7 @@ module Hubspot
             parent_folder_id == o.parent_folder_id &&
             name == o.name &&
             parent_folder_path == o.parent_folder_path &&
+            clear_expires == o.clear_expires &&
             is_usable_in_content == o.is_usable_in_content &&
             expires_at == o.expires_at
       end
@@ -177,7 +187,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [access, parent_folder_id, name, parent_folder_path, is_usable_in_content, expires_at].hash
+        [access, parent_folder_id, name, parent_folder_path, clear_expires, is_usable_in_content, expires_at].hash
       end
 
       # Builds the object from hash
