@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -20,7 +20,7 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # Delete folder.
+      # Delete folder by ID
       # Delete folder by ID.
       # @param folder_id [String] ID of folder to delete.
       # @param [Hash] opts the optional parameters
@@ -30,7 +30,7 @@ module Hubspot
         nil
       end
 
-      # Delete folder.
+      # Delete folder by ID
       # Delete folder by ID.
       # @param folder_id [String] ID of folder to delete.
       # @param [Hash] opts the optional parameters
@@ -88,8 +88,8 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Delete folder.
-      # Delete folder by path.
+      # Delete folder by path
+      # Delete a folder, identified by its path.
       # @param folder_path [String] Path of folder to delete
       # @param [Hash] opts the optional parameters
       # @return [nil]
@@ -98,8 +98,8 @@ module Hubspot
         nil
       end
 
-      # Delete folder.
-      # Delete folder by path.
+      # Delete folder by path
+      # Delete a folder, identified by its path.
       # @param folder_path [String] Path of folder to delete
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -156,9 +156,9 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Check folder update status.
+      # Check folder update status
       # Check status of folder update. Folder updates happen asynchronously.
-      # @param task_id [String] TaskId of folder update
+      # @param task_id [String] The ID of the folder update task.
       # @param [Hash] opts the optional parameters
       # @return [FolderActionResponse]
       def check_update_status(task_id, opts = {})
@@ -166,9 +166,9 @@ module Hubspot
         data
       end
 
-      # Check folder update status.
+      # Check folder update status
       # Check status of folder update. Folder updates happen asynchronously.
-      # @param task_id [String] TaskId of folder update
+      # @param task_id [String] The ID of the folder update task.
       # @param [Hash] opts the optional parameters
       # @return [Array<(FolderActionResponse, Integer, Hash)>] FolderActionResponse data, response status code and response headers
       def check_update_status_with_http_info(task_id, opts = {})
@@ -219,7 +219,7 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Create folder.
+      # Create folder
       # Creates a folder.
       # @param folder_input [FolderInput] Folder creation options
       # @param [Hash] opts the optional parameters
@@ -229,7 +229,7 @@ module Hubspot
         data
       end
 
-      # Create folder.
+      # Create folder
       # Creates a folder.
       # @param folder_input [FolderInput] Folder creation options
       # @param [Hash] opts the optional parameters
@@ -291,20 +291,22 @@ module Hubspot
       # Search for folders. Does not contain hidden or archived folders.
       # @param [Hash] opts the optional parameters
       # @option opts [Array<String>] :properties Properties that should be included in the returned folders.
-      # @option opts [String] :after The maximum offset of items for a given search is 10000. Narrow your search down if you are reaching this limit.
+      # @option opts [String] :after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000. Narrow your search down if you are reaching this limit.
       # @option opts [String] :before 
-      # @option opts [Integer] :limit Limit of results to return. Max limit is 100.
+      # @option opts [Integer] :limit Number of items to return. Default limit is 10, maximum limit is 100.
       # @option opts [Array<String>] :sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
-      # @option opts [String] :id Search folder by given ID.
-      # @option opts [Time] :created_at Search for folders with the given creation timestamp.
-      # @option opts [Time] :created_at_lte 
-      # @option opts [Time] :created_at_gte 
-      # @option opts [Time] :updated_at Search for folder at given update timestamp.
-      # @option opts [Time] :updated_at_lte 
-      # @option opts [Time] :updated_at_gte 
+      # @option opts [Array<Integer>] :ids 
+      # @option opts [Integer] :id_lte 
+      # @option opts [Integer] :id_gte 
+      # @option opts [Time] :created_at Search folders by exact time of creation. Time must be epoch time in milliseconds.
+      # @option opts [Time] :created_at_lte Search folders by less than or equal to time of creation. Can be used with createdAtGte to create a range.
+      # @option opts [Time] :created_at_gte Search folders by greater than or equal to time of creation. Can be used with createdAtLte to create a range.
+      # @option opts [Time] :updated_at Search folders by exact time of latest updated. Time must be epoch time in milliseconds.
+      # @option opts [Time] :updated_at_lte Search folders by less than or equal to time of latest update. Can be used with updatedAtGte to create a range.
+      # @option opts [Time] :updated_at_gte Search folders by greater than or equal to time of latest update. Can be used with updatedAtLte to create a range.
       # @option opts [String] :name Search for folders containing the specified name.
-      # @option opts [String] :path Search for folders by path.
-      # @option opts [Integer] :parent_folder_id Search for folders with the given parent folderId.
+      # @option opts [String] :path Search folders by path.
+      # @option opts [Array<Integer>] :parent_folder_ids Search folders with the given parent folderId.
       # @return [CollectionResponseFolder]
       def do_search(opts = {})
         data, _status_code, _headers = do_search_with_http_info(opts)
@@ -315,20 +317,22 @@ module Hubspot
       # Search for folders. Does not contain hidden or archived folders.
       # @param [Hash] opts the optional parameters
       # @option opts [Array<String>] :properties Properties that should be included in the returned folders.
-      # @option opts [String] :after The maximum offset of items for a given search is 10000. Narrow your search down if you are reaching this limit.
+      # @option opts [String] :after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000. Narrow your search down if you are reaching this limit.
       # @option opts [String] :before 
-      # @option opts [Integer] :limit Limit of results to return. Max limit is 100.
+      # @option opts [Integer] :limit Number of items to return. Default limit is 10, maximum limit is 100.
       # @option opts [Array<String>] :sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
-      # @option opts [String] :id Search folder by given ID.
-      # @option opts [Time] :created_at Search for folders with the given creation timestamp.
-      # @option opts [Time] :created_at_lte 
-      # @option opts [Time] :created_at_gte 
-      # @option opts [Time] :updated_at Search for folder at given update timestamp.
-      # @option opts [Time] :updated_at_lte 
-      # @option opts [Time] :updated_at_gte 
+      # @option opts [Array<Integer>] :ids 
+      # @option opts [Integer] :id_lte 
+      # @option opts [Integer] :id_gte 
+      # @option opts [Time] :created_at Search folders by exact time of creation. Time must be epoch time in milliseconds.
+      # @option opts [Time] :created_at_lte Search folders by less than or equal to time of creation. Can be used with createdAtGte to create a range.
+      # @option opts [Time] :created_at_gte Search folders by greater than or equal to time of creation. Can be used with createdAtLte to create a range.
+      # @option opts [Time] :updated_at Search folders by exact time of latest updated. Time must be epoch time in milliseconds.
+      # @option opts [Time] :updated_at_lte Search folders by less than or equal to time of latest update. Can be used with updatedAtGte to create a range.
+      # @option opts [Time] :updated_at_gte Search folders by greater than or equal to time of latest update. Can be used with updatedAtLte to create a range.
       # @option opts [String] :name Search for folders containing the specified name.
-      # @option opts [String] :path Search for folders by path.
-      # @option opts [Integer] :parent_folder_id Search for folders with the given parent folderId.
+      # @option opts [String] :path Search folders by path.
+      # @option opts [Array<Integer>] :parent_folder_ids Search folders with the given parent folderId.
       # @return [Array<(CollectionResponseFolder, Integer, Hash)>] CollectionResponseFolder data, response status code and response headers
       def do_search_with_http_info(opts = {})
         if @api_client.config.debugging
@@ -344,7 +348,9 @@ module Hubspot
         query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
         query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
         query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
-        query_params[:'id'] = opts[:'id'] if !opts[:'id'].nil?
+        query_params[:'ids'] = @api_client.build_collection_param(opts[:'ids'], :multi) if !opts[:'ids'].nil?
+        query_params[:'idLte'] = opts[:'id_lte'] if !opts[:'id_lte'].nil?
+        query_params[:'idGte'] = opts[:'id_gte'] if !opts[:'id_gte'].nil?
         query_params[:'createdAt'] = opts[:'created_at'] if !opts[:'created_at'].nil?
         query_params[:'createdAtLte'] = opts[:'created_at_lte'] if !opts[:'created_at_lte'].nil?
         query_params[:'createdAtGte'] = opts[:'created_at_gte'] if !opts[:'created_at_gte'].nil?
@@ -353,7 +359,7 @@ module Hubspot
         query_params[:'updatedAtGte'] = opts[:'updated_at_gte'] if !opts[:'updated_at_gte'].nil?
         query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
         query_params[:'path'] = opts[:'path'] if !opts[:'path'].nil?
-        query_params[:'parentFolderId'] = opts[:'parent_folder_id'] if !opts[:'parent_folder_id'].nil?
+        query_params[:'parentFolderIds'] = @api_client.build_collection_param(opts[:'parent_folder_ids'], :multi) if !opts[:'parent_folder_ids'].nil?
 
         # header parameters
         header_params = opts[:header_params] || {}
@@ -389,8 +395,8 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get folder
-      # Get folder by ID
+      # Retrieve folder by ID
+      # Retrieve a folder by its ID.
       # @param folder_id [String] ID of desired folder
       # @param [Hash] opts the optional parameters
       # @option opts [Array<String>] :properties Properties to set on returned folder.
@@ -400,8 +406,8 @@ module Hubspot
         data
       end
 
-      # Get folder
-      # Get folder by ID
+      # Retrieve folder by ID
+      # Retrieve a folder by its ID.
       # @param folder_id [String] ID of desired folder
       # @param [Hash] opts the optional parameters
       # @option opts [Array<String>] :properties Properties to set on returned folder.
@@ -460,8 +466,8 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get folder.
-      # Get folder by path.
+      # Retrieve folder by path
+      # Retrieve a folder, identified by its path.
       # @param folder_path [String] Path of desired folder.
       # @param [Hash] opts the optional parameters
       # @option opts [Array<String>] :properties Properties to set on returned folder.
@@ -471,8 +477,8 @@ module Hubspot
         data
       end
 
-      # Get folder.
-      # Get folder by path.
+      # Retrieve folder by path
+      # Retrieve a folder, identified by its path.
       # @param folder_path [String] Path of desired folder.
       # @param [Hash] opts the optional parameters
       # @option opts [Array<String>] :properties Properties to set on returned folder.
@@ -531,31 +537,42 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Update folder properties
-      # Update properties of folder by given ID. This action happens asynchronously and will update all of the folder's children as well.
-      # @param folder_update_input [FolderUpdateInput] Properties to change in the folder
+      # Update folder properties by folder ID
+      # Update a folder's properties, identified by folder ID.
+      # @param folder_id [String] ID of folder to update
+      # @param folder_update_input [FolderUpdateInput] 
       # @param [Hash] opts the optional parameters
-      # @return [FolderUpdateTaskLocator]
-      def update_properties(folder_update_input, opts = {})
-        data, _status_code, _headers = update_properties_with_http_info(folder_update_input, opts)
+      # @return [Folder]
+      def update_properties(folder_id, folder_update_input, opts = {})
+        data, _status_code, _headers = update_properties_with_http_info(folder_id, folder_update_input, opts)
         data
       end
 
-      # Update folder properties
-      # Update properties of folder by given ID. This action happens asynchronously and will update all of the folder&#39;s children as well.
-      # @param folder_update_input [FolderUpdateInput] Properties to change in the folder
+      # Update folder properties by folder ID
+      # Update a folder&#39;s properties, identified by folder ID.
+      # @param folder_id [String] ID of folder to update
+      # @param folder_update_input [FolderUpdateInput] 
       # @param [Hash] opts the optional parameters
-      # @return [Array<(FolderUpdateTaskLocator, Integer, Hash)>] FolderUpdateTaskLocator data, response status code and response headers
-      def update_properties_with_http_info(folder_update_input, opts = {})
+      # @return [Array<(Folder, Integer, Hash)>] Folder data, response status code and response headers
+      def update_properties_with_http_info(folder_id, folder_update_input, opts = {})
         if @api_client.config.debugging
           @api_client.config.logger.debug 'Calling API: FoldersApi.update_properties ...'
         end
+        # verify the required parameter 'folder_id' is set
+        if @api_client.config.client_side_validation && folder_id.nil?
+          fail ArgumentError, "Missing the required parameter 'folder_id' when calling FoldersApi.update_properties"
+        end
+        pattern = Regexp.new(/\d+/)
+        if @api_client.config.client_side_validation && folder_id !~ pattern
+          fail ArgumentError, "invalid value for 'folder_id' when calling FoldersApi.update_properties, must conform to the pattern #{pattern}."
+        end
+
         # verify the required parameter 'folder_update_input' is set
         if @api_client.config.client_side_validation && folder_update_input.nil?
           fail ArgumentError, "Missing the required parameter 'folder_update_input' when calling FoldersApi.update_properties"
         end
         # resource path
-        local_var_path = '/files/v3/folders/update/async'
+        local_var_path = '/files/v3/folders/{folderId}'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
 
         # query parameters
         query_params = opts[:query_params] || {}
@@ -577,7 +594,7 @@ module Hubspot
         post_body = opts[:debug_body] || @api_client.object_to_http_body(folder_update_input)
 
         # return_type
-        return_type = opts[:debug_return_type] || 'FolderUpdateTaskLocator'
+        return_type = opts[:debug_return_type] || 'Folder'
 
         # auth_names
         auth_names = opts[:debug_auth_names] || ['oauth2']
@@ -592,9 +609,77 @@ module Hubspot
           :return_type => return_type
         )
 
-        data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+        data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
         if @api_client.config.debugging
           @api_client.config.logger.debug "API called: FoldersApi#update_properties\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        end
+        return data, status_code, headers
+      end
+
+      # Update folder properties
+      # Update properties of folder by given ID. This action happens asynchronously and will update all of the folder's children as well.
+      # @param folder_update_input_with_id [FolderUpdateInputWithId] 
+      # @param [Hash] opts the optional parameters
+      # @return [FolderUpdateTaskLocator]
+      def update_properties_recursively(folder_update_input_with_id, opts = {})
+        data, _status_code, _headers = update_properties_recursively_with_http_info(folder_update_input_with_id, opts)
+        data
+      end
+
+      # Update folder properties
+      # Update properties of folder by given ID. This action happens asynchronously and will update all of the folder&#39;s children as well.
+      # @param folder_update_input_with_id [FolderUpdateInputWithId] 
+      # @param [Hash] opts the optional parameters
+      # @return [Array<(FolderUpdateTaskLocator, Integer, Hash)>] FolderUpdateTaskLocator data, response status code and response headers
+      def update_properties_recursively_with_http_info(folder_update_input_with_id, opts = {})
+        if @api_client.config.debugging
+          @api_client.config.logger.debug 'Calling API: FoldersApi.update_properties_recursively ...'
+        end
+        # verify the required parameter 'folder_update_input_with_id' is set
+        if @api_client.config.client_side_validation && folder_update_input_with_id.nil?
+          fail ArgumentError, "Missing the required parameter 'folder_update_input_with_id' when calling FoldersApi.update_properties_recursively"
+        end
+        # resource path
+        local_var_path = '/files/v3/folders/update/async'
+
+        # query parameters
+        query_params = opts[:query_params] || {}
+
+        # header parameters
+        header_params = opts[:header_params] || {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+
+        # form parameters
+        form_params = opts[:form_params] || {}
+
+        # http body (model)
+        post_body = opts[:debug_body] || @api_client.object_to_http_body(folder_update_input_with_id)
+
+        # return_type
+        return_type = opts[:debug_return_type] || 'FolderUpdateTaskLocator'
+
+        # auth_names
+        auth_names = opts[:debug_auth_names] || ['oauth2']
+
+        new_options = opts.merge(
+          :operation => :"FoldersApi.update_properties_recursively",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        )
+
+        data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+        if @api_client.config.debugging
+          @api_client.config.logger.debug "API called: FoldersApi#update_properties_recursively\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
         end
         return data, status_code, headers
       end

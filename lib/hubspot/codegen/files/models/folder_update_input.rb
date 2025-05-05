@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Files
+    # Object for updating folders.
     class FolderUpdateInput
       # New parent folderId. If changed, the folder and all it's children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
       attr_accessor :parent_folder_id
@@ -22,15 +23,11 @@ module Hubspot
       # New name. If specified the folder's name and fullPath will change. All children of the folder will be updated accordingly.
       attr_accessor :name
 
-      # ID of the folder to change.
-      attr_accessor :id
-
       # Attribute mapping from ruby-style variable name to JSON key.
       def self.attribute_map
         {
           :'parent_folder_id' => :'parentFolderId',
-          :'name' => :'name',
-          :'id' => :'id'
+          :'name' => :'name'
         }
       end
 
@@ -43,8 +40,7 @@ module Hubspot
       def self.openapi_types
         {
           :'parent_folder_id' => :'Integer',
-          :'name' => :'String',
-          :'id' => :'String'
+          :'name' => :'String'
         }
       end
 
@@ -76,27 +72,18 @@ module Hubspot
         if attributes.key?(:'name')
           self.name = attributes[:'name']
         end
-
-        if attributes.key?(:'id')
-          self.id = attributes[:'id']
-        end
       end
 
       # Show invalid properties with the reasons. Usually used together with valid?
       # @return Array for valid properties with the reasons
       def list_invalid_properties
         invalid_properties = Array.new
-        if @id.nil?
-          invalid_properties.push('invalid value for "id", id cannot be nil.')
-        end
-
         invalid_properties
       end
 
       # Check to see if the all the properties in the model are valid
       # @return true if the model is valid
       def valid?
-        return false if @id.nil?
         true
       end
 
@@ -106,8 +93,7 @@ module Hubspot
         return true if self.equal?(o)
         self.class == o.class &&
             parent_folder_id == o.parent_folder_id &&
-            name == o.name &&
-            id == o.id
+            name == o.name
       end
 
       # @see the `==` method
@@ -119,7 +105,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [parent_folder_id, name, id].hash
+        [parent_folder_id, name].hash
       end
 
       # Builds the object from hash

@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Files
+    # Information on the task that has been started, and where to check it's status.
     class ImportFromUrlTaskLocator
       # Links for where to check information related to the task. The `status` link gives the URL for where to check the status of the task.
       attr_accessor :links

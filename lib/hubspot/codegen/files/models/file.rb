@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -15,6 +15,7 @@ require 'time'
 
 module Hubspot
   module Files
+    # File
     class File
       # Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
       attr_accessor :extension
@@ -24,6 +25,10 @@ module Hubspot
 
       # ID of the folder the file is in.
       attr_accessor :parent_folder_id
+
+      attr_accessor :source_group
+
+      attr_accessor :file_md5
 
       # Encoding of the file.
       attr_accessor :encoding
@@ -45,11 +50,11 @@ module Hubspot
       # Deletion time of the file object.
       attr_accessor :archived_at
 
-      # If the file is deleted.
-      attr_accessor :archived
-
       # Path of the file in the file manager.
       attr_accessor :path
+
+      # If the file is deleted.
+      attr_accessor :archived
 
       # Size of the file in bytes.
       attr_accessor :size
@@ -100,6 +105,8 @@ module Hubspot
           :'extension' => :'extension',
           :'access' => :'access',
           :'parent_folder_id' => :'parentFolderId',
+          :'source_group' => :'sourceGroup',
+          :'file_md5' => :'fileMd5',
           :'encoding' => :'encoding',
           :'type' => :'type',
           :'is_usable_in_content' => :'isUsableInContent',
@@ -107,8 +114,8 @@ module Hubspot
           :'expires_at' => :'expiresAt',
           :'created_at' => :'createdAt',
           :'archived_at' => :'archivedAt',
-          :'archived' => :'archived',
           :'path' => :'path',
+          :'archived' => :'archived',
           :'size' => :'size',
           :'name' => :'name',
           :'width' => :'width',
@@ -130,6 +137,8 @@ module Hubspot
           :'extension' => :'String',
           :'access' => :'String',
           :'parent_folder_id' => :'String',
+          :'source_group' => :'String',
+          :'file_md5' => :'String',
           :'encoding' => :'String',
           :'type' => :'String',
           :'is_usable_in_content' => :'Boolean',
@@ -137,8 +146,8 @@ module Hubspot
           :'expires_at' => :'Integer',
           :'created_at' => :'Time',
           :'archived_at' => :'Time',
-          :'archived' => :'Boolean',
           :'path' => :'String',
+          :'archived' => :'Boolean',
           :'size' => :'Integer',
           :'name' => :'String',
           :'width' => :'Integer',
@@ -182,6 +191,14 @@ module Hubspot
           self.parent_folder_id = attributes[:'parent_folder_id']
         end
 
+        if attributes.key?(:'source_group')
+          self.source_group = attributes[:'source_group']
+        end
+
+        if attributes.key?(:'file_md5')
+          self.file_md5 = attributes[:'file_md5']
+        end
+
         if attributes.key?(:'encoding')
           self.encoding = attributes[:'encoding']
         end
@@ -210,12 +227,12 @@ module Hubspot
           self.archived_at = attributes[:'archived_at']
         end
 
-        if attributes.key?(:'archived')
-          self.archived = attributes[:'archived']
-        end
-
         if attributes.key?(:'path')
           self.path = attributes[:'path']
+        end
+
+        if attributes.key?(:'archived')
+          self.archived = attributes[:'archived']
         end
 
         if attributes.key?(:'size')
@@ -278,7 +295,7 @@ module Hubspot
       # @return true if the model is valid
       def valid?
         return false if @access.nil?
-        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE", "HIDDEN_SENSITIVE", "SENSITIVE"])
         return false unless access_validator.valid?(@access)
         return false if @created_at.nil?
         return false if @archived.nil?
@@ -290,7 +307,7 @@ module Hubspot
       # Custom attribute writer method checking allowed values (enum).
       # @param [Object] access Object to be assigned
       def access=(access)
-        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE", "HIDDEN_SENSITIVE", "SENSITIVE"])
         unless validator.valid?(access)
           fail ArgumentError, "invalid value for \"access\", must be one of #{validator.allowable_values}."
         end
@@ -305,6 +322,8 @@ module Hubspot
             extension == o.extension &&
             access == o.access &&
             parent_folder_id == o.parent_folder_id &&
+            source_group == o.source_group &&
+            file_md5 == o.file_md5 &&
             encoding == o.encoding &&
             type == o.type &&
             is_usable_in_content == o.is_usable_in_content &&
@@ -312,8 +331,8 @@ module Hubspot
             expires_at == o.expires_at &&
             created_at == o.created_at &&
             archived_at == o.archived_at &&
-            archived == o.archived &&
             path == o.path &&
+            archived == o.archived &&
             size == o.size &&
             name == o.name &&
             width == o.width &&
@@ -332,7 +351,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [extension, access, parent_folder_id, encoding, type, is_usable_in_content, url, expires_at, created_at, archived_at, archived, path, size, name, width, id, default_hosting_url, updated_at, height].hash
+        [extension, access, parent_folder_id, source_group, file_md5, encoding, type, is_usable_in_content, url, expires_at, created_at, archived_at, path, archived, size, name, width, id, default_hosting_url, updated_at, height].hash
       end
 
       # Builds the object from hash

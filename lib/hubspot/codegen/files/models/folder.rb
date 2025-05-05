@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -22,11 +22,11 @@ module Hubspot
       # Timestamp of folder deletion.
       attr_accessor :archived_at
 
-      # Marks whether the folder is deleted or not.
-      attr_accessor :archived
-
       # Path of the folder in the file manager.
       attr_accessor :path
+
+      # Marks whether the folder is deleted or not.
+      attr_accessor :archived
 
       # ID of the parent folder.
       attr_accessor :parent_folder_id
@@ -45,8 +45,8 @@ module Hubspot
         {
           :'created_at' => :'createdAt',
           :'archived_at' => :'archivedAt',
-          :'archived' => :'archived',
           :'path' => :'path',
+          :'archived' => :'archived',
           :'parent_folder_id' => :'parentFolderId',
           :'name' => :'name',
           :'id' => :'id',
@@ -64,8 +64,8 @@ module Hubspot
         {
           :'created_at' => :'Time',
           :'archived_at' => :'Time',
-          :'archived' => :'Boolean',
           :'path' => :'String',
+          :'archived' => :'Boolean',
           :'parent_folder_id' => :'String',
           :'name' => :'String',
           :'id' => :'String',
@@ -102,12 +102,12 @@ module Hubspot
           self.archived_at = attributes[:'archived_at']
         end
 
-        if attributes.key?(:'archived')
-          self.archived = attributes[:'archived']
-        end
-
         if attributes.key?(:'path')
           self.path = attributes[:'path']
+        end
+
+        if attributes.key?(:'archived')
+          self.archived = attributes[:'archived']
         end
 
         if attributes.key?(:'parent_folder_id')
@@ -167,8 +167,8 @@ module Hubspot
         self.class == o.class &&
             created_at == o.created_at &&
             archived_at == o.archived_at &&
-            archived == o.archived &&
             path == o.path &&
+            archived == o.archived &&
             parent_folder_id == o.parent_folder_id &&
             name == o.name &&
             id == o.id &&
@@ -184,7 +184,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [created_at, archived_at, archived, path, parent_folder_id, name, id, updated_at].hash
+        [created_at, archived_at, path, archived, parent_folder_id, name, id, updated_at].hash
       end
 
       # Builds the object from hash
