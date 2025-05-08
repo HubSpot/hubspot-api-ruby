@@ -13,14 +13,16 @@ OpenAPI Generator version: 6.2.1
 require 'cgi'
 
 module Hubspot
-  module OAuth
+  module Oauth
     class AccessTokensApi
       attr_accessor :api_client
 
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # @param token [String] 
+      # Retrieve OAuth token metadata
+      # Retrieve a token's metadata, including the email address of the user that the token was created for and the ID of the account it's associated with.  Note: HubSpot access tokens will fluctuate in size as the information that's encoded in them changes over time. It's recommended to allow for tokens to be up to 300 characters to account for any potential changes.
+      # @param token [String] The access token that you want to retrieve information about.
       # @param [Hash] opts the optional parameters
       # @return [AccessTokenInfoResponse]
       def get(token, opts = {})
@@ -28,7 +30,9 @@ module Hubspot
         data
       end
 
-      # @param token [String] 
+      # Retrieve OAuth token metadata
+      # Retrieve a token&#39;s metadata, including the email address of the user that the token was created for and the ID of the account it&#39;s associated with.  Note: HubSpot access tokens will fluctuate in size as the information that&#39;s encoded in them changes over time. It&#39;s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
+      # @param token [String] The access token that you want to retrieve information about.
       # @param [Hash] opts the optional parameters
       # @return [Array<(AccessTokenInfoResponse, Integer, Hash)>] AccessTokenInfoResponse data, response status code and response headers
       def get_with_http_info(token, opts = {})

@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -36,6 +36,8 @@ module Hubspot
 
       # If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file's name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
       attr_accessor :overwrite
+
+      attr_accessor :expires_at
 
       # URL to download the new file from.
       attr_accessor :url
@@ -75,6 +77,7 @@ module Hubspot
           :'duplicate_validation_strategy' => :'duplicateValidationStrategy',
           :'ttl' => :'ttl',
           :'overwrite' => :'overwrite',
+          :'expires_at' => :'expiresAt',
           :'url' => :'url',
           :'folder_id' => :'folderId'
         }
@@ -95,6 +98,7 @@ module Hubspot
           :'duplicate_validation_strategy' => :'String',
           :'ttl' => :'String',
           :'overwrite' => :'Boolean',
+          :'expires_at' => :'Time',
           :'url' => :'String',
           :'folder_id' => :'String'
         }
@@ -149,6 +153,10 @@ module Hubspot
           self.overwrite = attributes[:'overwrite']
         end
 
+        if attributes.key?(:'expires_at')
+          self.expires_at = attributes[:'expires_at']
+        end
+
         if attributes.key?(:'url')
           self.url = attributes[:'url']
         end
@@ -177,7 +185,7 @@ module Hubspot
       # @return true if the model is valid
       def valid?
         return false if @access.nil?
-        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        access_validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE", "HIDDEN_SENSITIVE", "SENSITIVE"])
         return false unless access_validator.valid?(@access)
         duplicate_validation_scope_validator = EnumAttributeValidator.new('String', ["ENTIRE_PORTAL", "EXACT_FOLDER"])
         return false unless duplicate_validation_scope_validator.valid?(@duplicate_validation_scope)
@@ -190,7 +198,7 @@ module Hubspot
       # Custom attribute writer method checking allowed values (enum).
       # @param [Object] access Object to be assigned
       def access=(access)
-        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE"])
+        validator = EnumAttributeValidator.new('String', ["PUBLIC_INDEXABLE", "PUBLIC_NOT_INDEXABLE", "HIDDEN_INDEXABLE", "HIDDEN_NOT_INDEXABLE", "HIDDEN_PRIVATE", "PRIVATE", "HIDDEN_SENSITIVE", "SENSITIVE"])
         unless validator.valid?(access)
           fail ArgumentError, "invalid value for \"access\", must be one of #{validator.allowable_values}."
         end
@@ -229,6 +237,7 @@ module Hubspot
             duplicate_validation_strategy == o.duplicate_validation_strategy &&
             ttl == o.ttl &&
             overwrite == o.overwrite &&
+            expires_at == o.expires_at &&
             url == o.url &&
             folder_id == o.folder_id
       end
@@ -242,7 +251,7 @@ module Hubspot
       # Calculates hash code according to all attributes.
       # @return [Integer] Hash code
       def hash
-        [folder_path, access, duplicate_validation_scope, name, duplicate_validation_strategy, ttl, overwrite, url, folder_id].hash
+        [folder_path, access, duplicate_validation_scope, name, duplicate_validation_strategy, ttl, overwrite, expires_at, url, folder_id].hash
       end
 
       # Builds the object from hash

@@ -23,6 +23,7 @@ module Hubspot
             @api_client = api_client
           end
           # Read a batch of feedback submissions by internal ID, or unique property values
+          # Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)
@@ -33,6 +34,7 @@ module Hubspot
           end
 
           # Read a batch of feedback submissions by internal ID, or unique property values
+          # Retrieve records by record ID or include the &#x60;idProperty&#x60; parameter to retrieve records by a custom unique value property. 
           # @param batch_read_input_simple_public_object_id [BatchReadInputSimplePublicObjectId] 
           # @param [Hash] opts the optional parameters
           # @option opts [Boolean] :archived Whether to return only results that have been archived. (default to false)

@@ -16,6 +16,7 @@ module Hubspot
   module Crm
     module Tickets
       class BasicApi
+        require 'hubspot/helpers/get_all_helper'
         include Hubspot::Helpers::GetAllHelper
 
         attr_accessor :api_client
@@ -25,7 +26,7 @@ module Hubspot
         end
         # Archive
         # Move an Object identified by `{ticketId}` to the recycling bin.
-        # @param ticket_id [String] 
+        # @param ticket_id [String] The ID of the ticket to delete.
         # @param [Hash] opts the optional parameters
         # @return [nil]
         def archive(ticket_id, opts = {})
@@ -35,7 +36,7 @@ module Hubspot
 
         # Archive
         # Move an Object identified by &#x60;{ticketId}&#x60; to the recycling bin.
-        # @param ticket_id [String] 
+        # @param ticket_id [String] The ID of the ticket to delete.
         # @param [Hash] opts the optional parameters
         # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def archive_with_http_info(ticket_id, opts = {})
@@ -156,7 +157,7 @@ module Hubspot
 
         # Read
         # Read an Object identified by `{ticketId}`. `{ticketId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-        # @param ticket_id [String] 
+        # @param ticket_id [String] The ID of the ticket.
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -171,7 +172,7 @@ module Hubspot
 
         # Read
         # Read an Object identified by &#x60;{ticketId}&#x60;. &#x60;{ticketId}&#x60; refers to the internal object ID by default, or optionally any unique property value as specified by the &#x60;idProperty&#x60; query param.  Control what is returned via the &#x60;properties&#x60; query param.
-        # @param ticket_id [String] 
+        # @param ticket_id [String] The ID of the ticket.
         # @param [Hash] opts the optional parameters
         # @option opts [Array<String>] :properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
         # @option opts [Array<String>] :properties_with_history A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
@@ -303,6 +304,74 @@ module Hubspot
           data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
           if @api_client.config.debugging
             @api_client.config.logger.debug "API called: BasicApi#get_page\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+          end
+          return data, status_code, headers
+        end
+
+        # Merge two tickets
+        # Merge two tickets, combining them into one ticket record.
+        # @param public_merge_input [PublicMergeInput] 
+        # @param [Hash] opts the optional parameters
+        # @return [SimplePublicObject]
+        def merge(public_merge_input, opts = {})
+          data, _status_code, _headers = merge_with_http_info(public_merge_input, opts)
+          data
+        end
+
+        # Merge two tickets
+        # Merge two tickets, combining them into one ticket record.
+        # @param public_merge_input [PublicMergeInput] 
+        # @param [Hash] opts the optional parameters
+        # @return [Array<(SimplePublicObject, Integer, Hash)>] SimplePublicObject data, response status code and response headers
+        def merge_with_http_info(public_merge_input, opts = {})
+          if @api_client.config.debugging
+            @api_client.config.logger.debug 'Calling API: BasicApi.merge ...'
+          end
+          # verify the required parameter 'public_merge_input' is set
+          if @api_client.config.client_side_validation && public_merge_input.nil?
+            fail ArgumentError, "Missing the required parameter 'public_merge_input' when calling BasicApi.merge"
+          end
+          # resource path
+          local_var_path = '/crm/v3/objects/tickets/merge'
+
+          # query parameters
+          query_params = opts[:query_params] || {}
+
+          # header parameters
+          header_params = opts[:header_params] || {}
+          # HTTP header 'Accept' (if needed)
+          header_params['Accept'] = @api_client.select_header_accept(['application/json', '*/*'])
+          # HTTP header 'Content-Type'
+          content_type = @api_client.select_header_content_type(['application/json'])
+          if !content_type.nil?
+              header_params['Content-Type'] = content_type
+          end
+
+          # form parameters
+          form_params = opts[:form_params] || {}
+
+          # http body (model)
+          post_body = opts[:debug_body] || @api_client.object_to_http_body(public_merge_input)
+
+          # return_type
+          return_type = opts[:debug_return_type] || 'SimplePublicObject'
+
+          # auth_names
+          auth_names = opts[:debug_auth_names] || ['oauth2']
+
+          new_options = opts.merge(
+            :operation => :"BasicApi.merge",
+            :header_params => header_params,
+            :query_params => query_params,
+            :form_params => form_params,
+            :body => post_body,
+            :auth_names => auth_names,
+            :return_type => return_type
+          )
+
+          data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+          if @api_client.config.debugging
+            @api_client.config.logger.debug "API called: BasicApi#merge\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
           end
           return data, status_code, headers
         end

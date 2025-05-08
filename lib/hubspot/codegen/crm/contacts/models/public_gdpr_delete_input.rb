@@ -17,8 +17,10 @@ module Hubspot
   module Crm
     module Contacts
       class PublicGdprDeleteInput
+        # The name of a property whose values are unique for this object. An alternative to identifying a contact by ID.
         attr_accessor :id_property
 
+        # The ID of the contact to permanently delete.
         attr_accessor :object_id
 
         # Attribute mapping from ruby-style variable name to JSON key.

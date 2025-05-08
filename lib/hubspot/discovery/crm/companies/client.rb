@@ -11,7 +11,6 @@ module Hubspot
             %i[
               basic
               batch
-              merge
               search
             ].freeze
           end

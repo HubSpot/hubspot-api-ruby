@@ -1,5 +1,5 @@
 =begin
-#Files Files
+#Files
 
 #Upload and manage files.
 
@@ -20,8 +20,8 @@ module Hubspot
       def initialize(api_client = ApiClient.default)
         @api_client = api_client
       end
-      # Delete file
       # Delete file by ID
+      # Delete a file by ID
       # @param file_id [String] FileId to delete
       # @param [Hash] opts the optional parameters
       # @return [nil]
@@ -30,8 +30,8 @@ module Hubspot
         nil
       end
 
-      # Delete file
       # Delete file by ID
+      # Delete a file by ID
       # @param file_id [String] FileId to delete
       # @param [Hash] opts the optional parameters
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -88,75 +88,7 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # GDPR delete
-      # GDRP delete file
-      # @param file_id [String] ID of file to GDPR delete
-      # @param [Hash] opts the optional parameters
-      # @return [nil]
-      def archive_gdpr(file_id, opts = {})
-        archive_gdpr_with_http_info(file_id, opts)
-        nil
-      end
-
-      # GDPR delete
-      # GDRP delete file
-      # @param file_id [String] ID of file to GDPR delete
-      # @param [Hash] opts the optional parameters
-      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-      def archive_gdpr_with_http_info(file_id, opts = {})
-        if @api_client.config.debugging
-          @api_client.config.logger.debug 'Calling API: FilesApi.archive_gdpr ...'
-        end
-        # verify the required parameter 'file_id' is set
-        if @api_client.config.client_side_validation && file_id.nil?
-          fail ArgumentError, "Missing the required parameter 'file_id' when calling FilesApi.archive_gdpr"
-        end
-        pattern = Regexp.new(/\d+/)
-        if @api_client.config.client_side_validation && file_id !~ pattern
-          fail ArgumentError, "invalid value for 'file_id' when calling FilesApi.archive_gdpr, must conform to the pattern #{pattern}."
-        end
-
-        # resource path
-        local_var_path = '/files/v3/files/{fileId}/gdpr-delete'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-        # query parameters
-        query_params = opts[:query_params] || {}
-
-        # header parameters
-        header_params = opts[:header_params] || {}
-        # HTTP header 'Accept' (if needed)
-        header_params['Accept'] = @api_client.select_header_accept(['*/*'])
-
-        # form parameters
-        form_params = opts[:form_params] || {}
-
-        # http body (model)
-        post_body = opts[:debug_body]
-
-        # return_type
-        return_type = opts[:debug_return_type]
-
-        # auth_names
-        auth_names = opts[:debug_auth_names] || ['oauth2']
-
-        new_options = opts.merge(
-          :operation => :"FilesApi.archive_gdpr",
-          :header_params => header_params,
-          :query_params => query_params,
-          :form_params => form_params,
-          :body => post_body,
-          :auth_names => auth_names,
-          :return_type => return_type
-        )
-
-        data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-        if @api_client.config.debugging
-          @api_client.config.logger.debug "API called: FilesApi#archive_gdpr\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-        end
-        return data, status_code, headers
-      end
-
-      # Check import status.
+      # Check import status
       # Check the status of requested import.
       # @param task_id [String] Import by URL task ID
       # @param [Hash] opts the optional parameters
@@ -166,7 +98,7 @@ module Hubspot
         data
       end
 
-      # Check import status.
+      # Check import status
       # Check the status of requested import.
       # @param task_id [String] Import by URL task ID
       # @param [Hash] opts the optional parameters
@@ -219,33 +151,113 @@ module Hubspot
         return data, status_code, headers
       end
 
+      # GDPR-delete file
+      # Delete a file in accordance with GDPR regulations.
+      # @param file_id [String] ID of file to GDPR delete
+      # @param [Hash] opts the optional parameters
+      # @return [nil]
+      def delete(file_id, opts = {})
+        delete_with_http_info(file_id, opts)
+        nil
+      end
+
+      # GDPR-delete file
+      # Delete a file in accordance with GDPR regulations.
+      # @param file_id [String] ID of file to GDPR delete
+      # @param [Hash] opts the optional parameters
+      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+      def delete_with_http_info(file_id, opts = {})
+        if @api_client.config.debugging
+          @api_client.config.logger.debug 'Calling API: FilesApi.delete ...'
+        end
+        # verify the required parameter 'file_id' is set
+        if @api_client.config.client_side_validation && file_id.nil?
+          fail ArgumentError, "Missing the required parameter 'file_id' when calling FilesApi.delete"
+        end
+        pattern = Regexp.new(/\d+/)
+        if @api_client.config.client_side_validation && file_id !~ pattern
+          fail ArgumentError, "invalid value for 'file_id' when calling FilesApi.delete, must conform to the pattern #{pattern}."
+        end
+
+        # resource path
+        local_var_path = '/files/v3/files/{fileId}/gdpr-delete'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
+
+        # query parameters
+        query_params = opts[:query_params] || {}
+
+        # header parameters
+        header_params = opts[:header_params] || {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+
+        # form parameters
+        form_params = opts[:form_params] || {}
+
+        # http body (model)
+        post_body = opts[:debug_body]
+
+        # return_type
+        return_type = opts[:debug_return_type]
+
+        # auth_names
+        auth_names = opts[:debug_auth_names] || ['oauth2']
+
+        new_options = opts.merge(
+          :operation => :"FilesApi.delete",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        )
+
+        data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+        if @api_client.config.debugging
+          @api_client.config.logger.debug "API called: FilesApi#delete\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        end
+        return data, status_code, headers
+      end
+
       # Search files
       # Search through files in the file manager. Does not display hidden or archived files.
       # @param [Hash] opts the optional parameters
-      # @option opts [Array<String>] :properties Desired file properties in the return object.
-      # @option opts [String] :after The maximum offset of items for a given search is 10000. Narrow your search down if you are reaching this limit.
+      # @option opts [Array<String>] :properties A list of file properties to return.
+      # @option opts [String] :after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000. Narrow your search down if you are reaching this limit.
       # @option opts [String] :before 
-      # @option opts [Integer] :limit Number of items to return. Maximum limit is 100.
+      # @option opts [Integer] :limit Number of items to return. Default limit is 10, maximum limit is 100.
       # @option opts [Array<String>] :sort Sort files by a given field.
-      # @option opts [String] :id Search files by given ID.
+      # @option opts [Array<Integer>] :ids Search by a list of file IDs.
+      # @option opts [Integer] :id_lte 
+      # @option opts [Integer] :id_gte 
       # @option opts [Time] :created_at Search files by time of creation.
-      # @option opts [Time] :created_at_lte 
-      # @option opts [Time] :created_at_gte 
+      # @option opts [Time] :created_at_lte Search files by less than or equal to time of creation. Can be used with &#x60;createdAtGte&#x60; to create a range.
+      # @option opts [Time] :created_at_gte Search files by greater than or equal to time of creation. Can be used with &#x60;createdAtLte&#x60; to create a range.
       # @option opts [Time] :updated_at Search files by time of latest updated.
-      # @option opts [Time] :updated_at_lte 
-      # @option opts [Time] :updated_at_gte 
+      # @option opts [Time] :updated_at_lte Search files by less than or equal to time of latest update. Can be used with &#x60;updatedAtGte&#x60; to create a range.
+      # @option opts [Time] :updated_at_gte Search files by greater than or equal to time of latest update. Can be used with &#x60;updatedAtLte&#x60; to create a range.
       # @option opts [String] :name Search for files containing the given name.
       # @option opts [String] :path Search files by path.
-      # @option opts [Integer] :parent_folder_id Search files within given folderId.
-      # @option opts [Integer] :size Query by file size.
+      # @option opts [Array<Integer>] :parent_folder_ids Search files within given &#x60;folderId&#x60;.
+      # @option opts [Integer] :size Search files by exact file size in bytes.
+      # @option opts [Integer] :size_lte Search files by less than or equal to file size. Can be used with &#x60;sizeGte&#x60; to create a range.
+      # @option opts [Integer] :size_gte Search files by greater than or equal to file size. Can be used with &#x60;sizeLte&#x60; to create a range.
       # @option opts [Integer] :height Search files by height of image or video.
+      # @option opts [Integer] :height_lte Search files by less than or equal to height of image or video. Can be used with &#x60;heightGte&#x60; to create a range.
+      # @option opts [Integer] :height_gte Search files by greater than or equal to height of image or video. Can be used with &#x60;heightLte&#x60; to create a range.
       # @option opts [Integer] :width Search files by width of image or video.
-      # @option opts [String] :encoding Search files with specified encoding.
+      # @option opts [Integer] :width_lte Search files by less than or equal to width of image or video. Can be used with &#x60;widthGte&#x60; to create a range.
+      # @option opts [Integer] :width_gte Search files by greater than or equal to width of image or video. Can be used with &#x60;widthLte&#x60; to create a range.
+      # @option opts [String] :encoding Search files by specified encoding.
       # @option opts [String] :type Filter by provided file type.
       # @option opts [String] :extension Search files by given extension.
-      # @option opts [String] :url Search for given URL
-      # @option opts [Boolean] :is_usable_in_content If true shows files that have been marked to be used in new content. It false shows files that should not be used in new content.
-      # @option opts [Boolean] :allows_anonymous_access If &#39;true&#39; will show private files; if &#39;false&#39; will show public files
+      # @option opts [String] :url Search by file URL.
+      # @option opts [Boolean] :is_usable_in_content If &#x60;true&#x60;, shows files that have been marked to be used in new content. If &#x60;false&#x60;, shows files that should not be used in new content.
+      # @option opts [Boolean] :allows_anonymous_access Search files by access. If &#x60;true&#x60;, will show only public files. If &#x60;false&#x60;, will show only private files.
+      # @option opts [String] :file_md5 Search files by a specific md5 hash.
+      # @option opts [Time] :expires_at Search files by exact expires time. Time must be epoch time in milliseconds.
+      # @option opts [Time] :expires_at_lte Search files by less than or equal to expires time. Can be used with &#x60;expiresAtGte&#x60; to create a range.
+      # @option opts [Time] :expires_at_gte Search files by greater than or equal to expires time. Can be used with &#x60;expiresAtLte&#x60; to create a range.
       # @return [CollectionResponseFile]
       def do_search(opts = {})
         data, _status_code, _headers = do_search_with_http_info(opts)
@@ -255,30 +267,42 @@ module Hubspot
       # Search files
       # Search through files in the file manager. Does not display hidden or archived files.
       # @param [Hash] opts the optional parameters
-      # @option opts [Array<String>] :properties Desired file properties in the return object.
-      # @option opts [String] :after The maximum offset of items for a given search is 10000. Narrow your search down if you are reaching this limit.
+      # @option opts [Array<String>] :properties A list of file properties to return.
+      # @option opts [String] :after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000. Narrow your search down if you are reaching this limit.
       # @option opts [String] :before 
-      # @option opts [Integer] :limit Number of items to return. Maximum limit is 100.
+      # @option opts [Integer] :limit Number of items to return. Default limit is 10, maximum limit is 100.
       # @option opts [Array<String>] :sort Sort files by a given field.
-      # @option opts [String] :id Search files by given ID.
+      # @option opts [Array<Integer>] :ids Search by a list of file IDs.
+      # @option opts [Integer] :id_lte 
+      # @option opts [Integer] :id_gte 
       # @option opts [Time] :created_at Search files by time of creation.
-      # @option opts [Time] :created_at_lte 
-      # @option opts [Time] :created_at_gte 
+      # @option opts [Time] :created_at_lte Search files by less than or equal to time of creation. Can be used with &#x60;createdAtGte&#x60; to create a range.
+      # @option opts [Time] :created_at_gte Search files by greater than or equal to time of creation. Can be used with &#x60;createdAtLte&#x60; to create a range.
       # @option opts [Time] :updated_at Search files by time of latest updated.
-      # @option opts [Time] :updated_at_lte 
-      # @option opts [Time] :updated_at_gte 
+      # @option opts [Time] :updated_at_lte Search files by less than or equal to time of latest update. Can be used with &#x60;updatedAtGte&#x60; to create a range.
+      # @option opts [Time] :updated_at_gte Search files by greater than or equal to time of latest update. Can be used with &#x60;updatedAtLte&#x60; to create a range.
       # @option opts [String] :name Search for files containing the given name.
       # @option opts [String] :path Search files by path.
-      # @option opts [Integer] :parent_folder_id Search files within given folderId.
-      # @option opts [Integer] :size Query by file size.
+      # @option opts [Array<Integer>] :parent_folder_ids Search files within given &#x60;folderId&#x60;.
+      # @option opts [Integer] :size Search files by exact file size in bytes.
+      # @option opts [Integer] :size_lte Search files by less than or equal to file size. Can be used with &#x60;sizeGte&#x60; to create a range.
+      # @option opts [Integer] :size_gte Search files by greater than or equal to file size. Can be used with &#x60;sizeLte&#x60; to create a range.
       # @option opts [Integer] :height Search files by height of image or video.
+      # @option opts [Integer] :height_lte Search files by less than or equal to height of image or video. Can be used with &#x60;heightGte&#x60; to create a range.
+      # @option opts [Integer] :height_gte Search files by greater than or equal to height of image or video. Can be used with &#x60;heightLte&#x60; to create a range.
       # @option opts [Integer] :width Search files by width of image or video.
-      # @option opts [String] :encoding Search files with specified encoding.
+      # @option opts [Integer] :width_lte Search files by less than or equal to width of image or video. Can be used with &#x60;widthGte&#x60; to create a range.
+      # @option opts [Integer] :width_gte Search files by greater than or equal to width of image or video. Can be used with &#x60;widthLte&#x60; to create a range.
+      # @option opts [String] :encoding Search files by specified encoding.
       # @option opts [String] :type Filter by provided file type.
       # @option opts [String] :extension Search files by given extension.
-      # @option opts [String] :url Search for given URL
-      # @option opts [Boolean] :is_usable_in_content If true shows files that have been marked to be used in new content. It false shows files that should not be used in new content.
-      # @option opts [Boolean] :allows_anonymous_access If &#39;true&#39; will show private files; if &#39;false&#39; will show public files
+      # @option opts [String] :url Search by file URL.
+      # @option opts [Boolean] :is_usable_in_content If &#x60;true&#x60;, shows files that have been marked to be used in new content. If &#x60;false&#x60;, shows files that should not be used in new content.
+      # @option opts [Boolean] :allows_anonymous_access Search files by access. If &#x60;true&#x60;, will show only public files. If &#x60;false&#x60;, will show only private files.
+      # @option opts [String] :file_md5 Search files by a specific md5 hash.
+      # @option opts [Time] :expires_at Search files by exact expires time. Time must be epoch time in milliseconds.
+      # @option opts [Time] :expires_at_lte Search files by less than or equal to expires time. Can be used with &#x60;expiresAtGte&#x60; to create a range.
+      # @option opts [Time] :expires_at_gte Search files by greater than or equal to expires time. Can be used with &#x60;expiresAtLte&#x60; to create a range.
       # @return [Array<(CollectionResponseFile, Integer, Hash)>] CollectionResponseFile data, response status code and response headers
       def do_search_with_http_info(opts = {})
         if @api_client.config.debugging
@@ -294,7 +318,9 @@ module Hubspot
         query_params[:'before'] = opts[:'before'] if !opts[:'before'].nil?
         query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
         query_params[:'sort'] = @api_client.build_collection_param(opts[:'sort'], :multi) if !opts[:'sort'].nil?
-        query_params[:'id'] = opts[:'id'] if !opts[:'id'].nil?
+        query_params[:'ids'] = @api_client.build_collection_param(opts[:'ids'], :multi) if !opts[:'ids'].nil?
+        query_params[:'idLte'] = opts[:'id_lte'] if !opts[:'id_lte'].nil?
+        query_params[:'idGte'] = opts[:'id_gte'] if !opts[:'id_gte'].nil?
         query_params[:'createdAt'] = opts[:'created_at'] if !opts[:'created_at'].nil?
         query_params[:'createdAtLte'] = opts[:'created_at_lte'] if !opts[:'created_at_lte'].nil?
         query_params[:'createdAtGte'] = opts[:'created_at_gte'] if !opts[:'created_at_gte'].nil?
@@ -303,16 +329,26 @@ module Hubspot
         query_params[:'updatedAtGte'] = opts[:'updated_at_gte'] if !opts[:'updated_at_gte'].nil?
         query_params[:'name'] = opts[:'name'] if !opts[:'name'].nil?
         query_params[:'path'] = opts[:'path'] if !opts[:'path'].nil?
-        query_params[:'parentFolderId'] = opts[:'parent_folder_id'] if !opts[:'parent_folder_id'].nil?
+        query_params[:'parentFolderIds'] = @api_client.build_collection_param(opts[:'parent_folder_ids'], :multi) if !opts[:'parent_folder_ids'].nil?
         query_params[:'size'] = opts[:'size'] if !opts[:'size'].nil?
+        query_params[:'sizeLte'] = opts[:'size_lte'] if !opts[:'size_lte'].nil?
+        query_params[:'sizeGte'] = opts[:'size_gte'] if !opts[:'size_gte'].nil?
         query_params[:'height'] = opts[:'height'] if !opts[:'height'].nil?
+        query_params[:'heightLte'] = opts[:'height_lte'] if !opts[:'height_lte'].nil?
+        query_params[:'heightGte'] = opts[:'height_gte'] if !opts[:'height_gte'].nil?
         query_params[:'width'] = opts[:'width'] if !opts[:'width'].nil?
+        query_params[:'widthLte'] = opts[:'width_lte'] if !opts[:'width_lte'].nil?
+        query_params[:'widthGte'] = opts[:'width_gte'] if !opts[:'width_gte'].nil?
         query_params[:'encoding'] = opts[:'encoding'] if !opts[:'encoding'].nil?
         query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
         query_params[:'extension'] = opts[:'extension'] if !opts[:'extension'].nil?
         query_params[:'url'] = opts[:'url'] if !opts[:'url'].nil?
         query_params[:'isUsableInContent'] = opts[:'is_usable_in_content'] if !opts[:'is_usable_in_content'].nil?
         query_params[:'allowsAnonymousAccess'] = opts[:'allows_anonymous_access'] if !opts[:'allows_anonymous_access'].nil?
+        query_params[:'fileMd5'] = opts[:'file_md5'] if !opts[:'file_md5'].nil?
+        query_params[:'expiresAt'] = opts[:'expires_at'] if !opts[:'expires_at'].nil?
+        query_params[:'expiresAtLte'] = opts[:'expires_at_lte'] if !opts[:'expires_at_lte'].nil?
+        query_params[:'expiresAtGte'] = opts[:'expires_at_gte'] if !opts[:'expires_at_gte'].nil?
 
         # header parameters
         header_params = opts[:header_params] || {}
@@ -348,22 +384,22 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get file.
-      # Get file by ID.
+      # Retrieve file by ID
+      # Retrieve a file by its ID.
       # @param file_id [String] ID of the desired file.
       # @param [Hash] opts the optional parameters
-      # @option opts [Array<String>] :properties 
+      # @option opts [Array<String>] :properties null
       # @return [File]
       def get_by_id(file_id, opts = {})
         data, _status_code, _headers = get_by_id_with_http_info(file_id, opts)
         data
       end
 
-      # Get file.
-      # Get file by ID.
+      # Retrieve file by ID
+      # Retrieve a file by its ID.
       # @param file_id [String] ID of the desired file.
       # @param [Hash] opts the optional parameters
-      # @option opts [Array<String>] :properties 
+      # @option opts [Array<String>] :properties null
       # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
       def get_by_id_with_http_info(file_id, opts = {})
         if @api_client.config.debugging
@@ -419,18 +455,22 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # @param path [String] 
+      # Retrieve file by path
+      # Retrieve a file by its path.
+      # @param path [String] The path of the file. 
       # @param [Hash] opts the optional parameters
-      # @option opts [Array<String>] :properties 
+      # @option opts [Array<String>] :properties Properties to return in the response.
       # @return [FileStat]
       def get_metadata(path, opts = {})
         data, _status_code, _headers = get_metadata_with_http_info(path, opts)
         data
       end
 
-      # @param path [String] 
+      # Retrieve file by path
+      # Retrieve a file by its path.
+      # @param path [String] The path of the file. 
       # @param [Hash] opts the optional parameters
-      # @option opts [Array<String>] :properties 
+      # @option opts [Array<String>] :properties Properties to return in the response.
       # @return [Array<(FileStat, Integer, Hash)>] FileStat data, response status code and response headers
       def get_metadata_with_http_info(path, opts = {})
         if @api_client.config.debugging
@@ -486,7 +526,7 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Get signed URL to access private file.
+      # Get signed URL to access private file
       # Generates signed URL that allows temporary access to a private file.
       # @param file_id [String] ID of file.
       # @param [Hash] opts the optional parameters
@@ -499,7 +539,7 @@ module Hubspot
         data
       end
 
-      # Get signed URL to access private file.
+      # Get signed URL to access private file
       # Generates signed URL that allows temporary access to a private file.
       # @param file_id [String] ID of file.
       # @param [Hash] opts the optional parameters
@@ -567,7 +607,7 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Import a file from a URL into the file manager.
+      # Import file from URL
       # Asynchronously imports the file at the given URL into the file manager.
       # @param import_from_url_input [ImportFromUrlInput] 
       # @param [Hash] opts the optional parameters
@@ -577,7 +617,7 @@ module Hubspot
         data
       end
 
-      # Import a file from a URL into the file manager.
+      # Import file from URL
       # Asynchronously imports the file at the given URL into the file manager.
       # @param import_from_url_input [ImportFromUrlInput] 
       # @param [Hash] opts the optional parameters
@@ -635,26 +675,26 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # Replace file.
+      # Replace file
       # Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
       # @param file_id [String] ID of the desired file.
       # @param [Hash] opts the optional parameters
       # @option opts [File] :file File data that will replace existing file in the file manager.
       # @option opts [String] :charset_hunch Character set of given file data.
-      # @option opts [String] :options JSON String representing FileReplaceOptions
+      # @option opts [String] :options JSON string representing FileReplaceOptions. Includes options to set the access and expiresAt properties, which will automatically update when the file is replaced.
       # @return [File]
       def replace(file_id, opts = {})
         data, _status_code, _headers = replace_with_http_info(file_id, opts)
         data
       end
 
-      # Replace file.
+      # Replace file
       # Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
       # @param file_id [String] ID of the desired file.
       # @param [Hash] opts the optional parameters
       # @option opts [File] :file File data that will replace existing file in the file manager.
       # @option opts [String] :charset_hunch Character set of given file data.
-      # @option opts [String] :options JSON String representing FileReplaceOptions
+      # @option opts [String] :options JSON string representing FileReplaceOptions. Includes options to set the access and expiresAt properties, which will automatically update when the file is replaced.
       # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
       def replace_with_http_info(file_id, opts = {})
         if @api_client.config.debugging
@@ -717,10 +757,10 @@ module Hubspot
         return data, status_code, headers
       end
 
-      # update file properties
+      # Update file properties
       # Update properties of file by ID.
       # @param file_id [String] ID of file to update
-      # @param file_update_input [FileUpdateInput] Options to update.
+      # @param file_update_input [FileUpdateInput] 
       # @param [Hash] opts the optional parameters
       # @return [File]
       def update_properties(file_id, file_update_input, opts = {})
@@ -728,10 +768,10 @@ module Hubspot
         data
       end
 
-      # update file properties
+      # Update file properties
       # Update properties of file by ID.
       # @param file_id [String] ID of file to update
-      # @param file_update_input [FileUpdateInput] Options to update.
+      # @param file_update_input [FileUpdateInput] 
       # @param [Hash] opts the optional parameters
       # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
       def update_properties_with_http_info(file_id, file_update_input, opts = {})

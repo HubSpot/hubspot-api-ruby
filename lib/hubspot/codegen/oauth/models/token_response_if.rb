@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module Hubspot
-  module OAuth
+  module Oauth
     class TokenResponseIF
       # 
       attr_accessor :access_token
@@ -68,13 +68,13 @@ module Hubspot
       # @param [Hash] attributes Model attributes in the form of hash
       def initialize(attributes = {})
         if (!attributes.is_a?(Hash))
-          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::OAuth::TokenResponseIF` initialize method"
+          fail ArgumentError, "The input argument (attributes) must be a hash in `Hubspot::Oauth::TokenResponseIF` initialize method"
         end
 
         # check to see if the attribute exists and convert string to symbol for hash key
         attributes = attributes.each_with_object({}) { |(k, v), h|
           if (!self.class.attribute_map.key?(k.to_sym))
-            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::OAuth::TokenResponseIF`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+            fail ArgumentError, "`#{k}` is not a valid attribute in `Hubspot::Oauth::TokenResponseIF`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
           end
           h[k.to_sym] = v
         }
@@ -225,7 +225,7 @@ module Hubspot
           end
         else # model
           # models (e.g. Pet) or oneOf
-          klass = Hubspot::OAuth.const_get(type)
+          klass = Hubspot::Oauth.const_get(type)
           klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
         end
       end
