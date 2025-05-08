@@ -13,7 +13,6 @@ module Hubspot
             domains
             hubdb
             pages
-            performance
             site_search
             source_code
             url_redirects
