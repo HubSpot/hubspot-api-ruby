@@ -5,7 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.0.0-beta.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.0.0...HEAD)
+
+## [20.0.0] - 2025-05-08
+
+## Files
+
+- Changed incomining parameters list in `files.files_api.do_search()`.
+- Renamed method `archive_gdpr()` to `delete()` in `files.files_api`.
+- Renamed method `update_properties()` to `update_properties_recursively()` in `files.folders_api`.
+- Added new method `update_properties()` to `files.folders_api`.
+- Changed incomining parameters list in `files.folders_api.do_search()`.
+- Added properties `source_group` and `file_md5` to `File`.
+- Added property `clear_expires` to `FileUpdateInput`.
+- Changed property type from `:'expires_at' => :'Integer'` to `:'expires_at' => :'Time'` in `FileUpdateInput`.
+- Added property `expires_at` to `ImportFromUrlInput`.
+- Removed property `id` from `FolderUpdateInput`.
+
+## CRM Objects
+
+- Renamed `BatchInputSimplePublicObjectInputForCreate` to `BatchInputSimplePublicObjectBatchInputForCreate` for `crm.contacts`, `crm.companies`, `crm.deals`, `crm.products`, `crm.objects.goals`, `crm.tickets`.
+- Added parameter `object_write_trace_id` to models: `simple_public_object`, `simple_public_object_with_associations`, `simple_public_upsert_object` for  `crm.contacts`, `crm.companies`, `crm.deals`, `crm.products`, `crm.objects.goals`, `crm.tickets`, `crm.objects.feedback_submissions`.
+- Removed parameter `object_write_trace_id` from models: `simple_public_object_input`, `simple_public_object_input_for_create` for  `crm.contacts`, `crm.companies`, `crm.deals`, `crm.products`, `crm.objects.goals`, `crm.tickets`, `crm.objects.feedback_submissions`.
+- Added method `merge()` to `crm.tickets.basic_api`.
+
+## Other changes
+
+- Changed from `Hubspot::OAuth` to `Hubspot::Oauth`.
+- Removed `crm.tickets.merge_api` Api.
+- Removed `crm.companies.merge_api` Api.
+- Removed `crm.contacts.merge_api` Api.
+- Removed `crm.deals.merge_api` Api.
+- Removed `crm.contacts.gdpr_api` Api.
+- Removed `CMS Performance` Client.
 
 ## [20.0.0-beta.1] - 2025-04-09
 
