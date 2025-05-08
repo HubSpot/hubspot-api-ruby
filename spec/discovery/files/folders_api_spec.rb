@@ -11,4 +11,5 @@ describe 'Hubspot::Discovery::Files::FoldersApi' do
   it { is_expected.to respond_to(:get_by_id) }
   it { is_expected.to respond_to(:get_by_path) }
   it { is_expected.to respond_to(:update_properties) }
+  it { is_expected.to respond_to(:update_properties_recursively) }
 end
