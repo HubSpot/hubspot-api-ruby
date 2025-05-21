@@ -52,6 +52,20 @@ You'll need to create a [private app](https://developers.hubspot.com/docs/api/pr
 
 Please note that pagination is used under the hood to get all results.
 
+### Get one
+
+`get_by_id` method is available for all objects.
+
+```ruby
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
+user = client.crm.owners.owners_api.get_by_id(owner_id: <user_id>])
+```
+
+Tip: If you are unsure what property name to pass in, call the method with no parameters and the name at the end of the error message will tell you:
+
+`#<LoadError: cannot load such file -- hubspot/codegen/crm/owners/models/owner_id>` => **owner_id**
+
+
 ## Search
 
 `do_search` method is available for all objects (Companies, Contacts, Deals and etc).
