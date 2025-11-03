@@ -55,7 +55,7 @@ module Hubspot
       end
 
       def require_api_models
-        def (Kernel.const_get(codegen_module_name)).const_get(const)
+        def (Kernel.const_get(codegen_module_name)).const_get(const, *)
           require 'hubspot/helpers/path'
           codegen_module_path = Hubspot::Helpers::Path.new.format(self.name).gsub('hubspot/', 'hubspot/codegen/')
           codegen_model = Hubspot::Helpers::Path.new.format(const)
