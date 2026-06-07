@@ -52,6 +52,40 @@ You'll need to create a [private app](https://developers.hubspot.com/docs/api/pr
 
 Please note that pagination is used under the hood to get all results.
 
+### Get one 
+
+`get_by_id` is also available for all objects. But, you will need to pass a `[object name]_id` property explicitly into your request. 
+
+For contacts:  
+
+```ruby
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
+contact = client.crm.contacts.basic_api.get_one(contact_id: 123_456) # using a numeric Hubspot ID
+```
+
+For owners: 
+
+```ruby
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
+owner = client.crm.owners.owners_api.get_one(owner_id: 123_456)
+```
+
+By default, fetches will use Hubspot's numeric IDs in the `[object name]_id` field. But, you can fetch using any unique field. You just need to specify _which_ field, using an `id_property` value.
+
+For example, to search Contacts for a particular email address:
+
+```ruby
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
+contact = client.crm.contacts.basic_api.get_one(contact_id: 'example@email.com', id_property: 'email') 
+```
+
+Note that this `id_property` field is distinct from the `properties` field. The `properties` field indicates which values you want fetch _from_ Hubspot. 
+
+```ruby
+client = Hubspot::Client.new(access_token: 'your_oauth2_access_token')
+contact = client.crm.contacts.basic_api.get_one(contact_id: 'example@email.com', id_property: 'email', properties: ['email', 'id', 'first_name']) # returns email, id, and first name 
+```
+
 ## Search
 
 `do_search` method is available for all objects (Companies, Contacts, Deals and etc).
