@@ -245,7 +245,7 @@ module Hubspot
         fail "Content-Type is not supported: #{content_type}" unless json_mime?(content_type)
 
         begin
-          data = JSON.parse("[#{body}]", :symbolize_names => true)[0]
+          data = JSON.parse(body, symbolize_names: true)
         rescue JSON::ParserError => e
           if %w(String Date Time).include?(return_type)
             data = body
