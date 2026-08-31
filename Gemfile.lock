@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     hubspot-api-client (20.0.0)
-      json (~> 2.1, >= 2.1.0)
-      typhoeus (~> 1.4.0)
+      json (>= 2.1.0)
+      typhoeus (>= 1.4.0)
 
 GEM
   remote: https://rubygems.org/
