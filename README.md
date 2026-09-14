@@ -237,6 +237,20 @@ client = Hubspot::Client.new(access_token: 'your_access_token')
 contacts = client.crm.contacts.basic_api.get_page(retry: retry_config) { |error| error.code }
 ```
 
+### Request timeout
+
+Requests have no timeout by default, so a request that never gets a response blocks the calling thread forever. Pass `timeout` (in seconds) to bound it:
+
+```ruby
+require 'hubspot-api-client'
+
+client = Hubspot::Client.new(access_token: 'your_access_token', timeout: 10)
+
+contacts = client.crm.contacts.basic_api.get_page
+```
+
+The value is handed to Typhoeus as `CURLOPT_TIMEOUT` and covers the whole request, connection included. A request that exceeds it raises instead of hanging. Omit the param to keep the previous behaviour.
+
 ### Sample apps
 
 Please, take a look at our [Sample apps](https://github.com/HubSpot/sample-apps-list)
