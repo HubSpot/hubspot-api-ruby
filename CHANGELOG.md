@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.0.0...HEAD)
 
+## Marketing Form Submissions
+
+- Added `marketing.form_submissions.submissions_api` with `submit()` (`/submissions/v3/integration/secure/submit/{portalId}/{formGuid}`) and `submit_unauthenticated()` (`/submissions/v3/integration/submit/{portalId}/{formGuid}`), served from `api.hsforms.com`.
+
 ## [20.0.0] - 2025-05-08
 
 ## Files

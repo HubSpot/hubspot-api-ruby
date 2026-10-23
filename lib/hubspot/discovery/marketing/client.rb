@@ -10,6 +10,7 @@ module Hubspot
           %i[
             emails
             events
+            form_submissions
             forms
             transactional
           ].freeze
