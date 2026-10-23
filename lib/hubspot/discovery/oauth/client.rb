@@ -6,6 +6,12 @@ module Hubspot
       class Client
         include Hubspot::Discovery::BaseModuleClient
 
+        def api_modules
+          %i[
+            v3
+          ].freeze
+        end
+
         def api_classes
           %i[
             access_tokens
