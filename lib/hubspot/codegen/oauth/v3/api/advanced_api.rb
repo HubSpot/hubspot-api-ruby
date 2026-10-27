@@ -201,10 +201,10 @@ module Hubspot
         # @option opts [String] :client_secret 
         # @option opts [String] :token 
         # @option opts [String] :token_type_hint 
-        # @return [Error]
+        # @return [nil]
         def revoke_token(opts = {})
-          data, _status_code, _headers = revoke_token_with_http_info(opts)
-          data
+          revoke_token_with_http_info(opts)
+          nil
         end
 
         # Token Revocation endpoint
@@ -214,7 +214,7 @@ module Hubspot
         # @option opts [String] :client_secret 
         # @option opts [String] :token 
         # @option opts [String] :token_type_hint 
-        # @return [Array<(Error, Integer, Hash)>] Error data, response status code and response headers
+        # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
         def revoke_token_with_http_info(opts = {})
           if @api_client.config.debugging
             @api_client.config.logger.debug 'Calling API: AdvancedApi.revoke_token ...'
@@ -246,7 +246,7 @@ module Hubspot
           post_body = opts[:debug_body]
 
           # return_type
-          return_type = opts[:debug_return_type] || 'Error'
+          return_type = opts[:debug_return_type]
 
           # auth_names
           auth_names = opts[:debug_auth_names] || []
