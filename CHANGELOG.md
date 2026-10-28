@@ -5,7 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.0.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-ruby/compare/v20.1.0...HEAD)
+
+## [20.1.0] - 2026-10-27
+
+## OAuth
+
+- Added OAuth v3 client, available as `oauth.v3`.
+- Added `oauth.v3.advanced_api` with methods `get_token()`, `introspect_token()` and `revoke_token()`.
+- Added models `AccessTokenResponse`, `ClientCredentialsTokenResponse`, `PublicAccessTokenInfoResponse`, `PublicRefreshTokenInfoResponse`, `SignedAccessToken`, `Error` and `ErrorDetail`.
+- Added polymorphic base models `TokenResponseIF` and `TokenInfoResponseBaseIF`, which deserialize to the matching token response type.
 
 ## [20.0.0] - 2025-05-08
 
