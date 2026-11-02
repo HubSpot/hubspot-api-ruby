@@ -142,6 +142,22 @@ describe 'Hubspot::Discovery::BaseApiClient' do
     end
   end
 
+  describe 'request timeout' do
+    subject(:timeout) { Hubspot::Discovery::SomeApiClass.new(params).config.timeout }
+
+    context 'without timeout param' do
+      let(:params) { {access_token: 'test'} }
+
+      it { is_expected.to eq(0) }
+    end
+
+    context 'with timeout param' do
+      let(:params) { {access_token: 'test', timeout: 10} }
+
+      it { is_expected.to eq(10) }
+    end
+  end
+
   describe '#raise_error' do
     subject(:raise_error) { client.raise_error { |e| e.message } }
 
